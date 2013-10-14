@@ -9,10 +9,19 @@ local_server_root = /var/www
 QUIET_  = @
 QUIET   = $(QUIET_$(V))
 
+less =							\
+	css/styles.less					\
+	$(NULL)
+
+css = $(less:.less=.css)
+
+%.css: %.less
+	lessc $< $@
+
 ##
 ## Publishing
 ##
-local:
+local: $(less)
 	$(QUIET)test -d "$(local_server_root)" || {	\
 		echo "Local directory '$(local_server_root)' not found!"; \
 		exit 2;					\

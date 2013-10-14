@@ -1,0 +1,32 @@
+@primaryColor: #2bacd6;
+
+@accentFont: 'Josefin Sans', sans-serif;
+
+@import url(http://fonts.googleapis.com/css?family=Josefin+Sans:100);
+
+@searchWidth: 300px;
+@searchHeight: 150px;
+@searchLogoColor: @primaryColor;
+@searchLogoSize: 72px;
+
+.search {
+  width: @searchWidth;
+  height: @searchHeight;
+  text-align: center;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -@searchHeight * 0.5;
+  margin-left: -@searchWidth * 0.5;
+}
+.search .logo {
+  font-family: @accentFont;
+  font-size: @searchLogoSize;
+  margin: -70px 0 10px;
+  color: @searchLogoColor;
+}
+.search #search-text {
+  width: 100%;
+  display: block;
+}
