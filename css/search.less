@@ -7,7 +7,7 @@
 @searchLogoColor: @primaryColor;
 @searchLogoSize: 72px;
 
-.search {
+.search.full {
   width: @searchWidth;
   height: @searchHeight;
   text-align: center;
@@ -17,14 +17,28 @@
   top: 50%;
   margin: (-@searchHeight * 0.5) 0 0 (-@searchWidth * 0.5);
 }
+.search.inline {
+  background: #e8e8e8;
+  padding: 2px 10px 10px;
+}
 .search .logo {
   font-family: @accentFont;
-  font-size: @searchLogoSize;
-  margin: -70px 0 20px;
   color: @searchLogoColor;
 }
-.search #search-text {
+.search.inline .logo {
+  font-size: 36px;
+  display: inline;
+}
+.search.full .logo {
+  font-size: @searchLogoSize;
+  margin: -70px 0 20px;
+}
+.search.full #search-text {
   width: 100%;
   display: block;
   margin: 10px 0;
+}
+.search.inline #search-text {
+  display: inline;
+  margin: 0 10px 0 20px;
 }
