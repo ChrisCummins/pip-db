@@ -15,16 +15,16 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  margin-top: -@searchHeight * 0.5;
-  margin-left: -@searchWidth * 0.5;
+  margin: (-@searchHeight * 0.5) 0 0 (-@searchWidth * 0.5);
 }
 .search .logo {
   font-family: @accentFont;
   font-size: @searchLogoSize;
-  margin: -70px 0 10px;
+  margin: -70px 0 20px;
   color: @searchLogoColor;
 }
 .search #search-text {
   width: 100%;
   display: block;
+  margin: 10px 0;
 }
