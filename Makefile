@@ -34,6 +34,9 @@ local: $(less)
 ##
 ## General
 ##
+clean:
+	$(QUIET)rm -fv $(css)
+
 help:
 	@echo ''
 	@echo 'Publishing:'
@@ -42,5 +45,6 @@ help:
 	@echo ''
 	@echo 'General:'
 	@echo ''
+	@echo '  make clean -      - remove most generated files'
 	@echo '  make help         - display this help text'
 	@echo ''
