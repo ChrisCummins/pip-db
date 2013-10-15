@@ -21,7 +21,7 @@ css = $(less:.less=.css)
 ##
 ## Publishing
 ##
-local: $(less)
+local: $(css)
 	$(QUIET)test -d "$(local_server_root)" || {	\
 		echo "Local directory '$(local_server_root)' not found!"; \
 		exit 2;					\
