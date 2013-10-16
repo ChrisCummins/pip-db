@@ -66,6 +66,11 @@ clean-targets =								\
 	$(js-target-path)/*						\
 	$(NULL)
 
+compilers = lib/build
+html-compiler = $(compilers)/htmlcompressor.jar
+css-compiler = $(compilers)/yuicompressor.jar
+js-compiler = $(compilers)/closure-compiler.jar
+
 ##
 ## Compiling
 ##
@@ -78,7 +83,11 @@ $(html-targets): $(html-sources)
 	}
 	$(QUIET)for f in $(html); do					\
 		echo "  HTML    $(html-source-path)/$$f";		\
-		cp $(v) $(html-source-path)/$$f $(html-target-path)/$$f;\
+		java -jar $(html-compiler) 				\
+					--compress-js 			\
+					--compress-css 			\
+					-o $(html-target-path)/$$f	\
+					$(html-source-path)/$$f;	\
 	done
 
 # Less CSS compilation phase
@@ -97,7 +106,10 @@ $(css-targets): $(css-sources)
 		echo "  CSS     $(css-source-path)/$$f";		\
 		HASH=`md5sum $(css-source-path)/$$f | cut -c1-$(hash-length)`; \
 		NAME=$${f%.*}-$$HASH.css;				\
-		cp $(v) $(css-source-path)/$$f $(css-target-path)/$$NAME;\
+		java -jar $(css-compiler) --charset utf-8 -v 		\
+					--type css 			\
+					$(css-source-path)/$$f		\
+					 > $(css-target-path)/$$NAME;	\
 		for h in $(html-targets); do				\
 			sed -ri "s/(href=\"$(css-path)\/)$$f(\")/\1$$NAME\2/" $$h; \
 		done;							\
@@ -111,7 +123,9 @@ $(js-targets): $(js-sources)
 		echo "  JS      $(js-source-path)/$$f";			\
 		HASH=`md5sum $(js-source-path)/$$f | cut -c1-$(hash-length)`;	\
 		NAME=$${f%.*}-$$HASH.js;				\
-		cp $(v) $(js-source-path)/$$f $(js-target-path)/$$NAME;	\
+		java -jar $(js-compiler) 				\
+			--js=$(js-source-path)/$$f			\
+			--js_output_file=$(js-target-path)/$$NAME;	\
 		for h in $(html-targets); do				\
 			sed -ri "s/(<script src=\"$(js-path)\/)$$f(\")/\1$$NAME\2/" $$h; \
 		done;							\
