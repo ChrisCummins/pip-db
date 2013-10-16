@@ -91,11 +91,15 @@ $(html-targets): $(html-sources)
 	done
 
 # Less CSS compilation phase
-$(css-sources):
+less-sources = $(shell find $(css-source-path) -name '*.less')
+
+$(css-sources): $(less-sources)
 	$(QUIET)(							\
 		NAME="$(@:.css=.less)"; 				\
-		echo "  LESS    $$NAME";				\
-		lessc "$$NAME" "$@";					\
+		if [ -f "$$NAME" ]; then				\
+			echo "  LESS    $$NAME";			\
+			lessc "$$NAME" "$@";				\
+		fi;							\
 	)
 
 $(css-targets): $(css-sources)
@@ -103,16 +107,18 @@ $(css-targets): $(css-sources)
 		mkdir -p $(v) $(css-target-path);			\
 	}
 	$(QUIET)for f in $(css); do					\
-		echo "  CSS     $(css-source-path)/$$f";		\
 		HASH=`md5sum $(css-source-path)/$$f | cut -c1-$(hash-length)`; \
 		NAME=$${f%.*}-$$HASH.css;				\
-		java -jar $(css-compiler) --charset utf-8 -v 		\
-					--type css 			\
-					$(css-source-path)/$$f		\
-					 > $(css-target-path)/$$NAME;	\
-		for h in $(html-targets); do				\
-			sed -ri "s/(href=\"$(css-path)\/)$$f(\")/\1$$NAME\2/" $$h; \
-		done;							\
+		test -f "$(css-target-path)/$$NAME" || {		\
+			echo "  CSS     $(css-source-path)/$$f";	\
+			java -jar $(css-compiler) --charset utf-8 -v	\
+						--type css		\
+						$(css-source-path)/$$f	\
+						 > $(css-target-path)/$$NAME; \
+			for h in $(html-targets); do			\
+				sed -ri "s/(href=\"$(css-path)\/)$${f%.*}(-[0-9a-f]{$(hash-length)})?.css(\")/\1$$NAME\3/" $$h; \
+			done;						\
+		}							\
 	done
 
 $(js-targets): $(js-sources)
@@ -120,15 +126,17 @@ $(js-targets): $(js-sources)
 		mkdir -p $(v) $(js-target-path);			\
 	}
 	$(QUIET)for f in $(js); do					\
-		echo "  JS      $(js-source-path)/$$f";			\
 		HASH=`md5sum $(js-source-path)/$$f | cut -c1-$(hash-length)`;	\
 		NAME=$${f%.*}-$$HASH.js;				\
-		java -jar $(js-compiler) 				\
-			--js=$(js-source-path)/$$f			\
-			--js_output_file=$(js-target-path)/$$NAME;	\
-		for h in $(html-targets); do				\
-			sed -ri "s/(<script src=\"$(js-path)\/)$$f(\")/\1$$NAME\2/" $$h; \
-		done;							\
+		test -f "$(js-target-path)/$$NAME" || {			\
+			echo "  JS      $(js-source-path)/$$f";		\
+			java -jar $(js-compiler) 			\
+				--js=$(js-source-path)/$$f		\
+				--js_output_file=$(js-target-path)/$$NAME; \
+			for h in $(html-targets); do			\
+				sed -ri "s/(<script src=\"$(js-path)\/)$${f%.*}(-[0-9a-f]{$(hash-length)})?.js(\")/\1$$NAME\3/" $$h; \
+			done;						\
+		}							\
 	done
 
 ##
