@@ -165,6 +165,15 @@ local:
 		"$(dest)/" "$(local_server_root)/"
 
 ##
+## Documentation
+##
+
+docs: log
+
+log:
+	$(QUIET)make -C Documentation/log
+
+##
 ## General
 ##
 
@@ -180,6 +189,11 @@ help:
 	@echo 'Publishing:'
 	@echo ''
 	@echo '  make local        - publish local site'
+	@echo ''
+	@echo 'Documentation:'
+	@echo ''
+	@echo '  make docs         - compile all documentation'
+	@echo '  make log          - compile the log'
 	@echo ''
 	@echo 'General:'
 	@echo ''
