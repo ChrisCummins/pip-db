@@ -21,12 +21,12 @@ html =				\
 	$(NULL)
 
 css =				\
-	bootstrap.css		\
-	styles.css		\
+	css/bootstrap.css	\
+	css/styles.css		\
 	$(NULL)
 
 js =				\
-	bootstrap.js		\
+	js/bootstrap.js		\
 	$(NULL)
 
 assets =
@@ -52,24 +52,14 @@ html-target-path = $(dest)/$(html-path)
 html-sources = $(addprefix $(html-source-path)/,$(html))
 html-targets = $(addprefix $(html-target-path)/,$(html))
 
-css-path = css
-css-source-path = $(src)/$(css-path)
-css-target-path = $(dest)/$(css-path)
-css-sources = $(addprefix $(css-source-path)/,$(css))
-css-targets = $(addprefix $(css-target-path)/,$(css))
-css-build = `cat $(css-targets) | mda5sum | cut -c1-8`.css
+css-sources = $(addprefix $(src)/,$(css))
+css-targets = $(addprefix $(dest)/,$(css))
 
-js-path = js
-js-source-path = $(src)/$(js-path)
-js-target-path = $(dest)/$(js-path)
-js-sources = $(addprefix $(js-source-path)/,$(js))
-js-targets = $(addprefix $(js-target-path)/,$(js))
+js-sources = $(addprefix $(src)/,$(js))
+js-targets = $(addprefix $(dest)/,$(js))
 
-assets-path = assets
-assets-source-path = src/$(assets-path)
-assets-target-path = $(dest)/$(assets-path)
-assets-sources = $(addprefix $(assets-source-path)/,$(assets))
-assets-targets = $(addprefix $(assets-target-path)/,$(assets))
+assets-sources = $(addprefix $(src)/,$(assets))
+assets-targets = $(addprefix $(dest)/,$(assets))
 
 site-contents =								\
 	$(html-targets) $(extra-html)					\
@@ -78,11 +68,7 @@ site-contents =								\
 	$(assets-targets)						\
 	$(NULL)
 
-clean-targets =								\
-	$(html-target-path)/*						\
-	$(css-target-path)/*						\
-	$(js-target-path)/*						\
-	$(NULL)
+clean-targets = $(dest)/*
 
 compilers = lib/build
 html-compiler = $(compilers)/htmlcompressor.jar
@@ -121,50 +107,48 @@ $(css-sources): $(less-sources)
 	)
 
 $(css-targets): $(css-sources)
-	$(QUIET)test -d $(css-target-path) || {				\
-		mkdir -p $(v) $(css-target-path);			\
+	$(QUIET)test -d $(dir $@) || {					\
+		mkdir -p $(v) $(dir $@);				\
 	}
-	$(QUIET)for f in $(css); do					\
-		HASH=`md5sum $(css-source-path)/$$f | cut -c1-$(hash-length)`; \
-		NAME=$${f%.*}-$$HASH.css;				\
-		test -f "$(css-target-path)/$$NAME" || {		\
-			echo "  CSS     $(css-source-path)/$$f";	\
+	$(eval HASH := $(shell md5sum $< | cut -c1-$(hash-length)))
+	$(eval TARGET_NAME := $(subst /,\/,$(shell echo "$@" | sed -r 's/$(dest)\/(.*)\.css/\1/')))
+	$(eval NAME := $(addsuffix -$(HASH).css,$(patsubst %.css,%,$@)))
+	$(QUIET)(							\
+		test -f $(NAME) || {					\
+			echo '  CSS     $(NAME)';			\
 			java -jar $(css-compiler) --charset utf-8 -v	\
 						--type css		\
-						$(css-source-path)/$$f	\
-						 > $(css-target-path)/$$NAME; \
+						$< > $@;		\
 			for h in $(html-targets); do			\
-				sed -ri "s/(href=\"$(css-path)\/)$${f%.*}(-[0-9a-f]{$(hash-length)})?.css(\")/\1$$NAME\3/" $$h; \
+				sed -ri 's/(href=\")$(TARGET_NAME)(-[0-9a-f]{$(hash-length)})?(\.css\")/\1$(TARGET_NAME)-$(HASH)\3/' $$h; \
 			done;						\
 		}							\
-	done
+	)
 
 $(js-targets): $(js-sources)
-	$(QUIET)test -d $(js-target-path) || {				\
-		mkdir -p $(v) $(js-target-path);			\
+	$(QUIET)test -d $(dir $@) || {					\
+		mkdir -p $(v) $(dir $@);				\
 	}
-	$(QUIET)for f in $(js); do					\
-		HASH=`md5sum $(js-source-path)/$$f | cut -c1-$(hash-length)`;	\
-		NAME=$${f%.*}-$$HASH.js;				\
-		test -f "$(js-target-path)/$$NAME" || {			\
-			echo "  JS      $(js-source-path)/$$f";		\
+	$(eval HASH := $(shell md5sum $< | cut -c1-$(hash-length)))
+	$(eval TARGET_NAME := $(subst /,\/,$(shell echo "$@" | sed -r 's/$(dest)\/(.*)\.js/\1/')))
+	$(eval NAME := $(addsuffix -$(HASH).js,$(patsubst %.js,%,$@)))
+	$(QUIET)(							\
+		test -f $(NAME) || {					\
+			echo '  JS      $(NAME)';			\
 			java -jar $(js-compiler) 			\
-				--js=$(js-source-path)/$$f		\
-				--js_output_file=$(js-target-path)/$$NAME; \
+				--js=$< --js_output_file=$@;		\
 			for h in $(html-targets); do			\
-				sed -ri "s/(<script src=\"$(js-path)\/)$${f%.*}(-[0-9a-f]{$(hash-length)})?.js(\")/\1$$NAME\3/" $$h; \
+				sed -ri 's/(<script src=\")$(TARGET_NAME)(-[0-9a-f]{$(hash-length)})?(\.js\")/\1$(TARGET_NAME)-$(HASH)\3/' $$h; \
 			done;						\
-		}							\
-	done
+		};							\
+	)
 
 $(assets-targets): $(assets-sources)
-	$(QUIET)test -d $(assets-target-path) || {			\
-		mkdir -p $(v) $(assets-target-path);			\
+	$(QUIET)test -d $(dir $@) || {					\
+		mkdir -p $(v) $(dir $@);				\
 	}
-	$(QUIET)for f in $(assets); do					\
-		echo "  CP      $(assets-source-path)/$$f";		\
-		cp $(v) $(assets-source-path)/$$f $(assets-target-path)/$$f;\
-	done
+	@echo "  CP      $@";
+	$(QUIET)cp $(v) $< $@
 
 ##
 ## Publishing
