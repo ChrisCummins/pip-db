@@ -26,6 +26,8 @@ js =				\
 	bootstrap.js		\
 	$(NULL)
 
+assets =
+
 ##
 ## Build variables
 ##
@@ -60,6 +62,19 @@ js-target-path = $(dest)/$(js-path)
 js-sources = $(addprefix $(js-source-path)/,$(js))
 js-targets = $(addprefix $(js-target-path)/,$(js))
 
+assets-path = assets
+assets-source-path = src/$(assets-path)
+assets-target-path = $(dest)/$(assets-path)
+assets-sources = $(addprefix $(assets-source-path)/,$(assets))
+assets-targets = $(addprefix $(assets-target-path)/,$(assets))
+
+site-contents =								\
+	$(html-targets) $(extra-html)					\
+	$(css-targets) $(extra-css)					\
+	$(js-targets) $(extra-js)					\
+	$(assets-targets)						\
+	$(NULL)
+
 clean-targets =								\
 	$(html-target-path)/*						\
 	$(css-target-path)/*						\
@@ -75,7 +90,7 @@ js-compiler = $(compilers)/closure-compiler.jar
 ## Compiling
 ##
 
-all: $(html-targets) $(css-targets) $(js-targets)
+all: $(site-contents)
 
 $(html-targets): $(html-sources)
 	$(QUIET)test -d $(html-target-path) || {			\
@@ -137,6 +152,15 @@ $(js-targets): $(js-sources)
 				sed -ri "s/(<script src=\"$(js-path)\/)$${f%.*}(-[0-9a-f]{$(hash-length)})?.js(\")/\1$$NAME\3/" $$h; \
 			done;						\
 		}							\
+	done
+
+$(assets-targets): $(assets-sources)
+	$(QUIET)test -d $(assets-target-path) || {			\
+		mkdir -p $(v) $(assets-target-path);			\
+	}
+	$(QUIET)for f in $(assets); do					\
+		echo "  CP      $(assets-source-path)/$$f";		\
+		cp $(v) $(assets-source-path)/$$f $(assets-target-path)/$$f;\
 	done
 
 ##
