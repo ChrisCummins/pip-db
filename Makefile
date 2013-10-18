@@ -10,8 +10,17 @@
 #
 LOCAL_SERVER_ROOT := /var/www
 
-# The number of truncated hash characters to include in file name
-HASH_SIZE = 16
+# Content Hashing
+#
+# HASH_BIN            The program used to generated hashes, e.g. md5sum
+# HASH_SIZE           The number of truncated hash characters to include in
+#                     file names, e.g. 16. Using a smaller hash size results
+#                     in more compact file names, but increases the chance of
+#                     hash collisions. Note that changing this value will
+#                     require you to rebuild the full site.
+#
+HASH_BIN              = md5sum
+HASH_SIZE             = 8
 
 #########################
 # Files and Directories #
@@ -88,6 +97,9 @@ SITE =									\
 	$(JS_BUILD_FILES)						\
 	$(NULL)
 
+# Size of the generated hashes (in number of characters):
+GENERATED_HASH_SIZE = 32
+
 ## Verbosity:
 
 # Use V=1 to see full verbosity
@@ -130,11 +142,11 @@ $(CSS_SRC)/%.css: $(CSS_SRC)/%.less $(HTML_BUILD_FILES)
 	$(QUIET)lessc $< $@
 
 # CSS compilation
-$(CSS_DEST)/%.css: $(CSS_SRC)/%.css $(HTML_BUILD_FILES)
+$(CSS_DEST)/%.css: $(CSS_SRC)/%.css $(HTML_BUILD_FILES) check-hash-size
 	$(QUIET)test -d $(CSS_DEST) || {				\
 		mkdir -p $(v) $(CSS_DEST);				\
 	}
-	$(eval HASH := $(shell md5sum $< | cut -c1-$(HASH_SIZE)))
+	$(eval HASH := $(shell $(HASH_BIN) $< | cut -c1-$(HASH_SIZE)))
 	$(eval TARGET := $(subst /,\/,$(shell echo "$@" | sed -r 's/$(BUILDIR)\/(.*)\.css/\1/')))
 	$(eval NAME := $(addsuffix -$(HASH).css,$(patsubst %.css,%,$@)))
 	$(QUIET)test -f $(NAME) || {					\
@@ -148,11 +160,11 @@ $(CSS_DEST)/%.css: $(CSS_SRC)/%.css $(HTML_BUILD_FILES)
 	done
 
 # JavaScript compilation
-$(JS_DEST)/%.js: $(JS_SRC)/%.js $(HTML_BUILD_FILES)
+$(JS_DEST)/%.js: $(JS_SRC)/%.js $(HTML_BUILD_FILES) check-hash-size
 	$(QUIET)test -d $(JS_DEST) || {					\
 		mkdir -p $(v) $(JS_DEST);				\
 	}
-	$(eval HASH := $(shell md5sum $< | cut -c1-$(HASH_SIZE)))
+	$(eval HASH := $(shell $(HASH_BIN) $< | cut -c1-$(HASH_SIZE)))
 	$(eval TARGET := $(subst /,\/,$(shell echo "$@" | sed -r 's/$(BUILDIR)\/(.*)\.js/\1/')))
 	$(eval NAME := $(addsuffix -$(HASH).js,$(patsubst %.js,%,$@)))
 	$(QUIET)test -f $(NAME) || {					\
@@ -163,6 +175,17 @@ $(JS_DEST)/%.js: $(JS_SRC)/%.js $(HTML_BUILD_FILES)
 	$(QUIET)for h in $(HTML_BUILD_FILES); do			\
 		sed -ri 's/(<script src=\")$(TARGET)(-[0-9a-f]{$(HASH_SIZE)})?(\.js\")/\1$(TARGET)-$(HASH)\3/' $$h; \
 	done
+
+.PHONY: check-hash-size
+
+# We can't have a $(HASH_SIZE) value which is larger than the actual length of
+# the generated hashes, so test for this and fail loudly if necessary.
+check-hash-size:
+	$(QUIET)test $(HASH_SIZE) -le $(GENERATED_HASH_SIZE) || {	\
+		echo -n "fatal: HASH_SIZE is set to $(HASH_SIZE), ";	\
+		echo    "maximum legal value is $(GENERATED_HASH_SIZE)";\
+		exit 1;							\
+	}
 
 ##
 ## Publishing:
