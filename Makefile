@@ -2,8 +2,13 @@
 ## Configuration
 ##
 
-# Path to local test server
-local_server_root = /var/www
+#
+# The path to local test server.
+#
+# When 'make local' is executed, the contents of this directory are overwritten
+# by the build files located in $(dest).
+#
+LOCAL_SERVER_ROOT = /var/www
 
 # Path to build directory
 dest = build
@@ -140,15 +145,20 @@ $(assets-targets): $(assets-sources)
 ## Publishing
 ##
 
+#
+# Export the $(dest) directory to $(LOCAL_SERVER_ROOT). If $(LOCAL_SERVER_ROOT)
+# directory does not exist, fail loudly.
+#
 local:
-	$(QUIET)test -d "$(local_server_root)" || {	\
-		echo "Local directory '$(local_server_root)' not found!"; \
-		exit 2;					\
+	$(QUIET)test -d "$(LOCAL_SERVER_ROOT)" || {			\
+		echo -n "fatal: destination directory " >&2;		\
+		echo -n "'$(LOCAL_SERVER_ROOT)'" >&2;			\
+		echo    " not found!" >&2; 				\
+		echo >&2;						\
+		exit 2;							\
 	}
-	$(QUIET)rsync -avh --delete			\
-		--exclude .git/ 			\
-		--exclude Makefile			\
-		"$(dest)/" "$(local_server_root)/"
+	$(QUIET)rsync -avh --delete					\
+		"$(dest)/" "$(LOCAL_SERVER_ROOT)/"
 
 ##
 ## Documentation
