@@ -1,0 +1,370 @@
+\section{October 2013 \hrulefill}
+
+\subsection{Monday 7th}
+I’ve organised a meeting with Ian Nabney (i.t.nabney@aston.ac.uk) for Thursday
+10th 10:30am in MB216A. Topics for discussion:
+
+\begin{itemize}
+\item Dataset – getting a better understanding of the data which I will be
+  working with, the scientific background behind it, how often it will be
+  updated, whether it is confidential/open source etc.
+\item Users – what is the expected userbase, what are their expectations,
+  concerns, and technical experience? Etc.
+\item Time schedule – should I be using any development processes? How often
+  should I be meeting/reporting back? Etc.
+\item Difference(s) between the protein diffusion coefficient projects.
+\item Additional project requirements – what is the expected site traffic? High
+  or low? Do I need to organise dedicated servers?
+\item Any existing related databases to use as reference.
+\item Any confidentiality/plagiarism issues with hosting WIP code on github
+  (effectively open sourcing the whole project)?
+\end{itemize}
+
+\subsection{Wednesday 9th}
+Some personal goals for the project:
+
+\begin{enumerate}
+\item To produce something of value to the molecular biology community.
+\item To exclusively use open source (free as in freedom and free as in free
+  beer) software and tools, without exception.
+\item To learn more
+\item To get a high mark ($> 70\%$) mark for all assessments.
+\item To contribute back to at least one of the tools that I use in some
+  quantifiable way.
+\end{enumerate}
+
+\subsection{Thursday 10th}
+Met with Ian. Notes:
+
+\begin{itemize}
+\item Choice of process is important - look up RUP (IBM Rational Unified
+  Process) \cite{IBMRUP} and consider using it. If not, suggest an improved
+  alternative and justify.
+\item Choice of language is personal preference. Ian has experience with PHP
+  making it a solid choice – but a justified alternative is acceptable.
+\item I should meet with Dr. Darren Flower (Aston lecturer, effectively product
+  owner for this project) ASAP to discuss the project, and he can give me the
+  data and help answer questions about it.
+\item I can use \texttt{github.com} to host code, but shouldn’t upload the bio
+  data itself.
+\item First term work is for a lot more than just planning stage. I should be
+  using it to begin work properly and use it to brush up on MySQL/PHP skills as
+  required.
+\item Weekly meetings are essential, 10:30 on Thursdays.
+\end{itemize}
+
+\paragraph{TODO}
+\begin{itemize}
+\item Read up on RUP.
+\item Contact Darren to arrange meeting.
+\item Read about git and MySQL \cite{Kulbertis2011}.
+\end{itemize}
+
+\paragraph{Unified Process} The Unified Software Development Process is an
+iterative and incremental software development process framework. The basis of
+the process is that it is a use case driven iterative and incremental process,
+in which Elaboration, Construction and Transition are divided into a series of
+time boxed phases and iterated upon.
+
+\paragraph{IBM Rational Unified Process} An iterative software development
+process framework created by IBM (Rational Software Corporation division), which
+is an implementation of the Unified Process. It details six best practices for
+modern software engineering:
+
+\begin{enumerate}
+\item Develop iteratively, with risk as the primary iteration driver
+\item Manage requirements
+\item Employ a component-based architecture
+\item Model software visually
+\item Continuously verify quality
+\item Control changes
+\end{enumerate}
+
+\noindent
+Each iteration contains nine disciplines. Six engineering disciplines:
+\begin{enumerate}
+\item Business modelling
+\item Requirements
+\item Analysis and Design
+\item Implementation
+\item Test
+\item Deployment
+\end{enumerate}
+
+\noindent
+And three supporting disciplines:
+\begin{enumerate}
+\item Configuration and change management
+\item Project management
+\item Environment
+\end{enumerate}
+
+\noindent
+The RUP project life cycle consists of four phases:
+\begin{enumerate}
+\item Inception phase
+\item Elaboration phase
+\item Construction phase
+\item Transition phase
+\end{enumerate}
+
+\paragraph{Problems with RUP} It is isn’t open source. A user license for the
+Rational Method Composer must be bought from IBM for \$1,080.00 dollars, and so
+I must look for alternatively so as not to violate my personal goal of using
+purely open source tools/frameworks.
+
+\paragraph{OpenUP} The Open Unified Process, alternatively known as the Eclipse
+Process Framework (EPF). This offers an open source minimalist implementation of
+RUP.
+
+\begin{quote}
+  OpenUP is a lean Unified Process that applies iterative and incremental
+  approaches within a structured lifecycle. OpenUP embraces a pragmatic, agile
+  philosophy that focuses on the collaborative nature of software
+  development. It is a tools-agnostic, low-ceremony process that can be extended
+  to address a broad variety of project types.
+\end{quote}
+
+\noindent
+Arranged meeting with Darren for 2pm in MB449 tomorrow.
+
+\subsection{Friday 11th}
+Purposes of the project planning module:
+
+\begin{enumerate}
+\item Develop a project plan.
+\item Produce a schedule of activities using GANTT charts or similar.
+\item Consider which activities are critical to the success of your project.
+\item Undertake a risk analysis.
+\item Ensure that tangible milestones are identified to measure progress and
+  success.
+\item Determine the resources needed to carry out and complete your project
+  work.
+\end{enumerate}
+
+\noindent
+From the guidance notes, a good project topic:
+
+\begin{enumerate}
+\item Provides a sufficient intellectual challenge. – will be determined by 3).
+\item Contains a relatively straightforward core part which should be achievable
+  even in the worst-case scenario. – Yes. The creation of an online database.
+\item Has an element of innovation, not necessarily in the research sense, but
+  at least in the sense of ‘not covered or detailed in final-year lectures or in
+  standard textbooks’. – Not sure about this.
+\item Yields results that can be verified in some way. – Yes.
+\end{enumerate}
+
+\noindent
+Questions for next meeting with Ian:
+\begin{itemize}
+\item Availability of dedicated servers, and public IPs.
+\item Registration of a domain.
+\item Clarify the purpose of the project logbook: is it for my benefit or the
+  assessor’s?
+\item Confirm access to the database module notes.
+\end{itemize}
+
+\noindent
+Questions for meeting with Darren:
+
+\begin{itemize}
+\item The Dataset:
+  \begin{itemize}
+  \item What is it used for?
+  \item Who is it used by?
+    \begin{itemize}
+    \item Confidential or open source?
+    \item Publicly available or user account based access?
+    \end{itemize}
+  \item How often is it used? (Site traffic)
+  \item How often is it updated?
+    \begin{itemize}
+    \item User submissions or single admin account?
+    \end{itemize}
+  \item Feedback from users?
+    \begin{itemize}
+    \item Reddit style popularity mechanism?
+    \item Comments system?
+    \end{itemize}
+  \end{itemize}
+\item The website:
+  \begin{itemize}
+  \item Possible volunteers for user testing?
+  \item Associated with Aston?
+  \end{itemize}
+\end{itemize}
+
+\noindent
+Notes from meeting with Darren:
+\begin{itemize}
+\item There are hundreds (/thousands) of existing databases which offer specific
+  categories of information which tend to interlink with each other.
+\item Many different use cases for looking up data. Some people will want a dump
+  of the whole dataset so as to perform calculations, some other cases may be
+  interested in performing more targeted searches, such as by type/range of pHs
+  etc.
+\item A BLAST search implementation would be useful.
+\item Possible visualisations of results such as graphing distribution of pI
+  ranges would be useful.
+\item Fuzzy matching of search criteria would be useful.
+\item All data contains citations to original source.
+\item User submitted data could be potentially useful, but would need a way to
+  distinguish it from the ‘authoritative’ source. I think this could be a really
+  interesting topic of research – how can you authenticate user submitted data?
+  Ranking by the weight of the citation? User rating? Peer reviewing?
+\item Version control of the dataset would be useful. For example, viewing
+  history (like Wikipedia’s page history), and the ability to undo revisions.
+\item Site traffic is impossible to predict. It could be used by lots of people,
+  or it may not. To accommodate this, I should assume worst-case scenarios for
+  the number of users – in cases of peer reviewing, assume low userbase; in
+  cases of site traffic, assume heavy load.
+\item Darren has volunteered for offering user testing of work-in-progress
+  sites.
+\item Darren would like to hear from me with progress reports, or any questions
+  etc. Should keep him in the loop. Perhaps periodic progress reports sent by
+  email?
+\item Fraser is a final year Biology student who has worked with the dataset
+  extensively, and should be able to help go through the data with me and
+  explain what it means.
+\item Darren will send me the dataset in the near future.
+\end{itemize}
+
+\noindent
+Site security concenrs:
+
+\paragraph{Confidentiality} Any user system will require usernames and passwords
+to remain confidential.
+\paragraph{Integrity} Integrity of dataset is CRUCIAL. Any unwarranted
+modifications or loss of data would invalidate the whole project.
+\paragraph{Accessibility} Data must be accessible at all times. System downtime
+is unacceptable, and this means that updates to dataset must occur transparently
+to the user. This also includes making offline copies of the data for users.
+
+\paragraph{Project Goal} A reasonable personal goal would be to get the basic
+searchable database online by the end of the year. This provides ample time for
+adding the ``fun'' stuff, such as visualisation, advanced searching techniques,
+extensive user testing, site design etc. etc.
+
+Have received dataset from Darren. Note that it is currently CONFIDENTIAL ``in
+so far as you shouldn’t pass it on to anyone else, or otherwise make it
+available to others''.
+
+\paragraph{Development Plan}
+\begin{enumerate}
+\item Setup MySQL database and suitable tables.
+\item Create a webpage to add entries to db and test.
+\item Create a script to import exiting data in spreadsheets.
+\item Create forms to search database.
+\item Create forms to download database/search queries.
+\end{enumerate}
+
+\paragraph{UI Idea} use an accordion model to hide further details of search
+requests and show them on demand, instead of showing a list of links to separate
+details pages.
+
+\paragraph{UI Idea} use a minimalist front page if we don’t have anything to
+show. Think \texttt{google.com}.
+
+\subsection{Sunday 13th}
+Found that the PHP sources for a couple of pages from Facebook were leaked in
+2007, now available on github \cite{Buvrilovic2013}. Should keep tabs on this so
+as to see how a large database backed website organises its code.
+
+\noindent
+Notes on Facebook source code:
+\begin{itemize}
+\item Function \texttt{get\_site\_variable()} provides API into state vars.
+\item \texttt{IS\_DEV\_SITE} and other globals provide some debugging.
+\item \texttt{xxx\_stats} variable arrays are used for grouping relevant data.
+\item Directory structure:
+  \begin{itemize}
+  \item \texttt{/html/}
+  \item \texttt{/libs/}
+  \item \texttt{/js/}
+  \item \texttt{/css/}
+  \end{itemize}
+\item Templates are used and rendered last:
+\begin{verbatim}
+    render_template($_SERVER['PHP_ROOT'].'/html/index.phpt');
+\end{verbatim}
+\end{itemize}
+
+\subsection{Monday 14th}
+Read up on PHP templating \cite{Rakowski2011}, should investigate use of Twig
+framework to implement MVC architecture in my project.\\
+
+Amended meeting time with Fraser to 4pm on Wednesday.\\
+
+Started generating project plan (gantt chart). OpenUP reference:
+\texttt{http://epf.eclipse.org/wikis/openup/}.
+
+\subsection{Tuesday 15th}
+Created first iteration of site mockups to get a feel for the
+design. Requirements are still changing rapidly so this helps formulate a TODO
+list.
+
+\paragraph{Back-end idea} Don’t just store external URLs for references, instead
+break it down logically into a website name, author, unique ID, etc.
+
+\paragraph{Plan for site map}
+\begin{itemize}
+\item Home
+  \begin{itemize}
+  \item Help
+  \item About Us
+  \item Terms \& Conditions
+  \item Privacy Policy
+  \item Contact Us
+  \end{itemize}
+\item Search Results
+  \begin{itemize}
+  \item Download Results
+  \item Invidual Record
+  \item Edit Record
+  \item Add New Record
+  \end{itemize}
+\item Members Page
+  \begin{itemize}
+  \item Register
+  \item Login
+  \end{itemize}
+\end{itemize}
+
+\subsection{Wednesday 16th}
+Had meeting first with Fraser. Notes:
+
+\begin{itemize}
+\item Dataset consist of multiple sheets which can be combined, with an extra
+  field to note the sheet it originated from (1975, PubMed, etc.). Note that
+  data in sixth form sheet may be incorrect or less valid.
+\item Notes, by field:
+  \begin{itemize}
+  \item \textbf{E.C.} Enzyme Commission Number. Numerical classification scheme,
+    consisting of four positive integer values. Many to one relationship of
+    proteins and records to E.C. value. Can be unknown.
+  \item \textbf{Protein / Alternative Name(s)} string names of equal value.
+  \item \textbf{Source} Latin binomial. Case sensitivity is important:
+    capitalise the Genus, everything else is lower case. Does have common names
+    (property).
+  \item \textbf{Organ and/or Subcellular location} a property of the source.
+  \item \textbf{M.W.} Molecular Weight, in units of Daltons (Da).
+  \item \textbf{Subunit No. / M.W (range)} properties of molecular weight.
+  \item \textbf{No. of Iso-enzymes} Values can be vague (e.g. Many/several), not
+    that important.
+  \item \textbf{pI maximum value / pI range / pI value of major component / pI}
+    various ways to specify pI value with varying precision.
+  \item \textbf{Temperature} Important for replicating experimental results.
+  \item \textbf{Method} Experimental method
+  \item \textbf{Valid sequence(s) available} Values in the fields are shorthand,
+    use the key at the bottom of each sheet to decode. Entries with ‘1’ are more
+    robust and should be ranked greater than entries with ‘0’ values.
+  \item \textbf{Protein sequence / Species Taxonomy / Original Texts / PubMed}
+    External links.
+  \item \textbf{Notes} text with additional details. Could be combed through to
+    see if info could be added to other fields.
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Prototyping idea} Write a ``Plausible Nonsense Generator'' which can
+create fake but believable ideal datasets for testing with.
