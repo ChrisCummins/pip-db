@@ -15,21 +15,34 @@ src = src
 ## Source files
 ##
 
-html =				\
-	index.html		\
-	results.html		\
-	$(NULL)
+less = styles.css
 
-css =				\
-	css/bootstrap.css	\
-	css/styles.css		\
-	$(NULL)
+html-path = .
+css-path = css
+js-path = js
 
-js =				\
-	js/bootstrap.js		\
-	$(NULL)
+html-src = $(src)/$(html-path)
+html-dest = $(dest)/$(html-path)
 
-assets =
+css-src = $(src)/$(css-path)
+css-dest = $(dest)/$(css-path)
+
+js-src = $(src)/$(js-path)
+js-dest = $(dest)/$(js-path)
+
+html = $(shell find $(html-src) -name '*.html' -exec basename {} \;)
+html-sources = $(addprefix $(html-src)/,$(html))
+html-targets = $(addprefix $(html-dest)/,$(html))
+
+css = $(shell find $(css-src) -name '*.css' -exec basename {} \;)
+css += $(less)
+css-sources = $(addprefix $(css-src)/,$(css))
+less-targets = $(addprefix $(css-src)/,$(less))
+css-targets = $(addprefix $(css-dest)/,$(css))
+
+js = $(shell find $(js-src) -name '*.js' -exec basename {} \;)
+js-sources = $(addprefix $(js-src)/,$(js))
+js-targets = $(addprefix $(js-dest)/,$(js))
 
 ##
 ## Build variables
@@ -46,29 +59,14 @@ endif
 # The number of truncated hash characters to include in file name
 hash-length = 16
 
-html-path = .
-html-source-path = $(src)/$(html-path)
-html-target-path = $(dest)/$(html-path)
-html-sources = $(addprefix $(html-source-path)/,$(html))
-html-targets = $(addprefix $(html-target-path)/,$(html))
-
-css-sources = $(addprefix $(src)/,$(css))
-css-targets = $(addprefix $(dest)/,$(css))
-
-js-sources = $(addprefix $(src)/,$(js))
-js-targets = $(addprefix $(dest)/,$(js))
-
-assets-sources = $(addprefix $(src)/,$(assets))
-assets-targets = $(addprefix $(dest)/,$(assets))
-
 site-contents =								\
 	$(html-targets) $(extra-html)					\
-	$(css-targets) $(extra-css)					\
+	$(css-targets) $(less-targets) $(extra-css)			\
 	$(js-targets) $(extra-js)					\
-	$(assets-targets)						\
+	$(assets-targets) 						\
 	$(NULL)
 
-clean-targets = $(dest)/*
+clean-targets = $(dest)/* $(less-targets)
 
 compilers = lib/build
 html-compiler = $(compilers)/htmlcompressor.jar
@@ -81,34 +79,22 @@ js-compiler = $(compilers)/closure-compiler.jar
 
 all: $(site-contents)
 
-$(html-targets): $(html-sources)
-	$(QUIET)test -d $(html-target-path) || {			\
-		mkdir -p $(v) $(html-target-path);			\
+$(html-dest)/%.html: $(html-src)/%.html
+	$(QUIET)test -d $(html-dest) || {				\
+		mkdir -p $(v) $(html-dest);				\
 	}
-	$(QUIET)for f in $(html); do					\
-		echo "  HTML    $(html-source-path)/$$f";		\
-		java -jar $(html-compiler) 				\
-					--compress-js 			\
-					--compress-css 			\
-					-o $(html-target-path)/$$f	\
-					$(html-source-path)/$$f;	\
-	done
+	@echo "  HTML    $@"
+	$(QUIET)java -jar $(html-compiler)				\
+			--compress-js --compress-css -o $@ $<
 
 # Less CSS compilation phase
-less-sources = $(shell find $(css-source-path) -name '*.less')
+$(css-src)/%.css: $(css-src)/%.less $(html-targets)
+	@echo "  LESS    $@"
+	$(QUIET)lessc $< $@
 
-$(css-sources): $(less-sources)
-	$(QUIET)(							\
-		NAME="$(@:.css=.less)"; 				\
-		if [ -f "$$NAME" ]; then				\
-			echo "  LESS    $$NAME";			\
-			lessc "$$NAME" "$@";				\
-		fi;							\
-	)
-
-$(css-targets): $(css-sources)
-	$(QUIET)test -d $(dir $@) || {					\
-		mkdir -p $(v) $(dir $@);				\
+$(css-dest)/%.css: $(css-src)/%.css $(html-targets)
+	$(QUIET)test -d $(css-dest) || {				\
+		mkdir -p $(v) $(css-dest);				\
 	}
 	$(eval HASH := $(shell md5sum $< | cut -c1-$(hash-length)))
 	$(eval TARGET := $(subst /,\/,$(shell echo "$@" | sed -r 's/$(dest)\/(.*)\.css/\1/')))
@@ -119,15 +105,15 @@ $(css-targets): $(css-sources)
 			java -jar $(css-compiler) --charset utf-8 -v	\
 						--type css		\
 						$< > $(NAME);		\
-			for h in $(html-targets); do			\
-				sed -ri 's/(href=\")$(TARGET)(-[0-9a-f]{$(hash-length)})?(\.css\")/\1$(TARGET)-$(HASH)\3/' $$h; \
-			done;						\
-		}							\
+		};							\
+		for h in $(html-targets); do				\
+			sed -ri 's/(href=\")$(TARGET)(-[0-9a-f]{$(hash-length)})?(\.css\")/\1$(TARGET)-$(HASH)\3/' $$h; \
+		done;							\
 	)
 
-$(js-targets): $(js-sources)
-	$(QUIET)test -d $(dir $@) || {					\
-		mkdir -p $(v) $(dir $@);				\
+$(js-dest)/%.js: $(js-src)/%.js $(html-targets)
+	$(QUIET)test -d $(js-dest) || {					\
+		mkdir -p $(v) $(js-dest);				\
 	}
 	$(eval HASH := $(shell md5sum $< | cut -c1-$(hash-length)))
 	$(eval TARGET := $(subst /,\/,$(shell echo "$@" | sed -r 's/$(dest)\/(.*)\.js/\1/')))
@@ -137,10 +123,10 @@ $(js-targets): $(js-sources)
 			echo '  JS      $(NAME)';			\
 			java -jar $(js-compiler) 			\
 				--js=$< --js_output_file=$(NAME);	\
-			for h in $(html-targets); do			\
-				sed -ri 's/(<script src=\")$(TARGET)(-[0-9a-f]{$(hash-length)})?(\.js\")/\1$(TARGET)-$(HASH)\3/' $$h; \
-			done;						\
 		};							\
+		for h in $(html-targets); do				\
+			sed -ri 's/(<script src=\")$(TARGET)(-[0-9a-f]{$(hash-length)})?(\.js\")/\1$(TARGET)-$(HASH)\3/' $$h; \
+		done;							\
 	)
 
 $(assets-targets): $(assets-sources)
