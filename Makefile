@@ -101,8 +101,6 @@ ifdef V
 	v = -v
 endif
 
-clean-targets = $(BUILDIR)/* $(LESS_BUILD_FILES)
-
 compilers = lib/build
 html-compiler = $(compilers)/htmlcompressor.jar
 css-compiler = $(compilers)/yuicompressor.jar
@@ -203,8 +201,14 @@ log:
 ## General
 ##
 
+.PHONY: clean distclean
+
 clean:
-	$(QUIET)rm -rfv $(clean-targets)
+	$(QUIET)find $(BUILDIR) -type f | xargs --no-run-if-empty rm -v
+	$(QUIET)rm -fv $(LESS_BUILD_FILES)
+
+distclean: clean
+	$(QUIET)rm -rfv $(BUILDIR)
 
 help:
 	@echo ''
@@ -223,6 +227,7 @@ help:
 	@echo ''
 	@echo 'General:'
 	@echo ''
-	@echo '  make clean -      - remove most generated files'
+	@echo '  make clean        - remove most generated files'
+	@echo '  make distclean    - removes all the files of "clean" and some extras'
 	@echo '  make help         - display this help text'
 	@echo ''
