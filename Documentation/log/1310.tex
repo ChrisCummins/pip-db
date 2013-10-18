@@ -331,7 +331,7 @@ break it down logically into a website name, author, unique ID, etc.
   \end{itemize}
 \end{itemize}
 
-\subsection{Wednesday 16th}
+\subsection{Tuesday 16th}
 Had meeting first with Fraser. Notes:
 
 \begin{itemize}
@@ -368,3 +368,180 @@ Had meeting first with Fraser. Notes:
 
 \paragraph{Prototyping idea} Write a ``Plausible Nonsense Generator'' which can
 create fake but believable ideal datasets for testing with.
+
+\subsection{Wednesday 17th}
+Notes from weekly meeting with Ian:
+
+\begin{itemize}
+\item No news yet on availability of server/IP.
+\item Registration of domains can be done whenever (he recommended quiet late,
+  I'll recommend quite early), small cost will be reimbursed by department.
+\item Refer to Kate for answers on: logbook style (is it for my benefit or
+  exmainers?), the distribution of marks between testing and evaluation, term
+  dates.
+\item 'Balsamiq' is a UI prototyping tool which is useful for generating
+  wireframes and mockups. I should look into this.
+\item First iteration of Gantt chart/project plan is lacking in User
+  requirements and risk assessment time. More time should be dedicated to this,
+  don't rush into implementation. Also need to propose a business case (although
+  this will be pretty minimal: more science = better humanity).
+\item A proper audit of the previous student's project should be done and
+  recorded (this can be added to project plan). This can be chalked up as
+  ``Contextual Investigation''
+\item Be more honest in risk assessment. Include things like ``need to learn
+  PHP'', ``I'm a MySQL n00b'', etc.
+\end{itemize}
+
+\paragraph{TODO}
+\begin{itemize}
+\item Second iteration of Gantt chart/project plan.
+\item Write an assessment of project risks.
+\item Talk with Darren about further user investigation.
+\item Audit the previous FYP.
+\end{itemize}
+
+\subsection{Thursday 18th}
+\paragraph{An examination of pidb back-end}
+\begin{verbatim}
+mysql> SHOW TABLES;
++------------------+
+| Tables_in_pidb   |
++------------------+
+| Locations        |
+| MethodCollection |
+| Methods          |
+| ProteinAltNames  |
+| Proteins         |
+| Records          |
+| Settings         |
+| Sources          |
+| TextCollection   |
+| Texts            |
+| Users            |
++------------------+
+11 rows in set (0.00 sec)
+
+mysql> DESCRIBE Locations;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| LocationID | int(15)      | NO   | PRI | NULL    | auto_increment |
+| Location   | varchar(255) | NO   |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> DESCRIBE MethodCollection;
++----------+---------+------+-----+---------+-------+
+| Field    | Type    | Null | Key | Default | Extra |
++----------+---------+------+-----+---------+-------+
+| RecordID | int(15) | NO   | PRI | NULL    |       |
+| MethodID | int(15) | NO   | PRI | NULL    |       |
++----------+---------+------+-----+---------+-------+
+2 rows in set (0.02 sec)
+
+mysql> DESCRIBE Methods;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| MethodID | int(15)      | NO   | PRI | NULL    | auto_increment |
+| Method   | varchar(255) | NO   |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> DESCRIBE ProteinAltNames;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| ProteinID | int(15)      | NO   | PRI | NULL    |       |
+| AltName   | varchar(255) | NO   | PRI | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+2 rows in set (0.02 sec)
+
+mysql> DESCRIBE Proteins;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| ProteinID    | int(15)      | NO   | PRI | NULL    | auto_increment |
+| Name         | varchar(255) | NO   |     | NULL    |                |
+| SequenceLink | text         | NO   |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> DESCRIBE Records;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| RecordID       | int(15)      | NO   | PRI | NULL    | auto_increment |
+| EC             | varchar(255) | NO   |     | NULL    |                |
+| ProteinID      | int(15)      | NO   |     | NULL    |                |
+| SourceID       | int(15)      | NO   |     | NULL    |                |
+| LocationID     | int(15)      | NO   |     | NULL    |                |
+| MWMin          | int(50)      | NO   |     | NULL    |                |
+| MWMax          | int(50)      | NO   |     | NULL    |                |
+| SubUnitNo      | int(5)       | NO   |     | NULL    |                |
+| SubUnitMW      | varchar(255) | NO   |     | NULL    |                |
+| IsoEnzymesMin  | varchar(255) | NO   |     | NULL    |                |
+| IsoEnzymesMax  | varchar(255) | NO   |     | NULL    |                |
+| PIMaxValue     | float        | NO   |     | NULL    |                |
+| PIMin          | float        | NO   |     | NULL    |                |
+| PIMax          | float        | NO   |     | NULL    |                |
+| PIMajorComp    | float        | NO   |     | NULL    |                |
+| PIValue        | float        | NO   |     | NULL    |                |
+| TemperatureMin | int(255)     | NO   |     | NULL    |                |
+| TemperatureMax | int(255)     | NO   |     | NULL    |                |
+| PubMed         | text         | NO   |     | NULL    |                |
+| Notes          | varchar(255) | NO   |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+20 rows in set (0.01 sec)
+
+mysql> DESCRIBE Settings;
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| ID    | int(15)      | NO   | PRI | NULL    | auto_increment |
+| Name  | varchar(255) | NO   |     | NULL    |                |
+| Value | varchar(255) | NO   |     | NULL    |                |
++-------+--------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> DESCRIBE Sources;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| SourceID     | int(15)      | NO   | PRI | NULL    | auto_increment |
+| Name         | varchar(255) | NO   |     | NULL    |                |
+| TaxonomyLink | text         | NO   |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> DESCRIBE TextCollection;
++----------+---------+------+-----+---------+-------+
+| Field    | Type    | Null | Key | Default | Extra |
++----------+---------+------+-----+---------+-------+
+| RecordID | int(15) | NO   | PRI | NULL    |       |
+| TextID   | int(15) | NO   | PRI | NULL    |       |
++----------+---------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> DESCRIBE Texts;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| TextID   | int(15)      | NO   | PRI | NULL    | auto_increment |
+| Link     | text         | NO   |     | NULL    |                |
+| TextType | varchar(255) | NO   |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> DESCRIBE Users;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| UserID   | int(15)      | NO   | PRI | NULL    | auto_increment |
+| Name     | varchar(255) | NO   |     | NULL    |                |
+| Email    | varchar(255) | NO   |     | NULL    |                |
+| Password | varchar(32)  | NO   |     | NULL    |                |
+| Type     | varchar(50)  | NO   |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+\end{verbatim}
