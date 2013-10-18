@@ -11,7 +11,7 @@
 LOCAL_SERVER_ROOT := /var/www
 
 # The number of truncated hash characters to include in file name
-hash-length = 16
+HASH_SIZE = 16
 
 #########################
 # Files and Directories #
@@ -47,7 +47,7 @@ JS_DIR   := js
 #
 LESS_BASENAMES = styles.less
 
-## END OF USER CONFIGURABLE VARIABLES.
+## END OF USER CONFIGURABLE SECTION.
 
 ######################
 # Internal variables #
@@ -88,9 +88,7 @@ SITE =									\
 	$(JS_BUILD_FILES)						\
 	$(NULL)
 
-##
 ## Verbosity:
-##
 
 # Use V=1 to see full verbosity
 QUIET_  = @
@@ -101,10 +99,15 @@ ifdef V
 	v = -v
 endif
 
-compilers = lib/build
-html-compiler = $(compilers)/htmlcompressor.jar
-css-compiler = $(compilers)/yuicompressor.jar
-js-compiler = $(compilers)/closure-compiler.jar
+# Compilers and minifiers:
+JAR_DIR  = lib/build
+HTML_JAR = $(JAR_DIR)/htmlcompressor.jar
+CSS_JAR  = $(JAR_DIR)/yuicompressor.jar
+JS_JAR   = $(JAR_DIR)/closure-compiler.jar
+
+#####################
+# Rules and targets #
+#####################
 
 ##
 ## Compiling
@@ -112,65 +115,61 @@ js-compiler = $(compilers)/closure-compiler.jar
 
 all: $(SITE)
 
+# HTML compilation
 $(HTML_DEST)/%.html: $(HTML_SRC)/%.html
 	$(QUIET)test -d $(HTML_DEST) || {				\
 		mkdir -p $(v) $(HTML_DEST);				\
 	}
 	@echo "  HTML    $@"
-	$(QUIET)java -jar $(html-compiler)				\
+	$(QUIET)java -jar $(HTML_JAR)					\
 			--compress-js --compress-css -o $@ $<
 
-# Less CSS compilation phase
+# Less CSS compilation
 $(CSS_SRC)/%.css: $(CSS_SRC)/%.less $(HTML_BUILD_FILES)
 	@echo "  LESS    $@"
 	$(QUIET)lessc $< $@
 
+# CSS compilation
 $(CSS_DEST)/%.css: $(CSS_SRC)/%.css $(HTML_BUILD_FILES)
 	$(QUIET)test -d $(CSS_DEST) || {				\
 		mkdir -p $(v) $(CSS_DEST);				\
 	}
-	$(eval HASH := $(shell md5sum $< | cut -c1-$(hash-length)))
+	$(eval HASH := $(shell md5sum $< | cut -c1-$(HASH_SIZE)))
 	$(eval TARGET := $(subst /,\/,$(shell echo "$@" | sed -r 's/$(BUILDIR)\/(.*)\.css/\1/')))
 	$(eval NAME := $(addsuffix -$(HASH).css,$(patsubst %.css,%,$@)))
 	$(QUIET)(							\
 		test -f $(NAME) || {					\
 			echo '  CSS     $(NAME)';			\
-			java -jar $(css-compiler) --charset utf-8 -v	\
+			java -jar $(CSS_JAR) --charset utf-8 -v		\
 						--type css		\
 						$< > $(NAME);		\
 		};							\
-		for h in $(HTML_BUILD_FILES); do				\
-			sed -ri 's/(href=\")$(TARGET)(-[0-9a-f]{$(hash-length)})?(\.css\")/\1$(TARGET)-$(HASH)\3/' $$h; \
+		for h in $(HTML_BUILD_FILES); do			\
+			sed -ri 's/(href=\")$(TARGET)(-[0-9a-f]{$(HASH_SIZE)})?(\.css\")/\1$(TARGET)-$(HASH)\3/' $$h; \
 		done;							\
 	)
 
+# JavaScript compilation
 $(JS_DEST)/%.js: $(JS_SRC)/%.js $(HTML_BUILD_FILES)
 	$(QUIET)test -d $(JS_DEST) || {					\
 		mkdir -p $(v) $(JS_DEST);				\
 	}
-	$(eval HASH := $(shell md5sum $< | cut -c1-$(hash-length)))
+	$(eval HASH := $(shell md5sum $< | cut -c1-$(HASH_SIZE)))
 	$(eval TARGET := $(subst /,\/,$(shell echo "$@" | sed -r 's/$(BUILDIR)\/(.*)\.js/\1/')))
 	$(eval NAME := $(addsuffix -$(HASH).js,$(patsubst %.js,%,$@)))
 	$(QUIET)(							\
 		test -f $(NAME) || {					\
 			echo '  JS      $(NAME)';			\
-			java -jar $(js-compiler) 			\
+			java -jar $(JS_JAR) 				\
 				--js=$< --js_output_file=$(NAME);	\
 		};							\
 		for h in $(HTML_BUILD_FILES); do			\
-			sed -ri 's/(<script src=\")$(TARGET)(-[0-9a-f]{$(hash-length)})?(\.js\")/\1$(TARGET)-$(HASH)\3/' $$h; \
+			sed -ri 's/(<script src=\")$(TARGET)(-[0-9a-f]{$(HASH_SIZE)})?(\.js\")/\1$(TARGET)-$(HASH)\3/' $$h; \
 		done;							\
 	)
 
-$(assets-targets): $(assets-sources)
-	$(QUIET)test -d $(dir $@) || {					\
-		mkdir -p $(v) $(dir $@);				\
-	}
-	@echo "  CP      $@";
-	$(QUIET)cp $(v) $< $@
-
 ##
-## Publishing
+## Publishing:
 ##
 
 #
