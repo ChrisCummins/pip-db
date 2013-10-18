@@ -137,17 +137,15 @@ $(CSS_DEST)/%.css: $(CSS_SRC)/%.css $(HTML_BUILD_FILES)
 	$(eval HASH := $(shell md5sum $< | cut -c1-$(HASH_SIZE)))
 	$(eval TARGET := $(subst /,\/,$(shell echo "$@" | sed -r 's/$(BUILDIR)\/(.*)\.css/\1/')))
 	$(eval NAME := $(addsuffix -$(HASH).css,$(patsubst %.css,%,$@)))
-	$(QUIET)(							\
-		test -f $(NAME) || {					\
-			echo '  CSS     $(NAME)';			\
-			java -jar $(CSS_JAR) --charset utf-8 -v		\
-						--type css		\
-						$< > $(NAME);		\
-		};							\
-		for h in $(HTML_BUILD_FILES); do			\
-			sed -ri 's/(href=\")$(TARGET)(-[0-9a-f]{$(HASH_SIZE)})?(\.css\")/\1$(TARGET)-$(HASH)\3/' $$h; \
-		done;							\
-	)
+	$(QUIET)test -f $(NAME) || {					\
+		echo '  CSS     $(NAME)';				\
+		java -jar $(CSS_JAR) --charset utf-8 -v			\
+					--type css			\
+					$< > $(NAME);			\
+	}
+	$(QUIET)for h in $(HTML_BUILD_FILES); do			\
+		sed -ri 's/(href=\")$(TARGET)(-[0-9a-f]{$(HASH_SIZE)})?(\.css\")/\1$(TARGET)-$(HASH)\3/' $$h; \
+	done
 
 # JavaScript compilation
 $(JS_DEST)/%.js: $(JS_SRC)/%.js $(HTML_BUILD_FILES)
@@ -157,16 +155,14 @@ $(JS_DEST)/%.js: $(JS_SRC)/%.js $(HTML_BUILD_FILES)
 	$(eval HASH := $(shell md5sum $< | cut -c1-$(HASH_SIZE)))
 	$(eval TARGET := $(subst /,\/,$(shell echo "$@" | sed -r 's/$(BUILDIR)\/(.*)\.js/\1/')))
 	$(eval NAME := $(addsuffix -$(HASH).js,$(patsubst %.js,%,$@)))
-	$(QUIET)(							\
-		test -f $(NAME) || {					\
-			echo '  JS      $(NAME)';			\
-			java -jar $(JS_JAR) 				\
-				--js=$< --js_output_file=$(NAME);	\
-		};							\
-		for h in $(HTML_BUILD_FILES); do			\
-			sed -ri 's/(<script src=\")$(TARGET)(-[0-9a-f]{$(HASH_SIZE)})?(\.js\")/\1$(TARGET)-$(HASH)\3/' $$h; \
-		done;							\
-	)
+	$(QUIET)test -f $(NAME) || {					\
+		echo '  JS      $(NAME)';				\
+		java -jar $(JS_JAR) 					\
+			--js=$< --js_output_file=$(NAME);		\
+	}
+	$(QUIET)for h in $(HTML_BUILD_FILES); do			\
+		sed -ri 's/(<script src=\")$(TARGET)(-[0-9a-f]{$(HASH_SIZE)})?(\.js\")/\1$(TARGET)-$(HASH)\3/' $$h; \
+	done
 
 ##
 ## Publishing:
