@@ -111,16 +111,16 @@ $(css-targets): $(css-sources)
 		mkdir -p $(v) $(dir $@);				\
 	}
 	$(eval HASH := $(shell md5sum $< | cut -c1-$(hash-length)))
-	$(eval TARGET_NAME := $(subst /,\/,$(shell echo "$@" | sed -r 's/$(dest)\/(.*)\.css/\1/')))
+	$(eval TARGET := $(subst /,\/,$(shell echo "$@" | sed -r 's/$(dest)\/(.*)\.css/\1/')))
 	$(eval NAME := $(addsuffix -$(HASH).css,$(patsubst %.css,%,$@)))
 	$(QUIET)(							\
 		test -f $(NAME) || {					\
 			echo '  CSS     $(NAME)';			\
 			java -jar $(css-compiler) --charset utf-8 -v	\
 						--type css		\
-						$< > $@;		\
+						$< > $(NAME);		\
 			for h in $(html-targets); do			\
-				sed -ri 's/(href=\")$(TARGET_NAME)(-[0-9a-f]{$(hash-length)})?(\.css\")/\1$(TARGET_NAME)-$(HASH)\3/' $$h; \
+				sed -ri 's/(href=\")$(TARGET)(-[0-9a-f]{$(hash-length)})?(\.css\")/\1$(TARGET)-$(HASH)\3/' $$h; \
 			done;						\
 		}							\
 	)
@@ -130,15 +130,15 @@ $(js-targets): $(js-sources)
 		mkdir -p $(v) $(dir $@);				\
 	}
 	$(eval HASH := $(shell md5sum $< | cut -c1-$(hash-length)))
-	$(eval TARGET_NAME := $(subst /,\/,$(shell echo "$@" | sed -r 's/$(dest)\/(.*)\.js/\1/')))
+	$(eval TARGET := $(subst /,\/,$(shell echo "$@" | sed -r 's/$(dest)\/(.*)\.js/\1/')))
 	$(eval NAME := $(addsuffix -$(HASH).js,$(patsubst %.js,%,$@)))
 	$(QUIET)(							\
 		test -f $(NAME) || {					\
 			echo '  JS      $(NAME)';			\
 			java -jar $(js-compiler) 			\
-				--js=$< --js_output_file=$@;		\
+				--js=$< --js_output_file=$(NAME);	\
 			for h in $(html-targets); do			\
-				sed -ri 's/(<script src=\")$(TARGET_NAME)(-[0-9a-f]{$(hash-length)})?(\.js\")/\1$(TARGET_NAME)-$(HASH)\3/' $$h; \
+				sed -ri 's/(<script src=\")$(TARGET)(-[0-9a-f]{$(hash-length)})?(\.js\")/\1$(TARGET)-$(HASH)\3/' $$h; \
 			done;						\
 		};							\
 	)
