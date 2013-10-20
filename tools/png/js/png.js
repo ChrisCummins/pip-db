@@ -39,6 +39,16 @@ var png = png || {};
             return Math.floor(Math.random() * (high - low + 1) + low);
           }
 
+          function rstring(length) {
+            var string = "";
+            var space = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890";
+
+            for (var i = 0; i < length; i++)
+              string += space.charAt(rint(0, space.length));
+
+            return string;
+          }
+
           function generateLatinBinomial() {
             var genus = rentry(payload.latin);
             var species = rentry(payload.latin);
@@ -48,30 +58,39 @@ var png = png || {};
 
           switch (i) {
           case 0:
-            return type ? "Protein" : rentry(payload.proteins);
+            if (type)
+              return "E.C.";
+            else if (Math.random() < 0.8)
+              return (rint(1, 3) + "." +
+                      rint(1, 10) + "." +
+                      rint(1, 30) + "." +
+                      rint(1, 30));
+            else
+              return "";
             break;
           case 1:
-            if (type)
-              return "Alternative name(s)";
-            else if (Math.random() < 0.9) {
-              return rentry(payload.proteins);
-            } else {
-              return "";
-            };
+            return type ? "Protein" : rentry(payload.proteins);
             break;
           case 2:
-            return type ? "Source" : generateLatinBinomial();
+            if (type)
+              return "Alternative name(s)";
+            else if (Math.random() < 0.9)
+              return rentry(payload.proteins);
+            else
+              return "";
             break;
           case 3:
-            if (type) {
-              return "Organ";
-            } else if (Math.random() < 0.6) {
-              return rentry(payload.organs);
-            } else {
-              return "";
-            };
+            return type ? "Source" : generateLatinBinomial();
             break;
           case 4:
+            if (type)
+              return "Organ";
+            else if (Math.random() < 0.6)
+              return rentry(payload.organs);
+            else
+              return "";
+            break;
+          case 5:
             if (type)
               return "M.W";
             else if (Math.random() < 0.9)
@@ -79,10 +98,13 @@ var png = png || {};
             else
               return "";
             break;
-          case 5:
+          case 6:
+            return type ? "Subunit No." : "data";
+            break;
+          case 7:
             return type ? "Subunit M.W" : "data";
             break;
-          case 6:
+          case 8:
             if (type)
               return "No of Iso-enzymes";
             else if (Math.random() < 0.02)
@@ -90,51 +112,96 @@ var png = png || {};
             else
               return "";
             break;
-          case 7:
+          case 9:
             return type ? "pI maximum value" : "data";
             break;
-          case 8:
-            return type ? "pI range" : "data";
-            break;
-          case 9:
-            return type ? "pI value of major component" : "data";
-            break;
           case 10:
-            return type ? "pI" : "data";
+            return type ? "pI range min" : "data";
             break;
           case 11:
-            return type ? "Temperature (C)" : "data";
+            return type ? "pI range max" : "data";
             break;
           case 12:
-            return type ? "Method" : "data";
+            return type ? "pI value of major component" : "data";
             break;
           case 13:
-            return type ? "Valid sequence(s) available" : "data";
+            return type ? "pI" : "data";
             break;
           case 14:
-            return type ? "Protein sequence" : "data";
+            if (type)
+              return "Temperature (C)";
+            else if (Math.random() < 0.6 && Math.random() > 0.3)
+              return rint(10,37) + "C";
+            else if (Math.random() < 0.3)
+              return rint(10,20) + "-" + rint(21,37) + "C"
+            else
+              return "";
             break;
           case 15:
-            return type ? "Species Taxonomy" : "data";
+            if (type)
+              return "Method";
+            else if (Math.random() < 0.8)
+              return rentry(payload.methods);
+            else
+              return "Not available";
             break;
           case 16:
-            return type ? "Full Text" : "data";
+            return type ? "Valid sequence(s) available" : "data";
             break;
           case 17:
-            return type ? "Abstract" : "data";
+            if (type)
+              return "Protein sequence";
+            else if (Math.random() < 0.6)
+              return "http://www.ncbi.nlm.nih.gov/protein/" + rstring(8);
+            else
+              return "";
             break;
           case 18:
-            return type ? "Pubmed" : "data";
+            if (type)
+              return "Species Taxonomy";
+            else if (Math.random() < 0.95)
+              return "http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=" + rstring(8);
+            else
+              return "";
             break;
           case 19:
-            return type ? "Notes" : "data";
+            if (type)
+              return "Full Text";
+            else if (Math.random() < 0.8)
+              return "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1177738/pdf/biochemj" + rstring(8);
+            else
+              return "";
+            break;
+          case 20:
+            if (type)
+              return "Abstract";
+            else if (Math.random() < 0.02)
+              return "http://www.sciencedirect.com/science/article/pii/" + rstring(16);
+            else
+              return "";
+            break;
+          case 21:
+            if (type)
+              return "Pubmed";
+            else if (Math.random() < 0.9)
+              return "http://www.ncbi.nlm.nih.gov/pubmed/" + rstring(8);
+            else
+              return "";
+            break;
+          case 22:
+            if (type)
+              return "Notes";
+            else if (Math.random() < 0.02)
+              return rentry(payload.notes);
+            else
+              return "";
             break;
           }
         }
 
         var row = "";
 
-        for (var i = 0; i < 20; i++) {
+        for (var i = 0; i < 23; i++) {
           var text = generateCol(i, type);
 
           switch (format) {
