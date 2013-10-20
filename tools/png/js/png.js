@@ -222,7 +222,13 @@ var png = png || {};
       results += generateRow(1, format) + "\n";
 
       for (var i = 0; i < size; i++) {
-        results += generateRow(0, format) + "\n";
+        var row = new Tuple();
+
+        switch (format) {
+          case 'CSV':
+            results += row.toCSV() + '\n';
+            break;
+        }
       }
 
       return results;
