@@ -1,4 +1,4 @@
-function Tuple() {
+function Tuple(isHeader) {
 
   function rchance(chance) {
     return Math.random() < chance;
@@ -45,97 +45,128 @@ function Tuple() {
     return (Math.random() * 14).toFixed(2);
   }
 
-  this.p = {
-    'ec' : '',
-    'protein' : '',
-    'alt' : '',
-    'source' : '',
-    'organ' : '',
-    'mw' : '',
-    'subno' : '',
-    'submw' : '',
-    'isoenzymes' : '',
-    'piMax' : '',
-    'piRangeMin' : '',
-    'piRangeMax' : '',
-    'piMajor' : '',
-    'pi' : '',
-    'temp' : '',
-    'method' : '',
-    'valid' : '',
-    'sequence' : '',
-    'species' : '',
-    'full' : '',
-    'abstract' : '',
-    'pubmed' : '',
-    'notes' : ''
-  };
+  if (isHeader) {
+    /* Generate header titles */
+    this.p = {
+      'ec' : 'E.C.',
+      'protein' : 'Protein',
+      'alt' : 'Alternative name(s)',
+      'source' : 'Source',
+      'organ' : 'Organ',
+      'mw' : 'M.W',
+      'subno' : 'Subunut No.',
+      'submw' : 'Subunut M.W',
+      'isoenzymes' : 'No. of Iso-enzymes',
+      'piMax' : 'pI Maximum',
+      'piRangeMin' : 'pI Range min',
+      'piRangeMax' : 'pI Range max',
+      'piMajor' : 'pI value of major component',
+      'pi' : 'pI',
+      'temp' : 'Temperature',
+      'method' : 'Method',
+      'valid' : 'Valid sequence(s) available',
+      'sequence' : 'Protein Sequence',
+      'species' : 'Species Taxonomy',
+      'full' : 'Full Text',
+      'abstract' : 'Abstract',
+      'pubmed' : 'PubMed',
+      'notes' : 'Notes'
+    };
 
-  this.p['ec'] = rchance(0.8) ? rec() : '';
+  } else {
 
-  this.p['protein'] = rentry('proteins');
+    this.p = {
+      'ec' : '',
+      'protein' : '',
+      'alt' : '',
+      'source' : '',
+      'organ' : '',
+      'mw' : '',
+      'subno' : '',
+      'submw' : '',
+      'isoenzymes' : '',
+      'piMax' : '',
+      'piRangeMin' : '',
+      'piRangeMax' : '',
+      'piMajor' : '',
+      'pi' : '',
+      'temp' : '',
+      'method' : '',
+      'valid' : '',
+      'sequence' : '',
+      'species' : '',
+      'full' : '',
+      'abstract' : '',
+      'pubmed' : '',
+      'notes' : ''
+    };
 
-  this.p['alt'] = rchance(0.9) ? rentry('proteins') : '';
+    this.p['ec'] = rchance(0.8) ? rec() : '';
 
-  this.p['source'] = rbinomial();
+    this.p['protein'] = rentry('proteins');
 
-  this.p['organ'] = rchance(0.6) ? rentry('organs') : '';
+    this.p['alt'] = rchance(0.9) ? rentry('proteins') : '';
 
-  this.p['mw'] = rchance(0.9) ? rmw() : '';
+    this.p['source'] = rbinomial();
 
-  if (rchance(0.3)) {
-    this.p['subno'] = rint(1, 148);
-    this.p['submw'] = rmw();
-  }
+    this.p['organ'] = rchance(0.6) ? rentry('organs') : '';
 
-  this.p['isoenzymes'] = rchance(0.9) ? rint(1, 10000) : '';
+    this.p['mw'] = rchance(0.9) ? rmw() : '';
 
-  if (rchance(0.95)) {
-    if (rchance(0.8))
-      this.p['pi'] = rpi();
-    else {
-      if (rchance(0.5))
-        this.p['piMax'] = rpi();
-      else if (rchance(0.5))
-        this.p['piMajor'] = rpi();
+    if (rchance(0.3)) {
+      this.p['subno'] = rint(1, 148);
+      this.p['submw'] = rmw();
+    }
+
+    this.p['isoenzymes'] = rchance(0.9) ? rint(1, 10000) : '';
+
+    if (rchance(0.95)) {
+      if (rchance(0.8))
+        this.p['pi'] = rpi();
       else {
-        this.p['piRangeMin'] = rpi();
-        this.p['piRangeMax'] = rpi();
+        if (rchance(0.5))
+          this.p['piMax'] = rpi();
+        else if (rchance(0.5))
+          this.p['piMajor'] = rpi();
+        else {
+          this.p['piRangeMin'] = rpi();
+          this.p['piRangeMax'] = rpi();
+        }
       }
     }
-  }
 
-  if (rchance(0.8)) {
-    if (rchance(0.7))
-      this.p['temp'] = rint(10, 30) + 'C';
-    else {
-      this.p['temp'] = rint(10, 20) + ' - ' + rint(21, 30) + 'C';
+    if (rchance(0.8)) {
+      if (rchance(0.7))
+        this.p['temp'] = rint(10, 30) + 'C';
+      else {
+        this.p['temp'] = rint(10, 20) + ' - ' + rint(21, 30) + 'C';
+      }
     }
+
+    this.p['method'] = rchance(0.8) ? rentry('methods') : 'Not available';
+
+    this.p['valid'] = '';
+
+    this.p['sequence'] = rchance(0.6) ?
+      'http://www.ncbi.nlm.nih.gov/protein/' + rstring(8) : '';
+
+    this.p['species'] = rchance(0.95) ?
+      'http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id='
+      + rstring(8) : '';
+
+    if (rchance(0.8)) {
+      if (rchance(0.95))
+        this.p['full'] = 'http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1177738/pdf/biochemj' + rstring(8);
+      else
+        this.p['abstract'] = 'http://www.sciencedirect.com/science/article/pii/' + rstring(16);
+    }
+
+    if (rchance(0.9))
+      this.p['pubmed'] = 'http://www.ncbi.nlm.nih.gov/pubmed/' + rstring(8);
+
+    if (rchance(0.02))
+      this.p['notes'] = rentry('notes');
   }
-
-  this.p['method'] = rchance(0.8) ? rentry('methods') : 'Not available';
-
-  this.p['valid'] = '';
-
-  this.p['sequence'] = rchance(0.6) ?
-    'http://www.ncbi.nlm.nih.gov/protein/' + rstring(8) : '';
-
-  this.p['species'] = rchance(0.95) ?
-    'http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id='
-    + rstring(8) : '';
-
-  if (rchance(0.8)) {
-    if (rchance(0.95))
-      this.p['full'] = 'http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1177738/pdf/biochemj' + rstring(8);
-    else
-      this.p['abstract'] = 'http://www.sciencedirect.com/science/article/pii/' + rstring(16);
-  }
-
-  if (rchance(0.9))
-    this.p['pubmed'] = 'http://www.ncbi.nlm.nih.gov/pubmed/' + rstring(8);
-
-  if (rchance(0.02))
-    this.p['notes'] = rentry('notes');
 }
 
 Tuple.prototype.toCSV = function() {
