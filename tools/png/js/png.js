@@ -23,7 +23,7 @@ var png = png || {};
     }
 
     function generateDataset(format, size) {
-      var results = "";
+      var results = '';
 
       /* Generate header row */
       var header = new Tuple(1)
