@@ -1062,5 +1062,29 @@ var payload = {
     'Unknown yeast organism',
     'Unreviewed',
     'Unsure on species of the monkey'
-  ]
+  ],
+  'validsequences': [
+    '0',
+    '0*',
+    '1',
+    'CU',
+    'MF',
+    'MF / SpU',
+    'MF / US',
+    'MS',
+    'No',
+    'NR',
+    'NS',
+    'OS',
+    'OS*',
+    'OV',
+    'OV / US',
+    'PP',
+    'SbU',
+    'SpU',
+    'SU',
+    'SU / OV',
+    'TS',
+    'TS*'
+    ]
 };

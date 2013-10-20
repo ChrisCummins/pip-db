@@ -145,7 +145,7 @@ function Tuple(isHeader) {
 
     this.p['method'] = rchance(0.8) ? rentry('methods') : 'Not available';
 
-    this.p['valid'] = '';
+    this.p['valid'] = rentry('validsequences');
 
     this.p['sequence'] = rchance(0.6) ?
       'http://www.ncbi.nlm.nih.gov/protein/' + rstring(8) : '';
