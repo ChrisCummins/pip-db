@@ -173,7 +173,7 @@ Tuple.prototype.toCSV = function() {
   var string = '';
 
   for (var key in this.p) {
-    string += '"' + this.p[key] + '", ';
+    string += '"' + this.p[key] + '",';
   }
 
   return string;
