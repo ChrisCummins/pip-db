@@ -23,6 +23,8 @@ clean-files =				\
 	\#* 				\
 	$(NULL)
 
+export-dirs = '/mnt/vm/f/chris/Dropbox/Aston University/5 - Final Year/EE4FYP - Final Year Project/EE4RPP - Research and Project Management'
+
 # Compile command
 COMPILE = pdftex -output-format pdf -progname pdflatex \
 	-file-line-error -interaction errorstopmode
@@ -31,6 +33,11 @@ COMPILE = pdftex -output-format pdf -progname pdflatex \
 all $(target): $(src)
 	$(QUIET)$(COMPILE) $(docname).tex
 	$(QUIET)$(COMPILE) $(docname).tex
+	$(QUIET)for d in $(export-dirs); do		\
+		test -d "$$d" && {			\
+			cp -v $(target) "$$d";		\
+		};					\
+	done
 
 open: $(target)
 	$(QUIET)xdg-open $(target) >/dev/null 2>&1 &
