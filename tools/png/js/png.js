@@ -9,17 +9,21 @@ var png = png || {};
 
   $('#generate').click(function() {
 
-    function showDataset(dataset) {
-      $('#results').text(dataset);
-      $('#results').show();
-    }
-
     function getDatasetSize() {
       return parseInt($('#target-size option:selected').text());
     }
 
     function getDatasetFormat() {
       return $('#target-type option:selected').text();
+    }
+
+    function getFileName() {
+      var f = $('#target-filename').val();
+
+      if (f != '')
+        return f;
+      else
+        return 'dataset.csv';
     }
 
     function generateDataset(format, size) {
@@ -47,8 +51,15 @@ var png = png || {};
       return results;
     }
 
-    showDataset(generateDataset(getDatasetFormat(),
-                                getDatasetSize()));
+    var dataset = generateDataset(getDatasetFormat(),
+                                  getDatasetSize());
+    var filename = getFileName();
+    var uri = encodeURI('data:text/csv;charset=utf-8,' + dataset);
+    var a = document.createElement('a');
+
+    a.setAttribute('href', uri);
+    a.setAttribute('download', filename);
+    a.click();
   });
 
 }).call(png);

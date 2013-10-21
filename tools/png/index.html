@@ -13,16 +13,6 @@
       table tr td button {
         min-width: 80px;
       }
-
-      #results {
-        display: none;
-        width: 100%;
-        min-height: 400px;
-
-        /* Horizontal scroll, no line wrap */
-        white-space: nowrap;
-        overflow: scroll;
-      }
     </style>
   </head>
 
@@ -66,14 +56,20 @@
       </tr>
       <tr>
         <td>
+          File name
+        </td>
+        <td>
+          <input id="target-filename" type="text" value="dataset.csv">
+        </td>
+      </tr>
+      <tr>
+        <td>
         </td>
         <td>
           <button id="generate">Generate</button>
         </td>
       </tr>
     </table>
-
-    <textarea id="results" readonly></textarea>
 
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/payload.js"></script>
