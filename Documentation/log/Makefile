@@ -48,7 +48,7 @@ open: $(target)
 edit:
 	$(QUIET)$(editor) `date +%y%m`.tex
 
-clean:
+distclean clean:
 	$(QUIET)rm -vf $(clean-files)
 
 help:
