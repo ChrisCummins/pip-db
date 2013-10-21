@@ -23,6 +23,9 @@ clean-files =				\
 	\#* 				\
 	$(NULL)
 
+# Text editor
+editor := emacsclient -t
+
 export-dirs = '/mnt/vm/f/chris/Dropbox/Aston University/5 - Final Year/EE4FYP - Final Year Project/EE4RPP - Research and Project Management'
 
 # Compile command
@@ -42,6 +45,9 @@ all $(target): $(src)
 open: $(target)
 	$(QUIET)xdg-open $(target) >/dev/null 2>&1 &
 
+edit:
+	$(QUIET)$(editor) `date +%y%m`.tex
+
 clean:
 	$(QUIET)rm -vf $(clean-files)
 
@@ -56,5 +62,6 @@ help:
 	@echo ''
 	@echo '  make clean        - remove compiled document'
 	@echo '  make distclean    - remove all generated files'
+	@echo '  make edit         - open log file for editing'
 	@echo '  make help         - display this help text'
 	@echo ''
