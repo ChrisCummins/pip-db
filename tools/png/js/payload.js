@@ -1,5 +1,15 @@
 /* A nonsense dataset */
 var payload = {
+  'datasets': [
+    'Mercury',
+    'Venus',
+    'Earth',
+    'Mars',
+    'Jupiter',
+    'Saturn',
+    'Uranus',
+    'Neptune'
+  ],
   'proteins': [
     '1,2-alpha-L-fucosidase',
     '1,5-anhydro-D-fructose reductase',

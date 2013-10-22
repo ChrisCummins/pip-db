@@ -48,6 +48,7 @@ function Tuple(isHeader) {
   if (isHeader) {
     /* Generate header titles */
     this.p = {
+      'dataset' : 'Dataset',
       'ec' : 'E.C.',
       'protein' : 'Protein',
       'alt' : 'Alternative name(s)',
@@ -76,6 +77,7 @@ function Tuple(isHeader) {
   } else {
 
     this.p = {
+      'dataset' : '',
       'ec' : '',
       'protein' : '',
       'alt' : '',
@@ -100,6 +102,8 @@ function Tuple(isHeader) {
       'pubmed' : '',
       'notes' : ''
     };
+
+    this.p['dataset'] = rentry('datasets');
 
     this.p['ec'] = rchance(0.8) ? rec() : '';
 
