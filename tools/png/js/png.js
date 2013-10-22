@@ -51,11 +51,18 @@ var png = png || {};
       return results;
     }
 
-    var dataset = generateDataset(getDatasetFormat(),
-                                  getDatasetSize());
-    var filename = getFileName();
-    var uri = encodeURI('data:text/csv;charset=utf-8,' + dataset);
+    var format = getDatasetFormat();
+    var dataset = generateDataset(format, getDatasetSize());
+
+    switch (format) {
+      case 'CSV':
+        var header = 'data:text/csv;charset=utf-8,';
+        break;
+    }
+
+    var uri = encodeURI(header + dataset);
     var a = document.createElement('a');
+    var filename = getFileName();
 
     a.setAttribute('href', uri);
     a.setAttribute('download', filename);
