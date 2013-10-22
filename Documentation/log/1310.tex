@@ -639,3 +639,18 @@ to use when implementing some of the data back-end.
 \item Implement \texttt{make DEBUG=1 all} feature.
 \item Move website sources into \texttt{www/} subdirectory.
 \end{itemize}
+
+\paragraph{Preparing CSV files from Dataset} Save the desired sheet as text (tab delimiter).
+
+\paragraph{Working with CSV dataset}
+\begin{verbatim}
+# To remove header line from output
+$ cat dataset.csv | tail -n+2
+
+# To print first column
+$ cat dataset.csv | awk -F $'\t' '{print $2}'
+
+# To count non-empty fields
+$ cat dataset.csv | tail -n+2 | \
+  awk -F $'\t' '{print $2}' | sed '/^$/d' | wc -l
+\end{verbatim}
