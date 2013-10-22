@@ -1,0 +1,71 @@
+#!/bin/bash
+
+usage() {
+	echo "Usage: $0 <csv-dataset>"
+}
+
+column() {
+	cat $FILE | tail -n+2 | awk -F $'\t' '{print $'$1'}'
+}
+
+perc() {
+	echo "($1 / $2) * 100" | bc -l | xargs printf '%.2f\n'
+}
+
+output() {
+	echo -e "$@" >> $TMP
+}
+
+USING_HEADERS=1
+
+FILE="$1"
+
+# Count the number columns in the dataset
+NO_OF_COLUMNS=`head -n1 $FILE | sed 's/\t/\n/g' | head -n-1 | wc -l`
+
+TMP=/tmp/dsa.$(date +%s)
+
+# Get the size of the dataset (line count of the dataset, minus header line)
+DATASET_SIZE=`wc -l $FILE | awk '{print $1}'`
+if [[ USING_HEADERS -eq 1 ]]; then
+	DATASET_SIZE=$((DATASET_SIZE-1))
+fi
+
+if [[ -z "$1" ]]; then
+	usage
+	exit 1
+fi
+
+if [[ ! -f "$1" ]]; then
+	echo "fatal: file '$1' not found!">&2
+fi
+
+echo -e "Dataset: '$FILE' ($DATASET_SIZE records)\n"
+
+rm -f $TMP
+touch $TMP
+
+# Output headers
+output "Row\tPopulated\t% \tUnique\t%  "
+
+for i in $(seq 1 $NO_OF_COLUMNS); do
+
+	COLUMN=`cat $FILE | head -n1 | awk -F $'\t' '{print $'$i'}'`
+
+	POPULATED=`column $i | sed '/^$/d' | wc -l`
+	POPULATED_PERC=`perc $POPULATED $DATASET_SIZE`
+
+	UNIQUE=`column $i | sort -u | wc -l`
+	UNIQUE_PERC=`perc $UNIQUE $DATASET_SIZE`
+
+	output "$COLUMN\t$POPULATED\t$POPULATED_PERC%\t$UNIQUE\t$UNIQUE_PERC%"
+done
+
+if [[ "$2" == "-t" ]]; then
+	column -t -s $'\t' $TMP
+else
+	tablify $TMP
+fi
+
+# Cleanup temporary file
+#rm -f $TMP
