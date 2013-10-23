@@ -50,7 +50,11 @@ output "Row\tPopulated\t% \tUnique\t%  "
 
 for i in $(seq 1 $NO_COLUMNS); do
 
-	COLUMN_NAME=`head -n1 $FILE | awk -F $'\t' '{print $'$i'}'`
+	if [[ $USING_HEADERS == 1 ]]; then
+		COLUMN_NAME=`head -n1 $FILE | awk -F $'\t' '{print $'$i'}'`
+	else
+		COLUMN_NAME=$i
+	fi
 
 	NO_POPULATED=`column $i | sed '/^$/d' | wc -l`
 	POPULATED_PERC=`perc $POPULATED $NO_ROWS`
