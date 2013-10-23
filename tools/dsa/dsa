@@ -5,7 +5,7 @@ usage() {
 }
 
 column() {
-	cat $FILE | tail -n+2 | awk -F $'\t' '{print $'$1'}'
+	tail -n+2 $FILE | awk -F $'\t' '{print $'$1'}'
 }
 
 perc() {
@@ -50,7 +50,7 @@ output "Row\tPopulated\t% \tUnique\t%  "
 
 for i in $(seq 1 $NO_OF_COLUMNS); do
 
-	COLUMN=`cat $FILE | head -n1 | awk -F $'\t' '{print $'$i'}'`
+	COLUMN=`head -n1 $FILE | awk -F $'\t' '{print $'$i'}'`
 
 	POPULATED=`column $i | sed '/^$/d' | wc -l`
 	POPULATED_PERC=`perc $POPULATED $DATASET_SIZE`
