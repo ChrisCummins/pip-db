@@ -68,4 +68,4 @@ else
 fi
 
 # Cleanup temporary file
-#rm -f $TMP
+rm -f $TMP
