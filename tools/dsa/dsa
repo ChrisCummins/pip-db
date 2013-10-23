@@ -21,14 +21,14 @@ USING_HEADERS=1
 FILE="$1"
 
 # Count the number columns in the dataset
-NO_OF_COLUMNS=`head -n1 $FILE | sed 's/\t/\n/g' | head -n-1 | wc -l`
+NO_COLUMNS=`head -n1 $FILE | sed 's/\t/\n/g' | head -n-1 | wc -l`
+# Get the size of the dataset (line count of the dataset, minus header line)
+NO_ROWS=`wc -l $FILE | awk '{print $1}'`
 
 TMP=/tmp/dsa.$(date +%s)
 
-# Get the size of the dataset (line count of the dataset, minus header line)
-DATASET_SIZE=`wc -l $FILE | awk '{print $1}'`
 if [[ USING_HEADERS -eq 1 ]]; then
-	DATASET_SIZE=$((DATASET_SIZE-1))
+	NO_ROWS=$((NO_ROWS-1))
 fi
 
 if [[ -z "$1" ]]; then
@@ -40,7 +40,7 @@ if [[ ! -f "$1" ]]; then
 	echo "fatal: file '$1' not found!">&2
 fi
 
-echo -e "Dataset: '$FILE' ($DATASET_SIZE records)\n"
+echo -e "Dataset: '$FILE' ($NO_ROWS records)\n"
 
 rm -f $TMP
 touch $TMP
@@ -48,17 +48,17 @@ touch $TMP
 # Output headers
 output "Row\tPopulated\t% \tUnique\t%  "
 
-for i in $(seq 1 $NO_OF_COLUMNS); do
+for i in $(seq 1 $NO_COLUMNS); do
 
-	COLUMN=`head -n1 $FILE | awk -F $'\t' '{print $'$i'}'`
+	COLUMN_NAME=`head -n1 $FILE | awk -F $'\t' '{print $'$i'}'`
 
-	POPULATED=`column $i | sed '/^$/d' | wc -l`
-	POPULATED_PERC=`perc $POPULATED $DATASET_SIZE`
+	NO_POPULATED=`column $i | sed '/^$/d' | wc -l`
+	POPULATED_PERC=`perc $POPULATED $NO_ROWS`
 
-	UNIQUE=`column $i | sort -u | wc -l`
-	UNIQUE_PERC=`perc $UNIQUE $DATASET_SIZE`
+	NO_UNIQUE=`column $i | sort -u | wc -l`
+	UNIQUE_PERC=`perc $UNIQUE $NO_ROWS`
 
-	output "$COLUMN\t$POPULATED\t$POPULATED_PERC%\t$UNIQUE\t$UNIQUE_PERC%"
+	output "$COLUMN_NAME\t$NO_POPULATED\t$POPULATED_PERC%\t$NO_UNIQUE\t$UNIQUE_PERC%"
 done
 
 if [[ "$2" == "-t" ]]; then
