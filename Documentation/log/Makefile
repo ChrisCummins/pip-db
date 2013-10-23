@@ -37,9 +37,9 @@ all $(target): $(src)
 	$(QUIET)$(COMPILE) $(docname).tex
 	$(QUIET)$(COMPILE) $(docname).tex
 	$(QUIET)for d in $(export-dirs); do		\
-		test -d "$$d" && {			\
-			cp -v $(target) "$$d";		\
-		};					\
+	 	if [ -d "$$d" ]; then			\
+	 		cp -v $(target) "$$d";		\
+	 	fi					\
 	done
 
 open: $(target)
