@@ -5,7 +5,11 @@ usage() {
 }
 
 column() {
-	tail -n+2 $FILE | awk -F $'\t' '{print $'$1'}'
+	if [[ $USING_HEADERS == 1 ]]; then
+		tail -n+2 $FILE | awk -F $'\t' '{print $'$1'}'
+	else
+		cat $FILE | awk -F $'\t' '{print $'$1'}'
+	fi
 }
 
 perc() {
