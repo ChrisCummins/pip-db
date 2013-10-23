@@ -91,6 +91,7 @@ main() {
 	# Check that file exists
 	if [[ ! -f "$1" ]]; then
 		echo "fatal: file '$1' not found!">&2
+		exit 1
 	fi
 
 	# Whether the input dataset contains a header row
