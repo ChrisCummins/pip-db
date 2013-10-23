@@ -1,9 +1,11 @@
 #!/bin/bash
 
+# Print program usage
 usage() {
 	echo "Usage: $0 <csv-dataset>"
 }
 
+# Output a column from the dataset
 column() {
 	if [[ $USING_HEADERS == 1 ]]; then
 		tail -n+2 $FILE | awk -F $'\t' '{print $'$1'}'
@@ -12,26 +14,32 @@ column() {
 	fi
 }
 
+# Calculate a percentage total
+#    $1 result
+#    $2 total
 perc() {
 	echo "($1 / $2) * 100" | bc -l | xargs printf '%.2f\n'
 }
 
+# Output a result to temporary file
 output() {
 	echo -e "$@" >> $TMP
 }
 
+# Whether the input dataset contains a header row
 USING_HEADERS=1
 
+# Our input dataset
 FILE="$1"
 
-# Count the number columns in the dataset
+# The dimensions of our dataset in rows and columns
 NO_COLUMNS=`head -n1 $FILE | sed 's/\t/\n/g' | head -n-1 | wc -l`
-# Get the size of the dataset (line count of the dataset, minus header line)
 NO_ROWS=`wc -l $FILE | awk '{print $1}'`
 
+# Temporary file used to store results
 TMP=/tmp/dsa.$(date +%s)
 
-if [[ USING_HEADERS -eq 1 ]]; then
+if [[ $USING_HEADERS == 1 ]]; then
 	NO_ROWS=$((NO_ROWS-1))
 fi
 
