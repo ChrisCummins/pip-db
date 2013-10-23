@@ -74,6 +74,10 @@ output_results() {
 }
 
 main() {
+	test -n "$DEBUG" && {
+		set -x
+	}
+
 	# Check for file argument
 	if [[ -z "$1" ]]; then
 		usage
