@@ -55,10 +55,10 @@ analyse_dataset() {
 		fi
 
 		NO_POPULATED=`column $i | sed '/^$/d' | wc -l`
-		POPULATED_PERC=`perc $POPULATED $NO_ROWS`
+		POPULATED_PERC=`perc $NO_POPULATED $NO_ROWS`
 
 		NO_UNIQUE=`column $i | sort -u | wc -l`
-		UNIQUE_PERC=`perc $UNIQUE $NO_ROWS`
+		UNIQUE_PERC=`perc $NO_UNIQUE $NO_ROWS`
 
 		output "$COLUMN_NAME\t$NO_POPULATED\t$POPULATED_PERC%\t$NO_UNIQUE\t$UNIQUE_PERC%"
 	done
