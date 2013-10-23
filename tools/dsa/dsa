@@ -5,7 +5,8 @@ usage() {
 	echo "Usage: $0 <csv-dataset>"
 }
 
-# Output a column from the dataset
+# Output a column $1 from the dataset
+#    $1 column index
 column() {
 	if [[ $USING_HEADERS == 1 ]]; then
 		tail -n+2 $FILE | awk -F $'\t' '{print $'$1'}'
