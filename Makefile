@@ -8,6 +8,7 @@ WWW_DIR = www
 # Subdirectories for recursive make rules
 SUBDIRS =								\
 	Documentation/log						\
+	tools/dsa							\
 	$(WWW_DIR)							\
 	$(NULL)
 
