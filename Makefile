@@ -7,9 +7,12 @@ WWW_DIR = www
 
 # Subdirectories for recursive make rules
 SUBDIRS =								\
-	Documentation/log						\
 	tools/dsa							\
 	$(WWW_DIR)							\
+	$(NULL)
+
+DOCDIRS =								\
+	Documentation/log						\
 	$(NULL)
 
 # Usage: $(call recursive-make,target,dirs)
@@ -22,14 +25,17 @@ endef
 all:
 	$(call recursive-make,all,$(SUBDIRS))
 
+docs:
+	$(call recursive-make,all,$(DOCDIRS))
+
 local:
 	$(call recursive-make,local,$(WWW_DIR))
 
 clean:
-	$(call recursive-make,clean,$(SUBDIRS))
+	$(call recursive-make,clean,$(SUBDIRS) $(DOCDIRS))
 
 distclean:
-	$(call recursive-make,distclean,$(SUBDIRS))
+	$(call recursive-make,distclean,$(SUBDIRS) $(DOCDIRS))
 
 .PHONY: help
 
@@ -37,7 +43,8 @@ help:
 	@echo ''
 	@echo 'Compiling:'
 	@echo ''
-	@echo '  make all          - full project build'
+	@echo '  make all          - compile all project sources'
+	@echo '  make docs         - build extra documentation'
 	@echo ''
 	@echo 'Publishing:'
 	@echo ''
