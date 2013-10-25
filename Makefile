@@ -56,3 +56,6 @@ help:
 	@echo '  make distclean    - removes all the files of "clean" and some extras'
 	@echo '  make help         - display this help text'
 	@echo ''
+	@echo 'Invoke make with V=1 argument for greater verbosity.'
+	@echo ''
+	@echo 'Use make DEBUG=1 argument to skip code obfuscation.'
