@@ -1,5 +1,5 @@
 /* A nonsense dataset */
-var payload = {
+global.Payload = {
   'datasets': [
     'Mercury',
     'Venus',

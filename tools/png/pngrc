@@ -1,0 +1,6 @@
+/*
+ * Plausible Nonsense Generator configuration file.
+ */
+Configuration.format = 'CSV';
+
+Configuration.size = 512;
