@@ -1,0 +1,58 @@
+#!/usr/bin/env node
+
+/*
+ * Prints a given message to console if DEBUG is set.
+ *
+ * @param s Debugging message
+ */
+function debug(s) {
+  if (DEBUG)
+    console.log('debug: ' + s);
+}
+
+/* Initialise command line parameter parsing */
+var argv = require('optimist')
+    .default('c', './pngrc')
+    .default('p', './payload.js')
+    .default('s', 512)
+    .argv;
+
+/* Global variable set TRUE if executed with '-d' or '--debug' flags */
+var DEBUG = argv.d || argv.debug ? true : false;
+
+/* Set args from long options */
+if (argv.conf !== undefined)
+  argv.c = argv.conf;
+if (argv.payload !== undefined)
+  argv.p = argv.payload;
+if (!isNaN(argv.size))
+  argv.s = argv.size;
+
+var path = {
+  payload: argv.p,
+  conf: argv.c
+};
+
+/* Set payload */
+if (argv.p !== undefined)
+  path.payload = argv.p;
+else if (argv.payload !== undefined)
+  path.payload = argv.payload;
+
+/* Let's print some useful environmental info before getting stuck in */
+debug('using payload file: \'' + path.payload + '\'');
+debug('using configuration file: \'' + path.conf + '\'');
+debug('generating ' + argv.s + ' records');
+
+/* Fire up the file system */
+var fs = require('fs');
+
+/* Load the files in our path. Any error is here is considered fatal */
+for (var file in path) {
+  try {
+    require(path[file]);
+  } catch (e) {
+    console.log('fatal: failed to open \'' + path[file] + '\'!');
+    process.exit(1);
+  }
+}
