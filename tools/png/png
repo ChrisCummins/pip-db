@@ -278,7 +278,9 @@ for (var file in env.includes) {
 }
 
 /* Set out local environment from external files */
-env.conf = Configuration;
+for (key in Configuration)
+  env[key] = Configuration[key];
+
 env.payload = Payload;
 
 /* Last minute sanity checks */
@@ -286,22 +288,22 @@ if (env.payload === undefined) {
   fatal('no payload found!');
 }
 
-if (env.conf === undefined) {
+if (Configuration === undefined) {
   fatal('no configuration found!');
 }
 
 /* Print some more useful debugging info */
-debug('generating ' + env.conf.size + ' records');
+debug('generating ' + env.size + ' records');
 debug('output file format: ' + Configuration.format);
 
 /* Instantiate dataset */
 var dataset = '';
 
 /* Populate dataset */
-for (var i = 0; i <= env.conf.size; i++) {
+for (var i = 0; i <= env.size; i++) {
   var t = new Tuple(i === 0 ? 1 : 0);
 
-  switch (env.conf.format) {
+  switch (env.format) {
   case 'CSV':
     dataset += t.toCSV() + '\n';
     break;
