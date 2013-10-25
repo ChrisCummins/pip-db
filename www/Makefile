@@ -133,8 +133,12 @@ $(HTML_DEST)/%.html: $(HTML_SRC)/%.html
 		mkdir -p $(v) $(HTML_DEST);				\
 	}
 	@echo "  HTML    $@"
+ifdef DEBUG
+	$(QUIET)cp $< $@
+else
 	$(QUIET)java -jar $(HTML_JAR)					\
 			--compress-js --compress-css -o $@ $<
+endif
 
 # Less CSS compilation
 $(CSS_SRC)/%.css: $(CSS_SRC)/%.less $(HTML_BUILD_FILES)
@@ -149,12 +153,19 @@ $(CSS_DEST)/%.css: $(CSS_SRC)/%.css $(HTML_BUILD_FILES) check-hash-size
 	$(eval HASH := $(shell $(HASH_BIN) $< | cut -c1-$(HASH_SIZE)))
 	$(eval TARGET := $(subst /,\/,$(shell echo "$@" | sed -r 's/$(BUILDIR)\/(.*)\.css/\1/')))
 	$(eval NAME := $(addsuffix -$(HASH).css,$(patsubst %.css,%,$@)))
+ifdef DEBUG
+	$(QUIET)test -f $(NAME) || {					\
+		echo '  CSS     $(NAME)';				\
+		cp $< $(NAME);						\
+	}
+else
 	$(QUIET)test -f $(NAME) || {					\
 		echo '  CSS     $(NAME)';				\
 		java -jar $(CSS_JAR) --charset utf-8 -v			\
 					--type css			\
 					$< > $(NAME);			\
 	}
+endif
 	$(QUIET)for h in $(HTML_BUILD_FILES); do			\
 		sed -ri 's/(href=\")$(TARGET)(-[0-9a-f]{$(HASH_SIZE)})?(\.css\")/\1$(TARGET)-$(HASH)\3/' $$h; \
 	done
@@ -167,11 +178,18 @@ $(JS_DEST)/%.js: $(JS_SRC)/%.js $(HTML_BUILD_FILES) check-hash-size
 	$(eval HASH := $(shell $(HASH_BIN) $< | cut -c1-$(HASH_SIZE)))
 	$(eval TARGET := $(subst /,\/,$(shell echo "$@" | sed -r 's/$(BUILDIR)\/(.*)\.js/\1/')))
 	$(eval NAME := $(addsuffix -$(HASH).js,$(patsubst %.js,%,$@)))
+ifdef DEBUG
+	$(QUIET)test -f $(NAME) || {					\
+		echo '  JS      $(NAME)';				\
+		cp $< $(NAME);						\
+	}
+else
 	$(QUIET)test -f $(NAME) || {					\
 		echo '  JS      $(NAME)';				\
 		java -jar $(JS_JAR) 					\
 			--js=$< --js_output_file=$(NAME);		\
 	}
+endif
 	$(QUIET)for h in $(HTML_BUILD_FILES); do			\
 		sed -ri 's/(<script src=\")$(TARGET)(-[0-9a-f]{$(HASH_SIZE)})?(\.js\")/\1$(TARGET)-$(HASH)\3/' $$h; \
 	done
