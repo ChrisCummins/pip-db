@@ -26,7 +26,7 @@ clean-files =				\
 # Text editor
 editor := emacsclient -t
 
-export-dirs = '/mnt/vm/f/chris/Dropbox/Aston University/5 - Final Year/EE4FYP - Final Year Project/EE4RPP - Research and Project Management'
+export-dirs = '/mnt/vm/f/chris/Dropbox/Aston University/5 - Final Year/EE4FYP - Final Year Project'
 
 # Compile command
 COMPILE = pdftex -output-format pdf -progname pdflatex \
