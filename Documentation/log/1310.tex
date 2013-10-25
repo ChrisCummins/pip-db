@@ -701,3 +701,38 @@ design using Balsamiq.
 \item Make a list of mitigation strategies for each of the risks in the Risk
   list.
 \end{itemize}
+
+\noindent
+Started using the GitHub issue tracker and imported the milestones and current
+task list. Added GitHub pages for the repo, should populate that later. Ideas
+for public page: a link to latest PDF build of this log, automatic burndown
+charts, a dynamic list of top bugs and most recent commits, etc.
+
+\subsection{Friday 25th}
+Prepared Balsamiq mockups for meeting with Darren at 2pm today, and installed
+previous FYP onto laptop for demonstration.
+
+\paragraph{Notes from meeting with Darren}
+\begin{itemize}
+\item D1 initial design is OK.
+\item The search engine should provide hard limits on the number of results it
+  returns (perhaps as a percentage of the dataset size?); this is to prevent
+  users from just downloading the whole dataset themselves and eradicating the
+  need for the database.
+\item In order to achieve this, search criteria should be split into two types:
+  primary and secondary. Primary search criteria are those which can only return
+  a finite subset of the dataset, whereas secondary criteria may return the
+  entire set, and so should be combined with primary criteria. For example, a
+  protein name is a primary criterion, whereas a pI range of 0-14 (all possible
+  values) is a secondary criterion.
+\item Incorporating Blast searching will involve generating a list of sequences
+  for every record and then using that database with the blast search
+  program. This is a high priority ``bonus'', as it will be a step above the
+  previous attempts.
+\item The design is a very subjective thing - as long as it is functional, I
+  have a lot of creative control over how the user should interact with the
+  site.
+\item I have relative freedom over the project name, but Darren will be able to
+  contribute suggestions if necessary.
+\item I should see if Fraser has anything he would like to say about the design.
+\end{itemize}
