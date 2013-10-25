@@ -6,7 +6,7 @@
         <verticalScrollbar>true</verticalScrollbar>
       </controlProperties>
     </control>
-    <control controlID="10" controlTypeID="com.balsamiq.mockups::TextInput" x="1734" y="1012" w="289" h="-1" measuredW="59" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::TextInput" x="1734" y="1012" w="289" h="-1" measuredW="58" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
         <text>pi%3A4-5.5</text>
       </controlProperties>
@@ -50,7 +50,7 @@
         <verticalScrollbar>true</verticalScrollbar>
       </controlProperties>
     </control>
-    <control controlID="57" controlTypeID="com.balsamiq.mockups::TextInput" x="165" y="1012" w="289" h="-1" measuredW="59" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+    <control controlID="57" controlTypeID="com.balsamiq.mockups::TextInput" x="165" y="1012" w="289" h="-1" measuredW="58" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
         <text>pi%3A4-5.5</text>
       </controlProperties>
@@ -92,7 +92,7 @@
       <controlProperties>
         <backgroundAlpha>0.5</backgroundAlpha>
         <color>10470904</color>
-        <text>Acetoacetyl-CoA%20thiolase</text>
+        <text>Alkaline%20phosphatase</text>
       </controlProperties>
     </control>
     <control controlID="87" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="71" y="286" w="668" h="552" measuredW="450" measuredH="400" zOrder="15" locked="false" isInGroup="-1">
@@ -153,7 +153,7 @@
         <text/>
       </controlProperties>
     </control>
-    <control controlID="221" controlTypeID="com.balsamiq.mockups::Label" x="79" y="244" w="-1" h="-1" measuredW="188" measuredH="41" zOrder="26" locked="false" isInGroup="-1">
+    <control controlID="221" controlTypeID="com.balsamiq.mockups::Label" x="79" y="244" w="-1" h="-1" measuredW="189" measuredH="41" zOrder="26" locked="false" isInGroup="-1">
       <controlProperties>
         <size>32</size>
         <text>1.%20Load%20page</text>
@@ -165,13 +165,13 @@
         <text>2.%20Go%20to%20advanced%20page</text>
       </controlProperties>
     </control>
-    <control controlID="223" controlTypeID="com.balsamiq.mockups::Label" x="1646" y="244" w="-1" h="-1" measuredW="179" measuredH="41" zOrder="28" locked="false" isInGroup="-1">
+    <control controlID="223" controlTypeID="com.balsamiq.mockups::Label" x="1646" y="244" w="-1" h="-1" measuredW="182" measuredH="41" zOrder="28" locked="false" isInGroup="-1">
       <controlProperties>
         <size>32</size>
         <text>3.%20Fill%20in%20form</text>
       </controlProperties>
     </control>
-    <control controlID="224" controlTypeID="com.balsamiq.mockups::Label" x="650" y="248" w="-1" h="-1" measuredW="180" measuredH="33" zOrder="29" locked="false" isInGroup="-1">
+    <control controlID="224" controlTypeID="com.balsamiq.mockups::Label" x="650" y="248" w="-1" h="-1" measuredW="181" measuredH="33" zOrder="29" locked="false" isInGroup="-1">
       <controlProperties>
         <color>6710886</color>
         <size>24</size>
@@ -207,7 +207,7 @@
         <text/>
       </controlProperties>
     </control>
-    <control controlID="269" controlTypeID="com.balsamiq.mockups::Label" x="71" y="888" w="-1" h="-1" measuredW="215" measuredH="41" zOrder="35" locked="false" isInGroup="-1">
+    <control controlID="269" controlTypeID="com.balsamiq.mockups::Label" x="71" y="888" w="-1" h="-1" measuredW="214" measuredH="41" zOrder="35" locked="false" isInGroup="-1">
       <controlProperties>
         <size>32</size>
         <text>6.%20View%20record</text>
@@ -237,7 +237,7 @@
         <verticalScrollbar>true</verticalScrollbar>
       </controlProperties>
     </control>
-    <control controlID="328" controlTypeID="com.balsamiq.mockups::TextInput" x="951" y="1012" w="289" h="-1" measuredW="59" measuredH="27" zOrder="39" locked="false" isInGroup="-1">
+    <control controlID="328" controlTypeID="com.balsamiq.mockups::TextInput" x="951" y="1012" w="289" h="-1" measuredW="58" measuredH="27" zOrder="39" locked="false" isInGroup="-1">
       <controlProperties>
         <text>pi%3A4-5.5</text>
       </controlProperties>
@@ -352,7 +352,7 @@
         <text>Performing%20an%20advanced%20search</text>
       </controlProperties>
     </control>
-    <control controlID="355" controlTypeID="com.balsamiq.mockups::DataGrid" x="1666" y="1077" w="605" h="376" measuredW="609" measuredH="380" zOrder="57" locked="false" isInGroup="-1">
+    <control controlID="355" controlTypeID="com.balsamiq.mockups::DataGrid" x="1666" y="1077" w="605" h="376" measuredW="489" measuredH="380" zOrder="57" locked="false" isInGroup="-1">
       <controlProperties>
         <alternateRowColor>15134199</alternateRowColor>
         <borderStyle>square</borderStyle>
@@ -361,10 +361,10 @@
         <rowHeight>25</rowHeight>
         <selectedIndex>-1</selectedIndex>
         <size>10</size>
-        <text>Protein%20%5E%2C%20Source%20%5E%2C%20Location%20%5E%2C%20Temperature%20%28C%29%20%5E%2C%20pI%20%5E%0A*Alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C*4.6*%0A*Alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C*4.6*%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2C*Human*%2CPlacenta%2C0C-0C%2C*4.7*%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%2CPlacenta%2C0C-0C%2C*4.80*%0AIntestinal-type%20*alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C22C%2C*4.80*%0A*Alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C*4.80*%0A*Alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*4.9*%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5-51*%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.10*%0AIntestinal-type%20*alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C22C%2C*5.1*%0A*Alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.2*%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.4*%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.4*%0AIntestinal-type%20*alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C22C%2C*5.4*</text>
+        <text>Protein%20%5E%2C%20Source%20%5E%2C%20Location%20%5E%2C%20pI%20%5E%0A*Alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C*4.6*%0A*Alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C*4.6*%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2C*Human*%2CPlacenta%2C*4.6*%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20*alkaline*%201%2C*Human*%2CPlacenta%2C*4.6*%0AIntestinal-type%20*alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C*4.6*%0A*Alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C*4.6*%0A*Alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C*4.6*%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C*4.6*%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20*alkaline*%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C*4.6*%0AIntestinal-type%20*alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C*4.6*%0A*Alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C*4.6*%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C*4.6*%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C*4.6*%0AIntestinal-type%20*alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C*4.6*</text>
       </controlProperties>
     </control>
-    <control controlID="358" controlTypeID="com.balsamiq.mockups::DataGrid" x="883" y="1077" w="605" h="376" measuredW="609" measuredH="380" zOrder="58" locked="false" isInGroup="-1">
+    <control controlID="358" controlTypeID="com.balsamiq.mockups::DataGrid" x="883" y="1077" w="605" h="376" measuredW="489" measuredH="380" zOrder="58" locked="false" isInGroup="-1">
       <controlProperties>
         <alternateRowColor>15134199</alternateRowColor>
         <borderStyle>square</borderStyle>
@@ -373,7 +373,7 @@
         <rowHeight>25</rowHeight>
         <selectedIndex>-1</selectedIndex>
         <size>10</size>
-        <text>Protein%20%5E%2C%20Source%20%5E%2C%20Location%20%5E%2C%20Temperature%20%28C%29%20%5E%2C%20pI%20%5E%0A*Alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C*4.6*%0A*Alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C*4.6*%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2C*Human*%2CPlacenta%2C0C-0C%2C*4.7*%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%2CPlacenta%2C0C-0C%2C*4.80*%0AIntestinal-type%20*alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C22C%2C*4.80*%0A*Alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C*4.80*%0A*Alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*4.9*%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5-51*%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.10*%0AIntestinal-type%20*alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C22C%2C*5.1*%0A*Alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.2*%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.4*%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.4*%0AIntestinal-type%20*alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C22C%2C*5.4*</text>
+        <text>Protein%20%5E%2C%20Source%20%5E%2C%20Location%20%5E%2C%20pI%20%5E%0A*Alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C*4.6*%0A*Alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C*4.6*%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2C*Human*%2CPlacenta%2C*4.6*%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20*alkaline*%201%2C*Human*%2CPlacenta%2C*4.6*%0AIntestinal-type%20*alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C*4.6*%0A*Alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C*4.6*%0A*Alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C*4.6*%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C*4.6*%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20*alkaline*%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C*4.6*%0AIntestinal-type%20*alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C*4.6*%0A*Alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C*4.6*%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C*4.6*%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C*4.6*%0AIntestinal-type%20*alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C*4.6*</text>
       </controlProperties>
     </control>
     <control controlID="359" controlTypeID="com.balsamiq.mockups::Label" x="86" y="371" w="49" h="21" measuredW="49" measuredH="21" zOrder="60" locked="false" isInGroup="-1">
@@ -423,7 +423,7 @@
         <text/>
       </controlProperties>
     </control>
-    <control controlID="370" controlTypeID="com.balsamiq.mockups::Label" x="944" y="415" w="-1" h="-1" measuredW="112" measuredH="20" zOrder="67" locked="false" isInGroup="-1">
+    <control controlID="370" controlTypeID="com.balsamiq.mockups::Label" x="944" y="415" w="-1" h="-1" measuredW="111" measuredH="20" zOrder="67" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>true</bold>
         <color>3355443</color>
@@ -431,14 +431,14 @@
         <text>Find%20records%20with...</text>
       </controlProperties>
     </control>
-    <control controlID="371" controlTypeID="com.balsamiq.mockups::Label" x="944" y="437" w="-1" h="-1" measuredW="88" measuredH="20" zOrder="68" locked="false" isInGroup="-1">
+    <control controlID="371" controlTypeID="com.balsamiq.mockups::Label" x="944" y="437" w="-1" h="-1" measuredW="87" measuredH="20" zOrder="68" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
         <text>all%20these%20words%3A</text>
       </controlProperties>
     </control>
-    <control controlID="372" controlTypeID="com.balsamiq.mockups::Label" x="944" y="471" w="-1" h="-1" measuredW="142" measuredH="20" zOrder="69" locked="false" isInGroup="-1">
+    <control controlID="372" controlTypeID="com.balsamiq.mockups::Label" x="944" y="471" w="-1" h="-1" measuredW="144" measuredH="20" zOrder="69" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
@@ -452,7 +452,7 @@
         <text/>
       </controlProperties>
     </control>
-    <control controlID="374" controlTypeID="com.balsamiq.mockups::Label" x="944" y="503" w="-1" h="-1" measuredW="110" measuredH="20" zOrder="71" locked="false" isInGroup="-1">
+    <control controlID="374" controlTypeID="com.balsamiq.mockups::Label" x="944" y="503" w="-1" h="-1" measuredW="108" measuredH="20" zOrder="71" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
@@ -466,7 +466,7 @@
         <text/>
       </controlProperties>
     </control>
-    <control controlID="376" controlTypeID="com.balsamiq.mockups::Label" x="944" y="534" w="-1" h="-1" measuredW="116" measuredH="20" zOrder="73" locked="false" isInGroup="-1">
+    <control controlID="376" controlTypeID="com.balsamiq.mockups::Label" x="944" y="534" w="-1" h="-1" measuredW="115" measuredH="20" zOrder="73" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
@@ -480,7 +480,7 @@
         <text/>
       </controlProperties>
     </control>
-    <control controlID="378" controlTypeID="com.balsamiq.mockups::Label" x="944" y="577" w="-1" h="-1" measuredW="140" measuredH="20" zOrder="75" locked="false" isInGroup="-1">
+    <control controlID="378" controlTypeID="com.balsamiq.mockups::Label" x="944" y="577" w="-1" h="-1" measuredW="141" measuredH="20" zOrder="75" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>true</bold>
         <color>3355443</color>
@@ -488,7 +488,7 @@
         <text>Then%20narrow%20resutls%20by...</text>
       </controlProperties>
     </control>
-    <control controlID="379" controlTypeID="com.balsamiq.mockups::Label" x="944" y="602" w="-1" h="-1" measuredW="46" measuredH="20" zOrder="76" locked="false" isInGroup="-1">
+    <control controlID="379" controlTypeID="com.balsamiq.mockups::Label" x="944" y="602" w="-1" h="-1" measuredW="45" measuredH="20" zOrder="76" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
@@ -502,7 +502,7 @@
         <text/>
       </controlProperties>
     </control>
-    <control controlID="381" controlTypeID="com.balsamiq.mockups::Label" x="944" y="634" w="-1" h="-1" measuredW="48" measuredH="20" zOrder="78" locked="false" isInGroup="-1">
+    <control controlID="381" controlTypeID="com.balsamiq.mockups::Label" x="944" y="634" w="-1" h="-1" measuredW="47" measuredH="20" zOrder="78" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
@@ -516,7 +516,7 @@
         <text/>
       </controlProperties>
     </control>
-    <control controlID="383" controlTypeID="com.balsamiq.mockups::Label" x="944" y="665" w="-1" h="-1" measuredW="20" measuredH="20" zOrder="80" locked="false" isInGroup="-1">
+    <control controlID="383" controlTypeID="com.balsamiq.mockups::Label" x="944" y="665" w="-1" h="-1" measuredW="19" measuredH="20" zOrder="80" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
@@ -545,14 +545,14 @@
         <text>to</text>
       </controlProperties>
     </control>
-    <control controlID="387" controlTypeID="com.balsamiq.mockups::Label" x="944" y="697" w="-1" h="-1" measuredW="152" measuredH="20" zOrder="84" locked="false" isInGroup="-1">
+    <control controlID="387" controlTypeID="com.balsamiq.mockups::Label" x="944" y="697" w="-1" h="-1" measuredW="153" measuredH="20" zOrder="84" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
         <text>enzyme%20commison%20number%3A</text>
       </controlProperties>
     </control>
-    <control controlID="388" controlTypeID="com.balsamiq.mockups::Label" x="944" y="728" w="-1" h="-1" measuredW="78" measuredH="20" zOrder="85" locked="false" isInGroup="-1">
+    <control controlID="388" controlTypeID="com.balsamiq.mockups::Label" x="944" y="728" w="-1" h="-1" measuredW="76" measuredH="20" zOrder="85" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
@@ -609,7 +609,7 @@
         <text/>
       </controlProperties>
     </control>
-    <control controlID="396" controlTypeID="com.balsamiq.mockups::Label" x="944" y="761" w="-1" h="-1" measuredW="98" measuredH="20" zOrder="93" locked="false" isInGroup="-1">
+    <control controlID="396" controlTypeID="com.balsamiq.mockups::Label" x="944" y="761" w="-1" h="-1" measuredW="96" measuredH="20" zOrder="93" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
@@ -675,7 +675,7 @@
         <text>alkaline</text>
       </controlProperties>
     </control>
-    <control controlID="403" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="415" w="-1" h="-1" measuredW="112" measuredH="20" zOrder="100" locked="false" isInGroup="-1">
+    <control controlID="403" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="415" w="-1" h="-1" measuredW="111" measuredH="20" zOrder="100" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>true</bold>
         <color>3355443</color>
@@ -683,14 +683,14 @@
         <text>Find%20records%20with...</text>
       </controlProperties>
     </control>
-    <control controlID="404" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="437" w="-1" h="-1" measuredW="88" measuredH="20" zOrder="101" locked="false" isInGroup="-1">
+    <control controlID="404" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="437" w="-1" h="-1" measuredW="87" measuredH="20" zOrder="101" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
         <text>all%20these%20words%3A</text>
       </controlProperties>
     </control>
-    <control controlID="405" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="471" w="-1" h="-1" measuredW="142" measuredH="20" zOrder="102" locked="false" isInGroup="-1">
+    <control controlID="405" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="471" w="-1" h="-1" measuredW="144" measuredH="20" zOrder="102" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
@@ -704,7 +704,7 @@
         <text/>
       </controlProperties>
     </control>
-    <control controlID="407" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="503" w="-1" h="-1" measuredW="110" measuredH="20" zOrder="104" locked="false" isInGroup="-1">
+    <control controlID="407" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="503" w="-1" h="-1" measuredW="108" measuredH="20" zOrder="104" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
@@ -718,7 +718,7 @@
         <text/>
       </controlProperties>
     </control>
-    <control controlID="409" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="534" w="-1" h="-1" measuredW="116" measuredH="20" zOrder="106" locked="false" isInGroup="-1">
+    <control controlID="409" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="534" w="-1" h="-1" measuredW="115" measuredH="20" zOrder="106" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
@@ -732,7 +732,7 @@
         <text/>
       </controlProperties>
     </control>
-    <control controlID="411" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="577" w="-1" h="-1" measuredW="140" measuredH="20" zOrder="108" locked="false" isInGroup="-1">
+    <control controlID="411" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="577" w="-1" h="-1" measuredW="141" measuredH="20" zOrder="108" locked="false" isInGroup="-1">
       <controlProperties>
         <bold>true</bold>
         <color>3355443</color>
@@ -740,7 +740,7 @@
         <text>Then%20narrow%20resutls%20by...</text>
       </controlProperties>
     </control>
-    <control controlID="412" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="602" w="-1" h="-1" measuredW="46" measuredH="20" zOrder="109" locked="false" isInGroup="-1">
+    <control controlID="412" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="602" w="-1" h="-1" measuredW="45" measuredH="20" zOrder="109" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
@@ -754,7 +754,7 @@
         <text>human</text>
       </controlProperties>
     </control>
-    <control controlID="414" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="634" w="-1" h="-1" measuredW="48" measuredH="20" zOrder="111" locked="false" isInGroup="-1">
+    <control controlID="414" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="634" w="-1" h="-1" measuredW="47" measuredH="20" zOrder="111" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
@@ -768,7 +768,7 @@
         <text/>
       </controlProperties>
     </control>
-    <control controlID="416" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="665" w="-1" h="-1" measuredW="20" measuredH="20" zOrder="113" locked="false" isInGroup="-1">
+    <control controlID="416" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="665" w="-1" h="-1" measuredW="19" measuredH="20" zOrder="113" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
@@ -797,14 +797,14 @@
         <text>to</text>
       </controlProperties>
     </control>
-    <control controlID="420" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="697" w="-1" h="-1" measuredW="152" measuredH="20" zOrder="117" locked="false" isInGroup="-1">
+    <control controlID="420" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="697" w="-1" h="-1" measuredW="153" measuredH="20" zOrder="117" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
         <text>enzyme%20commison%20number%3A</text>
       </controlProperties>
     </control>
-    <control controlID="421" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="728" w="-1" h="-1" measuredW="78" measuredH="20" zOrder="118" locked="false" isInGroup="-1">
+    <control controlID="421" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="728" w="-1" h="-1" measuredW="76" measuredH="20" zOrder="118" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
@@ -861,7 +861,7 @@
         <text/>
       </controlProperties>
     </control>
-    <control controlID="429" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="761" w="-1" h="-1" measuredW="98" measuredH="20" zOrder="126" locked="false" isInGroup="-1">
+    <control controlID="429" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="761" w="-1" h="-1" measuredW="96" measuredH="20" zOrder="126" locked="false" isInGroup="-1">
       <controlProperties>
         <color>0</color>
         <size>12</size>
@@ -913,7 +913,7 @@
         </control>
       </groupChildrenDescriptors>
     </control>
-    <control controlID="434" controlTypeID="com.balsamiq.mockups::Label" x="1640" y="888" w="-1" h="-1" measuredW="217" measuredH="41" zOrder="131" locked="false" isInGroup="-1">
+    <control controlID="434" controlTypeID="com.balsamiq.mockups::Label" x="1640" y="888" w="-1" h="-1" measuredW="216" measuredH="41" zOrder="131" locked="false" isInGroup="-1">
       <controlProperties>
         <size>32</size>
         <text>4.%20View%20results</text>

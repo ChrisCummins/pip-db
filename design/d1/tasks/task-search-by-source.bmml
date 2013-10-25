@@ -92,7 +92,7 @@
       <controlProperties>
         <backgroundAlpha>0.5</backgroundAlpha>
         <color>10470904</color>
-        <text>Acetoacetyl-CoA%20thiolase</text>
+        <text>Alkaline%20phosphatase</text>
       </controlProperties>
     </control>
     <control controlID="87" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="71" y="286" w="668" h="552" measuredW="450" measuredH="400" zOrder="15" locked="false" isInGroup="-1">
@@ -210,7 +210,7 @@
         <text/>
       </controlProperties>
     </control>
-    <control controlID="221" controlTypeID="com.balsamiq.mockups::Label" x="79" y="244" w="-1" h="-1" measuredW="188" measuredH="41" zOrder="36" locked="false" isInGroup="-1">
+    <control controlID="221" controlTypeID="com.balsamiq.mockups::Label" x="79" y="244" w="-1" h="-1" measuredW="189" measuredH="41" zOrder="36" locked="false" isInGroup="-1">
       <controlProperties>
         <size>32</size>
         <text>1.%20Load%20page</text>
@@ -437,7 +437,7 @@
         <text>Looking%20up%20a%20record%20by%20source</text>
       </controlProperties>
     </control>
-    <control controlID="355" controlTypeID="com.balsamiq.mockups::DataGrid" x="1666" y="436" w="605" h="376" measuredW="597" measuredH="380" zOrder="71" locked="false" isInGroup="-1">
+    <control controlID="355" controlTypeID="com.balsamiq.mockups::DataGrid" x="1666" y="436" w="605" h="376" measuredW="489" measuredH="380" zOrder="71" locked="false" isInGroup="-1">
       <controlProperties>
         <alternateRowColor>15134199</alternateRowColor>
         <borderStyle>square</borderStyle>
@@ -446,10 +446,10 @@
         <rowHeight>25</rowHeight>
         <selectedIndex>-1</selectedIndex>
         <size>10</size>
-        <text>Protein%20%5E%2C%20Source%20%5E%2C%20Location%20%5E%2C%20Temperature%20%28C%29%20%5E%2C%20pI%20%5E%0AAlkaline%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C4.6%0AAlkaline%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C4.6%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2C*Human*%2CPlacenta%2C0C-0C%2C4.6%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%2CPlacenta%2C0C-0C%2C4.6%0AIntestinal-type%20alkaline%20phosphatase%2C*Human*%2CPlacenta%2C22C%2C4.6%0AAlkaline%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C4.6%0AAlkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C4.6%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C4.6%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C4.6%0AIntestinal-type%20alkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C22C%2C4.6%0AAlkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C4.6%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C4.6%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C4.6%0AIntestinal-type%20alkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C22C%2C4.6</text>
+        <text>Protein%20%5E%2C%20Source%20%5E%2C%20Location%20%5E%2C%20pI%20%5E%0AAlkaline%20phosphatase%2C*Human*%2CPlacenta%2C4.6%0AAlkaline%20phosphatase%2C*Human*%2CPlacenta%2C4.6%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2C*Human*%2CPlacenta%2C4.6%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%2CPlacenta%2C4.6%0AIntestinal-type%20alkaline%20phosphatase%2C*Human*%2CPlacenta%2C4.6%0AAlkaline%20phosphatase%2C*Human*%2CPlacenta%2C4.6%0AAlkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C4.6%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C4.6%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C4.6%0AIntestinal-type%20alkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C4.6%0AAlkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C4.6%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C4.6%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C4.6%0AIntestinal-type%20alkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C4.6</text>
       </controlProperties>
     </control>
-    <control controlID="358" controlTypeID="com.balsamiq.mockups::DataGrid" x="1273" y="1077" w="605" h="376" measuredW="597" measuredH="380" zOrder="72" locked="false" isInGroup="-1">
+    <control controlID="358" controlTypeID="com.balsamiq.mockups::DataGrid" x="1273" y="1077" w="605" h="376" measuredW="489" measuredH="380" zOrder="72" locked="false" isInGroup="-1">
       <controlProperties>
         <alternateRowColor>15134199</alternateRowColor>
         <borderStyle>square</borderStyle>
@@ -458,7 +458,7 @@
         <rowHeight>25</rowHeight>
         <selectedIndex>-1</selectedIndex>
         <size>10</size>
-        <text>Protein%20%5E%2C%20Source%20%5E%2C%20Location%20%5E%2C%20Temperature%20%28C%29%20%5E%2C%20pI%20%5E%0AAlkaline%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C4.6%0AAlkaline%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C4.6%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2C*Human*%2CPlacenta%2C0C-0C%2C4.6%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%2CPlacenta%2C0C-0C%2C4.6%0AIntestinal-type%20alkaline%20phosphatase%2C*Human*%2CPlacenta%2C22C%2C4.6%0AAlkaline%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C4.6%0AAlkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C4.6%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C4.6%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C4.6%0AIntestinal-type%20alkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C22C%2C4.6%0AAlkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C4.6%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C4.6%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C4.6%0AIntestinal-type%20alkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C22C%2C4.6</text>
+        <text>Protein%20%5E%2C%20Source%20%5E%2C%20Location%20%5E%2C%20pI%20%5E%0AAlkaline%20phosphatase%2C*Human*%2CPlacenta%2C4.6%0AAlkaline%20phosphatase%2C*Human*%2CPlacenta%2C4.6%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2C*Human*%2CPlacenta%2C4.6%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%2CPlacenta%2C4.6%0AIntestinal-type%20alkaline%20phosphatase%2C*Human*%2CPlacenta%2C4.6%0AAlkaline%20phosphatase%2C*Human*%2CPlacenta%2C4.6%0AAlkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C4.6%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C4.6%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C4.6%0AIntestinal-type%20alkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C4.6%0AAlkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C4.6%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C4.6%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C4.6%0AIntestinal-type%20alkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C4.6</text>
       </controlProperties>
     </control>
     <control controlID="359" controlTypeID="com.balsamiq.mockups::Label" x="86" y="371" w="49" h="21" measuredW="49" measuredH="21" zOrder="74" locked="false" isInGroup="-1">

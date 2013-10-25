@@ -6,7 +6,7 @@
         <verticalScrollbar>true</verticalScrollbar>
       </controlProperties>
     </control>
-    <control controlID="10" controlTypeID="com.balsamiq.mockups::TextInput" x="1734" y="371" w="289" h="-1" measuredW="59" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::TextInput" x="1734" y="371" w="289" h="-1" measuredW="58" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
         <text>pi%3A4-5.5</text>
       </controlProperties>
@@ -50,7 +50,7 @@
         <verticalScrollbar>true</verticalScrollbar>
       </controlProperties>
     </control>
-    <control controlID="57" controlTypeID="com.balsamiq.mockups::TextInput" x="555" y="1012" w="289" h="-1" measuredW="59" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+    <control controlID="57" controlTypeID="com.balsamiq.mockups::TextInput" x="555" y="1012" w="289" h="-1" measuredW="58" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
         <text>pi%3A4-5.5</text>
       </controlProperties>
@@ -92,7 +92,7 @@
       <controlProperties>
         <backgroundAlpha>0.5</backgroundAlpha>
         <color>10470904</color>
-        <text>Acetoacetyl-CoA%20thiolase</text>
+        <text>Alkaline%20phosphatase</text>
       </controlProperties>
     </control>
     <control controlID="87" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="71" y="286" w="668" h="552" measuredW="450" measuredH="400" zOrder="15" locked="false" isInGroup="-1">
@@ -152,7 +152,7 @@
         <text>protein-db%0Ahttp%3A//protein-db.com</text>
       </controlProperties>
     </control>
-    <control controlID="98" controlTypeID="com.balsamiq.mockups::TextInput" x="1077" y="549" w="216" h="-1" measuredW="59" measuredH="27" zOrder="26" locked="false" isInGroup="-1">
+    <control controlID="98" controlTypeID="com.balsamiq.mockups::TextInput" x="1077" y="549" w="216" h="-1" measuredW="58" measuredH="27" zOrder="26" locked="false" isInGroup="-1">
       <controlProperties>
         <borderColor>545684</borderColor>
         <text>pi%3A4-5.5</text>
@@ -210,7 +210,7 @@
         <text/>
       </controlProperties>
     </control>
-    <control controlID="221" controlTypeID="com.balsamiq.mockups::Label" x="79" y="244" w="-1" h="-1" measuredW="188" measuredH="41" zOrder="36" locked="false" isInGroup="-1">
+    <control controlID="221" controlTypeID="com.balsamiq.mockups::Label" x="79" y="244" w="-1" h="-1" measuredW="189" measuredH="41" zOrder="36" locked="false" isInGroup="-1">
       <controlProperties>
         <size>32</size>
         <text>1.%20Load%20page</text>
@@ -308,7 +308,7 @@
         <verticalScrollbar>true</verticalScrollbar>
       </controlProperties>
     </control>
-    <control controlID="328" controlTypeID="com.balsamiq.mockups::TextInput" x="1341" y="1012" w="289" h="-1" measuredW="59" measuredH="27" zOrder="50" locked="false" isInGroup="-1">
+    <control controlID="328" controlTypeID="com.balsamiq.mockups::TextInput" x="1341" y="1012" w="289" h="-1" measuredW="58" measuredH="27" zOrder="50" locked="false" isInGroup="-1">
       <controlProperties>
         <text>pi%3A4-5.5</text>
       </controlProperties>
@@ -437,7 +437,7 @@
         <text>Looking%20up%20a%20record%20by%20pI%20range</text>
       </controlProperties>
     </control>
-    <control controlID="355" controlTypeID="com.balsamiq.mockups::DataGrid" x="1666" y="436" w="605" h="376" measuredW="602" measuredH="380" zOrder="71" locked="false" isInGroup="-1">
+    <control controlID="355" controlTypeID="com.balsamiq.mockups::DataGrid" x="1666" y="436" w="605" h="376" measuredW="509" measuredH="480" zOrder="71" locked="false" isInGroup="-1">
       <controlProperties>
         <alternateRowColor>15134199</alternateRowColor>
         <borderStyle>square</borderStyle>
@@ -446,10 +446,10 @@
         <rowHeight>25</rowHeight>
         <selectedIndex>-1</selectedIndex>
         <size>10</size>
-        <text>Protein%20%5E%2C%20Source%20%5E%2C%20Location%20%5E%2C%20Temperature%20%28C%29%20%5E%2C%20pI%20%5E%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C0C-0C%2C*4.6*%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C0C-0C%2C*4.6*%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C0C-0C%2C*4.7*%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2CHuman%2CPlacenta%2C0C-0C%2C*4.80*%0AIntestinal-type%20alkaline%20phosphatase%2CHuman%2CPlacenta%2C22C%2C*4.80*%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C0C-0C%2C*4.80*%0AAlkaline%20phosphatase%2CHuman%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*4.9*%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2CHuman%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5-51*%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2CHuman%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.10*%0AIntestinal-type%20alkaline%20phosphatase%2CHuman%20cytomegalovirus%2CPlacenta%2C22C%2C*5.1*%0AAlkaline%20phosphatase%2CHuman%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.2*%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2CHuman%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.4*%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2CHuman%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.4*%0AIntestinal-type%20alkaline%20phosphatase%2CHuman%20cytomegalovirus%2CPlacenta%2C22C%2C*5.4*</text>
+        <text>Protein%20%5E%2C%20Source%20%5E%2C%20Location%20%5E%2C%20pI%20%5E%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C*4.6*%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%20phosphatase%201%2CHuman%2CPlacenta%2C*4.6*%0AIntestinal-type%20alkaline%20phosphatase%2CBos%20taurus%20%28Ox%29%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C*4.4*%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C*4.6*%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%20phosphatase%201%2CHuman%2CPlacenta%2C*4.6*%0AIntestinal-type%20alkaline%20phosphatase%2CBos%20taurus%20%28Ox%29%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C*4.6*%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%20phosphatase%201%2CHuman%2CPlacenta%2C*4.6*%0AIntestinal-type%20alkaline%20phosphatase%2CBos%20taurus%20%28Ox%29%2CPlacenta%2C*4.6*</text>
       </controlProperties>
     </control>
-    <control controlID="358" controlTypeID="com.balsamiq.mockups::DataGrid" x="1273" y="1077" w="605" h="376" measuredW="607" measuredH="380" zOrder="72" locked="false" isInGroup="-1">
+    <control controlID="358" controlTypeID="com.balsamiq.mockups::DataGrid" x="1273" y="1077" w="605" h="376" measuredW="509" measuredH="480" zOrder="72" locked="false" isInGroup="-1">
       <controlProperties>
         <alternateRowColor>15134199</alternateRowColor>
         <borderStyle>square</borderStyle>
@@ -458,7 +458,7 @@
         <rowHeight>25</rowHeight>
         <selectedIndex>-1</selectedIndex>
         <size>10</size>
-        <text>Protein%20%5E%2C%20Source%20%5E%2C%20Location%20%5E%2C%20Temperature%20%28C%29%20%5E%2C%20pI%20%5E%0AAlkaline%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C4.6%0AAlkaline%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C4.6%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2C*Human*%2CPlacenta%2C0C-0C%2C4.6%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%2CPlacenta%2C0C-0C%2C4.6%0AIntestinal-type%20alkaline%20phosphatase%2C*Human*%2CPlacenta%2C22C%2C4.6%0AAlkaline%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C4.6%0AAlkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C4.6%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C4.6%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C4.6%0AIntestinal-type%20alkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C22C%2C4.6%0AAlkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C4.6%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C4.6%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C4.6%0AIntestinal-type%20alkaline%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C22C%2C4.6</text>
+        <text>Protein%20%5E%2C%20Source%20%5E%2C%20Location%20%5E%2C%20pI%20%5E%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C*4.6*%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%20phosphatase%201%2CHuman%2CPlacenta%2C*4.6*%0AIntestinal-type%20alkaline%20phosphatase%2CBos%20taurus%20%28Ox%29%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C*4.4*%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C*4.6*%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%20phosphatase%201%2CHuman%2CPlacenta%2C*4.6*%0AIntestinal-type%20alkaline%20phosphatase%2CBos%20taurus%20%28Ox%29%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C*4.6*%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C*4.6*%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%20phosphatase%201%2CHuman%2CPlacenta%2C*4.6*%0AIntestinal-type%20alkaline%20phosphatase%2CBos%20taurus%20%28Ox%29%2CPlacenta%2C*4.6*</text>
       </controlProperties>
     </control>
     <control controlID="359" controlTypeID="com.balsamiq.mockups::Label" x="86" y="371" w="49" h="21" measuredW="49" measuredH="21" zOrder="74" locked="false" isInGroup="-1">
