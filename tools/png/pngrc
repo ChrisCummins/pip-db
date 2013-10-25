@@ -3,74 +3,72 @@
  */
 Configuration.format = 'CSV';
 
-Configuration.size = 512;
+Configuration.size = 100000;
 
 Configuration.dataset = {
   dataset: {
     populated: 1.0
   },
   ec: {
-    populated: 0.8
+    populated: 0.9581
   },
   protein: {
-    populated: 1.0
+    populated: 0.9998
   },
   alt: {
-    populated: 0.9
+    populated: 0.6567
   },
   source: {
     populated: 1.0
   },
   organ: {
-    populated: 0.6
+    populated: 0.6656
   },
   mw: {
-    populated: 0.9
+    populated: 0.5994
   },
   subunit: {
-    populated: 0.3,
+    populated: 0.35,
     no: {
-      populated: 0.9
+      populated: 0.7
     },
     mw: {
       populated: 0.9
     }
   },
   isoenzymes: {
-    populated: 1.0
+    populated: 0.6065
   },
   pi: {
     populated: 1.0,
-    exact: 0.8,
-    range: 0.1,
-  },
-  piMajor: {
-    populated: 1.0
+    exact: 0.8085,
+    range: 0.057,
+    max: 0.0253
   },
   temp: {
-    populated: 1.0,
+    populated: 0.2629,
     exact: 0.7
     /* Range is implied */
   },
   method: {
-    populated: 1.0
+    populated: 0.9009
   },
   valid: {
-    populated: 1.0
+    populated: 99.93
   },
   sequence: {
-    populated: 1.0
+    populated: 0.6363
   },
   species: {
-    populated: 1.0
+    populated: 0.9716
   },
   citation: {
-    populated: 1.0,
-    full: 0.95
+    populated: 0.9382,
+    full: 0.65
     /* abstract is implied */
   },
   pubmed: {
-    populated: 1.0
+    populated: 0.9101
   },
   notes: {
     populated: 0.02

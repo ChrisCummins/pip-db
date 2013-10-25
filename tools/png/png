@@ -171,12 +171,11 @@ function Tuple(isHeader) {
       else if (r(env.dataset.pi.range)) {
         this.p['piRangeMin'] = rpi();
         this.p['piRangeMax'] = rpi();
-      } else
+      } else if (r(env.dataset.pi.max))
         this.p['piMax'] = rpi();
+      else
+        this.p['piMajor'] = rpi();
     }
-
-    if (r(env.dataset.piMajor.populated))
-      this.p['piMax'] = rpi();
 
     if (r(env.dataset.temp.populated)) {
       if (r(env.dataset.temp.exact))
