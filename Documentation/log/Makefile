@@ -38,7 +38,7 @@ all $(target): $(src)
 	$(QUIET)$(COMPILE) $(docname).tex
 	$(QUIET)for d in $(export-dirs); do		\
 	 	if [ -d "$$d" ]; then			\
-	 		cp -v $(target) "$$d";		\
+	 		cp -v $(target) "$$d/Project Log.pdf"; \
 	 	fi					\
 	done
 
