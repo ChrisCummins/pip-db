@@ -1,0 +1,923 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="2314" measuredH="1479" mockupW="2243" mockupH="1338">
+  <controls>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="1640" y="927" w="668" h="552" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>My%20Search...%20-%20protein-db%0Ahttp%3A//protein-db.com</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::TextInput" x="1734" y="1012" w="289" h="-1" measuredW="59" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>pi%3A4-5.5</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="2031" y="1012" w="100" h="27" measuredW="65" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>40463</color>
+        <text>Search</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Button" x="2139" y="1012" w="100" h="27" measuredW="82" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2848996</color>
+        <text>Advanced</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Label" x="1655" y="1014" w="71" h="-1" measuredW="68" measuredH="22" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <bold>false</bold>
+        <color>2848996</color>
+        <size>14</size>
+        <text>protein-db</text>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::Label" x="2247" y="1015" w="-1" h="-1" measuredW="35" measuredH="21" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Login</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::Label" x="1666" y="1053" w="-1" h="-1" measuredW="92" measuredH="17" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <size>10</size>
+        <text>Found%20122%20results...</text>
+      </controlProperties>
+    </control>
+    <control controlID="56" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="71" y="927" w="668" h="552" measuredW="450" measuredH="400" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>My%20Search...%20-%20protein-db%0Ahttp%3A//protein-db.com</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="57" controlTypeID="com.balsamiq.mockups::TextInput" x="165" y="1012" w="289" h="-1" measuredW="59" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>pi%3A4-5.5</text>
+      </controlProperties>
+    </control>
+    <control controlID="58" controlTypeID="com.balsamiq.mockups::Button" x="462" y="1012" w="100" h="27" measuredW="65" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>40463</color>
+        <text>Search</text>
+      </controlProperties>
+    </control>
+    <control controlID="59" controlTypeID="com.balsamiq.mockups::Button" x="570" y="1012" w="100" h="27" measuredW="82" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2848996</color>
+        <text>Advanced</text>
+      </controlProperties>
+    </control>
+    <control controlID="60" controlTypeID="com.balsamiq.mockups::Label" x="86" y="1014" w="71" h="-1" measuredW="68" measuredH="22" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <bold>false</bold>
+        <color>2848996</color>
+        <size>14</size>
+        <text>protein-db</text>
+      </controlProperties>
+    </control>
+    <control controlID="61" controlTypeID="com.balsamiq.mockups::Label" x="678" y="1015" w="-1" h="-1" measuredW="35" measuredH="21" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Login</text>
+      </controlProperties>
+    </control>
+    <control controlID="62" controlTypeID="com.balsamiq.mockups::Label" x="97" y="1053" w="-1" h="-1" measuredW="92" measuredH="17" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <size>10</size>
+        <text>Found%20122%20results...</text>
+      </controlProperties>
+    </control>
+    <control controlID="63" controlTypeID="com.balsamiq.mockups::TextArea" x="97" y="1077" w="605" h="25" measuredW="200" measuredH="140" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <color>10470904</color>
+        <text>Acetoacetyl-CoA%20thiolase</text>
+      </controlProperties>
+    </control>
+    <control controlID="87" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="71" y="286" w="668" h="552" measuredW="450" measuredH="400" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>protein-db%0Ahttp%3A//protein-db.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="88" controlTypeID="com.balsamiq.mockups::TextInput" x="297" y="549" w="216" h="-1" measuredW="79" measuredH="27" zOrder="16" locked="false" isInGroup="-1"/>
+    <control controlID="89" controlTypeID="com.balsamiq.mockups::Button" x="297" y="584" w="100" h="27" measuredW="65" measuredH="27" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>40463</color>
+        <text>Search</text>
+      </controlProperties>
+    </control>
+    <control controlID="90" controlTypeID="com.balsamiq.mockups::Button" x="413" y="584" w="100" h="27" measuredW="82" measuredH="27" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2848996</color>
+        <text>Advanced</text>
+      </controlProperties>
+    </control>
+    <control controlID="91" controlTypeID="com.balsamiq.mockups::Label" x="297" y="501" w="216" h="-1" measuredW="184" measuredH="50" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <bold>false</bold>
+        <color>2848996</color>
+        <size>40</size>
+        <text>protein-db</text>
+      </controlProperties>
+    </control>
+    <control controlID="92" controlTypeID="com.balsamiq.mockups::Label" x="86" y="784" w="-1" h="-1" measuredW="40" measuredH="21" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>About</text>
+      </controlProperties>
+    </control>
+    <control controlID="93" controlTypeID="com.balsamiq.mockups::Label" x="136" y="784" w="-1" h="-1" measuredW="50" measuredH="21" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Contact</text>
+      </controlProperties>
+    </control>
+    <control controlID="94" controlTypeID="com.balsamiq.mockups::Label" x="634" y="784" w="-1" h="-1" measuredW="46" measuredH="21" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Terms</text>
+      </controlProperties>
+    </control>
+    <control controlID="95" controlTypeID="com.balsamiq.mockups::Label" x="686" y="784" w="-1" h="-1" measuredW="49" measuredH="21" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Privacy</text>
+      </controlProperties>
+    </control>
+    <control controlID="96" controlTypeID="com.balsamiq.mockups::Label" x="686" y="371" w="-1" h="-1" measuredW="35" measuredH="21" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Login</text>
+      </controlProperties>
+    </control>
+    <control controlID="107" controlTypeID="com.balsamiq.mockups::Arrow" x="739" y="576" w="112" h="10" measuredW="150" measuredH="100" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>bottom</direction>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="221" controlTypeID="com.balsamiq.mockups::Label" x="79" y="244" w="-1" h="-1" measuredW="188" measuredH="41" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>32</size>
+        <text>1.%20Load%20page</text>
+      </controlProperties>
+    </control>
+    <control controlID="222" controlTypeID="com.balsamiq.mockups::Label" x="860" y="244" w="-1" h="-1" measuredW="349" measuredH="41" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>32</size>
+        <text>2.%20Go%20to%20advanced%20page</text>
+      </controlProperties>
+    </control>
+    <control controlID="223" controlTypeID="com.balsamiq.mockups::Label" x="1646" y="244" w="-1" h="-1" measuredW="179" measuredH="41" zOrder="28" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>32</size>
+        <text>3.%20Fill%20in%20form</text>
+      </controlProperties>
+    </control>
+    <control controlID="224" controlTypeID="com.balsamiq.mockups::Label" x="650" y="248" w="-1" h="-1" measuredW="180" measuredH="33" zOrder="29" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <size>24</size>
+        <text>advanced%20button</text>
+      </controlProperties>
+    </control>
+    <control controlID="225" controlTypeID="com.balsamiq.mockups::Arrow" x="487" y="265" w="156" h="322" measuredW="150" measuredH="100" zOrder="30" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <direction>bottom</direction>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="226" controlTypeID="com.balsamiq.mockups::Arrow" x="1530" y="555" w="112" h="10" measuredW="150" measuredH="100" zOrder="31" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="266" controlTypeID="com.balsamiq.mockups::Label" x="857" y="888" w="-1" h="-1" measuredW="221" measuredH="41" zOrder="32" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>32</size>
+        <text>5.%20Select%20result</text>
+      </controlProperties>
+    </control>
+    <control controlID="267" controlTypeID="com.balsamiq.mockups::Arrow" x="1890" y="846" w="129" h="83" measuredW="150" measuredH="100" zOrder="33" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>bottom</direction>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="268" controlTypeID="com.balsamiq.mockups::Arrow" x="739" y="1208" w="118" h="10" measuredW="150" measuredH="100" zOrder="34" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="269" controlTypeID="com.balsamiq.mockups::Label" x="71" y="888" w="-1" h="-1" measuredW="215" measuredH="41" zOrder="35" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>32</size>
+        <text>6.%20View%20record</text>
+      </controlProperties>
+    </control>
+    <control controlID="319" controlTypeID="com.balsamiq.mockups::Button" x="2186" y="1050" w="85" h="22" measuredW="85" measuredH="27" zOrder="36" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16750848</color>
+        <icon>DownloadIcon%7Cxsmall</icon>
+        <size>10</size>
+        <state>up</state>
+        <text>Download</text>
+      </controlProperties>
+    </control>
+    <control controlID="321" controlTypeID="com.balsamiq.mockups::Button" x="617" y="1050" w="85" h="22" measuredW="85" measuredH="27" zOrder="37" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16750848</color>
+        <icon>DownloadIcon%7Cxsmall</icon>
+        <size>10</size>
+        <state>up</state>
+        <text>Download</text>
+      </controlProperties>
+    </control>
+    <control controlID="327" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="857" y="927" w="668" h="552" measuredW="450" measuredH="400" zOrder="38" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>My%20Search...%20-%20protein-db%0Ahttp%3A//protein-db.com</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="328" controlTypeID="com.balsamiq.mockups::TextInput" x="951" y="1012" w="289" h="-1" measuredW="59" measuredH="27" zOrder="39" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>pi%3A4-5.5</text>
+      </controlProperties>
+    </control>
+    <control controlID="329" controlTypeID="com.balsamiq.mockups::Button" x="1248" y="1012" w="100" h="27" measuredW="65" measuredH="27" zOrder="40" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>40463</color>
+        <text>Search</text>
+      </controlProperties>
+    </control>
+    <control controlID="330" controlTypeID="com.balsamiq.mockups::Button" x="1356" y="1012" w="100" h="27" measuredW="82" measuredH="27" zOrder="41" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>2848996</color>
+        <text>Advanced</text>
+      </controlProperties>
+    </control>
+    <control controlID="331" controlTypeID="com.balsamiq.mockups::Label" x="872" y="1014" w="71" h="-1" measuredW="68" measuredH="22" zOrder="42" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <bold>false</bold>
+        <color>2848996</color>
+        <size>14</size>
+        <text>protein-db</text>
+      </controlProperties>
+    </control>
+    <control controlID="332" controlTypeID="com.balsamiq.mockups::Label" x="1464" y="1015" w="-1" h="-1" measuredW="35" measuredH="21" zOrder="43" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Login</text>
+      </controlProperties>
+    </control>
+    <control controlID="333" controlTypeID="com.balsamiq.mockups::Label" x="883" y="1053" w="-1" h="-1" measuredW="92" measuredH="17" zOrder="44" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <size>10</size>
+        <text>Found%20122%20results...</text>
+      </controlProperties>
+    </control>
+    <control controlID="334" controlTypeID="com.balsamiq.mockups::Button" x="1403" y="1050" w="85" h="22" measuredW="85" measuredH="27" zOrder="45" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16750848</color>
+        <icon>DownloadIcon%7Cxsmall</icon>
+        <size>10</size>
+        <state>up</state>
+        <text>Download</text>
+      </controlProperties>
+    </control>
+    <control controlID="336" controlTypeID="com.balsamiq.mockups::Canvas" x="883" y="1121" w="605" h="34" measuredW="100" measuredH="70" zOrder="59" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <color>2848996</color>
+      </controlProperties>
+    </control>
+    <control controlID="340" controlTypeID="com.balsamiq.mockups::Button" x="462" y="1136" w="166" h="27" measuredW="73" measuredH="27" zOrder="46" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Full%20Text</text>
+      </controlProperties>
+    </control>
+    <control controlID="341" controlTypeID="com.balsamiq.mockups::Button" x="462" y="1170" w="166" h="27" measuredW="70" measuredH="27" zOrder="47" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>PubMed</text>
+      </controlProperties>
+    </control>
+    <control controlID="342" controlTypeID="com.balsamiq.mockups::Button" x="462" y="1207" w="166" h="27" measuredW="132" measuredH="27" zOrder="48" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Species%20Taxonomy</text>
+      </controlProperties>
+    </control>
+    <control controlID="343" controlTypeID="com.balsamiq.mockups::Button" x="462" y="1244" w="166" h="27" measuredW="126" measuredH="27" zOrder="49" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Protein%20Sequence</text>
+      </controlProperties>
+    </control>
+    <control controlID="345" controlTypeID="com.balsamiq.mockups::Label" x="462" y="1109" w="-1" h="-1" measuredW="85" measuredH="21" zOrder="50" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>External%20Links</text>
+      </controlProperties>
+    </control>
+    <control controlID="346" controlTypeID="com.balsamiq.mockups::Label" x="86" y="1425" w="-1" h="-1" measuredW="40" measuredH="21" zOrder="51" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>About</text>
+      </controlProperties>
+    </control>
+    <control controlID="347" controlTypeID="com.balsamiq.mockups::Label" x="136" y="1425" w="-1" h="-1" measuredW="50" measuredH="21" zOrder="52" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Contact</text>
+      </controlProperties>
+    </control>
+    <control controlID="348" controlTypeID="com.balsamiq.mockups::Label" x="609" y="1425" w="-1" h="-1" measuredW="46" measuredH="21" zOrder="53" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Terms</text>
+      </controlProperties>
+    </control>
+    <control controlID="349" controlTypeID="com.balsamiq.mockups::Label" x="661" y="1425" w="-1" h="-1" measuredW="49" measuredH="21" zOrder="54" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Privacy</text>
+      </controlProperties>
+    </control>
+    <control controlID="350" controlTypeID="com.balsamiq.mockups::DataGrid" x="97" y="1109" w="350" h="242" measuredW="370" measuredH="241" zOrder="55" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <hasHeader>true</hasHeader>
+        <rowHeight>16</rowHeight>
+        <selectedIndex>-1</selectedIndex>
+        <size>8</size>
+        <text>Protein%3A%2CAlkaline%20phosphatase%0AAlternative%20names%3A%2C%20Alkaline%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%20phosphatase%201%0ASource%3A%2C%20Human%0ALocation%3A%2C%20Placenta%0ApI%20Value%3A%2C%204.6%0ApI%20Range%3A%2C%200%20-%200%0ApI%20Value%20of%20Major%20Component%3A%2C%200%0ApI%20Max%20Value%3A%2C%200%0AMolecular%20Weight%3A%2C%20116000%20-%20116000%0ASub%20Unit%20No%3A%2C%202%0ASub%20Unit%20MW%3A%2C%2058000%0AIso%20Enzymes%3A%2C%201%20-%201%0ATemperature%20%28C%29%3A%2C%200%B0C%20-%200%B0C%0APub%20Med%20Link%3A%2C%20Unavailable%0ANotes%3A%2C%20No%20Entry</text>
+      </controlProperties>
+    </control>
+    <control controlID="354" controlTypeID="com.balsamiq.mockups::Label" x="71" y="141" w="2237" h="79" measuredW="842" measuredH="72" zOrder="56" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>60</size>
+        <text>Performing%20an%20advanced%20search</text>
+      </controlProperties>
+    </control>
+    <control controlID="355" controlTypeID="com.balsamiq.mockups::DataGrid" x="1666" y="1077" w="605" h="376" measuredW="609" measuredH="380" zOrder="57" locked="false" isInGroup="-1">
+      <controlProperties>
+        <alternateRowColor>15134199</alternateRowColor>
+        <borderStyle>square</borderStyle>
+        <hasHeader>false</hasHeader>
+        <hLines>false</hLines>
+        <rowHeight>25</rowHeight>
+        <selectedIndex>-1</selectedIndex>
+        <size>10</size>
+        <text>Protein%20%5E%2C%20Source%20%5E%2C%20Location%20%5E%2C%20Temperature%20%28C%29%20%5E%2C%20pI%20%5E%0A*Alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C*4.6*%0A*Alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C*4.6*%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2C*Human*%2CPlacenta%2C0C-0C%2C*4.7*%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%2CPlacenta%2C0C-0C%2C*4.80*%0AIntestinal-type%20*alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C22C%2C*4.80*%0A*Alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C*4.80*%0A*Alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*4.9*%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5-51*%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.10*%0AIntestinal-type%20*alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C22C%2C*5.1*%0A*Alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.2*%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.4*%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.4*%0AIntestinal-type%20*alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C22C%2C*5.4*</text>
+      </controlProperties>
+    </control>
+    <control controlID="358" controlTypeID="com.balsamiq.mockups::DataGrid" x="883" y="1077" w="605" h="376" measuredW="609" measuredH="380" zOrder="58" locked="false" isInGroup="-1">
+      <controlProperties>
+        <alternateRowColor>15134199</alternateRowColor>
+        <borderStyle>square</borderStyle>
+        <hasHeader>false</hasHeader>
+        <hLines>false</hLines>
+        <rowHeight>25</rowHeight>
+        <selectedIndex>-1</selectedIndex>
+        <size>10</size>
+        <text>Protein%20%5E%2C%20Source%20%5E%2C%20Location%20%5E%2C%20Temperature%20%28C%29%20%5E%2C%20pI%20%5E%0A*Alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C*4.6*%0A*Alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C*4.6*%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2C*Human*%2CPlacenta%2C0C-0C%2C*4.7*%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%2CPlacenta%2C0C-0C%2C*4.80*%0AIntestinal-type%20*alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C22C%2C*4.80*%0A*Alkaline*%20phosphatase%2C*Human*%2CPlacenta%2C0C-0C%2C*4.80*%0A*Alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*4.9*%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5-51*%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.10*%0AIntestinal-type%20*alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C22C%2C*5.1*%0A*Alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.2*%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.4*%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20alkaline%201%2C*Human*%20cytomegalovirus%2CPlacenta%2C0C-0C%2C*5.4*%0AIntestinal-type%20*alkaline*%20phosphatase%2C*Human*%20cytomegalovirus%2CPlacenta%2C22C%2C*5.4*</text>
+      </controlProperties>
+    </control>
+    <control controlID="359" controlTypeID="com.balsamiq.mockups::Label" x="86" y="371" w="49" h="21" measuredW="49" measuredH="21" zOrder="60" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Browse</text>
+      </controlProperties>
+    </control>
+    <control controlID="360" controlTypeID="com.balsamiq.mockups::Label" x="494" y="552" w="19" h="21" measuredW="15" measuredH="21" zOrder="61" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>10066329</color>
+        <text>%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="365" controlTypeID="com.balsamiq.mockups::Label" x="2004" y="1018" w="19" h="21" measuredW="15" measuredH="21" zOrder="62" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>10066329</color>
+        <text>%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="366" controlTypeID="com.balsamiq.mockups::Label" x="1221" y="1015" w="19" h="21" measuredW="15" measuredH="21" zOrder="63" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>10066329</color>
+        <text>%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="367" controlTypeID="com.balsamiq.mockups::Label" x="435" y="1015" w="19" h="21" measuredW="15" measuredH="21" zOrder="64" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>10066329</color>
+        <text>%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="368" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="852" y="294" w="668" h="552" measuredW="450" measuredH="400" zOrder="65" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16777215</color>
+        <text>protein-db%0Ahttp%3A//protein-db.com/advanced</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="369" controlTypeID="com.balsamiq.mockups::TextInput" x="1103" y="434" w="216" h="-1" measuredW="79" measuredH="26" zOrder="66" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>545684</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="370" controlTypeID="com.balsamiq.mockups::Label" x="944" y="415" w="-1" h="-1" measuredW="112" measuredH="20" zOrder="67" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>3355443</color>
+        <size>12</size>
+        <text>Find%20records%20with...</text>
+      </controlProperties>
+    </control>
+    <control controlID="371" controlTypeID="com.balsamiq.mockups::Label" x="944" y="437" w="-1" h="-1" measuredW="88" measuredH="20" zOrder="68" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>all%20these%20words%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="372" controlTypeID="com.balsamiq.mockups::Label" x="944" y="471" w="-1" h="-1" measuredW="142" measuredH="20" zOrder="69" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>this%20exact%20word%20or%20phrase%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="373" controlTypeID="com.balsamiq.mockups::TextInput" x="1103" y="468" w="216" h="-1" measuredW="79" measuredH="26" zOrder="70" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="374" controlTypeID="com.balsamiq.mockups::Label" x="944" y="503" w="-1" h="-1" measuredW="110" measuredH="20" zOrder="71" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>any%20of%20these%20words%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="375" controlTypeID="com.balsamiq.mockups::TextInput" x="1103" y="500" w="216" h="-1" measuredW="79" measuredH="26" zOrder="72" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="376" controlTypeID="com.balsamiq.mockups::Label" x="944" y="534" w="-1" h="-1" measuredW="116" measuredH="20" zOrder="73" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>none%20of%20these%20words%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="377" controlTypeID="com.balsamiq.mockups::TextInput" x="1103" y="531" w="216" h="-1" measuredW="79" measuredH="26" zOrder="74" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="378" controlTypeID="com.balsamiq.mockups::Label" x="944" y="577" w="-1" h="-1" measuredW="140" measuredH="20" zOrder="75" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>3355443</color>
+        <size>12</size>
+        <text>Then%20narrow%20resutls%20by...</text>
+      </controlProperties>
+    </control>
+    <control controlID="379" controlTypeID="com.balsamiq.mockups::Label" x="944" y="602" w="-1" h="-1" measuredW="46" measuredH="20" zOrder="76" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>source%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="380" controlTypeID="com.balsamiq.mockups::TextInput" x="1103" y="599" w="216" h="-1" measuredW="79" measuredH="26" zOrder="77" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="381" controlTypeID="com.balsamiq.mockups::Label" x="944" y="634" w="-1" h="-1" measuredW="48" measuredH="20" zOrder="78" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>location%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="382" controlTypeID="com.balsamiq.mockups::TextInput" x="1103" y="631" w="216" h="-1" measuredW="79" measuredH="26" zOrder="79" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="383" controlTypeID="com.balsamiq.mockups::Label" x="944" y="665" w="-1" h="-1" measuredW="20" measuredH="20" zOrder="80" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>pI%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="384" controlTypeID="com.balsamiq.mockups::TextInput" x="1103" y="662" w="99" h="-1" measuredW="79" measuredH="26" zOrder="81" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="385" controlTypeID="com.balsamiq.mockups::TextInput" x="1225" y="662" w="94" h="-1" measuredW="79" measuredH="26" zOrder="82" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="386" controlTypeID="com.balsamiq.mockups::Label" x="1202" y="665" w="23" h="20" measuredW="17" measuredH="20" zOrder="83" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <color>0</color>
+        <size>12</size>
+        <text>to</text>
+      </controlProperties>
+    </control>
+    <control controlID="387" controlTypeID="com.balsamiq.mockups::Label" x="944" y="697" w="-1" h="-1" measuredW="152" measuredH="20" zOrder="84" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>enzyme%20commison%20number%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="388" controlTypeID="com.balsamiq.mockups::Label" x="944" y="728" w="-1" h="-1" measuredW="78" measuredH="20" zOrder="85" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>temperature%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="389" controlTypeID="com.balsamiq.mockups::TextInput" x="1103" y="725" w="99" h="-1" measuredW="79" measuredH="26" zOrder="86" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="390" controlTypeID="com.balsamiq.mockups::TextInput" x="1225" y="725" w="94" h="-1" measuredW="79" measuredH="26" zOrder="87" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="391" controlTypeID="com.balsamiq.mockups::Label" x="1202" y="728" w="23" h="20" measuredW="17" measuredH="20" zOrder="88" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <color>0</color>
+        <size>12</size>
+        <text>to</text>
+      </controlProperties>
+    </control>
+    <control controlID="392" controlTypeID="com.balsamiq.mockups::TextInput" x="1270" y="694" w="49" h="-1" measuredW="79" measuredH="26" zOrder="89" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="393" controlTypeID="com.balsamiq.mockups::TextInput" x="1215" y="694" w="49" h="-1" measuredW="79" measuredH="26" zOrder="90" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="394" controlTypeID="com.balsamiq.mockups::TextInput" x="1158" y="694" w="49" h="-1" measuredW="79" measuredH="26" zOrder="91" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="395" controlTypeID="com.balsamiq.mockups::TextInput" x="1103" y="694" w="49" h="-1" measuredW="79" measuredH="26" zOrder="92" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="396" controlTypeID="com.balsamiq.mockups::Label" x="944" y="761" w="-1" h="-1" measuredW="98" measuredH="20" zOrder="93" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>molecular%20weight%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="397" controlTypeID="com.balsamiq.mockups::TextInput" x="1103" y="758" w="99" h="-1" measuredW="79" measuredH="26" zOrder="94" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="398" controlTypeID="com.balsamiq.mockups::TextInput" x="1225" y="758" w="94" h="-1" measuredW="79" measuredH="26" zOrder="95" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="399" controlTypeID="com.balsamiq.mockups::Label" x="1202" y="761" w="23" h="20" measuredW="17" measuredH="20" zOrder="96" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <color>0</color>
+        <size>12</size>
+        <text>to</text>
+      </controlProperties>
+    </control>
+    <control controlID="400" controlTypeID="__group__" x="852" y="364" w="650" h="36" measuredW="650" measuredH="36" zOrder="97" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="650" h="36" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="400">
+          <controlProperties>
+            <color>14540253</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="15" y="6" w="71" h="-1" measuredW="68" measuredH="22" zOrder="1" locked="false" isInGroup="400">
+          <controlProperties>
+            <align>center</align>
+            <bold>false</bold>
+            <color>2848996</color>
+            <size>14</size>
+            <text>protein-db</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="593" y="7" w="-1" h="-1" measuredW="35" measuredH="21" zOrder="2" locked="false" isInGroup="400">
+          <controlProperties>
+            <text>Login</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="401" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="1646" y="294" w="668" h="552" measuredW="450" measuredH="400" zOrder="98" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16777215</color>
+        <text>protein-db%0Ahttp%3A//protein-db.com/advanced</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="402" controlTypeID="com.balsamiq.mockups::TextInput" x="1897" y="434" w="216" h="-1" measuredW="53" measuredH="26" zOrder="99" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text>alkaline</text>
+      </controlProperties>
+    </control>
+    <control controlID="403" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="415" w="-1" h="-1" measuredW="112" measuredH="20" zOrder="100" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>3355443</color>
+        <size>12</size>
+        <text>Find%20records%20with...</text>
+      </controlProperties>
+    </control>
+    <control controlID="404" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="437" w="-1" h="-1" measuredW="88" measuredH="20" zOrder="101" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>all%20these%20words%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="405" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="471" w="-1" h="-1" measuredW="142" measuredH="20" zOrder="102" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>this%20exact%20word%20or%20phrase%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="406" controlTypeID="com.balsamiq.mockups::TextInput" x="1897" y="468" w="216" h="-1" measuredW="79" measuredH="26" zOrder="103" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="407" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="503" w="-1" h="-1" measuredW="110" measuredH="20" zOrder="104" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>any%20of%20these%20words%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="408" controlTypeID="com.balsamiq.mockups::TextInput" x="1897" y="500" w="216" h="-1" measuredW="79" measuredH="26" zOrder="105" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="409" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="534" w="-1" h="-1" measuredW="116" measuredH="20" zOrder="106" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>none%20of%20these%20words%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="410" controlTypeID="com.balsamiq.mockups::TextInput" x="1897" y="531" w="216" h="-1" measuredW="79" measuredH="26" zOrder="107" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="411" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="577" w="-1" h="-1" measuredW="140" measuredH="20" zOrder="108" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>3355443</color>
+        <size>12</size>
+        <text>Then%20narrow%20resutls%20by...</text>
+      </controlProperties>
+    </control>
+    <control controlID="412" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="602" w="-1" h="-1" measuredW="46" measuredH="20" zOrder="109" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>source%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="413" controlTypeID="com.balsamiq.mockups::TextInput" x="1897" y="599" w="216" h="-1" measuredW="50" measuredH="26" zOrder="110" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text>human</text>
+      </controlProperties>
+    </control>
+    <control controlID="414" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="634" w="-1" h="-1" measuredW="48" measuredH="20" zOrder="111" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>location%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="415" controlTypeID="com.balsamiq.mockups::TextInput" x="1897" y="631" w="216" h="-1" measuredW="79" measuredH="26" zOrder="112" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="416" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="665" w="-1" h="-1" measuredW="20" measuredH="20" zOrder="113" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>pI%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="417" controlTypeID="com.balsamiq.mockups::TextInput" x="1897" y="662" w="99" h="-1" measuredW="33" measuredH="26" zOrder="114" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text>4.0</text>
+      </controlProperties>
+    </control>
+    <control controlID="418" controlTypeID="com.balsamiq.mockups::TextInput" x="2019" y="662" w="94" h="-1" measuredW="21" measuredH="26" zOrder="115" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>545684</borderColor>
+        <size>12</size>
+        <text>7</text>
+      </controlProperties>
+    </control>
+    <control controlID="419" controlTypeID="com.balsamiq.mockups::Label" x="1996" y="665" w="23" h="20" measuredW="17" measuredH="20" zOrder="116" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <color>0</color>
+        <size>12</size>
+        <text>to</text>
+      </controlProperties>
+    </control>
+    <control controlID="420" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="697" w="-1" h="-1" measuredW="152" measuredH="20" zOrder="117" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>enzyme%20commison%20number%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="421" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="728" w="-1" h="-1" measuredW="78" measuredH="20" zOrder="118" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>temperature%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="422" controlTypeID="com.balsamiq.mockups::TextInput" x="1897" y="725" w="99" h="-1" measuredW="79" measuredH="26" zOrder="119" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="423" controlTypeID="com.balsamiq.mockups::TextInput" x="2019" y="725" w="94" h="-1" measuredW="79" measuredH="26" zOrder="120" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="424" controlTypeID="com.balsamiq.mockups::Label" x="1996" y="728" w="23" h="20" measuredW="17" measuredH="20" zOrder="121" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <color>0</color>
+        <size>12</size>
+        <text>to</text>
+      </controlProperties>
+    </control>
+    <control controlID="425" controlTypeID="com.balsamiq.mockups::TextInput" x="2064" y="694" w="49" h="-1" measuredW="79" measuredH="26" zOrder="122" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="426" controlTypeID="com.balsamiq.mockups::TextInput" x="2009" y="694" w="49" h="-1" measuredW="79" measuredH="26" zOrder="123" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="427" controlTypeID="com.balsamiq.mockups::TextInput" x="1952" y="694" w="49" h="-1" measuredW="79" measuredH="26" zOrder="124" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="428" controlTypeID="com.balsamiq.mockups::TextInput" x="1897" y="694" w="49" h="-1" measuredW="79" measuredH="26" zOrder="125" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="429" controlTypeID="com.balsamiq.mockups::Label" x="1738" y="761" w="-1" h="-1" measuredW="98" measuredH="20" zOrder="126" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <size>12</size>
+        <text>molecular%20weight%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="430" controlTypeID="com.balsamiq.mockups::TextInput" x="1897" y="758" w="99" h="-1" measuredW="79" measuredH="26" zOrder="127" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="431" controlTypeID="com.balsamiq.mockups::TextInput" x="2019" y="758" w="94" h="-1" measuredW="79" measuredH="26" zOrder="128" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>3355443</borderColor>
+        <size>12</size>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="432" controlTypeID="com.balsamiq.mockups::Label" x="1996" y="761" w="23" h="20" measuredW="17" measuredH="20" zOrder="129" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <color>0</color>
+        <size>12</size>
+        <text>to</text>
+      </controlProperties>
+    </control>
+    <control controlID="433" controlTypeID="__group__" x="1646" y="364" w="650" h="36" measuredW="650" measuredH="36" zOrder="130" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="650" h="36" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="433">
+          <controlProperties>
+            <color>14540253</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="15" y="6" w="71" h="-1" measuredW="68" measuredH="22" zOrder="1" locked="false" isInGroup="433">
+          <controlProperties>
+            <align>center</align>
+            <bold>false</bold>
+            <color>2848996</color>
+            <size>14</size>
+            <text>protein-db</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="593" y="7" w="-1" h="-1" measuredW="35" measuredH="21" zOrder="2" locked="false" isInGroup="433">
+          <controlProperties>
+            <text>Login</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="434" controlTypeID="com.balsamiq.mockups::Label" x="1640" y="888" w="-1" h="-1" measuredW="217" measuredH="41" zOrder="131" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>32</size>
+        <text>4.%20View%20results</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
