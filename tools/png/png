@@ -10,6 +10,12 @@ function debug(m) {
     console.log('debug: ' + m);
 }
 
+/*
+ * Prints a given error message to console and quits. Note this function does
+ * not return.
+ *
+ * @param m Error message
+ */
 function fatal(m) {
   console.log('fatal: ' + m);
   process.exit(1);
@@ -22,6 +28,7 @@ function fatal(m) {
  */
 function Tuple(isHeader) {
 
+  /* Return boolean true with probability (chance * 100)% */
   function rchance(chance) {
     return Math.random() < chance;
   }
@@ -31,13 +38,17 @@ function Tuple(isHeader) {
     return env.payload[array][Math.floor(Math.random() * (array.length + 1))];
   }
 
+  /* Return random integer in range low to high */
   function rint(low, high) {
     return Math.floor(Math.random() * (high - low + 1) + low);
   }
 
+  /* Generate a random string of length characters */
   function rstring(length) {
     var string = '';
-    var space = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890';
+    var space = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
+        'abcdefghijklmnopqrstuvwxyz' +
+        '01234567890';
 
     for (var i = 0; i < length; i++)
       string += space.charAt(rint(0, space.length));
@@ -45,6 +56,7 @@ function Tuple(isHeader) {
     return string;
   }
 
+  /* Generate a random E.C. string */
   function rec() {
     return (rint(1, 3) + '.' +
             rint(1, 10) + '.' +
@@ -52,6 +64,7 @@ function Tuple(isHeader) {
             rint(1, 120));
   }
 
+  /* Generate a random Latin binomial */
   function rbinomial() {
     var genus = rentry('latin');
     var species = rentry('latin');
@@ -59,10 +72,12 @@ function Tuple(isHeader) {
     return genus + ' ' + species;
   }
 
+  /* Generate a random molecular weight */
   function rmw() {
     return rint(23, 150) * 1000;
   }
 
+  /* Generate a random isoelectric point */
   function rpi() {
     return (Math.random() * 14).toFixed(2);
   }
