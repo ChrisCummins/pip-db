@@ -4,3 +4,75 @@
 Configuration.format = 'CSV';
 
 Configuration.size = 512;
+
+Configuration.dataset = {
+  dataset: {
+    populated: 1.0
+  },
+  ec: {
+    populated: 0.8
+  },
+  protein: {
+    populated: 1.0
+  },
+  alt: {
+    populated: 0.9
+  },
+  source: {
+    populated: 1.0
+  },
+  organ: {
+    populated: 0.6
+  },
+  mw: {
+    populated: 0.9
+  },
+  subunit: {
+    populated: 0.3,
+    no: {
+      populated: 0.9
+    },
+    mw: {
+      populated: 0.9
+    }
+  },
+  isoenzymes: {
+    populated: 1.0
+  },
+  pi: {
+    populated: 1.0,
+    exact: 0.8,
+    range: 0.1,
+  },
+  piMajor: {
+    populated: 1.0
+  },
+  temp: {
+    populated: 1.0,
+    exact: 0.7
+    /* Range is implied */
+  },
+  method: {
+    populated: 1.0
+  },
+  valid: {
+    populated: 1.0
+  },
+  sequence: {
+    populated: 1.0
+  },
+  species: {
+    populated: 1.0
+  },
+  citation: {
+    populated: 1.0,
+    full: 0.95
+    /* abstract is implied */
+  },
+  pubmed: {
+    populated: 1.0
+  },
+  notes: {
+    populated: 0.02
+  }
+}

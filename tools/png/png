@@ -29,7 +29,7 @@ function fatal(m) {
 function Tuple(isHeader) {
 
   /* Return boolean true with probability (chance * 100)% */
-  function rchance(chance) {
+  function r(chance) {
     return Math.random() < chance;
   }
 
@@ -140,72 +140,75 @@ function Tuple(isHeader) {
       'notes' : ''
     };
 
-    this.p['dataset'] = rentry('datasets');
+    if (r(env.dataset.dataset.populated))
+      this.p['dataset'] = rentry('datasets');
+    if (r(env.dataset.ec.populated))
+      this.p['ec'] = rec();
+    if (r(env.dataset.protein.populated))
+      this.p['protein'] = rentry('proteins');
+    if (r(env.dataset.alt.populated))
+      this.p['alt'] = rentry('proteins');
+    if (r(env.dataset.source.populated))
+      this.p['source'] = rbinomial();
+    if (r(env.dataset.organ.populated))
+      this.p['organ'] = rentry('organs');
+    if (r(env.dataset.mw.populated))
+      this.p['mw'] = rmw();
 
-    this.p['ec'] = rchance(0.8) ? rec() : '';
-
-    this.p['protein'] = rentry('proteins');
-
-    this.p['alt'] = rchance(0.9) ? rentry('proteins') : '';
-
-    this.p['source'] = rbinomial();
-
-    this.p['organ'] = rchance(0.6) ? rentry('organs') : '';
-
-    this.p['mw'] = rchance(0.9) ? rmw() : '';
-
-    if (rchance(0.3)) {
-      this.p['subno'] = rint(1, 148);
-      this.p['submw'] = rmw();
+    if (r(env.dataset.subunit.populated)) {
+      if (r(env.dataset.subunit.no.populated))
+        this.p['subno'] = rint(1, 148);
+      if (r(env.dataset.subunit.mw.populated))
+        this.p['submw'] = rmw();
     }
 
-    this.p['isoenzymes'] = rchance(0.9) ? rint(1, 10000) : '';
+    if (r(env.dataset.isoenzymes.populated))
+      this.p['isoenzymes'] = rint(1, 10000);
 
-    if (rchance(0.95)) {
-      if (rchance(0.8))
+    if (r(env.dataset.pi.populated)) {
+      if (r(env.dataset.pi.exact))
         this.p['pi'] = rpi();
-      else {
-        if (rchance(0.5))
-          this.p['piMax'] = rpi();
-        else if (rchance(0.5))
-          this.p['piMajor'] = rpi();
-        else {
-          this.p['piRangeMin'] = rpi();
-          this.p['piRangeMax'] = rpi();
-        }
-      }
+      else if (r(env.dataset.pi.range)) {
+        this.p['piRangeMin'] = rpi();
+        this.p['piRangeMax'] = rpi();
+      } else
+        this.p['piMax'] = rpi();
     }
 
-    if (rchance(0.8)) {
-      if (rchance(0.7))
+    if (r(env.dataset.piMajor.populated))
+      this.p['piMax'] = rpi();
+
+    if (r(env.dataset.temp.populated)) {
+      if (r(env.dataset.temp.exact))
         this.p['temp'] = rint(10, 30) + 'C';
-      else {
+      else
         this.p['temp'] = rint(10, 20) + ' - ' + rint(21, 30) + 'C';
-      }
     }
 
-    this.p['method'] = rchance(0.8) ? rentry('methods') : 'Not available';
+    if (r(env.dataset.method.populated))
+      this.p['method'] = rentry('methods');
 
-    this.p['valid'] = rentry('validsequences');
+    if (r(env.dataset.valid.populated))
+      this.p['valid'] = rentry('validsequences');
 
-    this.p['sequence'] = rchance(0.6) ?
-      'http://www.ncbi.nlm.nih.gov/protein/' + rstring(8) : '';
+    if (r(env.dataset.sequence.populated))
+      this.p['sequence'] = 'http://www.ncbi.nlm.nih.gov/protein/' + rstring(8);
 
-    this.p['species'] = rchance(0.95) ?
-      'http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id='
-      + rstring(8) : '';
+    if (r(env.dataset.species.populated)) {
+      this.p['species'] = 'http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=' + rstring(8);
+    }
 
-    if (rchance(0.8)) {
-      if (rchance(0.95))
+    if (r(env.dataset.citation.populated)) {
+      if (r(env.dataset.citation.full))
         this.p['full'] = 'http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1177738/pdf/biochemj' + rstring(8);
       else
         this.p['abstract'] = 'http://www.sciencedirect.com/science/article/pii/' + rstring(16);
     }
 
-    if (rchance(0.9))
+    if (r(env.dataset.pubmed.populated))
       this.p['pubmed'] = 'http://www.ncbi.nlm.nih.gov/pubmed/' + rstring(8);
 
-    if (rchance(0.02))
+    if (r(env.dataset.notes.populated))
       this.p['notes'] = rentry('notes');
   }
 }
