@@ -3,7 +3,7 @@
  */
 Configuration.format = 'CSV';
 
-Configuration.size = 100000;
+Configuration.size = 5775;
 
 Configuration.dataset = {
   dataset: {
