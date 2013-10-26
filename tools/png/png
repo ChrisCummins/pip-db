@@ -21,6 +21,15 @@ function fatal(m) {
   process.exit(1);
 }
 
+function usage() {
+  console.log('Usage: png\n' +
+              '           -o --output [file]     Output to file\n' +
+              '           -f --format [format]   Output format\n' +
+              '           -c --conf [file]       Use configuration file\n' +
+              '           -p --payload [file]    Use payload file\n' +
+              '           -s --size [number]     Number of records to generate');
+}
+
 /*
  * A tuple object.
  *
@@ -245,6 +254,11 @@ if (argv.output !== undefined)
   argv.o = argv.output;
 if (argv.format !== undefined)
   argv.f = argv.format;
+
+if (argv.h || argv.help) {
+  usage();
+  process.exit(0);
+}
 
 /* Setup our environment */
 var env = {
