@@ -243,6 +243,8 @@ if (!isNaN(argv.size))
   argv.s = argv.size;
 if (argv.output !== undefined)
   argv.o = argv.output;
+if (argv.format !== undefined)
+  argv.f = argv.format;
 
 /* Setup our environment */
 var env = {
