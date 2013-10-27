@@ -4,5 +4,6 @@ QUIET   = $(QUIET_$(V))
 export QUIET
 
 SUBDIRS = \
+	Documentation \
 	tools \
 	$(NULL)
