@@ -45,4 +45,49 @@
 Makefile
 Makefile.in
 
+#
+# Editor backups and transient files
+#
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+auto-save-list
+tramp
+.\#*
+.*.s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+
+#
+# Patches, diffs and VCS integration
+#
+*.diff
+*.orig
+*.patch
+*.rej
+*/.cvsignore
+*/CVS/*
+.cvsignore
+/CVS/*
+
+#
+# Platform specific noise
+#
+$RECYCLE.BIN/
+.AppleDouble
+.DS_Store
+.LSOverride
+.Spotlight-V100
+.Trashes
+Desktop.ini
+ehthumbs.db
+Icon
+Thumbs.db
+
+#
+# Project-specific ignore patterns
+#
 /priv
