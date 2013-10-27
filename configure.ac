@@ -21,6 +21,13 @@ AC_CHECK_FILE([$WWW_ROOT],
 	      AC_MSG_WARN([Local server root "$WWW_ROOT" not found.]))
 AM_CONDITIONAL([HAVE_WWW_ROOT], test -d "$WWW_ROOT")
 
+# Build location for www
+WWW_BUILD="`pwd`/build/www"
+AC_SUBST([WWW_BUILD])
+AC_CHECK_FILE([$WWW_BUILD],
+	      ,
+ 	      [mkdir -pv "$WWW_BUILD"])
+
 # Automake
 AM_INIT_AUTOMAKE([1.11 -Wall foreign no-define])
 AM_SILENT_RULES([yes])
