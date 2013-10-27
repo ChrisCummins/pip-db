@@ -238,7 +238,7 @@ Tuple.prototype.toCSV = function() {
 var argv = require('optimist')
     .default('c', './pngrc')
     .default('f', 'CSV')
-    .default('p', './payload.js')
+    .default('p', './png-payload.js')
     .default('s', 512)
     .default('o', './dataset.csv')
     .argv;
