@@ -28,6 +28,13 @@ AC_CHECK_FILE([$WWW_BUILD],
 	      ,
  	      [mkdir -pv "$WWW_BUILD"])
 
+# Check for hash binary
+HASH=md5sum
+AC_CHECK_PROG(HASH_BIN, $HASH, $HASH)
+if test -z "$HASH_BIN"; then
+   AC_MSG_ERROR([$HASH program is needed.])
+fi
+
 # Automake
 AM_INIT_AUTOMAKE([1.11 -Wall foreign no-define])
 AM_SILENT_RULES([yes])
