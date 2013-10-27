@@ -35,6 +35,23 @@ if test -z "$HASH_BIN"; then
    AC_MSG_ERROR([$HASH program is needed.])
 fi
 
+# Length of hashes used for content hashing
+HASH_LENGTH=8
+
+# Get the length (in characters) of generated hashes
+TMP_TEST=/tmp/`date +%s`
+touch $TMP_TEST
+GEN_HASH_LENGTH=`$HASH_BIN $TMP_TEST | awk '{print $1}' | wc -c`
+GEN_HASH_LENGTH=$((GEN_HASH_LENGTH-1))
+rm -f "$TMP_TEST"
+
+# Limit the length of hashes to GEN_HASH_LENGTH
+if test $HASH_LENGTH -ge $GEN_HASH_LENGTH; then
+   AC_MSG_WARN([Limiting content hash length to $GEN_HASH_LENGTH])
+   HASH_LENGTH=$GEN_HASH_LENGTH
+fi
+AC_SUBST([HASH_LENGTH])
+
 # Automake
 AM_INIT_AUTOMAKE([1.11 -Wall foreign no-define])
 AM_SILENT_RULES([yes])
