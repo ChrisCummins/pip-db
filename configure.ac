@@ -10,7 +10,7 @@ AC_PROG_INSTALL
 # Check for LaTeX compiler and define PDFLATEX and HAVE_PDFLATEX
 AC_CHECK_PROG(PDFLATEX, pdflatex, pdflatex)
 if test -z "$PDFLATEX"; then
-  AC_MSG_WARN([Unable to create PDF documentation.])
+   AC_MSG_WARN([Unable to create PDF documentation.])
 fi
 AM_CONDITIONAL([HAVE_PDFLATEX], test -n "$PDFLATEX")
 
