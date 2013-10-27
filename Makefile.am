@@ -2,3 +2,7 @@
 QUIET_  = @
 QUIET   = $(QUIET_$(V))
 export QUIET
+
+SUBDIRS = \
+	tools \
+	$(NULL)

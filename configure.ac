@@ -14,4 +14,5 @@ AM_SILENT_RULES([yes])
 # Autoconf output files
 AC_OUTPUT([
 	Makefile
+	tools/Makefile
 ])
