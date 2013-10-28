@@ -40,6 +40,13 @@ HTTPD="/usr/sbin/apache2"
 AC_CHECK_FILE([$HTTPD], , AC_MSG_WARN([No apache server found.]))
 AM_CONDITIONAL([HAVE_HTTPD], test -f "$HTTPD")
 
+# Check for MySQL
+AC_CHECK_PROG([MYSQL], [mysql], [mysql])
+if test -z "$MYSQL"; then
+   AC_MSG_WARN([No mysql database application found])
+fi
+AM_CONDITIONAL([HAVE_MYSQL], test -n "$MYSQL")
+
 # Build location for www
 WWW_BUILD="`pwd`/build/www"
 AC_SUBST([WWW_BUILD])
@@ -108,6 +115,8 @@ AM_COND_IF([HAVE_HTTPD],
            echo "    httpd:                            $HTTPD";
            echo "    httpd root:                       $WWW_ROOT",
            echo "    httpd:                            no")
+echo -n "    Database management system:       "
+AM_COND_IF([HAVE_MYSQL], echo "$MYSQL", echo "no")
 echo "    Build directory:                  $WWW_BUILD"
 echo "    Content hashing algorithm:        $HASH"
 echo "    Content hashes length:            $HASH_LENGTH"
