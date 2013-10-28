@@ -91,3 +91,4 @@ Thumbs.db
 # Project-specific ignore patterns
 #
 /priv
+!/build/jar

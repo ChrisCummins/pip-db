@@ -52,6 +52,15 @@ if test $HASH_LENGTH -ge $GEN_HASH_LENGTH; then
 fi
 AC_SUBST([HASH_LENGTH])
 
+# Compilers and minifiers
+JAR_DIR="`pwd`/build/jar"
+HTML_JAR="$JAR_DIR/htmlcompressor.jar"
+AC_SUBST([HTML_JAR])
+CSS_JAR="$JAR_DIR/yuicompressor.jar"
+AC_SUBST([CSS_JAR])
+JS_JAR="$JAR_DIR/closure-compiler.jar"
+AC_SUBST([JS_JAR])
+
 # Automake
 AM_INIT_AUTOMAKE([1.11 -Wall foreign no-define])
 AM_SILENT_RULES([yes])
