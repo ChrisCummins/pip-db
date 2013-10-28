@@ -9,9 +9,9 @@ usage() {
 #    $1 column index
 column() {
 	if [[ $USING_HEADERS == 1 ]]; then
-		tail -n+2 $FILE | awk -F $'\t' '{print $'$1'}'
+		tail -n+2 $FILE | @AWK@ -F $'\t' '{print $'$1'}'
 	else
-		cat $FILE | awk -F $'\t' '{print $'$1'}'
+		cat $FILE | @AWK@ -F $'\t' '{print $'$1'}'
 	fi
 }
 
@@ -53,12 +53,12 @@ analyse_dataset() {
 	for i in $(seq 1 $NO_COLUMNS); do
 
 		if [[ $USING_HEADERS == 1 ]]; then
-			COLUMN_NAME=`head -n1 $FILE | awk -F $'\t' '{print $'$i'}'`
+			COLUMN_NAME=`head -n1 $FILE | @AWK@ -F $'\t' '{print $'$i'}'`
 		else
 			COLUMN_NAME=$i
 		fi
 
-		NO_POPULATED=`column $i | sed '/^$/d' | wc -l`
+		NO_POPULATED=`column $i | @SED@ '/^$/d' | wc -l`
 		POPULATED_PERC=`perc $NO_POPULATED $NO_ROWS`
 
 		NO_UNIQUE=`column $i | sort -u | wc -l`
@@ -101,8 +101,8 @@ main() {
 	FILE="$1"
 
 	# The dimensions of our dataset in rows and columns
-	NO_COLUMNS=`head -n1 $FILE | sed 's/\t/\n/g' | head -n-1 | wc -l`
-	NO_ROWS=`wc -l $FILE | awk '{print $1}'`
+	NO_COLUMNS=`head -n1 $FILE | @SED@ 's/\t/\n/g' | head -n-1 | wc -l`
+	NO_ROWS=`wc -l $FILE | @AWK@ '{print $1}'`
 
 	if [[ $USING_HEADERS == 1 ]]; then
 		NO_ROWS=$((NO_ROWS-1))
