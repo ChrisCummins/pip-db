@@ -52,6 +52,12 @@ if test $HASH_LENGTH -ge $GEN_HASH_LENGTH; then
 fi
 AC_SUBST([HASH_LENGTH])
 
+# Check for Java VM
+AC_CHECK_PROG([JAVA], [java], [java])
+if test -z "$JAVA"; then
+   AC_MSG_ERROR([No Java virtual machine found.])
+fi
+
 # Compilers and minifiers
 JAR_DIR="`pwd`/build/jar"
 HTML_JAR="$JAR_DIR/htmlcompressor.jar"
