@@ -14,6 +14,13 @@ if test -z "$PDFLATEX"; then
 fi
 AM_CONDITIONAL([HAVE_PDFLATEX], test -n "$PDFLATEX")
 
+# Check for xdg-open for opening PDF documentation
+AC_CHECK_PROG([XDG_OPEN], [xdg-open], [xdg-open])
+if test -z "$XDG_OPEN"; then
+   AC_MSG_WARN([PDF opening feature disabled.])
+fi
+AM_CONDITIONAL([HAVE_XDG_OPEN], test -n "$XDG_OPEN")
+
 # Export location for www
 WWW_ROOT="/var/www"
 AC_CHECK_FILE([$WWW_ROOT],
