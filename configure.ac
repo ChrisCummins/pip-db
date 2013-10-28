@@ -95,3 +95,18 @@ AC_OUTPUT([
 	www/css/Makefile
 	www/js/Makefile
 ])
+
+echo ""
+echo "Summary:"
+echo ""
+echo "    Server root:                      $WWW_ROOT"
+echo "    Build directory:                  $WWW_BUILD"
+echo "    Content hashing algorithm:        $HASH"
+echo "    Content hashes length:            $HASH_LENGTH"
+echo -n "    Building extra documentation:     "
+if test -n "$PDFLATEX"; then
+   echo "yes"
+else
+   echo "no"
+fi
+echo ""
