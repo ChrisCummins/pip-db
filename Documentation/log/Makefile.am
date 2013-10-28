@@ -40,3 +40,9 @@ open:
 	@test -f $(DOCPDF) || echo "File '$(DOCPDF)' not found, is it compiled?"
 	@test ! -f $(DOCPDF) || $(XDG_OPEN) $(DOCPDF) >/dev/null 2>&1 &
 endif
+
+# If we have emacsclient then we can edit the sources
+if HAVE_EMACSCLIENT
+edit:
+	@$(EMACSCLIENT) -t `date +%y%m`.tex
+endif
