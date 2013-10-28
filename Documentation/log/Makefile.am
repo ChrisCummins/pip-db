@@ -33,3 +33,10 @@ endef
 $(DOCPDF): $(DOCSRC)
 	$(call compile,$(DOCTEX))
 	$(call compile,$(DOCTEX))
+
+# If we have xdg-open then we can open the PDF
+if HAVE_XDG_OPEN
+open:
+	@test -f $(DOCPDF) || echo "File '$(DOCPDF)' not found, is it compiled?"
+	@test ! -f $(DOCPDF) || $(XDG_OPEN) $(DOCPDF) >/dev/null 2>&1 &
+endif
