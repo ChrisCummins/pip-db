@@ -35,6 +35,11 @@ AC_CHECK_FILE([$WWW_ROOT],
 	      AC_MSG_WARN([Local server root "$WWW_ROOT" not found.]))
 AM_CONDITIONAL([HAVE_WWW_ROOT], test -d "$WWW_ROOT")
 
+# Check for Apache server
+HTTPD="/usr/sbin/apache2"
+AC_CHECK_FILE([$HTTPD], , AC_MSG_WARN([No apache server found.]))
+AM_CONDITIONAL([HAVE_HTTPD], test -f "$HTTPD")
+
 # Build location for www
 WWW_BUILD="`pwd`/build/www"
 AC_SUBST([WWW_BUILD])
@@ -99,7 +104,10 @@ AC_OUTPUT([
 echo ""
 echo "Summary:"
 echo ""
-echo "    Server root:                      $WWW_ROOT"
+AM_COND_IF([HAVE_HTTPD],
+           echo "    httpd:                            $HTTPD";
+           echo "    httpd root:                       $WWW_ROOT",
+           echo "    httpd:                            no")
 echo "    Build directory:                  $WWW_BUILD"
 echo "    Content hashing algorithm:        $HASH"
 echo "    Content hashes length:            $HASH_LENGTH"
