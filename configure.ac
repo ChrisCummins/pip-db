@@ -47,6 +47,13 @@ if test -z "$MYSQL"; then
 fi
 AM_CONDITIONAL([HAVE_MYSQL], test -n "$MYSQL")
 
+# Check for node else fail
+AC_CHECK_PROG([NODE], [node], [node])
+if test -z "$NODE"; then
+   AC_MSG_ERROR([Node.js not found.])
+fi
+AM_CONDITIONAL([HAVE_NODE], test -n "$NODE")
+
 # Build location for www
 WWW_BUILD="`pwd`/build/www"
 AC_SUBST([WWW_BUILD])
