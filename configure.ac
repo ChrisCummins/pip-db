@@ -106,14 +106,14 @@ AM_SILENT_RULES([yes])
 
 # Autoconf output files
 AC_OUTPUT([
-	Makefile
-	Documentation/Makefile
 	Documentation/log/Makefile
+	Documentation/Makefile
+	Makefile
 	tools/dsa.sh
 	tools/Makefile
-	www/Makefile
 	www/css/Makefile
 	www/js/Makefile
+	www/Makefile
 ])
 
 echo ""
