@@ -54,6 +54,12 @@ if test -z "$NODE"; then
 fi
 AM_CONDITIONAL([HAVE_NODE], test -n "$NODE")
 
+# Check for awk
+AC_PROG_AWK
+
+# Check for sed
+AC_PROG_SED
+
 # Build location for www
 WWW_BUILD="`pwd`/build/www"
 AC_SUBST([WWW_BUILD])
