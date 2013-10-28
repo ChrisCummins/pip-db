@@ -21,9 +21,15 @@ CLEANFILES = \
 	\#* \
 	$(NULL)
 
+# Compile command
+define compile
+$(PDFLATEX) -output-format pdf \
+	-progname pdflatex \
+	-file-line-error \
+	-interaction errorstopmode $1
+endef
+
 # Compile twice to refresh cross-references
 $(DOCPDF): $(DOCSRC)
-	$(QUIET)$(PDFLATEX) -output-format pdf -progname pdflatex \
-		-file-line-error -interaction errorstopmode $(DOCTEX)
-	$(QUIET)$(PDFLATEX) -output-format pdf -progname pdflatex \
-		-file-line-error -interaction errorstopmode $(DOCTEX)
+	$(call compile,$(DOCTEX))
+	$(call compile,$(DOCTEX))
