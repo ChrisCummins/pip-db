@@ -24,7 +24,7 @@ endef
 # CSS compilation
 $(CSS_DEST)/%.css: %.css
 	@test -d $(CSS_DEST) || { \
-		mkdir -pv $(CSS_DEST); \
+		$(MKDIR_P) -v $(CSS_DEST); \
 	}
 	$(eval CHASH := $(shell $(HASH_BIN) $< | cut -c1-$(HASH_LENGTH)))
 	$(eval NAME := $(addsuffix -$(CHASH).css,$(patsubst %.css,%,$@)))

@@ -15,7 +15,7 @@ endef
 # JavaScript compilation
 $(JS_DEST)/%.js: %.js
 	@test -d $(JS_DEST) || { \
-		mkdir -pv $(JS_DEST); \
+		$(MKDIR_P) -v $(JS_DEST); \
 	}
 	$(eval CHASH := $(shell $(HASH_BIN) $< | cut -c1-$(HASH_LENGTH)))
 	$(eval NAME := $(addsuffix -$(CHASH).js,$(patsubst %.js,%,$@)))

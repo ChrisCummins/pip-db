@@ -15,6 +15,6 @@ CLEANFILES = $(noinst_SCRIPTS)
 # HTML compilation
 $(HTML_DEST)/%.html: %.html
 	@test -d $(HTML_DEST) || { \
-		mkdir -p $(HTML_DEST); \
+		$(MKDIR_P) -v $(HTML_DEST); \
 	}
 	$(JAVA) -jar $(HTML_JAR) --compress-js --compress-css -o $@ $<

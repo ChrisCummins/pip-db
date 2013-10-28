@@ -60,6 +60,9 @@ AC_PROG_AWK
 # Check for sed
 AC_PROG_SED
 
+# Check for mkdir -p
+AC_PROG_MKDIR_P
+
 # Build location for www
 WWW_BUILD="`pwd`/build/www"
 AC_SUBST([WWW_BUILD])
