@@ -21,6 +21,13 @@ if test -z "$XDG_OPEN"; then
 fi
 AM_CONDITIONAL([HAVE_XDG_OPEN], test -n "$XDG_OPEN")
 
+# Check for emacsclient for editing files
+AC_CHECK_PROG([EMACSCLIENT], [emacsclient], [emacsclient])
+if test -z "$EMACSCLIENT"; then
+   AC_MSG_WARN([Text editor launching features disabled.])
+fi
+AM_CONDITIONAL([HAVE_EMACSCLIENT], test -n "$EMACSCLIENT")
+
 # Export location for www
 WWW_ROOT="/var/www"
 AC_CHECK_FILE([$WWW_ROOT],
