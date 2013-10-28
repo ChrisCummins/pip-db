@@ -109,6 +109,7 @@ AC_OUTPUT([
 	Makefile
 	Documentation/Makefile
 	Documentation/log/Makefile
+	tools/dsa.sh
 	tools/Makefile
 	www/Makefile
 	www/css/Makefile
