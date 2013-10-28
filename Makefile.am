@@ -6,4 +6,5 @@ export QUIET
 SUBDIRS = \
 	Documentation \
 	tools \
+	www \
 	$(NULL)

@@ -1,0 +1,39 @@
+# Less CSS source files@
+LESS = \
+	styles.less \
+	$(NULL)
+
+# Generate lists of source files and targets
+CSS_DEST = $(WWW_BUILD)/css
+CSS_SRC = $(shell find . -name '*.css' -exec basename {} \;) $(LESS:.less=.css)
+CSS = $(addprefix $(CSS_DEST)/,$(CSS_SRC))
+
+noinst_SCRIPTS = $(CSS) $(LESS:.less=.css)
+
+CLEANFILES = $(shell find $(CSS_DEST) -name '*.css') $(LESS:.less=.css)
+
+# Less CSS compilation
+%.css: %.less
+	lessc $< $@
+
+# Compilation command
+define compile
+$(JAVA) -jar $(CSS_JAR) --charset utf-8 -v --type css $1 > $2
+endef
+
+# CSS compilation
+$(CSS_DEST)/%.css: %.css
+	@test -d $(CSS_DEST) || { \
+		mkdir -pv $(CSS_DEST); \
+	}
+	$(eval CHASH := $(shell $(HASH_BIN) $< | cut -c1-$(HASH_LENGTH)))
+	$(eval NAME := $(addsuffix -$(CHASH).css,$(patsubst %.css,%,$@)))
+	@test -f $(NAME) || { \
+		echo '$(call compile,$<,$(NAME))'; \
+		$(call compile,$<,$(NAME)); \
+	}
+	$(eval TARGET := css\/$(patsubst %.css,%,$<))
+	@for h in $(HTML); do \
+		echo "Updating refs to `basename $(NAME)` in `basename $$h`"; \
+		sed -ri 's/(href=\")$(TARGET)(-[0-9a-f]{$(HASH_LENGTH)})?(\.css\")/\1$(TARGET)-$(CHASH)\3/' $$h; \
+	done

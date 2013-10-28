@@ -77,4 +77,7 @@ AC_OUTPUT([
 	Documentation/Makefile
 	Documentation/log/Makefile
 	tools/Makefile
+	www/Makefile
+	www/css/Makefile
+	www/js/Makefile
 ])
