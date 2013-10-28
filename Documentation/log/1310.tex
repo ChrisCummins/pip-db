@@ -750,3 +750,23 @@ to be very interesting - it's worth reading more into it.
 \item Real Time Web with Node.js \cite{CoursewareND}
 \item Node.js vs PHP \cite{Webapplog2013}
 \end{itemize}
+
+\subsection{Sunday 27th}
+Began replacing the static Makefile with an autotooled build system. This will
+provide greater portability and is a more suitable process for building the
+project as it adds the extra configuration stage which can be used to specify
+options such as whether to use content hashing, whether to build the TeX
+sources, etc.
+
+\paragraph{Build system TODO}
+\begin{itemize}
+\item configure: Add --enable-(html|js|css)-minification=(yes|no) feature
+\item configure: Check for node else fail
+\item configure: Check for dsa runtime dependencies else fail
+\item configure: Check for Apache/MySQL else warn
+\item automake: Add make install command
+\item configure: Add --prefix for www_root
+\item configure: Add --enable-content-hashing=(yes|no) feature
+\item configure: Add summary
+\item automake: Add log make open|edit rules
+\end{itemize}
