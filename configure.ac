@@ -61,6 +61,18 @@ if test -z "$NPM"; then
 fi
 AM_CONDITIONAL([HAVE_NPM], test -n "$NPM")
 
+# Check for node optimist package
+echo -n "checking for optimist package... "
+TMP=`npm ls -g | grep optimist`
+if test -z "$TMP"; then
+   echo "no"
+   AC_MSG_ERROR([Required node pacakge 'optimist' not found.])
+else
+   echo "yes"
+fi
+unset TMP
+AM_CONDITIONAL([HAVE_NODE_OPTIMIST], test -n "$TMP")
+
 # Check for awk
 AC_PROG_AWK
 
