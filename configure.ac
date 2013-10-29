@@ -73,6 +73,13 @@ fi
 unset TMP
 AM_CONDITIONAL([HAVE_NODE_OPTIMIST], test -n "$TMP")
 
+# Check for lessc else fail
+AC_CHECK_PROG([LESSC], [lessc], [lessc])
+if test -z "$LESSC"; then
+   AC_MSG_ERROR([Less CSS compiler not found.])
+fi
+AM_CONDITIONAL([HAVE_LESSC], test -n "$LESSC")
+
 # Check for awk
 AC_PROG_AWK
 
