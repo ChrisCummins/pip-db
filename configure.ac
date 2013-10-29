@@ -54,6 +54,13 @@ if test -z "$NODE"; then
 fi
 AM_CONDITIONAL([HAVE_NODE], test -n "$NODE")
 
+# Check for npm else fail
+AC_CHECK_PROG([NPM], [npm], [npm])
+if test -z "$NPM"; then
+   AC_MSG_ERROR([Node package manager not found.])
+fi
+AM_CONDITIONAL([HAVE_NPM], test -n "$NPM")
+
 # Check for awk
 AC_PROG_AWK
 
