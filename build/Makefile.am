@@ -1,1 +1,3 @@
 SUBDIRS = jar
+
+EXTRA_DIST = README.md
