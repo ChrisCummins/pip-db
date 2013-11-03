@@ -148,6 +148,8 @@ AM_SILENT_RULES([yes])
 
 # Autoconf output files
 AC_OUTPUT([
+	build/jar/Makefile
+	build/Makefile
 	Documentation/log/Makefile
 	Documentation/Makefile
 	Documentation/plan/Makefile

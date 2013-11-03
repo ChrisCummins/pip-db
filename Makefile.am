@@ -1,4 +1,5 @@
 SUBDIRS = \
+	build \
 	Documentation \
 	tools \
 	www \
