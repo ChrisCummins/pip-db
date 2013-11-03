@@ -94,8 +94,23 @@ new() {
 
 # Close the current work-in-progress branch and rebase on master
 close() {
+	local branch=`get_current_branch`
+
+	# Sanity checks
 	fail_if_tree_not_clean
-	echo "close in `get_git_toplevel`"
+	fail_if_not_on_issue_branch
+
+	# Perform branching
+	set -e
+	git checkout $ISSUE_BRANCH_BASE
+	git rebase $branch
+	git branch -D $branch
+	git push $REMOTE :$branch
+	set +e
+
+	# Output results
+	echo ""
+	echo "Merged '$branch' into '$ISSUE_BRANCH_BASE'"
 }
 
 main() {
