@@ -26,6 +26,18 @@ fail_if_tree_not_clean() {
 	fi
 }
 
+# Check that the issue number is a valid open github issue else fail
+#    $1 issue number
+fail_if_issue_not_valid () {
+	local issue=$1
+	local is_valid=1 #TODO: Implement test
+
+	if [[ $is_valid != 1 ]]; then
+		echo "fatal: issue #$issue not found" >&2
+		exit 3
+	fi
+}
+
 # Get git toplevel directory
 #    @return Path to git toplevel
 get_git_toplevel() {
