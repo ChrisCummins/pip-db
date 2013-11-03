@@ -271,7 +271,78 @@ var env = {
 };
 
 global.Configuration = {
-}
+  format: 'CSV',
+  size: 5775,
+  dataset: {
+    dataset: {
+      populated: 1.0
+    },
+    ec: {
+      populated: 0.9581
+    },
+    protein: {
+      populated: 0.9998
+    },
+    alt: {
+      populated: 0.6567
+    },
+    source: {
+      populated: 1.0
+    },
+    organ: {
+      populated: 0.6656
+    },
+    mw: {
+      populated: 0.5994
+    },
+    subunit: {
+      populated: 0.35,
+      no: {
+        populated: 0.7
+      },
+      mw: {
+        populated: 0.9
+      }
+    },
+    isoenzymes: {
+      populated: 0.6065
+    },
+    pi: {
+      populated: 1.0,
+      exact: 0.8085,
+      range: 0.057,
+      max: 0.0253
+    },
+    temp: {
+      populated: 0.2629,
+      exact: 0.7
+      /* Range is implied */
+    },
+    method: {
+      populated: 0.9009
+    },
+    valid: {
+      populated: 99.93
+    },
+    sequence: {
+      populated: 0.6363
+    },
+    species: {
+      populated: 0.9716
+    },
+    citation: {
+      populated: 0.9382,
+      full: 0.65
+      /* abstract is implied */
+    },
+    pubmed: {
+      populated: 0.9101
+    },
+    notes: {
+      populated: 0.02
+    }
+  }
+};
 
 /* Global variable set TRUE if executed with '-d' or '--debug' flags */
 env.debug = argv.d || argv.debug ? true : false;
