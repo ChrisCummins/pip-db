@@ -1,6 +1,7 @@
 noinst_SCRIPTS = \
 	dsa \
 	png \
+	workflow \
 	$(NULL)
 
 CLEANFILES = $(noinst_SCRIPTS)
@@ -11,6 +12,7 @@ EXTRA_DIST = \
 	png.js \
 	pngrc \
 	README.md \
+	workflow.sh \
 	$(NULL)
 
 # Generating executables from Node.js scripts
