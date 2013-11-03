@@ -1,6 +1,6 @@
 # Tools
 
-Axillary tools which may be useful during development and testing but are not
+Auxiliary tools which may be useful during development and testing but are not
 required for the production system.
 
 ## Table of Contents
