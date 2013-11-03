@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# The prefix for work-in-progress issue branches
+ISSUE_BRANCH_PREFIX=wip/
+
+# The branch to base work-in-progress branches off of
+ISSUE_BRANCH_BASE=master
+
+# The remote repository destination
+REMOTE=origin
+
 # Print program usage
 usage() {
 	echo "Usage: $0 <command> [args]"
