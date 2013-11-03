@@ -60,7 +60,9 @@ get_current_issue() {
 
 # Check that the current branch is an issue branch else fail
 fail_if_not_on_issue_branch() {
-	if [ -z `get_current_issue` ]; then
+	local prefix=`echo $(get_current_branch) | grep "^$ISSUE_BRANCH_PREFIX"`
+
+	if [ -z $prefix ]; then
 		echo "fatal: not on an issue branch" >&2
 		exit 5
 	fi
