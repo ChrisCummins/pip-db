@@ -60,8 +60,10 @@ new() {
 	fail_if_tree_not_clean
 
 	# Perform branching
+	set -e
 	git checkout -b wip/$issue $ISSUE_BRANCH_BASE
 	git push -u $REMOTE $branch
+	set +e
 
 	# Output results
 	echo ""
