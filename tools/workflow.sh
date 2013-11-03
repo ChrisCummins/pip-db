@@ -34,10 +34,12 @@ close() {
 }
 
 main() {
+	# Set debugging output if DEBUG=1
 	test -n "$DEBUG" && {
 		set -x
 	}
 
+	# Check for help argument and print usage
 	for arg in $@; do
 		if [ "$arg" = "--help" ] || [ "$arg" = "-h" ]; then
 			usage
@@ -45,6 +47,7 @@ main() {
 		fi
 	done
 
+	# Parse user input
 	case "$1" in
 	"new")
 		shift
