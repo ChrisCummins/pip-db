@@ -7,6 +7,7 @@ required for the production system.
 
 * [dsa - Dataset Analyser](#dsa)
 * [png - Plausible Nonsense Generator](#png)
+* [workflow - Workflow scripts](#workflow)
 
 ## dsa
     Usage: ./dsa <csv-dataset>
@@ -68,3 +69,12 @@ A program for generating nonsense datasets for testing purposes.
     debug: output file format: CSV
     $ wc -l test.csv
     17 test.csv
+
+## workflow
+    Usage: $0 <command> [args]
+
+    Commands:
+               new <issue-number>   Begin work on a new issue
+               close                Close current work an issue
+
+Automated workflow script for managing git branches.
