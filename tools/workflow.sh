@@ -11,7 +11,10 @@ usage() {
 
 # Check that git tree is clean else fail
 fail_if_tree_not_clean() {
-	echo "clean?"
+	if [[ `git diff --shortstat 2> /dev/null | tail -n1` != "" ]]; then
+		echo "fatal: uncommitted changes in repository" >&2
+		exit 2
+	fi
 }
 
 # Get git toplevel directory
