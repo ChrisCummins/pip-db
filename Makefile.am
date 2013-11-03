@@ -9,6 +9,10 @@ SUBDIRS = \
 	www \
 	$(NULL)
 
+EXTRA_DIST = \
+	autogen.sh \
+	$(NULL)
+
 local:
 	@test -d "$(WWW_ROOT)" || { \
 		echo -n "fatal: destination directory " >&2; \
