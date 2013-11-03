@@ -17,7 +17,7 @@ noinst_SCRIPTS = $(CSS) $(LESS:.less=.css)
 CLEANFILES = $(shell find $(CSS_DEST) -name '*.css') $(LESS:.less=.css)
 
 # Less CSS compilation
-%.css: %.less
+%.css: %.less $(wildcard *.less)
 	lessc $< $@
 
 # Compilation command
