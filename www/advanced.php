@@ -14,7 +14,7 @@
 
     <!-- Search box -->
     <div class="search inline">
-      <a href="index.html"><h1 class="logo">pip-db</h1></a>
+      <a href="index.php"><h1 class="logo">pip-db</h1></a>
     </div>
 
     <div class="container">
