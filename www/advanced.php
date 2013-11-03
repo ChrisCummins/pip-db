@@ -11,6 +11,14 @@
   </head>
 
   <body>
+      <!-- Search box -->
+      <div class="search inline">
+        <a href="index.html"><h1 class="logo">pip-db</h1></a>
+        <input id="search-text" type="text" value="search term...">
+        <button id="search-submit" class="btn btn-success">Search</button>
+        <button id="search-browse" class="btn btn-info">Help</button>
+      </div>
+
     <div class="container">
 
     </div>
