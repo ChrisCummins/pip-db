@@ -151,6 +151,12 @@ AC_OUTPUT([
 	build/jar/Makefile
 	build/Makefile
 	design/d1/Makefile
+	design/d1/pages/Makefile
+	design/d1/pages/renders/Makefile
+	design/d1/previous/Makefile
+	design/d1/previous/renders/Makefile
+	design/d1/tasks/Makefile
+	design/d1/tasks/renders/Makefile
 	design/Makefile
 	Documentation/log/Makefile
 	Documentation/Makefile
