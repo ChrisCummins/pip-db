@@ -1,6 +1,7 @@
 # Generate lists of source files and targets
 HTML_DEST = $(WWW_BUILD)
-HTML_SRC = $(shell find . -name '*.html' -exec basename {} \;)
+HTML_SRC = $(shell find . -name '*.html' -exec basename {} \;) \
+	$(shell find . -name '*.php' -exec basename {} \;)
 HTML = $(addprefix $(HTML_DEST)/,$(HTML_SRC))
 export HTML
 
@@ -19,6 +20,13 @@ EXTRA_DIST = \
 
 # HTML compilation
 $(HTML_DEST)/%.html: %.html
+	@test -d $(HTML_DEST) || { \
+		$(MKDIR_P) -v $(HTML_DEST); \
+	}
+	$(JAVA) -jar $(HTML_JAR) --compress-js --compress-css -o $@ $<
+
+# PHP compilation
+$(HTML_DEST)/%.php: %.php
 	@test -d $(HTML_DEST) || { \
 		$(MKDIR_P) -v $(HTML_DEST); \
 	}
