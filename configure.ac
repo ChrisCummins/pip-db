@@ -1,6 +1,13 @@
+m4_define([name], [protein-db])
+m4_define([author], [chrisc.101@gmail.com])
+m4_define([major_version], [0])
+m4_define([minor_version], [0])
+m4_define([micro_version], [1])
+m4_define([version], [major_version.minor_version.micro_version])
+
 # Autoconf
 AC_PREREQ(2.68)
-AC_INIT([protein-db], [0.0.1], [chrisc.101@gmail.com])
+AC_INIT([name], [version], [author])
 AC_CONFIG_MACRO_DIR([build])
 AC_CONFIG_AUX_DIR([build])
 
