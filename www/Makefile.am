@@ -12,6 +12,8 @@ noinst_SCRIPTS = $(HTML)
 
 CLEANFILES = $(noinst_SCRIPTS)
 
+EXTRA_DIST = $(HTML_SRC)
+
 # HTML compilation
 $(HTML_DEST)/%.html: %.html
 	@test -d $(HTML_DEST) || { \

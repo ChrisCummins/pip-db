@@ -7,6 +7,8 @@ noinst_SCRIPTS = $(JS)
 
 CLEANFILES = $(shell find $(JS_DEST) -name '*.js')
 
+EXTRA_DIST = $(JS_SRC)
+
 # Compilation command
 define compile
 $(JAVA) -jar $(JS_JAR) --js=$1 --js_output_file=$2

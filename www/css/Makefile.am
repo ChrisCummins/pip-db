@@ -5,8 +5,12 @@ LESS = \
 
 # Generate lists of source files and targets
 CSS_DEST = $(WWW_BUILD)/css
-CSS_SRC = $(shell find . -name '*.css' -exec basename {} \;) $(LESS:.less=.css)
+CSS_SRC = $(shell find . -name '*.css' -exec basename {} \;)
 CSS = $(addprefix $(CSS_DEST)/,$(CSS_SRC))
+
+EXTRA_DIST = $(CSS_SRC) $(shell find . -name '*.less' -exec basename {} \;)
+
+CSS_SRC += $(LESS:.less=.css) # Generated CSS
 
 noinst_SCRIPTS = $(CSS) $(LESS:.less=.css)
 
