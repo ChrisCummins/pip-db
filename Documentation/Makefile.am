@@ -1,3 +1,4 @@
 SUBDIRS = \
 	log \
+	plan \
 	$(NULL)

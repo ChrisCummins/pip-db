@@ -143,6 +143,7 @@ AM_SILENT_RULES([yes])
 AC_OUTPUT([
 	Documentation/log/Makefile
 	Documentation/Makefile
+	Documentation/plan/Makefile
 	Makefile
 	tools/dsa.sh
 	tools/Makefile
