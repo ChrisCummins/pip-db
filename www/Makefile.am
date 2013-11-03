@@ -12,7 +12,10 @@ noinst_SCRIPTS = $(HTML)
 
 CLEANFILES = $(noinst_SCRIPTS)
 
-EXTRA_DIST = $(HTML_SRC)
+EXTRA_DIST = \
+	$(HTML_SRC) \
+	README.md \
+	$(NULL)
 
 # HTML compilation
 $(HTML_DEST)/%.html: %.html
