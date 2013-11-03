@@ -236,7 +236,6 @@ Tuple.prototype.toCSV = function() {
 
 /* Initialise command line parameter parsing */
 var argv = require('optimist')
-    .default('c', './pngrc')
     .default('f', 'CSV')
     .default('p', './png-payload.js')
     .default('s', 512)
@@ -265,10 +264,13 @@ var env = {
   debug: false,
   includes: {
     payload: argv.p,
-    conf: argv.c
   },
   output: argv.o
 };
+
+/* Use a configuration file if specified */
+if (argv.c !== undefined)
+  env.includes.conf = argv.c;
 
 global.Configuration = {
   format: 'CSV',
@@ -349,7 +351,10 @@ env.debug = argv.d || argv.debug ? true : false;
 
  /* Let's print some useful environmental info before getting stuck in */
 debug('using payload file: \'' + env.includes.payload + '\'');
-debug('using configuration file: \'' + env.includes.conf + '\'');
+if (env.includes.conf !== undefined)
+  debug('using configuration file: \'' + env.includes.conf + '\'');
+else
+  debug('not using configuration file');
 debug('writing output to file: \'' + env.output + '\'');
 
 /* Fire up the file system */
