@@ -21,7 +21,10 @@ CLEANFILES = \
 	\#* \
 	$(NULL)
 
-EXTRA_DIST = $(DOCSRC)
+EXTRA_DIST = \
+	$(DOCSRC) \
+	README.md \
+	$(NULL)
 
 # Compile command
 define compile
