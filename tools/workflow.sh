@@ -44,6 +44,28 @@ get_git_toplevel() {
 	git rev-parse --show-toplevel
 }
 
+# Get the name of the current branch
+#    @return Branch name, e.g. 'wip/28', 'master'
+get_current_branch() {
+	local refname=`git symbolic-ref HEAD 2>/dev/null`
+	echo ${refname##refs/heads/}
+}
+
+# Get the issue number from the current wip branch
+#    @return Issue number, e.g. '28'
+get_current_issue() {
+	local branch=`get_current_branch`
+	echo ${branch##$ISSUE_BRANCH_PREFIX}
+}
+
+# Check that the current branch is an issue branch else fail
+fail_if_not_on_issue_branch() {
+	if [ -z `get_current_issue` ]; then
+		echo "fatal: not on an issue branch" >&2
+		exit 5
+	fi
+}
+
 # Create a new local work-in-progress branch
 #    $1 issue number
 new() {
