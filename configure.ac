@@ -150,6 +150,7 @@ AM_SILENT_RULES([yes])
 AC_OUTPUT([
 	build/jar/Makefile
 	build/Makefile
+	design/Makefile
 	Documentation/log/Makefile
 	Documentation/Makefile
 	Documentation/plan/Makefile
