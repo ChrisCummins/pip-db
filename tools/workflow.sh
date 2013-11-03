@@ -47,8 +47,25 @@ get_git_toplevel() {
 # Create a new local work-in-progress branch
 #    $1 issue number
 new() {
+	local issue=$1
+	local branch=$ISSUE_BRANCH_PREFIX$issue
+
+	if [ -z "$issue" ]; then
+		echo "fatal: no issue number given" >&2
+		exit 4
+	fi
+
+	# Sanity checks
+	fail_if_issue_not_valid $issue
 	fail_if_tree_not_clean
-	echo "new in `get_git_toplevel`"
+
+	# Perform branching
+	git checkout -b wip/$issue $ISSUE_BRANCH_BASE
+	git push -u $REMOTE $branch
+
+	# Output results
+	echo ""
+	echo "Execute '$0 close' when completed."
 }
 
 # Close the current work-in-progress branch and rebase on master
