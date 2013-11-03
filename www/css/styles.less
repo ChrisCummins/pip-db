@@ -1,11 +1,130 @@
 @import url("http://fonts.googleapis.com/css?family=Josefin+Sans:100|Josefin+Slab|Lato:300,400,700,900");
 
-@import "layout.less";
+/*
+ * LAYOUT
+ */
+html,
+body {
+  height: 100%;
+}
+#wrap {
+  min-height: 100%;
+}
+#main {
+  overflow: auto;
+}
 
-@import "colors.less";
-@import "fonts.less";
-@import "components.less";
+/*
+ * COLORS
+ */
+@primaryColor: #2bacd6;
+@accentColor: #ffc12b;
+@boldColor: #ff4c2b;
 
-@import "footer.less";
-@import "search.less";
-@import "results.less";
+/*
+ * FONTS
+ */
+@primaryFont: 'Josefin Slab', serif;
+@accentFont: 'Josefin Sans', sans-serif;
+@defaultFont: 'Lato', sans-serif;
+
+/*
+ * UI-COMPONENTS
+ */
+input[type="text"] {
+  font-family: @defaultFont;
+  font-size: 17px;
+  border: 2px solid #bdc3c7;
+  padding: 8px 5px;
+  text-indent: 4px;
+}
+input[type="text"]:focus {
+  border-color: @primaryColor;
+}
+
+/*
+ * FOOTER
+ */
+@footerHeight: 70px;
+
+#main {
+  padding-bottom: @footerHeight;
+}
+
+#footer {
+  background-color: #f0f0f0;
+  position: absolute;
+  margin-top: -@footerHeight;
+  height: @footerHeight;
+  bottom: 0;
+}
+
+/*
+ * HOMEPAGE SEARCH BOX
+ */
+@searchWidth: 300px;
+@searchHeight: 150px;
+@searchLogoColor: @primaryColor;
+@searchLogoSize: 72px;
+
+.search.full {
+  width: @searchWidth;
+  height: @searchHeight;
+  text-align: center;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: (-@searchHeight * 0.5) 0 0 (-@searchWidth * 0.5);
+}
+.search.inline {
+  background: #e8e8e8;
+  padding: 2px 20px 10px 20px;
+}
+.search .logo {
+  font-family: @accentFont;
+  color: @searchLogoColor;
+}
+.search.inline .logo {
+  font-size: 30px;
+  display: inline;
+  margin-right: 20px;
+}
+.search.full .logo {
+  font-size: @searchLogoSize;
+  margin: -70px 0 20px;
+}
+.search.full #search-text {
+  width: 100%;
+  display: block;
+  margin: 10px 0;
+}
+.search.inline #search-text {
+  display: inline;
+  padding: 3px;
+}
+.search.inline button {
+  margin-top: -6px;
+}
+
+.advanced-search input {
+  display: inline;
+  width: 100%;
+}
+
+/*
+ * RESULTS PAGE
+ */
+div.panel-group#results {
+  margin-top: 15px;
+}
+
+table.results-table {
+  margin-bottom: 0;
+}
+
+div.results-button-row {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
