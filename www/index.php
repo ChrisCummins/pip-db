@@ -15,12 +15,15 @@
       <div class="search full">
         <h1 class="logo">pip-db</h1>
         <input id="search-text" type="text">
-        <a href="results.html">
-          <button id="search-submit" class="btn btn-success">Search</button>
-        </a>
-        <a href="advanced.php">
-          <button id="search-browse" class="btn btn-info">Advanced</button>
-        </a>
+        <div class="button-row">
+            <a href="results.html">
+              <button id="search-submit" class="btn btn-success">Search</button>
+            </a>
+            <a href="advanced.php">
+              <button id="search-browse" class="btn btn-info">Advanced</button>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
