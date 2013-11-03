@@ -99,8 +99,8 @@ close() {
 	local branch=`get_current_branch`
 
 	# Sanity checks
-	fail_if_tree_not_clean
 	fail_if_not_on_issue_branch
+	fail_if_tree_not_clean
 
 	# Perform branching
 	set -e
