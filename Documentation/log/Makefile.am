@@ -21,6 +21,8 @@ CLEANFILES = \
 	\#* \
 	$(NULL)
 
+EXTRA_DIST = $(DOCSRC)
+
 # Compile command
 define compile
 $(PDFLATEX) -output-format pdf \
