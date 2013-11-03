@@ -78,3 +78,32 @@ A program for generating nonsense datasets for testing purposes.
                close                Close current work an issue
 
 Automated workflow script for managing git branches.
+
+### Example
+
+    $ ./tools/workflow new 10
+    Switched to a new branch 'wip/10'
+    Counting objects: 59, done.
+    Compressing objects: 100% (53/53), done.
+    Writing objects: 100% (54/54), 6.50 KiB, done.
+    Total 54 (delta 38), reused 0 (delta 0)
+    To git@github.com:ChrisCummins/protein-db.git
+     * [new branch]      wip/10 -> wip/10
+    Branch wip/10 set up to track remote branch wip/10 from origin.
+
+    Execute './workflow close' when completed.
+    $ echo 'my hotfox' > fix
+    $ git commit -a -m 'Fix for #10'
+    [wip/10 672b654] Fix for #10
+     1 file changed, 1 insertion(+)
+     create mode 100644 tools/fix
+    $ ./workflow close
+    Switched to branch 'master'
+    Your branch is ahead of 'origin/master' by 1 commit.
+    First, rewinding head to replay your work on top of it...
+    Fast-forwarded master to wip/10.
+    Deleted branch wip/10 (was 672b654).
+    To git@github.com:ChrisCummins/protein-db.git
+     - [deleted]         wip/10
+
+    Merged 'wip/10' into 'master'
