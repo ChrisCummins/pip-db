@@ -29,7 +29,6 @@
 #
 /aclocal.m4
 /autom4te.cache
-/build/*
 /compile
 /config.h
 /config.h.in
@@ -91,4 +90,3 @@ Thumbs.db
 # Project-specific ignore patterns
 #
 /priv
-!/build/jar
