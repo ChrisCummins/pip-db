@@ -57,175 +57,176 @@
 
           <!-- Table body -->
           <tbody>
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
               <td>4.6</td>
             </tr>
 
-            <tr> <!-- Record -->
+            <tr url="index.php"> <!-- Record -->
               <td><span class="match">Alkaline</span> phosphatese</td>
               <td>Human</td>
               <td>Placenta</td>
