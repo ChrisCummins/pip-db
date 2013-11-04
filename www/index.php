@@ -35,18 +35,18 @@
           <form method="GET">
             <!-- le textbox -->
             <input id="in" type="text">
-
-            <!-- buttons -->
-            <div class="btn-row">
-              <a href="advanced.php">
-                <button id="search-browse" class="btn btn-info">Advanced</button>
-              </a>
-
-              <a href="results.html">
-                <button id="search-submit" class="btn btn-success">Search</button>
-              </a>
-            </div> <!-- /.button-row -->
           </form>
+
+          <!-- buttons -->
+          <div class="btn-row">
+            <a href="advanced.php">
+              <button id="search-browse" class="btn btn-info">Advanced</button>
+            </a>
+
+            <a href="results.html">
+              <button id="search-submit" class="btn btn-success">Search</button>
+            </a>
+          </div> <!-- /.button-row -->
 
         </div> <!-- /.search-full -->
       </div> <!-- /.container -->
