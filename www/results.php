@@ -18,6 +18,15 @@
       <!-- Header -->
       <div class="header grey">
         <div class="search inline">
+
+          <!-- User bar -->
+          <div class="ubar">
+            <div class="login">
+              <button class="btn">Login</button>
+            </div>
+          </div>
+
+          <!-- Inline searchbar -->
           <a href="index.php"><h1 class="logo">pip-db</h1></a>
           <input id="search-text" type="text" value="Alkaline">
           <a href="results.php">
