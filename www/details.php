@@ -130,10 +130,9 @@
               <div class="ref">
                 <h4>Reference this page</h4>
 
-                <blockquote>
-                  Adair, J. (1988) <i>Effective time management: How to save time
-                  and spend it wisely</i>, London: Pan Books.
-                </blockquote>
+                <blockquote>Adair, J. (1988) <i>Effective time management: How
+                  to save time and spend it wisely</i>, London: Pan
+                  Books.</blockquote>
               </div> <!-- /.ref -->
 
             </div> <!-- /.col-md-4 -->
