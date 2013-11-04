@@ -17,7 +17,8 @@
 
         <!-- Search form -->
         <form method="GET">
-          <input id="search-text" type="text">
+          <!-- le textbox -->
+          <input id="in" type="text">
           <div class="button-row">
             <a href="results.html">
               <button id="search-submit" class="btn btn-success">Search</button>
