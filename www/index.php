@@ -69,7 +69,7 @@
         </div>
       </div>
 
-    </div>
+    </div> <!-- /.footer -->
 
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
