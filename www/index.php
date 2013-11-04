@@ -43,7 +43,7 @@
               <button id="search-browse" class="btn btn-info">Advanced</button>
             </a>
 
-            <a href="results.html">
+            <a href="results.php">
               <button id="search-submit" class="btn btn-success">Search</button>
             </a>
           </div> <!-- /.button-row -->
