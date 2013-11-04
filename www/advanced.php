@@ -12,9 +12,11 @@
 
   <body>
 
-    <!-- Search box -->
-    <div class="search inline">
-      <a href="index.php"><h1 class="logo">pip-db</h1></a>
+    <!-- Header -->
+    <div class="header grey">
+      <div class="search inline">
+        <a href="index.php"><h1 class="logo">pip-db</h1></a>
+      </div>
     </div>
 
     <div class="container">

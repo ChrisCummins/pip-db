@@ -11,6 +11,13 @@
   </head>
 
   <body>
+
+    <div class="header">
+      <div class="search inline">
+
+      </div>
+    </div>
+
     <div class="container">
       <div class="search full">
         <h1 class="logo">pip-db</h1>
