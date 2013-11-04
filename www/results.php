@@ -4,7 +4,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>pip-db Advanced Search</title>
+    <title>pip-db "Alkaline"</title>
 
     <link rel="stylesheet" href="css/styles.css"/>
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -17,12 +17,23 @@
       <div class="search inline">
         <a href="index.php"><h1 class="logo">pip-db</h1></a>
       </div>
+
+      <!-- TODO: inline search box -->
     </div>
 
     <div class="container">
 
+      <!-- Page title -->
       <div class="page-title">
-        <h3>Advanced Search</h3>
+        <!-- Download results -->
+        <div class="download">
+          <button class="btn btn-warning">Download</button>
+        </div>
+
+        <!-- Number of search results -->
+        <div class="info">
+          Found 122 results...
+        </div>
         <hr>
       </div> <!-- /.page-title -->
 

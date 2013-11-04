@@ -28,6 +28,7 @@
  */
 @paragraphTextSize: 13px;
 @smallTextSize: 11px;
+@reducedTextSize: 12px;
 
 /*
  * LAYOUT
@@ -196,8 +197,19 @@ div.page-title {
 }
 div.page-title h3 {
   color: @boldColor;
+  margin-bottom: 20px;
 }
-
+div.page-title div.download {
+  float: right !important;
+}
+div.page-title div.info {
+  padding-top: 18px;
+  color: @muteTextColor;
+  font-size: @reducedTextSize;
+}
+div.page-title hr:last-child {
+  margin-top: 0;
+}
 
 /*
  * ADVANCED SEARCH
