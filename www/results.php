@@ -19,7 +19,7 @@
       <div class="header grey">
         <div class="search inline">
           <a href="index.php"><h1 class="logo">pip-db</h1></a>
-          <input id="search-text" type="text" value="Alkaline.">
+          <input id="search-text" type="text" value="Alkaline">
           <a href="results.php">
             <button id="s" class="btn btn-success">Search</button>
           </a>
