@@ -54,9 +54,21 @@
 
     <!-- Bottom of the page footer -->
     <div id="footer">
-      <div class="container">
-        Hello, world!
+
+      <div class="left">
+        <div class="footer-inner">
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+        </div>
       </div>
+
+      <div class="right">
+        <div class="footer-inner">
+          <a href="#">Terms</a>
+          <a href="#">Privacy</a>
+        </div>
+      </div>
+
     </div>
 
     <script src="//code.jquery.com/jquery.js"></script>
