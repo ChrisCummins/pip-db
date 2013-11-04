@@ -230,12 +230,16 @@
             </div></div>
           </div>
 
-          <div class="row">
-            <div class="col-md-2 col-md-offset-6">
-              <button id="submit" class="btn btn-info">Advanced Search</button>
-            </div>
-          </div>
         </form>
+
+        <div class="row">
+          <div class="col-md-2 col-md-offset-6">
+            <a href="results.php">
+              <button id="submit" class="btn btn-info pull-right">Advanced Search</button>
+            </a>
+          </div>
+        </div>
+
       </div> <!-- /.advanced-search -->
 
     </div>
