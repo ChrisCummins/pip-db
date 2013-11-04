@@ -78,11 +78,30 @@ div.header.grey {
 div.header div.ubar {
   float: right !important;
 }
-
-div.header div.ubar .login {
+div.header div.ubar div.ubar-inner {
   display: table-cell;
   vertical-align: middle;
-  height: @headerHeight;
+  height: @footerHeight;
+  padding: 0 15px;
+}
+div.header div.ubar div.ubar-inner a {
+  /* Seperate links: */
+  margin-left: 12px;
+  font-weight: bold;
+  color: @textColor;
+  /* Pad links to button sizes: */
+  padding: 3px 12px;
+  /* Give buttons rounded edges: */
+  border-radius: 4px;
+  /* Animate button background change on hover: */
+  transition: background 0.3s;
+  -webkit-transition: background 0.3s;
+}
+div.header div.ubar div.ubar-inner a:hover,
+div.header div.ubar div.ubar-inner a:focus {
+  color: @textColor;
+  text-decoration: none;
+  background: #e5e5e5;
 }
 
 /* FOOTER */
@@ -171,7 +190,7 @@ div#footer div.footer-inner a:focus {
 /* Inline search */
 .search.inline {
   height: 100%;
-  padding: 0 20px 10px 20px;
+  padding: 0 0 10px 20px;
 }
 .search.inline .logo {
   font-size: 30px;

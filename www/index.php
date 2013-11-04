@@ -19,8 +19,8 @@
       <div class="header">
         <div class="search inline">
           <div class="ubar">
-            <div class="login">
-              <button class="btn">Login</button>
+            <div class="ubar-inner">
+              <a id="login" href="login.php">Login</a>
             </div>
           </div>
         </div>
