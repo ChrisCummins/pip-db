@@ -43,7 +43,196 @@
       </div> <!-- /.page-title -->
 
       <div class="sresults">
+        <table class="table table-striped">
 
+          <!-- Table header -->
+          <thead>
+            <tr>
+              <td>Protein</td>
+              <td>Source</td>
+              <td>Location</td>
+              <td>pI</td>
+            </tr>
+          </thead>
+
+          <!-- Table body -->
+          <tbody>
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+
+            <tr> <!-- Record -->
+              <td><span class="match">Alkaline</span> phosphatese</td>
+              <td>Human</td>
+              <td>Placenta</td>
+              <td>4.6</td>
+            </tr>
+          </tbody>
+        </table>
       </div> <!-- /.sresults -->
 
     </div>
