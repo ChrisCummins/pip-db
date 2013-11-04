@@ -242,4 +242,15 @@
     <script src="js/bootstrap.js"></script>
   </body>
 
+  <script>
+    $(document).ready(function(){
+      /*
+       * Search results link to details page:
+       */
+      $('div.sresults table tbody tr').click(function(){
+        window.location = $(this).attr('url');
+      });
+    });
+  </script>
+
 </html>
