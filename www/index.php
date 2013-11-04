@@ -14,7 +14,11 @@
 
     <div class="header">
       <div class="search inline">
-
+        <div class="ubar">
+          <div class="login">
+            <button class="btn">Login</button>
+          </div>
+        </div>
       </div>
     </div>
 
