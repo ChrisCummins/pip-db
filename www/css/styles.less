@@ -81,6 +81,12 @@ button.btn {
 @searchLogoColor: @primaryColor;
 @searchLogoSize: 105px;
 
+.search .logo {
+  font-family: @accentFont;
+  color: @searchLogoColor;
+}
+
+/* Homepage search */
 .search.full {
   width: @searchWidth;
   height: @searchHeight;
@@ -90,19 +96,6 @@ button.btn {
   left: 50%;
   top: 50%;
   margin: (-@searchHeight * 0.6) 0 0 (-@searchWidth * 0.5);
-}
-.search.inline {
-  background: #e8e8e8;
-  padding: 2px 20px 10px 20px;
-}
-.search .logo {
-  font-family: @accentFont;
-  color: @searchLogoColor;
-}
-.search.inline .logo {
-  font-size: 30px;
-  display: inline;
-  margin-right: 20px;
 }
 .search.full .logo {
   font-size: @searchLogoSize;
@@ -121,6 +114,17 @@ button.btn {
 }
 .search.full button.btn:last-child {
   margin-left: 8px;
+}
+
+/* Inline search */
+.search.inline {
+  background: #e8e8e8;
+  padding: 2px 20px 10px 20px;
+}
+.search.inline .logo {
+  font-size: 30px;
+  display: inline;
+  margin-right: 20px;
 }
 .search.inline button {
   margin-top: -6px;
