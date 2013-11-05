@@ -78,8 +78,8 @@ dnl TODO: Add subsections for each AC_ARG_ENABLE
 dnl     ============================================================
 dnl     Are we using content hashing?
 dnl     ============================================================
-HASH=md5sum   dnl The program used to generate hashes
-HASH_LENGTH=8 dnl The length of hashes used for content hashing
+HASH=md5sum
+HASH_LENGTH=8
 
 AC_CHECK_PROG(HASH_BIN, $HASH, $HASH)
 if test -z "$HASH_BIN"; then
