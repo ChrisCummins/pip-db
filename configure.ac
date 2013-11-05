@@ -156,8 +156,9 @@ dnl     Do we have a local apache2 server?
 dnl     ============================================================
 HTTPD="/usr/sbin/apache2"
 AC_CHECK_FILE([$HTTPD],
-              [HAVE_HTTPD=true],
-              [HAVE_HTTPD=false;
+              [HAVE_HTTPD=true
+               AC_SUBST([HTTPD])],
+              [HAVE_HTTPD=false
                AC_MSG_WARN([No apache server found.])])
 AM_CONDITIONAL([HAVE_HTTPD], test x$HAVE_HTTPD = xtrue)
 
