@@ -6,7 +6,6 @@
 
     <title>pip-db Alkaline phosphatese</title>
 
-    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/styles.css"/>
   </head>
 

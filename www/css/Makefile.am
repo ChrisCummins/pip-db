@@ -1,6 +1,5 @@
 # Less CSS source files@
 LESS = \
-	bootstrap.less \
 	styles.less \
 	$(NULL)
 

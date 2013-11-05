@@ -6,7 +6,6 @@
 
     <title>pip-db Sign In</title>
 
-    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/styles.css"/>
   </head>
 
