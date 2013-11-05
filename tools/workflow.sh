@@ -43,11 +43,14 @@ echo_if_live() {
 }
 
 # Check that git tree is clean else fail
+#    @env $DIRTY If this variable is set, don't perform check
 fail_if_tree_not_clean() {
-	if [[ `git diff --shortstat 2> /dev/null | tail -n1` != "" ]]; then
-		echo "fatal: uncommitted changes in repository" >&2
-		exit 2
-	fi
+	test -z "$DIRTY" && {
+		if [[ `git diff --shortstat 2> /dev/null | tail -n1` != "" ]]; then
+			echo "fatal: uncommitted changes in repository" >&2
+			exit 2
+		fi
+	}
 }
 
 # Check that the issue number is a valid open github issue else fail
