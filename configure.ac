@@ -230,11 +230,13 @@ dnl     ============================================================
 dnl     JAR file locations
 dnl     ============================================================
 JAR_DIR="`pwd`/build/jar"
+
 HTML_JAR="$JAR_DIR/htmlcompressor.jar"
-AC_SUBST([HTML_JAR])
 CSS_JAR="$JAR_DIR/yuicompressor.jar"
-AC_SUBST([CSS_JAR])
 JS_JAR="$JAR_DIR/closure-compiler.jar"
+
+AC_SUBST([HTML_JAR])
+AC_SUBST([CSS_JAR])
 AC_SUBST([JS_JAR])
 
 
@@ -242,10 +244,10 @@ dnl     ============================================================
 dnl     Website build destination
 dnl     ============================================================
 WWW_BUILD="`pwd`/build/www"
-AC_SUBST([WWW_BUILD])
 AC_CHECK_FILE([$WWW_BUILD],
 	      ,
  	      [mkdir -pv "$WWW_BUILD"])
+AC_SUBST([WWW_BUILD])
 
 
 AC_OUTPUT([
