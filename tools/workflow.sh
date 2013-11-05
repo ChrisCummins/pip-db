@@ -26,7 +26,9 @@ execute() {
 	local quiet=$2
 
 	test -z "$DRY_RUN" && {
+		set -e
 		$cmd;
+		set +e
 	} || {
 		test -z $quiet && echo $cmd
 	}
@@ -106,11 +108,9 @@ new() {
 	execute "fail_if_tree_not_clean" quiet
 
 	# Perform branching
-	set -e
 	execute "git checkout -b wip/$issue $ISSUE_BRANCH_BASE"
 	echo_if_live "git push -u $REMOTE $branch"
 	execute "git push -u $REMOTE $branch"
-	set +e
 
 	# Output results
 	echo ""
@@ -126,13 +126,11 @@ close() {
 	execute "fail_if_tree_not_clean" quiet
 
 	# Perform branching
-	set -e
 	execute "git checkout $ISSUE_BRANCH_BASE"
 	echo_if_live "git rebase $branch"
 	execute "git rebase $branch"
 	execute "git branch -D $branch"
 	execute "git push $REMOTE :$branch"
-	set +e
 
 	# Output results
 	echo ""
