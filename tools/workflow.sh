@@ -129,9 +129,11 @@ close() {
 	execute "fail_if_tree_not_clean" quiet
 
 	# Perform branching
+	execute "git stash"
 	execute "git checkout $ISSUE_BRANCH_BASE"
 	echo_if_live "git rebase $branch"
 	execute "git rebase $branch"
+	execute "git stash pop"
 	execute "git branch -D $branch"
 	execute "git push $REMOTE :$branch"
 
