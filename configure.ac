@@ -76,6 +76,16 @@ dnl TODO: Add subsections for each AC_ARG_ENABLE
 
 
 dnl     ============================================================
+dnl     Check for Website build destination
+dnl     ============================================================
+m4_define([www_build],["$(pwd)/build/www"])
+
+AC_CHECK_FILE([www_build],,[mkdir -pv www_build])
+
+AC_SUBST([WWW_BUILD],[www_build])
+
+
+dnl     ============================================================
 dnl     Are we using content hashing?
 dnl     ============================================================
 HASH=md5sum
@@ -239,16 +249,6 @@ m4_define([js_jar],   [jar_dir/closure-compiler.jar])
 AC_SUBST([HTML_JAR], [html_jar])
 AC_SUBST([CSS_JAR],  [css_jar])
 AC_SUBST([JS_JAR],   [js_jar])
-
-
-dnl     ============================================================
-dnl     Website build destination
-dnl     ============================================================
-m4_define([www_build],["$(pwd)/build/www"])
-
-AC_CHECK_FILE([www_build],,[mkdir -pv www_build])
-
-AC_SUBST([WWW_BUILD],[www_build])
 
 
 AC_OUTPUT([
