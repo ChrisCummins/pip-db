@@ -60,6 +60,7 @@ if test -z "$LESSC"; then
 fi
 AM_CONDITIONAL([HAVE_LESSC], test -n "$LESSC")
 
+
 dnl     ============================================================
 dnl     Do we have a Java runtime environment?
 dnl     ============================================================
@@ -68,10 +69,12 @@ if test -z "$JAVA"; then
    AC_MSG_ERROR([No Java virtual machine found.])
 fi
 
+
 dnl ================================================================
 dnl Handle extra configure options
 dnl ================================================================
 dnl TODO: Add subsections for each AC_ARG_ENABLE
+
 
 dnl     ============================================================
 dnl     Are we using content hashing?
@@ -97,6 +100,7 @@ if test $HASH_LENGTH -ge $GEN_HASH_LENGTH; then
    HASH_LENGTH=$GEN_HASH_LENGTH
 fi
 AC_SUBST([HASH_LENGTH])
+
 
 dnl ================================================================
 dnl Check for dependency packages
@@ -146,6 +150,7 @@ AC_PROG_AWK
 AC_PROG_INSTALL
 AC_PROG_MKDIR_P
 AC_PROG_SED
+
 
 dnl     ============================================================
 dnl     Do we have a local apache2 server?
@@ -209,6 +214,7 @@ else
 fi
 unset TMP
 AM_CONDITIONAL([HAVE_NODE_OPTIMIST], test -n "$TMP")
+
 
 dnl ================================================================
 dnl What needs to be substituted in other files
