@@ -26,7 +26,7 @@
           </div>
 
           <!-- Inline searchbar -->
-          <a href="index.php"><h1 class="logo">pip-db</h1></a>
+          <a href="search.php"><h1 class="logo">pip-db</h1></a>
           <input id="search-text" type="text" value="Alkaline">
           <a href="results.php">
             <button id="s" class="btn btn-success">Search</button>

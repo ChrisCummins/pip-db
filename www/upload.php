@@ -27,7 +27,7 @@
           </div>
 
           <!-- Inline searchbar -->
-          <a href="index.php"><h1 class="logo">pip-db</h1></a>
+          <a href="search.php"><h1 class="logo">pip-db</h1></a>
         </div>
       </div>
 
