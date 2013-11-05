@@ -119,7 +119,7 @@ close() {
 	# Perform branching
 	set -e
 	execute "git checkout $ISSUE_BRANCH_BASE"
-	execute "rebase $branch"
+	execute "git rebase $branch"
 	execute "git branch -D $branch"
 	execute "git push $REMOTE :$branch"
 	set +e
