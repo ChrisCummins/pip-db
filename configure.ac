@@ -156,11 +156,11 @@ dnl     Do we have a local apache2 server?
 dnl     ============================================================
 HTTPD="/usr/sbin/apache2"
 AC_CHECK_FILE([$HTTPD],
-              [HAVE_HTTPD=true
+              [HAVE_HTTPD=yes
                AC_SUBST([HTTPD])],
-              [HAVE_HTTPD=false
+              [HAVE_HTTPD=no
                AC_MSG_WARN([No apache server found.])])
-AM_CONDITIONAL([HAVE_HTTPD], test x$HAVE_HTTPD = xtrue)
+AM_CONDITIONAL([HAVE_HTTPD], test x$HAVE_HTTPD = xyes)
 
 
 dnl     ============================================================
@@ -168,11 +168,11 @@ dnl     Do we have a local web-server root?
 dnl     ============================================================
 WWW_ROOT="/var/www"
 AC_CHECK_FILE([$WWW_ROOT],
-              [HAVE_WWW_ROOT=true
+              [HAVE_WWW_ROOT=yes
                AC_SUBST([WWW_ROOT])],
-              [HAVE_WWW_ROOT=false
+              [HAVE_WWW_ROOT=no
                AC_MSG_WARN([Local server root "$WWW_ROOT" not found.])])
-AM_CONDITIONAL([HAVE_WWW_ROOT], test x$HAVE_WWW_ROOT = xtrue)
+AM_CONDITIONAL([HAVE_WWW_ROOT], test x$HAVE_WWW_ROOT = xyes)
 
 
 dnl     ============================================================
@@ -212,16 +212,16 @@ dnl         ========================================================
 AC_MSG_CHECKING([for optimist package])
 optimist_test=`npm ls -g | grep optimist`
 if test -n "$optimist_test"; then
-   HAVE_NODE_OPTIMIST=true
+   HAVE_NODE_OPTIMIST=yes
 else
-   HAVE_NODE_OPTIMIST=false
+   HAVE_NODE_OPTIMIST=no
 fi
 unset optimist_test
 
 AC_MSG_RESULT([$HAVE_NODE_OPTIMIST])
-AS_IF([test x$HAVE_NODE_OPTIMIST = xtrue], ,
+AS_IF([test x$HAVE_NODE_OPTIMIST = xyes], ,
       [AC_MSG_ERROR([Required node pacakge 'optimist' not found.])])
-AM_CONDITIONAL([HAVE_NODE_OPTIMIST], test x$HAVE_NODE_OPTIMIST = xtrue)
+AM_CONDITIONAL([HAVE_NODE_OPTIMIST], test x$HAVE_NODE_OPTIMIST = xyes)
 
 
 dnl ================================================================
@@ -288,13 +288,13 @@ echo "--------------"
 echo ""
 # Global flags:
 echo " • Global:"
-if test x$HAVE_HTTPD = xtrue; then
+if test x$HAVE_HTTPD = xyes; then
            echo "        httpd:                          $HTTPD"
            echo "        httpd root:                     $WWW_ROOT/"
 else
            echo "        httpd:                          no"
 fi
-if test x$HAVE_MYSQL = xtrue; then
+if test x$HAVE_MYSQL = xyes; then
            echo "        mysql:                          $MYSQL"
 else
            echo "        mysql:                          no"
