@@ -42,11 +42,21 @@ echo_if_live() {
 	test -z "$DRY_RUN" && echo $1
 }
 
+# Check that the git tree is clean
+#    @return 0 if clean, else 1
+is_working_tree_clean() {
+	if [[ `git diff --shortstat 2> /dev/null | tail -n1` == "" ]]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
 # Check that git tree is clean else fail
 #    @env $DIRTY If this variable is set, don't perform check
 fail_if_tree_not_clean() {
 	test -z "$DIRTY" && {
-		if [[ `git diff --shortstat 2> /dev/null | tail -n1` != "" ]]; then
+		if ! is_working_tree_clean; then
 			echo "fatal: uncommitted changes in repository" >&2
 			exit 2
 		fi
