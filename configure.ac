@@ -87,9 +87,9 @@ if test -z "$HASH_BIN"; then
 fi
 
 dnl Get the length (in characters) of generated hashes
-TMP_TEST=/tmp/`date +%s`
+TMP_TEST=/tmp/$(date +%s)
 touch $TMP_TEST
-GEN_HASH_LENGTH=`$HASH_BIN $TMP_TEST | awk '{print $1}' | wc -c`
+GEN_HASH_LENGTH=$($HASH_BIN $TMP_TEST | awk '{print $1}' | wc -c)
 GEN_HASH_LENGTH=$((GEN_HASH_LENGTH-1))
 rm -f "$TMP_TEST"
 
@@ -210,15 +210,13 @@ dnl         ========================================================
 dnl         Do we have the optimist package?
 dnl         ========================================================
 AC_MSG_CHECKING([for optimist package])
-optimist_test=`npm ls -g | grep optimist`
-if test -n "$optimist_test"; then
+if test -n "$(npm ls -g | grep optimist)"; then
    HAVE_NODE_OPTIMIST=yes
 else
    HAVE_NODE_OPTIMIST=no
 fi
-unset optimist_test
-
 AC_MSG_RESULT([$HAVE_NODE_OPTIMIST])
+
 AS_IF([test x$HAVE_NODE_OPTIMIST = xyes], ,
       [AC_MSG_ERROR([Required node pacakge 'optimist' not found.])])
 AM_CONDITIONAL([HAVE_NODE_OPTIMIST], test x$HAVE_NODE_OPTIMIST = xyes)
@@ -232,7 +230,7 @@ dnl ================================================================
 dnl     ============================================================
 dnl     JAR file locations
 dnl     ============================================================
-JAR_DIR="`pwd`/build/jar"
+JAR_DIR="$(pwd)/build/jar"
 
 HTML_JAR="$JAR_DIR/htmlcompressor.jar"
 CSS_JAR="$JAR_DIR/yuicompressor.jar"
@@ -246,7 +244,7 @@ AC_SUBST([JS_JAR])
 dnl     ============================================================
 dnl     Website build destination
 dnl     ============================================================
-WWW_BUILD="`pwd`/build/www"
+WWW_BUILD="$(pwd)/build/www"
 AC_CHECK_FILE([$WWW_BUILD],
 	      ,
  	      [mkdir -pv "$WWW_BUILD"])
