@@ -209,16 +209,19 @@ AM_CONDITIONAL([HAVE_NODE], test -n "$NODE")
 dnl         ========================================================
 dnl         Do we have the optimist package?
 dnl         ========================================================
-echo -n "checking for optimist package... "
-TMP=`npm ls -g | grep optimist`
-if test -z "$TMP"; then
-   echo "no"
-   AC_MSG_ERROR([Required node pacakge 'optimist' not found.])
+AC_MSG_CHECKING([for optimist package])
+optimist_test=`npm ls -g | grep optimist`
+if test -n "$optimist_test"; then
+   HAVE_NODE_OPTIMIST=true
 else
-   echo "yes"
+   HAVE_NODE_OPTIMIST=false
 fi
-unset TMP
-AM_CONDITIONAL([HAVE_NODE_OPTIMIST], test -n "$TMP")
+unset optimist_test
+
+AC_MSG_RESULT([$HAVE_NODE_OPTIMIST])
+AS_IF([test x$HAVE_NODE_OPTIMIST = xtrue], ,
+      [AC_MSG_ERROR([Required node pacakge 'optimist' not found.])])
+AM_CONDITIONAL([HAVE_NODE_OPTIMIST], test x$HAVE_NODE_OPTIMIST = xtrue)
 
 
 dnl ================================================================
