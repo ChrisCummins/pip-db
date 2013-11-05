@@ -273,7 +273,7 @@ dnl Dah Da!
 dnl ================================================================
 dnl TODO: Beautify configure output
 echo ""
-echo "Summary:"
+echo "pip-db - $PIPDB_VERSION"
 echo ""
 AM_COND_IF([HAVE_HTTPD],
            echo "    httpd:                            $HTTPD";
