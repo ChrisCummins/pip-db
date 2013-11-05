@@ -276,19 +276,39 @@ AC_OUTPUT([
 dnl ================================================================
 dnl Dah Da!
 dnl ================================================================
-dnl TODO: Beautify configure output
 echo ""
 echo "pip-db - $PIPDB_VERSION"
+echo "--------------"
+
 echo ""
-AM_COND_IF([HAVE_HTTPD],
-           echo "    httpd:                            $HTTPD";
-           echo "    httpd root:                       $WWW_ROOT",
-           echo "    httpd:                            no")
-echo -n "    Database management system:       "
-AM_COND_IF([HAVE_MYSQL], echo "$MYSQL", echo "no")
-echo "    Build directory:                  $WWW_BUILD"
-echo "    Content hashing algorithm:        $HASH"
-echo "    Content hashes length:            $HASH_LENGTH"
-echo -n "    Building extra documentation:     "
+# Global flags:
+echo " • Global:"
+if test x$HAVE_HTTPD = xtrue; then
+           echo "        httpd:                          $HTTPD"
+           echo "        httpd root:                     $WWW_ROOT/"
+else
+           echo "        httpd:                          no"
+fi
+if test x$HAVE_MYSQL = xtrue; then
+           echo "        mysql:                          $MYSQL"
+else
+           echo "        mysql:                          no"
+fi
+
+echo ""
+# Features:
+echo " • Features:"
+echo "        Content hashing algorithm:      $HASH"
+echo "        Content hashes length:          $HASH_LENGTH"
+
+echo ""
+# Build options:
+echo " • Build options:"
+echo "        Build directory:                $WWW_BUILD/"
+
+echo ""
+# Miscellaneous:
+echo " • Extra:"
+echo -n "        Building extra documentation:   "
 AM_COND_IF([HAVE_PDFLATEX], echo "yes", echo "no")
 echo ""
