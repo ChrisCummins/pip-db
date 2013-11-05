@@ -35,6 +35,15 @@ dnl AC_SUBST([GDK_PIXBUF_REQ_VERSION], [gdk_pixbuf_req_version])
 
 AM_INIT_AUTOMAKE([1.11 -Wall foreign no-define])
 AM_SILENT_RULES([yes])
+
+dnl ================================================================
+dnl Export the package versioning
+dnl ================================================================
+AC_SUBST([MAJOR_VERSION],[major_version])
+AC_SUBST([MINOR_VERSION],[minor_version])
+AC_SUBST([MICRO_VERSION],[micro_version])
+AC_SUBST([VERSION],[version])
+
 # Define INSTALL
 AC_PROG_INSTALL
 
