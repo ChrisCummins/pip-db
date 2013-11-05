@@ -7,7 +7,11 @@ export HTML
 
 # We must build this directory first in order to allow for content hashing ref
 # updating of HTML build files.
-SUBDIRS = . css js
+SUBDIRS = \
+	. \
+	css \
+	js \
+	$(NULL)
 
 noinst_SCRIPTS = $(HTML)
 
