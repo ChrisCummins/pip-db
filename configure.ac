@@ -1,16 +1,40 @@
-m4_define([name], [protein-db])
-m4_define([author], [chrisc.101@gmail.com])
+AC_PREREQ(2.68)
+
+dnl ================================================================
+dnl Project versions (i.e. the package version)
+dnl ================================================================
+dnl TODO: Prefix this macros with the package name
 m4_define([major_version], [0])
 m4_define([minor_version], [0])
 m4_define([micro_version], [1])
 m4_define([version], [major_version.minor_version.micro_version])
 
-# Autoconf
-AC_PREREQ(2.68)
+dnl ================================================================
+dnl Project details (i.e. the "meta" stuff)
+dnl ================================================================
+dnl TODO: Fix this package name
+m4_define([name], [protein-db])
+m4_define([author], [chrisc.101@gmail.com])
+
 AC_INIT([name], [version], [author])
 AC_CONFIG_MACRO_DIR([build])
 AC_CONFIG_AUX_DIR([build])
 
+dnl ================================================================
+dnl Required versions for dependencies
+dnl ================================================================
+
+dnl TODO: Add dependency versions, examples:
+dnl m4_define([glib_req_version],           [2.32.0])
+dnl m4_define([pangocairo_req_version],     [1.20])
+
+dnl These variables get copied into the generated README
+dnl TODO: Add AC_SUBST for dependencies, examples:
+dnl AC_SUBST([GLIB_REQ_VERSION], [glib_req_version])
+dnl AC_SUBST([GDK_PIXBUF_REQ_VERSION], [gdk_pixbuf_req_version])
+
+AM_INIT_AUTOMAKE([1.11 -Wall foreign no-define])
+AM_SILENT_RULES([yes])
 # Define INSTALL
 AC_PROG_INSTALL
 
@@ -141,10 +165,6 @@ CSS_JAR="$JAR_DIR/yuicompressor.jar"
 AC_SUBST([CSS_JAR])
 JS_JAR="$JAR_DIR/closure-compiler.jar"
 AC_SUBST([JS_JAR])
-
-# Automake
-AM_INIT_AUTOMAKE([1.11 -Wall foreign no-define])
-AM_SILENT_RULES([yes])
 
 # Autoconf output files
 AC_OUTPUT([
