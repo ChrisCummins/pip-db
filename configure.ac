@@ -52,71 +52,156 @@ AC_SUBST([VERSION],[version])
 dnl ================================================================
 dnl Compiler stuff
 dnl ================================================================
+
+
+dnl     ============================================================
+dnl     Do we have a Less CSS compiler?
+dnl     ============================================================
 AC_CHECK_PROG([LESSC], [lessc], [lessc])
 if test -z "$LESSC"; then
    AC_MSG_ERROR([Less CSS compiler not found.])
 fi
 AM_CONDITIONAL([HAVE_LESSC], test -n "$LESSC")
 
+dnl     ============================================================
+dnl     Do we have a Java runtime environment?
+dnl     ============================================================
+AC_CHECK_PROG([JAVA], [java], [java])
+if test -z "$JAVA"; then
+   AC_MSG_ERROR([No Java virtual machine found.])
+fi
 
-# Define INSTALL
-AC_PROG_INSTALL
+dnl ================================================================
+dnl Handle extra configure options
+dnl ================================================================
+dnl TODO: Add subsections for each AC_ARG_ENABLE
 
-# Check for LaTeX compiler and define PDFLATEX and HAVE_PDFLATEX
+dnl     ============================================================
+dnl     Are we using content hashing?
+dnl     ============================================================
+HASH=md5sum   dnl The program used to generate hashes
+HASH_LENGTH=8 dnl The length of hashes used for content hashing
+
+AC_CHECK_PROG(HASH_BIN, $HASH, $HASH)
+if test -z "$HASH_BIN"; then
+   AC_MSG_ERROR([$HASH program is needed.])
+fi
+
+dnl Get the length (in characters) of generated hashes
+TMP_TEST=/tmp/`date +%s`
+touch $TMP_TEST
+GEN_HASH_LENGTH=`$HASH_BIN $TMP_TEST | awk '{print $1}' | wc -c`
+GEN_HASH_LENGTH=$((GEN_HASH_LENGTH-1))
+rm -f "$TMP_TEST"
+
+dnl Limit the length of hashes to GEN_HASH_LENGTH
+if test $HASH_LENGTH -ge $GEN_HASH_LENGTH; then
+   AC_MSG_WARN([Limiting content hash length to $GEN_HASH_LENGTH])
+   HASH_LENGTH=$GEN_HASH_LENGTH
+fi
+AC_SUBST([HASH_LENGTH])
+
+dnl ================================================================
+dnl Check for dependency packages
+dnl ================================================================
+
+
+dnl     ============================================================
+dnl     Should LaTeX documentation be built?
+dnl     ============================================================
 AC_CHECK_PROG(PDFLATEX, pdflatex, pdflatex)
 if test -z "$PDFLATEX"; then
    AC_MSG_WARN([Unable to create PDF documentation.])
 fi
 AM_CONDITIONAL([HAVE_PDFLATEX], test -n "$PDFLATEX")
 
-# Check for xdg-open for opening PDF documentation
+
+dnl     ============================================================
+dnl     Should xdg-open be used to open PDFs?
+dnl     ============================================================
 AC_CHECK_PROG([XDG_OPEN], [xdg-open], [xdg-open])
 if test -z "$XDG_OPEN"; then
    AC_MSG_WARN([PDF opening feature disabled.])
 fi
 AM_CONDITIONAL([HAVE_XDG_OPEN], test -n "$XDG_OPEN")
 
-# Check for emacsclient for editing files
+
+dnl     ============================================================
+dnl     Should emacsclient by used for editing files?
+dnl     ============================================================
 AC_CHECK_PROG([EMACSCLIENT], [emacsclient], [emacsclient])
 if test -z "$EMACSCLIENT"; then
    AC_MSG_WARN([Text editor launching features disabled.])
 fi
 AM_CONDITIONAL([HAVE_EMACSCLIENT], test -n "$EMACSCLIENT")
 
-# Export location for www
+
+dnl ================================================================
+dnl Documentation stuff
+dnl ================================================================
+dnl TODO: Add AC_ARG_ENABLE check for extra documentation
+
+
+dnl ================================================================
+dnl Misc program dependencies.
+dnl ================================================================
+AC_PROG_AWK
+AC_PROG_INSTALL
+AC_PROG_MKDIR_P
+AC_PROG_SED
+
+dnl     ============================================================
+dnl     Do we have a local apache2 server?
+dnl     ============================================================
+HTTPD="/usr/sbin/apache2"
+AC_CHECK_FILE([$HTTPD], , AC_MSG_WARN([No apache server found.]))
+AM_CONDITIONAL([HAVE_HTTPD], test -f "$HTTPD")
+
+
+dnl     ============================================================
+dnl     Do we have a local web-server root?
+dnl     ============================================================
 WWW_ROOT="/var/www"
 AC_CHECK_FILE([$WWW_ROOT],
               AC_SUBST([WWW_ROOT]),
 	      AC_MSG_WARN([Local server root "$WWW_ROOT" not found.]))
 AM_CONDITIONAL([HAVE_WWW_ROOT], test -d "$WWW_ROOT")
 
-# Check for Apache server
-HTTPD="/usr/sbin/apache2"
-AC_CHECK_FILE([$HTTPD], , AC_MSG_WARN([No apache server found.]))
-AM_CONDITIONAL([HAVE_HTTPD], test -f "$HTTPD")
 
-# Check for MySQL
+dnl     ============================================================
+dnl     Do we have mysql?
+dnl     ============================================================
 AC_CHECK_PROG([MYSQL], [mysql], [mysql])
 if test -z "$MYSQL"; then
    AC_MSG_WARN([No mysql database application found])
 fi
 AM_CONDITIONAL([HAVE_MYSQL], test -n "$MYSQL")
 
-# Check for node else fail
-AC_CHECK_PROG([NODE], [node], [node])
-if test -z "$NODE"; then
-   AC_MSG_ERROR([Node.js not found.])
-fi
-AM_CONDITIONAL([HAVE_NODE], test -n "$NODE")
 
-# Check for npm else fail
+dnl     ============================================================
+dnl     Do we have npm?
+dnl     ============================================================
 AC_CHECK_PROG([NPM], [npm], [npm])
 if test -z "$NPM"; then
    AC_MSG_ERROR([Node package manager not found.])
 fi
 AM_CONDITIONAL([HAVE_NPM], test -n "$NPM")
 
-# Check for node optimist package
+
+dnl     ============================================================
+dnl     Do we have node?
+dnl     ============================================================
+dnl TODO: Check for correct version
+AC_CHECK_PROG([NODE], [node], [node])
+if test -z "$NODE"; then
+   AC_MSG_ERROR([Node.js not found.])
+fi
+AM_CONDITIONAL([HAVE_NODE], test -n "$NODE")
+
+
+dnl         ========================================================
+dnl         Do we have the optimist package?
+dnl         ========================================================
 echo -n "checking for optimist package... "
 TMP=`npm ls -g | grep optimist`
 if test -z "$TMP"; then
@@ -128,53 +213,14 @@ fi
 unset TMP
 AM_CONDITIONAL([HAVE_NODE_OPTIMIST], test -n "$TMP")
 
-# Check for awk
-AC_PROG_AWK
+dnl ================================================================
+dnl What needs to be substituted in other files
+dnl ================================================================
 
-# Check for sed
-AC_PROG_SED
 
-# Check for mkdir -p
-AC_PROG_MKDIR_P
-
-# Build location for www
-WWW_BUILD="`pwd`/build/www"
-AC_SUBST([WWW_BUILD])
-AC_CHECK_FILE([$WWW_BUILD],
-	      ,
- 	      [mkdir -pv "$WWW_BUILD"])
-
-# Check for hash binary
-HASH=md5sum
-AC_CHECK_PROG(HASH_BIN, $HASH, $HASH)
-if test -z "$HASH_BIN"; then
-   AC_MSG_ERROR([$HASH program is needed.])
-fi
-
-# Length of hashes used for content hashing
-HASH_LENGTH=8
-
-# Get the length (in characters) of generated hashes
-TMP_TEST=/tmp/`date +%s`
-touch $TMP_TEST
-GEN_HASH_LENGTH=`$HASH_BIN $TMP_TEST | awk '{print $1}' | wc -c`
-GEN_HASH_LENGTH=$((GEN_HASH_LENGTH-1))
-rm -f "$TMP_TEST"
-
-# Limit the length of hashes to GEN_HASH_LENGTH
-if test $HASH_LENGTH -ge $GEN_HASH_LENGTH; then
-   AC_MSG_WARN([Limiting content hash length to $GEN_HASH_LENGTH])
-   HASH_LENGTH=$GEN_HASH_LENGTH
-fi
-AC_SUBST([HASH_LENGTH])
-
-# Check for Java VM
-AC_CHECK_PROG([JAVA], [java], [java])
-if test -z "$JAVA"; then
-   AC_MSG_ERROR([No Java virtual machine found.])
-fi
-
-# Compilers and minifiers
+dnl     ============================================================
+dnl     JAR file locations
+dnl     ============================================================
 JAR_DIR="`pwd`/build/jar"
 HTML_JAR="$JAR_DIR/htmlcompressor.jar"
 AC_SUBST([HTML_JAR])
@@ -183,7 +229,17 @@ AC_SUBST([CSS_JAR])
 JS_JAR="$JAR_DIR/closure-compiler.jar"
 AC_SUBST([JS_JAR])
 
-# Autoconf output files
+
+dnl     ============================================================
+dnl     Website build destination
+dnl     ============================================================
+WWW_BUILD="`pwd`/build/www"
+AC_SUBST([WWW_BUILD])
+AC_CHECK_FILE([$WWW_BUILD],
+	      ,
+ 	      [mkdir -pv "$WWW_BUILD"])
+
+
 AC_OUTPUT([
 	build/jar/Makefile
 	build/Makefile
@@ -208,6 +264,10 @@ AC_OUTPUT([
 	www/Makefile
 ])
 
+
+dnl ================================================================
+dnl Dah Da!
+dnl ================================================================
 echo ""
 echo "Summary:"
 echo ""
