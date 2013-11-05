@@ -139,11 +139,14 @@ close() {
 	execute "fail_if_tree_not_clean" quiet
 
 	# Perform branching
-	execute "git stash"
+	if ! is_working_tree_clean; then
+		execute "git stash"
+		local have_stashed=yes
+	fi
 	execute "git checkout $ISSUE_BRANCH_BASE"
 	echo_if_live "git rebase $branch"
 	execute "git rebase $branch"
-	execute "git stash pop"
+	test -n "$have_stashed" && execute "git stash pop"
 	execute "git branch -D $branch"
 	execute "git push $REMOTE :$branch"
 
