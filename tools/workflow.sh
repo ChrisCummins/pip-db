@@ -32,6 +32,14 @@ execute() {
 	}
 }
 
+# Prints a msg to stdout if we're not on a dry-run
+#    $1 msg
+echo_if_live() {
+	local msg=$1
+
+	test -z "$DRY_RUN" && echo $1
+}
+
 # Check that git tree is clean else fail
 fail_if_tree_not_clean() {
 	if [[ `git diff --shortstat 2> /dev/null | tail -n1` != "" ]]; then
@@ -100,6 +108,7 @@ new() {
 	# Perform branching
 	set -e
 	execute "git checkout -b wip/$issue $ISSUE_BRANCH_BASE"
+	echo_if_live "git push -u $REMOTE $branch"
 	execute "git push -u $REMOTE $branch"
 	set +e
 
@@ -119,6 +128,7 @@ close() {
 	# Perform branching
 	set -e
 	execute "git checkout $ISSUE_BRANCH_BASE"
+	echo_if_live "git rebase $branch"
 	execute "git rebase $branch"
 	execute "git branch -D $branch"
 	execute "git push $REMOTE :$branch"
