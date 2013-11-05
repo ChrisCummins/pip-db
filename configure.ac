@@ -168,9 +168,11 @@ dnl     Do we have a local web-server root?
 dnl     ============================================================
 WWW_ROOT="/var/www"
 AC_CHECK_FILE([$WWW_ROOT],
-              AC_SUBST([WWW_ROOT]),
-	      AC_MSG_WARN([Local server root "$WWW_ROOT" not found.]))
-AM_CONDITIONAL([HAVE_WWW_ROOT], test -d "$WWW_ROOT")
+              [HAVE_WWW_ROOT=true
+               AC_SUBST([WWW_ROOT])],
+              [HAVE_WWW_ROOT=false
+               AC_MSG_WARN([Local server root "$WWW_ROOT" not found.])])
+AM_CONDITIONAL([HAVE_WWW_ROOT], test x$HAVE_WWW_ROOT = xtrue)
 
 
 dnl     ============================================================
