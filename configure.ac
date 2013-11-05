@@ -1,5 +1,6 @@
 AC_PREREQ(2.68)
 
+
 dnl ================================================================
 dnl Project versions (i.e. the package version)
 dnl ================================================================
@@ -8,6 +9,7 @@ m4_define([major_version], [0])
 m4_define([minor_version], [0])
 m4_define([micro_version], [1])
 m4_define([version], [major_version.minor_version.micro_version])
+
 
 dnl ================================================================
 dnl Project details (i.e. the "meta" stuff)
@@ -19,6 +21,7 @@ m4_define([author], [chrisc.101@gmail.com])
 AC_INIT([name], [version], [author])
 AC_CONFIG_MACRO_DIR([build])
 AC_CONFIG_AUX_DIR([build])
+
 
 dnl ================================================================
 dnl Required versions for dependencies
@@ -35,6 +38,7 @@ dnl AC_SUBST([GDK_PIXBUF_REQ_VERSION], [gdk_pixbuf_req_version])
 
 AM_INIT_AUTOMAKE([1.11 -Wall foreign no-define])
 AM_SILENT_RULES([yes])
+
 
 dnl ================================================================
 dnl Export the package versioning
