@@ -4,21 +4,18 @@ AC_PREREQ(2.68)
 dnl ================================================================
 dnl Project versions (i.e. the package version)
 dnl ================================================================
-dnl TODO: Prefix this macros with the package name
-m4_define([major_version], [0])
-m4_define([minor_version], [0])
-m4_define([micro_version], [1])
-m4_define([version], [major_version.minor_version.micro_version])
+m4_define([pipdb_major_version],[0])
+m4_define([pipdb_minor_version],[0])
+m4_define([pipdb_micro_version],[1])
+m4_define([pipdb_version],[pipdb_major_version.pipdb_minor_version.pipdb_micro_version])
 
 
 dnl ================================================================
 dnl Project details (i.e. the "meta" stuff)
 dnl ================================================================
-dnl TODO: Fix this package name
-m4_define([name], [protein-db])
 m4_define([author], [chrisc.101@gmail.com])
 
-AC_INIT([name], [version], [author])
+AC_INIT([pip-db], [pipdb_version], [author])
 AC_CONFIG_MACRO_DIR([build])
 AC_CONFIG_AUX_DIR([build])
 
@@ -43,10 +40,10 @@ AM_SILENT_RULES([yes])
 dnl ================================================================
 dnl Export the package versioning
 dnl ================================================================
-AC_SUBST([MAJOR_VERSION],[major_version])
-AC_SUBST([MINOR_VERSION],[minor_version])
-AC_SUBST([MICRO_VERSION],[micro_version])
-AC_SUBST([VERSION],[version])
+AC_SUBST([PIPDB_MAJOR_VERSION],[pipdb_major_version])
+AC_SUBST([PIPDB_MINOR_VERSION],[pipdb_minor_version])
+AC_SUBST([PIPDB_MICRO_VERSION],[pipdb_micro_version])
+AC_SUBST([PIPDB_VERSION],[pipdb_version])
 
 
 dnl ================================================================
