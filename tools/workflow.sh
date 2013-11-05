@@ -18,6 +18,20 @@ usage() {
 	echo "           close                Close current work an issue"
 }
 
+# Execute command if we're not on a dry-run, else just print the commnad
+#     $1 Command to execute
+#     $2 (optional) Set to 'quiet' to suppress output being printed on dry-run
+execute() {
+	local cmd=$1
+	local quiet=$2
+
+	test -z "$DRY_RUN" && {
+		$cmd;
+	} || {
+		test -z $quiet && echo $cmd
+	}
+}
+
 # Check that git tree is clean else fail
 fail_if_tree_not_clean() {
 	if [[ `git diff --shortstat 2> /dev/null | tail -n1` != "" ]]; then
@@ -80,13 +94,13 @@ new() {
 	fi
 
 	# Sanity checks
-	fail_if_issue_not_valid $issue
-	fail_if_tree_not_clean
+	execute "fail_if_issue_not_valid $issue" quiet
+	execute "fail_if_tree_not_clean" quiet
 
 	# Perform branching
 	set -e
-	git checkout -b wip/$issue $ISSUE_BRANCH_BASE
-	git push -u $REMOTE $branch
+	execute "git checkout -b wip/$issue $ISSUE_BRANCH_BASE"
+	execute "git push -u $REMOTE $branch"
 	set +e
 
 	# Output results
@@ -100,14 +114,14 @@ close() {
 
 	# Sanity checks
 	fail_if_not_on_issue_branch
-	fail_if_tree_not_clean
+	execute "fail_if_tree_not_clean" quiet
 
 	# Perform branching
 	set -e
-	git checkout $ISSUE_BRANCH_BASE
-	git rebase $branch
-	git branch -D $branch
-	git push $REMOTE :$branch
+	execute "git checkout $ISSUE_BRANCH_BASE"
+	execute "rebase $branch"
+	execute "git branch -D $branch"
+	execute "git push $REMOTE :$branch"
 	set +e
 
 	# Output results
