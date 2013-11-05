@@ -21,13 +21,13 @@ EXTRA_DIST = \
 # HTML compilation
 $(HTML_DEST)/%.html: %.html
 	@test -d $(HTML_DEST) || { \
-		$(MKDIR_P) -v $(HTML_DEST); \
+		$(MKDIR_P) $(HTML_DEST); \
 	}
 	$(JAVA) -jar $(HTML_JAR) --compress-js --compress-css -o $@ $<
 
 # PHP compilation
 $(HTML_DEST)/%.php: %.php
 	@test -d $(HTML_DEST) || { \
-		$(MKDIR_P) -v $(HTML_DEST); \
+		$(MKDIR_P) $(HTML_DEST); \
 	}
 	$(JAVA) -jar $(HTML_JAR) --compress-js --compress-css -o $@ $<
