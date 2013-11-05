@@ -165,6 +165,7 @@ AC_OUTPUT([
 	tools/dsa.sh
 	tools/Makefile
 	www/css/Makefile
+	www/fonts/Makefile
 	www/img/Makefile
 	www/js/Makefile
 	www/Makefile

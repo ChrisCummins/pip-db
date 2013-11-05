@@ -10,6 +10,7 @@ export HTML
 SUBDIRS = \
 	. \
 	css \
+	fonts \
 	img \
 	js \
 	$(NULL)
