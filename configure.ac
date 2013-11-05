@@ -268,6 +268,7 @@ AC_OUTPUT([
 dnl ================================================================
 dnl Dah Da!
 dnl ================================================================
+dnl TODO: Beautify configure output
 echo ""
 echo "Summary:"
 echo ""
