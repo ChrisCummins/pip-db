@@ -82,6 +82,16 @@ dnl ================================================================
 
 
 dnl     ============================================================
+dnl     Are we building the extra tools?
+dnl     ============================================================
+AC_ARG_ENABLE(extra_tools,
+              AS_HELP_STRING([--enable-extra-tools],
+                             [Build extra tools (default: yes)]),,
+              [enable_extra_tools=yes])
+AM_CONDITIONAL(ENABLE_EXTRA_TOOLS, test x$enable_extra_tools = xyes)
+
+
+dnl     ============================================================
 dnl     Are we using content hashing?
 dnl     ============================================================
 AC_ARG_ENABLE(content_hashing,
@@ -404,6 +414,7 @@ echo "        Build directory:                $WWW_BUILD/"
 echo ""
 # Miscellaneous:
 echo " • Extra:"
+echo "        Build extra tools:              $enable_extra_tools"
 echo -n "        Building extra documentation:   "
 AM_COND_IF([HAVE_PDFLATEX], echo "yes", echo "no")
 echo ""
