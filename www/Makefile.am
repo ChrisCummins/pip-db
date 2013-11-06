@@ -50,7 +50,7 @@ $(HTML_DEST)/%.php: %.php
 	}
 	$(call compile,$<,$@)
 
-if ENABLE_HTTPD
+if HAVE_WWW_ROOT
 # Export build to local webserver
 local:
 	@test -d "$(WWW_ROOT)" || { \

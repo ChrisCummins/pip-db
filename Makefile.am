@@ -10,7 +10,7 @@ EXTRA_DIST = \
 	autogen.sh \
 	$(NULL)
 
-if ENABLE_HTTPD
+if HAVE_WWW_ROOT
 # Export build to local webserver
 local:
 	$(MAKE) -C www/ local
@@ -21,7 +21,7 @@ help:
 	@echo 'Compiling:'
 	@echo ''
 	@echo '  make all          - compile entire project'
-if ENABLE_HTTPD
+if HAVE_WWW_ROOT
 	@echo ''
 	@echo 'Publishing:'
 	@echo ''
