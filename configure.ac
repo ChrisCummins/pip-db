@@ -230,7 +230,16 @@ AM_CONDITIONAL([HAVE_EMACSCLIENT],[test x$HAVE_EMACSCLIENT = xyes])
 dnl ================================================================
 dnl Documentation stuff
 dnl ================================================================
-dnl TODO: Add AC_ARG_ENABLE check for extra documentation
+
+
+dnl     ============================================================
+dnl     Should extra documentation be built?
+dnl     ============================================================
+AC_ARG_ENABLE(extra_documentation,
+              AS_HELP_STRING([--enable-extra-documentation],
+                             [Build extra documentation (default: yes)]),,
+              [enable_extra_documentation=yes])
+AM_CONDITIONAL(ENABLE_EXTRA_DOCUMENTATION, test x$enable_extra_documentation = xyes)
 
 
 dnl ================================================================
