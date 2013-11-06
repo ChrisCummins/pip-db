@@ -226,11 +226,13 @@ dnl     ============================================================
 dnl     Do we have a local apache2 server?
 dnl     ============================================================
 HTTPD="/usr/sbin/apache2"
-AC_CHECK_FILE([$HTTPD],
-              [HAVE_HTTPD=yes
-               AC_SUBST([HTTPD])],
-              [HAVE_HTTPD=no
-               AC_MSG_WARN([No apache server found.])])
+AS_IF([test "x$enable_httpd" = xyes],
+      AC_CHECK_FILE([$HTTPD],
+                    [HAVE_HTTPD=yes
+                     AC_SUBST([HTTPD])],
+                    [HAVE_HTTPD=no
+                     AC_MSG_WARN([No apache server found.])]),
+      [HAVE_HTTPD=no])
 AM_CONDITIONAL([HAVE_HTTPD], test x$HAVE_HTTPD = xyes)
 
 
@@ -238,24 +240,28 @@ dnl     ============================================================
 dnl     Do we have a local web-server root?
 dnl     ============================================================
 WWW_ROOT="/var/www"
-AC_CHECK_FILE([$WWW_ROOT],
-              [HAVE_WWW_ROOT=yes
-               AC_SUBST([WWW_ROOT])],
-              [HAVE_WWW_ROOT=no
-               AC_MSG_WARN([Local server root "$WWW_ROOT" not found.])])
+AS_IF([test "x$enable_httpd" = xyes],
+      AC_CHECK_FILE([$WWW_ROOT],
+                    [HAVE_WWW_ROOT=yes
+                     AC_SUBST([WWW_ROOT])],
+                    [HAVE_WWW_ROOT=no
+                     AC_MSG_WARN([Local server root "$WWW_ROOT" not found.])]),
+      [HAVE_WWW_ROOT=no])
 AM_CONDITIONAL([HAVE_WWW_ROOT], test x$HAVE_WWW_ROOT = xyes)
 
 
 dnl     ============================================================
 dnl     Do we have mysql?
 dnl     ============================================================
-AC_CHECK_PROG([MYSQL],[mysql],[mysql])
-if test x$MYSQL != x; then
-   HAVE_MYSQL=yes
-else
-   HAVE_MYSQL=no
-   AC_MSG_WARN([No mysql database application found])
-fi
+AS_IF([test "x$enable_httpd" = xyes],
+      AC_CHECK_PROG([MYSQL],[mysql],[mysql])
+      if test x$MYSQL != x; then
+         HAVE_MYSQL=yes
+      else
+         HAVE_MYSQL=no
+         AC_MSG_WARN([No mysql database application found])
+      fi,
+      [HAVE_MYSQL=no])
 AM_CONDITIONAL([HAVE_MYSQL],[test x$HAVE_MYSQL = xyes])
 
 
