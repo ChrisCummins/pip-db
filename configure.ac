@@ -364,14 +364,14 @@ echo ""
 echo " • Features:"
 echo "        Content hashing algorithm:      $HASH"
 echo "        Content hashes length:          $HASH_LENGTH"
+echo "        Minify HTML:                    $enable_minify_html"
+echo "        Minify CSS:                     $enable_minify_css"
+echo "        Minify JS:                      $enable_minify_js"
 
 echo ""
 # Build options:
 echo " • Build options:"
 echo "        Build directory:                $WWW_BUILD/"
-echo "        Minify HTML:                    $enable_minify_html"
-echo "        Minify CSS:                     $enable_minify_css"
-echo "        Minify JS:                      $enable_minify_js"
 
 echo ""
 # Miscellaneous:
