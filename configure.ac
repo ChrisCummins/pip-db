@@ -426,6 +426,6 @@ echo ""
 # Miscellaneous:
 echo " • Extra:"
 echo "        Build extra tools:              $enable_extra_tools"
-echo -n "        Building extra documentation:   "
-AM_COND_IF([HAVE_PDFLATEX], echo "yes", echo "no")
+echo "        Building extra documentation:   $HAVE_PDFLATEX"
+
 echo ""
