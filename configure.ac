@@ -12,9 +12,9 @@ m4_define([pipdb_version],[pipdb_major_version.pipdb_minor_version.pipdb_micro_v
 dnl ================================================================
 dnl Project details (i.e. the "meta" stuff)
 dnl ================================================================
-m4_define([author], [chrisc.101@gmail.com])
+m4_define([author],[chrisc.101@gmail.com])
 
-AC_INIT([pip-db], [pipdb_version], [author])
+AC_INIT([pip-db],[pipdb_version],[author])
 AC_CONFIG_MACRO_DIR([build])
 AC_CONFIG_AUX_DIR([build])
 
@@ -334,7 +334,7 @@ else
 fi
 AC_MSG_RESULT([$HAVE_NODE_OPTIMIST])
 
-AS_IF([test "x$HAVE_NODE_OPTIMIST" = xyes], ,
+AS_IF([test "x$HAVE_NODE_OPTIMIST" = xyes],,
       [AC_MSG_ERROR([Required node pacakge 'optimist' not found.])])
 AM_CONDITIONAL([HAVE_NODE_OPTIMIST],[test "x$HAVE_NODE_OPTIMIST" = xyes])
 
@@ -347,11 +347,11 @@ dnl ================================================================
 dnl     ============================================================
 dnl     JAR file locations
 dnl     ============================================================
-m4_define([jar_dir],  ["$(pwd)/build/jar"])
+m4_define([jar_dir], ["$(pwd)/build/jar"])
 
-m4_define([html_jar], [jar_dir/htmlcompressor.jar])
-m4_define([css_jar],  [jar_dir/yuicompressor.jar])
-m4_define([js_jar],   [jar_dir/closure-compiler.jar])
+m4_define([html_jar],[jar_dir/htmlcompressor.jar])
+m4_define([css_jar], [jar_dir/yuicompressor.jar])
+m4_define([js_jar],  [jar_dir/closure-compiler.jar])
 
 AC_SUBST([HTML_JAR], [html_jar])
 AC_SUBST([CSS_JAR],  [css_jar])
