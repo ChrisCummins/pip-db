@@ -50,6 +50,7 @@ $(HTML_DEST)/%.php: %.php
 	}
 	$(call compile,$<,$@)
 
+if ENABLE_HTTPD
 # Export build to local webserver
 local:
 	@test -d "$(WWW_ROOT)" || { \
@@ -60,3 +61,4 @@ local:
 		exit 2; \
 	}
 	rsync -avh --delete "$(WWW_BUILD)/" "$(WWW_ROOT)/"
+endif
