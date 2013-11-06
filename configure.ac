@@ -82,6 +82,16 @@ dnl ================================================================
 
 
 dnl     ============================================================
+dnl     Are we minifying HTML?
+dnl     ============================================================
+AC_ARG_ENABLE(minify_html,
+              AS_HELP_STRING([--enable-minify-html],
+                             [Minify compiled HTML sources (default: yes)]),,
+              [enable_minify_html=yes])
+AM_CONDITIONAL(ENABLE_MINIFY_HTML, test x$enable_minify_html = xyes)
+
+
+dnl     ============================================================
 dnl     Are we minifying CSS?
 dnl     ============================================================
 AC_ARG_ENABLE(minify_css,
@@ -359,6 +369,7 @@ echo ""
 # Build options:
 echo " • Build options:"
 echo "        Build directory:                $WWW_BUILD/"
+echo "        Minify HTML:                    $enable_minify_html"
 echo "        Minify CSS:                     $enable_minify_css"
 echo "        Minify JS:                      $enable_minify_js"
 
