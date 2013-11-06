@@ -1,8 +1,10 @@
+if ENABLE_EXTRA_TOOLS
 noinst_SCRIPTS = \
 	dsa \
 	png \
 	workflow \
 	$(NULL)
+endif
 
 CLEANFILES = $(noinst_SCRIPTS)
 
