@@ -23,11 +23,11 @@ CLEANFILES = $(shell find $(CSS_DEST) -name '*.css') $(LESS:.less=.css)
 # Compilation command
 if ENABLE_MINIFY_CSS
 define compile
-$(JAVA) -jar $(CSS_JAR) --charset utf-8 -v --type css $1 > $2
+	$(JAVA) -jar $(CSS_JAR) --charset utf-8 -v --type css $1 > $2
 endef
 else # Disabled minification
 define compile
-cat $1 > $2
+	cat $1 > $2
 endef
 endif
 
