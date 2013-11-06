@@ -79,7 +79,6 @@ AM_CONDITIONAL([HAVE_JAVA],[test x$HAVE_JAVA = xyes])
 dnl ================================================================
 dnl Handle extra configure options
 dnl ================================================================
-dnl TODO: Add subsections for each AC_ARG_ENABLE
 
 
 dnl     ============================================================
