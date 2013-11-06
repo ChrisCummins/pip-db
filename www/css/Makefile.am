@@ -36,14 +36,20 @@ $(CSS_DEST)/%.css: %.css
 	@test -d $(CSS_DEST) || { \
 		$(MKDIR_P) $(CSS_DEST); \
 	}
+if ENABLE_CONTENT_HASHING
 	$(eval CHASH := $(shell $(HASH_BIN) $< | cut -c1-$(HASH_LENGTH)))
 	$(eval NAME := $(addsuffix -$(CHASH).css,$(patsubst %.css,%,$@)))
+else
+	$(eval NAME := $@)
+endif
 	@test -f $(NAME) || { \
 		echo '$(call compile,$<,$(NAME))'; \
 		$(call compile,$<,$(NAME)); \
 	}
+if ENABLE_CONTENT_HASHING
 	$(eval TARGET := css\/$(patsubst %.css,%,$<))
 	@for h in $(HTML); do \
 		echo "Updating refs to `basename $(NAME)` in `basename $$h`"; \
 		sed -ri 's/(href=\")$(TARGET)(-[0-9a-f]{$(HASH_LENGTH)})?(\.css\")/\1$(TARGET)-$(CHASH)\3/' $$h; \
 	done
+endif
