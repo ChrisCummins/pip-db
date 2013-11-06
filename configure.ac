@@ -232,14 +232,16 @@ AM_CONDITIONAL(ENABLE_EXTRA_DOCUMENTATION, test x$enable_extra_documentation = x
 dnl     ============================================================
 dnl     Do we have pdflatex installed?
 dnl     ============================================================
-AC_CHECK_PROG([PDFLATEX],[pdflatex],[pdflatex])
-if test x$PDFLATEX != x; then
-   HAVE_PDFLATEX=yes
-else
-   HAVE_PDFLATEX=no
-   AC_MSG_WARN([Unable to create PDF documentation.])
-fi
-AM_CONDITIONAL([HAVE_PDFLATEX],[test x$HAVE_PDFLATEX = xyes])
+AS_IF([test "x$enable_extra_documentation" = xyes],
+      AC_CHECK_PROG([PDFLATEX],[pdflatex],[pdflatex])
+      if test "x$PDFLATEX" != x; then
+         HAVE_PDFLATEX=yes
+      else
+         HAVE_PDFLATEX=no
+         AC_MSG_WARN([Unable to create PDF documentation.])
+      fi,
+      HAVE_PDFLATEX=no)
+AM_CONDITIONAL([HAVE_PDFLATEX],[test "x$HAVE_PDFLATEX" = xyes])
 
 
 dnl ================================================================
