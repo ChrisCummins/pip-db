@@ -25,6 +25,7 @@
     }
     .d1-picture {
       max-width: 390px;
+      margin: 0 auto;
     }
     .d1-picture img {
       width: 100%;
