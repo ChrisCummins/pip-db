@@ -88,7 +88,7 @@ AC_ARG_ENABLE(extra_tools,
               AS_HELP_STRING([--enable-extra-tools],
                              [Build extra tools (default: yes)]),,
               [enable_extra_tools=yes])
-AM_CONDITIONAL(ENABLE_EXTRA_TOOLS, test "x$enable_extra_tools" = xyes)
+AM_CONDITIONAL(ENABLE_EXTRA_TOOLS,[test "x$enable_extra_tools" = xyes])
 
 
 dnl     ============================================================
@@ -98,7 +98,7 @@ AC_ARG_ENABLE(content_hashing,
               AS_HELP_STRING([--enable-content-hashing],
                              [Enable cache busting content hashing (default: yes)]),,
               [enable_content_hashing=yes])
-AM_CONDITIONAL(ENABLE_CONTENT_HASHING, test "x$enable_content_hashing" = xyes)
+AM_CONDITIONAL(ENABLE_CONTENT_HASHING,[test "x$enable_content_hashing" = xyes])
 
 
 dnl     ============================================================
@@ -108,7 +108,7 @@ AC_ARG_ENABLE(minify_html,
               AS_HELP_STRING([--enable-minify-html],
                              [Minify compiled HTML sources (default: yes)]),,
               [enable_minify_html=yes])
-AM_CONDITIONAL(ENABLE_MINIFY_HTML, test "x$enable_minify_html" = xyes)
+AM_CONDITIONAL(ENABLE_MINIFY_HTML,[test "x$enable_minify_html" = xyes])
 
 
 dnl     ============================================================
@@ -118,7 +118,7 @@ AC_ARG_ENABLE(minify_css,
               AS_HELP_STRING([--enable-minify-css],
                              [Minify compiled CSS sources (default: yes)]),,
               [enable_minify_css=yes])
-AM_CONDITIONAL(ENABLE_MINIFY_CSS, test "x$enable_minify_css" = xyes)
+AM_CONDITIONAL(ENABLE_MINIFY_CSS,[test "x$enable_minify_css" = xyes])
 
 
 dnl     ============================================================
@@ -128,7 +128,7 @@ AC_ARG_ENABLE(minify_js,
               AS_HELP_STRING([--enable-minify-js],
                              [Minify compiled JS sources (default: yes)]),,
               [enable_minify_js=yes])
-AM_CONDITIONAL(ENABLE_MINIFY_JS, test "x$enable_minify_js" = xyes)
+AM_CONDITIONAL(ENABLE_MINIFY_JS,[test "x$enable_minify_js" = xyes])
 
 
 dnl     ============================================================
@@ -148,7 +148,7 @@ AC_ARG_ENABLE(httpd,
               AS_HELP_STRING([--enable-httpd],
                              [Allow exporting to local webserver (default: yes)]),,
               [enable_httpd=yes])
-AM_CONDITIONAL(ENABLE_HTTPD, test "x$enable_httpd" = xyes)
+AM_CONDITIONAL(ENABLE_HTTPD,[test "x$enable_httpd" = xyes])
 
 dnl     ============================================================
 dnl     Are we using content hashing?
@@ -226,7 +226,7 @@ AC_ARG_ENABLE(extra_documentation,
               AS_HELP_STRING([--enable-extra-documentation],
                              [Build extra documentation (default: no)]),,
               [enable_extra_documentation=no])
-AM_CONDITIONAL(ENABLE_EXTRA_DOCUMENTATION, test "x$enable_extra_documentation" = xyes)
+AM_CONDITIONAL(ENABLE_EXTRA_DOCUMENTATION,[test "x$enable_extra_documentation" = xyes])
 
 
 dnl     ============================================================
@@ -264,7 +264,7 @@ AS_IF([test "x$enable_httpd" = xyes],
                     [HAVE_HTTPD=no
                      AC_MSG_WARN([No apache server found.])]),
       [HAVE_HTTPD=no])
-AM_CONDITIONAL([HAVE_HTTPD], test "x$HAVE_HTTPD" = xyes)
+AM_CONDITIONAL([HAVE_HTTPD],[test "x$HAVE_HTTPD" = xyes])
 
 
 dnl     ============================================================
@@ -278,7 +278,7 @@ AS_IF([test "x$enable_httpd" = xyes],
                     [HAVE_WWW_ROOT=no
                      AC_MSG_WARN([Local server root "$WWW_ROOT" not found.])]),
       [HAVE_WWW_ROOT=no])
-AM_CONDITIONAL([HAVE_WWW_ROOT], test "x$HAVE_WWW_ROOT" = xyes)
+AM_CONDITIONAL([HAVE_WWW_ROOT],[test "x$HAVE_WWW_ROOT" = xyes])
 
 
 dnl     ============================================================
@@ -336,7 +336,7 @@ AC_MSG_RESULT([$HAVE_NODE_OPTIMIST])
 
 AS_IF([test "x$HAVE_NODE_OPTIMIST" = xyes], ,
       [AC_MSG_ERROR([Required node pacakge 'optimist' not found.])])
-AM_CONDITIONAL([HAVE_NODE_OPTIMIST], test "x$HAVE_NODE_OPTIMIST" = xyes)
+AM_CONDITIONAL([HAVE_NODE_OPTIMIST],[test "x$HAVE_NODE_OPTIMIST" = xyes])
 
 
 dnl ================================================================
