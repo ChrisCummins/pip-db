@@ -122,6 +122,15 @@ AC_SUBST([WWW_BUILD],[www_build])
 
 
 dnl     ============================================================
+dnl     Are we exporting to a local webserver?
+dnl     ============================================================
+AC_ARG_ENABLE(httpd,
+              AS_HELP_STRING([--enable-httpd],
+                             [Allow exporting to local webserver (default: yes)]),,
+              [enable_httpd=yes])
+AM_CONDITIONAL(ENABLE_HTTPD, test x$enable_httpd = xyes)
+
+dnl     ============================================================
 dnl     Are we using content hashing?
 dnl     ============================================================
 HASH=md5sum
