@@ -82,6 +82,16 @@ dnl ================================================================
 
 
 dnl     ============================================================
+dnl     Are we minifying CSS?
+dnl     ============================================================
+AC_ARG_ENABLE(minify_css,
+              AS_HELP_STRING([--enable-minify-css],
+                             [Minify compiled CSS sources (default: yes)]),,
+              [enable_minify_css=yes])
+AM_CONDITIONAL(ENABLE_MINIFY_CSS, test x$enable_minify_css = xyes)
+
+
+dnl     ============================================================
 dnl     Check for Website build destination
 dnl     ============================================================
 m4_define([www_build],["$(pwd)/build/www"])
@@ -339,6 +349,7 @@ echo ""
 # Build options:
 echo " • Build options:"
 echo "        Build directory:                $WWW_BUILD/"
+echo "        Minify CSS:                     $enable_minify_css"
 
 echo ""
 # Miscellaneous:
