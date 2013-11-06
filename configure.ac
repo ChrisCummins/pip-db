@@ -92,16 +92,6 @@ AM_CONDITIONAL(ENABLE_EXTRA_TOOLS,[test "x$enable_extra_tools" = xyes])
 
 
 dnl     ============================================================
-dnl     Are we using content hashing?
-dnl     ============================================================
-AC_ARG_ENABLE(content_hashing,
-              AS_HELP_STRING([--enable-content-hashing],
-                             [Enable cache busting content hashing (default: yes)]),,
-              [enable_content_hashing=yes])
-AM_CONDITIONAL(ENABLE_CONTENT_HASHING,[test "x$enable_content_hashing" = xyes])
-
-
-dnl     ============================================================
 dnl     Are we minifying HTML?
 dnl     ============================================================
 AC_ARG_ENABLE(minify_html,
@@ -150,9 +140,17 @@ AC_ARG_ENABLE(httpd,
               [enable_httpd=yes])
 AM_CONDITIONAL(ENABLE_HTTPD,[test "x$enable_httpd" = xyes])
 
+
 dnl     ============================================================
 dnl     Are we using content hashing?
 dnl     ============================================================
+AC_ARG_ENABLE(content_hashing,
+              AS_HELP_STRING([--enable-content-hashing],
+                             [Enable cache busting content hashing (default: yes)]),,
+              [enable_content_hashing=yes])
+AM_CONDITIONAL(ENABLE_CONTENT_HASHING,[test "x$enable_content_hashing" = xyes])
+
+dnl TODO: Only check hash program and length if we have content hashing enabled
 HASH=md5sum
 HASH_LENGTH=8
 
