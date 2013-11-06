@@ -54,26 +54,26 @@ dnl     ============================================================
 dnl     Do we have a Less CSS compiler?
 dnl     ============================================================
 AC_CHECK_PROG([LESSC],[lessc],[lessc])
-if test x$LESSC != x; then
+if test "x$LESSC" != x; then
    HAVE_LESSC=yes
 else
    HAVE_LESSC=no
    AC_MSG_ERROR([Less CSS compiler not found.])
 fi
-AM_CONDITIONAL([HAVE_LESSC],[test x$HAVE_LESSC = xyes])
+AM_CONDITIONAL([HAVE_LESSC],[test "x$HAVE_LESSC" = xyes])
 
 
 dnl     ============================================================
 dnl     Do we have a Java runtime environment?
 dnl     ============================================================
 AC_CHECK_PROG([JAVA],[java],[java])
-if test x$JAVA != x; then
+if test "x$JAVA" != x; then
    HAVE_JAVA=yes
 else
    HAVE_JAVA=no
    AC_MSG_ERROR([No Java virtual machine found.])
 fi
-AM_CONDITIONAL([HAVE_JAVA],[test x$HAVE_JAVA = xyes])
+AM_CONDITIONAL([HAVE_JAVA],[test "x$HAVE_JAVA" = xyes])
 
 
 dnl ================================================================
@@ -88,7 +88,7 @@ AC_ARG_ENABLE(extra_tools,
               AS_HELP_STRING([--enable-extra-tools],
                              [Build extra tools (default: yes)]),,
               [enable_extra_tools=yes])
-AM_CONDITIONAL(ENABLE_EXTRA_TOOLS, test x$enable_extra_tools = xyes)
+AM_CONDITIONAL(ENABLE_EXTRA_TOOLS, test "x$enable_extra_tools" = xyes)
 
 
 dnl     ============================================================
@@ -98,7 +98,7 @@ AC_ARG_ENABLE(content_hashing,
               AS_HELP_STRING([--enable-content-hashing],
                              [Enable cache busting content hashing (default: yes)]),,
               [enable_content_hashing=yes])
-AM_CONDITIONAL(ENABLE_CONTENT_HASHING, test x$enable_content_hashing = xyes)
+AM_CONDITIONAL(ENABLE_CONTENT_HASHING, test "x$enable_content_hashing" = xyes)
 
 
 dnl     ============================================================
@@ -108,7 +108,7 @@ AC_ARG_ENABLE(minify_html,
               AS_HELP_STRING([--enable-minify-html],
                              [Minify compiled HTML sources (default: yes)]),,
               [enable_minify_html=yes])
-AM_CONDITIONAL(ENABLE_MINIFY_HTML, test x$enable_minify_html = xyes)
+AM_CONDITIONAL(ENABLE_MINIFY_HTML, test "x$enable_minify_html" = xyes)
 
 
 dnl     ============================================================
@@ -118,7 +118,7 @@ AC_ARG_ENABLE(minify_css,
               AS_HELP_STRING([--enable-minify-css],
                              [Minify compiled CSS sources (default: yes)]),,
               [enable_minify_css=yes])
-AM_CONDITIONAL(ENABLE_MINIFY_CSS, test x$enable_minify_css = xyes)
+AM_CONDITIONAL(ENABLE_MINIFY_CSS, test "x$enable_minify_css" = xyes)
 
 
 dnl     ============================================================
@@ -128,7 +128,7 @@ AC_ARG_ENABLE(minify_js,
               AS_HELP_STRING([--enable-minify-js],
                              [Minify compiled JS sources (default: yes)]),,
               [enable_minify_js=yes])
-AM_CONDITIONAL(ENABLE_MINIFY_JS, test x$enable_minify_js = xyes)
+AM_CONDITIONAL(ENABLE_MINIFY_JS, test "x$enable_minify_js" = xyes)
 
 
 dnl     ============================================================
@@ -148,7 +148,7 @@ AC_ARG_ENABLE(httpd,
               AS_HELP_STRING([--enable-httpd],
                              [Allow exporting to local webserver (default: yes)]),,
               [enable_httpd=yes])
-AM_CONDITIONAL(ENABLE_HTTPD, test x$enable_httpd = xyes)
+AM_CONDITIONAL(ENABLE_HTTPD, test "x$enable_httpd" = xyes)
 
 dnl     ============================================================
 dnl     Are we using content hashing?
@@ -157,20 +157,20 @@ HASH=md5sum
 HASH_LENGTH=8
 
 AC_CHECK_PROG([HASH_BIN],[$HASH],[$HASH])
-if test x$HASH_BIN != x; then
+if test "x$HASH_BIN" != x; then
    HAVE_HASH_BIN=yes
 else
    HAVE_HASH_BIN=no
    AC_MSG_ERROR([$HASH program not found.])
 fi
-AM_CONDITIONAL([HAVE_HASH_BIN],[test x$HAVE_HASH_BIN = xyes])
+AM_CONDITIONAL([HAVE_HASH_BIN],[test "x$HAVE_HASH_BIN" = xyes])
 
 AC_MSG_CHECKING([length of generated hashes])
 hash_test_file=/tmp/$(date +%s)
 touch $hash_test_file
 GEN_HASH_LENGTH=$($HASH_BIN $hash_test_file | awk '{print $1}' | wc -c)
 GEN_HASH_LENGTH=$((GEN_HASH_LENGTH-1))
-rm -f "$hash_test_file"
+rm -f $hash_test_file
 unset hash_test_file
 
 if test $HASH_LENGTH -ge $GEN_HASH_LENGTH; then
@@ -192,26 +192,26 @@ dnl     ============================================================
 dnl     Should xdg-open be used to open PDFs?
 dnl     ============================================================
 AC_CHECK_PROG([XDG_OPEN],[xdg-open],[xdg-open])
-if test x$XDG_OPEN != x; then
+if test "x$XDG_OPEN" != x; then
    HAVE_XDG_OPEN=yes
 else
    HAVE_XDG_OPEN=no
    AC_MSG_WARN([PDF opening feature disabled.])
 fi
-AM_CONDITIONAL([HAVE_XDG_OPEN],[test x$HAVE_XDG_OPEN = xyes])
+AM_CONDITIONAL([HAVE_XDG_OPEN],[test "x$HAVE_XDG_OPEN" = xyes])
 
 
 dnl     ============================================================
 dnl     Should emacsclient by used for editing files?
 dnl     ============================================================
 AC_CHECK_PROG([EMACSCLIENT],[emacsclient],[emacsclient])
-if test x$EMACSCLIENT != x; then
+if test "x$EMACSCLIENT" != x; then
    HAVE_EMACSCLIENT=yes
 else
    HAVE_EMACSCLIENT=no
    AC_MSG_WARN([Text editor launching features disabled.])
 fi
-AM_CONDITIONAL([HAVE_EMACSCLIENT],[test x$HAVE_EMACSCLIENT = xyes])
+AM_CONDITIONAL([HAVE_EMACSCLIENT],[test "x$HAVE_EMACSCLIENT" = xyes])
 
 
 dnl ================================================================
@@ -226,7 +226,7 @@ AC_ARG_ENABLE(extra_documentation,
               AS_HELP_STRING([--enable-extra-documentation],
                              [Build extra documentation (default: no)]),,
               [enable_extra_documentation=no])
-AM_CONDITIONAL(ENABLE_EXTRA_DOCUMENTATION, test x$enable_extra_documentation = xyes)
+AM_CONDITIONAL(ENABLE_EXTRA_DOCUMENTATION, test "x$enable_extra_documentation" = xyes)
 
 
 dnl     ============================================================
@@ -264,7 +264,7 @@ AS_IF([test "x$enable_httpd" = xyes],
                     [HAVE_HTTPD=no
                      AC_MSG_WARN([No apache server found.])]),
       [HAVE_HTTPD=no])
-AM_CONDITIONAL([HAVE_HTTPD], test x$HAVE_HTTPD = xyes)
+AM_CONDITIONAL([HAVE_HTTPD], test "x$HAVE_HTTPD" = xyes)
 
 
 dnl     ============================================================
@@ -278,7 +278,7 @@ AS_IF([test "x$enable_httpd" = xyes],
                     [HAVE_WWW_ROOT=no
                      AC_MSG_WARN([Local server root "$WWW_ROOT" not found.])]),
       [HAVE_WWW_ROOT=no])
-AM_CONDITIONAL([HAVE_WWW_ROOT], test x$HAVE_WWW_ROOT = xyes)
+AM_CONDITIONAL([HAVE_WWW_ROOT], test "x$HAVE_WWW_ROOT" = xyes)
 
 
 dnl     ============================================================
@@ -286,27 +286,27 @@ dnl     Do we have mysql?
 dnl     ============================================================
 AS_IF([test "x$enable_httpd" = xyes],
       AC_CHECK_PROG([MYSQL],[mysql],[mysql])
-      if test x$MYSQL != x; then
+      if test "x$MYSQL" != x; then
          HAVE_MYSQL=yes
       else
          HAVE_MYSQL=no
          AC_MSG_WARN([No mysql database application found])
       fi,
       [HAVE_MYSQL=no])
-AM_CONDITIONAL([HAVE_MYSQL],[test x$HAVE_MYSQL = xyes])
+AM_CONDITIONAL([HAVE_MYSQL],[test "x$HAVE_MYSQL" = xyes])
 
 
 dnl     ============================================================
 dnl     Do we have npm?
 dnl     ============================================================
 AC_CHECK_PROG([NPM],[npm],[npm])
-if test x$NPM != x; then
+if test "x$NPM" != x; then
    HAVE_NPM=yes
 else
    HAVE_NPM=no
    AC_MSG_ERROR([Node package manager not found.])
 fi
-AM_CONDITIONAL([HAVE_NPM],[test x$HAVE_NPM = xyes])
+AM_CONDITIONAL([HAVE_NPM],[test "x$HAVE_NPM" = xyes])
 
 
 dnl     ============================================================
@@ -314,13 +314,13 @@ dnl     Do we have node?
 dnl     ============================================================
 dnl TODO: Check for correct version
 AC_CHECK_PROG([NODE],[node],[node])
-if test x$NODE != x; then
+if test "x$NODE" != x; then
    HAVE_NODE=yes
 else
    HAVE_NODE=no
    AC_MSG_ERROR([Node.js not found.])
 fi
-AM_CONDITIONAL([HAVE_NODE],[test x$HAVE_NODE = xyes])
+AM_CONDITIONAL([HAVE_NODE],[test "x$HAVE_NODE" = xyes])
 
 
 dnl         ========================================================
@@ -334,9 +334,9 @@ else
 fi
 AC_MSG_RESULT([$HAVE_NODE_OPTIMIST])
 
-AS_IF([test x$HAVE_NODE_OPTIMIST = xyes], ,
+AS_IF([test "x$HAVE_NODE_OPTIMIST" = xyes], ,
       [AC_MSG_ERROR([Required node pacakge 'optimist' not found.])])
-AM_CONDITIONAL([HAVE_NODE_OPTIMIST], test x$HAVE_NODE_OPTIMIST = xyes)
+AM_CONDITIONAL([HAVE_NODE_OPTIMIST], test "x$HAVE_NODE_OPTIMIST" = xyes)
 
 
 dnl ================================================================
@@ -393,13 +393,13 @@ echo "--------------"
 echo ""
 # Global flags:
 echo " • Global:"
-if test x$HAVE_HTTPD = xyes; then
+if test "x$HAVE_HTTPD" = xyes; then
            echo "        httpd:                          $HTTPD"
            echo "        httpd root:                     $WWW_ROOT/"
 else
            echo "        httpd:                          no"
 fi
-if test x$HAVE_MYSQL = xyes; then
+if test "x$HAVE_MYSQL" = xyes; then
            echo "        mysql:                          $MYSQL"
 else
            echo "        mysql:                          no"
