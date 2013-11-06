@@ -82,6 +82,16 @@ dnl ================================================================
 
 
 dnl     ============================================================
+dnl     Are we using content hashing?
+dnl     ============================================================
+AC_ARG_ENABLE(content_hashing,
+              AS_HELP_STRING([--enable-content-hashing],
+                             [Enable cache busting content hashing (default: yes)]),,
+              [enable_content_hashing=yes])
+AM_CONDITIONAL(ENABLE_CONTENT_HASHING, test x$enable_content_hashing = xyes)
+
+
+dnl     ============================================================
 dnl     Are we minifying HTML?
 dnl     ============================================================
 AC_ARG_ENABLE(minify_html,
@@ -377,8 +387,11 @@ fi
 echo ""
 # Features:
 echo " • Features:"
-echo "        Content hashing algorithm:      $HASH"
-echo "        Content hashes length:          $HASH_LENGTH"
+echo "        Content hashing enabled:        $enable_content_hashing"
+if test "x$enable_content_hashing" = xyes; then
+   echo "        Content hashing algorithm:      $HASH"
+   echo "        Content hashes length:          $HASH_LENGTH"
+fi
 echo "        Minify HTML:                    $enable_minify_html"
 echo "        Minify CSS:                     $enable_minify_css"
 echo "        Minify JS:                      $enable_minify_js"
