@@ -53,20 +53,27 @@ dnl ================================================================
 dnl     ============================================================
 dnl     Do we have a Less CSS compiler?
 dnl     ============================================================
-AC_CHECK_PROG([LESSC], [lessc], [lessc])
-if test -z "$LESSC"; then
+AC_CHECK_PROG([LESSC],[lessc],[lessc])
+if test x$LESSC != x; then
+   HAVE_LESSC=yes
+else
+   HAVE_LESSC=no
    AC_MSG_ERROR([Less CSS compiler not found.])
 fi
-AM_CONDITIONAL([HAVE_LESSC], test -n "$LESSC")
+AM_CONDITIONAL([HAVE_LESSC],[test x$HAVE_LESSC = xyes])
 
 
 dnl     ============================================================
 dnl     Do we have a Java runtime environment?
 dnl     ============================================================
-AC_CHECK_PROG([JAVA], [java], [java])
-if test -z "$JAVA"; then
+AC_CHECK_PROG([JAVA],[java],[java])
+if test x$JAVA != x; then
+   HAVE_JAVA=yes
+else
+   HAVE_JAVA=no
    AC_MSG_ERROR([No Java virtual machine found.])
 fi
+AM_CONDITIONAL([HAVE_JAVA],[test x$HAVE_JAVA = xyes])
 
 
 dnl ================================================================
@@ -90,10 +97,15 @@ dnl     Are we using content hashing?
 dnl     ============================================================
 HASH=md5sum
 HASH_LENGTH=8
-AC_CHECK_PROG([HASH_BIN], [$HASH], [$HASH])
-if test -z "$HASH_BIN"; then
+
+AC_CHECK_PROG([HASH_BIN],[$HASH],[$HASH])
+if test x$HASH_BIN != x; then
+   HAVE_HASH_BIN=yes
+else
+   HAVE_HASH_BIN=no
    AC_MSG_ERROR([$HASH program not found.])
 fi
+AM_CONDITIONAL([HAVE_HASH_BIN],[test x$HAVE_HASH_BIN = xyes])
 
 AC_MSG_CHECKING([length of generated hashes])
 hash_test_file=/tmp/$(date +%s)
@@ -121,31 +133,40 @@ dnl ================================================================
 dnl     ============================================================
 dnl     Should LaTeX documentation be built?
 dnl     ============================================================
-AC_CHECK_PROG(PDFLATEX, pdflatex, pdflatex)
-if test -z "$PDFLATEX"; then
+AC_CHECK_PROG([PDFLATEX],[pdflatex],[pdflatex])
+if test x$PDFLATEX != x; then
+   HAVE_PDFLATEX=yes
+else
+   HAVE_PDFLATEX=no
    AC_MSG_WARN([Unable to create PDF documentation.])
 fi
-AM_CONDITIONAL([HAVE_PDFLATEX], test -n "$PDFLATEX")
+AM_CONDITIONAL([HAVE_PDFLATEX],[test x$HAVE_PDFLATEX = xyes])
 
 
 dnl     ============================================================
 dnl     Should xdg-open be used to open PDFs?
 dnl     ============================================================
-AC_CHECK_PROG([XDG_OPEN], [xdg-open], [xdg-open])
-if test -z "$XDG_OPEN"; then
+AC_CHECK_PROG([XDG_OPEN],[xdg-open],[xdg-open])
+if test x$XDG_OPEN != x; then
+   HAVE_XDG_OPEN=yes
+else
+   HAVE_XDG_OPEN=no
    AC_MSG_WARN([PDF opening feature disabled.])
 fi
-AM_CONDITIONAL([HAVE_XDG_OPEN], test -n "$XDG_OPEN")
+AM_CONDITIONAL([HAVE_XDG_OPEN],[test x$HAVE_XDG_OPEN = xyes])
 
 
 dnl     ============================================================
 dnl     Should emacsclient by used for editing files?
 dnl     ============================================================
-AC_CHECK_PROG([EMACSCLIENT], [emacsclient], [emacsclient])
-if test -z "$EMACSCLIENT"; then
+AC_CHECK_PROG([EMACSCLIENT],[emacsclient],[emacsclient])
+if test x$EMACSCLIENT != x; then
+   HAVE_EMACSCLIENT=yes
+else
+   HAVE_EMACSCLIENT=no
    AC_MSG_WARN([Text editor launching features disabled.])
 fi
-AM_CONDITIONAL([HAVE_EMACSCLIENT], test -n "$EMACSCLIENT")
+AM_CONDITIONAL([HAVE_EMACSCLIENT],[test x$HAVE_EMACSCLIENT = xyes])
 
 
 dnl ================================================================
@@ -190,32 +211,41 @@ AM_CONDITIONAL([HAVE_WWW_ROOT], test x$HAVE_WWW_ROOT = xyes)
 dnl     ============================================================
 dnl     Do we have mysql?
 dnl     ============================================================
-AC_CHECK_PROG([MYSQL], [mysql], [mysql])
-if test -z "$MYSQL"; then
+AC_CHECK_PROG([MYSQL],[mysql],[mysql])
+if test x$MYSQL != x; then
+   HAVE_MYSQL=yes
+else
+   HAVE_MYSQL=no
    AC_MSG_WARN([No mysql database application found])
 fi
-AM_CONDITIONAL([HAVE_MYSQL], test -n "$MYSQL")
+AM_CONDITIONAL([HAVE_MYSQL],[test x$HAVE_MYSQL = xyes])
 
 
 dnl     ============================================================
 dnl     Do we have npm?
 dnl     ============================================================
-AC_CHECK_PROG([NPM], [npm], [npm])
-if test -z "$NPM"; then
+AC_CHECK_PROG([NPM],[npm],[npm])
+if test x$NPM != x; then
+   HAVE_NPM=yes
+else
+   HAVE_NPM=no
    AC_MSG_ERROR([Node package manager not found.])
 fi
-AM_CONDITIONAL([HAVE_NPM], test -n "$NPM")
+AM_CONDITIONAL([HAVE_NPM],[test x$HAVE_NPM = xyes])
 
 
 dnl     ============================================================
 dnl     Do we have node?
 dnl     ============================================================
 dnl TODO: Check for correct version
-AC_CHECK_PROG([NODE], [node], [node])
-if test -z "$NODE"; then
+AC_CHECK_PROG([NODE],[node],[node])
+if test x$NODE != x; then
+   HAVE_NODE=yes
+else
+   HAVE_NODE=no
    AC_MSG_ERROR([Node.js not found.])
 fi
-AM_CONDITIONAL([HAVE_NODE], test -n "$NODE")
+AM_CONDITIONAL([HAVE_NODE],[test x$HAVE_NODE = xyes])
 
 
 dnl         ========================================================
