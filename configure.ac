@@ -92,6 +92,16 @@ AM_CONDITIONAL(ENABLE_MINIFY_CSS, test x$enable_minify_css = xyes)
 
 
 dnl     ============================================================
+dnl     Are we minifying JS?
+dnl     ============================================================
+AC_ARG_ENABLE(minify_js,
+              AS_HELP_STRING([--enable-minify-js],
+                             [Minify compiled JS sources (default: yes)]),,
+              [enable_minify_js=yes])
+AM_CONDITIONAL(ENABLE_MINIFY_JS, test x$enable_minify_js = xyes)
+
+
+dnl     ============================================================
 dnl     Check for Website build destination
 dnl     ============================================================
 m4_define([www_build],["$(pwd)/build/www"])
@@ -350,6 +360,7 @@ echo ""
 echo " • Build options:"
 echo "        Build directory:                $WWW_BUILD/"
 echo "        Minify CSS:                     $enable_minify_css"
+echo "        Minify JS:                      $enable_minify_js"
 
 echo ""
 # Miscellaneous:
