@@ -10,9 +10,15 @@ CLEANFILES = $(shell find $(JS_DEST) -name '*.js')
 EXTRA_DIST = $(JS_SRC)
 
 # Compilation command
+if ENABLE_MINIFY_JS
 define compile
 $(JAVA) -jar $(JS_JAR) --js=$1 --js_output_file=$2
 endef
+else # Disabled minification
+define compile
+cat $1 > $2
+endef
+endif
 
 # JavaScript compilation
 $(JS_DEST)/%.js: %.js
