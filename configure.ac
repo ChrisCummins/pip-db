@@ -189,19 +189,6 @@ dnl ================================================================
 
 
 dnl     ============================================================
-dnl     Should LaTeX documentation be built?
-dnl     ============================================================
-AC_CHECK_PROG([PDFLATEX],[pdflatex],[pdflatex])
-if test x$PDFLATEX != x; then
-   HAVE_PDFLATEX=yes
-else
-   HAVE_PDFLATEX=no
-   AC_MSG_WARN([Unable to create PDF documentation.])
-fi
-AM_CONDITIONAL([HAVE_PDFLATEX],[test x$HAVE_PDFLATEX = xyes])
-
-
-dnl     ============================================================
 dnl     Should xdg-open be used to open PDFs?
 dnl     ============================================================
 AC_CHECK_PROG([XDG_OPEN],[xdg-open],[xdg-open])
@@ -240,6 +227,19 @@ AC_ARG_ENABLE(extra_documentation,
                              [Build extra documentation (default: yes)]),,
               [enable_extra_documentation=yes])
 AM_CONDITIONAL(ENABLE_EXTRA_DOCUMENTATION, test x$enable_extra_documentation = xyes)
+
+
+dnl     ============================================================
+dnl     Do we have pdflatex installed?
+dnl     ============================================================
+AC_CHECK_PROG([PDFLATEX],[pdflatex],[pdflatex])
+if test x$PDFLATEX != x; then
+   HAVE_PDFLATEX=yes
+else
+   HAVE_PDFLATEX=no
+   AC_MSG_WARN([Unable to create PDF documentation.])
+fi
+AM_CONDITIONAL([HAVE_PDFLATEX],[test x$HAVE_PDFLATEX = xyes])
 
 
 dnl ================================================================
