@@ -31,7 +31,7 @@ define compile
 $(PDFLATEX) -output-format pdf \
 	-progname pdflatex \
 	-file-line-error \
-	-interaction errorstopmode $1
+	-interaction=nonstopmode $1
 endef
 
 # Compile twice to refresh cross-references
