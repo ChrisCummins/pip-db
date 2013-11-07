@@ -54,12 +54,10 @@ dnl     ============================================================
 dnl     Do we have a Less CSS compiler?
 dnl     ============================================================
 AC_CHECK_PROG([LESSC],[lessc],[lessc])
-if test "x$LESSC" != x; then
-    HAVE_LESSC=yes
-else
-    HAVE_LESSC=no
-    AC_MSG_ERROR([Less CSS compiler not found.])
-fi
+AS_IF([test "x$LESSC" != x],
+      [HAVE_LESSC=yes],
+      [HAVE_LESSC=no
+       AC_MSG_ERROR([Less CSS compiler not found.])])
 AM_CONDITIONAL([HAVE_LESSC],[test "x$HAVE_LESSC" = xyes])
 
 
@@ -67,12 +65,10 @@ dnl     ============================================================
 dnl     Do we have a Java runtime environment?
 dnl     ============================================================
 AC_CHECK_PROG([JAVA],[java],[java])
-if test "x$JAVA" != x; then
-    HAVE_JAVA=yes
-else
-    HAVE_JAVA=no
-    AC_MSG_ERROR([No Java virtual machine found.])
-fi
+AS_IF([test "x$JAVA" != x],
+      [HAVE_JAVA=yes],
+      [HAVE_JAVA=no
+       AC_MSG_ERROR([No Java virtual machine found.])])
 AM_CONDITIONAL([HAVE_JAVA],[test "x$HAVE_JAVA" = xyes])
 
 
@@ -155,12 +151,10 @@ HASH=md5sum
 HASH_LENGTH=8
 
 AC_CHECK_PROG([HASH_BIN],[$HASH],[$HASH])
-if test "x$HASH_BIN" != x; then
-    HAVE_HASH_BIN=yes
-else
-    HAVE_HASH_BIN=no
-    AC_MSG_ERROR([$HASH program not found.])
-fi
+AS_IF([test "x$HASH_BIN" != x],
+      [HAVE_HASH_BIN=yes],
+      [HAVE_HASH_BIN=no
+       AC_MSG_ERROR([$HASH program not found.])])
 AM_CONDITIONAL([HAVE_HASH_BIN],[test "x$HAVE_HASH_BIN" = xyes])
 
 AC_MSG_CHECKING([length of generated hashes])
@@ -171,13 +165,11 @@ GEN_HASH_LENGTH=$((GEN_HASH_LENGTH-1))
 rm -f $hash_test_file
 unset hash_test_file
 
-if test $HASH_LENGTH -ge $GEN_HASH_LENGTH; then
-    HASH_LENGTH=$GEN_HASH_LENGTH
-    AC_MSG_RESULT([truncated])
-    AC_MSG_WARN([Limiting content hash length to $GEN_HASH_LENGTH])
-else
-    AC_MSG_RESULT([ok])
-fi
+AS_IF([test $HASH_LENGTH -ge $GEN_HASH_LENGTH],
+      [HASH_LENGTH=$GEN_HASH_LENGTH
+       AC_MSG_RESULT([truncated])
+       AC_MSG_WARN([Limiting content hash length to $GEN_HASH_LENGTH])],
+      [AC_MSG_RESULT([ok])])
 AC_SUBST([HASH_LENGTH])
 
 
@@ -190,12 +182,10 @@ dnl     ============================================================
 dnl     Should xdg-open be used to open PDFs?
 dnl     ============================================================
 AC_CHECK_PROG([XDG_OPEN],[xdg-open],[xdg-open])
-if test "x$XDG_OPEN" != x; then
-    HAVE_XDG_OPEN=yes
-else
-    HAVE_XDG_OPEN=no
-    AC_MSG_WARN([PDF opening feature disabled.])
-fi
+AS_IF([test "x$XDG_OPEN" != x],
+      [HAVE_XDG_OPEN=yes],
+      [HAVE_XDG_OPEN=no
+       AC_MSG_WARN([PDF opening feature disabled.])])
 AM_CONDITIONAL([HAVE_XDG_OPEN],[test "x$HAVE_XDG_OPEN" = xyes])
 
 
@@ -203,12 +193,10 @@ dnl     ============================================================
 dnl     Should emacsclient by used for editing files?
 dnl     ============================================================
 AC_CHECK_PROG([EMACSCLIENT],[emacsclient],[emacsclient])
-if test "x$EMACSCLIENT" != x; then
-    HAVE_EMACSCLIENT=yes
-else
-    HAVE_EMACSCLIENT=no
-    AC_MSG_WARN([Text editor launching features disabled.])
-fi
+AS_IF([test "x$EMACSCLIENT" != x],
+      [HAVE_EMACSCLIENT=yes],
+      [HAVE_EMACSCLIENT=no
+       AC_MSG_WARN([Text editor launching features disabled.])])
 AM_CONDITIONAL([HAVE_EMACSCLIENT],[test "x$HAVE_EMACSCLIENT" = xyes])
 
 
@@ -232,12 +220,10 @@ dnl     Do we have pdflatex installed?
 dnl     ============================================================
 AS_IF([test "x$enable_extra_documentation" = xyes],
       AC_CHECK_PROG([PDFLATEX],[pdflatex],[pdflatex])
-      if test "x$PDFLATEX" != x; then
-         HAVE_PDFLATEX=yes
-      else
-         HAVE_PDFLATEX=no
-         AC_MSG_WARN([Unable to create PDF documentation.])
-      fi,
+      AS_IF([test "x$PDFLATEX" != x],
+            [HAVE_PDFLATEX=yes],
+            [HAVE_PDFLATEX=no
+             AC_MSG_WARN([Unable to create PDF documentation.])]),
       HAVE_PDFLATEX=no)
 AM_CONDITIONAL([HAVE_PDFLATEX],[test "x$HAVE_PDFLATEX" = xyes])
 
@@ -284,12 +270,10 @@ dnl     Do we have mysql?
 dnl     ============================================================
 AS_IF([test "x$enable_httpd" = xyes],
       AC_CHECK_PROG([MYSQL],[mysql],[mysql])
-      if test "x$MYSQL" != x; then
-         HAVE_MYSQL=yes
-      else
-         HAVE_MYSQL=no
-         AC_MSG_WARN([No mysql database application found])
-      fi,
+      AS_IF([test "x$MYSQL" != x],
+            [HAVE_MYSQL=yes],
+            [HAVE_MYSQL=no
+             AC_MSG_WARN([No mysql database application found])]),
       [HAVE_MYSQL=no])
 AM_CONDITIONAL([HAVE_MYSQL],[test "x$HAVE_MYSQL" = xyes])
 
@@ -298,12 +282,10 @@ dnl     ============================================================
 dnl     Do we have npm?
 dnl     ============================================================
 AC_CHECK_PROG([NPM],[npm],[npm])
-if test "x$NPM" != x; then
-    HAVE_NPM=yes
-else
-    HAVE_NPM=no
-    AC_MSG_ERROR([Node package manager not found.])
-fi
+AS_IF([test "x$NPM" != x],
+      [HAVE_NPM=yes],
+      [HAVE_NPM=no
+       AC_MSG_ERROR([Node package manager not found.])])
 AM_CONDITIONAL([HAVE_NPM],[test "x$HAVE_NPM" = xyes])
 
 
@@ -312,12 +294,10 @@ dnl     Do we have node?
 dnl     ============================================================
 dnl TODO: Check for correct version
 AC_CHECK_PROG([NODE],[node],[node])
-if test "x$NODE" != x; then
-    HAVE_NODE=yes
-else
-    HAVE_NODE=no
-    AC_MSG_ERROR([Node.js not found.])
-fi
+AS_IF([test "x$NODE" != x],
+      [HAVE_NODE=yes],
+      [HAVE_NODE=no
+       AC_MSG_ERROR([Node.js not found.])])
 AM_CONDITIONAL([HAVE_NODE],[test "x$HAVE_NODE" = xyes])
 
 
@@ -325,11 +305,9 @@ dnl         ========================================================
 dnl         Do we have the optimist package?
 dnl         ========================================================
 AC_MSG_CHECKING([for optimist package])
-if test -n "$(npm ls -g | grep optimist)"; then
-    HAVE_NODE_OPTIMIST=yes
-else
-    HAVE_NODE_OPTIMIST=no
-fi
+AS_IF([test -n "$(npm ls -g | grep optimist)"],
+      [HAVE_NODE_OPTIMIST=yes],
+      [HAVE_NODE_OPTIMIST=no])
 AC_MSG_RESULT([$HAVE_NODE_OPTIMIST])
 
 AS_IF([test "x$HAVE_NODE_OPTIMIST" = xyes],,
@@ -391,26 +369,21 @@ echo "--------------"
 echo ""
 # Global flags:
 echo " • Global:"
-if test "x$HAVE_HTTPD" = xyes; then
-    echo "        httpd:                          $HTTPD"
-    echo "        httpd root:                     $WWW_ROOT/"
-else
-    echo "        httpd:                          no"
-fi
-if test "x$HAVE_MYSQL" = xyes; then
-    echo "        mysql:                          $MYSQL"
-else
-    echo "        mysql:                          no"
-fi
+AS_IF([test "x$HAVE_HTTPD" = xyes],
+      [echo "        httpd:                          $HTTPD"
+       echo "        httpd root:                     $WWW_ROOT/"],
+      [echo "        httpd:                          no"])
+AS_IF([test "x$HAVE_MYSQL" = xyes],
+      [echo "        mysql:                          $MYSQL"],
+      [echo "        mysql:                          no"])
 
 echo ""
 # Features:
 echo " • Features:"
 echo "        Content hashing enabled:        $enable_content_hashing"
-if test "x$enable_content_hashing" = xyes; then
-    echo "        Content hashing algorithm:      $HASH"
-    echo "        Content hashes length:          $HASH_LENGTH"
-fi
+AS_IF([test "x$enable_content_hashing" = xyes],
+      [echo "        Content hashing algorithm:      $HASH"
+       echo "        Content hashes length:          $HASH_LENGTH"])
 echo "        Minify HTML:                    $enable_minify_html"
 echo "        Minify CSS:                     $enable_minify_css"
 echo "        Minify JS:                      $enable_minify_js"
