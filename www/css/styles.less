@@ -24,6 +24,7 @@
 @import "navs.less";
 @import "navbar.less";
 @import "footer.less";
+@import "search.less";
 @import "breadcrumbs.less";
 @import "pagination.less";
 @import "pager.less";
@@ -52,70 +53,6 @@
 /*
  * START OF SITE-SPECIFIC STYLES
  */
-
-/* SEARCH */
-@searchWidth: 640px;
-@searchHeight: 300px;
-@searchLogoColor: @brand-primary;
-@searchLogoSize: 105px;
-
-.search .logo {
-  font-family: @font-family-title;
-  color: @searchLogoColor;
-}
-
-/* Homepage search */
-.search.full {
-  width: @searchWidth;
-  height: @searchHeight;
-  text-align: center;
-
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin: (-@searchHeight * 0.6) 0 0 (-@searchWidth * 0.5);
-}
-.search.full .logo {
-  font-size: @searchLogoSize;
-  margin: -70px 0 50px;
-}
-.search.full #in {
-  width: 100%;
-  display: block;
-  margin: 10px 0;
-}
-.search.full a:hover {
-  /* Prevent buttons wrapped in anchors on homepage from having text decoration
-   * artifacts on hover: */
-  text-decoration: none;
-}
-.search.full button.btn {
-  min-width: 116px;
-}
-.search.full button.btn:first-child {
-  margin-right: 8px;
-}
-.search.full button.btn:last-child {
-  margin-left: 8px;
-}
-
-/* Inline search */
-.search.inline {
-  height: 100%;
-  padding: 0 0 10px 20px;
-}
-.search.inline .logo {
-  font-size: 30px;
-  display: inline;
-  margin-right: 20px;
-}
-.search.inline button {
-  margin-top: -2px;
-}
-.search.inline input[type="text"] {
-  /* Use the same width as on the homepage */
-  width: @searchWidth;
-}
 
 /* PAGE TITLE */
 div.page-title {

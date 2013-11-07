@@ -1,0 +1,61 @@
+//
+// SEARCH
+// --------------------------------------------------
+
+.search .logo {
+  font-family: @font-family-title;
+  color: @brand-primary;
+}
+
+/* Homepage search */
+.search.full {
+  width: @search-width;
+  height: @search-height;
+  text-align: center;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: (-@search-height * 0.6) 0 0 (-@search-width * 0.5);
+}
+.search.full .logo {
+  font-size: @font-size-title;
+  margin: -70px 0 50px;
+}
+.search.full #in {
+  width: 100%;
+  display: block;
+  margin: 10px 0;
+}
+.search.full a:hover {
+  /* Prevent buttons wrapped in anchors on homepage from having text decoration
+   * artifacts on hover: */
+  text-decoration: none;
+}
+.search.full button.btn {
+  min-width: 116px;
+}
+.search.full button.btn:first-child {
+  margin-right: 8px;
+}
+.search.full button.btn:last-child {
+  margin-left: 8px;
+}
+
+/* Inline search */
+.search.inline {
+  height: 100%;
+  padding: 0 0 10px 20px;
+}
+.search.inline .logo {
+  font-size: 30px;
+  display: inline;
+  margin-right: 20px;
+}
+.search.inline button {
+  margin-top: -2px;
+}
+.search.inline input[type="text"] {
+  /* Use the same width as on the homepage */
+  width: @search-width;
+}
