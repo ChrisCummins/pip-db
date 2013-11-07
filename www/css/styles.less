@@ -54,8 +54,6 @@
  */
 
 /* Block border */
-@borderColor: #e4e4e4;
-@borderWidth: 1px;
 
 /*
  * SIZES
@@ -95,9 +93,9 @@ div.header {
 }
 div.header.grey {
   /* Offset the height by the width of the border: */
-  height: @headerHeight + @borderWidth;
+  height: @headerHeight + @navbar-border-width;
   background: @navbar-default-bg;
-  border-bottom: @borderWidth solid @borderColor;
+  border-bottom: @navbar-default-border;
 }
 
 /* User bar */
