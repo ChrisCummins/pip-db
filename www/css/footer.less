@@ -1,0 +1,30 @@
+//
+// Footer
+// --------------------------------------------------
+
+#footer {
+  height: @footerHeight;
+  background-color: @blockColor;
+  border-top: @borderWidth solid @borderColor;
+}
+div#footer div.left {
+  float: left !important;
+}
+div#footer div.right {
+  float: right !important;
+}
+div#footer div.footer-inner {
+  display: table-cell;
+  vertical-align: middle;
+  height: @footerHeight;
+  padding: 0 15px;
+}
+div#footer div.footer-inner a {
+  margin: 0 12px;
+  color: @muteTextColor;
+}
+div#footer div.footer-inner a:hover,
+div#footer div.footer-inner a:focus {
+  color: @textColor;
+  text-decoration: underline;
+}

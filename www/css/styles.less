@@ -23,6 +23,7 @@
 @import "input-groups.less";
 @import "navs.less";
 @import "navbar.less";
+@import "footer.less";
 @import "breadcrumbs.less";
 @import "pagination.less";
 @import "pager.less";
@@ -81,18 +82,6 @@
 @smallTextSize: 11px;
 @reducedTextSize: 12px;
 
-/* LAYOUT */
-html,
-body {
-  height: 100%;
-}
-#wrap {
-  min-height: 100%;
-}
-#main {
-  overflow: auto;
-}
-
 /* UI-COMPONENTS */
 input[type="text"] {
   display: inline;
@@ -119,7 +108,6 @@ button.btn-lg {
 }
 
 /* HEADER */
-@headerHeight: 49px;
 
 div.header {
   height: @headerHeight;
@@ -159,43 +147,6 @@ div.header div.ubar div.ubar-inner a:focus {
   color: @textColor;
   text-decoration: none;
   background: #e5e5e5;
-}
-
-/* FOOTER */
-@footerHeight: @headerHeight;
-
-#wrap {
-  min-height: 100%;
-  height: auto;
-  margin: 0 auto -@footerHeight - @borderWidth;
-  padding: 0 0 @footerHeight - @borderWidth;
-}
-
-#footer {
-  height: @footerHeight;
-  background-color: @blockColor;
-  border-top: @borderWidth solid @borderColor;
-}
-div#footer div.left {
-  float: left !important;
-}
-div#footer div.right {
-  float: right !important;
-}
-div#footer div.footer-inner {
-  display: table-cell;
-  vertical-align: middle;
-  height: @footerHeight;
-  padding: 0 15px;
-}
-div#footer div.footer-inner a {
-  margin: 0 12px;
-  color: @muteTextColor;
-}
-div#footer div.footer-inner a:hover,
-div#footer div.footer-inner a:focus {
-  color: @textColor;
-  text-decoration: underline;
 }
 
 /* SEARCH */

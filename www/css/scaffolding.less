@@ -27,6 +27,24 @@ body {
   background-color: @body-bg;
 }
 
+// Sticky footer wrapper
+
+html,
+body {
+  height: 100%;
+}
+
+#wrap {
+  min-height: 100%;
+}
+
+#wrap {
+  min-height: 100%;
+  height: auto;
+  margin: 0 auto -@footerHeight - @borderWidth;
+  padding: 0 0 @footerHeight - @borderWidth;
+}
+
 // Reset fonts for relevant elements
 input,
 button,
