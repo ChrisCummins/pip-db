@@ -18,7 +18,8 @@ CLEANFILES = $(shell find $(CSS_DEST) -name '*.css') $(LESS:.less=.css)
 
 # Less CSS compilation
 %.css: %.less $(wildcard *.less)
-	lessc $< $@
+	@echo '  LESS   $@'
+	@lessc $< $@
 
 # Compilation command
 if ENABLE_MINIFY_CSS
@@ -43,13 +44,12 @@ else
 	$(eval NAME := $@)
 endif
 	@test -f $(NAME) || { \
-		echo '$(call compile,$<,$(NAME))'; \
+		echo '  CSS    $(notdir $(NAME))'; \
 		$(call compile,$<,$(NAME)); \
 	}
 if ENABLE_CONTENT_HASHING
 	$(eval TARGET := css\/$(patsubst %.css,%,$<))
 	@for h in $(HTML); do \
-		echo "Updating refs to `basename $(NAME)` in `basename $$h`"; \
 		sed -ri 's/(href=\")$(TARGET)(-[0-9a-f]{$(HASH_LENGTH)})?(\.css\")/\1$(TARGET)-$(CHASH)\3/' $$h; \
 	done
 endif
