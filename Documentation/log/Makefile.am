@@ -40,8 +40,9 @@ endef
 
 # Compile twice to refresh cross-references
 $(DOCPDF): $(DOCSRC)
-	$(call compile,$(DOCTEX))
-	$(call compile,$(DOCTEX))
+	@echo '  LATEX  $(DOCPDF)'
+	@$(call compile,$(DOCTEX))
+	@$(call compile,$(DOCTEX))
 
 # If we have xdg-open then we can open the PDF
 if HAVE_XDG_OPEN
