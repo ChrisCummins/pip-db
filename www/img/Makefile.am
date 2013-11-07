@@ -14,4 +14,5 @@ $(IMG_DEST)/% : %
 	@test -d $(IMG_DEST) || { \
 		$(MKDIR_P) $(IMG_DEST); \
 	}
-	cp $< $@
+	@echo '  IMAGE  $<'
+	@cp $< $@
