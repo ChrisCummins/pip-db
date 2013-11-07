@@ -14,4 +14,5 @@ $(FONTS_DEST)/% : %
 	@test -d $(FONTS_DEST) || { \
 		$(MKDIR_P) $(FONTS_DEST); \
 	}
-	cp $< $@
+	@echo '  FONT   $<'
+	@cp $< $@
