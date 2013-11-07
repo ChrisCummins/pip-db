@@ -19,8 +19,10 @@ EXTRA_DIST = \
 
 # Generating executables from Node.js scripts
 %: %.js
-	$(INSTALL) --mode=755 $< $@
+	@echo '  NODE   $@'
+	@$(INSTALL) --mode=755 $< $@
 
 # Generating executables from shell scripts
 %: %.sh
-	$(INSTALL) --mode=755 $< $@
+	@echo '  SHELL  $@'
+	@$(INSTALL) --mode=755 $< $@
