@@ -41,14 +41,16 @@ $(HTML_DEST)/%.html: %.html
 	@test -d $(HTML_DEST) || { \
 		$(MKDIR_P) $(HTML_DEST); \
 	}
-	$(call compile,$<,$@)
+	@echo '  HTML   $(notdir $@)'
+	@$(call compile,$<,$@)
 
 # PHP compilation
 $(HTML_DEST)/%.php: %.php
 	@test -d $(HTML_DEST) || { \
 		$(MKDIR_P) $(HTML_DEST); \
 	}
-	$(call compile,$<,$@)
+	@echo '  PHP    $(notdir $@)'
+	@$(call compile,$<,$@)
 
 if HAVE_WWW_ROOT
 # Export build to local webserver
