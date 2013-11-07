@@ -26,12 +26,16 @@ EXTRA_DIST = \
 	README.md \
 	$(NULL)
 
-# Compile command
-define compile
-$(PDFLATEX) -output-format pdf \
+PDFLATEX_ARGS = -output-format pdf \
 	-progname pdflatex \
 	-file-line-error \
-	-interaction=nonstopmode $1
+	-interaction=nonstopmode
+
+# Compile command. We pipe the output to /dev/null to silence it, and if there
+# is an error, we re-run the compilation without the pipe so as to print the
+# failure messages.
+define compile
+$(PDFLATEX) $(PDFLATEX_ARGS) $1 >/dev/null || $(PDFLATEX) $(PDFLATEX_ARGS) $1
 endef
 
 # Compile twice to refresh cross-references
