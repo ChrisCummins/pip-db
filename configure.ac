@@ -55,10 +55,10 @@ dnl     Do we have a Less CSS compiler?
 dnl     ============================================================
 AC_CHECK_PROG([LESSC],[lessc],[lessc])
 if test "x$LESSC" != x; then
-   HAVE_LESSC=yes
+    HAVE_LESSC=yes
 else
-   HAVE_LESSC=no
-   AC_MSG_ERROR([Less CSS compiler not found.])
+    HAVE_LESSC=no
+    AC_MSG_ERROR([Less CSS compiler not found.])
 fi
 AM_CONDITIONAL([HAVE_LESSC],[test "x$HAVE_LESSC" = xyes])
 
@@ -68,10 +68,10 @@ dnl     Do we have a Java runtime environment?
 dnl     ============================================================
 AC_CHECK_PROG([JAVA],[java],[java])
 if test "x$JAVA" != x; then
-   HAVE_JAVA=yes
+    HAVE_JAVA=yes
 else
-   HAVE_JAVA=no
-   AC_MSG_ERROR([No Java virtual machine found.])
+    HAVE_JAVA=no
+    AC_MSG_ERROR([No Java virtual machine found.])
 fi
 AM_CONDITIONAL([HAVE_JAVA],[test "x$HAVE_JAVA" = xyes])
 
@@ -156,10 +156,10 @@ HASH_LENGTH=8
 
 AC_CHECK_PROG([HASH_BIN],[$HASH],[$HASH])
 if test "x$HASH_BIN" != x; then
-   HAVE_HASH_BIN=yes
+    HAVE_HASH_BIN=yes
 else
-   HAVE_HASH_BIN=no
-   AC_MSG_ERROR([$HASH program not found.])
+    HAVE_HASH_BIN=no
+    AC_MSG_ERROR([$HASH program not found.])
 fi
 AM_CONDITIONAL([HAVE_HASH_BIN],[test "x$HAVE_HASH_BIN" = xyes])
 
@@ -172,11 +172,11 @@ rm -f $hash_test_file
 unset hash_test_file
 
 if test $HASH_LENGTH -ge $GEN_HASH_LENGTH; then
-   HASH_LENGTH=$GEN_HASH_LENGTH
-   AC_MSG_RESULT([truncated])
-   AC_MSG_WARN([Limiting content hash length to $GEN_HASH_LENGTH])
+    HASH_LENGTH=$GEN_HASH_LENGTH
+    AC_MSG_RESULT([truncated])
+    AC_MSG_WARN([Limiting content hash length to $GEN_HASH_LENGTH])
 else
-   AC_MSG_RESULT([ok])
+    AC_MSG_RESULT([ok])
 fi
 AC_SUBST([HASH_LENGTH])
 
@@ -191,10 +191,10 @@ dnl     Should xdg-open be used to open PDFs?
 dnl     ============================================================
 AC_CHECK_PROG([XDG_OPEN],[xdg-open],[xdg-open])
 if test "x$XDG_OPEN" != x; then
-   HAVE_XDG_OPEN=yes
+    HAVE_XDG_OPEN=yes
 else
-   HAVE_XDG_OPEN=no
-   AC_MSG_WARN([PDF opening feature disabled.])
+    HAVE_XDG_OPEN=no
+    AC_MSG_WARN([PDF opening feature disabled.])
 fi
 AM_CONDITIONAL([HAVE_XDG_OPEN],[test "x$HAVE_XDG_OPEN" = xyes])
 
@@ -204,10 +204,10 @@ dnl     Should emacsclient by used for editing files?
 dnl     ============================================================
 AC_CHECK_PROG([EMACSCLIENT],[emacsclient],[emacsclient])
 if test "x$EMACSCLIENT" != x; then
-   HAVE_EMACSCLIENT=yes
+    HAVE_EMACSCLIENT=yes
 else
-   HAVE_EMACSCLIENT=no
-   AC_MSG_WARN([Text editor launching features disabled.])
+    HAVE_EMACSCLIENT=no
+    AC_MSG_WARN([Text editor launching features disabled.])
 fi
 AM_CONDITIONAL([HAVE_EMACSCLIENT],[test "x$HAVE_EMACSCLIENT" = xyes])
 
@@ -299,10 +299,10 @@ dnl     Do we have npm?
 dnl     ============================================================
 AC_CHECK_PROG([NPM],[npm],[npm])
 if test "x$NPM" != x; then
-   HAVE_NPM=yes
+    HAVE_NPM=yes
 else
-   HAVE_NPM=no
-   AC_MSG_ERROR([Node package manager not found.])
+    HAVE_NPM=no
+    AC_MSG_ERROR([Node package manager not found.])
 fi
 AM_CONDITIONAL([HAVE_NPM],[test "x$HAVE_NPM" = xyes])
 
@@ -313,10 +313,10 @@ dnl     ============================================================
 dnl TODO: Check for correct version
 AC_CHECK_PROG([NODE],[node],[node])
 if test "x$NODE" != x; then
-   HAVE_NODE=yes
+    HAVE_NODE=yes
 else
-   HAVE_NODE=no
-   AC_MSG_ERROR([Node.js not found.])
+    HAVE_NODE=no
+    AC_MSG_ERROR([Node.js not found.])
 fi
 AM_CONDITIONAL([HAVE_NODE],[test "x$HAVE_NODE" = xyes])
 
@@ -326,9 +326,9 @@ dnl         Do we have the optimist package?
 dnl         ========================================================
 AC_MSG_CHECKING([for optimist package])
 if test -n "$(npm ls -g | grep optimist)"; then
-   HAVE_NODE_OPTIMIST=yes
+    HAVE_NODE_OPTIMIST=yes
 else
-   HAVE_NODE_OPTIMIST=no
+    HAVE_NODE_OPTIMIST=no
 fi
 AC_MSG_RESULT([$HAVE_NODE_OPTIMIST])
 
@@ -392,15 +392,15 @@ echo ""
 # Global flags:
 echo " • Global:"
 if test "x$HAVE_HTTPD" = xyes; then
-           echo "        httpd:                          $HTTPD"
-           echo "        httpd root:                     $WWW_ROOT/"
+    echo "        httpd:                          $HTTPD"
+    echo "        httpd root:                     $WWW_ROOT/"
 else
-           echo "        httpd:                          no"
+    echo "        httpd:                          no"
 fi
 if test "x$HAVE_MYSQL" = xyes; then
-           echo "        mysql:                          $MYSQL"
+    echo "        mysql:                          $MYSQL"
 else
-           echo "        mysql:                          no"
+    echo "        mysql:                          no"
 fi
 
 echo ""
@@ -408,8 +408,8 @@ echo ""
 echo " • Features:"
 echo "        Content hashing enabled:        $enable_content_hashing"
 if test "x$enable_content_hashing" = xyes; then
-   echo "        Content hashing algorithm:      $HASH"
-   echo "        Content hashes length:          $HASH_LENGTH"
+    echo "        Content hashing algorithm:      $HASH"
+    echo "        Content hashes length:          $HASH_LENGTH"
 fi
 echo "        Minify HTML:                    $enable_minify_html"
 echo "        Minify CSS:                     $enable_minify_css"
