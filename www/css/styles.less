@@ -53,16 +53,6 @@
  * START OF SITE-SPECIFIC STYLES
  */
 
-/* COLORS */
-@primaryColor: #2bacd6;
-@accentColor: #ffc12b;
-@boldColor: #ff4c2b;
-@muteTextColor: #777777;
-@textColor: #222;
-
-/* UI blocks such as headers and footers */
-@blockColor: #f5f5f5;
-
 /* Block border */
 @borderColor: #e4e4e4;
 @borderWidth: 1px;
@@ -83,7 +73,7 @@ input[type="text"] {
   padding: 3px;
 }
 input[type="text"]:focus {
-  border-color: @primaryColor;
+  border-color: @brand-primary;
 }
 
 button.btn {
@@ -106,7 +96,7 @@ div.header {
 div.header.grey {
   /* Offset the height by the width of the border: */
   height: @headerHeight + @borderWidth;
-  background: @blockColor;
+  background: @navbar-default-bg;
   border-bottom: @borderWidth solid @borderColor;
 }
 
@@ -124,7 +114,7 @@ div.header div.ubar div.ubar-inner a {
   /* Seperate links: */
   margin-left: 12px;
   font-weight: bold;
-  color: @textColor;
+  color: @text-color;
   /* Pad links to button sizes: */
   padding: 3px 12px;
   /* Give buttons rounded edges: */
@@ -135,7 +125,7 @@ div.header div.ubar div.ubar-inner a {
 }
 div.header div.ubar div.ubar-inner a:hover,
 div.header div.ubar div.ubar-inner a:focus {
-  color: @textColor;
+  color: @text-color;
   text-decoration: none;
   background: #e5e5e5;
 }
@@ -143,7 +133,7 @@ div.header div.ubar div.ubar-inner a:focus {
 /* SEARCH */
 @searchWidth: 640px;
 @searchHeight: 300px;
-@searchLogoColor: @primaryColor;
+@searchLogoColor: @brand-primary;
 @searchLogoSize: 105px;
 
 .search .logo {
@@ -210,7 +200,7 @@ div.page-title {
   margin-bottom: 20px;
 }
 div.page-title h3 {
-  color: @boldColor;
+  color: @text-warning-color;
   margin-bottom: 20px;
 }
 div.page-title div.download {
@@ -220,7 +210,7 @@ div.page-title div.info {
   /* Vertically align */
   padding-top: 15px;
   padding-bottom: 2px;
-  color: @muteTextColor;
+  color: @text-mute-color;
   font-size: @reducedTextSize;
 }
 div.page-title hr:last-child {
@@ -250,7 +240,7 @@ div.page-title hr:last-child {
 .advsearch form .info {
   .advsearch-valign-text;
   font-size: @smallTextSize;
-  color: @muteTextColor;
+  color: @text-mute-color;
 }
 .advsearch form input[type="text"] {
   width: 100%;
@@ -268,7 +258,7 @@ div.page-title hr:last-child {
 /* RESULTS PAGE */
 div.sresults table thead {
   font-weight: bold;
-  color: @boldColor;
+  color: @text-warning-color;
 }
 div.sresults table tbody tr span.match {
   font-weight: bold;
@@ -311,7 +301,7 @@ div#details ul.meta {
 div#details ul.meta li {
   display: inline;
   font-size: @smallTextSize;
-  color: @muteTextColor;
+  color: @text-mute-color;
 }
 
 /* LOGIN PAGE */
