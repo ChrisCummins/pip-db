@@ -32,13 +32,12 @@ else
 	$(eval NAME := $@)
 endif
 	@test -f $(NAME) || { \
-		echo '$(call compile,$<,$(NAME))'; \
+		echo '  JS     $(notdir $(NAME))'; \
 		$(call compile,$<,$(NAME)); \
 	}
 if ENABLE_CONTENT_HASHING
 	$(eval TARGET := js\/$(patsubst %.js,%,$<))
 	@for h in $(HTML); do \
-		echo "Updating refs to `basename $(NAME)` in `basename $$h`"; \
 		sed -ri 's/(<script src=\")$(TARGET)(-[0-9a-f]{$(HASH_LENGTH)})?(\.js\")/\1$(TARGET)-$(CHASH)\3/' $$h; \
 	done
 endif
