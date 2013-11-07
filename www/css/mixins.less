@@ -71,7 +71,7 @@
 // CSS image replacement
 //
 // Heads up! v3 launched with with only `.hide-text()`, but per our pattern for
-// mixins being reused as classes with the same name, this doesn't hold up. As
+// mixins being reused as classes with the same name, this doesnt hold up. As
 // of v3.0.1 we have added `.text-hide()` and deprecated `.hide-text()`. Note
 // that we cannot chain the mixins together in Less, so they are repeated.
 //
@@ -716,7 +716,7 @@
     @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
     .col(@index + 1, @item);
   }
-  .col(@index, @list) when (@index =< @grid-columns) { // general; "=<" isn't a typo
+  .col(@index, @list) when (@index =< @grid-columns) { // general; "=<" isnt a typo
     @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
     .col(@index + 1, ~"@{list}, @{item}");
   }
@@ -819,7 +819,7 @@
 //
 // We highly encourage you to not customize the default value, but instead use
 // this to tweak colors on an as-needed basis. This aesthetic change is based on
-// WebKit's default styles, but applicable to a wider range of browsers. Its
+// WebKits default styles, but applicable to a wider range of browsers. Its
 // usability and accessibility should be taken into account with any change.
 //
 // Example usage: change the default blue border and shadow to white for better
@@ -838,7 +838,7 @@
 //
 // Relative text size, padding, and border-radii changes for form controls. For
 // horizontal sizing, wrap controls in the predefined grid classes. `<select>`
-// element gets special love because it's special, and that's a fact!
+// element gets special love because its special, and thats a fact!
 
 .input-size(@input-height; @padding-vertical; @padding-horizontal; @font-size; @line-height; @border-radius) {
   height: @input-height;
