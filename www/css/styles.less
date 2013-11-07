@@ -58,14 +58,11 @@
 /*
  * SIZES
  */
-@paragraphTextSize: 13px;
-@smallTextSize: 11px;
-@reducedTextSize: 12px;
 
 /* UI-COMPONENTS */
 input[type="text"] {
   display: inline;
-  font-size: @paragraphTextSize;
+  font-size: @font-size-base;
   border: 2px solid #bdc3c7;
   text-indent: 4px;
   padding: 3px;
@@ -209,7 +206,7 @@ div.page-title div.info {
   padding-top: 15px;
   padding-bottom: 2px;
   color: @text-mute-color;
-  font-size: @reducedTextSize;
+  font-size: @font-size-small;
 }
 div.page-title hr:last-child {
   margin-top: 0;
@@ -223,7 +220,7 @@ div.page-title hr:last-child {
 }
 
 .advsearch form {
-  font-size: @paragraphTextSize;
+  font-size: @font-size-base;
 }
 .advsearch form .row {
   margin-bottom: 10px;
@@ -237,7 +234,7 @@ div.page-title hr:last-child {
 }
 .advsearch form .info {
   .advsearch-valign-text;
-  font-size: @smallTextSize;
+  font-size: @font-size-small;
   color: @text-mute-color;
 }
 .advsearch form input[type="text"] {
@@ -298,7 +295,7 @@ div#details ul.meta {
 }
 div#details ul.meta li {
   display: inline;
-  font-size: @smallTextSize;
+  font-size: @font-size-small;
   color: @text-mute-color;
 }
 
