@@ -52,7 +52,6 @@
 /*
  * START OF SITE-SPECIFIC STYLES
  */
-@import url("http://fonts.googleapis.com/css?family=Josefin+Sans:400|Josefin+Slab|Lato:300,400,700,900");
 
 /* COLORS */
 @primaryColor: #2bacd6;
@@ -69,13 +68,6 @@
 @borderWidth: 1px;
 
 /*
- * FONTS
- */
-@primaryFont: 'Josefin Slab', serif;
-@accentFont: 'Josefin Sans', sans-serif;
-@defaultFont: 'Lato', sans-serif;
-
-/*
  * SIZES
  */
 @paragraphTextSize: 13px;
@@ -85,7 +77,6 @@
 /* UI-COMPONENTS */
 input[type="text"] {
   display: inline;
-  font-family: @defaultFont;
   font-size: @paragraphTextSize;
   border: 2px solid #bdc3c7;
   text-indent: 4px;
@@ -156,7 +147,7 @@ div.header div.ubar div.ubar-inner a:focus {
 @searchLogoSize: 105px;
 
 .search .logo {
-  font-family: @accentFont;
+  font-family: @font-family-title;
   color: @searchLogoColor;
 }
 
