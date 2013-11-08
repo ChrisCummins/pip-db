@@ -353,6 +353,7 @@ AC_OUTPUT([
 	tools/Makefile
 	www/css/Makefile
 	www/fonts/Makefile
+	www/html/Makefile
 	www/img/Makefile
 	www/js/Makefile
 	www/lib/Makefile
