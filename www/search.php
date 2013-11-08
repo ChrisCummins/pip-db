@@ -31,13 +31,15 @@
 
           <!-- buttons -->
           <div class="btn-row">
-            <a href="advanced.php">
-              <button id="search-browse" class="btn btn-primary">Advanced</button>
+
+            <a id="search-browse" href="advanced.php" class="btn btn-primary">
+              Advanced
             </a>
 
-            <a href="results.php">
-              <button id="search-submit" class="btn btn-success">Search</button>
+            <a id="search-submit" href="results.php" class="btn btn-success">
+              Search
             </a>
+
           </div> <!-- /.button-row -->
 
         </div> <!-- /.search-full -->
