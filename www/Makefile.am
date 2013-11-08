@@ -1,7 +1,7 @@
 # Generate lists of source files and targets
 HTML_DEST = $(WWW_BUILD)
-HTML_SRC = $(shell find . -name '*.html' -exec basename {} \;) \
-	$(shell find . -name '*.php' -exec basename {} \;)
+HTML_SRC = $(shell find . -maxdepth 1 -name '*.html' -exec basename {} \;) \
+	$(shell find . -maxdepth 1 -name '*.php' -exec basename {} \;)
 HTML = $(addprefix $(HTML_DEST)/,$(HTML_SRC))
 export HTML
 
