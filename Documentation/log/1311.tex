@@ -94,3 +94,62 @@ function get_header( $inline_search = false, $value = null,
 
 function get_footer();
 \end{verbatim}
+
+\subsection{Friday 8th}
+\paragraph{Notes from meeting with Ian} The theme of this week's meeting is: PROCESS, PROCESS, PROCESS.
+\begin{itemize}
+\item I need a more definite set of goals for this construction phase.
+\item Bring a copy of the Gantt chart to each meeting.
+\item Make more constructive notes on the research and planning work done.
+\end{itemize}
+
+\paragraph{Notes for next meeting with Ian}
+\begin{itemize}
+\item HCI - The next round of design work is at the start of next term. The
+  remainder of effort this term will be focused on implementation, although I
+  will still be checking design with Darren in the meantime.
+\item Software architecture planning - Discuss analysis of WordPress, previous
+  FYP project, dataset analysis, and database designs.
+\item Development plan - Le grande 8 step plan.
+\item Development process - show the GitHub issue tracker and milestones. Issues
+  are created on a ``as needed'' basis, hence the second term milestones have
+  nothing. Show \texttt{./tools/worflow} and development flow diagram.
+\end{itemize}
+
+\paragraph{TODO}
+\begin{itemize}
+\item Complete issues for `Draft Project Plan submission'.
+\item Make a write-up of analysis of WordPress source code, previous FYP
+  sources, and any other similar projects.
+\item Further research of EBI.
+\end{itemize}
+
+\paragraph{Notes on WordPress} found a detailed description of the
+WordPress database design \cite{WordPressND}. There is also detailed
+documentation for all of the APIs \cite{WordPressNDa}.
+\begin{itemize}
+\item There are filesystem and database APIs to completely abstract the
+  underlying system. The user should never have to write system or MySQL calls.
+\item There is a global \$wpdb variable which is used to talk to the WordPress
+  database. API:
+\begin{verbatim}
+    $wpdb->delete( $table, $where, $where_format = null );
+    $wpdb->get_col( 'query', column_offset );
+    $wpdb->get_results( 'query', output_type );
+    $wpdb->get_row('query', output_type, row_offset);
+    $wpdb->get_var( 'query', column_offset, row_offset );
+    $wpdb->insert( $table, $data, $format );
+    $wpdb->query('query');
+    $wpdb->replace( $table, $data, $format );
+    $wpdb->update( $table, $data, $where, $format = null, $where_format = null );
+    $wpdb->show_errors();
+    $wpdb->hide_errors();
+    $wpdb->get_col_info('type', offset);
+    $wpdb->flush();
+\end{verbatim}
+\item ID fields in each table are prefixed with the table name and are of type
+  BIGINT(20).
+\item A \texttt{wp\_options} table stores the settings for the site.
+\item A file \texttt{wp-admin/includes/schema.php} contains the database
+  information and description.
+\end{itemize}
