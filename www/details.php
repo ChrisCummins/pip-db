@@ -52,6 +52,11 @@
                   </tr>
 
                   <tr> <!-- Detail -->
+                    <td>Enzyme Commission number:</td>
+                    <td>3.2.1.52</td>
+                  </tr>
+
+                  <tr> <!-- Detail -->
                     <td>Source:</td>
                     <td>Human</td>
                   </tr>
@@ -82,8 +87,13 @@
                   </tr>
 
                   <tr> <!-- Detail -->
-                    <td>Iso Enzymes:</td>
-                    <td>1 - 1</td>
+                    <td>Number of Iso Enzymes:</td>
+                    <td>Many</td>
+                  </tr>
+
+                  <tr> <!-- Detail -->
+                    <td>Valid sequences available:</td>
+                    <td>Yes</td>
                   </tr>
 
                   <tr> <!-- Detail -->
