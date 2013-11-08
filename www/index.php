@@ -43,7 +43,16 @@
         <div class="jumbotron">
           <h1>D1 Mockups</h1>
           <p>This set of static web pages shows a mockup of the first iteration of design for pip-db.</p>
-          <p><a href="https://github.com/ChrisCummins/protein-db/tree/master/design/d1" class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
+          <p>
+            <a href="http://github.com/ChrisCummins/protein-db/tree/master/design/d1"
+               class="btn btn-primary btn-lg" role="button">
+              See design &raquo;
+            </a>
+            <a href="/theme.php"
+               class="btn btn-success btn-lg" role="button">
+              See theme &raquo;
+            </a>
+          </p>
         </div>
 
         <div class="row">
