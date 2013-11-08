@@ -30,7 +30,7 @@ find_files_with_extension() {
 
 	cd "$(get_project_root)"
 
-	find ".$subdir" -type f -name '*.'"$ext" | grep -v '/build/www/'
+	find ".$subdir" -type f -name '*.'"$ext" | grep -v '/build/www/' | sort
 }
 
 # Prints the sloccounts for a list of files, followed by a total.
