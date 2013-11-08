@@ -2,6 +2,7 @@ if ENABLE_EXTRA_TOOLS
 noinst_SCRIPTS = \
 	dsa \
 	png \
+	sloccount \
 	workflow \
 	$(NULL)
 endif

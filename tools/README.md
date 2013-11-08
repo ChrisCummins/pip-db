@@ -7,6 +7,7 @@ required for the production system.
 
 * [dsa - Dataset Analyser](#dsa)
 * [png - Plausible Nonsense Generator](#png)
+* [sloccount - Source code line count](#sloccount)
 * [workflow - Workflow scripts](#workflow)
 
 ## dsa
@@ -69,6 +70,12 @@ A program for generating nonsense datasets for testing purposes.
     debug: output file format: CSV
     $ wc -l test.csv
     17 test.csv
+
+## sloccount
+    Usage: ./sloccount
+
+A script to count the physical source lines of code (SLOC) contained in the
+project.
 
 ## workflow
     Usage: ./worflow <command> [args]
