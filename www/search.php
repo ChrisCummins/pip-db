@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 
-  <?php include_once('functions.php'); ?>
+  <?php require_once( 'functions.php' ); ?>
 
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,7 @@
     <!-- Content wrapper -->
     <div id="wrap">
 
-      <?php get_header(false, '', true); ?>
+      <?php get_header( false, '', true ); ?>
 
       <!-- Main body of page -->
       <div class="container">
