@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
 
+  <?php require_once( 'functions.php' ); ?>
+
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -15,21 +17,7 @@
     <!-- Content wrapper -->
     <div id="wrap">
 
-      <!-- Header -->
-      <div class="header grey">
-        <div class="search inline">
-
-          <!-- User bar -->
-          <div class="ubar">
-            <div class="ubar-inner">
-              <a id="login" href="login.php">Login</a>
-            </div>
-          </div>
-
-          <!-- Inline searchbar -->
-          <a href="search.php"><h1 class="logo">pip-db</h1></a>
-        </div>
-      </div>
+      <?php get_header(); ?>
 
       <div class="container">
 
