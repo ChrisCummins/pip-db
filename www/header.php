@@ -1,10 +1,22 @@
 <?php
 
-function get_header( $inline_search = false, $value = null ) {
+function get_header($inline_search = false,
+                    $value         = null,
+                    $login_only    = false) {
 
     echo <<<EOF
       <!-- Fixed navbar -->
-      <div class="navbar navbar-default navbar-fixed-top">
+      <div class="navbar navbar-fixed-top
+EOF;
+
+    if ($login_only == true) {
+        echo " navbar-invisible";
+    } else {
+        echo " navbar-default";
+    }
+
+    echo <<<EOF
+">
         <div class="container">
 
           <div class="navbar-header">
