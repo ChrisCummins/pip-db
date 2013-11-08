@@ -120,14 +120,20 @@
               </div> <!-- /.panel -->
 
               <!-- Reference text section -->
-              <div class="ref">
-                <h4>Reference this page</h4>
+              <div class="panel panel-primary panel-reference">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Reference this page</h3>
+                </div>
 
-                <blockquote>pip-db. (2012) <i>Protein Isoelectric Point Database</i>,
-                  Alkaline phosphatese. Available from:
-                  &lt;http://www.pip-db.com/r?id=12023&gt;. [Cited 10 July 2013].
-                </blockquote>
-              </div> <!-- /.ref -->
+                <div class="panel-body">
+                  <blockquote>pip-db. (2012)
+                    <i>Protein Isoelectric Point Database</i>, Alkaline
+                    phosphatese. Available from:
+                    &lt;http://www.pip-db.com/r?id=12023&gt;. [Cited 10 July
+                    2013].
+                  </blockquote>
+                </div>
+              </div> <!-- /.panel -->
 
             </div> <!-- /.col-md-4 -->
 
