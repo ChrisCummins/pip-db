@@ -8,17 +8,7 @@ div#details table {
 div#details h4 {
   color: #555;
 }
-div#details ul.extern {
-  list-style-type: none;
-  padding-left: 0;
-  margin-bottom: 0;
-}
-div#details ul.extern li {
-  padding-bottom: 10px;
-}
-div#details ul.extern li button.btn {
-  width: 100%;
-}
+
 /* Reference this page: */
 div#details div.ref blockquote {
   margin-bottom: 5px;
@@ -32,6 +22,19 @@ div#details ul.meta li {
   display: inline;
   font-size: @font-size-small;
   color: @text-mute-color;
+}
+
+// "External links" section
+.panel-extern .panel-body > .panel-link-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.panel-extern .panel-body > .panel-link-list li {
+  padding-bottom: 10px;
+}
+.panel-extern .panel-body > .panel-link-list li:last-child {
+  padding-bottom: 0;
 }
 
 // "Reference this page" blockquote

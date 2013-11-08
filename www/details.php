@@ -104,17 +104,33 @@
             <div class="col-md-4">
 
               <!-- External links section -->
-              <div class="panel panel-default">
+              <div class="panel panel-default panel-extern">
                 <div class="panel-heading">
                   <h3 class="panel-title">External Links</h3>
                 </div>
 
                 <div class="panel-body">
-                  <ul class="extern">
-                    <li><button class="btn btn-info">Full Text</button></li>
-                    <li><button class="btn btn-info">PubMed</button></li>
-                    <li><button class="btn btn-info">Species Taxonomy</button></li>
-                    <li><button class="btn btn-info">Protein Sequence</button></li>
+                  <ul class="panel-link-list">
+                    <li>
+                      <a class="btn btn-info btn-block">
+                        Full Text
+                      </a>
+                    </li>
+                    <li>
+                      <a class="btn btn-info btn-block">
+                        PubMed
+                      </a>
+                    </li>
+                    <li>
+                      <a class="btn btn-info btn-block">
+                        Species Taxonomy
+                      </a>
+                    </li>
+                    <li>
+                      <a class="btn btn-info btn-block">
+                        Protein Sequence
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </div> <!-- /.panel -->
