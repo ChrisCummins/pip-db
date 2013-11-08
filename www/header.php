@@ -2,9 +2,7 @@
 
 function get_header( $inline_search = false, $value = null ) {
 
-   $value = (string)$value;
-
-   echo <<<EOF
+    echo <<<EOF
       <!-- Fixed navbar -->
       <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -37,6 +35,8 @@ EOF;
                   <input id="s" name="s" type="text" class="form-control"
                          value="
 EOF;
+
+        $value = (string)$value;
 
         if ($value !== '') {
             echo $value;
