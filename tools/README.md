@@ -50,7 +50,7 @@ An automated dataset analysis tool.
     24 records returned
 
 ## png
-    Usage: png
+    Usage: ./png
                -o --output [file]     Output to file
                -f --format [format]   Output format
                -c --conf [file]       Use configuration file
@@ -71,7 +71,7 @@ A program for generating nonsense datasets for testing purposes.
     17 test.csv
 
 ## workflow
-    Usage: $0 <command> [args]
+    Usage: ./worflow <command> [args]
 
     Commands:
                new <issue-number>   Begin work on a new issue
