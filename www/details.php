@@ -104,16 +104,20 @@
             <div class="col-md-4">
 
               <!-- External links section -->
-              <div class="extern">
-                <h4>External Links</h4>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">External Links</h3>
+                </div>
 
-                <ul class="extern">
-                  <li><button class="btn btn-info">Full Text</button></li>
-                  <li><button class="btn btn-info">PubMed</button></li>
-                  <li><button class="btn btn-info">Species Taxonomy</button></li>
-                  <li><button class="btn btn-info">Protein Sequence</button></li>
-                </ul>
-              </div> <!-- /.extern -->
+                <div class="panel-body">
+                  <ul class="extern">
+                    <li><button class="btn btn-info">Full Text</button></li>
+                    <li><button class="btn btn-info">PubMed</button></li>
+                    <li><button class="btn btn-info">Species Taxonomy</button></li>
+                    <li><button class="btn btn-info">Protein Sequence</button></li>
+                  </ul>
+                </div>
+              </div> <!-- /.panel -->
 
               <!-- Reference text section -->
               <div class="ref">
