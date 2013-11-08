@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
 
+  <?php include_once('functions.php'); ?>
+
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,28 +16,7 @@
     <!-- Content wrapper -->
     <div id="wrap">
 
-      <!-- Header -->
-      <div class="header grey">
-        <div class="search inline">
-
-          <!-- User bar -->
-          <div class="ubar">
-            <div class="ubar-inner">
-              <a id="login" href="login.php">Login</a>
-            </div>
-          </div>
-
-          <!-- Inline searchbar -->
-          <a href="search.php"><h1 class="logo">pip-db</h1></a>
-          <input id="search-text" type="text" value="Alkaline">
-          <a href="results.php">
-            <button id="s" class="btn btn-success">Search</button>
-          </a>
-          <a href="advanced.php">
-            <button id="advsearch" class="btn btn-info">Advanced</button>
-          </a>
-        </div>
-      </div>
+      <?php get_header(true, 'Alkaline') ?>
 
       <div class="container">
 

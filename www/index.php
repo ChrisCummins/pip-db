@@ -20,9 +20,6 @@
   </head>
 
   <style>
-    body {
-      padding-top: 40px;
-    }
     .d1-picture {
       max-width: 390px;
       margin: 0 auto;
