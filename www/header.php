@@ -26,7 +26,7 @@ EOF;
           </button>
 
           <!-- The logo -->
-          <a class="navbar-brand" href="search.php">pip-db</a>
+          <a class="navbar-brand" href="results.php">pip-db</a>
 
         </div> <!-- /.navbar-header -->
 
