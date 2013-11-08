@@ -32,7 +32,7 @@
           <!-- buttons -->
           <div class="btn-row">
             <a href="advanced.php">
-              <button id="search-browse" class="btn btn-info">Advanced</button>
+              <button id="search-browse" class="btn btn-primary">Advanced</button>
             </a>
 
             <a href="results.php">
