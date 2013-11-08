@@ -19,6 +19,20 @@ get_project_root() {
 	exit 3
 }
 
+# Returns a list of paths to files which match the pattern *.$1, relative to the
+# project root directory. This excludes files from the build/www directory.
+#
+#     $1 The file extension to match
+#     $2 (optional) The subdirectory to look in, defaults to the project root
+find_files_with_extension() {
+	local ext="$1"
+	local subdir="/$2"
+
+	cd "$(get_project_root)"
+
+	find ".$subdir" -type f -name '*.'"$ext" | grep -v '/build/www/'
+}
+
 main() {
 	echo "$0"
 }
