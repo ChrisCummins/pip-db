@@ -1,10 +1,9 @@
 <?php
 
-function get_header($inline_search = false,
-                    $value         = null,
-                    $login_only    = false) {
+function get_header( $inline_search = false, $value = null,
+                     $login_only = false ) {
 
-    echo <<<EOF
+	echo <<<EOF
       <!-- Fixed navbar -->
       <div class="navbar navbar-fixed-top
 EOF;
@@ -36,8 +35,8 @@ EOF;
           <div class="navbar-collapse collapse">
 EOF;
 
-   if ($inline_search == true) {
-       echo <<<EOF
+	if ( true == $inline_search ) {
+		echo <<<EOF
             <div class="col-sm-7 col-md-7 navbar-search">
 
               <form class="navbar-form" role="search">
@@ -48,13 +47,13 @@ EOF;
                          value="
 EOF;
 
-        $value = (string)$value;
+		$value = (string) $value;
 
-        if ($value !== '') {
-            echo $value;
-        }
+		if ( '' !== $value ) {
+			echo $value;
+		}
 
-        echo <<<EOF
+        	echo <<<EOF
 ">
 
                   <!-- Search button -->
@@ -81,7 +80,7 @@ EOF;
               </li>
             </ul> <!-- /.navnar-nav -->
 EOF;
-    }
+	}
 
     echo <<<EOF
             <!-- Login button -->
@@ -95,5 +94,3 @@ EOF;
 EOF;
 
 }
-
-?>
