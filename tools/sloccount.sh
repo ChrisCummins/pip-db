@@ -33,6 +33,26 @@ find_files_with_extension() {
 	find ".$subdir" -type f -name '*.'"$ext" | grep -v '/build/www/'
 }
 
+# Prints the sloccounts for a list of files, followed by a total.
+#
+#     $1 A space-separated list of file paths
+print_sloccount_for_files() {
+	local files="$@"
+	local total=0
+
+	cd "$(get_project_root)"
+
+	for f in $files; do
+		local sloccount=$(wc -l "$f" | awk '{print $1}')
+
+		total=$((total+sloccount))
+
+		echo -e "    $sloccount   \t$f"
+	done
+
+	echo -e "    $total   \ttotal"
+}
+
 main() {
 	echo "$0"
 }
