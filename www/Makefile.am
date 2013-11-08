@@ -13,6 +13,7 @@ SUBDIRS = \
 	fonts \
 	img \
 	js \
+	lib \
 	$(NULL)
 
 noinst_SCRIPTS = $(HTML)

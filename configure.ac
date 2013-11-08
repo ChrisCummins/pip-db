@@ -355,6 +355,7 @@ AC_OUTPUT([
 	www/fonts/Makefile
 	www/img/Makefile
 	www/js/Makefile
+	www/lib/Makefile
 	www/Makefile
 ])
 
