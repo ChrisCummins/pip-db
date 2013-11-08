@@ -50,4 +50,10 @@
     <script src="js/bootstrap.js"></script>
   </body>
 
+  <script>
+    $(function() {
+      $('input#in').focus();
+    });
+  </script>
+
 </html>
