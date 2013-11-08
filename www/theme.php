@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
 
+  <?php include_once('functions.php'); ?>
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,7 +23,7 @@
 
   <style>
     body {
-      padding-top: 70px;
+      padding-top: 20px;
     }
 
     .theme-dropdown .dropdown-menu {
@@ -40,66 +42,7 @@
     <!-- Content wrapper -->
     <div id="wrap">
 
-      <!-- Fixed navbar -->
-      <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-
-          <div class="navbar-header">
-
-            <!-- Collapse button -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-            <!-- The logo -->
-            <a class="navbar-brand" href="search.php">pip-db</a>
-
-          </div> <!-- /.navbar-header -->
-
-          <div class="navbar-collapse collapse">
-
-            <div class="col-sm-7 col-md-7 navbar-search">
-
-              <form class="navbar-form" role="search">
-                <div class="input-group">
-
-                  <!-- Search bar -->
-                  <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
-
-                  <!-- Search button -->
-                  <div class="input-group-btn">
-                    <a href="/search.php" class="btn btn-success" type="submit">
-                      Search
-                    </a>
-                  </div>
-                </div>
-              </form>
-
-            </div> <!-- /.col-md-7 -->
-
-            <!-- Advanced button -->
-            <ul class="nav navbar-nav">
-              <li>
-                <div class="navbar-button-group">
-                  <div class="navbar-button">
-                    <a href="/advanced.php" class="btn btn-primary">
-                      Advanced
-                    </a>
-                  </div>
-                </div>
-              </li>
-            </ul> <!-- /.navnar-nav -->
-
-            <!-- Login button -->
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/login.php">Login</a></li>
-            </ul> <!-- /.navbar-right -->
-
-          </div><!--/.nav-collapse -->
-        </div> <!-- /.container -->
-      </div> <!-- /.navbar -->
+      <?php get_header(true) ?>
 
       <div class="container theme-showcase">
 
