@@ -50,7 +50,7 @@ $(HTML_DEST)/%.php: %.php
 		$(MKDIR_P) $(HTML_DEST); \
 	}
 	@echo '  PHP    $(notdir $@)'
-	cat $< > $@
+	@cat $< > $@
 
 if HAVE_WWW_ROOT
 # Export build to local webserver
