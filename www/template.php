@@ -12,6 +12,11 @@ $twig = new Twig_Environment( $twig_loader, $twig_args );
 function render_template( $template_name, $template_args = array() ) {
 	global $twig;
 
+	if ( '_' == $template_name[0] ) {
+		echo 'template.php: Private template should not be rendered';
+		return;
+	}
+
 	$template_extension = '.html';
 	$template_file = $template_name . $template_extension;
 
