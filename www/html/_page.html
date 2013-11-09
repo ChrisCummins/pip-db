@@ -30,7 +30,9 @@
       </div> <!-- /.container -->
     </div> <!-- /.wrap -->
 
-    {% include "_footer.html" %}
+    {% if not _footer.hide %}
+      {% include "_footer.html" %}
+    {% endif %}
 
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
