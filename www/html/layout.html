@@ -1,5 +1,12 @@
 {% include "header.html" %}
 
+{% if title is defined %}
+  <div class="page-title">
+    <h3>{{ title }}</h3>
+    <hr>
+  </div> <!-- /.page-title -->
+{% endif %}
+
 {% block content %}{% endblock %}
 
 {% include "footer.html" %}
