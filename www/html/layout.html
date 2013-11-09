@@ -1,44 +1,27 @@
-<!doctype html>
-<html lang="en">
+{% include "header.html" %}
 
-  <?php require_once( 'functions.php' ); ?>
+<div class="search full">
+  <h1 class="logo">pip-db</h1>
 
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Search form -->
+  <form method="GET">
+    <!-- le textbox -->
+    <input id="in" type="text">
+  </form>
 
-    <title>pip-db "Alkaline"</title>
+  <!-- buttons -->
+  <div class="btn-row">
 
-    <link rel="stylesheet" href="css/styles.css"/>
-  </head>
+    <a id="search-browse" href="advanced.php" class="btn btn-primary">
+      Advanced
+    </a>
 
-  <body>
+    <a id="search-submit" href="results.php" class="btn btn-success">
+      Search
+    </a>
 
-    <!-- Content wrapper -->
-    <div id="wrap">
+  </div> <!-- /.button-row -->
 
-      {% include "header.html" %}
+</div> <!-- /.search-full -->
 
-      <div class="container">
-
-      </div> <!-- /.container -->
-    </div> <!-- /.wrap -->
-
-
-    {% include "footer.html" %}
-
-    <script src="//code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.js"></script>
-  </body>
-
-  <script>
-    $(document).ready(function(){
-      /*
-      * Search results link to details page:
-      */
-      $('div.sresults table tbody tr').click(function(){
-        window.location = $(this).attr('url');
-      });
-    });
-  </script>
-
-</html>
+{% include "footer.html" %}
