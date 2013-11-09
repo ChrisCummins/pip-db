@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% set header = {
+     "login_only": true
+   }
+%}
+
+{% block content %}
+
+<div class="search full">
+  <h1 class="logo">pip-db</h1>
+
+  <!-- Search form -->
+  <form method="GET">
+    <!-- le textbox -->
+    <input id="in" type="text">
+  </form>
+
+  <!-- buttons -->
+  <div class="btn-row">
+
+    <a id="search-browse" href="advanced.php" class="btn btn-primary">
+      Advanced
+    </a>
+
+    <a id="search-submit" href="results.php" class="btn btn-success">
+      Search
+    </a>
+
+  </div> <!-- /.button-row -->
+
+</div> <!-- /.search-full -->
+
+{% endblock %}
+
+{% block footer %}
+
+  <script>
+    $(function() {
+      $('input#in').focus();
+    });
+  </script>
+
+{% endblock %}
