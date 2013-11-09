@@ -2,4 +2,4 @@
 
 require_once( 'functions.php' );
 
-render_template( 'layout' );
+render_template( 'results' );
