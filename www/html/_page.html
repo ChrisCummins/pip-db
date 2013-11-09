@@ -4,7 +4,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>pip-db {{ page.title }}</title>
+    <title>pip-db {{ _page.title }}</title>
 
     <link rel="stylesheet" href="css/styles.css"/>
 
@@ -16,12 +16,12 @@
     <!-- Content wrapper -->
     <div id="wrap">
 
-      {% include "navbar.html" %}
+      {% include "_navbar.html" %}
 
       <!-- Container -->
       <div class="container">
 
-        {% if title is defined %}
+        {% if _title is defined %}
           {% include "_title.html" %}
         {% endif %}
 
@@ -30,7 +30,7 @@
       </div> <!-- /.container -->
     </div> <!-- /.wrap -->
 
-    {% include "footer.html" %}
+    {% include "_footer.html" %}
 
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.js"></script>

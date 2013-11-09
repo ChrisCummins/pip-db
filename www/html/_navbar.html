@@ -1,7 +1,7 @@
 <!-- Fixed navbar -->
 <div class="navbar navbar-fixed-top
 
-{% if navbar.login_only %}
+{% if _navbar.login_only %}
   navbar-invisible
 {% else %}
   navbar-default
@@ -25,7 +25,7 @@
 
   <div class="navbar-collapse collapse">
 
-{% if navbar.search %}
+{% if _navbar.search %}
     <div class="col-sm-7 col-md-7 navbar-search">
 
       <form class="navbar-form" role="search">
@@ -33,7 +33,7 @@
 
           <!-- Search bar -->
           <input id="s" name="s" type="text" class="form-control"
-                 value="{{ navbar.search_value }}">
+                 value="{{ _navbar.search_value }}">
 
           <!-- Search button -->
           <div class="input-group-btn">
