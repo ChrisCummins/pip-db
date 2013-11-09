@@ -2,7 +2,12 @@
 HTML_DEST = $(WWW_BUILD)
 HTML_SRC = $(shell find . -maxdepth 1 -name '*.html' -exec basename {} \;) \
 	$(shell find . -maxdepth 1 -name '*.php' -exec basename {} \;)
-HTML = $(addprefix $(HTML_DEST)/,$(HTML_SRC))
+
+TEMPLATE_DEST = $(WWW_BUILD)/html
+TEMPLATE_SRC = $(shell find html -maxdepth 1 -name '*.html' -exec basename {} \;)
+
+HTML = $(addprefix $(HTML_DEST)/,$(HTML_SRC)) \
+	$(addprefix $(TEMPLATE_DEST)/,$(TEMPLATE_SRC))
 export HTML
 
 # We must build this directory first in order to allow for content hashing ref
