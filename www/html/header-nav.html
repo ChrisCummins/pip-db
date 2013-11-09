@@ -1,5 +1,14 @@
 <!-- Fixed navbar -->
-<div class="navbar navbar-fixed-top navbar-default">
+<div class="navbar navbar-fixed-top
+
+{% if header.login_only %}
+  navbar-invisible
+{% else %}
+  navbar-default
+{% endif %}
+
+">
+
   <div class="navbar-header">
 
     <!-- Collapse button -->
@@ -15,6 +24,8 @@
   </div> <!-- /.navbar-header -->
 
   <div class="navbar-collapse collapse">
+
+{% if header.search %}
     <div class="col-sm-7 col-md-7 navbar-search">
 
       <form class="navbar-form" role="search">
@@ -22,7 +33,7 @@
 
           <!-- Search bar -->
           <input id="s" name="s" type="text" class="form-control"
-                 value="">
+                 value="{{ header.search_value }}">
 
           <!-- Search button -->
           <div class="input-group-btn">
@@ -47,6 +58,7 @@
         </div>
       </li>
     </ul> <!-- /.navnar-nav -->
+{% endif %}
 
     <!-- Login button -->
     <ul class="nav navbar-nav navbar-right">
