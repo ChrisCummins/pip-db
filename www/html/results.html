@@ -11,21 +11,13 @@
    }
 %}
 
+{% set title = {
+     "results": 122,
+     "download": true
+   }
+%}
+
 {% block content %}
-
-<!-- Page title -->
-<div class="page-title">
-  <!-- Download results -->
-  <div class="download">
-    <button class="btn btn-warning">Download</button>
-  </div>
-
-  <!-- Number of search results -->
-  <div class="info">
-    Found 122 results...
-  </div>
-  <hr>
-</div> <!-- /.page-title -->
 
 <div class="sresults">
   <table class="table table-striped table-hover table-bordered">

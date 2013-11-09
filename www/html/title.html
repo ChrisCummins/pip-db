@@ -7,6 +7,25 @@
     </div>
   {% endif %}
 
-  <h3>{{ title.heading }}</h3>
+  {% if title.heading is defined %}
+
+    <h3>{{ title.heading }}</h3>
+
+  {% elseif title.results is defined %}
+
+    <div class="info">
+
+      <!-- Number of search results -->
+      Found {{ title.results }}
+      {% if title.results > 1 %}
+        results...
+      {% else %}
+        result...
+      {% endif %}
+
+    </div>
+
+  {% endif %}
+
   <hr>
 </div> <!-- /.page-title -->
