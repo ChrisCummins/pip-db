@@ -10,7 +10,10 @@
    }
 %}
 
-{% set title = page.title %}
+{% set title = {
+     "text": page.title,
+   }
+%}
 
 {% block content %}
 
