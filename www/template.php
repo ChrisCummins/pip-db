@@ -12,6 +12,12 @@ $twig_args = array();
 
 $twig = new Twig_Environment( $twig_loader, $twig_args );
 
+function template_exists( $template_name ) {
+	global $template_dir;
+
+	return file_exists( $template_dir . $template_name );
+}
+
 function render_template( $template_name, $template_args = array() ) {
 	global $twig;
 
@@ -22,6 +28,11 @@ function render_template( $template_name, $template_args = array() ) {
 
 	$template_extension = '.html';
 	$template_file = $template_name . $template_extension;
+
+	if ( !template_exists( $template_file ) ) {
+		echo 'template.php: Template not found!';
+		return;
+	}
 
 	$template = $twig->loadTemplate( $template_file );
 
