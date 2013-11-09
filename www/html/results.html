@@ -222,3 +222,16 @@
 </div> <!-- /.sresults -->
 
 {% endblock %}
+
+{% block footer %}
+<script>
+  $(document).ready(function(){
+    /*
+     * Search results link to details page:
+     */
+    $('div.sresults table tbody tr').click(function(){
+      window.location = $(this).attr('url');
+    });
+  });
+</script>
+{% endblock %}

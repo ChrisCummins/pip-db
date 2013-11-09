@@ -1,9 +1,33 @@
-{% include "header.html" %}
+<!doctype html>
+<html lang="en">
 
-{% if title is defined %}
-  {% include "title.html" %}
-{% endif %}
+  <head>
+    {% include "header.html" %}
+    {% block header %}{% endblock %}
+  </head>
 
-{% block content %}{% endblock %}
+  <body>
 
-{% include "footer.html" %}
+    <!-- Content wrapper -->
+    <div id="wrap">
+
+      {% include "header-nav.html" %}
+
+      <!-- Container -->
+      <div class="container">
+
+        {% if title is defined %}
+          {% include "title.html" %}
+        {% endif %}
+
+        {% block content %}{% endblock %}
+
+      </div> <!-- /.container -->
+    </div> <!-- /.wrap -->
+
+    {% include "footer.html" %}
+
+    {% block footer %}{% endblock %}
+
+  </body>
+</html>

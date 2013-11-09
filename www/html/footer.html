@@ -1,21 +1,4 @@
-      </div> <!-- /.container -->
-    </div> <!-- /.wrap -->
+{% include "footer-nav.html" %}
 
-    {% include "footer-nav.html" %}
-
-    <script src="//code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.js"></script>
-  </body>
-
-  <script>
-    $(document).ready(function(){
-      /*
-      * Search results link to details page:
-      */
-      $('div.sresults table tbody tr').click(function(){
-        window.location = $(this).attr('url');
-      });
-    });
-  </script>
-
-</html>
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
