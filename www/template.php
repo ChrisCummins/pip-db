@@ -1,10 +1,13 @@
 <?php
 
-require_once( './lib/Twig/Autoloader.php' );
+$template_dir = './html/';
+$twig_autoloader = './lib/Twig/Autoloader.php';
+
+require_once( $twig_autoloader );
 
 Twig_Autoloader::register();
 
-$twig_loader = new Twig_Loader_Filesystem( './html' );
+$twig_loader = new Twig_Loader_Filesystem( $template_dir );
 $twig_args = array();
 
 $twig = new Twig_Environment( $twig_loader, $twig_args );
