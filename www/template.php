@@ -9,7 +9,7 @@ $twig_args = array();
 
 $twig = new Twig_Environment( $twig_loader, $twig_args );
 
-function render_template( $template_name, $template_args ) {
+function render_template( $template_name, $template_args = array() ) {
 	global $twig;
 
 	$template_extension = '.html';
