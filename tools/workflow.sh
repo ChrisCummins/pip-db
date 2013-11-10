@@ -168,15 +168,15 @@ main() {
 
 	# Parse user input
 	case "$1" in
-	"new")
+	"new" | "n")
 		shift
 		new $@
 		;;
-	"pause")
+	"pause" | "p")
 		shift
 		pause $@
 		;;
-	"close")
+	"close" | "c")
 		shift
 		close $@
 		;;
