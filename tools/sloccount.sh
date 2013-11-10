@@ -106,7 +106,7 @@ get_page_sloccounts() {
 	local total=$((css+$less+$html))
 
 	print_sloccount $css   $total "CSS"
-	print_sloccount $less  $total "Less"
+	print_sloccount $less  $total "Less CSS"
 	print_sloccount $html  $total "HTML"
 }
 
@@ -117,17 +117,17 @@ get_controller_sloccounts() {
 	local js=$(get_lc_of_files "$(find_files_with_extension js www/)")
 	local total=$((pages+$lib+$js))
 
-	print_sloccount $pages $total "PHP-pages"
-	print_sloccount $lib   $total "PHP-lib"
+	print_sloccount $pages $total "PHP (pages)"
+	print_sloccount $lib   $total "PHP (lib)"
 	print_sloccount $js    $total "JavaScript"
 }
 
 # Returns a list of sloccounts for the external libraries.
 get_extern_sloccounts() {
-	local php=$(get_lc_of_files "$(find_files_with_extension php www/lib/twig)")
-	local total=$((php))
+	local twig=$(get_lc_of_files "$(find_files_with_extension php www/lib/twig)")
+	local total=$((twig))
 
-	print_sloccount $php   $total "PHP"
+	print_sloccount $twig  $total "PHP (twig)"
 }
 
 # Returns a list of sloccounts for the Documentation.
