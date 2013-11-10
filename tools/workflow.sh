@@ -53,17 +53,6 @@ is_working_tree_clean() {
 	fi
 }
 
-# Check that git tree is clean else fail
-#    @env $DIRTY If this variable is set, don't perform check
-fail_if_tree_not_clean() {
-	test -z "$DIRTY" && {
-		if ! is_working_tree_clean; then
-			echo "fatal: uncommitted changes in repository" >&2
-			exit 2
-		fi
-	}
-}
-
 # Check that the issue number is a valid open github issue else fail
 #    $1 issue number
 fail_if_issue_not_valid () {
@@ -119,7 +108,6 @@ new() {
 
 	# Sanity checks
 	execute "fail_if_issue_not_valid $issue" quiet
-	execute "fail_if_tree_not_clean" quiet
 
 	# Perform branching
 	execute "git checkout -b wip/$issue $ISSUE_BRANCH_BASE"
@@ -137,7 +125,6 @@ pause() {
 
 	# Sanity checks
 	fail_if_not_on_issue_branch
-	execute "fail_if_tree_not_clean" quiet
 
 	# Perform branching
 	if ! is_working_tree_clean; then
