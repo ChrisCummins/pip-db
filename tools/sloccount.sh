@@ -103,23 +103,23 @@ get_page_sloccounts() {
 	local css=$(get_lc_of_files "$(find_files_with_extension css www/)")
 	local less=$(get_lc_of_files "$(find_files_with_extension less www/)")
 	local html=$(get_lc_of_files "$(find_files_with_extension html www/)")
-	local total=$((css+$less+$html))
+	local js=$(get_lc_of_files "$(find_files_with_extension js www/)")
+	local total=$((css+$less+$html+$js))
 
 	print_sloccount $css   $total "CSS"
 	print_sloccount $less  $total "Less CSS"
 	print_sloccount $html  $total "HTML"
+	print_sloccount $js    $total "JavaScript"
 }
 
 # Returns a list of sloccounts for the website controller code.
 get_controller_sloccounts() {
 	local pages=$(get_lc_of_files "$(find_files_with_extension php www/ 1)")
 	local lib=$(get_lc_of_files "$(find_files_with_extension php www/lib 1)")
-	local js=$(get_lc_of_files "$(find_files_with_extension js www/)")
-	local total=$((pages+$lib+$js))
+	local total=$((pages+$lib))
 
 	print_sloccount $pages $total "PHP (pages)"
 	print_sloccount $lib   $total "PHP (lib)"
-	print_sloccount $js    $total "JavaScript"
 }
 
 # Returns a list of sloccounts for the external libraries.
