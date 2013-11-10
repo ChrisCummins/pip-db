@@ -81,9 +81,9 @@ project.
     Usage: ./worflow <command> [args]
 
     Commands:
-               new <issue-number>   Begin work on a new issue
-               pause                Pause work on the current issue
-               close                Complete work on the current issue
+           n | new <issue-number>   Begin work on a new issue
+           p | pause                Pause work on the current issue
+           c | close                Complete work on the current issue
 
 Automated workflow script for managing git branches.
 

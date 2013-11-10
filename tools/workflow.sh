@@ -14,9 +14,9 @@ usage() {
 	echo "Usage: $0 <command> [args]"
 	echo ""
 	echo "Commands:"
-	echo "           new <issue-number>   Begin work on a new issue"
-	echo "           pause                Pause work on the current issue"
-	echo "           close                Complete work on the current issue"
+	echo "       n | new <issue-number>   Begin work on a new issue"
+	echo "       p | pause                Pause work on the current issue"
+	echo "       c | close                Complete work on the current issue"
 }
 
 # Execute command if we're not on a dry-run, else just print the commnad
