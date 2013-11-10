@@ -130,18 +130,6 @@ get_extern_sloccounts() {
 	print_sloccount $php   $total "PHP"
 }
 
-# Returns a list of sloccounts for the website source code.
-get_www_sloccounts() {
-	local html=$(get_lc_of_files "$(find_files_with_extension html www/)")
-	local php=$(get_lc_of_files "$(find_files_with_extension php www/)")
-	local js=$(get_lc_of_files "$(find_files_with_extension js www/)")
-	local total=$((html+$php+$js))
-
-	print_sloccount $html  $total "HTML"
-	print_sloccount $php   $total "PHP"
-	print_sloccount $js    $total "JavaScript"
-}
-
 # Returns a list of sloccounts for the Documentation.
 get_doc_sloccounts() {
 	local latex=$(get_lc_of_files "$(find_files_with_extension tex)")
@@ -183,10 +171,6 @@ main() {
 	echo ""
 	echo "Controller sources: $(sum_rows "$(get_controller_sloccounts)")"
 	get_controller_sloccounts | sort -rn | column -t
-
-	echo ""
-	echo "Web sources: $(sum_rows "$(get_www_sloccounts)")"
-	get_www_sloccounts | sort -rn | column -t
 
 	echo ""
 	echo "External libraries: $(sum_rows "$(get_extern_sloccounts)")"
