@@ -15,7 +15,7 @@ usage() {
 	echo ""
 	echo "Commands:"
 	echo "           new <issue-number>   Begin work on a new issue"
-	echo "           close                Close current work an issue"
+	echo "           close                Complete work on the current issue"
 }
 
 # Execute command if we're not on a dry-run, else just print the commnad
