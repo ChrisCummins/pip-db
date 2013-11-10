@@ -82,7 +82,7 @@ print_sloccount() {
 	local percentage=$(get_perc $linecount $total_linecount)
 
 	if [[ $linecount > 0 ]]; then
-		echo "$linecount $file ($percentage%)"
+		echo -e "$linecount\t$file\t($percentage%)"
 	fi
 }
 
@@ -162,26 +162,26 @@ sum_rows() {
 main() {
 	echo ""
 	echo "Build system: $(sum_rows "$(get_build_sloccounts)")"
-	get_build_sloccounts | sort -rn | column -t
+	get_build_sloccounts | sort -rn | column -t -s $'\t'
 
 	echo ""
 	echo "Page sources: $(sum_rows "$(get_page_sloccounts)")"
-	get_page_sloccounts | sort -rn | column -t
+	get_page_sloccounts | sort -rn | column -t -s $'\t'
 
 	echo ""
 	echo "Controller sources: $(sum_rows "$(get_controller_sloccounts)")"
-	get_controller_sloccounts | sort -rn | column -t
+	get_controller_sloccounts | sort -rn | column -t -s $'\t'
 
 	echo ""
 	echo "External libraries: $(sum_rows "$(get_extern_sloccounts)")"
-	get_extern_sloccounts | sort -rn | column -t
+	get_extern_sloccounts | sort -rn | column -t -s $'\t'
 
 	echo ""
 	echo "Documentation: $(sum_rows "$(get_doc_sloccounts)")"
-	get_doc_sloccounts | sort -rn | column -t
+	get_doc_sloccounts | sort -rn | column -t -s $'\t'
 
 	echo ""
 	echo "Tools: $(sum_rows "$(get_tools_sloccounts)")"
-	get_tools_sloccounts | sort -rn | column -t
+	get_tools_sloccounts | sort -rn | column -t -s $'\t'
 }
 main $@
