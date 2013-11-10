@@ -24,13 +24,19 @@ get_project_root() {
 #
 #     $1 The file extension to match
 #     $2 (optional) The subdirectory to look in, defaults to the project root
+#     $3 (optional) The maxdepth for file searching
 find_files_with_extension() {
 	local ext="$1"
 	local subdir="/$2"
+	local maxdepth=$3
+
+	if [[ -n $maxdepth ]]; then
+		local args="-maxdepth $maxdepth"
+	fi
 
 	cd "$(get_project_root)"
 
-	find ".$subdir" -type f -name '*.'"$ext" | grep -v '/build/www/' | sort
+	find ".$subdir" $args -type f -name '*.'"$ext" | grep -v '/build/www/' | sort
 }
 
 # Returns the line counts for a list of files.
