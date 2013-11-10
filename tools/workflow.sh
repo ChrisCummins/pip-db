@@ -131,8 +131,8 @@ new() {
 	echo "Execute '$0 close' when completed."
 }
 
-# Close the current work-in-progress branch and rebase on master
-close() {
+# Switch back to master and rebase current issue work
+pause() {
 	local branch=`get_current_branch`
 
 	# Sanity checks
@@ -148,12 +148,21 @@ close() {
 	echo_if_live "git rebase $branch"
 	execute "git rebase $branch"
 	test -n "$have_stashed" && execute "git stash pop"
-	execute "git branch -D $branch"
-	execute "git push $REMOTE :$branch"
 
 	# Output results
 	echo ""
 	echo "Merged '$branch' into '$ISSUE_BRANCH_BASE'"
+}
+
+# Close the current work-in-progress branch and rebase on master
+close() {
+	local branch=`get_current_branch`
+
+	pause $@
+
+	# Cleanup issue branch
+	execute "git branch -D $branch"
+	execute "git push $REMOTE :$branch"
 }
 
 main() {
@@ -175,6 +184,10 @@ main() {
 	"new")
 		shift
 		new $@
+		;;
+	"pause")
+		shift
+		pause $@
 		;;
 	"close")
 		shift
