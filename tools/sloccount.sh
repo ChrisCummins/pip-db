@@ -92,19 +92,27 @@ get_build_sloccounts() {
 	print_sloccount $makefile $total "Makefile.am"
 }
 
+# Returns a list of sloccounts for the website pages.
+get_page_sloccounts() {
+	local css=$(get_lc_of_files "$(find_files_with_extension css www/)")
+	local less=$(get_lc_of_files "$(find_files_with_extension less www/)")
+	local html=$(get_lc_of_files "$(find_files_with_extension html www/)")
+	local total=$((css+$less+$html))
+
+	print_sloccount $css   $total "CSS"
+	print_sloccount $less  $total "Less"
+	print_sloccount $html  $total "HTML"
+}
+
 # Returns a list of sloccounts for the website source code.
 get_www_sloccounts() {
 	local html=$(get_lc_of_files "$(find_files_with_extension html www/)")
 	local php=$(get_lc_of_files "$(find_files_with_extension php www/)")
-	local css=$(get_lc_of_files "$(find_files_with_extension css www/)")
-	local less=$(get_lc_of_files "$(find_files_with_extension less www/)")
 	local js=$(get_lc_of_files "$(find_files_with_extension js www/)")
-	local total=$((html+$php+$css+$less+$js))
+	local total=$((html+$php+$js))
 
 	print_sloccount $html  $total "HTML"
 	print_sloccount $php   $total "PHP"
-	print_sloccount $css   $total "CSS"
-	print_sloccount $less  $total "Less"
 	print_sloccount $js    $total "JavaScript"
 }
 
@@ -141,6 +149,10 @@ main() {
 	echo ""
 	echo "Build system: $(sum_rows "$(get_build_sloccounts)")"
 	get_build_sloccounts | sort -rn | column -t
+
+	echo ""
+	echo "Page sources: $(sum_rows "$(get_page_sloccounts)")"
+	get_page_sloccounts | sort -rn | column -t
 
 	echo ""
 	echo "Web sources: $(sum_rows "$(get_www_sloccounts)")"
