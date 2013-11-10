@@ -22,7 +22,7 @@ function render_template( $template_name, $template_args = array() ) {
 	global $twig;
 
 	if ( '_' == $template_name[0] ) {
-		echo 'template.php: Private template should not be rendered';
+		echo 'lib/template.php: Private template should not be rendered';
 		return;
 	}
 
@@ -30,7 +30,7 @@ function render_template( $template_name, $template_args = array() ) {
 	$template_file = $template_name . $template_extension;
 
 	if ( !template_exists( $template_file ) ) {
-		echo 'template.php: Template not found!';
+		echo 'lib/template.php: Template not found!';
 		return;
 	}
 

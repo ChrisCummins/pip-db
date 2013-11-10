@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 
-  <?php include_once('functions.php'); ?>
+  <?php include_once('lib/functions.php'); ?>
 
   <head>
     <meta charset="utf-8">
