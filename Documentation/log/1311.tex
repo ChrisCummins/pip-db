@@ -157,3 +157,80 @@ documentation for all of the APIs \cite{WordPressNDa}.
 
 \paragraph{PHP best practises} Read up on how PHP is not object orientated
 \cite{Kimsal2011}, and PHP templating practises \cite{Rakowski2011}.
+
+\subsection{Saturday 10th}
+\paragraph{Notes on last FYP} 2533 lines of PHP. File structure:
+\begin{verbatim}
+-rw-r--r-- 1 chris chris  465 Dec 21  2011 ajax.js
+-rw-r--r-- 1 chris chris 1.9K Mar 22  2012 ajax.php
+-rw-r--r-- 1 chris chris  311 Mar 23  2012 back-up.php
+-rw-r--r-- 1 chris chris 3.6K Apr  3  2012 backup.php
+-rw-r--r-- 1 chris chris    0 Mar 23  2012 backup.sql
+-rw-r--r-- 1 chris chris  238 Apr 20  2012 bottom.php
+-rw-r--r-- 1 chris chris  110 Sep 10  2012 db-details.php
+-rw-r--r-- 1 chris chris  15K Apr 25  2012 display.php
+-rw-r--r-- 1 chris chris 2.8K Apr 20  2012 download.php
+-rw-r--r-- 1 chris chris 1.1K Feb  6  2012 funcs.php
+drwxr-xr-x 2 chris chris 4.0K Apr  3  2012 images
+-rw-r--r-- 1 chris chris 5.3K Mar 22  2012 index.php
+drwxr-xr-x 2 chris chris 4.0K Apr 25  2012 js
+-rw-r--r-- 1 chris chris 7.7K Apr 16  2012 login.php
+-rw-r--r-- 1 chris chris 1.8K Feb 15  2012 protein.php
+-rw-r--r-- 1 chris chris 3.1K Mar 14  2012 record.php
+-rw-r--r-- 1 chris chris 7.7K Apr 16  2012 restore.php
+-rw-r--r-- 1 chris chris  24K Apr 30  2012 search.php
+-rw-r--r-- 1 chris chris 4.4K Mar 22  2012 style.css
+-rw-r--r-- 1 chris chris 3.3K Apr 20  2012 top.php
+-rw-r--r-- 1 chris chris  22K Apr 20  2012 upload.php
+drwxr-xr-x 2 chris chris 4.0K Sep 10  2012 uploads
+
+./images:
+total 620K
+-rw-r--r-- 1 chris chris 1.4K Apr  3  2012 homeico.png
+-rw-r--r-- 1 chris chris 7.4K Apr  3  2012 home.png
+-rw-r--r-- 1 chris chris  88K Feb 10  2012 logo.png
+-rw-r--r-- 1 chris chris 486K Feb  8  2012 logo.psd
+-rw-r--r-- 1 chris chris  31K Jan 16  2012 randprot.png
+
+./js:
+total 108K
+-rw-r--r-- 1 chris chris  92K Jan 17  2012 jquery-1.7.1.min.js
+-rw-r--r-- 1 chris chris 5.3K Apr 25  2012 jquery.js
+-rw-r--r-- 1 chris chris 5.3K Apr 25  2012 jquery.php
+
+./uploads:
+total 2.5M
+-rw-r--r-- 1 chris chris 553K Mar 13  2012 database_egle_bunkute2.csv
+-rw-r--r-- 1 chris chris 1.1M Mar 13  2012 pidb_1981.csv
+-rw-r--r-- 1 chris chris  26K Mar 13  2012 pidb_1995.csv
+-rw-r--r-- 1 chris chris 903K Mar 13  2012 pidb_brenda.csv
+\end{verbatim}
+
+\paragraph{top.php}
+\begin{enumerate}
+\item Sets the session
+\item Connects to mysql
+\item Sets a \texttt{\$root\_dir} variable
+\item Prints HTML header
+\end{enumerate}
+
+\paragraph{funcs.php} Defines \texttt{get\_record(\$record\_if)}.
+
+\paragraph{bottom.php} Prints out a page footer and closes MySQL connection.
+
+\paragraph{index.php}
+\begin{enumerate}
+\item Include \texttt{top.php}
+\item Output page contents with inline PHP logic
+\item Connects to mysql
+\end{enumerate}
+
+\paragraph{search.php} 515 lines of intermingled MySQL commands, PHP logic and
+HTML.
+
+\paragraph{General notes}
+\begin{itemize}
+\item Multiple copies of constants scattered throughout sources
+\item Spaghetti code source files - a mixture of inline PHP and HTML.
+\item MySQL commands embedded into page sources - no MVC separation.
+\end{itemize}
