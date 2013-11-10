@@ -130,21 +130,28 @@ get_tools_sloccounts() {
 	print_sloccount $py    $total "Python"
 }
 
+# Returns the sum of a list of integers
+#
+#     $1 A list of integers, one per line
+sum_rows() {
+	echo "$1" | awk '{s+=$1} END {print s}'
+}
+
 main() {
 	echo ""
-	echo "Build system:"
+	echo "Build system: $(sum_rows "$(get_build_sloccounts)")"
 	get_build_sloccounts | sort -rn | column -t
 
 	echo ""
-	echo "Web sources:"
+	echo "Web sources: $(sum_rows "$(get_www_sloccounts)")"
 	get_www_sloccounts | sort -rn | column -t
 
 	echo ""
-	echo "Documentation:"
+	echo "Documentation: $(sum_rows "$(get_doc_sloccounts)")"
 	get_doc_sloccounts | sort -rn | column -t
 
 	echo ""
-	echo "Tools:"
+	echo "Tools: $(sum_rows "$(get_tools_sloccounts)")"
 	get_tools_sloccounts | sort -rn | column -t
 }
 main $@
