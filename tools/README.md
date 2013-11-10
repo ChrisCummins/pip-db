@@ -82,6 +82,7 @@ project.
 
     Commands:
                new <issue-number>   Begin work on a new issue
+               pause                Pause work on the current issue
                close                Complete work on the current issue
 
 Automated workflow script for managing git branches.

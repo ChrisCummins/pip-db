@@ -15,6 +15,7 @@ usage() {
 	echo ""
 	echo "Commands:"
 	echo "           new <issue-number>   Begin work on a new issue"
+	echo "           pause                Pause work on the current issue"
 	echo "           close                Complete work on the current issue"
 }
 
