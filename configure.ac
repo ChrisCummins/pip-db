@@ -1,6 +1,15 @@
 AC_PREREQ(2.68)
 
 dnl ================================================================
+dnl     Autoconf script for pip-db.
+dnl
+dnl To rebuild the configure script from this, execute command
+dnl     autoconf
+dnl in the directory containing this script.
+dnl ================================================================
+
+
+dnl ================================================================
 dnl Project versions (i.e. the package version)
 dnl ================================================================
 m4_define([pipdb_major_version],[0])
