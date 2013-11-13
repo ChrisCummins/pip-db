@@ -5,11 +5,9 @@ require_once( 'lib/init.php' );
 $content = array(
 	/*
 	 * (optional)
-	 * The configuration for the navbar element. See html/_navbar.html.
+	 * Search box text.
 	 */
-	"_navbar" => array(
-		"search_text" => "Alkaline"
-		),
+	 "search_text" => "Alkaline",
 	/*
 	 * (optional)
 	 * The configuration for the title element. See html/_title.html.

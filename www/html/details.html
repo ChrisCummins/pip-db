@@ -3,10 +3,9 @@
 
     Schema for content args:
 
-    _navbar    => (optional) The navbar configuration, if any.
+    search_text => (optional) Search box text.
 
-    _title     => (optional) The title configuration (download href, etc), if
-                  any.
+    download   => (optional) The href to download page.
 
     names      => An array of names, with the first element being the primary
                   name, and other elements after this being alternative names.
@@ -30,10 +29,14 @@
    }
 %}
 
-{% if _navbar is defined %}
-  {% set _navbar = _navbar|merge({"search": true}) %}
-{% else %}
-  {% set _navbar = { "search": true } %}
+{% set _navbar = {
+     "search": true
+   }
+%}
+
+<!-- Navbar search text -->
+{% if search_text is defined %}
+  {% set _navbar = _navbar|merge({ "search_text": search_text }) %}
 {% endif %}
 
 {% if _title is defined %}
