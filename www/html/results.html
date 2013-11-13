@@ -1,13 +1,13 @@
 {% extends "_page.html" %}
 
 {% set _page = {
-     "title": '"Alkaline"'
+     "title": ('"' ~ search_text ~ '"')
    }
 %}
 
 {% set _navbar = {
-     "search" : true,
-     "search_text" : "Alkaline"
+     "search": true,
+     "search_text": search_text
    }
 %}
 
