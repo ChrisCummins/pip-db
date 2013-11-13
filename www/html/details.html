@@ -14,9 +14,11 @@
     properties => An associate array of property names and values to populate
                   the details table with.
 
-    links      => (optional) An associate array of external links in the form
+    links      => (optional) An associative array of external links in the form
                   <name, href> which is used to populate the external links
                   panel.
+    ref        => (optional) An associative array for the "Reference this page"
+                  section.
 -->
 
 {% extends "_page.html" %}
@@ -98,6 +100,7 @@
       </div> <!-- /.panel -->
       {% endif %}
 
+      {% if ref is defined %}
       <!-- Reference text section -->
       <div class="panel panel-primary panel-reference">
         <div class="panel-heading">
@@ -105,14 +108,16 @@
         </div>
 
         <div class="panel-body">
-          <blockquote>pip-db. (2012)
-            <i>Protein Isoelectric Point Database</i>, Alkaline
-            phosphatese. Available from:
-            &lt;http://www.pip-db.com/r?id=12023&gt;. [Cited 10 July
-            2013].
+          <blockquote>{{ ref.author }}.
+            ({{ ref.year }})
+            {{ ref.title }},
+            <i>{{ ref.site }}</i>.
+            Available from: &lt;{{ ref.href }}&gt;.
+            [Cited 10 July 2013].
           </blockquote>
         </div>
       </div> <!-- /.panel -->
+      {% endif %}
 
     </div> <!-- /.col-md-4 -->
 
