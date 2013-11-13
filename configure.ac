@@ -9,6 +9,13 @@ dnl in the directory containing this script.
 dnl ================================================================
 
 
+dnl     Autoconf script for protein-db.
+dnl
+dnl To rebuild the configure script from this, execute command
+dnl     autoconf
+dnl in the directory containing this script.
+
+
 dnl ================================================================
 dnl Project versions (i.e. the package version)
 dnl ================================================================
