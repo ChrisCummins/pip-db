@@ -10,11 +10,9 @@ $content = array(
 	 "search_text" => "Alkaline",
 	/*
 	 * (optional)
-	 * The configuration for the title element. See html/_title.html.
+	 * The href to download page.
 	 */
-	"_title" => array(
-		download => "http://127.0.0.1"
-		),
+	 download => "http://127.0.0.1",
 	/*
 	 * The names of the protein. Each protien must have at least one name,
 	 * which is used to set the page title. Additional names after the first

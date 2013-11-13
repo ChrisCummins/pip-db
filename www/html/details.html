@@ -34,15 +34,19 @@
    }
 %}
 
+{% set _title = {
+     "heading": _page.title
+   }
+%}
+
 <!-- Navbar search text -->
 {% if search_text is defined %}
   {% set _navbar = _navbar|merge({ "search_text": search_text }) %}
 {% endif %}
 
-{% if _title is defined %}
-  {% set _title = _title|merge({ "heading": _page.title }) %}
-{% else %}
-  {% set _title = { "heading": _page.title } %}
+<!-- Title download link -->
+{% if download is defined %}
+  {% set _title = _title|merge({ "download": download }) %}
 {% endif %}
 
 {% block content %}
