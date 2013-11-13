@@ -11,10 +11,12 @@
    }
 %}
 
-{% set _title = {
-     "results": results_count
-   }
-%}
+{% set _title = {} %}
+
+<!-- Number of results -->
+{% if results is defined %}
+  {% set _title = _title|merge({ "results": results_count }) %}
+{% endif %}
 
 <!-- Download link -->
 {% if download is defined %}
@@ -24,6 +26,8 @@
 {% block content %}
 
 <div class="sresults">
+
+  {% if results is defined %}
   <table class="table table-striped table-hover table-bordered">
 
     <!-- Table header -->
@@ -50,6 +54,12 @@
 
     </tbody>
   </table>
+  {% else %}
+  <p class="lead">
+    No results found.
+  </p>
+  {% endif %}
+
 </div> <!-- /.sresults -->
 
 {% endblock %}
