@@ -13,6 +13,7 @@ $content = array(
 
 	/*
 	 * (optional)
+	 * The configuration for the title element. See html/_title.html.
 	 */
 	"_title" => array(
 		download => "http://127.0.0.1"
