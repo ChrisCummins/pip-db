@@ -169,6 +169,7 @@ sum_rows() {
 
 main() {
 	echo "$(get_package_string) - Source lines of code"
+	echo "$(date)"
 
 	echo ""
 	echo ""
