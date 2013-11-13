@@ -8,7 +8,7 @@ $content = array(
 	 * The configuration for the navbar element. See html/_navbar.html.
 	 */
 	"_navbar" => array(
-		"search_text" => "test"
+		"search_text" => "Alkaline"
 		),
 	/*
 	 * (optional)
