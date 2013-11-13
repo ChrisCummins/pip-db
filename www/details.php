@@ -55,6 +55,18 @@ $content = array(
 		"PubMed" => "http://127.0.0.1",
 		"Species Taxonomy" => "http://127.0.0.1",
 		"Protein Sequence" => "http://127.0.0.1"
+		),
+
+	/*
+	 * (optional)
+	 * The "Reference this Page" section.
+	 */
+	"ref" => array(
+		"author" => "pip-db",
+		"year" => "2012",
+		"title" => "Alkaline phosphatese",
+		"site" => "Protein Isoelectric Point Database",
+		"href" => "http://www.pip-db.com/r?id=12023"
 		)
 	);
 
