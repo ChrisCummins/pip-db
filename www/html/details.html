@@ -1,15 +1,23 @@
-{# THE DETAILS PAGE.
+<!--
+    THE DETAILS PAGE.
 
-schema for content args:
+    Schema for content args:
 
-_navbar => (optional) The navbar configuration, if any.
-names => An array of names, with the first element being the primary name, and
-         other elements after this being alternative names.
-properties => An associate array of property names and values to populate the
-         details table with.
-links => (optional) An associate array of external links in the form
-         <name, href> which is used to populate the external links panel.
-#}
+    _navbar    => (optional) The navbar configuration, if any.
+
+    _title     => (optional) The title configuration (download href, etc), if
+                  any.
+
+    names      => An array of names, with the first element being the primary
+                  name, and other elements after this being alternative names.
+
+    properties => An associate array of property names and values to populate
+                  the details table with.
+
+    links      => (optional) An associate array of external links in the form
+                  <name, href> which is used to populate the external links
+                  panel.
+-->
 
 {% extends "_page.html" %}
 
