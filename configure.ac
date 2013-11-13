@@ -25,7 +25,6 @@ m4_define([author],[chrisc.101@gmail.com])
 
 AC_INIT([pip-db],[pipdb_version],[author])
 AC_CONFIG_SRCDIR([www/index.php])
-AC_CONFIG_MACRO_DIR([build])
 AC_CONFIG_AUX_DIR([build])
 
 
