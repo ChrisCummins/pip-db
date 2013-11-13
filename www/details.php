@@ -45,6 +45,14 @@ $content = array(
 		),
 	/*
 	 * (optional)
+	 * The record meta-data.
+	 */
+	"meta" => array(
+		"added" => "on March 10th 2012",
+		"edited" => "6 hours ago"
+		),
+	/*
+	 * (optional)
 	 * The external links properties. These are in <name, href> pairs and
 	 * represent individual external reference buttons.
 	 */
