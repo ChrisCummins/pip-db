@@ -4,7 +4,10 @@ schema for content args:
 
 names => An array of names, with the first element being the primary name, and
          other elements after this being alternative names.
-
+properties => An associate array of property names and values to populate the
+         details table with.
+links => (optional) An associate array of external links in the form
+         <name, href> which is used to populate the external links panel.
 #}
 
 {% extends "_page.html" %}
@@ -62,6 +65,7 @@ names => An array of names, with the first element being the primary name, and
 
     <div class="col-md-4">
 
+      {% if links is defined%}
       <!-- External links section -->
       <div class="panel panel-primary panel-extern">
         <div class="panel-heading">
@@ -70,29 +74,20 @@ names => An array of names, with the first element being the primary name, and
 
         <div class="panel-body">
           <ul class="panel-link-list">
+
+            {% for name, href in links %}
             <li>
-              <a class="btn btn-success btn-block">
-                Full Text
+              <a href="{{ href }}"
+                 class="btn btn-success btn-block">
+                {{ name }}
               </a>
             </li>
-            <li>
-              <a class="btn btn-success btn-block">
-                PubMed
-              </a>
-            </li>
-            <li>
-              <a class="btn btn-success btn-block">
-                Species Taxonomy
-              </a>
-            </li>
-            <li>
-              <a class="btn btn-success btn-block">
-                Protein Sequence
-              </a>
-            </li>
+            {% endfor %}
+
           </ul>
         </div>
       </div> <!-- /.panel -->
+      {% endif %}
 
       <!-- Reference text section -->
       <div class="panel panel-primary panel-reference">
