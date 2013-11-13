@@ -21,16 +21,16 @@ function template_exists( $template_name ) {
 function render_template( $template_name, $template_args = array() ) {
 	global $twig;
 
-	if ( '_' == $template_name[0] ) {
-		echo 'lib/template.php: Private template should not be rendered';
-		return;
-	}
-
 	$template_extension = '.html';
 	$template_file = $template_name . $template_extension;
 
 	if ( !template_exists( $template_file ) ) {
 		echo 'lib/template.php: Template not found!';
+		return;
+	}
+
+	if ( '_' == $template_name[0] ) {
+		echo 'lib/template.php: Private template should not be rendered';
 		return;
 	}
 
