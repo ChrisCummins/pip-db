@@ -27,6 +27,10 @@ AC_INIT([pip-db],[pipdb_version],[author])
 AC_CONFIG_SRCDIR([www/index.php])
 AC_CONFIG_AUX_DIR([build])
 
+dnl Support for --program-prefix, --program-suffix and
+dnl --program-transform-name options
+AC_ARG_PROGRAM
+
 
 dnl ================================================================
 dnl Required versions for dependencies
