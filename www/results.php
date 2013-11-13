@@ -11,6 +11,12 @@ $content = array(
 	 * The number of results returned.
 	 */
 	"results_count" => 122,
+	/*
+	 * (optional)
+	 * Href to download the results.
+	 */
+	"download" => "http://127.0.0.1",
+	/*
 	 * (optional)
 	 * An array of search results. Each result element is an array of
 	 * properties, with the first element being the href to that

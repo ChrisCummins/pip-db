@@ -12,10 +12,14 @@
 %}
 
 {% set _title = {
-     "results": results_count,
-     "download": true
+     "results": results_count
    }
 %}
+
+<!-- Download link -->
+{% if download is defined %}
+  {% set _title = _title|merge({ "download": download }) %}
+{% endif %}
 
 {% block content %}
 
