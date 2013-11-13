@@ -14,6 +14,8 @@
     properties => An associate array of property names and values to populate
                   the details table with.
 
+    meta       => (optional) The record meta-data.
+
     links      => (optional) An associative array of external links in the form
                   <name, href> which is used to populate the external links
                   panel.
@@ -123,17 +125,19 @@
 
   </div> <!-- /.row -->
 
+  {% if meta is defined %}
   <div class="row">
     <div class="col-md-12">
       <!-- Record metadata -->
       <div class="meta-holder">
         <ul class="meta">
-          <li>Added on March 10th 2012.</li>
-          <li>Last edited 6 hours ago.</li>
+          <li>Added {{ meta.added }}.</li>
+          <li>Last edited {{ meta.edited }}.</li>
         </ul>
       </div>
     </div> <!-- /.col-md-12 -->
   </div> <!-- /.row -->
+  {% endif %}
 
 </div> <!-- /#details -->
 
