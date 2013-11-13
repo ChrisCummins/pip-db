@@ -42,6 +42,7 @@ dnl TODO: Add AC_SUBST for dependencies, examples:
 dnl AC_SUBST([GLIB_REQ_VERSION], [glib_req_version])
 dnl AC_SUBST([GDK_PIXBUF_REQ_VERSION], [gdk_pixbuf_req_version])
 
+dnl Fairly arbitrary, older versions might work too.
 AM_INIT_AUTOMAKE([1.11 -Wall foreign no-define])
 AM_SILENT_RULES([yes])
 
