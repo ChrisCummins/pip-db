@@ -12,6 +12,13 @@ $content = array(
 		),
 
 	/*
+	 * (optional)
+	 */
+	"_title" => array(
+		download => "http://127.0.0.1"
+		),
+
+	/*
 	 * The names of the protein. Each protien must have at least one name,
 	 * which is used to set the page title. Additional names after the first
 	 * element will be listed as 'Alternative names'.

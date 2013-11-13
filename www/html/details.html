@@ -24,11 +24,11 @@ links => (optional) An associate array of external links in the form
   {% set _navbar = { "search": true } %}
 {% endif %}
 
-{% set _title = {
-     "heading": _page.title,
-     "download": true
-   }
-%}
+{% if _title is defined %}
+  {% set _title = _title|merge({ "heading": _page.title }) %}
+{% else %}
+  {% set _title = { "heading": _page.title } %}
+{% endif %}
 
 {% block content %}
 
