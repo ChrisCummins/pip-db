@@ -2,4 +2,6 @@
 
 require_once( 'lib/init.php' );
 
-render_template( 'search' );
+$content = array();
+
+render_template( 'search', $content );
