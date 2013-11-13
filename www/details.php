@@ -10,7 +10,6 @@ $content = array(
 	"_navbar" => array(
 		"search_text" => "test"
 		),
-
 	/*
 	 * (optional)
 	 * The configuration for the title element. See html/_title.html.
@@ -18,7 +17,6 @@ $content = array(
 	"_title" => array(
 		download => "http://127.0.0.1"
 		),
-
 	/*
 	 * The names of the protein. Each protien must have at least one name,
 	 * which is used to set the page title. Additional names after the first
@@ -56,7 +54,6 @@ $content = array(
 		"Species Taxonomy" => "http://127.0.0.1",
 		"Protein Sequence" => "http://127.0.0.1"
 		),
-
 	/*
 	 * (optional)
 	 * The "Reference this Page" section.
