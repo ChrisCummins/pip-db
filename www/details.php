@@ -28,6 +28,17 @@ $content = array(
 		"Valid sequences available" => "Yes",
 		"Method" => "Isoelectric focusing",
 		"Temperature" => "22 C"
+		),
+	/*
+	 * (optional)
+	 * The external links properties. These are in <name, href> pairs and
+	 * represent individual external reference buttons.
+	 */
+	"links" => array(
+		"Full Text" => "http://127.0.0.1",
+		"PubMed" => "http://127.0.0.1",
+		"Species Taxonomy" => "http://127.0.0.1",
+		"Protein Sequence" => "http://127.0.0.1"
 		)
 	);
 
