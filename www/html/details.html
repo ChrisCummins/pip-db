@@ -1,7 +1,16 @@
+{# THE DETAILS PAGE.
+
+schema for content args:
+
+names => An array of names, with the first element being the primary name, and
+         other elements after this being alternative names.
+
+#}
+
 {% extends "_page.html" %}
 
 {% set _page = {
-     "title": "Alkaline phosphatese"
+     "title": names[0]
    }
 %}
 
@@ -28,15 +37,18 @@
         <!-- Table body -->
         <tbody>
 
-          <tr> <!-- Detail -->
-            <td>Name:</td>
-            <td>Alkaline phosphatese</td>
-          </tr>
+          {% for name in names %}
+            <tr>
 
-          <tr> <!-- Detail -->
-            <td>Alternative name:</td>
-            <td>Alkaline phosphatese</td>
-          </tr>
+              {% if loop.first %}
+                <td>Name:</td>
+              {% else %}
+                <td>Alternative name:</td>
+              {% endif %}
+
+              <td>{{ name }}</td>
+            </tr>
+          {% endfor %}
 
           <tr> <!-- Detail -->
             <td>Enzyme Commission number:</td>
