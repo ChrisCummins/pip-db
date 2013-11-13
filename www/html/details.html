@@ -38,72 +38,22 @@ names => An array of names, with the first element being the primary name, and
         <tbody>
 
           {% for name in names %}
-            <tr>
-
-              {% if loop.first %}
-                <td>Name:</td>
-              {% else %}
-                <td>Alternative name:</td>
-              {% endif %}
-
-              <td>{{ name }}</td>
-            </tr>
+          <tr>
+            {% if loop.first %}
+            <td>Name:</td>
+            {% else %}
+            <td>Alternative name:</td>
+            {% endif %}
+            <td>{{ name }}</td>
+          </tr>
           {% endfor %}
 
-          <tr> <!-- Detail -->
-            <td>Enzyme Commission number:</td>
-            <td>3.2.1.52</td>
+          {% for key, value in properties %}
+          <tr>
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
           </tr>
-
-          <tr> <!-- Detail -->
-            <td>Source:</td>
-            <td>Human</td>
-          </tr>
-
-          <tr> <!-- Detail -->
-            <td>Location:</td>
-            <td>Placenta</td>
-          </tr>
-
-          <tr> <!-- Detail -->
-            <td>pI:</td>
-            <td>4.6</td>
-          </tr>
-
-          <tr> <!-- Detail -->
-            <td>Molecular weight:</td>
-            <td>116000 - 116000</td>
-          </tr>
-
-          <tr> <!-- Detail -->
-            <td>Sub unit no:</td>
-            <td>2</td>
-          </tr>
-
-          <tr> <!-- Detail -->
-            <td>Sub unit MW:</td>
-            <td>58000</td>
-          </tr>
-
-          <tr> <!-- Detail -->
-            <td>Number of Iso Enzymes:</td>
-            <td>Many</td>
-          </tr>
-
-          <tr> <!-- Detail -->
-            <td>Valid sequences available:</td>
-            <td>Yes</td>
-          </tr>
-
-          <tr> <!-- Detail -->
-            <td>Method:</td>
-            <td>Isoelectric focusing</td>
-          </tr>
-
-          <tr> <!-- Detail -->
-            <td>Temperature:</td>
-            <td>22 C</td>
-          </tr>
+          {% endfor %}
 
         </tbody>
       </table>
