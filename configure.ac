@@ -1,4 +1,4 @@
-AC_PREREQ(2.68)
+AC_PREREQ(2.65)
 
 dnl ================================================================
 dnl     Autoconf script for pip-db.
