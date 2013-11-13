@@ -4,6 +4,14 @@ require_once( 'lib/functions.php' );
 
 $content = array(
 	/*
+	 * (optional)
+	 * The configuration for the navbar element. See html/_navbar.html.
+	 */
+	"_navbar" => array(
+		"search_text" => "test"
+		),
+
+	/*
 	 * The names of the protein. Each protien must have at least one name,
 	 * which is used to set the page title. Additional names after the first
 	 * element will be listed as 'Alternative names'.
