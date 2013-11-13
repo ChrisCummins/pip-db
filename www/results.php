@@ -7,6 +7,10 @@ $content = array(
 	 * The search text.
 	 */
 	"search_text" => "Alkaline",
+	/*
+	 * The number of results returned.
+	 */
+	"results_count" => 122,
 	 * (optional)
 	 * An array of search results. Each result element is an array of
 	 * properties, with the first element being the href to that
