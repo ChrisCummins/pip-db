@@ -1,4 +1,5 @@
 #!/bin/bash
+### sloccount.sh - tool to count source code lines in pip-db
 
 # Lookup the root directory for the project. If unable to locate root, exit
 # script.
@@ -17,6 +18,13 @@ get_project_root() {
 
 	echo "fatal: Unable to locate project base directory." >&2
 	exit 3
+}
+
+# Lookup the package string as exported by Autoconf in the toplevel Makefile.
+#
+#     @return A package string, in the form: <name> <version>
+get_package_string() {
+	grep '^PACKAGE_STRING' "$(get_project_root)"/Makefile | sed 's/^PACKAGE_STRING *= *//'
 }
 
 # Returns a list of paths to files which match the pattern *.$1, relative to the
@@ -160,6 +168,9 @@ sum_rows() {
 }
 
 main() {
+	echo "$(get_package_string) - Source lines of code"
+
+	echo ""
 	echo ""
 	echo "Build system: $(sum_rows "$(get_build_sloccounts)")"
 	get_build_sloccounts | sort -rn | column -t -s $'\t'
