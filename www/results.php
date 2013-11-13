@@ -2,4 +2,6 @@
 
 require_once( 'lib/functions.php' );
 
-render_template( 'results' );
+$content = array();
+
+render_template( 'results', $content );
