@@ -365,6 +365,7 @@ AC_OUTPUT([
 	Makefile
 	tools/dsa.sh
 	tools/Makefile
+	www/.htaccess
 	www/css/Makefile
 	www/fonts/Makefile
 	www/html/Makefile

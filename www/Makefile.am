@@ -21,12 +21,13 @@ SUBDIRS = \
 	html \
 	$(NULL)
 
-noinst_SCRIPTS = $(HTML)
+noinst_SCRIPTS = $(HTML) $(WWW_BUILD)/.htaccess
 
 CLEANFILES = $(shell find $(WWW_BUILD) -type f)
 
 EXTRA_DIST = \
 	$(SRC) \
+	.htaccess.in \
 	README.md \
 	$(NULL)
 
@@ -56,6 +57,13 @@ $(WWW_BUILD)/%.php: %.php
 		$(MKDIR_P) $(WWW_BUILD); \
 	}
 	@echo '  PHP    $(notdir $@)'
+	@cat $< > $@
+
+$(WWW_BUILD)/.htaccess: .htaccess
+	@test -d $(WWW_BUILD) || { \
+		$(MKDIR_P) $(WWW_BUILD); \
+	}
+	@echo '  CP     $(notdir $@)'
 	@cat $< > $@
 
 if HAVE_WWW_ROOT
