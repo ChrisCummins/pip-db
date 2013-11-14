@@ -9,6 +9,7 @@ abstract class PostVariables
 {
 	const Username = "user";
 	const Password = "pass";
+	const Action  = "action";
 }
 
 /*
