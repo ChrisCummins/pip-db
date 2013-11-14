@@ -1,7 +1,5 @@
 <?php
 
-$template_extension = '.html';
-
 $twig_autoloader = './lib/Twig/Autoloader.php';
 
 require_once( $twig_autoloader );
@@ -24,9 +22,7 @@ function pip_throw_template_error( $msg ) {
  * For a given template name, return the template source file.
  */
 function pip_get_template_file( $name ) {
-	global $template_extension;
-
-	return $name . $template_extension;
+	return $name . '.html';
 }
 
 /*
