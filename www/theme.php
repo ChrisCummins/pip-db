@@ -1,5 +1,5 @@
 <?php
 
-require_once( 'lib/init.php' );
+require_once( $_SERVER['PHP_ROOT'] . 'init.php' );
 
 pip_render_template( 'theme' );

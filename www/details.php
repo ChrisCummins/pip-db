@@ -1,6 +1,6 @@
 <?php
 
-require_once( 'lib/init.php' );
+require_once( $_SERVER['PHP_ROOT'] . 'init.php' );
 
 $content = array(
 	/*
