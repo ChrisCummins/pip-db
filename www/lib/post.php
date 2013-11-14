@@ -5,8 +5,7 @@
  * done indirectly using the pip_{get,set}_post_var() API and using the values
  * found in this class.
  */
-abstract class PostVariables
-{
+abstract class PostVariables {
 	const Username = "user";
 	const Password = "pass";
 	const Action  = "action";
