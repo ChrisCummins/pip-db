@@ -19,9 +19,34 @@ abstract class SessionVariables
 }
 
 /*
+ * Returns whether a given SESSION variable is valid, i.e. whether it has been
+ * defined in the SessionVariables class. If the variable name is found, return
+ * true, else false.
+ */
+function pip_session_is_valid( $var ) {
+	foreach ( SessionVariables::val() as $val ) {
+		if ( $val == $var )
+			return true;
+	}
+
+	return false;
+}
+
+/*
+ * Ensure that the given variable has an entry in the SessionVariables class.
+ */
+function pip_session_fail_if_not_valid( $var ) {
+	if ( !pip_session_is_valid( $var ) )
+		throw new Exception( 'Illegal _SESSION variable: "'
+				     . $var . '"' );
+}
+
+/*
  * Returns wheteher a particular session variable is set or not.
  */
 function pip_session_isset( $var ) {
+	pip_session_fail_if_not_valid( $var );
+
 	return isset( $_SESSION[$var] );
 }
 
@@ -29,6 +54,8 @@ function pip_session_isset( $var ) {
  * Return a particular session variable if defined, else an empty string.
  */
 function pip_session_get( $var ) {
+	pip_session_fail_if_not_valid( $var );
+
 	if ( pip_session_isset( $var ) )
 		return $_SESSION[$var];
 	else
@@ -39,6 +66,8 @@ function pip_session_get( $var ) {
  * Sets a particular session variable.
  */
 function pip_session_set( $var, $val ) {
+	pip_session_fail_if_not_valid( $var );
+
 	$_SESSION[$var] = $val;
 }
 
@@ -49,6 +78,9 @@ function pip_session_set( $var, $val ) {
 function pip_session_unset( $var = null ) {
 	if ( null == $var )
 		session_unset();
-	else
+	else {
+		pip_session_fail_if_not_valid( $var );
+
 		session_unset( $var );
+	}
 }
