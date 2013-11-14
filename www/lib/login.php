@@ -18,7 +18,7 @@ function pip_login_is_logged_in() {
 /*
  * If logged in, return the session array. Otherwise, return null.
  */
-function pip_get_session() {
+function pip_login_get_user_details() {
 
 	if ( pip_login_is_logged_in() )
 		return array(
@@ -33,7 +33,7 @@ function pip_get_session() {
  * Returns the session (if found) to the given array.
  */
 function pip_append_session_to_array( $array ) {
-	$session = pip_get_session();
+	$session = pip_login_get_user_details();
 
 	if ( null !== $session )
 		$array['session'] = $session;
