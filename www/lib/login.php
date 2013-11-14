@@ -11,7 +11,7 @@ abstract class PostActionValues {
 /*
  * Returns whether the user is currently logged in or not.
  */
-function pip_is_logged_in() {
+function pip_login_is_logged_in() {
 	return '' !== pip_get_session_var( SessionVariables::Username );
 }
 
@@ -20,7 +20,7 @@ function pip_is_logged_in() {
  */
 function pip_get_session() {
 
-	if ( pip_is_logged_in() )
+	if ( pip_login_is_logged_in() )
 		return array(
 			'user' => pip_get_session_var( SessionVariables::Username ),
 			'pass' => pip_get_session_var( SessionVariables::Password )
