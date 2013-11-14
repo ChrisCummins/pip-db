@@ -56,9 +56,11 @@ function pip_attempting_login() {
 	return isset($_POST['user']);
 }
 
+
 /* Initialise our session */
 session_start();
 
+/* Handle login attempt */
 if ( pip_attempting_login() ) {
 	$username = $_POST['user'];
 	$password = "";
