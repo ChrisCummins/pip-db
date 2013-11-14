@@ -132,7 +132,7 @@ get_controller_sloccounts() {
 
 # Returns a list of sloccounts for the external libraries.
 get_extern_sloccounts() {
-	local twig=$(get_lc_of_files "$(find_files_with_extension php www/lib/twig)")
+	local twig=$(get_lc_of_files "$(find_files_with_extension php www/lib/Twig)")
 	local total=$((twig))
 
 	print_sloccount $twig  $total "PHP (twig)"
