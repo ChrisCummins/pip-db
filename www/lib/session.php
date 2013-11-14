@@ -1,30 +1,56 @@
 <?php
 
-function get_session() {
+/*
+ * Returns whether the user is currently logged in or not.
+ */
+function pip_is_logged_in() {
+	return isset( $_SESSION['user'] ) &&
+		'' !== $_SESSION['user'];
+}
 
-	if ( isset( $_SESSION['user'] ) &&
-	     '' !== $_SESSION['user'] ) {
+/*
+ * If logged in, return the session array. Otherwise, return null.
+ */
+function pip_get_session() {
+
+	if ( pip_is_logged_in() )
 		return array( 'user' => $_SESSION['user'] );
-	}
-
-	return null;
+	else
+		return null;
 }
 
-function set_session( $user ) {
-	$_SESSION['user'] = $user;
-}
-
-function attempt_login() {
+/*
+ * Validates whether a set of user credentials are valid.
+ */
+function pip_credentials_are_valid( $username, $password ) {
 	/*
 	 * TODO: Actually implement a proper user backend. For now, we just
 	 * assume that whatever details were provided were successful.
 	 */
-	set_session( $_POST['user'] );
+	return true;
+}
+
+/*
+ * Sets the current session.
+ */
+function pip_login( $username, $password ) {
+	$_SESSION['user'] = $username;
+}
+
+/*
+ * Returns whether we're currently attempting a page login.
+ */
+function pip_attempting_login() {
+	return isset($_POST['user']);
 }
 
 /* Initialise our session */
 session_start();
 
-if (isset($_POST['user'])) {
-	attempt_login();
+if ( pip_attempting_login() ) {
+	$username = $_POST['user'];
+	$password = "";
+
+	if ( pip_credentials_are_valid( $username, $password ) )
+		pip_login( $username, $password );
 }

@@ -34,7 +34,7 @@ function render_template( $template_name, $template_args = array() ) {
 		return;
 	}
 
-	$session = get_session();
+	$session = pip_get_session();
 
 	if ( null !== $session )
 		$template_args['session'] = $session;
