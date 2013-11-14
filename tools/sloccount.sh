@@ -108,13 +108,11 @@ get_build_sloccounts() {
 
 # Returns a list of sloccounts for the website pages.
 get_page_sloccounts() {
-	local css=$(get_lc_of_files "$(find_files_with_extension css www/)")
 	local less=$(get_lc_of_files "$(find_files_with_extension less www/)")
 	local html=$(get_lc_of_files "$(find_files_with_extension html www/)")
 	local js=$(get_lc_of_files "$(find_files_with_extension js www/)")
-	local total=$((css+$less+$html+$js))
+	local total=$((less+$html+$js))
 
-	print_sloccount $css   $total "CSS"
 	print_sloccount $less  $total "Less CSS"
 	print_sloccount $html  $total "HTML"
 	print_sloccount $js    $total "JavaScript"
