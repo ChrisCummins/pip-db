@@ -1,6 +1,5 @@
 <?php
 
-$template_dir = './html/';
 $template_extension = '.html';
 
 $twig_autoloader = './lib/Twig/Autoloader.php';
@@ -9,7 +8,7 @@ require_once( $twig_autoloader );
 
 Twig_Autoloader::register();
 
-$twig_loader = new Twig_Loader_Filesystem( $template_dir );
+$twig_loader = new Twig_Loader_Filesystem( $_SERVER['HTML_ROOT'] );
 $twig_args = array();
 
 $twig = new Twig_Environment( $twig_loader, $twig_args );
@@ -36,9 +35,7 @@ function pip_get_template_file( $name ) {
  *      <dir>/<name>.<ext>
  */
 function pip_get_template_path( $name ) {
-	global $template_dir;
-
-	return $template_dir . pip_get_template_file( $name );
+	return $_SERVER['HTML_ROOT'] . pip_get_template_file( $name );
 }
 
 /*
