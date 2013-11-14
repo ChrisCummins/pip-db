@@ -10,6 +10,14 @@ abstract class PostVariables
 	const Username = "user";
 	const Password = "pass";
 	const Action  = "action";
+
+	function val() {
+		return array(
+			self::Username,
+			self::Password,
+			self::Action
+			);
+	}
 }
 
 /*
