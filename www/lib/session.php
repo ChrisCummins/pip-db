@@ -35,5 +35,16 @@ function pip_set_session_var( $var, $val ) {
 	$_SESSION[$var] = $val;
 }
 
+/*
+ * Unset a specific session variable. If no variable is given, unset all
+ * variables.
+ */
+function pip_session_unset( $var = null ) {
+	if ( null == $var )
+		session_unset();
+	else
+		session_unset( $var );
+}
+
 /* Initialise our session */
 session_start();
