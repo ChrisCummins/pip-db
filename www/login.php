@@ -24,8 +24,8 @@
 
         <form class="form-signin">
           <h2 class="form-signin-heading">Login</h2>
-          <input type="text" class="form-control" placeholder="Email address" required autofocus>
-          <input type="password" class="form-control" placeholder="Password" required>
+          <input name="user" type="text" class="form-control" placeholder="Email address" required autofocus>
+          <input name="pass" type="password" class="form-control" placeholder="Password" required>
           <label class="checkbox">
             <input type="checkbox" value="remember-me"> Remember me
           </label>
