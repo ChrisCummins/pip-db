@@ -152,9 +152,3 @@ function pip_do_register_attempt() {
 		pip_failed_register();
 
 }
-
-/* Handle login attempt */
-if ( pip_attempting_login() )
-	pip_do_login_attempt();
-else if ( pip_attempting_register() )
-	pip_do_register_attempt();
