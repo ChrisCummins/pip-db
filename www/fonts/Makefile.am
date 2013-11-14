@@ -5,7 +5,7 @@ FONTS = $(addprefix $(FONTS_DEST)/,$(FONTS_SRC))
 
 noinst_SCRIPTS = $(FONTS)
 
-CLEANFILES = $(noinst_SCRIPTS)
+CLEANFILES = $(shell find $(WWW_BUILD) -type f)
 
 EXTRA_DIST = $(FONTS_SRC)
 

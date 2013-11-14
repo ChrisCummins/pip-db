@@ -14,7 +14,7 @@ CSS_SRC += $(LESS:.less=.css) # Generated CSS
 
 noinst_SCRIPTS = $(CSS) $(LESS:.less=.css)
 
-CLEANFILES = $(shell find $(CSS_DEST) -name '*.css') $(LESS:.less=.css)
+CLEANFILES = $(shell find $(WWW_BUILD) -type f) $(LESS:.less=.css)
 
 # Less CSS compilation
 %.css: %.less $(wildcard *.less)

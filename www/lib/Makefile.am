@@ -10,7 +10,7 @@ SUBDIRS = \
 
 noinst_SCRIPTS = $(LIB)
 
-CLEANFILES = $(noinst_SCRIPTS)
+CLEANFILES = $(shell find $(WWW_BUILD) -type f)
 
 EXTRA_DIST = $(LIB_SRC)
 

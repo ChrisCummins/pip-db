@@ -5,7 +5,7 @@ HTML = $(addprefix $(HTML_DEST)/,$(HTML_SRC))
 
 noinst_SCRIPTS = $(HTML)
 
-CLEANFILES = $(noinst_SCRIPTS)
+CLEANFILES = $(shell find $(WWW_BUILD) -type f)
 
 EXTRA_DIST = $(HTML_SRC) README.md
 

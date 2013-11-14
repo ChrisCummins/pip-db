@@ -5,7 +5,7 @@ IMG = $(addprefix $(IMG_DEST)/,$(IMG_SRC))
 
 noinst_SCRIPTS = $(IMG)
 
-CLEANFILES = $(noinst_SCRIPTS)
+CLEANFILES = $(shell find $(WWW_BUILD) -type f)
 
 EXTRA_DIST = $(IMG_SRC)
 
