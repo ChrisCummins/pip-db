@@ -24,7 +24,7 @@ function pip_accounts_add_new( $username, $password ) {
 /*
  * Returns whether a specific user name exists.
  */
-function pip_user_exists( $username ) {
+function pip_accounts_account_exists( $username ) {
 	/*
 	 * TODO: Actually implement a proper user backend. For now, we just
 	 * assume that no users exist.
