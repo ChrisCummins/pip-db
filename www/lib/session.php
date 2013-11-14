@@ -9,6 +9,13 @@ abstract class SessionVariables
 {
 	const Username = "user";
 	const Password = "pass";
+
+	function val() {
+		return array(
+			self::Username,
+			self::Password
+			);
+	}
 }
 
 /*
