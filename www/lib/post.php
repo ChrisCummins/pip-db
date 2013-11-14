@@ -13,6 +13,14 @@ abstract class PostVariables
 }
 
 /*
+ * Legal values for the POST['action'] variable.
+ */
+abstract class PostActionValues {
+	const Login = "login";
+	const Register = "register";
+}
+
+/*
  * Returns wheteher a particular POST variable is set or not.
  */
 function pip_post_isset( $var ) {

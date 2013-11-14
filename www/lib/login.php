@@ -1,14 +1,6 @@
 <?php
 
 /*
- * Legal values for the POST['action'] variable.
- */
-abstract class PostActionValues {
-	const Login = "login"; /* Attempting to login */
-	const Register = "register"; /* Attempting to register a new account */
-}
-
-/*
  * Returns whether the user is currently logged in or not.
  */
 function pip_login_is_logged_in() {
