@@ -45,6 +45,3 @@ function pip_session_unset( $var = null ) {
 	else
 		session_unset( $var );
 }
-
-/* Initialise our session */
-session_start();

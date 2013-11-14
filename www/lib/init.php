@@ -8,3 +8,7 @@ require_once( $_SERVER['PHP_ROOT'] . 'history.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'template.php' );
 
 require_once( $_SERVER['PHP_ROOT'] . 'login.php' );
+
+
+/* Initialise our session */
+session_start();
