@@ -1,11 +1,38 @@
 <?php
 
 /*
+ * The names of SessionVariables. All accessing of sesion variables should be
+ * done indirectly using the pip_{get,set}_session_var() API and using the
+ * values found in this class.
+ */
+abstract class SessionVariables
+{
+	const Username = "user";
+	const Password = "pass";
+}
+
+/*
+ * Return a particular session variable if defined, else an empty string.
+ */
+function pip_get_session_var( $var ) {
+	if ( isset( $_SESSION[$var] ) )
+		return $_SESSION[$var];
+	else
+		return "";
+}
+
+/*
+ * Sets a particular session variable.
+ */
+function pip_set_session_var( $var, $val ) {
+	$_SESSION[$var] = $val;
+}
+
+/*
  * Returns whether the user is currently logged in or not.
  */
 function pip_is_logged_in() {
-	return isset( $_SESSION['user'] ) &&
-		'' !== $_SESSION['user'];
+	return '' !== pip_get_session_var( 'user' );
 }
 
 /*
@@ -14,7 +41,10 @@ function pip_is_logged_in() {
 function pip_get_session() {
 
 	if ( pip_is_logged_in() )
-		return array( 'user' => $_SESSION['user'] );
+		return array(
+			'user' => pip_get_session_var( SessionVariables::Username ),
+			'pass' => pip_get_session_var( SessionVariables::Password )
+			);
 	else
 		return null;
 }
@@ -46,7 +76,8 @@ function pip_credentials_are_valid( $username, $password ) {
  * Sets the current session.
  */
 function pip_login( $username, $password ) {
-	$_SESSION['user'] = $username;
+	pip_set_session_var( SessionVariables::Username, $username );
+	pip_set_session_var( SessionVariables::Password, $password );
 }
 
 /*
