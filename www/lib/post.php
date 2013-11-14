@@ -22,7 +22,7 @@ function pip_post_var_isset( $var ) {
  * Return a particular POST variable if defined, else an empty string.
  */
 function pip_get_post_var( $var ) {
-	if ( pip_post_var_isset( $_POST[$var] ) )
+	if ( pip_post_var_isset( $var ) )
 		return $_POST[$var];
 	else
 		return "";
