@@ -48,7 +48,7 @@ function pip_logout() {
 /*
  * Returns whether we're currently attempting a page login.
  */
-function pip_attempting_login() {
+function pip_login_attempting_login() {
 	return PostActionValues::Login ==
 		pip_get_post_var( PostVariables::Action );
 }

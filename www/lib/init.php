@@ -15,7 +15,7 @@ require_once( $_SERVER['PHP_ROOT'] . 'login.php' );
 session_start();
 
 /* Handle login attempt */
-if ( pip_attempting_login() )
+if ( pip_login_attempting_login() )
 	pip_do_login_attempt();
 else if ( pip_attempting_register() )
 	pip_do_register_attempt();
