@@ -1,12 +1,11 @@
 # Generate lists of source files and targets
-HTML_DEST = $(WWW_BUILD)
-HTML_SRC = $(shell find . -maxdepth 1 -name '*.html' -exec basename {} \;) \
+SRC = $(shell find . -maxdepth 1 -name '*.html' -exec basename {} \;) \
 	$(shell find . -maxdepth 1 -name '*.php' -exec basename {} \;)
 
 TEMPLATE_DEST = $(WWW_BUILD)/html
 TEMPLATE_SRC = $(shell find html -maxdepth 1 -name '*.html' -exec basename {} \;)
 
-HTML = $(addprefix $(HTML_DEST)/,$(HTML_SRC)) \
+HTML = $(addprefix $(WWW_BUILD)/,$(SRC)) \
 	$(addprefix $(TEMPLATE_DEST)/,$(TEMPLATE_SRC))
 export HTML
 
@@ -27,7 +26,7 @@ noinst_SCRIPTS = $(HTML)
 CLEANFILES = $(shell find $(WWW_BUILD) -type f)
 
 EXTRA_DIST = \
-	$(HTML_SRC) \
+	$(SRC) \
 	README.md \
 	$(NULL)
 
@@ -44,17 +43,17 @@ endef
 endif
 
 # HTML compilation
-$(HTML_DEST)/%.html: %.html
-	@test -d $(HTML_DEST) || { \
-		$(MKDIR_P) $(HTML_DEST); \
+$(WWW_BUILD)/%.html: %.html
+	@test -d $(WWW_BUILD) || { \
+		$(MKDIR_P) $(WWW_BUILD); \
 	}
 	@echo '  HTML   $(notdir $@)'
 	@$(call compile,$<,$@)
 
 # PHP compilation
-$(HTML_DEST)/%.php: %.php
-	@test -d $(HTML_DEST) || { \
-		$(MKDIR_P) $(HTML_DEST); \
+$(WWW_BUILD)/%.php: %.php
+	@test -d $(WWW_BUILD) || { \
+		$(MKDIR_P) $(WWW_BUILD); \
 	}
 	@echo '  PHP    $(notdir $@)'
 	@cat $< > $@
