@@ -16,7 +16,9 @@
     <!-- Content wrapper -->
     <div id="wrap">
 
-      {% include "_navbar.html" %}
+      {% if not _navbar.hidden %}
+        {% include "_navbar.html" %}
+      {% endif %}
 
       <!-- Container -->
       <div class="container">
