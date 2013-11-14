@@ -50,7 +50,7 @@ function pip_logout() {
  */
 function pip_login_attempting_login() {
 	return PostActionValues::Login ==
-		pip_get_post_var( PostVariables::Action );
+		pip_post_get( PostVariables::Action );
 }
 
 /*
@@ -67,8 +67,8 @@ function pip_login_failed() {
  * Perform a login attempt.
  */
 function pip_login_attempt() {
-	$username = pip_get_post_var( PostVariables::Username );
-	$password = pip_get_post_var( PostVariables::Password );
+	$username = pip_post_get( PostVariables::Username );
+	$password = pip_post_get( PostVariables::Password );
 
 	if ( pip_accounts_validate_credentials( $username, $password ) )
 		pip_login( $username, $password );

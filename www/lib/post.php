@@ -15,15 +15,15 @@ abstract class PostVariables
 /*
  * Returns wheteher a particular POST variable is set or not.
  */
-function pip_post_var_isset( $var ) {
+function pip_post_isset( $var ) {
 	return isset( $_POST[$var] );
 }
 
 /*
  * Return a particular POST variable if defined, else an empty string.
  */
-function pip_get_post_var( $var ) {
-	if ( pip_post_var_isset( $var ) )
+function pip_post_get( $var ) {
+	if ( pip_post_isset( $var ) )
 		return $_POST[$var];
 	else
 		return "";

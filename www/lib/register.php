@@ -5,7 +5,7 @@
  */
 function pip_register_attempting_registration() {
 	return PostActionValues::Register ==
-		pip_get_post_var( PostVariables::Action );
+		pip_post_get( PostVariables::Action );
 }
 
 /*
@@ -22,8 +22,8 @@ function pip_register_failed() {
  * Attempt to register a new user.
  */
 function pip_register_attempt() {
-	$username = pip_get_post_var( PostVariables::Username );
-	$password = pip_get_post_var( PostVariables::Password );
+	$username = pip_post_get( PostVariables::Username );
+	$password = pip_post_get( PostVariables::Password );
 
 	if ( !pip_accounts_account_exists( $username ) ) {
 		pip_accounts_add_new( $username, $password );
