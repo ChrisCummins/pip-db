@@ -61,6 +61,5 @@ function pip_render_template( $name, $content = array() ) {
 	$content = pip_append_session_to_array( $content );
 
 	$template = $twig->loadTemplate( pip_get_template_file( $name ) );
-
 	$template->display( $content );
 }
