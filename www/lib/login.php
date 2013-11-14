@@ -74,7 +74,7 @@ function pip_login_failed() {
 /*
  * Perform a login attempt.
  */
-function pip_do_login_attempt() {
+function pip_login_attempt() {
 	$username = pip_get_post_var( PostVariables::Username );
 	$password = pip_get_post_var( PostVariables::Password );
 

@@ -16,6 +16,6 @@ session_start();
 
 /* Handle login attempt */
 if ( pip_login_attempting_login() )
-	pip_do_login_attempt();
+	pip_login_attempt();
 else if ( pip_login_attempting_register() )
 	pip_do_register_attempt();
