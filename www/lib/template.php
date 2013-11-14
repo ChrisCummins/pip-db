@@ -1,6 +1,8 @@
 <?php
 
 $template_dir = './html/';
+$template_extension = '.html';
+
 $twig_autoloader = './lib/Twig/Autoloader.php';
 
 require_once( $twig_autoloader );
@@ -13,12 +15,30 @@ $twig_args = array();
 $twig = new Twig_Environment( $twig_loader, $twig_args );
 
 /*
- * Returns whether a template has a corresponding source file.
+ * For a given template name, return the template source file.
  */
-function pip_template_exists( $template_name ) {
+function pip_get_template_file( $name ) {
+	global $template_extension;
+
+	return $name . $template_extension;
+}
+
+/*
+ * Returns the path to a template file in the form:
+ *
+ *      <dir>/<name>.<ext>
+ */
+function pip_get_template_path( $name ) {
 	global $template_dir;
 
-	return file_exists( $template_dir . $template_name );
+	return $template_dir . pip_get_template_file( $name );
+}
+
+/*
+ * Returns whether a template has a corresponding source file.
+ */
+function pip_template_exists( $name ) {
+	return file_exists( pip_get_template_path( $name ) );
 }
 
 /*
@@ -31,18 +51,15 @@ function pip_template_is_private( $name ) {
 /*
  * Renders a given template.
  */
-function pip_render_template( $template_name, $template_args = array() ) {
+function pip_render_template( $name, $content = array() ) {
 	global $twig;
 
-	$template_extension = '.html';
-	$template_file = $template_name . $template_extension;
-
-	if ( !pip_template_exists( $template_file ) ) {
+	if ( !pip_template_exists( $name ) ) {
 		echo 'lib/template.php: Template not found!';
 		return;
 	}
 
-	if ( pip_template_is_private( $template_name ) ) {
+	if ( pip_template_is_private( $name ) ) {
 		echo 'lib/template.php: Private template should not be rendered';
 		return;
 	}
@@ -52,7 +69,7 @@ function pip_render_template( $template_name, $template_args = array() ) {
 	if ( null !== $session )
 		$template_args['session'] = $session;
 
-	$template = $twig->loadTemplate( $template_file );
+	$template = $twig->loadTemplate( pip_get_template_file( $name ) );
 
-	$template->display( $template_args );
+	$template->display( $content );
 }
