@@ -16,7 +16,7 @@ function pip_login_is_logged_in() {
 }
 
 /*
- * If logged in, return the session array. Otherwise, return null.
+ * If logged in, return the user details as an array. Otherwise, return null.
  */
 function pip_login_get_user_details() {
 
