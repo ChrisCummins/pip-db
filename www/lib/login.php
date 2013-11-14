@@ -61,6 +61,14 @@ function pip_login( $username, $password ) {
 }
 
 /*
+ * Logs out the current user.
+ */
+function pip_logout() {
+	pip_session_unset( SessionVariables::Username );
+	pip_session_unset( SessionVariables::Password );
+}
+
+/*
  * Registers a new account.
  */
 function pip_add_account( $username, $password ) {
