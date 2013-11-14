@@ -56,15 +56,33 @@ function pip_attempting_login() {
 	return isset( $_POST['user'] );
 }
 
+/*
+ * Called when a login attempt is unsuccessful.
+ */
+function pip_failed_login() {
+	/*
+	 * TODO: Provide visual feedback to the user that the attempt was
+	 * unsuccessful.
+	 */
+}
 
-/* Initialise our session */
-session_start();
-
-/* Handle login attempt */
-if ( pip_attempting_login() ) {
+/*
+ * Perform a login attempt.
+ */
+function pip_do_login_attempt() {
 	$username = $_POST['user'];
 	$password = "";
 
 	if ( pip_credentials_are_valid( $username, $password ) )
 		pip_login( $username, $password );
+	else
+		pip_failed_login();
 }
+
+
+/* Initialise our session */
+session_start();
+
+/* Handle login attempt */
+if ( pip_attempting_login() )
+	pip_do_login_attempt();
