@@ -30,17 +30,6 @@ function pip_login_get_user_details() {
 }
 
 /*
- * Validates whether a set of user credentials are valid.
- */
-function pip_credentials_are_valid( $username, $password ) {
-	/*
-	 * TODO: Actually implement a proper user backend. For now, we just
-	 * assume that whatever details were provided were successful.
-	 */
-	return true;
-}
-
-/*
  * Sets the current session.
  */
 function pip_login( $username, $password ) {
@@ -54,16 +43,6 @@ function pip_login( $username, $password ) {
 function pip_logout() {
 	pip_session_unset( SessionVariables::Username );
 	pip_session_unset( SessionVariables::Password );
-}
-
-/*
- * Registers a new account.
- */
-function pip_add_account( $username, $password ) {
-	/*
-	 * TODO: Actually implement a proper user backend. For now, we just
-	 * assume that whatever details were provided were successful.
-	 */
 }
 
 /*
@@ -113,17 +92,6 @@ function pip_failed_register() {
 	 * TODO: Provide visual feedback to the user that the attempt was
 	 * unsuccessful.
 	 */
-}
-
-/*
- * Returns whether a specific user name exists.
- */
-function pip_user_exists( $username ) {
-	/*
-	 * TODO: Actually implement a proper user backend. For now, we just
-	 * assume that no users exist.
-	 */
-	return false;
 }
 
 /*

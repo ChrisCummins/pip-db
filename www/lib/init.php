@@ -7,6 +7,7 @@ require_once( $_SERVER['PHP_ROOT'] . 'goto.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'history.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'template.php' );
 
+require_once( $_SERVER['PHP_ROOT'] . 'accounts.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'login.php' );
 
 
