@@ -12,12 +12,18 @@ $twig_args = array();
 
 $twig = new Twig_Environment( $twig_loader, $twig_args );
 
+/*
+ * Returns whether a template has a corresponding source file.
+ */
 function pip_template_exists( $template_name ) {
 	global $template_dir;
 
 	return file_exists( $template_dir . $template_name );
 }
 
+/*
+ * Renders a given template.
+ */
 function pip_render_template( $template_name, $template_args = array() ) {
 	global $twig;
 
