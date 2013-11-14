@@ -34,6 +34,11 @@ function render_template( $template_name, $template_args = array() ) {
 		return;
 	}
 
+	$session = get_session();
+
+	if ( null !== $session )
+		$template_args['session'] = $session;
+
 	$template = $twig->loadTemplate( $template_file );
 
 	$template->display( $template_args );
