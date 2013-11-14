@@ -12,10 +12,17 @@ abstract class SessionVariables
 }
 
 /*
+ * Returns wheteher a particular session variable is set or not.
+ */
+function pip_session_var_isset( $var ) {
+	return isset( $_SESSION[$var] );
+}
+
+/*
  * Return a particular session variable if defined, else an empty string.
  */
 function pip_get_session_var( $var ) {
-	if ( isset( $_SESSION[$var] ) )
+	if ( pip_session_var_isset( $var ) )
 		return $_SESSION[$var];
 	else
 		return "";
