@@ -47,7 +47,8 @@ function pip_post_is_valid( $var ) {
  */
 function pip_post_fail_if_not_valid( $var ) {
 	if ( !pip_post_is_valid( $var ) )
-		throw new Exception( 'Illegal _POST variable: ' . $var );
+		throw new Exception( 'Illegal _POST variable: "'
+				     . $var . '"' );
 }
 
 /*
