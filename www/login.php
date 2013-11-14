@@ -22,7 +22,7 @@
       <!-- Main body of page -->
       <div class="container">
 
-        <form class="form-signin">
+	 <form method="post" action="/search.php" class="form-signin">
           <h2 class="form-signin-heading">Login</h2>
           <input name="user" type="text" class="form-control" placeholder="Email address" required autofocus>
           <input name="pass" type="password" class="form-control" placeholder="Password" required>
