@@ -20,6 +20,18 @@ function pip_get_session() {
 }
 
 /*
+ * Returns the session (if found) to the given array.
+ */
+function pip_append_session_to_array( $array ) {
+	$session = pip_get_session();
+
+	if ( null !== $session )
+		$array['session'] = $session;
+
+	return $array;
+}
+
+/*
  * Validates whether a set of user credentials are valid.
  */
 function pip_credentials_are_valid( $username, $password ) {
