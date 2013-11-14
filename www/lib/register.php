@@ -3,7 +3,7 @@
 /*
  * Returns whether the user is currently attempting to register a new account.
  */
-function pip_login_attempting_register() {
+function pip_register_attempting_registration() {
 	return PostActionValues::Register ==
 		pip_get_post_var( PostVariables::Action );
 }
@@ -11,7 +11,7 @@ function pip_login_attempting_register() {
 /*
  * Called when a registration attempt is unsuccessful.
  */
-function pip_login_registration_failed() {
+function pip_register_failed() {
 	/*
 	 * TODO: Provide visual feedback to the user that the attempt was
 	 * unsuccessful.
@@ -21,7 +21,7 @@ function pip_login_registration_failed() {
 /*
  * Attempt to register a new user.
  */
-function pip_login_registration_attempt() {
+function pip_register_attempt() {
 	$username = pip_get_post_var( PostVariables::Username );
 	$password = pip_get_post_var( PostVariables::Password );
 
@@ -29,6 +29,6 @@ function pip_login_registration_attempt() {
 		pip_accounts_add_new( $username, $password );
 		pip_login( $username, $password );
 	} else
-		pip_login_registration_failed();
+		pip_register_failed();
 
 }
