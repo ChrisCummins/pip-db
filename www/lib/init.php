@@ -1,8 +1,8 @@
 <?php
 
-require_once( 'post.php' );
-require_once( 'session.php' );
+require_once( './lib/post.php' );
+require_once( './lib/session.php' );
 
 require_once( './lib/login.php' );
 
-require_once( 'template.php' );
+require_once( './lib/template.php' );
