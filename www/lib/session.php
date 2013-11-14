@@ -36,9 +36,10 @@ function pip_session_is_valid( $var ) {
  * Ensure that the given variable has an entry in the SessionVariables class.
  */
 function pip_session_fail_if_not_valid( $var ) {
-	if ( !pip_session_is_valid( $var ) )
-		throw new Exception( 'Illegal _SESSION variable: "'
-				     . $var . '"' );
+	if ( !pip_session_is_valid( $var ) ) {
+		throw new IllegalSuperglobalException( $var, '_SESSION',
+						       SessionVariables::val() );
+	}
 }
 
 /*
