@@ -641,6 +641,20 @@
   color: @brand-primary;
 }
 
+.navbar-invisible .navbar-nav > .dropdown > a .caret {
+  border-top-color: @brand-primary;
+  border-bottom-color: @brand-primary;
+}
+
+/* Make the invisible dropdown links visible */
+.navbar-invisible .navbar-nav > .open > a {
+  &,
+  &:hover,
+  &focus {
+    color: @navbar-default-link-hover-color;
+  }
+}
+
 // Bottom navbar
 
 .navbar-bottom {
