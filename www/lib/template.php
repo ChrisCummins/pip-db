@@ -71,7 +71,11 @@ function pip_render_template( $name, $content = array() ) {
 	if ( pip_template_is_private( $name ) )
 		pip_throw_template_error( 'Private template should not be rendered' );
 
-	$content = pip_append_session_to_array( $content );
+	/* Add user session to content */
+	$session = pip_login_get_user_details();
+	if ( null !== $session )
+		$content['session'] = $session;
+
 	$template = pip_template_get_template( $name );
 	$template->display( $content );
 }

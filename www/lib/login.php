@@ -30,18 +30,6 @@ function pip_login_get_user_details() {
 }
 
 /*
- * Returns the session (if found) to the given array.
- */
-function pip_append_session_to_array( $array ) {
-	$session = pip_login_get_user_details();
-
-	if ( null !== $session )
-		$array['session'] = $session;
-
-	return $array;
-}
-
-/*
  * Validates whether a set of user credentials are valid.
  */
 function pip_credentials_are_valid( $username, $password ) {
