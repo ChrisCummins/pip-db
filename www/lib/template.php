@@ -15,6 +15,13 @@ $twig_args = array();
 $twig = new Twig_Environment( $twig_loader, $twig_args );
 
 /*
+ * Throw a custom exception for the tempalte engine.
+ */
+function pip_throw_template_error( $msg ) {
+	throw new Exception( 'lib/template.php: ' . $msg );
+}
+
+/*
  * For a given template name, return the template source file.
  */
 function pip_get_template_file( $name ) {
@@ -54,15 +61,11 @@ function pip_template_is_private( $name ) {
 function pip_render_template( $name, $content = array() ) {
 	global $twig;
 
-	if ( !pip_template_exists( $name ) ) {
-		echo 'lib/template.php: Template not found!';
-		return;
-	}
+	if ( !pip_template_exists( $name ) )
+		pip_throw_template_error( 'Template not found!' );
 
-	if ( pip_template_is_private( $name ) ) {
-		echo 'lib/template.php: Private template should not be rendered';
-		return;
-	}
+	if ( pip_template_is_private( $name ) )
+		pip_throw_template_error( 'Private template should not be rendered' );
 
 	$content = pip_append_session_to_array( $content );
 
