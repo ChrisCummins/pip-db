@@ -9,6 +9,7 @@ require_once( $_SERVER['PHP_ROOT'] . 'template.php' );
 
 require_once( $_SERVER['PHP_ROOT'] . 'accounts.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'login.php' );
+require_once( $_SERVER['PHP_ROOT'] . 'register.php' );
 
 
 /* Initialise our session */
