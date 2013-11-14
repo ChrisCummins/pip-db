@@ -78,7 +78,7 @@ function pip_do_login_attempt() {
 	$username = pip_get_post_var( PostVariables::Username );
 	$password = pip_get_post_var( PostVariables::Password );
 
-	if ( pip_credentials_are_valid( $username, $password ) )
+	if ( pip_accounts_validate_credentials( $username, $password ) )
 		pip_login( $username, $password );
 	else
 		pip_failed_login();

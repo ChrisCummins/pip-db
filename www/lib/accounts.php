@@ -3,7 +3,7 @@
 /*
  * Validates whether a set of user credentials are valid.
  */
-function pip_credentials_are_valid( $username, $password ) {
+function pip_accounts_validate_credentials( $username, $password ) {
 	/*
 	 * TODO: Actually implement a proper user backend. For now, we just
 	 * assume that whatever details were provided were successful.
