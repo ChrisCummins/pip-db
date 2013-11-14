@@ -29,6 +29,20 @@ abstract class PostActionValues {
 }
 
 /*
+ * Returns whether a given POST variable is valid, i.e. whether it has been
+ * defined in the PostVariables class. If the variable name is found, return
+ * true, else false.
+ */
+function pip_post_is_valid( $var ) {
+	foreach ( PostVariables::val() as $val ) {
+		if ( $val == $var )
+			return true;
+	}
+
+	return false;
+}
+
+/*
  * Returns wheteher a particular POST variable is set or not.
  */
 function pip_post_isset( $var ) {
