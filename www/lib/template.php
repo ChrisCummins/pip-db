@@ -22,6 +22,13 @@ function pip_template_exists( $template_name ) {
 }
 
 /*
+ * Returns true if a template is private, else false.
+ */
+function pip_template_is_private( $name ) {
+	return '_' == $name[0];
+}
+
+/*
  * Renders a given template.
  */
 function pip_render_template( $template_name, $template_args = array() ) {
@@ -35,7 +42,7 @@ function pip_render_template( $template_name, $template_args = array() ) {
 		return;
 	}
 
-	if ( '_' == $template_name[0] ) {
+	if ( pip_template_is_private( $template_name ) ) {
 		echo 'lib/template.php: Private template should not be rendered';
 		return;
 	}
