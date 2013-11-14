@@ -91,7 +91,7 @@ function pip_login( $username, $password ) {
  * Returns whether we're currently attempting a page login.
  */
 function pip_attempting_login() {
-	return isset( $_POST['user'] );
+	return pip_post_var_isset( PostVariables::Username );
 }
 
 /*
@@ -108,8 +108,8 @@ function pip_failed_login() {
  * Perform a login attempt.
  */
 function pip_do_login_attempt() {
-	$username = $_POST['user'];
-	$password = "";
+	$username = pip_get_post_var( PostVariables::Username );
+	$password = pip_get_post_var( PostVariables::Password );
 
 	if ( pip_credentials_are_valid( $username, $password ) )
 		pip_login( $username, $password );
