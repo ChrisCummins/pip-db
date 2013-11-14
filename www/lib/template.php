@@ -56,6 +56,17 @@ function pip_template_get_default_engine() {
 }
 
 /*
+ * Returns a given template. If no template engine is supplied, a default engine
+ * is used.
+ */
+function pip_template_get_template( $name, $engine = null ) {
+	if ( null == $engine )
+		$engine = pip_template_get_default_engine();
+
+	return $engine->loadTemplate( pip_get_template_file( $name ) );
+}
+
+/*
  * Renders a given template.
  */
 function pip_render_template( $name, $content = array() ) {
