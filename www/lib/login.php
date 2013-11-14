@@ -56,7 +56,7 @@ function pip_login_attempting_login() {
 /*
  * Returns whether the user is currently attempting to register a new account.
  */
-function pip_attempting_register() {
+function pip_login_attempting_register() {
 	return PostActionValues::Register ==
 		pip_get_post_var( PostVariables::Action );
 }
