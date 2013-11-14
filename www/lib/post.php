@@ -43,6 +43,14 @@ function pip_post_is_valid( $var ) {
 }
 
 /*
+ * Ensure that the given variable has an entry in the PostVariables class.
+ */
+function pip_post_fail_if_not_valid( $var ) {
+	if ( !pip_post_is_valid( $var ) )
+		throw new Exception( 'Illegal _POST variable: ' . $var );
+}
+
+/*
  * Returns wheteher a particular POST variable is set or not.
  */
 function pip_post_isset( $var ) {
