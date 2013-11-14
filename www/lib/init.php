@@ -18,4 +18,4 @@ session_start();
 if ( pip_login_attempting_login() )
 	pip_login_attempt();
 else if ( pip_login_attempting_register() )
-	pip_do_register_attempt();
+	pip_login_registration_attempt();

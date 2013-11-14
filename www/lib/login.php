@@ -97,7 +97,7 @@ function pip_login_registration_failed() {
 /*
  * Attempt to register a new user.
  */
-function pip_do_register_attempt() {
+function pip_login_registration_attempt() {
 	$username = pip_get_post_var( PostVariables::Username );
 	$password = pip_get_post_var( PostVariables::Password );
 
