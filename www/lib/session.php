@@ -53,7 +53,7 @@ function pip_login( $username, $password ) {
  * Returns whether we're currently attempting a page login.
  */
 function pip_attempting_login() {
-	return isset($_POST['user']);
+	return isset( $_POST['user'] );
 }
 
 
