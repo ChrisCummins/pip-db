@@ -54,6 +54,8 @@ function pip_post_fail_if_not_valid( $var ) {
  * Returns wheteher a particular POST variable is set or not.
  */
 function pip_post_isset( $var ) {
+	pip_post_fail_if_not_valid( $var );
+
 	return isset( $_POST[$var] );
 }
 
@@ -61,6 +63,8 @@ function pip_post_isset( $var ) {
  * Return a particular POST variable if defined, else an empty string.
  */
 function pip_post_get( $var ) {
+	pip_post_fail_if_not_valid( $var );
+
 	if ( pip_post_isset( $var ) )
 		return $_POST[$var];
 	else
