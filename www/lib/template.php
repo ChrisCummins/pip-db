@@ -1,8 +1,6 @@
 <?php
 
-$twig_autoloader = './lib/Twig/Autoloader.php';
-
-require_once( $twig_autoloader );
+require_once( $_SERVER['PHP_ROOT'] . 'Twig/Autoloader.php' );
 
 Twig_Autoloader::register();
 
