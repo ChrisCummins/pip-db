@@ -64,7 +64,7 @@ function pip_login_attempting_register() {
 /*
  * Called when a login attempt is unsuccessful.
  */
-function pip_failed_login() {
+function pip_login_failed() {
 	/*
 	 * TODO: Provide visual feedback to the user that the attempt was
 	 * unsuccessful.
@@ -81,7 +81,7 @@ function pip_do_login_attempt() {
 	if ( pip_accounts_validate_credentials( $username, $password ) )
 		pip_login( $username, $password );
 	else
-		pip_failed_login();
+		pip_login_failed();
 }
 
 /*
