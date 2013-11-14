@@ -87,7 +87,7 @@ function pip_login_attempt() {
 /*
  * Called when a registration attempt is unsuccessful.
  */
-function pip_failed_register() {
+function pip_login_registration_failed() {
 	/*
 	 * TODO: Provide visual feedback to the user that the attempt was
 	 * unsuccessful.
@@ -105,6 +105,6 @@ function pip_do_register_attempt() {
 		pip_accounts_add_new( $username, $password );
 		pip_login( $username, $password );
 	} else
-		pip_failed_register();
+		pip_login_registration_failed();
 
 }
