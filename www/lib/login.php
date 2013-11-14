@@ -12,7 +12,7 @@ abstract class PostActionValues {
  * Returns whether the user is currently logged in or not.
  */
 function pip_is_logged_in() {
-	return '' !== pip_get_session_var( 'user' );
+	return '' !== pip_get_session_var( SessionVariables::Username );
 }
 
 /*
