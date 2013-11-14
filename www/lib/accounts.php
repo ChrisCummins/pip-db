@@ -14,7 +14,7 @@ function pip_accounts_validate_credentials( $username, $password ) {
 /*
  * Registers a new account.
  */
-function pip_add_account( $username, $password ) {
+function pip_accounts_add_new( $username, $password ) {
 	/*
 	 * TODO: Actually implement a proper user backend. For now, we just
 	 * assume that whatever details were provided were successful.

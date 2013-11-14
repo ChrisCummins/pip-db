@@ -102,7 +102,7 @@ function pip_do_register_attempt() {
 	$password = pip_get_post_var( PostVariables::Password );
 
 	if ( !pip_user_exists( $username ) ) {
-		pip_add_account( $username, $password );
+		pip_accounts_add_new( $username, $password );
 		pip_login( $username, $password );
 	} else
 		pip_failed_register();
