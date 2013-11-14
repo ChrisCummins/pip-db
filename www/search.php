@@ -4,4 +4,4 @@ require_once( 'lib/init.php' );
 
 $content = array();
 
-render_template( 'search', $content );
+pip_render_template( 'search', $content );

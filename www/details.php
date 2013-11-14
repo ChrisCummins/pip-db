@@ -71,4 +71,4 @@ $content = array(
 		)
 	);
 
-render_template( 'details', $content );
+pip_render_template( 'details', $content );

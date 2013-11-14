@@ -2,4 +2,4 @@
 
 require_once( 'lib/init.php' );
 
-render_template( 'upload' );
+pip_render_template( 'upload' );

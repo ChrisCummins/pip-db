@@ -236,4 +236,4 @@ $content = array(
 		)
 	);
 
-render_template( 'results', $content );
+pip_render_template( 'results', $content );
