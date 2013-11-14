@@ -47,6 +47,15 @@ function pip_template_is_private( $name ) {
 }
 
 /*
+ * Returns the template engine.
+ */
+function pip_template_get_default_engine() {
+	$loader = new Twig_Loader_Filesystem( $_SERVER['HTML_ROOT'] );
+
+	return new Twig_Environment( $loader, array() );
+}
+
+/*
  * Renders a given template.
  */
 function pip_render_template( $name, $content = array() ) {
