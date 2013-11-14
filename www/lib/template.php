@@ -1,7 +1,7 @@
 <?php
 
 $template_dir = './html/';
-$twig_autoloader = './lib/twig/Autoloader.php';
+$twig_autoloader = './lib/Twig/Autoloader.php';
 
 require_once( $twig_autoloader );
 

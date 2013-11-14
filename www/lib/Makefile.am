@@ -5,7 +5,7 @@ LIB = $(addprefix $(LIB_DEST)/,$(LIB_SRC))
 export LIB
 
 SUBDIRS = \
-	twig \
+	Twig \
 	$(NULL)
 
 noinst_SCRIPTS = $(LIB)
