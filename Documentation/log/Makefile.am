@@ -31,6 +31,9 @@ PDFLATEX_ARGS = -output-format pdf \
 	-file-line-error \
 	-interaction=nonstopmode
 
+EXPORT_DIR = "$(HOME)/Dropbox/Aston University/5 - Final Year/EE4FYP - Final Year Project/"
+EXPORT_NAME = "Project Log.pdf"
+
 # Compile command. We pipe the output to /dev/null to silence it, and if there
 # is an error, we re-run the compilation without the pipe so as to print the
 # failure messages.
@@ -43,6 +46,12 @@ $(DOCPDF): $(DOCSRC)
 	@echo '  LATEX  $(DOCPDF)'
 	@$(call compile,$(DOCTEX))
 	@$(call compile,$(DOCTEX))
+
+# Export the compiled document
+all-am: $(DOCPDF)
+	@test -d $(EXPORT_DIR) && { \
+		cp $< $(EXPORT_DIR)/$(EXPORT_NAME); \
+	}
 
 # If we have xdg-open then we can open the PDF
 if HAVE_XDG_OPEN
