@@ -10,7 +10,7 @@ abstract class SessionVariables
 	const Username = "user";
 	const Password = "pass";
 
-	function val() {
+	static function val() {
 		return array(
 			self::Username,
 			self::Password
