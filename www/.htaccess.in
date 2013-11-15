@@ -1,4 +1,5 @@
 <IfModule mod_env.c>
+	SetEnv DEBUG "all"
 	SetEnv PHP_ROOT "@WWW_ROOT@/lib/"
 	SetEnv HTML_ROOT "@WWW_ROOT@/html/"
 </IfModule>

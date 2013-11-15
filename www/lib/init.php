@@ -1,5 +1,7 @@
 <?php
 
+require_once( $_SERVER['PHP_ROOT'] . 'debug.php' );
+
 require_once( $_SERVER['PHP_ROOT'] . 'superglobals.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'post.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'session.php' );
