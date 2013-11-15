@@ -13,12 +13,10 @@
 
 {% set _title = {} %}
 
-<!-- Number of results -->
 {% if results is defined %}
   {% set _title = _title|merge({ "results": results_count }) %}
 {% endif %}
 
-<!-- Download link -->
 {% if download is defined %}
   {% set _title = _title|merge({ "download": download }) %}
 {% endif %}
