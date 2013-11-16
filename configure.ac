@@ -409,6 +409,7 @@ AS_IF([test "x$HAVE_MYSQL" = xyes],
 echo ""
 # Features:
 echo " • Features:"
+echo "        Website debugging:              $enable_debug"
 echo "        Content hashing enabled:        $enable_content_hashing"
 AS_IF([test "x$enable_content_hashing" = xyes],
       [echo "        Content hashing algorithm:      $HASH"
