@@ -36,8 +36,10 @@ function pip_exception_handler( Exception $e ) {
 function shutdown_handler() {
 	$e = error_get_last();
 
-	if ( $e['type'] == E_ERROR )
-		pip_error_handler( $e['type'], $e['message'], $e['file'], $e['line'] );
+	if ( $e['type'] == E_ERROR ) {
+		pip_error_handler( $e['type'], $e['message'],
+				   $e['file'], $e['line'] );
+	}
 }
 
 if ( pip_debugging() ) {
