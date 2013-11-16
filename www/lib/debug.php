@@ -1,6 +1,13 @@
 <?php
 
 /*
+ * Returns whether the site is in debugging mode or not.
+ */
+function pip_debugging() {
+	return isset( $_SERVER['DEBUG'] );
+}
+
+/*
  * Error handler.
  */
 function pip_error_handler( $num, $str, $file, $line, $context = null )
@@ -33,7 +40,7 @@ function shutdown_handler() {
 		pip_error_handler( $e['type'], $e['message'], $e['file'], $e['line'] );
 }
 
-if ( isset($_SERVER['DEBUG']) ) {
+if ( pip_debugging() ) {
 
 	/* Display errors */
 	ini_set( 'display_errors', 'Off' );
