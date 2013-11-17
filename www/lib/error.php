@@ -25,7 +25,7 @@ function pip_error_handler( $num, $str, $file, $line, $context = null )
 							 $file, $line ) );
 }
 
-/**
+/*
  * Shutdown handler.
  */
 function pip_error_shutdown_handler() {
