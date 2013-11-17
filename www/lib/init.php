@@ -4,6 +4,15 @@ require_once( $_SERVER['PHP_ROOT'] . 'server.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'debug.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'error.php' );
 
+/* Don't show errors */
+ini_set( 'display_errors', 'Off' );
+
+/* Enable debugging */
+if ( pip_debugging() ) {
+	error_reporting( E_ALL | E_STRICT );
+	pip_error_enable_error_handlers();
+}
+
 require_once( $_SERVER['PHP_ROOT'] . 'superglobals.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'post.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'session.php' );

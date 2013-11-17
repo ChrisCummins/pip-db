@@ -37,15 +37,10 @@ function pip_error_shutdown_handler() {
 	}
 }
 
-if ( pip_debugging() ) {
-
-	/* Display errors */
-	ini_set( 'display_errors', 'Off' );
-
-	/* Set a high error-reporting level */
-	error_reporting( E_ALL | E_STRICT );
-
-	/* Register our custom error handlers */
+/*
+ * Register our custom error handlers.
+ */
+function pip_error_enable_error_handlers() {
 	set_error_handler( 'pip_error_handler' );
 	set_exception_handler( 'pip_error_exception_handler' );
 	register_shutdown_function( 'pip_error_shutdown_handler' );
