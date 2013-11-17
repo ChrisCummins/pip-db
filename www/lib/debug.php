@@ -12,7 +12,8 @@ function pip_debugging() {
  */
 function pip_error_handler( $num, $str, $file, $line, $context = null )
 {
-	pip_exception_handler( new ErrorException( $str, 0, $num, $file, $line ) );
+	pip_exception_handler( new ErrorException( $str, 0, $num,
+						   $file, $line ) );
 }
 
 /*
