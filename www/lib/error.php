@@ -17,7 +17,7 @@ function pip_error_enable_strict() {
 /*
  * Exception handler.
  */
-function pip_error_exception_handler( Exception $e ) {
+function _exception_handler( Exception $e ) {
 	print "<div style='text-align: center;'>";
 	print "<h2 style='color: rgb(190, 50, 50);'>Exception Occured:</h2>";
 	print "<table style='width: 800px; display: inline-block;'>";
@@ -33,16 +33,16 @@ function pip_error_exception_handler( Exception $e ) {
 /*
  * Error handler.
  */
-function pip_error_handler( $num, $str, $file, $line, $context = null )
+function _error_handler( $num, $str, $file, $line, $context = null )
 {
-	pip_error_exception_handler( new ErrorException( $str, 0, $num,
+	_exception_handler( new ErrorException( $str, 0, $num,
 							 $file, $line ) );
 }
 
 /*
  * Shutdown handler.
  */
-function pip_error_shutdown_handler() {
+function _shutdown_handler() {
 	$e = error_get_last();
 
 	if ( $e['type'] == E_ERROR ) {
@@ -55,7 +55,7 @@ function pip_error_shutdown_handler() {
  * Register our custom error handlers.
  */
 function pip_error_enable_error_handlers() {
-	set_error_handler( 'pip_error_handler' );
-	set_exception_handler( 'pip_error_exception_handler' );
-	register_shutdown_function( 'pip_error_shutdown_handler' );
+	set_error_handler( '_error_handler' );
+	set_exception_handler( '_exception_handler' );
+	register_shutdown_function( '_shutdown_handler' );
 }
