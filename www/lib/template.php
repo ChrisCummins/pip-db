@@ -4,12 +4,6 @@ require_once( $_SERVER['PHP_ROOT'] . 'Twig/Autoloader.php' );
 
 Twig_Autoloader::register();
 
-/*
- * Throw a custom exception for the tempalte engine.
- */
-function pip_throw_template_error( $msg ) {
-	throw new Exception( 'lib/template.php: ' . $msg );
-}
 
 /*
  * For a given template name, return the template source file.
@@ -62,14 +56,21 @@ function pip_template_get_template( $name, $engine = null ) {
 }
 
 /*
+ * Throw a custom exception for the tempalte engine.
+ */
+function _throw_template_error( $msg ) {
+	throw new Exception( 'lib/template.php: ' . $msg );
+}
+
+/*
  * Renders a given template.
  */
 function pip_render_template( $name, $content = array() ) {
 	if ( !pip_template_exists( $name ) )
-		pip_throw_template_error( 'Template not found!' );
+		_throw_template_error( 'Template not found!' );
 
 	if ( pip_template_is_private( $name ) )
-		pip_throw_template_error( 'Private template should not be rendered' );
+		_throw_template_error( 'Private template should not be rendered' );
 
 	/* Add user session to content */
 	$session = pip_login_get_user_details();
