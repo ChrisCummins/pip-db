@@ -19,8 +19,10 @@ require_once( $_SERVER['PHP_ROOT'] . 'error.php' );
 
 pip_error_disable();
 
-if ( pip_debugging() )
+if ( pip_debugging() ) {
+	pip_error_enable_strict();
 	pip_error_enable_error_handlers();
+}
 
 
 /*************************************************/
