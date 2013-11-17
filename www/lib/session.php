@@ -19,6 +19,13 @@ abstract class SessionVariables
 }
 
 /*
+ * Initialise our session
+ */
+function pip_session_start() {
+	session_start();
+}
+
+/*
  * Returns whether a given SESSION variable is valid, i.e. whether it has been
  * defined in the SessionVariables class. If the variable name is found, return
  * true, else false.

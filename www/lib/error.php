@@ -1,6 +1,20 @@
 <?php
 
 /*
+ * Don't show errors.
+ */
+function pip_error_disable() {
+	ini_set( 'display_errors', 'Off' );
+}
+
+/*
+ * Enable strict error handling.
+ */
+function pip_error_enable_strict() {
+	error_reporting( E_ALL | E_STRICT );
+}
+
+/*
  * Exception handler.
  */
 function pip_error_exception_handler( Exception $e ) {
