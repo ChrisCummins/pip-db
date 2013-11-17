@@ -166,32 +166,43 @@ sum_rows() {
 }
 
 main() {
+	local build=$(sum_rows "$(get_build_sloccounts)")
+	local page=$(sum_rows "$(get_page_sloccounts)")
+	local cont=$(sum_rows "$(get_controller_sloccounts)")
+	local lib=$(sum_rows "$(get_extern_sloccounts)")
+	local docs=$(sum_rows "$(get_doc_sloccounts)")
+	local tools=$(sum_rows "$(get_tools_sloccounts)")
+	local total=$((build+$page+$cont+$lib+$docs+$tools))
+
 	echo "$(get_package_string) - Source lines of code"
 	echo "$(date)"
 
 	echo ""
 	echo ""
-	echo "Build system: $(sum_rows "$(get_build_sloccounts)")"
+	echo "Build system: $build"
 	get_build_sloccounts | sort -rn | column -t -s $'\t'
 
 	echo ""
-	echo "Page sources: $(sum_rows "$(get_page_sloccounts)")"
+	echo "Page sources: $page"
 	get_page_sloccounts | sort -rn | column -t -s $'\t'
 
 	echo ""
-	echo "Controller sources: $(sum_rows "$(get_controller_sloccounts)")"
+	echo "Controller sources: $cont"
 	get_controller_sloccounts | sort -rn | column -t -s $'\t'
 
 	echo ""
-	echo "External libraries: $(sum_rows "$(get_extern_sloccounts)")"
+	echo "External libraries: $lib"
 	get_extern_sloccounts | sort -rn | column -t -s $'\t'
 
 	echo ""
-	echo "Documentation: $(sum_rows "$(get_doc_sloccounts)")"
+	echo "Documentation: $docs"
 	get_doc_sloccounts | sort -rn | column -t -s $'\t'
 
 	echo ""
-	echo "Tools: $(sum_rows "$(get_tools_sloccounts)")"
+	echo "Tools: $tools"
 	get_tools_sloccounts | sort -rn | column -t -s $'\t'
+
+	echo ""
+	echo "Total physical source lines of code: $total"
 }
 main $@
