@@ -44,7 +44,7 @@ function pip_template_is_private( $name ) {
 /*
  * Returns the template engine.
  */
-function pip_template_get_default_engine() {
+function pip_template_engine_get_default() {
 	$loader = new Twig_Loader_Filesystem( $_SERVER['HTML_ROOT'] );
 
 	return new Twig_Environment( $loader, array() );
@@ -56,7 +56,7 @@ function pip_template_get_default_engine() {
  */
 function pip_template_get_template( $name, $engine = null ) {
 	if ( null == $engine )
-		$engine = pip_template_get_default_engine();
+		$engine = pip_template_engine_get_default();
 
 	return $engine->loadTemplate( pip_get_template_file( $name ) );
 }
