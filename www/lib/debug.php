@@ -1,20 +1,10 @@
 <?php
 
 /*
- * Returns the contents of the _SERVER debugging superglobal.
- */
-function pip_get_debug_var() {
-	if ( isset( $_SERVER['DEBUG'] ) )
-		return $_SERVER['DEBUG'];
-	else
-		return '';
-}
-
-/*
  * Returns whether the site is in debugging mode or not.
  */
 function pip_debugging() {
-	return 'yes' == pip_get_debug_var();
+	return 'yes' == pip_server_get_debug();
 }
 
 /*
