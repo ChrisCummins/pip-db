@@ -2,6 +2,7 @@
 
 require_once( $_SERVER['PHP_ROOT'] . 'server.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'debug.php' );
+require_once( $_SERVER['PHP_ROOT'] . 'error.php' );
 
 require_once( $_SERVER['PHP_ROOT'] . 'superglobals.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'post.php' );
