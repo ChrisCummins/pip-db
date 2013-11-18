@@ -50,6 +50,6 @@ endif
 if ENABLE_CONTENT_HASHING
 	$(eval TARGET := css\/$(patsubst %.css,%,$<))
 	@for h in $(HTML); do \
-		sed -ri 's/(href=\")$(TARGET)(-[0-9a-f]{$(HASH_LENGTH)})?(\.css\")/\1$(TARGET)-$(CHASH)\3/' $$h; \
+		sed -ri 's/(href=\"\/?)$(TARGET)(-[0-9a-f]{$(HASH_LENGTH)})?(\.css\")/\1$(TARGET)-$(CHASH)\3/' $$h; \
 	done
 endif
