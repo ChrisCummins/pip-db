@@ -17,6 +17,7 @@ SUBDIRS = \
 	fonts \
 	img \
 	js \
+	admin \
 	lib \
 	html \
 	$(NULL)
