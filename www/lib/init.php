@@ -47,7 +47,10 @@ require_once( $_SERVER['PHP_ROOT'] . 'template.php' );
 /***************************************************************/
 /* Libraries and functions for communicating with data backend */
 /***************************************************************/
+require_once( $_SERVER['PHP_ROOT'] . 'db.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'accounts.php' );
+
+pip_db_init();
 
 
 /************************************/
