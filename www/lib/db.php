@@ -28,3 +28,10 @@ function pip_db_init() {
 function pip_db_query( $query ) {
 	return mysql_query( $query );
 }
+
+/*
+ * Create a new database table.
+ */
+function pip_db_table_create( $name, $query ) {
+	return pip_db_query( "CREATE TABLE IF NOT EXISTS $name($query)" );
+}
