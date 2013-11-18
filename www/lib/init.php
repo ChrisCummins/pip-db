@@ -9,6 +9,7 @@
  * as a gateway to the full website API.
  */
 
+require_once( $_SERVER['PHP_ROOT'] . 'config.php' );
 
 /*********************************************************/
 /* Enable debugging, error handling, and server-side API */
