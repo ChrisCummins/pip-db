@@ -442,5 +442,6 @@ echo ""
 echo " • Extra:"
 echo "        Build extra tools:              $enable_extra_tools"
 echo "        Building LaTeX documentation:   $HAVE_PDFLATEX"
+echo "        Building md documentation:      $HAVE_PANDOC"
 
 echo ""
