@@ -483,6 +483,7 @@ echo "        Build directory:                $WWW_BUILD/"
 echo ""
 # Miscellaneous:
 echo " • Extra:"
+echo "        Project git hooks:              $enable_git_hooks"
 echo "        Build extra tools:              $enable_extra_tools"
 echo "        Build LaTeX documentation:      $HAVE_PDFLATEX"
 echo "        Build Markdown documentation:   $HAVE_PANDOC"
