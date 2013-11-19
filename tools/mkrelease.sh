@@ -88,5 +88,12 @@ main() {
 		usage
 		exit 1
 	fi
+
+	# Sanity-check on supplied version string
+	if ! verify_version "$1"; then
+		echo "Invalid version string!" >&2
+		exit 1
+	fi
+
 }
 main $@
