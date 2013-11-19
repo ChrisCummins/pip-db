@@ -22,8 +22,8 @@ function pip_register_failed() {
  * Attempt to register a new user.
  */
 function pip_register_attempt() {
-	$username = pip_post_get( PostVariables::Username );
-	$password = pip_post_get( PostVariables::Password );
+	$username = pip_string_sanitise( pip_post_get( PostVariables::Username ) );
+	$password = pip_string_sanitise( pip_post_get( PostVariables::Password ) );
 
 	if ( !pip_accounts_account_exists( $username ) ) {
 		pip_accounts_add_new( $username, $password );
