@@ -17,7 +17,7 @@ doc_DATA += $(DOCMD)
 endif
 
 CLEANFILES = \
-	$(DOCPDF) \
+	$(doc_DATA) \
 	*.aux \
 	*.log \
 	*.log \
