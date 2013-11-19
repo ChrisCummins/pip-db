@@ -37,6 +37,13 @@ function pip_db_num_rows( $query ) {
 }
 
 /*
+ * Fetches rows for a given query.
+ */
+function pip_db_fetch_row( $query ) {
+	return mysql_fetch_row( pip_db_query( $query ) );
+}
+
+/*
  * Create a new database table.
  */
 function pip_db_table_create( $tbl_name, $definition,
