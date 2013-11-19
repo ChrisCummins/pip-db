@@ -46,8 +46,8 @@ endif
 
 # HTML compilation
 $(WWW_BUILD)/%.html: %.html
-	@test -d $(WWW_BUILD) || { \
-		$(MKDIR_P) $(WWW_BUILD); \
+	@test -d $(dir $@) || { \
+		$(MKDIR_P) $(dir $@); \
 	}
 	@echo '  HTML   $(notdir $@)'
 	@$(call compile,$<,$@)
