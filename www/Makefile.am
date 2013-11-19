@@ -5,26 +5,26 @@ SRC = $(shell find . -maxdepth 1 -name '*.html' -exec basename {} \;) \
 TEMPLATE_DEST = $(WWW_BUILD)/html
 TEMPLATE_SRC = $(shell find html -maxdepth 1 -name '*.html' -exec basename {} \;)
 
-HTML = $(addprefix $(WWW_BUILD)/,$(SRC)) \
-	$(addprefix $(TEMPLATE_DEST)/,$(TEMPLATE_SRC))
+PHP = $(addprefix $(WWW_BUILD)/,$(SRC))
+HTML = $(PHP) $(addprefix $(TEMPLATE_DEST)/,$(TEMPLATE_SRC))
 export HTML
 
 # We must build this directory first in order to allow for content hashing ref
 # updating of HTML build files.
 SUBDIRS = \
 	. \
+	html \
 	css \
 	fonts \
 	img \
 	js \
 	admin \
 	lib \
-	html \
 	$(NULL)
 
-noinst_SCRIPTS = $(HTML) $(WWW_BUILD)/.htaccess
-
 CLEANFILES = $(shell find $(WWW_BUILD) -type f)
+
+noinst_SCRIPTS = $(PHP) $(WWW_BUILD)/.htaccess
 
 EXTRA_DIST = \
 	$(SRC) \
@@ -32,27 +32,6 @@ EXTRA_DIST = \
 	README.md \
 	$(NULL)
 
-# Compilation command
-if ENABLE_MINIFY_HTML
-define compile
-	$(JAVA) -jar $(HTML_JAR) \
-		--compress-js --compress-css -o $2 $1
-endef
-else # Disabled minification
-define compile
-	cat $1 > $2
-endef
-endif
-
-# HTML compilation
-$(WWW_BUILD)/%.html: %.html
-	@test -d $(dir $@) || { \
-		$(MKDIR_P) $(dir $@); \
-	}
-	@echo '  HTML   $(notdir $@)'
-	@$(call compile,$<,$@)
-
-# PHP compilation
 $(WWW_BUILD)/%.php: %.php
 	@test -d $(WWW_BUILD) || { \
 		$(MKDIR_P) $(WWW_BUILD); \
