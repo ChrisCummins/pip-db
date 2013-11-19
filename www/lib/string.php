@@ -1,6 +1,6 @@
 <?php
 
-function php_string_sanitise( $string ) {
+function pip_string_sanitise( $string ) {
 
 	$string = strip_tags( $string );
 	$string = htmlentities( $string );
