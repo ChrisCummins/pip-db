@@ -10,3 +10,7 @@ function pip_password_get_hash( $password, $rounds = 7 ) {
 
 	return crypt($password, sprintf('$2a$%02d$', $rounds) . $salt);
 }
+
+function pip_password_match( $password, $hash ) {
+	return $hash == crypt( $password, $hash );
+}
