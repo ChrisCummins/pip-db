@@ -32,6 +32,10 @@ function pip_db_query( $query ) {
 /*
  * Create a new database table.
  */
-function pip_db_table_create( $tbl_name, $definition ) {
-	return pip_db_query( "CREATE TABLE IF NOT EXISTS $tbl_name($definition)" );
+function pip_db_table_create( $tbl_name, $definition,
+			      $engine = PipDatabase::Engine ) {
+
+	return pip_db_query( 'CREATE TABLE IF NOT EXISTS ' .
+			     $tbl_name . '(' . $definition .
+			     ') ENGINE=' . $engine );
 }
