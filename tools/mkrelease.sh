@@ -51,6 +51,24 @@ get_current_version() {
 	echo $major.$minor.$micro
 }
 
+# Given a version string in the form <major>.<minor>.<micro>,
+# verify that it is correct.
+#
+#     @return 0 if version is valid, else 1
+verify_version() {
+	local version="$1"
+
+	local major=$(get_major $version)
+	local minor=$(get_minor $version)
+	local micro=$(get_micro $version)
+
+	test -n $major || return 1;
+	test -n $minor || return 1;
+	test -n $micro || return 1;
+
+	return 0;
+}
+
 main() {
 	# Set debugging output if DEBUG=1
 	test -n "$DEBUG" && {
