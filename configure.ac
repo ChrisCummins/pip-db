@@ -385,8 +385,10 @@ AC_SUBST([JS_JAR],   [js_jar])
 
 
 AC_OUTPUT([
-	build/jar/Makefile
+	Makefile
 	build/Makefile
+	build/jar/Makefile
+	design/Makefile
 	design/d1/Makefile
 	design/d1/pages/Makefile
 	design/d1/pages/renders/Makefile
@@ -394,13 +396,12 @@ AC_OUTPUT([
 	design/d1/previous/renders/Makefile
 	design/d1/tasks/Makefile
 	design/d1/tasks/renders/Makefile
-	design/Makefile
-	Documentation/log/Makefile
 	Documentation/Makefile
+	Documentation/log/Makefile
 	Documentation/plan/Makefile
-	Makefile
-	tools/dsa.sh
 	tools/Makefile
+	tools/dsa.sh
+	www/Makefile
 	www/.htaccess
 	www/admin/Makefile
 	www/css/Makefile
@@ -410,7 +411,6 @@ AC_OUTPUT([
 	www/js/Makefile
 	www/lib/Makefile
 	www/lib/Twig/Makefile
-	www/Makefile
 ])
 
 
