@@ -428,6 +428,6 @@ echo ""
 # Miscellaneous:
 echo " • Extra:"
 echo "        Build extra tools:              $enable_extra_tools"
-echo "        Building extra documentation:   $HAVE_PDFLATEX"
+echo "        Building LaTeX documentation:   $HAVE_PDFLATEX"
 
 echo ""
