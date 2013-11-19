@@ -40,12 +40,14 @@ PDFLATEX_ARGS = -output-format pdf \
 EXPORT_DIR = "$(HOME)/Dropbox/Aston University/5 - Final Year/EE4FYP - Final Year Project/"
 EXPORT_NAME = "Project Log.pdf"
 
+
 # Compile command. We pipe the output to /dev/null to silence it, and if there
 # is an error, we re-run the compilation without the pipe so as to print the
 # failure messages.
 define compile
 $(PDFLATEX) $(PDFLATEX_ARGS) $1 >/dev/null || $(PDFLATEX) $(PDFLATEX_ARGS) $1
 endef
+
 
 # Compile twice to refresh cross-references
 $(DOCPDF): $(DOCSRC)
@@ -57,21 +59,22 @@ $(DOCMD): $(DOCSRC)
 	@echo '  MD     $@'
 	@$(PANDOC) --biblatex -o $@ $<
 
+
 # Export the compiled document
 all-am: $(DOCPDF)
 	@test -d $(EXPORT_DIR) && { \
 		cp $< $(EXPORT_DIR)/$(EXPORT_NAME); \
 	}
 
-# If we have xdg-open then we can open the PDF
 if HAVE_XDG_OPEN
+# Open the PDF log
 open:
 	@test -f $(DOCPDF) || echo "File '$(DOCPDF)' not found, is it compiled?"
 	@test ! -f $(DOCPDF) || $(XDG_OPEN) $(DOCPDF) >/dev/null 2>&1 &
 endif
 
-# If we have emacsclient then we can edit the sources
 if HAVE_EMACSCLIENT
+# Edit the current month's log
 edit:
 	@$(EMACSCLIENT) -t `date +%y%m`.tex
 endif
