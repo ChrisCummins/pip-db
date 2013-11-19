@@ -1,6 +1,7 @@
 if ENABLE_EXTRA_TOOLS
 noinst_SCRIPTS = \
 	dsa \
+	mkrelease \
 	png \
 	sloccount \
 	workflow \
