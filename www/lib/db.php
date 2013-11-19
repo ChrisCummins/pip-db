@@ -30,6 +30,13 @@ function pip_db_query( $query ) {
 }
 
 /*
+ * Return the number of rows in a query.
+ */
+function pip_db_num_rows( $query ) {
+	return mysql_num_rows( pip_db_query ( $query ) );
+}
+
+/*
  * Create a new database table.
  */
 function pip_db_table_create( $tbl_name, $definition,
