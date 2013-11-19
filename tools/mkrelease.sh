@@ -24,6 +24,24 @@ get_project_root() {
 	exit 3
 }
 
+# Given a version string in the form <major>.<minor>.<micro>,
+# return the major component.
+get_major() {
+	echo $1 | sed -r 's/^([0-9]+)\.[0-9]+\.[0-9]+$/\1/'
+}
+
+# Given a version string in the form <major>.<minor>.<micro>,
+# return the minor component.
+get_minor() {
+	echo $1 | sed -r 's/^[0-9]+\.([0-9]+)\.[0-9]+$/\1/'
+}
+
+# Given a version string in the form <major>.<minor>.<micro>,
+# return the micro component.
+get_micro() {
+	echo $1 | sed -r 's/^[0-9]+\.[0-9]+\.([0-9]+)$/\1/'
+}
+
 main() {
 	# Set debugging output if DEBUG=1
 	test -n "$DEBUG" && {
