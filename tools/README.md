@@ -1,3 +1,15 @@
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+- [Tools](#tools)
+	- [Table of Contents](#table-of-contents)
+	- [dsa](#dsa)
+		- [Example](#example)
+	- [png](#png)
+		- [Example](#example-1)
+	- [sloccount](#sloccount)
+	- [workflow](#workflow)
+		- [Example](#example-2)
+
 # Tools
 
 Auxiliary tools which may be useful during development and testing but are not
