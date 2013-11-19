@@ -51,6 +51,22 @@ get_current_version() {
 	echo $major.$minor.$micro
 }
 
+# Replace the project version with a new one.
+#
+#     @param $1 The new version string
+replace_version() {
+	local new=$1
+	local current=''
+
+	cd $(get_project_root)
+
+	echo -n "Getting current version... "
+	current=$(get_current_version)
+	echo "'$current'"
+
+	echo "Setting new version... '$new'"
+}
+
 # Given a version string in the form <major>.<minor>.<micro>,
 # verify that it is correct.
 #
@@ -95,5 +111,6 @@ main() {
 		exit 1
 	fi
 
+	replace_version $1
 }
 main $@
