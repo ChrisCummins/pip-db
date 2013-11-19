@@ -400,6 +400,7 @@ AC_OUTPUT([
 	Documentation/log/Makefile
 	Documentation/plan/Makefile
 	scripts/Makefile
+	scripts/git/Makefile
 	tools/Makefile
 	tools/dsa.sh
 	www/Makefile
