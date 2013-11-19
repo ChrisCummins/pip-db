@@ -5,7 +5,6 @@ DOCPDF = $(DOC).pdf
 DOCTEX = $(DOC).tex
 DOCSRC = $(shell find . -name '*.tex')
 
-# Only create PDF we have the compiler
 if HAVE_PDFLATEX
 doc_DATA = $(DOCPDF)
 endif
