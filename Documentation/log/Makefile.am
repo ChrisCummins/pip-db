@@ -4,11 +4,16 @@ DOC = log
 DOCPDF = $(DOC).pdf
 DOCTEX = $(DOC).tex
 DOCSRC = $(shell find . -name '*.tex')
+DOCMD  = README.md
 
 doc_DATA =
 
 if HAVE_PDFLATEX
 doc_DATA += $(DOCPDF)
+endif
+
+if HAVE_PANDOC
+doc_DATA += $(DOCMD)
 endif
 
 CLEANFILES = \
@@ -47,6 +52,10 @@ $(DOCPDF): $(DOCSRC)
 	@echo '  LATEX  $(DOCPDF)'
 	@$(call compile,$(DOCTEX))
 	@$(call compile,$(DOCTEX))
+
+$(DOCMD): $(DOCSRC)
+	@echo '  MD     $@'
+	@$(PANDOC) --biblatex --csl chicago-author-date.csl -o $@ $<
 
 # Export the compiled document
 all-am: $(DOCPDF)
