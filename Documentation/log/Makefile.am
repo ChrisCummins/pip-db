@@ -69,7 +69,7 @@ all-am: $(DOCPDF)
 if HAVE_XDG_OPEN
 # Open the PDF log
 open:
-	@test -f $(DOCPDF) || echo "File '$(DOCPDF)' not found, is it compiled?"
+	@test -f $(DOCPDF) || make $(DOCPDF)
 	@test ! -f $(DOCPDF) || $(XDG_OPEN) $(DOCPDF) >/dev/null 2>&1 &
 endif
 
