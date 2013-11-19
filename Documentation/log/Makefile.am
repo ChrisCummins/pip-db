@@ -55,7 +55,7 @@ $(DOCPDF): $(DOCSRC)
 
 $(DOCMD): $(DOCSRC)
 	@echo '  MD     $@'
-	@$(PANDOC) --biblatex --csl chicago-author-date.csl -o $@ $<
+	@$(PANDOC) --biblatex -o $@ $<
 
 # Export the compiled document
 all-am: $(DOCPDF)
