@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# This pre-commit hook is run first, before you even type in a commit
+# message. It’s used to inspect the snapshot that’s about to be committed, to
+# see if you’ve forgotten something, to make sure tests run, or to examine
+# whatever you need to inspect in the code.
+
+#
+# If we are generating Markdown versions of our project log, then we should
+# update it every time we commit.
+#
+if test "x@HAVE_PANDOC@" = xyes; then
+	md="README.md"
+	dir="Documentation/log"
+
+	make -C $dir $md
+	git add $dir/$md
+fi
+
+exit 0

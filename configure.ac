@@ -416,6 +416,7 @@ AC_OUTPUT([
 	scripts/Makefile
 	scripts/git/Makefile
 	scripts/git/hooks/Makefile
+	scripts/git/hooks/pre-commit
 	tools/Makefile
 	tools/dsa.sh
 	www/Makefile
