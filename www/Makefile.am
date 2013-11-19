@@ -64,7 +64,7 @@ $(WWW_BUILD)/.htaccess: .htaccess
 	@test -d $(WWW_BUILD) || { \
 		$(MKDIR_P) $(WWW_BUILD); \
 	}
-	@echo '  CP     $(notdir $@)'
+	@echo '  APACHE $(notdir $@)'
 	@cat $< > $@
 
 if HAVE_WWW_ROOT
