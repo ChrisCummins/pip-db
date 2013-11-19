@@ -9,5 +9,6 @@ abstract class PipDatabase {
 	const Username = 'pipdb';
 	const Password = 'ou0aiWiwjohLaen5';
 	const Name = 'pipdb';
+	const Engine = 'INNODB';
 
 }
