@@ -201,6 +201,19 @@ AC_ARG_ENABLE(debug,
 AC_SUBST([ENABLE_DEBUG], ["$enable_debug"])
 AM_CONDITIONAL(ENABLE_DEBUG,[test "x$enable_debug" = xyes])
 
+
+dnl     ============================================================
+dnl     Are we installing the project git hooks?
+dnl     ============================================================
+AC_ARG_ENABLE(git_hooks,
+              AS_HELP_STRING([--enable-git-hooks],
+                             [Install project git hooks (default: no)]),
+              [enable_git_hooks=yes],
+              [enable_git_hooks=no])
+AC_SUBST([ENABLE_GIT_HOOKS], ["$enable_git_hooks"])
+AM_CONDITIONAL(ENABLE_GIT_HOOKS,[test "x$enable_git_hooks" = xyes])
+
+
 dnl ================================================================
 dnl Check for dependency packages
 dnl ================================================================
