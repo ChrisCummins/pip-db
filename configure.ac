@@ -265,6 +265,18 @@ AS_IF([test "x$enable_extra_documentation" = xyes],
       HAVE_PANDOC=no)
 AM_CONDITIONAL([HAVE_PANDOC],[test "x$HAVE_PANDOC" = xyes])
 
+dnl     ============================================================
+dnl     Do we have doctoc installed?
+dnl     ============================================================
+AS_IF([test "x$enable_extra_documentation" = xyes],
+      AC_CHECK_PROG([DOCTOC],[doctoc],[doctoc])
+      AS_IF([test "x$DOCTOC" != x],
+            [HAVE_DOCTOC=yes],
+            [HAVE_DOCTOC=no
+             AC_MSG_WARN([Unable to generate Markdown table of contents.])]),
+      HAVE_DOCTOC=no)
+AM_CONDITIONAL([HAVE_DOCTOC],[test "x$HAVE_DOCTOC" = xyes])
+
 
 dnl ================================================================
 dnl Misc program dependencies.
