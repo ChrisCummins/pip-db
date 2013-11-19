@@ -484,7 +484,7 @@ echo ""
 # Miscellaneous:
 echo " • Extra:"
 echo "        Build extra tools:              $enable_extra_tools"
-echo "        Building LaTeX documentation:   $HAVE_PDFLATEX"
-echo "        Building md documentation:      $HAVE_PANDOC"
+echo "        Build LaTeX documentation:      $HAVE_PDFLATEX"
+echo "        Build Markdown documentation:   $HAVE_PANDOC"
 
 echo ""
