@@ -1380,6 +1380,11 @@ arguments again static variables and methods [@Butler2012]. Google has a
 nice guide to writing testable code and code smells and symptoms of bad
 design to look for [@Hevery2008].
 
+Sunday 17th
+-----------
+
+Began implementing MySQL backend in library file `db.php`.
+
 9
 
 IBMRUP Wikipedia (ND). IBM Rational Unified Process.
