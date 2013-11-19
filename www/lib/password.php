@@ -1,6 +1,6 @@
 <?php
 
-function pip_password_get_hash ( $password, $rounds = 7 ) {
+function pip_password_get_hash( $password, $rounds = 7 ) {
 
 	$salt = "";
 	$salt_chars = array_merge(range('A','Z'), range('a','z'), range(0,9));
