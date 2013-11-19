@@ -72,6 +72,7 @@ AS_IF([test "x$LESSC" != x],
       [HAVE_LESSC=yes],
       [HAVE_LESSC=no
        AC_MSG_ERROR([Less CSS compiler not found.])])
+AC_SUBST([HAVE_LESSC],[$HAVE_LESSC])
 AM_CONDITIONAL([HAVE_LESSC],[test "x$HAVE_LESSC" = xyes])
 
 
@@ -83,6 +84,7 @@ AS_IF([test "x$JAVA" != x],
       [HAVE_JAVA=yes],
       [HAVE_JAVA=no
        AC_MSG_ERROR([No Java virtual machine found.])])
+AC_SUBST([HAVE_JAVA],[$HAVE_JAVA])
 AM_CONDITIONAL([HAVE_JAVA],[test "x$HAVE_JAVA" = xyes])
 
 
@@ -169,6 +171,7 @@ AS_IF([test "x$HASH_BIN" != x],
       [HAVE_HASH_BIN=yes],
       [HAVE_HASH_BIN=no
        AC_MSG_ERROR([$HASH program not found.])])
+AC_SUBST([HAVE_HASH_BIN],[$HAVE_HASH_BIN])
 AM_CONDITIONAL([HAVE_HASH_BIN],[test "x$HAVE_HASH_BIN" = xyes])
 
 AC_MSG_CHECKING([length of generated hashes])
@@ -211,6 +214,7 @@ AS_IF([test "x$XDG_OPEN" != x],
       [HAVE_XDG_OPEN=yes],
       [HAVE_XDG_OPEN=no
        AC_MSG_WARN([PDF opening feature disabled.])])
+AC_SUBST([HAVE_XDG_OPEN],[$HAVE_XDG_OPEN])
 AM_CONDITIONAL([HAVE_XDG_OPEN],[test "x$HAVE_XDG_OPEN" = xyes])
 
 
@@ -222,6 +226,7 @@ AS_IF([test "x$EMACSCLIENT" != x],
       [HAVE_EMACSCLIENT=yes],
       [HAVE_EMACSCLIENT=no
        AC_MSG_WARN([Text editor launching features disabled.])])
+AC_SUBST([HAVE_EMACSCLIENT],[$HAVE_EMACSCLIENT])
 AM_CONDITIONAL([HAVE_EMACSCLIENT],[test "x$HAVE_EMACSCLIENT" = xyes])
 
 
@@ -250,6 +255,7 @@ AS_IF([test "x$enable_extra_documentation" = xyes],
             [HAVE_PDFLATEX=no
              AC_MSG_WARN([Unable to create PDF documentation.])]),
       HAVE_PDFLATEX=no)
+AC_SUBST([HAVE_PDFLATEX],[$HAVE_PDFLATEX])
 AM_CONDITIONAL([HAVE_PDFLATEX],[test "x$HAVE_PDFLATEX" = xyes])
 
 
@@ -263,6 +269,7 @@ AS_IF([test "x$enable_extra_documentation" = xyes],
             [HAVE_PANDOC=no
              AC_MSG_WARN([Unable to create Markdown documentation.])]),
       HAVE_PANDOC=no)
+AC_SUBST([HAVE_PANDOC],[$HAVE_PANDOC])
 AM_CONDITIONAL([HAVE_PANDOC],[test "x$HAVE_PANDOC" = xyes])
 
 dnl     ============================================================
@@ -275,6 +282,7 @@ AS_IF([test "x$enable_extra_documentation" = xyes],
             [HAVE_DOCTOC=no
              AC_MSG_WARN([Unable to generate Markdown table of contents.])]),
       HAVE_DOCTOC=no)
+AC_SUBST([HAVE_DOCTOC],[$HAVE_DOCTOC])
 AM_CONDITIONAL([HAVE_DOCTOC],[test "x$HAVE_DOCTOC" = xyes])
 
 
@@ -298,6 +306,7 @@ AS_IF([test "x$enable_httpd" = xyes],
                     [HAVE_HTTPD=no
                      AC_MSG_WARN([No apache server found.])]),
       [HAVE_HTTPD=no])
+AC_SUBST([HAVE_HTTPD],[$HAVE_HTTPD])
 AM_CONDITIONAL([HAVE_HTTPD],[test "x$HAVE_HTTPD" = xyes])
 
 
@@ -312,6 +321,7 @@ AS_IF([test "x$enable_httpd" = xyes],
                     [HAVE_WWW_ROOT=no
                      AC_MSG_WARN([Local server root "$WWW_ROOT" not found.])]),
       [HAVE_WWW_ROOT=no])
+AC_SUBST([HAVE_WWW_ROOT],[$HAVE_WWW_ROOT])
 AM_CONDITIONAL([HAVE_WWW_ROOT],[test "x$HAVE_WWW_ROOT" = xyes])
 
 
@@ -325,6 +335,7 @@ AS_IF([test "x$enable_httpd" = xyes],
             [HAVE_MYSQL=no
              AC_MSG_WARN([No mysql database application found])]),
       [HAVE_MYSQL=no])
+AC_SUBST([HAVE_MYSQL],[$HAVE_MYSQL])
 AM_CONDITIONAL([HAVE_MYSQL],[test "x$HAVE_MYSQL" = xyes])
 
 
@@ -336,6 +347,7 @@ AS_IF([test "x$NPM" != x],
       [HAVE_NPM=yes],
       [HAVE_NPM=no
        AC_MSG_ERROR([Node package manager not found.])])
+AC_SUBST([HAVE_NPM],[$HAVE_NPM])
 AM_CONDITIONAL([HAVE_NPM],[test "x$HAVE_NPM" = xyes])
 
 
@@ -348,6 +360,7 @@ AS_IF([test "x$NODE" != x],
       [HAVE_NODE=yes],
       [HAVE_NODE=no
        AC_MSG_ERROR([Node.js not found.])])
+AC_SUBST([HAVE_NODE],[$HAVE_NODE])
 AM_CONDITIONAL([HAVE_NODE],[test "x$HAVE_NODE" = xyes])
 
 
@@ -362,6 +375,7 @@ AC_MSG_RESULT([$HAVE_NODE_OPTIMIST])
 
 AS_IF([test "x$HAVE_NODE_OPTIMIST" = xyes],,
       [AC_MSG_ERROR([Required node pacakge 'optimist' not found.])])
+AC_SUBST([HAVE_NODE_OPTIMIST],[$HAVE_NODE_OPTIMIST])
 AM_CONDITIONAL([HAVE_NODE_OPTIMIST],[test "x$HAVE_NODE_OPTIMIST" = xyes])
 
 
