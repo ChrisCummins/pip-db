@@ -42,6 +42,15 @@ get_micro() {
 	echo $1 | sed -r 's/^[0-9]+\.[0-9]+\.([0-9]+)$/\1/'
 }
 
+# Find and return the current version string in the form <major>.<minor>.<micro>
+get_current_version() {
+	local major=$(grep 'm4_define(\s*\[pipdb_major_version\]' configure.ac | sed -r 's/^.*([0-9]+).*$/\1/')
+	local minor=$(grep 'm4_define(\s*\[pipdb_minor_version\]' configure.ac | sed -r 's/^.*([0-9]+).*$/\1/')
+	local micro=$(grep 'm4_define(\s*\[pipdb_micro_version\]' configure.ac | sed -r 's/^.*([0-9]+).*$/\1/')
+
+	echo $major.$minor.$micro
+}
+
 main() {
 	# Set debugging output if DEBUG=1
 	test -n "$DEBUG" && {
