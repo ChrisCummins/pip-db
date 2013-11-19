@@ -401,6 +401,7 @@ AC_OUTPUT([
 	Documentation/plan/Makefile
 	scripts/Makefile
 	scripts/git/Makefile
+	scripts/git/hooks/Makefile
 	tools/Makefile
 	tools/dsa.sh
 	www/Makefile
