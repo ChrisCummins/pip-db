@@ -5,8 +5,10 @@ DOCPDF = $(DOC).pdf
 DOCTEX = $(DOC).tex
 DOCSRC = $(shell find . -name '*.tex')
 
+doc_DATA =
+
 if HAVE_PDFLATEX
-doc_DATA = $(DOCPDF)
+doc_DATA += $(DOCPDF)
 endif
 
 CLEANFILES = \
