@@ -40,7 +40,12 @@ function pip_db_num_rows( $query ) {
  * Fetches rows for a given query.
  */
 function pip_db_fetch_row( $query ) {
-	return mysql_fetch_row( pip_db_query( $query ) );
+	$results = pip_db_query( $query );
+
+	if ( !$results )
+		throw new Exception('Query returned no results!');
+
+	return mysql_fetch_row( $results );
 }
 
 /*
