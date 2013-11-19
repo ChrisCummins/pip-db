@@ -399,6 +399,7 @@ AC_OUTPUT([
 	Documentation/Makefile
 	Documentation/log/Makefile
 	Documentation/plan/Makefile
+	scripts/Makefile
 	tools/Makefile
 	tools/dsa.sh
 	www/Makefile
