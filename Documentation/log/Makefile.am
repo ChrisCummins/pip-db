@@ -58,6 +58,9 @@ $(DOCPDF): $(DOCSRC)
 $(DOCMD): $(DOCSRC)
 	@echo '  MD     $@'
 	@$(PANDOC) --biblatex -o $@ $<
+if HAVE_DOCTOC
+	@$(DOCTOC) $@ > /dev/null
+endif
 
 
 # Export the compiled document
