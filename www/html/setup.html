@@ -9,5 +9,13 @@
 
 {% block content %}
 
+{% for table in tables %}
+
+<h4><code>{{ table.name }}</code></h4>
+<pre>
+{{ table.schema }}
+</pre>
+
+{% endfor %}
 
 {% endblock %}
