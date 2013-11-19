@@ -13,6 +13,7 @@ abstract class PipDatabase {
 
 	static function schema() {
 		return array(
+
 			'users' =>
 "user_id bigint(20) UNSIGNED NOT NULL auto_increment,
 email varchar(200) NOT NULL DEFAULT '',
@@ -21,10 +22,12 @@ user_type_id bigint(20) UNSIGNED NOT NULL,
 PRIMARY KEY (user_id),
 INDEX (user_type_id),
 FOREIGN KEY (user_type_id) REFERENCES user_types(user_type_id)",
+
 			'user_types' =>
 "user_type_id bigint(20) UNSIGNED NOT NULL auto_increment,
 type_name varchar(255) NOT NULL DEFAULT '',
 PRIMARY KEY (user_type_id)"
+
 			);
 	}
 
