@@ -24,7 +24,7 @@ SUBDIRS = \
 
 CLEANFILES = $(shell find $(WWW_BUILD) -type f)
 
-noinst_SCRIPTS = $(PHP) $(WWW_BUILD)/.htaccess $(WWW_BUILD)/testdata.csv
+noinst_SCRIPTS = $(PHP) $(WWW_BUILD)/.htaccess
 
 EXTRA_DIST = \
 	$(SRC) \
@@ -44,13 +44,6 @@ $(WWW_BUILD)/.htaccess: .htaccess
 		$(MKDIR_P) $(WWW_BUILD); \
 	}
 	@echo '  APACHE $(notdir $@)'
-	@cat $< > $@
-
-$(WWW_BUILD)/testdata.csv: testdata.csv
-	@test -d $(WWW_BUILD) || { \
-		$(MKDIR_P) $(WWW_BUILD); \
-	}
-	@echo '  DATA   $(notdir $@)'
 	@cat $< > $@
 
 if HAVE_WWW_ROOT
