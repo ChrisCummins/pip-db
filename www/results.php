@@ -36,14 +36,11 @@ $content = array(
 	 * (optional)
 	 * Href to download the results.
 	 */
-	"download" => "http://127.0.0.1",
-	/*
-	 * (optional)
-	 * An array of search results. Each result element is an array of
-	 * properties, with the first element being the href to that
-	 * corresponding record's details page.
-	 */
-	"results" => $records
+	"download" => "http://127.0.0.1"
 	);
+
+if ( $count = count( $records ) ) {
+	$content['results'] = $records;
+}
 
 pip_render_template( 'results', $content );
