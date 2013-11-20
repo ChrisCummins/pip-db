@@ -29,10 +29,6 @@ $content = array(
 	 */
 	"search_text" => $query,
 	/*
-	 * The number of results returned.
-	 */
-	"results_count" => 122,
-	/*
 	 * (optional)
 	 * Href to download the results.
 	 */
@@ -41,6 +37,7 @@ $content = array(
 
 if ( $count = count( $records ) ) {
 	$content['results'] = $records;
+	$content['results_count'] = $count;
 }
 
 pip_render_template( 'results', $content );
