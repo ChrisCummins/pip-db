@@ -4,7 +4,7 @@ require_once( $_SERVER['PHP_ROOT'] . 'init.php' );
 
 $query = pip_get( GetVariables::Query );
 
-$result = pip_db_query( "SELECT name, source, organ, pi FROM records " .
+$result = pip_db_query( "SELECT record_id, name, source, organ, pi FROM records " .
 			"WHERE name LIKE '%" .
 			pip_string_sanitise( $query ) . "%'");
 
