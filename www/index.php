@@ -79,7 +79,7 @@
 
           <div class="col-md-4">
             <div class="d1-picture">
-              <a href="/results.php">
+              <a href="/s.php?q=Alkaline">
                 <img src="/img/results.png">
               </a>
             </div>
