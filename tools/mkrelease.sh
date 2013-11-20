@@ -83,6 +83,17 @@ make_release_branch() {
 	git push origin $branch_name
 }
 
+# Make the git release tag.
+#
+#     @param $1 The current version string
+make_release_tag() {
+	local current_version=$1
+	local tag_name=$current_version
+
+	git tag -a $tag_name -m "'$current_version' Release"
+	git push origin $tag_name
+}
+
 # Perform the new release.
 #
 #     @param $1 New version string
@@ -96,6 +107,7 @@ do_mkrelease() {
 	cd $(get_project_root)
 
 	make_release_branch
+	make_release_tag
 	set_new_version $current_version $new_version
 	make_release_branch
 }
