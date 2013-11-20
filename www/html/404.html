@@ -1,0 +1,20 @@
+{% extends "_page.html" %}
+
+{% set _navbar = { "hidden": true } %}
+
+{% block content %}
+
+<div class="search full">
+  <h1 class="logo">:(</h1>
+
+  <p class="lead">
+    Sorry, I couldn't find this page.
+  </p>
+
+  <a href="{{ _links.index }}" class="btn btn-primary btn-lg" role="button">
+    Take me home &raquo;
+  </a>
+
+</div> <!-- /.search-full -->
+
+{% endblock %}
