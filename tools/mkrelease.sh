@@ -109,7 +109,7 @@ make_version_bump_commit() {
 	local new_version=$1
 
 	git add configure.ac
-	git commit -m "Bump release version for '$new_version'"
+	git commit --allow-empty -m "Bump release version for '$new_version'"
 }
 
 # Perform the new release.
