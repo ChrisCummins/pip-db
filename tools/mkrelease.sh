@@ -89,7 +89,7 @@ make_release_branch() {
 
 	echo "Creating release branch... '$branch_name'"
 	git branch $branch_name
-	git push origin $branch_name
+	git push origin $branch_name >/dev/null
 }
 
 # Make the git release tag.
@@ -101,7 +101,7 @@ make_release_tag() {
 
 	echo "Creating release tag... '$current_version'"
 	git tag -a $tag_name -m "'$current_version' Release"
-	git push origin $tag_name
+	git push origin $tag_name >/dev/null
 }
 
 # Make the git version bump commit.
@@ -112,7 +112,7 @@ make_version_bump_commit() {
 
 	echo "Creating version bump commit... '$new_version'"
 	git add configure.ac
-	git commit --allow-empty -m "Bump release version for '$new_version'"
+	git commit --allow-empty -m "Bump release version for '$new_version'" >/dev/null
 }
 
 # Perform the new release.
