@@ -57,6 +57,12 @@ require_once( $_SERVER['PHP_ROOT'] . 'accounts.php' );
 pip_db_init();
 
 
+/******************************/
+/* High level data structures */
+/******************************/
+require_once( $_SERVER['PHP_ROOT'] . 'record.php' );
+
+
 /************************************/
 /* Site behaviour and interactivity */
 /************************************/
