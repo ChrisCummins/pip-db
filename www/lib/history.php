@@ -8,5 +8,5 @@ function pip_history_get_referer() {
 	if ( isset( $_SERVER['HTTP_REFERER'] ) )
 		return $_SERVER['HTTP_REFERER'];
 	else
-		return '/search.php';
+		return '/home.php';
 }

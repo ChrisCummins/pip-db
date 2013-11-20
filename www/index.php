@@ -59,7 +59,7 @@
 
           <div class="col-md-4">
             <div class="d1-picture">
-              <a href="/search.php">
+              <a href="/home.php">
                 <img src="/img/homepage.png">
               </a>
             </div>
