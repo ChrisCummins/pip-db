@@ -141,6 +141,6 @@ main() {
 		exit 1
 	fi
 
-	replace_version $1
+	do_mkrelease $1
 }
 main $@
