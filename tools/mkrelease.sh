@@ -116,11 +116,10 @@ do_mkrelease() {
 
 	cd $(get_project_root)
 
-	make_release_branch
-	make_release_tag
+	make_release_branch $current_version
+	make_release_tag $current_version
 	set_new_version $current_version $new_version
-	make_release_branch
-	make_version_bump_commit
+	make_version_bump_commit $new_version
 }
 
 # Given a version string in the form <major>.<minor>.<micro>,
