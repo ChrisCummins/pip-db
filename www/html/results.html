@@ -69,7 +69,7 @@
      * Search results link to details page:
      */
     $('div.sresults table tbody tr').click(function(){
-      window.location = '/r.php?r=' + $(this).attr('record-id');
+      window.location = '/r.php' + location.search + '&r=' + $(this).attr('record-id');
     });
   });
 </script>
