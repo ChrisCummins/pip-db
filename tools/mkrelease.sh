@@ -54,6 +54,8 @@ get_micro() {
 #
 #     @return Current version string, e.g. '0.1.4'
 get_current_version() {
+	cd $(get_project_root)
+
 	local major=$(grep 'm4_define(\s*\[pipdb_major_version\]' configure.ac | sed -r 's/^.*([0-9]+).*$/\1/')
 	local minor=$(grep 'm4_define(\s*\[pipdb_minor_version\]' configure.ac | sed -r 's/^.*([0-9]+).*$/\1/')
 	local micro=$(grep 'm4_define(\s*\[pipdb_micro_version\]' configure.ac | sed -r 's/^.*([0-9]+).*$/\1/')
@@ -72,6 +74,8 @@ set_new_version() {
 	local major=$(get_major $new)
 	local minor=$(get_minor $new)
 	local micro=$(get_micro $new)
+
+	cd $(get_project_root)
 
 	echo "Updating version string... 'configure.ac'"
 	test -f configure.ac || { echo "fatal: 'configure.ac' not found!"; exit 3; }
@@ -110,6 +114,8 @@ make_release_tag() {
 make_version_bump_commit() {
 	local new_version=$1
 
+	cd $(get_project_root)
+
 	echo "Creating version bump commit... '$new_version'"
 	git add configure.ac
 	git commit --allow-empty -m "Bump release version for '$new_version'" >/dev/null
@@ -124,8 +130,6 @@ do_mkrelease() {
 	echo -n "Getting current version... "
 	local current_version=$(get_current_version)
 	echo "'$current_version'"
-
-	cd $(get_project_root)
 
 	make_release_branch $current_version
 	make_release_tag $current_version
