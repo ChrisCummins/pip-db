@@ -32,6 +32,7 @@ if ( pip_debugging() ) {
 require_once( $_SERVER['PHP_ROOT'] . 'superglobals.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'get.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'post.php' );
+require_once( $_SERVER['PHP_ROOT'] . 'files.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'session.php' );
 
 pip_session_start();
