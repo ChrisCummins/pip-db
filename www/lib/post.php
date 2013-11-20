@@ -25,6 +25,7 @@ abstract class PostVariables {
 abstract class PostActionValues {
 	const Login = "login";
 	const Register = "register";
+	const Upload = "upload";
 }
 
 /*
