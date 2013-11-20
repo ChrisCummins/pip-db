@@ -93,7 +93,7 @@
 
           <div class="col-md-4">
             <div class="d1-picture">
-              <a href="/details.php">
+              <a href="/r.php?r=1">
                 <img src="/img/details.png">
               </a>
             </div>
