@@ -11,6 +11,14 @@ function pip_upload_new_file() {
 function pip_upload_parse_file() {
 	$super = pip_files( FilesVariables::Dataset );
 	$path = $super['tmp_name'];
+	$handle = fopen( $path, 'r' );
+
+	if ( $handle )
+		pip_upload_parse_csv( $handle );
+	else
+		throw new Exception( 'Failed to open submitted file!' );
+}
+
 function pip_upload_parse_csv( $handle ) {
 
 	while ( false !== ($line = fgets( $handle ) ) ) {
