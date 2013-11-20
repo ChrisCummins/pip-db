@@ -43,7 +43,7 @@
 
       {% for result in results %}
       <!-- Search result-->
-      <tr url="{{ result[0] }}">
+      <tr record-id="{{ result[0] }}">
 	{% for value in result|slice(1) %}
 	<td>{{ value }}</td>
 	{% endfor %}
@@ -69,7 +69,7 @@
      * Search results link to details page:
      */
     $('div.sresults table tbody tr').click(function(){
-      window.location = $(this).attr('url');
+      window.location = '/details.php?r=' + $(this).attr('record-id');
     });
   });
 </script>
