@@ -2,6 +2,23 @@
 
 require_once( $_SERVER['PHP_ROOT'] . 'init.php' );
 
+$result = pip_db_query( "SELECT name, source, organ, pi FROM records" );
+
+$records = array();
+
+while ( $mysql_row = mysql_fetch_assoc( $result ) ) {
+
+	$row = array();
+
+	array_push( $row, "details.php" );
+
+	foreach ( $mysql_row as $key => $value ) {
+		array_push( $row, $value );
+	}
+
+	array_push( $records, $row );
+}
+
 $content = array(
 	/*
 	 * The search text.
@@ -22,218 +39,7 @@ $content = array(
 	 * properties, with the first element being the href to that
 	 * corresponding record's details page.
 	 */
-	"results" => array(
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			),
-		array(
-			"details.php",
-			"Alkaline phosphatese",
-			"Human",
-			"Placenta",
-			"4.6"
-			)
-		)
+	"results" => $records
 	);
 
 pip_render_template( 'results', $content );
