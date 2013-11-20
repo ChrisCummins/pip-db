@@ -7,7 +7,7 @@
  */
 abstract class GetVariables {
 	const Query = "q";
-	const Record = "r";
+	const Record = "id";
 
 	static function val() {
 		return array(
