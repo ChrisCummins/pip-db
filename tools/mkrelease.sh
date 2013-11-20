@@ -87,6 +87,7 @@ make_release_branch() {
 	local current_version=$1
 	local branch_name="$RELEASE_PREFIX$current_version"
 
+	echo "Creating release branch... '$branch_name'"
 	git branch $branch_name
 	git push origin $branch_name
 }
@@ -98,6 +99,7 @@ make_release_tag() {
 	local current_version=$1
 	local tag_name=$current_version
 
+	echo "Creating release tag... '$current_version'"
 	git tag -a $tag_name -m "'$current_version' Release"
 	git push origin $tag_name
 }
@@ -108,6 +110,7 @@ make_release_tag() {
 make_version_bump_commit() {
 	local new_version=$1
 
+	echo "Creating version bump commit... '$new_version'"
 	git add configure.ac
 	git commit --allow-empty -m "Bump release version for '$new_version'"
 }
