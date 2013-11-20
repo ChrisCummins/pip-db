@@ -16,7 +16,7 @@ required for the production system.
 
 An automated dataset analysis tool.
 
-### Example
+### Example Usage
 
     $ ./dsa ../png/dataset.csv
     Dataset: '../png/dataset.csv' (512 records)
@@ -57,7 +57,7 @@ An automated dataset analysis tool.
 Creates a release branch/tag for the current version and bumps the project
 version to `<version>`.
 
-### Example
+### Example Usage
 
     $ ./mkrelease 0.0.2
     Getting current version... '0.0.1'
@@ -87,7 +87,7 @@ version to `<version>`.
 
 A program for generating nonsense datasets for testing purposes.
 
-### Example
+### Example Usage
 
     $ ./png --debug -s 16 -c ./pngrc -o test.csv
     debug: using payload file: './png-payload.js'
@@ -114,7 +114,7 @@ project.
 
 Automated workflow script for managing git branches.
 
-### Example
+### Example Usage
 
     $ ./tools/workflow new 10
     Switched to a new branch 'wip/10'
