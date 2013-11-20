@@ -53,18 +53,48 @@ get_current_version() {
 
 # Replace the project version with a new one.
 #
-#     @param $1 The new version string
-replace_version() {
-	local new=$1
-	local current=''
+#     @param $1 The current version string
+#     @param $2 The new version string
+set_new_version() {
+	local current=$1
+	local new=$2
+
+	local major=$(get_major $new)
+	local minor=$(get_minor $new)
+	local micro=$(get_micro $new)
+
+	echo "Updating version string... 'configure.ac'"
+	test -f configure.ac || { echo "fatal: 'configure.ac' not found!"; exit 3; }
+	sed -r -i 's/(.*m4_define\(\s*\[pipdb_major_version\],\s*\[)[0-9]+(\].*)/\1'$major'\2/' configure.ac
+	sed -r -i 's/(.*m4_define\(\s*\[pipdb_minor_version\],\s*\[)[0-9]+(\].*)/\1'$minor'\2/' configure.ac
+	sed -r -i 's/(.*m4_define\(\s*\[pipdb_micro_version\],\s*\[)[0-9]+(\].*)/\1'$micro'\2/' configure.ac
+}
+
+# Make the git release branch.
+#
+#     @param $1 The current version string
+make_release_branch() {
+	local current_version=$1
+	local branch_name="$RELEASE_PREFIX$current_version"
+
+	git branch $branch_name
+	git push origin $branch_name
+}
+
+# Perform the new release.
+#
+#     @param $1 New version string
+do_mkrelease() {
+	local new_version=$1
+
+	echo -n "Getting current version... "
+	local current_version=$(get_current_version)
+	echo "'$current'"
 
 	cd $(get_project_root)
 
-	echo -n "Getting current version... "
-	current=$(get_current_version)
-	echo "'$current'"
-
-	echo "Setting new version... '$new'"
+	make_release_branch
+	set_new_version $current_version $new_version
 }
 
 # Given a version string in the form <major>.<minor>.<micro>,
