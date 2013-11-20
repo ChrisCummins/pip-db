@@ -3,3 +3,11 @@
 	SetEnv PHP_ROOT "@WWW_ROOT@/lib/"
 	SetEnv HTML_ROOT "@WWW_ROOT@/html/"
 </IfModule>
+
+<IfModule mod_rewrite.c>
+	  RewriteEngine On
+
+	  RewriteCond %{REQUEST_FILENAME} !-d
+	  RewriteCond %{REQUEST_FILENAME} !-f
+	  RewriteRule (.*) $1.php [L]
+</IfModule>
