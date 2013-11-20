@@ -7,10 +7,12 @@
  */
 abstract class GetVariables {
 	const Query = "q";
+	const Record = "r";
 
 	static function val() {
 		return array(
-			self::Query
+			self::Query,
+			self::Record
 			);
 	}
 }
