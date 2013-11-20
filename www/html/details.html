@@ -46,10 +46,12 @@
           {% endfor %}
 
           {% for key, value in properties %}
+          {% if value != '' %}
           <tr>
             <td>{{ key }}</td>
             <td>{{ value }}</td>
           </tr>
+          {% endif %}
           {% endfor %}
 
         </tbody>
@@ -70,12 +72,14 @@
           <ul class="panel-link-list">
 
             {% for name, href in links %}
+            {% if href != '' %}
             <li>
               <a href="{{ href }}"
                  class="btn btn-success btn-block">
                 {{ name }}
               </a>
             </li>
+            {% endif %}
             {% endfor %}
 
           </ul>
