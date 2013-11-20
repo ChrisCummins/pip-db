@@ -58,3 +58,11 @@ function pip_db_table_create( $tbl_name, $definition,
 			     $tbl_name . '(' . $definition .
 			     ') ENGINE=' . $engine );
 }
+
+/*
+ * Delete a database table, if it exists.
+ */
+function pip_db_table_delete( $tbl_name ) {
+
+	return pip_db_query ( 'DROP TABLE IF EXISTS ' . $tbl_name );
+}
