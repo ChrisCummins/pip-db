@@ -1,5 +1,7 @@
 #!/bin/bash
 
+RELEASE_PREFIX="release/"
+
 # Print program usage
 usage() {
 	echo "Usage: $0 <version>"
@@ -95,6 +97,7 @@ do_mkrelease() {
 
 	make_release_branch
 	set_new_version $current_version $new_version
+	make_release_branch
 }
 
 # Given a version string in the form <major>.<minor>.<micro>,
