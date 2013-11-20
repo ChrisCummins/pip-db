@@ -48,7 +48,7 @@
                class="btn btn-primary btn-lg" role="button">
               See design &raquo;
             </a>
-            <a href="/theme.php"
+            <a href="/theme"
                class="btn btn-success btn-lg" role="button">
               See theme &raquo;
             </a>
@@ -59,7 +59,7 @@
 
           <div class="col-md-4">
             <div class="d1-picture">
-              <a href="/home.php">
+              <a href="/home">
                 <img src="/img/homepage.png">
               </a>
             </div>
@@ -69,7 +69,7 @@
 
           <div class="col-md-4">
             <div class="d1-picture">
-              <a href="/advanced.php">
+              <a href="/advanced">
                 <img src="/img/advanced.png">
               </a>
             </div>
@@ -79,7 +79,7 @@
 
           <div class="col-md-4">
             <div class="d1-picture">
-              <a href="/s.php?q=Alkaline">
+              <a href="/s?q=Alkaline">
                 <img src="/img/results.png">
               </a>
             </div>
@@ -93,7 +93,7 @@
 
           <div class="col-md-4">
             <div class="d1-picture">
-              <a href="/r.php?r=1">
+              <a href="/r?r=1">
                 <img src="/img/details.png">
               </a>
             </div>
@@ -103,7 +103,7 @@
 
           <div class="col-md-4">
             <div class="d1-picture">
-              <a href="/login.php">
+              <a href="/login">
                 <img src="/img/login.png">
               </a>
             </div>
@@ -113,7 +113,7 @@
 
           <div class="col-md-4">
             <div class="d1-picture">
-              <a href="/upload.php">
+              <a href="/upload">
                 <img src="/img/upload.png">
               </a>
             </div>

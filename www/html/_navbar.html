@@ -20,7 +20,7 @@
       </button>
 
       <!-- The logo -->
-      <a class="navbar-brand" href="/home.php">pip-db</a>
+      <a class="navbar-brand" href="/home">pip-db</a>
 
     </div> <!-- /.navbar-header -->
 
@@ -29,7 +29,7 @@
       {% if _navbar.search %}
       <div class="col-sm-7 col-md-7 navbar-search">
 
-        <form action="/s.php" class="navbar-form" role="search">
+        <form action="/s" class="navbar-form" role="search">
           <div class="input-group">
 
             <!-- Search bar -->
@@ -52,7 +52,7 @@
         <li>
           <div class="navbar-button-group">
             <div class="navbar-button">
-              <a href="/advanced.php" class="btn btn-primary">
+              <a href="/advanced" class="btn btn-primary">
                 Advanced
               </a>
             </div>
@@ -71,18 +71,18 @@
             {{ session.user }} <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" aria-labelledby="themes">
-            <li><a tabindex="-1" href="/admin/setup.php">Run initial setup</a></li>
-            <li><a tabindex="-1" href="/upload.php">Upload new data</a></li>
+            <li><a tabindex="-1" href="/admin/setup">Run initial setup</a></li>
+            <li><a tabindex="-1" href="/upload">Upload new data</a></li>
             <li><a tabindex="-1" href="#">Preferences</a></li>
             <li class="divider"></li>
-            <li><a tabindex="-1" href="/logout.php">Log out</a></li>
+            <li><a tabindex="-1" href="/logout">Log out</a></li>
           </ul>
         </li>
 
         {% else %}
 
         <!-- Login button -->
-        <li><a href="/login.php">Login</a></li>
+        <li><a href="/login">Login</a></li>
 
         {% endif %}
       </ul> <!-- /.navbar-right -->
