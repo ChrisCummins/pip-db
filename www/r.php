@@ -10,7 +10,7 @@ $content = array(
 	 * (optional)
 	 * Search box text.
 	 */
-	 "search_text" => "Alkaline",
+	"search_text" => pip_get( GetVariables::Query ),
 	/*
 	 * (optional)
 	 * The href to download page.
