@@ -18,4 +18,15 @@
 
 {% endfor %}
 
+{% if test_data is defined %}
+<h4>Test Data</h4>
+<pre>
+  {% for row in test_data %}
+  {% for col in row %}
+  {{ col }}
+  {% endfor %}
+  {% endfor %}
+</pre>
+{% endif %}
+
 {% endblock %}
