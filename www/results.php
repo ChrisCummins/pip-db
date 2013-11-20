@@ -17,8 +17,6 @@ while ( $mysql_row = mysql_fetch_assoc( $result ) ) {
 
 	$row = array();
 
-	array_push( $row, "details.php" );
-
 	foreach ( $mysql_row as $key => $value ) {
 		array_push( $row, $value );
 	}
