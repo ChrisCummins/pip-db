@@ -6,6 +6,7 @@ required for the production system.
 ## Table of Contents
 
 * [dsa - Dataset Analyser](#dsa)
+* [mkrelease - Project release generator](#mkrelease)
 * [png - Plausible Nonsense Generator](#png)
 * [sloccount - Source code line count](#sloccount)
 * [workflow - Workflow scripts](#workflow)
@@ -49,6 +50,32 @@ An automated dataset analysis tool.
     | Notes                       | 7         | 1.37%   | 5      | 0.98%  |
     +-----------------------------+-----------+---------+--------+--------+
     24 records returned
+
+## mkrelease
+    Usage: ./mkrelease <version>
+
+Creates a release branch/tag for the current version and bumps the project
+version to `<version>`.
+
+### Example
+
+    $ ./mkrelease 0.0.2
+    Getting current version... '0.0.1'
+    Creating release branch... 'release/0.0.1'
+    Counting objects: 82, done.
+    Compressing objects: 100% (78/78), done.
+    Writing objects: 100% (78/78), 7.97 KiB, done.
+    Total 78 (delta 57), reused 0 (delta 0)
+    To git@github.com:ChrisCummins/protein-db.git
+     * [new branch]      release/0.0.1 -> release/0.0.1
+    Creating release tag... '0.0.1'
+    Counting objects: 1, done.
+    Writing objects: 100% (1/1), 169 bytes, done.
+    Total 1 (delta 0), reused 0 (delta 0)
+    To git@github.com:ChrisCummins/protein-db.git
+     * [new tag]         0.0.1 -> 0.0.1
+    Updating version string... 'configure.ac'
+    Creating version bump commit... '0.0.2'
 
 ## png
     Usage: ./png
