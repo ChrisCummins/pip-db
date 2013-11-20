@@ -30,6 +30,7 @@ if ( pip_debugging() ) {
 /* Provide controlled access to PHP superglobals */
 /*************************************************/
 require_once( $_SERVER['PHP_ROOT'] . 'superglobals.php' );
+require_once( $_SERVER['PHP_ROOT'] . 'get.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'post.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'session.php' );
 
