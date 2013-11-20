@@ -62,6 +62,7 @@ pip_db_init();
 /************************************/
 require_once( $_SERVER['PHP_ROOT'] . 'login.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'register.php' );
+require_once( $_SERVER['PHP_ROOT'] . 'upload.php' );
 
 
 /* Handle login attempt */
@@ -69,3 +70,7 @@ if ( pip_login_attempting_login() )
 	pip_login_attempt();
 else if ( pip_register_attempting_registration() )
 	pip_register_attempt();
+
+/* Handle file upload */
+if ( pip_upload_new_file() )
+	pip_upload_parse_file();
