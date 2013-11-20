@@ -27,7 +27,7 @@ $content = array(
 	/*
 	 * The search text.
 	 */
-	"search_text" => pip_get( GetVariables::Query ),
+	"search_text" => $query,
 	/*
 	 * The number of results returned.
 	 */
