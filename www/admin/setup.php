@@ -10,6 +10,9 @@ foreach ( PipDatabase::schema() as $table => $description ) {
 	array_push( $content["tables"], array( "name" => $table,
 					       "schema" => $description ) );
 
+	/* Delete database table if it exists. */
+	pip_db_table_delete( $table );
+
 	/* Create database table. */
 	if ( !pip_db_table_create( $table, $description ) ) {
 		throw new PipDbException('Failed to create table: \'' . $table + '\'!' );
