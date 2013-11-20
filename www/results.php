@@ -8,6 +8,9 @@ $result = pip_db_query( "SELECT name, source, organ, pi FROM records " .
 			"WHERE name LIKE '%" .
 			pip_string_sanitise( $query ) . "%'");
 
+if ( !$result )
+	throw new Exception( 'Failed to query database!' );
+
 $records = array();
 
 while ( $mysql_row = mysql_fetch_assoc( $result ) ) {
