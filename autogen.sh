@@ -186,6 +186,7 @@ echo "Your system has the required tools, running autoreconf..."
 ## Let autoreconf figure out what, if anything, needs doing.
 autoreconf --install || exit $?
 
+echo
 echo "You can now run \`./configure'."
 
 exit 0
