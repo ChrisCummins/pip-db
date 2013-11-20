@@ -94,6 +94,16 @@ make_release_tag() {
 	git push origin $tag_name
 }
 
+# Make the git version bump commit.
+#
+#     @param $1 The new version string
+make_version_bump_commit() {
+	local new_version=$1
+
+	git add configure.ac
+	git commit -m "Bump release version for '$new_version'"
+}
+
 # Perform the new release.
 #
 #     @param $1 New version string
@@ -110,6 +120,7 @@ do_mkrelease() {
 	make_release_tag
 	set_new_version $current_version $new_version
 	make_release_branch
+	make_version_bump_commit
 }
 
 # Given a version string in the form <major>.<minor>.<micro>,
