@@ -28,23 +28,31 @@ get_project_root() {
 
 # Given a version string in the form <major>.<minor>.<micro>,
 # return the major component.
+#
+#     @return Major component as an integer, e.g. '5'
 get_major() {
 	echo $1 | sed -r 's/^([0-9]+)\.[0-9]+\.[0-9]+$/\1/'
 }
 
 # Given a version string in the form <major>.<minor>.<micro>,
 # return the minor component.
+#
+#     @return Minor component as an integer, e.g. '5'
 get_minor() {
 	echo $1 | sed -r 's/^[0-9]+\.([0-9]+)\.[0-9]+$/\1/'
 }
 
 # Given a version string in the form <major>.<minor>.<micro>,
 # return the micro component.
+#
+#     @return Micro component as an integer, e.g. '5'
 get_micro() {
 	echo $1 | sed -r 's/^[0-9]+\.[0-9]+\.([0-9]+)$/\1/'
 }
 
 # Find and return the current version string in the form <major>.<minor>.<micro>
+#
+#     @return Current version string, e.g. '0.1.4'
 get_current_version() {
 	local major=$(grep 'm4_define(\s*\[pipdb_major_version\]' configure.ac | sed -r 's/^.*([0-9]+).*$/\1/')
 	local minor=$(grep 'm4_define(\s*\[pipdb_minor_version\]' configure.ac | sed -r 's/^.*([0-9]+).*$/\1/')
