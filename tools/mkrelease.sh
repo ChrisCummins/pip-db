@@ -120,7 +120,7 @@ do_mkrelease() {
 
 	echo -n "Getting current version... "
 	local current_version=$(get_current_version)
-	echo "'$current'"
+	echo "'$current_version'"
 
 	cd $(get_project_root)
 
