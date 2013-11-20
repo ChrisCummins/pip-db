@@ -99,6 +99,7 @@
 			- [TODO](#todo-9)
 	- [Saturday 16th](#saturday-16th)
 	- [Sunday 17th](#sunday-17th)
+	- [Tuesday 19th](#tuesday-19th)
 
 October 2013 
 =============
@@ -1478,6 +1479,12 @@ Sunday 17th
 -----------
 
 Began implementing MySQL backend in library file `db.php`.
+
+Tuesday 19th
+------------
+
+Implement a `./tools/mkrelease` script which can be used to bump version
+number and create a release branch/tag. Bumped project version to 0.0.2.
 
 9
 
