@@ -11,7 +11,7 @@ $result = pip_db_query( "SELECT record_id, name, source, organ, pi FROM records 
 if ( !$result )
 	throw new Exception( 'Failed to query database!' );
 
-$records = array();
+$results = array();
 
 while ( $mysql_row = mysql_fetch_assoc( $result ) ) {
 
@@ -21,7 +21,7 @@ while ( $mysql_row = mysql_fetch_assoc( $result ) ) {
 		array_push( $row, $value );
 	}
 
-	array_push( $records, $row );
+	array_push( $results, $row );
 }
 
 $content = array(
