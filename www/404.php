@@ -2,4 +2,5 @@
 
 require_once( $_SERVER['PHP_ROOT'] . 'init.php' );
 
-pip_render_template( '404' );
+$template = new Pip_Template( '404' );
+$template->render( );

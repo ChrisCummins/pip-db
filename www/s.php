@@ -112,4 +112,5 @@ $content = array(
 	"last_page" => get_results_page( $num_of_pages )
 	);
 
-pip_render_template( 'results', $content );
+$template = new Pip_Template( 'results' );
+$template->render( $content );

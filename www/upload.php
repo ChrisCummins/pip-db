@@ -2,4 +2,5 @@
 
 require_once( $_SERVER['PHP_ROOT'] . 'init.php' );
 
-pip_render_template( 'upload' );
+$template = new Pip_Template( 'upload' );
+$template->render();

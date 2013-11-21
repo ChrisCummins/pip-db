@@ -2,4 +2,5 @@
 
 require_once( $_SERVER['PHP_ROOT'] . 'init.php' );
 
-pip_render_template( 'demo' );
+$template = new Pip_Template( 'demo' );
+$template->render();

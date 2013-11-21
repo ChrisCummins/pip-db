@@ -9,4 +9,5 @@ $content = array(
 	"referer" => pip_history_get_referer()
 	);
 
-pip_render_template( 'login', $content );
+$template = new Pip_Template( 'login' );
+$template->render( $content );
