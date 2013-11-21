@@ -4,7 +4,7 @@ SRC = $(shell find . -name '*.js' -exec basename {} \;)
 JS = $(addprefix $(DEST)/,$(SRC))
 
 EXTERN_SRC = \
-	bootstrap.js \
+	bootstrap-3.0.1.min.js \
 	jquery-1.10.2.min.js \
 	$(NULL)
 
