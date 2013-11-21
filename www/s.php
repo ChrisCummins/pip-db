@@ -39,7 +39,7 @@ $pages = array();
 for ( $i = 0; $i < $num_of_pages; $i++ ) {
 	$url = $base_url;
 	if ($i)
-		$url .= '&start=' . $i * Pip_search::ResultsPerPage;
+		$url .= '&start=' . $i * Pip_Search::ResultsPerPage;
 
 	array_push( $pages, $url );
 }
