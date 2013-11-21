@@ -12,8 +12,8 @@ EXTRA_DIST = \
 
 if HAVE_WWW_ROOT
 # Export build to local webserver
-local:
-	$(MAKE) -C www/ local
+install-www local:
+	$(MAKE) -C www/ install-www
 endif
 
 help:
