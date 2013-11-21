@@ -19,6 +19,8 @@
       Found {{ _title.results }}
       {% if _title.results > 1 %}results...{% else %}result...{% endif %}
 
+      ({{ _title.elapsed_time|number_format(6) }} seconds)
+
     </div>
 
     {% endif %}

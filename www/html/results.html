@@ -17,6 +17,8 @@
   {% set _title = _title|merge({ "results": results_count }) %}
 {% endif %}
 
+{% set _title = _title|merge({ "elapsed_time": elapsed_time }) %}
+
 {% if download is defined %}
   {% set _title = _title|merge({ "download": download }) %}
 {% endif %}

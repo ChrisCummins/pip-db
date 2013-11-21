@@ -25,6 +25,8 @@ function get_results_page_url( $num, $search_text ) {
 	return $url;
 }
 
+$start_time = microtime( true );
+
 $search_text = pip_get( GetVariables::Query );
 $resource = pip_db_query( "SELECT record_id, name, source, organ, pi " .
 			  "FROM records WHERE name LIKE '%" .
@@ -55,11 +57,19 @@ for ( $i = $starting_page; $i < $ending_page; $i++ ) {
 	array_push( $pages, array( "num" => $i, "href" => $url ) );
 }
 
+$end_time = microtime( true );
+
+$elapsed_time = $end_time - $start_time;
+
 $content = array(
 	/*
 	 * The search text.
 	 */
 	"search_text" => $search_text,
+	/*
+	 * The elapsed time for the query (in seconds).
+	 */
+	"elapsed_time" => $elapsed_time,
 	/*
 	 * (optional)
 	 * Href to download the results.
