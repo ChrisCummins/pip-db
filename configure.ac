@@ -339,7 +339,7 @@ AM_CONDITIONAL([HAVE_HTTPD],[test "x$HAVE_HTTPD" = xyes])
 dnl     ============================================================
 dnl     Do we have a local web-server root?
 dnl     ============================================================
-WWW_ROOT="/var/www"
+WWW_ROOT="$(realpath $PREFIX/var/www)"
 AS_IF([test "x$enable_httpd" = xyes],
       AC_CHECK_FILE([$WWW_ROOT],
                     [HAVE_WWW_ROOT=yes
