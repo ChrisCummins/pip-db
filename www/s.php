@@ -13,15 +13,15 @@ function mysql_fetch_all( $resource ) {
 
 $search_text = pip_get( GetVariables::Query );
 
-$result = pip_db_query( "SELECT record_id, name, source, organ, pi FROM records " .
-			"WHERE name LIKE '%" .
-			pip_string_sanitise( $search_text ) . "%'");
+$resource = pip_db_query( "SELECT record_id, name, source, organ, pi FROM records " .
+			  "WHERE name LIKE '%" .
+			  pip_string_sanitise( $search_text ) . "%'");
 
-if ( !$result )
+if ( !$resource )
 	throw new Exception( 'Failed to query database!' );
 
-$results_count = mysql_num_rows( $result );
-$results = mysql_fetch_all( $result );
+$results_count = mysql_num_rows( $resource );
+$results = mysql_fetch_all( $resource );
 
 
 
