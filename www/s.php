@@ -57,7 +57,7 @@ $content = array(
 	/*
 	 * An array of results. This can be empty if no results were found.
 	 */
-	"results" => array_slice( $results, $starting_at, $ending_at ),
+	"results" => array_slice( $results, $starting_at, Pip_Search::ResultsPerPage ),
 	/*
 	 * The number of results returned.
 	 */
