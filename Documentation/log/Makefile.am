@@ -6,14 +6,14 @@ DOCTEX = $(DOC).tex
 DOCSRC = $(shell find . -name '*.tex')
 DOCMD  = README.md
 
-doc_DATA =
+noinst_DATA =
 
 if HAVE_PDFLATEX
-doc_DATA += $(DOCPDF)
+noinst_DATA += $(DOCPDF)
 endif
 
 if HAVE_PANDOC
-doc_DATA += $(DOCMD)
+noinst_DATA += $(DOCMD)
 endif
 
 CLEANFILES = \
