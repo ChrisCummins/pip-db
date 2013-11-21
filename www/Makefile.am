@@ -10,7 +10,6 @@ export HTML
 # We must build this directory first in order to allow for content hashing ref
 # updating of HTML build files.
 SUBDIRS = \
-	. \
 	html \
 	css \
 	fonts \
