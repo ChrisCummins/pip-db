@@ -17,7 +17,7 @@ noinst_DATA += $(DOCMD)
 endif
 
 CLEANFILES = \
-	$(doc_DATA) \
+	$(noinst_DATA) \
 	*.aux \
 	*.log \
 	*.log \
