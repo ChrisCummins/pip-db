@@ -11,6 +11,20 @@ function fetch_all( $resource ) {
 	return $results;
 }
 
+function get_results_page_url( $num, $search_text ) {
+	$base_url = 'http://';
+	$base_url .= $_SERVER['SERVER_NAME'];
+	$base_url .= '/s?';
+	$base_url .= GetVariables::Query . '=' . urlencode( $search_text );
+
+	$url = $base_url;
+
+	if ( $num > 1 )
+		$url .= '&start=' . ( $num - 1 ) * Pip_Search::ResultsPerPage;
+
+	return $url;
+}
+
 $search_text = pip_get( GetVariables::Query );
 $resource = pip_db_query( "SELECT record_id, name, source, organ, pi " .
 			  "FROM records WHERE name LIKE '%" .
@@ -22,12 +36,6 @@ if ( !$resource )
 $results_count = mysql_num_rows( $resource );
 $results = fetch_all( $resource );
 
-/* URL base */
-$base_url = 'http://';
-$base_url .= $_SERVER['SERVER_NAME'];
-$base_url .= '/s?';
-$base_url .= GetVariables::Query . '=' . urlencode( $search_text );
-
 /* Calculate page numbers and whatnot */
 $num_of_pages = ceil( $results_count / Pip_Search::ResultsPerPage );
 $starting_at = pip_get_isset( GetVariables::StartAt ) ? pip_get( GetVariables::StartAt ) : 0;
@@ -36,12 +44,15 @@ $current_page = $starting_at / Pip_Search::ResultsPerPage + 1;
 
 /* Generate pagination hrefs */
 $pages = array();
-for ( $i = 0; $i < $num_of_pages; $i++ ) {
-	$url = $base_url;
-	if ($i)
-		$url .= '&start=' . $i * Pip_Search::ResultsPerPage;
+$starting_page = max( 1, $current_page - Pip_Search::MaxPaginationLinks / 2 );
 
-	array_push( $pages, $url );
+$ending_page = min( $num_of_pages + 1,
+		    $starting_page + Pip_Search::MaxPaginationLinks);
+
+for ( $i = $starting_page; $i < $ending_page; $i++ ) {
+	$url = get_results_page_url( $i, $search_text );
+
+	array_push( $pages, array( "num" => $i, "href" => $url ) );
 }
 
 $content = array(
@@ -72,7 +83,12 @@ $content = array(
 	 * If the results span multiple pages, set this to the page number
 	 * currently being displayed.
 	 */
-	"current_page" => $current_page
+	"current_page" => array( "num" => $current_page,
+				 "href" => get_results_page_url( 1, $search_text ) ),
+	"first_page" => array( "num" => 1,
+			       "href" => get_results_page_url( 1, $search_text ) ),
+	"last_page" => array( "num" => $num_of_pages,
+			      "href" => get_results_page_url( $num_of_pages, $search_text ) )
 	);
 
 pip_render_template( 'results', $content );

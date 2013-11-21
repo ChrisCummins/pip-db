@@ -63,4 +63,5 @@ PRIMARY KEY (record_id)"
 
 abstract class Pip_Search {
 	const ResultsPerPage = 20;
+	const MaxPaginationLinks = 10;
 }
