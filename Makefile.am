@@ -14,6 +14,9 @@ if HAVE_WWW_ROOT
 # Export build to local webserver
 install-www local:
 	$(MAKE) -C www/ install-www
+
+clean-www clean-local:
+	$(MAKE) -C www/ clean-www
 endif
 
 help:
