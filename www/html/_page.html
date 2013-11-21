@@ -42,6 +42,15 @@
       <!-- Container -->
       <div class="container">
 
+        <!--[if lt IE 8]>
+          <div class="browseralert">
+            <div class="alert alert-danger alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <p>You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+            </div>
+          </div>
+        <![endif]-->
+
         {% if _title is defined %}
           {% include "_title.html" %}
         {% endif %}
