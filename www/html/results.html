@@ -61,7 +61,10 @@
       <div style="text-align: center;">
         <div class="btn-group" style="margin: 0 auto;">
 
-          {% if current_page.num > first_page.num %}
+          {% set pagination_first = pages|first %}
+          {% set pagination_last = pages|last %}
+
+          {% if pagination_first.num > first_page.num %}
           <a href="{{ first_page.href }}" type="button" class="btn btn-success">
             &laquo;
           </a>
@@ -77,7 +80,7 @@
           </a>
           {% endfor %}
 
-          {% if current_page.num < last_page.num %}
+          {% if pagination_last.num < last_page.num %}
           <a href="{{ last_page.href }}" type="button" class="btn btn-success">
             &raquo;
           </a>
