@@ -49,6 +49,7 @@ require_once( $_SERVER['PHP_ROOT'] . 'template.php' );
 /***************************************************************/
 /* Libraries and functions for communicating with data backend */
 /***************************************************************/
+require_once( $_SERVER['PHP_ROOT'] . 'crypt.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'string.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'password.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'db.php' );
