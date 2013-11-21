@@ -17,7 +17,7 @@ while ( $mysql_row = mysql_fetch_assoc( $result ) ) {
 
 	$row = array();
 
-	foreach ( $mysql_row as $key => $value ) {
+	foreach ( $mysql_row as $value ) {
 		array_push( $row, $value );
 	}
 
