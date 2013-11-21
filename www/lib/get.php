@@ -8,11 +8,13 @@
 abstract class GetVariables {
 	const Query = "q";
 	const Record = "id";
+	const StartAt = "start";
 
 	static function val() {
 		return array(
 			self::Query,
-			self::Record
+			self::Record,
+			self::StartAt
 			);
 	}
 }
