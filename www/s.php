@@ -2,6 +2,15 @@
 
 require_once( $_SERVER['PHP_ROOT'] . 'init.php' );
 
+function mysql_fetch_all( $resource ) {
+	$results = array();
+
+	while ( $r = mysql_fetch_array( $resource ) )
+		array_push( $results, $r );
+
+	return $results;
+}
+
 $search_text = pip_get( GetVariables::Query );
 
 $result = pip_db_query( "SELECT record_id, name, source, organ, pi FROM records " .
@@ -12,19 +21,8 @@ if ( !$result )
 	throw new Exception( 'Failed to query database!' );
 
 $results_count = mysql_num_rows( $result );
+$results = mysql_fetch_all( $result );
 
-$results = array();
-
-while ( $mysql_row = mysql_fetch_assoc( $result ) ) {
-
-	$row = array();
-
-	foreach ( $mysql_row as $value ) {
-		array_push( $row, $value );
-	}
-
-	array_push( $results, $row );
-}
 
 
 $content = array(
