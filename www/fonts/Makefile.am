@@ -1,16 +1,16 @@
 # Generate lists of source files and targets
-FONTS_DEST = $(WWW_BUILD)/fonts
-FONTS_SRC = $(shell find . -exec basename {} \; | tail -n+2 | grep -v Makefile)
-FONTS = $(addprefix $(FONTS_DEST)/,$(FONTS_SRC))
+DEST = $(WWW_BUILD)/fonts
+SRC = $(shell find . -exec basename {} \; | tail -n+2 | grep -v Makefile)
+FONTS = $(addprefix $(DEST)/,$(SRC))
 
 noinst_SCRIPTS = $(FONTS)
 
-EXTRA_DIST = $(FONTS_SRC)
+EXTRA_DIST = $(SRC)
 
 # Export fonts
-$(FONTS_DEST)/% : %
-	@test -d $(FONTS_DEST) || { \
-		$(MKDIR_P) $(FONTS_DEST); \
+$(DEST)/% : %
+	@test -d $(DEST) || { \
+		$(MKDIR_P) $(DEST); \
 	}
 	@echo '  FONT   $<'
 	@cp $< $@

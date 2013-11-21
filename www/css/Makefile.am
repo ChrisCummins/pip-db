@@ -4,13 +4,13 @@ LESS = \
 	$(NULL)
 
 # Generate lists of source files and targets
-CSS_DEST = $(WWW_BUILD)/css
-CSS_SRC = $(shell find . -name '*.css' -exec basename {} \;)
-CSS = $(addprefix $(CSS_DEST)/,$(CSS_SRC))
+DEST = $(WWW_BUILD)/css
+SRC = $(shell find . -name '*.css' -exec basename {} \;)
+CSS = $(addprefix $(DEST)/,$(SRC))
 
-EXTRA_DIST = $(CSS_SRC) $(shell find . -name '*.less' -exec basename {} \;)
+EXTRA_DIST = $(SRC) $(shell find . -name '*.less' -exec basename {} \;)
 
-CSS_SRC += $(LESS:.less=.css) # Generated CSS
+SRC += $(LESS:.less=.css) # Generated CSS
 
 noinst_SCRIPTS = $(CSS) $(LESS:.less=.css)
 
@@ -33,9 +33,9 @@ endef
 endif
 
 # CSS compilation
-$(CSS_DEST)/%.css: %.css
-	@test -d $(CSS_DEST) || { \
-		$(MKDIR_P) $(CSS_DEST); \
+$(DEST)/%.css: %.css
+	@test -d $(DEST) || { \
+		$(MKDIR_P) $(DEST); \
 	}
 if ENABLE_CONTENT_HASHING
 	$(eval CHASH := $(shell $(HASH_BIN) $< | cut -c1-$(HASH_LENGTH)))

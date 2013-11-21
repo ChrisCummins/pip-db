@@ -1,16 +1,16 @@
 # Generate lists of source files and targets
-IMG_DEST = $(WWW_BUILD)/img
-IMG_SRC = $(shell find . -name '*.png' -exec basename {} \;)
-IMG = $(addprefix $(IMG_DEST)/,$(IMG_SRC))
+DEST = $(WWW_BUILD)/img
+SRC = $(shell find . -name '*.png' -exec basename {} \;)
+IMG = $(addprefix $(DEST)/,$(SRC))
 
 noinst_SCRIPTS = $(IMG)
 
-EXTRA_DIST = $(IMG_SRC)
+EXTRA_DIST = $(SRC)
 
 # Export images
-$(IMG_DEST)/% : %
-	@test -d $(IMG_DEST) || { \
-		$(MKDIR_P) $(IMG_DEST); \
+$(DEST)/% : %
+	@test -d $(DEST) || { \
+		$(MKDIR_P) $(DEST); \
 	}
 	@echo '  IMAGE  $<'
 	@cp $< $@

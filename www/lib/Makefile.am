@@ -1,7 +1,7 @@
-LIB_DEST = $(WWW_BUILD)/lib
-LIB_SRC = $(shell find . -maxdepth 1 -name '*.html' -exec basename {} \;) \
+DEST = $(WWW_BUILD)/lib
+SRC = $(shell find . -maxdepth 1 -name '*.html' -exec basename {} \;) \
 	$(shell find . -maxdepth 1 -name '*.php' -exec basename {} \;)
-LIB = $(addprefix $(LIB_DEST)/,$(LIB_SRC))
+LIB = $(addprefix $(DEST)/,$(SRC))
 export LIB
 
 SUBDIRS = \
@@ -10,11 +10,11 @@ SUBDIRS = \
 
 noinst_SCRIPTS = $(LIB)
 
-EXTRA_DIST = $(LIB_SRC)
+EXTRA_DIST = $(SRC)
 
-$(LIB_DEST)/%.php: %.php
-	@test -d $(LIB_DEST) || { \
-		$(MKDIR_P) $(LIB_DEST); \
+$(DEST)/%.php: %.php
+	@test -d $(DEST) || { \
+		$(MKDIR_P) $(DEST); \
 	}
 	@echo '  PHP    $(notdir $@)'
 	@cat $< > $@

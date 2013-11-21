@@ -1,11 +1,11 @@
 # Generate lists of source files and targets
-JS_DEST = $(WWW_BUILD)/js
-JS_SRC = $(shell find . -name '*.js' -exec basename {} \;)
-JS = $(addprefix $(JS_DEST)/,$(JS_SRC))
+DEST = $(WWW_BUILD)/js
+SRC = $(shell find . -name '*.js' -exec basename {} \;)
+JS = $(addprefix $(DEST)/,$(SRC))
 
 noinst_SCRIPTS = $(JS)
 
-EXTRA_DIST = $(JS_SRC)
+EXTRA_DIST = $(SRC)
 
 # Compilation command
 if ENABLE_MINIFY_JS
@@ -19,9 +19,9 @@ endef
 endif
 
 # JavaScript compilation
-$(JS_DEST)/%.js: %.js
-	@test -d $(JS_DEST) || { \
-		$(MKDIR_P) $(JS_DEST); \
+$(DEST)/%.js: %.js
+	@test -d $(DEST) || { \
+		$(MKDIR_P) $(DEST); \
 	}
 if ENABLE_CONTENT_HASHING
 	$(eval CHASH := $(shell $(HASH_BIN) $< | cut -c1-$(HASH_LENGTH)))
