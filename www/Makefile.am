@@ -1,6 +1,5 @@
 # Generate lists of source files and targets
-SRC = $(shell find . -maxdepth 1 -name '*.html' -exec basename {} \;) \
-	$(shell find . -maxdepth 1 -name '*.php' -exec basename {} \;)
+SRC = $(shell find . -maxdepth 1 -name '*.php' -exec basename {} \;)
 
 TEMPLATE_DEST = $(WWW_BUILD)/html
 TEMPLATE_SRC = $(shell find html -maxdepth 1 -name '*.html' -exec basename {} \;)
