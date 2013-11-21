@@ -59,7 +59,11 @@
       <div style="text-align: center;">
         <div class="btn-group" style="margin: 0 auto;">
           {% for page in pages %}
+          {% if loop.index == current_page %}
+          <a href="{{ page }}" type="button" class="btn btn-success disabled">
+          {% else %}
           <a href="{{ page }}" type="button" class="btn btn-success">
+          {% endif %}
             {{ loop.index }}
           </a>
           {% endfor %}
