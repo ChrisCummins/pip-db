@@ -22,7 +22,11 @@ if ( !$resource )
 $results_count = mysql_num_rows( $resource );
 $results = mysql_fetch_all( $resource );
 
-
+/* URL base */
+$base_url = 'http://';
+$base_url .= $_SERVER['SERVER_NAME'];
+$base_url .= '/s?';
+$base_url .= GetVariables::Query . '=' . urlencode( $search_text );
 
 $content = array(
 	/*
