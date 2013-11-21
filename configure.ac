@@ -14,7 +14,7 @@ dnl Project versions (i.e. the package version)
 dnl ================================================================
 m4_define([pipdb_major_version],[0])
 m4_define([pipdb_minor_version],[0])
-m4_define([pipdb_micro_version],[4])
+m4_define([pipdb_micro_version],[5])
 m4_define([pipdb_version],[pipdb_major_version.pipdb_minor_version.pipdb_micro_version])
 
 
