@@ -1,11 +1,10 @@
 # Generate lists of source files and targets
 SRC = $(shell find . -maxdepth 1 -name '*.php' -exec basename {} \;)
+PHP = $(addprefix $(WWW_BUILD)/,$(SRC))
 
 TEMPLATE_DEST = $(WWW_BUILD)/html
 TEMPLATE_SRC = $(shell find html -maxdepth 1 -name '*.html' -exec basename {} \;)
-
-PHP = $(addprefix $(WWW_BUILD)/,$(SRC))
-HTML = $(PHP) $(addprefix $(TEMPLATE_DEST)/,$(TEMPLATE_SRC))
+HTML = $(addprefix $(TEMPLATE_DEST)/,$(TEMPLATE_SRC))
 export HTML
 
 # We must build this directory first in order to allow for content hashing ref
