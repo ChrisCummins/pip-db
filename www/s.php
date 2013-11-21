@@ -24,6 +24,8 @@ while ( $mysql_row = mysql_fetch_assoc( $result ) ) {
 	array_push( $results, $row );
 }
 
+$count = count( $results );
+
 $content = array(
 	/*
 	 * The search text.
@@ -33,12 +35,15 @@ $content = array(
 	 * (optional)
 	 * Href to download the results.
 	 */
-	"download" => "http://127.0.0.1"
+	"download" => "http://127.0.0.1",
+	/*
+	 * An array of results. This can be empty if no results were found.
+	 */
+	"results" => $results,
+	/*
+	 * The number of results returned.
+	 */
+	"results_count" => $count
 	);
-
-if ( $count = count( $records ) ) {
-	$content['results'] = $records;
-	$content['results_count'] = $count;
-}
 
 pip_render_template( 'results', $content );
