@@ -24,11 +24,12 @@ help:
 	@echo 'Compiling:'
 	@echo ''
 	@echo '  make all          - compile entire project'
-if HAVE_WWW_ROOT
 	@echo ''
 	@echo 'Publishing:'
 	@echo ''
-	@echo '  make local        - publish local site'
+	@echo '  make install      - install project'
+if HAVE_WWW_ROOT
+	@echo '  make install-www  - publish local site'
 endif
 	@echo ''
 	@echo 'General:'
