@@ -456,9 +456,10 @@ echo ""
 # Global flags:
 echo " • Global:"
 AS_IF([test "x$HAVE_HTTPD" = xyes],
-      [echo "        httpd:                          $HTTPD"
-       echo "        httpd root:                     $WWW_ROOT/"],
+      [echo "        httpd:                          $HTTPD"],
       [echo "        httpd:                          no"])
+AS_IF([test "x$HAVE_WWW_ROOT" = xyes],
+      [echo "        httpd root:                     $WWW_ROOT/"])
 AS_IF([test "x$HAVE_MYSQL" = xyes],
       [echo "        mysql:                          $MYSQL"],
       [echo "        mysql:                          no"])
