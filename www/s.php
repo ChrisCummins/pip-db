@@ -2,11 +2,11 @@
 
 require_once( $_SERVER['PHP_ROOT'] . 'init.php' );
 
-$query = pip_get( GetVariables::Query );
+$search_text = pip_get( GetVariables::Query );
 
 $result = pip_db_query( "SELECT record_id, name, source, organ, pi FROM records " .
 			"WHERE name LIKE '%" .
-			pip_string_sanitise( $query ) . "%'");
+			pip_string_sanitise( $search_text ) . "%'");
 
 if ( !$result )
 	throw new Exception( 'Failed to query database!' );
@@ -30,7 +30,7 @@ $content = array(
 	/*
 	 * The search text.
 	 */
-	"search_text" => $query,
+	"search_text" => $search_text,
 	/*
 	 * (optional)
 	 * Href to download the results.
