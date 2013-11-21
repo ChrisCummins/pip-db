@@ -42,15 +42,3 @@ $(WWW_BUILD)/.htaccess: .htaccess
 	}
 	@echo '  APACHE $(notdir $@)'
 	@cat $< > $@
-
-if HAVE_WWW_ROOT
-# Export build to local webserver
-install-www local:
-	rsync -avh --delete "$(WWW_BUILD)/" "$(WWW_ROOT)/"
-
-install-data-local: local
-
-clean-www clean-local:
-	rm -rvf $(WWW_ROOT)/
-
-endif

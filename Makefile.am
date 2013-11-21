@@ -10,15 +10,6 @@ EXTRA_DIST = \
 	autogen.sh \
 	$(NULL)
 
-if HAVE_WWW_ROOT
-# Export build to local webserver
-install-www local:
-	$(MAKE) -C www/ install-www
-
-clean-www clean-local:
-	$(MAKE) -C www/ clean-www
-endif
-
 help:
 	@echo ''
 	@echo 'Compiling:'
@@ -28,9 +19,6 @@ help:
 	@echo 'Publishing:'
 	@echo ''
 	@echo '  make install      - install project'
-if HAVE_WWW_ROOT
-	@echo '  make install-www  - publish local site'
-endif
 	@echo ''
 	@echo 'General:'
 	@echo ''
