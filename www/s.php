@@ -5,8 +5,14 @@ require_once( $_SERVER['PHP_ROOT'] . 'init.php' );
 function fetch_all( $resource ) {
 	$results = array();
 
-	while ( $r = mysql_fetch_assoc( $resource ) )
-		array_push( $results, $r );
+	while ( $r = mysql_fetch_assoc( $resource ) ) {
+		$row = array();
+
+		foreach ( $r as $k )
+			array_push( $row, $k );
+
+		array_push( $results, $row );
+	}
 
 	return $results;
 }
