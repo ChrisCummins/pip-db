@@ -24,7 +24,7 @@ while ( $mysql_row = mysql_fetch_assoc( $result ) ) {
 	array_push( $results, $row );
 }
 
-$count = count( $results );
+$results_count = count( $results );
 
 $content = array(
 	/*
@@ -43,7 +43,7 @@ $content = array(
 	/*
 	 * The number of results returned.
 	 */
-	"results_count" => $count
+	"results_count" => $results_count,
 	);
 
 pip_render_template( 'results', $content );
