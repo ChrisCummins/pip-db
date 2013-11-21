@@ -12,8 +12,8 @@ function mysql_fetch_all( $resource ) {
 }
 
 $search_text = pip_get( GetVariables::Query );
-$resource = pip_db_query( "SELECT record_id, name, source, organ, pi FROM records " .
-			  "WHERE name LIKE '%" .
+$resource = pip_db_query( "SELECT record_id, name, source, organ, pi " .
+			  "FROM records WHERE name LIKE '%" .
 			  pip_string_sanitise( $search_text ) . "%'");
 
 if ( !$resource )
