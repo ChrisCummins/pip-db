@@ -1,0 +1,109 @@
+{% extends "_page.html" %}
+
+{% set _navbar = { "hidden": true } %}
+{% set _footer = { "hidden": true } %}
+
+{% block header %}
+<style>
+  .d1-picture {
+    max-width: 390px;
+    margin: 0 auto;
+  }
+  .d1-picture img {
+    width: 100%;
+  }
+  .d1-title {
+    margin-top: 10px;
+    margin-bottom: 60px;
+    text-align: center;
+  }
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="jumbotron">
+  <h1>D1 Mockups</h1>
+  <p>This set of static web pages shows a mockup of the first iteration of design for pip-db.</p>
+  <p>
+    <a href="http://github.com/ChrisCummins/protein-db/tree/master/design/d1"
+       class="btn btn-primary btn-lg" role="button">
+      See design &raquo;
+    </a>
+    <a href="/theme"
+       class="btn btn-success btn-lg" role="button">
+      See theme &raquo;
+    </a>
+  </p>
+</div>
+
+<div class="row">
+
+  <div class="col-md-4">
+    <div class="d1-picture">
+      <a href="/home">
+        <img src="/img/homepage.png">
+      </a>
+    </div>
+
+    <h3 class="d1-title">Homepage</h3>
+  </div> <!-- /.col-md-4 -->
+
+  <div class="col-md-4">
+    <div class="d1-picture">
+      <a href="/advanced">
+        <img src="/img/advanced.png">
+      </a>
+    </div>
+
+    <h3 class="d1-title">Advanced search</h3>
+  </div> <!-- /.col-md-4 -->
+
+  <div class="col-md-4">
+    <div class="d1-picture">
+      <a href="/s?q=Alkaline">
+        <img src="/img/results.png">
+      </a>
+    </div>
+
+    <h3 class="d1-title">Search results</h3>
+  </div> <!-- /.col-md-4 -->
+
+</div> <!-- /.row -->
+
+<div class="row">
+
+  <div class="col-md-4">
+    <div class="d1-picture">
+      <a href="/r?r=1">
+        <img src="/img/details.png">
+      </a>
+    </div>
+
+    <h3 class="d1-title">Details page</h3>
+  </div> <!-- /.col-md-4 -->
+
+  <div class="col-md-4">
+    <div class="d1-picture">
+      <a href="/login">
+        <img src="/img/login.png">
+      </a>
+    </div>
+
+    <h3 class="d1-title">Login</h3>
+  </div> <!-- /.col-md-4 -->
+
+  <div class="col-md-4">
+    <div class="d1-picture">
+      <a href="/upload">
+        <img src="/img/upload.png">
+      </a>
+    </div>
+
+    <h3 class="d1-title">Add data</h3>
+  </div> <!-- /.col-md-4 -->
+
+</div> <!-- /.row -->
+
+{% endblock %}
