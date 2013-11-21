@@ -28,6 +28,8 @@ $base_url .= $_SERVER['SERVER_NAME'];
 $base_url .= '/s?';
 $base_url .= GetVariables::Query . '=' . urlencode( $search_text );
 
+$num_of_pages = ceil($results_count / Pip_Search::ResultsPerPage );
+
 $content = array(
 	/*
 	 * The search text.
