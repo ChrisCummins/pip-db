@@ -17,11 +17,12 @@ function fetch_all( $resource ) {
 	return $results;
 }
 
-function get_results_page_url( $num, $search_text ) {
+function get_results_page_url( $num ) {
 	$base_url = 'http://';
 	$base_url .= $_SERVER['SERVER_NAME'];
 	$base_url .= '/s?';
-	$base_url .= GetVariables::Query . '=' . urlencode( $search_text );
+	$base_url .= GetVariables::Query . '=';
+	$base_url .= urlencode( pip_get( GetVariables::Query ) );
 
 	$url = $base_url;
 
@@ -29,6 +30,13 @@ function get_results_page_url( $num, $search_text ) {
 		$url .= '&start=' . ( $num - 1 ) * Pip_Search::ResultsPerPage;
 
 	return $url;
+}
+
+function get_results_page( $num ) {
+	return array(
+		"num" => $num,
+		"href" => get_results_page_url( $num )
+		);
 }
 
 $start_time = microtime( true );
@@ -58,7 +66,7 @@ $ending_page = min( $num_of_pages + 1,
 		    $starting_page + Pip_Search::MaxPaginationLinks);
 
 for ( $i = $starting_page; $i < $ending_page; $i++ ) {
-	$url = get_results_page_url( $i, $search_text );
+	$url = get_results_page_url( $i );
 
 	array_push( $pages, array( "num" => $i, "href" => $url ) );
 }
@@ -99,12 +107,9 @@ $content = array(
 	 * If the results span multiple pages, set this to the page number
 	 * currently being displayed.
 	 */
-	"current_page" => array( "num" => $current_page,
-				 "href" => get_results_page_url( 1, $search_text ) ),
-	"first_page" => array( "num" => 1,
-			       "href" => get_results_page_url( 1, $search_text ) ),
-	"last_page" => array( "num" => $num_of_pages,
-			      "href" => get_results_page_url( $num_of_pages, $search_text ) )
+	"current_page" => get_results_page( $current_page ),
+	"first_page" => get_results_page( 1 ),
+	"last_page" => get_results_page( $num_of_pages )
 	);
 
 pip_render_template( 'results', $content );
