@@ -5,8 +5,6 @@ export PHP
 
 noinst_SCRIPTS = $(PHP)
 
-CLEANFILES = $(shell find $(WWW_BUILD) -type f)
-
 EXTRA_DIST = $(SRC)
 
 $(DEST)/%.php: %.php

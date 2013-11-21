@@ -10,8 +10,6 @@ SUBDIRS = \
 
 noinst_SCRIPTS = $(LIB)
 
-CLEANFILES = $(shell find $(WWW_BUILD) -type f)
-
 EXTRA_DIST = $(LIB_SRC)
 
 $(LIB_DEST)/%.php: %.php

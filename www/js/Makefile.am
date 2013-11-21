@@ -5,8 +5,6 @@ JS = $(addprefix $(JS_DEST)/,$(JS_SRC))
 
 noinst_SCRIPTS = $(JS)
 
-CLEANFILES = $(shell find $(WWW_BUILD) -type f)
-
 EXTRA_DIST = $(JS_SRC)
 
 # Compilation command

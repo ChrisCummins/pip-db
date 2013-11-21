@@ -19,8 +19,6 @@ SUBDIRS = \
 	lib \
 	$(NULL)
 
-CLEANFILES = $(shell find $(WWW_BUILD) -type f)
-
 noinst_SCRIPTS = $(PHP) $(WWW_BUILD)/.htaccess
 
 EXTRA_DIST = \
