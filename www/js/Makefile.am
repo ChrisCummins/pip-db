@@ -6,6 +6,7 @@ JS = $(addprefix $(DEST)/,$(SRC))
 EXTERN_SRC = \
 	bootstrap-3.0.1.min.js \
 	jquery-1.10.2.min.js \
+	modernizr-2.7.0.min.js \
 	$(NULL)
 
 MINIFIED = $(addprefix $(DEST)/, $(EXTERN_SRC))
