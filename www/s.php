@@ -2,7 +2,7 @@
 
 require_once( $_SERVER['PHP_ROOT'] . 'init.php' );
 
-function mysql_fetch_all( $resource ) {
+function fetch_all( $resource ) {
 	$results = array();
 
 	while ( $r = mysql_fetch_array( $resource ) )
@@ -20,7 +20,7 @@ if ( !$resource )
 	throw new Exception( 'Failed to query database!' );
 
 $results_count = mysql_num_rows( $resource );
-$results = mysql_fetch_all( $resource );
+$results = fetch_all( $resource );
 
 /* URL base */
 $base_url = 'http://';
