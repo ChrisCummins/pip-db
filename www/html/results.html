@@ -52,6 +52,23 @@
 
     </tbody>
   </table>
+
+  {% if pages is defined %}
+  <div class="row" style="margin-bottom: 20px;">
+    <div class="col-lg-12">
+      <div style="text-align: center;">
+        <div class="btn-group" style="margin: 0 auto;">
+          {% for page in pages %}
+          <a href="{{ page }}" type="button" class="btn btn-success">
+            {{ loop.index }}
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
   {% else %}
   <p class="lead">
     No results found.
