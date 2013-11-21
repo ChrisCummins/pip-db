@@ -1,9 +1,9 @@
 SUBDIRS = \
-	build \
 	design \
 	Documentation \
 	tools \
 	www \
+	build \
 	$(NULL)
 
 EXTRA_DIST = \
