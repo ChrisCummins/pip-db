@@ -100,6 +100,7 @@
 	- [Saturday 16th](#saturday-16th)
 	- [Sunday 17th](#sunday-17th)
 	- [Tuesday 19th](#tuesday-19th)
+	- [Wednesday 20th](#wednesday-20th)
 	- [Thursday 21st](#thursday-21st)
 			- [Notes from meeting with Ian](#notes-from-meeting-with-ian-3)
 	- [Friday 22nd](#friday-22nd)
@@ -1490,6 +1491,13 @@ Tuesday 19th
 Implement a `./tools/mkrelease` script which can be used to bump version
 number and create a release branch/tag. Bumped project version to 0.0.2.
 
+Wednesday 20th
+--------------
+
+Have been reading about Dependency Injection in PHP, have found a good
+intro article [@Rodrigue2012] which recommends a tool Symphony
+[@SensioLabsND].
+
 Thursday 21st
 -------------
 
@@ -1631,4 +1639,9 @@ tutorial part 1: Hello World. <http://r.je/mvc-in-php.html>. Butler2012
 Butler, T. (2012). Are Static Methods/Variables bad practice?
 <http://r.je/static-methods-bad-practice.html>. Hevery2008 Hevery, M.
 (2008). Guide: Writing Testable Code.
-<http://misko.hevery.com/code-reviewers-guide/>.
+<http://misko.hevery.com/code-reviewers-guide/>. Rodrigue2012 Rodrigue,
+St. (2012). Dependency Injection in PHP. nettuts+.
+<http://net.tutsplus.com/tutorials/php/dependency-injection-in-php/>.
+SensioLabsND SensioLabs (ND). The Dependency Injection Component.
+Symfony.
+<http://symfony.com/doc/2.0/components/dependency_injection/introduction.html>.
