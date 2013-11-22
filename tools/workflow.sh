@@ -124,6 +124,8 @@ new() {
 	echo_if_live "git push -u $REMOTE $branch"
 	execute "git push -u $REMOTE $branch"
 
+	$(get_git_toplevel)/tools/ghi show $issue
+
 	# Output results
 	echo ""
 	echo "Execute '$0 close' when completed."
@@ -157,9 +159,13 @@ close() {
 
 	pause $@
 
+	local issue=$(echo "$branch" | sed 's/.*wip\///')
+
 	# Cleanup issue branch
 	execute "git branch -D $branch"
 	execute "git push $REMOTE :$branch"
+
+	$(get_git_toplevel)/tools/ghi show $issue
 }
 
 main() {
