@@ -175,32 +175,41 @@ AC_ARG_ENABLE(content_hashing,
               [enable_content_hashing=yes])
 AM_CONDITIONAL(ENABLE_CONTENT_HASHING,[test "x$enable_content_hashing" = xyes])
 
-dnl TODO: Only check hash program and length if we have content hashing enabled
 HASH=md5sum
 HASH_LENGTH=8
 
-AC_CHECK_PROG([HASH_BIN],[$HASH],[$HASH])
+dnl If we have content hashing enabled, then check for the hash program.
+AS_IF([test "x$enable_content_hashing" = xyes],
+      [AC_CHECK_PROG([HASH_BIN],[$HASH],[$HASH])])
+
 AS_IF([test "x$HASH_BIN" != x],
       [HAVE_HASH_BIN=yes],
-      [HAVE_HASH_BIN=no
-       AC_MSG_ERROR([$HASH program not found.])])
+      [HAVE_HASH_BIN=no])
+
+dnl Fail with an error if we couldn't find it.
+AS_IF([test "x$enable_content_hashing" = xyes &&
+       test "x$HAVE_HASH_BIN" = xno],
+      [AC_MSG_ERROR([$HASH program not found.])])
+
 AC_SUBST([HAVE_HASH_BIN],[$HAVE_HASH_BIN])
 AM_CONDITIONAL([HAVE_HASH_BIN],[test "x$HAVE_HASH_BIN" = xyes])
 
-AC_MSG_CHECKING([length of generated hashes])
-hash_test_file=/tmp/$(date +%s)
-touch $hash_test_file
-GEN_HASH_LENGTH=$($HASH_BIN $hash_test_file | awk '{print $1}' | wc -c)
-GEN_HASH_LENGTH=$((GEN_HASH_LENGTH-1))
-rm -f $hash_test_file
-unset hash_test_file
+dnl Check that the length of generated hashes is acceptable
+AS_IF([test "x$enable_content_hashing" = xyes],
+      [AC_MSG_CHECKING([length of generated hashes])
+       hash_test_file=/tmp/$(date +%s)
+       touch $hash_test_file
+       GEN_HASH_LENGTH=$($HASH_BIN $hash_test_file | awk '{print $1}' | wc -c)
+       GEN_HASH_LENGTH=$((GEN_HASH_LENGTH-1))
+       rm -f $hash_test_file
+       unset hash_test_file
 
-AS_IF([test $HASH_LENGTH -ge $GEN_HASH_LENGTH],
-      [HASH_LENGTH=$GEN_HASH_LENGTH
-       AC_MSG_RESULT([truncated])
-       AC_MSG_WARN([Limiting content hash length to $GEN_HASH_LENGTH])],
-      [AC_MSG_RESULT([ok])])
-AC_SUBST([HASH_LENGTH])
+       AS_IF([test $HASH_LENGTH -ge $GEN_HASH_LENGTH],
+             [HASH_LENGTH=$GEN_HASH_LENGTH
+              AC_MSG_RESULT([truncated])
+              AC_MSG_WARN([Limiting content hash length to $GEN_HASH_LENGTH])],
+             [AC_MSG_RESULT([ok])])
+       AC_SUBST([HASH_LENGTH])])
 
 
 dnl     ============================================================
