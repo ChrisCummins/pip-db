@@ -151,11 +151,13 @@ get_tools_sloccounts() {
 	local sh=$(get_lc_of_files "$(find_files_with_extension sh tools/)")
 	local js=$(get_lc_of_files "$(find_files_with_extension js tools/)")
 	local py=$(get_lc_of_files "$(find_files_with_extension py tools/)")
-	local total=$((sh+$js+$py))
+	local rb=$(get_lc_of_files "$(find_files_with_extension rb tools/)")
+	local total=$((sh+$js+$py+$rb))
 
 	print_sloccount $sh    $total "Shell"
 	print_sloccount $js    $total "JavaScript"
 	print_sloccount $py    $total "Python"
+	print_sloccount $rb    $total "Ruby"
 }
 
 # Returns the sum of a list of integers
