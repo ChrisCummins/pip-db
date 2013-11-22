@@ -23,4 +23,5 @@ foreach ( PipDatabase::schema() as $table => $description ) {
 /* Create an admin account type. */
 pip_db_query( "INSERT INTO user_types (type_name) VALUES ('admin')" );
 
-pip_render_template( 'setup', $content );
+$template = new Pip_Template( 'setup' );
+$template->render( $content );
