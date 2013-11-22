@@ -109,7 +109,7 @@
      * Search results link to details page:
      */
     $('div.sresults table tbody tr').click(function(){
-      window.location = '/r' + location.search + '&id=' + $(this).attr('record-id');
+      window.location = '{{ _links.root }}/r' + location.search + '&id=' + $(this).attr('record-id');
     });
   });
 </script>
