@@ -1,6 +1,7 @@
 if ENABLE_EXTRA_TOOLS
 noinst_SCRIPTS = \
 	dsa \
+	ghi \
 	mkrelease \
 	png \
 	sloccount \
@@ -27,4 +28,9 @@ EXTRA_DIST = \
 # Generating executables from shell scripts
 %: %.sh
 	@echo '  SHELL  $@'
+	@$(INSTALL) --mode=755 $< $@
+
+# Generating executables from ruby scripts
+%: %.rb
+	@echo '  RUBY   $@'
 	@$(INSTALL) --mode=755 $< $@
