@@ -355,6 +355,20 @@ AM_CONDITIONAL([HAVE_HTTPD],[test "x$HAVE_HTTPD" = xyes])
 
 
 dnl     ============================================================
+dnl     Set the document prefix
+dnl     ============================================================
+AC_ARG_VAR([WWW_PREFIX],
+           [The website document prefix (default: none)])
+
+AS_IF([test "x$WWW_PREFIX" != x],
+      [HAVE_WWW_PREFIX=yes],
+      [HAVE_WWW_PREFIX=no])
+
+AC_SUBST([HAVE_WWW_PREFIX],[$HAVE_WWW_PREFIX])
+AM_CONDITIONAL([HAVE_WWW_PREFIX],[test "x$HAVE_WWW_PREFIX" = xyes])
+
+
+dnl     ============================================================
 dnl     Do we have a local web-server root?
 dnl     ============================================================
 AC_ARG_VAR([WWW_ROOT],
@@ -362,6 +376,9 @@ AC_ARG_VAR([WWW_ROOT],
 
 AS_IF([test "x$WWW_ROOT" = x],
       [WWW_ROOT=/var/www])
+
+dnl Concatenate the root and prefix
+WWW_ROOT="$WWW_ROOT$WWW_PREFIX"
 
 AS_IF([test "x$enable_httpd" = xyes],
       AC_CHECK_FILE([$WWW_ROOT],
@@ -496,6 +513,9 @@ AS_IF([test "x$HAVE_HTTPD" = xyes],
       [echo "        httpd:                          no"])
 AS_IF([test "x$HAVE_WWW_ROOT" = xyes],
       [echo "        www root:                       $WWW_ROOT/"])
+AS_IF([test "x$HAVE_WWW_PREFIX" = xyes],
+      [echo "        Document prefix:                $WWW_PREFIX"],
+      [echo "        Document prefix:                none"])
 AS_IF([test "x$HAVE_MYSQL" = xyes],
       [echo "        mysql:                          $MYSQL"],
       [echo "        mysql:                          no"])
