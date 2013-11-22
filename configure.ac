@@ -176,13 +176,13 @@ AC_ARG_ENABLE(content_hashing,
 AM_CONDITIONAL(ENABLE_CONTENT_HASHING,[test "x$enable_content_hashing" = xyes])
 
 AC_ARG_VAR([HASH],
-           [The content hashing binary (e.g., md5sum, sha1sum)])
+           [The content hashing binary (default: md5sum)])
 
 AS_IF([test "x$HASH" = x],
       [HASH=md5sum])
 
 AC_ARG_VAR([HASH_LENGTH],
-           [The length of truncated content hashes (e.g., 4, 8, 16)])
+           [The length of truncated content hashes (default: 8)])
 
 AS_IF([test "x$HASH_LENGTH" = x],
       [HASH_LENGTH=8])
