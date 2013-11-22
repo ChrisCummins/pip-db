@@ -19,7 +19,7 @@ function fetch_all( $resource ) {
 
 function get_results_page_url( $num ) {
 	$base_url = 'http://';
-	$base_url .= $_SERVER['SERVER_NAME'];
+	$base_url .= $_SERVER['SERVER_NAME'] . $_SERVER['DOCUMENT_PREFIX'];
 	$base_url .= '/s?';
 	$base_url .= GetVariables::Query . '=';
 	$base_url .= urlencode( pip_get( GetVariables::Query ) );
