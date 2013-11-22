@@ -668,6 +668,7 @@ FileETag None
 # ------------------------------------------------------------------------------
 
 <IfModule mod_env.c>
+    SetEnv DOCUMENT_PREFIX "@WWW_PREFIX@"
     SetEnv DEBUG "@ENABLE_DEBUG@"
     SetEnv PHP_ROOT "@WWW_ROOT@/lib/"
     SetEnv HTML_ROOT "@WWW_ROOT@/html/"
