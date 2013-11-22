@@ -95,6 +95,16 @@ fail_if_not_on_issue_branch() {
 	fi
 }
 
+# Print a summary of the current issues and wip branches
+show() {
+	local branches=$(git branch | grep --color=never "$ISSUE_BRANCH_PREFIX")
+	local issues=$(echo "$branches" | sed 's/.*wip\///')
+
+	for i in $issues; do
+		$(get_git_toplevel)/tools/ghi list | grep --color=never '^ *'$i
+	done
+}
+
 # Create a new local work-in-progress branch
 #    $1 issue number
 new() {
@@ -168,6 +178,10 @@ main() {
 
 	# Parse user input
 	case "$1" in
+	"show" | "s")
+		shift
+		show $@
+		;;
 	"new" | "n")
 		shift
 		new $@
