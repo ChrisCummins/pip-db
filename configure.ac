@@ -175,8 +175,17 @@ AC_ARG_ENABLE(content_hashing,
               [enable_content_hashing=yes])
 AM_CONDITIONAL(ENABLE_CONTENT_HASHING,[test "x$enable_content_hashing" = xyes])
 
-HASH=md5sum
-HASH_LENGTH=8
+AC_ARG_VAR([HASH],
+           [The content hashing binary (e.g., md5sum, sha1sum)])
+
+AS_IF([test "x$HASH" = x],
+      [HASH=md5sum])
+
+AC_ARG_VAR([HASH_LENGTH],
+           [The length of truncated content hashes (e.g., 4, 8, 16)])
+
+AS_IF([test "x$HASH_LENGTH" = x],
+      [HASH_LENGTH=8])
 
 dnl If we have content hashing enabled, then check for the hash program.
 AS_IF([test "x$enable_content_hashing" = xyes],
