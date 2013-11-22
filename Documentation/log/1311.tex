@@ -316,3 +316,54 @@ number and create a release branch/tag. Bumped project version to 0.0.2.
   elaboration/construction iteration.
 \item TODO: Continue/complete development of prototype.
 \end{itemize}
+
+\subsection{Friday 22nd}
+\paragraph{Notes from meeting with Darren and Fraser}
+\begin{itemize}
+\item Prototype looks very good, and is mostly what would be expected of the
+  final design (save for the unnecessarily spartan homepage).
+\item Advanced Search is a high priority TODO, as this will enable user
+  testing.
+\item Fraser suggested posting to the Life and Health Sciences department a
+  request for user testers, or a survey which suggests whether people find it
+  useful, or how they would use such a tool.
+\item The Enzyme Commission number is a property of enzymes, and not all
+  proteins listed in the dataset are enzymes, so not all will have EC numbers.
+\item The ONLY two prerequisites for data being entered into the repository are
+  that it should contain a protein and an isoelectric point.
+\item Fraser noticed that some records which had Greek letters within their
+  names (like beta) were displayed incorrectly.
+\item I should look through the number of unique values within the dataset to
+  determine whether the advanced search page should have a dropdown selector or
+  a free-text field.
+\item Enzyme Commission number is a hierarchical search property, so people may
+  want to start searching with the top (leftmost) value, then specify additional
+  tiers. E.g. 3..., 3.1.., 3.1.2., 3.1.2.4. It's unlikely you'd ever want to
+  search for ..2.0.
+\item It's hard to anticipate how users would want to query the database, so it
+  would be nice to keep a record of all the queries that people make, and to use
+  this to influence the design. Additionally, we could record IP address of the
+  user so as to help collate the number of different users.
+\item The purpose of the database is to act as a passive repository of
+  information that has been gathered. It is a carbon copy of a set of research
+  data, so shouldn't make any assumptions or assertions about the data,
+  i.e. don't process the data. To this end, my super-overly-optimised database
+  design is crap, and we'd be much better off with ``documents'', not ``relational
+  data''.
+\item One possibility for administering the dataset could be to allow anyone to
+  create an account and upload data, but for this data to be help in a ``holding
+  bay'', pending approval from an admin. The admin would then see that someone
+  has submitted new data and could review/accept it.
+\item The cost of domain registration should come from my project budget, but
+  could be done in the Uni's name. Should sort this out in next meeting with
+  Ian.
+\item Example use cases:
+  \begin{enumerate}
+    \item A user is writing a paper on a certain protein, and would like to
+      quickly look up its isoelectric point. In this case, they would search for
+      the protein by name and location (species).
+    \item A user would like to see all records for a given EC value (for
+      example, 3.1).
+    \item
+  \end{enumerate}
+\end{itemize}
