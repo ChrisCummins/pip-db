@@ -100,6 +100,8 @@
 	- [Saturday 16th](#saturday-16th)
 	- [Sunday 17th](#sunday-17th)
 	- [Tuesday 19th](#tuesday-19th)
+	- [Thursday 21st](#thursday-21st)
+			- [Notes from meeting with Ian](#notes-from-meeting-with-ian-3)
 
 October 2013 
 =============
@@ -1485,6 +1487,27 @@ Tuesday 19th
 
 Implement a `./tools/mkrelease` script which can be used to bump version
 number and create a release branch/tag. Bumped project version to 0.0.2.
+
+Thursday 21st
+-------------
+
+#### Notes from meeting with Ian
+
+-   Requirements should be uniquely identified, for example, the
+    milestone requirements could be identified with M1.1, D3.2, etc.
+
+-   Requirements should be incredibly DETAILED. They are contractual, so
+    the ability to irrefutably determine whether a requirement has been
+    met or not is essential.
+
+-   Requirements for each iteration should be created at the start,
+    before beginning work. The start of next term will begin with
+    generating a set of requirements for the second iteration.
+
+-   TODO: Write a set of testable requirements for this first
+    elaboration/construction iteration.
+
+-   TODO: Continue/complete development of prototype.
 
 9
 
