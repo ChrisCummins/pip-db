@@ -472,15 +472,15 @@ AS_IF([test "x$HAVE_HTTPD" = xyes],
       [echo "        httpd:                          $HTTPD"],
       [echo "        httpd:                          no"])
 AS_IF([test "x$HAVE_WWW_ROOT" = xyes],
-      [echo "        httpd root:                     $WWW_ROOT/"])
+      [echo "        www root:                       $WWW_ROOT/"])
 AS_IF([test "x$HAVE_MYSQL" = xyes],
       [echo "        mysql:                          $MYSQL"],
       [echo "        mysql:                          no"])
 
 echo ""
-# Features:
-echo " • Features:"
-echo "        Website debugging:              $enable_debug"
+# Build options:
+echo " • Build options:"
+echo "        Build directory:                $WWW_BUILD/"
 echo "        Content hashing enabled:        $enable_content_hashing"
 AS_IF([test "x$enable_content_hashing" = xyes],
       [echo "        Content hashing algorithm:      $HASH"
@@ -490,9 +490,9 @@ echo "        Minify CSS:                     $enable_minify_css"
 echo "        Minify JS:                      $enable_minify_js"
 
 echo ""
-# Build options:
-echo " • Build options:"
-echo "        Build directory:                $WWW_BUILD/"
+# Features:
+echo " • Features:"
+echo "        Website debugging:              $enable_debug"
 
 echo ""
 # Miscellaneous:
