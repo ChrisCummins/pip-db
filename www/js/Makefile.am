@@ -44,7 +44,7 @@ endif
 if ENABLE_CONTENT_HASHING
 	$(eval TARGET := js\/$(patsubst %.js,%,$<))
 	@for h in $(HTML); do \
-		sed -ri 's/(<script src=\"\/?)$(TARGET)(-[0-9a-f]{$(HASH_LENGTH)})?(\.js\")/\1$(TARGET)-$(CHASH)\3/' $$h; \
+		sed -ri 's/(<script src=\"(\{\{ *(\w|[_.])+ *\}\})*\/?)$(TARGET)(-[0-9a-f]{$(HASH_LENGTH)})?(\.js\")/\1$(TARGET)-$(CHASH)\5/' $$h; \
 	done
 endif
 
@@ -65,6 +65,6 @@ endif
 if ENABLE_CONTENT_HASHING
 	$(eval TARGET := js\/$(patsubst %.js,%,$<))
 	@for h in $(HTML); do \
-		sed -ri 's/(<script src=\"\/?)$(TARGET)(-[0-9a-f]{$(HASH_LENGTH)})?(\.js\")/\1$(TARGET)-$(CHASH)\3/' $$h; \
+		sed -ri 's/(<script src=\"(\{\{ *(\w|[_.])+ *\}\})*\/?)$(TARGET)(-[0-9a-f]{$(HASH_LENGTH)})?(\.js\")/\1$(TARGET)-$(CHASH)\5/' $$h; \
 	done
 endif
