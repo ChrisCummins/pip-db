@@ -3,6 +3,29 @@
 /*
  * Global config constants
  */
+abstract class Pip_Links {
+
+	static function val() {
+		$links = array(
+			'root' => '',
+			'setup' => '/admin/setup',
+			'advanced' => '/advanced',
+			'results' => '/s',
+			'index' => '/home',
+			'login' => '/login',
+			'logout' => '/logout',
+			'search' => '/s',
+			'record' => '/r',
+			'upload' => '/upload',
+			);
+
+		foreach ( $links as $key => $val )
+			$links[$key] =  $_SERVER['DOCUMENT_PREFIX'] . $val;
+
+		return $links;
+	}
+}
+
 abstract class PipDatabase {
 
 	const Host = 'localhost';
