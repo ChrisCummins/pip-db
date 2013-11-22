@@ -33,6 +33,9 @@ class Pip_Template
 		if ( null !== $session )
 			$content['session'] = $session;
 
+		/* Add site links to content */
+		$content['_links'] = Pip_Links::val();
+
 		$this->template->display( $content );
 	}
 
