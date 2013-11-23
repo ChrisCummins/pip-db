@@ -377,11 +377,13 @@ AM_CONDITIONAL(ENABLE_TOOLS,[test "x$enable_tools" = xyes])
 dnl     ============================================================
 dnl     Do we have npm?
 dnl     ============================================================
-AC_CHECK_PROG([NPM],[npm],[npm])
-AS_IF([test "x$NPM" != x],
-      [HAVE_NPM=yes],
-      [HAVE_NPM=no
-       AC_MSG_ERROR([Node package manager not found.])])
+AS_IF([test "x$enable_tools" = xyes],
+      AC_CHECK_PROG([NPM],[npm],[npm])
+      AS_IF([test "x$NPM" != x],
+            [HAVE_NPM=yes],
+            [HAVE_NPM=no
+             AC_MSG_ERROR([Node package manager not found.])]),
+      [HAVE_NPM=no])
 AC_SUBST([HAVE_NPM],[$HAVE_NPM])
 AM_CONDITIONAL([HAVE_NPM],[test "x$HAVE_NPM" = xyes])
 
@@ -389,11 +391,13 @@ AM_CONDITIONAL([HAVE_NPM],[test "x$HAVE_NPM" = xyes])
 dnl     ============================================================
 dnl     Do we have node?
 dnl     ============================================================
-AC_CHECK_PROG([NODE],[node],[node])
-AS_IF([test "x$NODE" != x],
-      [HAVE_NODE=yes],
-      [HAVE_NODE=no
-       AC_MSG_ERROR([Node.js not found.])])
+AS_IF([test "x$enable_tools" = xyes],
+      AC_CHECK_PROG([NODE],[node],[node])
+      AS_IF([test "x$NODE" != x],
+            [HAVE_NODE=yes],
+            [HAVE_NODE=no
+             AC_MSG_ERROR([Node.js not found.])]),
+      [HAVE_NODE=no])
 AC_SUBST([HAVE_NODE],[$HAVE_NODE])
 AM_CONDITIONAL([HAVE_NODE],[test "x$HAVE_NODE" = xyes])
 
@@ -401,14 +405,16 @@ AM_CONDITIONAL([HAVE_NODE],[test "x$HAVE_NODE" = xyes])
 dnl         ========================================================
 dnl         Do we have optimist?
 dnl         ========================================================
-AC_MSG_CHECKING([for optimist package])
-AS_IF([test -n "$(npm ls -g | grep optimist)"],
-      [HAVE_NODE_OPTIMIST=yes],
-      [HAVE_NODE_OPTIMIST=no])
-AC_MSG_RESULT([$HAVE_NODE_OPTIMIST])
+AS_IF([test "x$enable_tools" = xyes],
+      AC_MSG_CHECKING([for optimist package])
+      AS_IF([test -n "$(npm ls -g | grep optimist)"],
+            [HAVE_NODE_OPTIMIST=yes],
+            [HAVE_NODE_OPTIMIST=no])
+      AC_MSG_RESULT([$HAVE_NODE_OPTIMIST])
 
-AS_IF([test "x$HAVE_NODE_OPTIMIST" = xyes],,
-      [AC_MSG_ERROR([Required node pacakge 'optimist' not found.])])
+      AS_IF([test "x$HAVE_NODE_OPTIMIST" = xyes],,
+            [AC_MSG_ERROR([Required node pacakge 'optimist' not found.])]),
+      [HAVE_NODE_OPTIMIST=no])
 AC_SUBST([HAVE_NODE_OPTIMIST],[$HAVE_NODE_OPTIMIST])
 AM_CONDITIONAL([HAVE_NODE_OPTIMIST],[test "x$HAVE_NODE_OPTIMIST" = xyes])
 
