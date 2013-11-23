@@ -515,6 +515,7 @@ echo "        Install custom git hooks:       $enable_git_hooks"
 echo "        Build extra tools:              $enable_extra_tools"
 echo "        Build LaTeX documentation:      $HAVE_PDFLATEX"
 echo "        Build Markdown documentation:   $HAVE_PANDOC"
+echo "        Build Markdown contents pages:  $HAVE_DOCTOC"
 
 
 echo ""
