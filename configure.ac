@@ -508,8 +508,7 @@ echo " • Global:"
 AS_IF([test "x$HAVE_HTTPD" = xyes],
       [echo "        httpd:                          $HTTPD"],
       [echo "        httpd:                          no"])
-AS_IF([test "x$HAVE_WWW_ROOT" = xyes],
-      [echo "        www root:                       $WWW_ROOT/"])
+echo "        www root:                       $WWW_ROOT/"
 AS_IF([test "x$HAVE_WWW_PREFIX" = xyes],
       [echo "        Document prefix:                $WWW_PREFIX"],
       [echo "        Document prefix:                none"])
