@@ -39,23 +39,35 @@ function get_results_page( $num ) {
 		);
 }
 
+function get_found_rows() {
+	$resource = pip_db_query( "SELECT FOUND_ROWS() AS `count`" );
+	$array = mysql_fetch_assoc( $resource );
+	return $array['count'];
+}
+
 $start_time = microtime( true );
 
+$starting_at = pip_get_isset( GetVariables::StartAt ) ? pip_get( GetVariables::StartAt ) : 0;
+$ending_at = $starting_at + Pip_Search::ResultsPerPage;
+
 $search_text = pip_get( GetVariables::Query );
-$resource = pip_db_query( "SELECT record_id, name, source, organ, pi " .
-			  "FROM records WHERE name LIKE '%" .
-			  pip_string_sanitise( $search_text ) . "%'");
+$resource = pip_db_query( "SELECT SQL_CALC_FOUND_ROWS
+                           record_id, name, source, organ, pi
+			   FROM records
+                           WHERE name LIKE '%" .
+			  pip_string_sanitise( $search_text ) . "%'" .
+                          " LIMIT " .
+			  $starting_at . "," . Pip_Search::ResultsPerPage );
 
 if ( !$resource )
 	throw new Exception( 'Failed to query database!' );
 
-$results_count = mysql_num_rows( $resource );
+$results_count = get_found_rows();
+
 $results = fetch_all( $resource );
 
 /* Calculate page numbers and whatnot */
 $num_of_pages = ceil( $results_count / Pip_Search::ResultsPerPage );
-$starting_at = pip_get_isset( GetVariables::StartAt ) ? pip_get( GetVariables::StartAt ) : 0;
-$ending_at = $starting_at + Pip_Search::ResultsPerPage;
 $current_page = $starting_at / Pip_Search::ResultsPerPage + 1;
 
 /* Generate pagination hrefs */
@@ -92,7 +104,7 @@ $content = array(
 	/*
 	 * An array of results. This can be empty if no results were found.
 	 */
-	"results" => array_slice( $results, $starting_at, Pip_Search::ResultsPerPage ),
+	"results" => $results,
 	/*
 	 * The number of results returned.
 	 */
