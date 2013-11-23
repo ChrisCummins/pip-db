@@ -107,6 +107,16 @@ dnl ================================================================
 
 
 dnl     ============================================================
+dnl     Are we installing the built website?
+dnl     ============================================================
+AC_ARG_ENABLE(install,
+              AS_HELP_STRING([--enable-install],
+                             [Install built website (default: yes)]),,
+              [enable_install=yes])
+AM_CONDITIONAL(ENABLE_INSTALL,[test "x$enable_install" = xyes])
+
+
+dnl     ============================================================
 dnl     Are we building the extra tools?
 dnl     ============================================================
 AC_ARG_ENABLE(extra_tools,
@@ -154,16 +164,6 @@ m4_define([www_build],["$(pwd)/build/www"])
 AC_CHECK_FILE([www_build],,[mkdir -pv www_build])
 
 AC_SUBST([WWW_BUILD],[www_build])
-
-
-dnl     ============================================================
-dnl     Are we exporting to a local webserver?
-dnl     ============================================================
-AC_ARG_ENABLE(httpd,
-              AS_HELP_STRING([--enable-httpd],
-                             [Allow exporting to local webserver (default: yes)]),,
-              [enable_httpd=yes])
-AM_CONDITIONAL(ENABLE_HTTPD,[test "x$enable_httpd" = xyes])
 
 
 dnl     ============================================================
@@ -343,7 +343,7 @@ dnl     ============================================================
 dnl     Do we have a local apache2 server?
 dnl     ============================================================
 HTTPD="/usr/sbin/apache2"
-AS_IF([test "x$enable_httpd" = xyes],
+AS_IF([test "x$enable_install" = xyes],
       AC_CHECK_FILE([$HTTPD],
                     [HAVE_HTTPD=yes
                      AC_SUBST([HTTPD])],
@@ -377,7 +377,7 @@ AC_ARG_VAR([WWW_ROOT],
 AS_IF([test "x$WWW_ROOT" = x],
       [WWW_ROOT=/var/www])
 
-AS_IF([test "x$enable_httpd" = xyes],
+AS_IF([test "x$enable_install" = xyes],
       AC_CHECK_FILE([$WWW_ROOT],
                     [HAVE_WWW_ROOT=yes
                      AC_SUBST([WWW_ROOT])],
@@ -391,7 +391,7 @@ AM_CONDITIONAL([HAVE_WWW_ROOT],[test "x$HAVE_WWW_ROOT" = xyes])
 dnl     ============================================================
 dnl     Do we have mysql?
 dnl     ============================================================
-AS_IF([test "x$enable_httpd" = xyes],
+AS_IF([test "x$enable_install" = xyes],
       AC_CHECK_PROG([MYSQL],[mysql],[mysql])
       AS_IF([test "x$MYSQL" != x],
             [HAVE_MYSQL=yes],
@@ -513,7 +513,7 @@ AS_IF([test "x$enable_content_hashing" = xyes],
 echo "        Minify HTML:                    $enable_minify_html"
 echo "        Minify CSS:                     $enable_minify_css"
 echo "        Minify JS:                      $enable_minify_js"
-echo "        Install to webserver:           $HAVE_WWW_ROOT"
+echo "        Install to webserver:           $enable_install"
 echo "        Install destination:            $WWW_ROOT"
 
 AS_IF([test "x$HAVE_WWW_ROOT" = xyes],
