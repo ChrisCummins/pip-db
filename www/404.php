@@ -8,5 +8,5 @@ $content = array(
 		)
 	);
 
-$template = new Pip_Template( '404' );
+$template = new Pip_Template( 'error' );
 $template->render( $content );
