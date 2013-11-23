@@ -377,9 +377,6 @@ AC_ARG_VAR([WWW_ROOT],
 AS_IF([test "x$WWW_ROOT" = x],
       [WWW_ROOT=/var/www])
 
-dnl Concatenate the root and prefix
-WWW_ROOT="$WWW_ROOT$WWW_PREFIX"
-
 AS_IF([test "x$enable_httpd" = xyes],
       AC_CHECK_FILE([$WWW_ROOT],
                     [HAVE_WWW_ROOT=yes
