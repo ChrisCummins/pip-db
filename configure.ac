@@ -65,7 +65,7 @@ dnl ================================================================
 
 
 dnl ================================================================
-dnl Project versions (i.e. the package version)
+dnl 1. Project versions (i.e. the package version)
 dnl ================================================================
 m4_define([pipdb_major_version],[0])
 m4_define([pipdb_minor_version],[0])
@@ -74,7 +74,7 @@ m4_define([pipdb_version],[pipdb_major_version.pipdb_minor_version.pipdb_micro_v
 
 
 dnl ================================================================
-dnl Project details (i.e. the "meta" stuff)
+dnl 2. Project details (i.e. the "meta" stuff)
 dnl ================================================================
 m4_define([author],[chrisc.101@gmail.com])
 
@@ -92,12 +92,12 @@ AM_SILENT_RULES([yes])
 
 
 dnl ================================================================
-dnl Substitutions (i.e. what we need to substitute in other files)
+dnl 3. Substitutions (i.e. what we need to substitute in other files)
 dnl ================================================================
 
 
 dnl     ============================================================
-dnl     Export the package versioning
+dnl     3.1. Export the package versioning
 dnl     ============================================================
 AC_SUBST([PIPDB_MAJOR_VERSION],[pipdb_major_version])
 AC_SUBST([PIPDB_MINOR_VERSION],[pipdb_minor_version])
@@ -106,7 +106,7 @@ AC_SUBST([PIPDB_VERSION],[pipdb_version])
 
 
 dnl     ============================================================
-dnl     Export the locations of compiler JARs
+dnl     3.2. Export the locations of compiler JARs
 dnl     ============================================================
 m4_define([jar_dir], ["$(pwd)/build/jar"])
 
@@ -120,7 +120,7 @@ AC_SUBST([JS_JAR],   [js_jar])
 
 
 dnl ================================================================
-dnl Build requirements
+dnl 4. Build requirements
 dnl ================================================================
 AC_PROG_AWK
 AC_PROG_INSTALL
@@ -129,7 +129,7 @@ AC_PROG_SED
 
 
 dnl     ============================================================
-dnl     Do we have a Less CSS compiler?
+dnl     4.1. Do we have a Less CSS compiler?
 dnl     ============================================================
 AC_CHECK_PROG([LESSC],[lessc],[lessc])
 AS_IF([test "x$LESSC" != x],
@@ -141,7 +141,7 @@ AM_CONDITIONAL([HAVE_LESSC],[test "x$HAVE_LESSC" = xyes])
 
 
 dnl     ============================================================
-dnl     Do we have a Java runtime environment?
+dnl     4.2. Do we have a Java runtime environment?
 dnl     ============================================================
 AC_CHECK_PROG([JAVA],[java],[java])
 AS_IF([test "x$JAVA" != x],
@@ -153,7 +153,7 @@ AM_CONDITIONAL([HAVE_JAVA],[test "x$HAVE_JAVA" = xyes])
 
 
 dnl     ============================================================
-dnl     Check for website build destination
+dnl     4.3. Check for website build destination
 dnl     ============================================================
 m4_define([www_build],["$(pwd)/build/www"])
 
@@ -163,12 +163,12 @@ AC_SUBST([WWW_BUILD],[www_build])
 
 
 dnl ================================================================
-dnl Build options
+dnl 5. Build options
 dnl ================================================================
 
 
 dnl     ============================================================
-dnl     Are we using content hashing?
+dnl     5.1. Are we using content hashing?
 dnl     ============================================================
 AC_ARG_ENABLE(content_hashing,
               [AS_HELP_STRING([--enable-content-hashing],
@@ -223,7 +223,7 @@ AS_IF([test "x$enable_content_hashing" = xyes],
 
 
 dnl     ============================================================
-dnl     Are we minifying built HTML?
+dnl     5.2. Are we minifying built HTML?
 dnl     ============================================================
 AC_ARG_ENABLE([minify_html],
               [AS_HELP_STRING([--enable-minify-html],
@@ -233,7 +233,7 @@ AM_CONDITIONAL(ENABLE_MINIFY_HTML,[test "x$enable_minify_html" = xyes])
 
 
 dnl     ============================================================
-dnl     Are we minifying built CSS?
+dnl     5.3. Are we minifying built CSS?
 dnl     ============================================================
 AC_ARG_ENABLE([minify_css],
               [AS_HELP_STRING([--enable-minify-css],
@@ -243,7 +243,7 @@ AM_CONDITIONAL(ENABLE_MINIFY_CSS,[test "x$enable_minify_css" = xyes])
 
 
 dnl     ============================================================
-dnl     Are we minifying built JS?
+dnl     5.4. Are we minifying built JS?
 dnl     ============================================================
 AC_ARG_ENABLE([minify_js],
               [AS_HELP_STRING([--enable-minify-js],
@@ -253,7 +253,7 @@ AM_CONDITIONAL(ENABLE_MINIFY_JS,[test "x$enable_minify_js" = xyes])
 
 
 dnl     ============================================================
-dnl     Are we installing the built website?
+dnl     5.5. Are we installing the built website?
 dnl     ============================================================
 AC_ARG_ENABLE([install],
               [AS_HELP_STRING([--enable-install],
@@ -263,12 +263,12 @@ AM_CONDITIONAL(ENABLE_INSTALL,[test "x$enable_install" = xyes])
 
 
 dnl ================================================================
-dnl Webserver
+dnl 6. Webserver
 dnl ================================================================
 
 
 dnl     ============================================================
-dnl     Do we have apache2?
+dnl     6.1. Do we have apache2?
 dnl     ============================================================
 HTTPD="/usr/sbin/apache2"
 AS_IF([test "x$enable_install" = xyes],
@@ -283,7 +283,7 @@ AM_CONDITIONAL([HAVE_HTTPD],[test "x$HAVE_HTTPD" = xyes])
 
 
 dnl     ============================================================
-dnl     Do we have mysql?
+dnl     6.2. Do we have mysql?
 dnl     ============================================================
 AS_IF([test "x$enable_install" = xyes],
       [AC_CHECK_PROG([MYSQL],[mysql],[mysql])
@@ -297,7 +297,7 @@ AM_CONDITIONAL([HAVE_MYSQL],[test "x$HAVE_MYSQL" = xyes])
 
 
 dnl     ============================================================
-dnl     Do we have PHP?
+dnl     6.3. Do we have PHP?
 dnl     ============================================================
 AS_IF([test "x$enable_install" = xyes],
       [AC_CHECK_PROG([PHP],[php],[php])
@@ -311,7 +311,7 @@ AM_CONDITIONAL([HAVE_PHP],[test "x$HAVE_PHP" = xyes])
 
 
 dnl     ============================================================
-dnl     Is apache mod_php enabled?
+dnl     6.4. Is apache mod_php enabled?
 dnl     ============================================================
 AS_IF([test "x$enable_install" = xyes],
       [AC_MSG_CHECKING([for mod_php])
@@ -330,12 +330,12 @@ AM_CONDITIONAL([HAVE_PHP],[test "x$HAVE_MOD_PHP" = xyes])
 
 
 dnl ================================================================
-dnl Website options
+dnl 7. Website options
 dnl ================================================================
 
 
 dnl     ============================================================
-dnl     Are we building a debugging site?
+dnl     7.1. Are we building a debugging site?
 dnl     ============================================================
 AC_ARG_ENABLE([debug],
               [AS_HELP_STRING([--enable-debug],
@@ -346,7 +346,7 @@ AM_CONDITIONAL(ENABLE_DEBUG,[test "x$enable_debug" = xyes])
 
 
 dnl     ============================================================
-dnl     Do we have a document root?
+dnl     7.2. Do we have a document root?
 dnl     ============================================================
 AC_ARG_VAR([WWW_ROOT],
            [The website root (default: /var/www)])
@@ -366,7 +366,7 @@ AM_CONDITIONAL([HAVE_WWW_ROOT],[test "x$HAVE_WWW_ROOT" = xyes])
 
 
 dnl     ============================================================
-dnl     Do we have a link prefix?
+dnl     7.3. Do we have a link prefix?
 dnl     ============================================================
 AC_ARG_VAR([WWW_PREFIX],
            [The website document prefix (default: none)])
@@ -380,12 +380,12 @@ AM_CONDITIONAL([HAVE_WWW_PREFIX],[test "x$HAVE_WWW_PREFIX" = xyes])
 
 
 dnl ================================================================
-dnl Tools
+dnl 8. Tools
 dnl ================================================================
 
 
 dnl     ============================================================
-dnl     Are we building the tools?
+dnl     8.1. Are we building the tools?
 dnl     ============================================================
 AC_ARG_ENABLE(tools,
               [AS_HELP_STRING([--enable-tools],
@@ -395,7 +395,7 @@ AM_CONDITIONAL(ENABLE_TOOLS,[test "x$enable_tools" = xyes])
 
 
 dnl     ============================================================
-dnl     Do we have npm?
+dnl     8.2. Do we have npm?
 dnl     ============================================================
 AS_IF([test "x$enable_tools" = xyes],
       [AC_CHECK_PROG([NPM],[npm],[npm])
@@ -409,7 +409,7 @@ AM_CONDITIONAL([HAVE_NPM],[test "x$HAVE_NPM" = xyes])
 
 
 dnl     ============================================================
-dnl     Do we have node?
+dnl     8.3. Do we have node?
 dnl     ============================================================
 AS_IF([test "x$enable_tools" = xyes],
       [AC_CHECK_PROG([NODE],[node],[node])
@@ -423,7 +423,7 @@ AM_CONDITIONAL([HAVE_NODE],[test "x$HAVE_NODE" = xyes])
 
 
 dnl         ========================================================
-dnl         Do we have optimist?
+dnl         8.4. Do we have optimist?
 dnl         ========================================================
 AS_IF([test "x$enable_tools" = xyes],
       [AC_MSG_CHECKING([for optimist package])
@@ -440,12 +440,12 @@ AM_CONDITIONAL([HAVE_NODE_OPTIMIST],[test "x$HAVE_NODE_OPTIMIST" = xyes])
 
 
 dnl ================================================================
-dnl Documentation
+dnl 9. Documentation
 dnl ================================================================
 
 
 dnl     ============================================================
-dnl     Are we building the documentation?
+dnl     9.1. Are we building the documentation?
 dnl     ============================================================
 AC_ARG_ENABLE([documentation],
               [AS_HELP_STRING([--enable-documentation],
@@ -455,7 +455,7 @@ AM_CONDITIONAL(ENABLE_DOCUMENTATION,[test "x$enable_documentation" = xyes])
 
 
 dnl     ============================================================
-dnl     Do we have pdflatex installed?
+dnl     9.2. Do we have pdflatex installed?
 dnl     ============================================================
 AS_IF([test "x$enable_documentation" = xyes],
       [AC_CHECK_PROG([PDFLATEX],[pdflatex],[pdflatex])
@@ -469,7 +469,7 @@ AM_CONDITIONAL([HAVE_PDFLATEX],[test "x$HAVE_PDFLATEX" = xyes])
 
 
 dnl     ============================================================
-dnl     Do we have pandoc installed?
+dnl     9.3. Do we have pandoc installed?
 dnl     ============================================================
 AS_IF([test "x$enable_documentation" = xyes],
       [AC_CHECK_PROG([PANDOC],[pandoc],[pandoc])
@@ -483,7 +483,7 @@ AM_CONDITIONAL([HAVE_PANDOC],[test "x$HAVE_PANDOC" = xyes])
 
 
 dnl     ============================================================
-dnl     Do we have doctoc installed?
+dnl     9.4. Do we have doctoc installed?
 dnl     ============================================================
 AS_IF([test "x$enable_documentation" = xyes],
       [AC_CHECK_PROG([DOCTOC],[doctoc],[doctoc])
@@ -497,7 +497,7 @@ AM_CONDITIONAL([HAVE_DOCTOC],[test "x$HAVE_DOCTOC" = xyes])
 
 
 dnl     ============================================================
-dnl     Should xdg-open be used to open PDFs?
+dnl     9.5. Should xdg-open be used to open PDFs?
 dnl     ============================================================
 AC_CHECK_PROG([XDG_OPEN],[xdg-open],[xdg-open])
 AS_IF([test "x$XDG_OPEN" != x],
@@ -509,7 +509,7 @@ AM_CONDITIONAL([HAVE_XDG_OPEN],[test "x$HAVE_XDG_OPEN" = xyes])
 
 
 dnl     ============================================================
-dnl     Should emacsclient be used for editing files?
+dnl     9.6. Should emacsclient be used for editing files?
 dnl     ============================================================
 AC_CHECK_PROG([EMACSCLIENT],[emacsclient],[emacsclient])
 AS_IF([test "x$EMACSCLIENT" != x],
@@ -521,12 +521,12 @@ AM_CONDITIONAL([HAVE_EMACSCLIENT],[test "x$HAVE_EMACSCLIENT" = xyes])
 
 
 dnl ================================================================
-dnl Git
+dnl 10. Git
 dnl ================================================================
 
 
 dnl     ============================================================
-dnl     Are we installing the project git hooks?
+dnl     10.1. Are we installing the project git hooks?
 dnl     ============================================================
 AC_ARG_ENABLE(git_hooks,
               [AS_HELP_STRING([--enable-git-hooks],
@@ -571,7 +571,7 @@ AC_OUTPUT([
 
 
 dnl ================================================================
-dnl Generate a config summary document
+dnl 11. Generate a config summary document
 dnl ================================================================
 
 s=config.summary
@@ -636,7 +636,7 @@ echo "        Install custom git hooks:       $enable_git_hooks" >> $s
 
 
 dnl     ============================================================
-dnl     Dah dah!
+dnl     11.1 Dah dah!
 dnl     ============================================================
 cat $s | tail -n+3
 
