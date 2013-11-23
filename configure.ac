@@ -33,6 +33,7 @@ dnl
 dnl   6.     Webserver
 dnl   6.1.     Do we have apache2?
 dnl   6.2.     Do we have mysql?
+dnl   6.3.     Do we have php?
 dnl
 dnl   7.     Website options
 dnl   7.1.     Are we building a debugging site?
@@ -292,6 +293,20 @@ AS_IF([test "x$enable_install" = xyes],
       [HAVE_MYSQL=no])
 AC_SUBST([HAVE_MYSQL],[$HAVE_MYSQL])
 AM_CONDITIONAL([HAVE_MYSQL],[test "x$HAVE_MYSQL" = xyes])
+
+
+dnl     ============================================================
+dnl     Do we have PHP?
+dnl     ============================================================
+AS_IF([test "x$enable_install" = xyes],
+      [AC_CHECK_PROG([PHP],[php],[php])
+       AS_IF([test "x$PHP" != x],
+             [HAVE_PHP=yes],
+             [HAVE_PHP=no
+              AC_MSG_WARN([No php interpreter found])])],
+      [HAVE_PHP=no])
+AC_SUBST([HAVE_PHP],[$HAVE_PHP])
+AM_CONDITIONAL([HAVE_PHP],[test "x$HAVE_PHP" = xyes])
 
 
 dnl ================================================================
@@ -574,7 +589,10 @@ AS_IF([test "x$enable_install" = xyes],
              [echo "        httpd:                          no" >> $s])
        AS_IF([test "x$HAVE_MYSQL" = xyes],
              [echo "        mysql:                          $MYSQL" >> $s],
-             [echo "        mysql:                          no" >> $s])])
+             [echo "        mysql:                          no" >> $s])
+       AS_IF([test "x$HAVE_PHP" = xyes],
+             [echo "        php:                            $PHP" >> $s],
+             [echo "        php:                            no" >> $s])])
 
 
 # Website options:
