@@ -166,8 +166,8 @@ dnl     ============================================================
 dnl     Are we using content hashing?
 dnl     ============================================================
 AC_ARG_ENABLE(content_hashing,
-              AS_HELP_STRING([--enable-content-hashing],
-                             [Enable cache busting content hashing (default: yes)]),,
+              [AS_HELP_STRING([--enable-content-hashing],
+                              [Enable cache busting content hashing (default: yes)])],,
               [enable_content_hashing=yes])
 AM_CONDITIONAL(ENABLE_CONTENT_HASHING,[test "x$enable_content_hashing" = xyes])
 
@@ -220,9 +220,9 @@ AS_IF([test "x$enable_content_hashing" = xyes],
 dnl     ============================================================
 dnl     Are we minifying built HTML?
 dnl     ============================================================
-AC_ARG_ENABLE(minify_html,
-              AS_HELP_STRING([--enable-minify-html],
-                             [Minify compiled HTML sources (default: yes)]),,
+AC_ARG_ENABLE([minify_html],
+              [AS_HELP_STRING([--enable-minify-html],
+                              [Minify compiled HTML sources (default: yes)])],,
               [enable_minify_html=yes])
 AM_CONDITIONAL(ENABLE_MINIFY_HTML,[test "x$enable_minify_html" = xyes])
 
@@ -230,9 +230,9 @@ AM_CONDITIONAL(ENABLE_MINIFY_HTML,[test "x$enable_minify_html" = xyes])
 dnl     ============================================================
 dnl     Are we minifying built CSS?
 dnl     ============================================================
-AC_ARG_ENABLE(minify_css,
-              AS_HELP_STRING([--enable-minify-css],
-                             [Minify compiled CSS sources (default: yes)]),,
+AC_ARG_ENABLE([minify_css],
+              [AS_HELP_STRING([--enable-minify-css],
+                             [Minify compiled CSS sources (default: yes)])],,
               [enable_minify_css=yes])
 AM_CONDITIONAL(ENABLE_MINIFY_CSS,[test "x$enable_minify_css" = xyes])
 
@@ -240,9 +240,9 @@ AM_CONDITIONAL(ENABLE_MINIFY_CSS,[test "x$enable_minify_css" = xyes])
 dnl     ============================================================
 dnl     Are we minifying built JS?
 dnl     ============================================================
-AC_ARG_ENABLE(minify_js,
-              AS_HELP_STRING([--enable-minify-js],
-                             [Minify compiled JS sources (default: yes)]),,
+AC_ARG_ENABLE([minify_js],
+              [AS_HELP_STRING([--enable-minify-js],
+                              [Minify compiled JS sources (default: yes)])],,
               [enable_minify_js=yes])
 AM_CONDITIONAL(ENABLE_MINIFY_JS,[test "x$enable_minify_js" = xyes])
 
@@ -250,9 +250,9 @@ AM_CONDITIONAL(ENABLE_MINIFY_JS,[test "x$enable_minify_js" = xyes])
 dnl     ============================================================
 dnl     Are we installing the built website?
 dnl     ============================================================
-AC_ARG_ENABLE(install,
-              AS_HELP_STRING([--enable-install],
-                             [Install built website (default: yes)]),,
+AC_ARG_ENABLE([install],
+              [AS_HELP_STRING([--enable-install],
+                              [Install built website (default: yes)])],,
               [enable_install=yes])
 AM_CONDITIONAL(ENABLE_INSTALL,[test "x$enable_install" = xyes])
 
@@ -267,11 +267,11 @@ dnl     Do we have apache2?
 dnl     ============================================================
 HTTPD="/usr/sbin/apache2"
 AS_IF([test "x$enable_install" = xyes],
-      AC_CHECK_FILE([$HTTPD],
-                    [HAVE_HTTPD=yes
-                     AC_SUBST([HTTPD])],
-                    [HAVE_HTTPD=no
-                     AC_MSG_WARN([No apache server found.])]),
+      [AC_CHECK_FILE([$HTTPD],
+                     [HAVE_HTTPD=yes
+                      AC_SUBST([HTTPD])],
+                     [HAVE_HTTPD=no
+                      AC_MSG_WARN([No apache server found.])])],
       [HAVE_HTTPD=no])
 AC_SUBST([HAVE_HTTPD],[$HAVE_HTTPD])
 AM_CONDITIONAL([HAVE_HTTPD],[test "x$HAVE_HTTPD" = xyes])
@@ -281,11 +281,11 @@ dnl     ============================================================
 dnl     Do we have mysql?
 dnl     ============================================================
 AS_IF([test "x$enable_install" = xyes],
-      AC_CHECK_PROG([MYSQL],[mysql],[mysql])
-      AS_IF([test "x$MYSQL" != x],
-            [HAVE_MYSQL=yes],
-            [HAVE_MYSQL=no
-             AC_MSG_WARN([No mysql database application found])]),
+      [AC_CHECK_PROG([MYSQL],[mysql],[mysql])
+       AS_IF([test "x$MYSQL" != x],
+             [HAVE_MYSQL=yes],
+             [HAVE_MYSQL=no
+              AC_MSG_WARN([No mysql database application found])])],
       [HAVE_MYSQL=no])
 AC_SUBST([HAVE_MYSQL],[$HAVE_MYSQL])
 AM_CONDITIONAL([HAVE_MYSQL],[test "x$HAVE_MYSQL" = xyes])
@@ -299,9 +299,9 @@ dnl ================================================================
 dnl     ============================================================
 dnl     Are we building a debugging site?
 dnl     ============================================================
-AC_ARG_ENABLE(debug,
-              AS_HELP_STRING([--enable-debug],
-                             [Enable extra website debugging features (default: no)]),
+AC_ARG_ENABLE([debug],
+              [AS_HELP_STRING([--enable-debug],
+                              [Enable extra website debugging features (default: no)])],
               [enable_debug=yes],
               [enable_debug=no])
 AC_SUBST([ENABLE_DEBUG], ["$enable_debug"])
@@ -318,11 +318,11 @@ AS_IF([test "x$WWW_ROOT" = x],
       [WWW_ROOT=/var/www])
 
 AS_IF([test "x$enable_install" = xyes],
-      AC_CHECK_FILE([$WWW_ROOT],
-                    [HAVE_WWW_ROOT=yes
-                     AC_SUBST([WWW_ROOT])],
-                    [HAVE_WWW_ROOT=no
-                     AC_MSG_WARN([Local server root "$WWW_ROOT" not found.])]),
+      [AC_CHECK_FILE([$WWW_ROOT],
+                     [HAVE_WWW_ROOT=yes
+                      AC_SUBST([WWW_ROOT])],
+                     [HAVE_WWW_ROOT=no
+                      AC_MSG_WARN([Local server root "$WWW_ROOT" not found.])])],
       [HAVE_WWW_ROOT=no])
 AC_SUBST([HAVE_WWW_ROOT],[$HAVE_WWW_ROOT])
 AM_CONDITIONAL([HAVE_WWW_ROOT],[test "x$HAVE_WWW_ROOT" = xyes])
@@ -351,8 +351,8 @@ dnl     ============================================================
 dnl     Are we installing the project git hooks?
 dnl     ============================================================
 AC_ARG_ENABLE(git_hooks,
-              AS_HELP_STRING([--enable-git-hooks],
-                             [Install project git hooks (default: no)]),
+              [AS_HELP_STRING([--enable-git-hooks],
+                              [Install project git hooks (default: no)])],
               [enable_git_hooks=yes],
               [enable_git_hooks=no])
 AC_SUBST([ENABLE_GIT_HOOKS], ["$enable_git_hooks"])
@@ -368,8 +368,8 @@ dnl     ============================================================
 dnl     Are we building the tools?
 dnl     ============================================================
 AC_ARG_ENABLE(tools,
-              AS_HELP_STRING([--enable-tools],
-                             [Build extra tools (default: yes)]),,
+              [AS_HELP_STRING([--enable-tools],
+                              [Build extra tools (default: yes)])],,
               [enable_tools=yes])
 AM_CONDITIONAL(ENABLE_TOOLS,[test "x$enable_tools" = xyes])
 
@@ -378,12 +378,12 @@ dnl     ============================================================
 dnl     Do we have npm?
 dnl     ============================================================
 AS_IF([test "x$enable_tools" = xyes],
-      AC_CHECK_PROG([NPM],[npm],[npm])
-      AS_IF([test "x$NPM" != x],
-            [HAVE_NPM=yes],
-            [HAVE_NPM=no
-             AC_MSG_ERROR([Node package manager not found.])]),
-      [HAVE_NPM=no])
+      [AC_CHECK_PROG([NPM],[npm],[npm])
+       AS_IF([test "x$NPM" != x],
+             [HAVE_NPM=yes],
+             [HAVE_NPM=no
+              AC_MSG_ERROR([Node package manager not found.])])],
+       [HAVE_NPM=no])
 AC_SUBST([HAVE_NPM],[$HAVE_NPM])
 AM_CONDITIONAL([HAVE_NPM],[test "x$HAVE_NPM" = xyes])
 
@@ -392,12 +392,12 @@ dnl     ============================================================
 dnl     Do we have node?
 dnl     ============================================================
 AS_IF([test "x$enable_tools" = xyes],
-      AC_CHECK_PROG([NODE],[node],[node])
-      AS_IF([test "x$NODE" != x],
-            [HAVE_NODE=yes],
-            [HAVE_NODE=no
-             AC_MSG_ERROR([Node.js not found.])]),
-      [HAVE_NODE=no])
+      [AC_CHECK_PROG([NODE],[node],[node])
+       AS_IF([test "x$NODE" != x],
+             [HAVE_NODE=yes],
+             [HAVE_NODE=no
+              AC_MSG_ERROR([Node.js not found.])])],
+       [HAVE_NODE=no])
 AC_SUBST([HAVE_NODE],[$HAVE_NODE])
 AM_CONDITIONAL([HAVE_NODE],[test "x$HAVE_NODE" = xyes])
 
@@ -406,14 +406,14 @@ dnl         ========================================================
 dnl         Do we have optimist?
 dnl         ========================================================
 AS_IF([test "x$enable_tools" = xyes],
-      AC_MSG_CHECKING([for optimist package])
-      AS_IF([test -n "$(npm ls -g | grep optimist)"],
-            [HAVE_NODE_OPTIMIST=yes],
-            [HAVE_NODE_OPTIMIST=no])
-      AC_MSG_RESULT([$HAVE_NODE_OPTIMIST])
+      [AC_MSG_CHECKING([for optimist package])
+       AS_IF([test -n "$(npm ls -g | grep optimist)"],
+             [HAVE_NODE_OPTIMIST=yes],
+             [HAVE_NODE_OPTIMIST=no])
+       AC_MSG_RESULT([$HAVE_NODE_OPTIMIST])
 
-      AS_IF([test "x$HAVE_NODE_OPTIMIST" = xyes],,
-            [AC_MSG_ERROR([Required node pacakge 'optimist' not found.])]),
+       AS_IF([test "x$HAVE_NODE_OPTIMIST" = xyes],,
+             [AC_MSG_ERROR([Required node pacakge 'optimist' not found.])])],
       [HAVE_NODE_OPTIMIST=no])
 AC_SUBST([HAVE_NODE_OPTIMIST],[$HAVE_NODE_OPTIMIST])
 AM_CONDITIONAL([HAVE_NODE_OPTIMIST],[test "x$HAVE_NODE_OPTIMIST" = xyes])
@@ -427,9 +427,9 @@ dnl ================================================================
 dnl     ============================================================
 dnl     Are we building the documentation?
 dnl     ============================================================
-AC_ARG_ENABLE(documentation,
-              AS_HELP_STRING([--enable-documentation],
-                             [Build extra documentation (default: no)]),,
+AC_ARG_ENABLE([documentation],
+              [AS_HELP_STRING([--enable-documentation],
+                              [Build extra documentation (default: no)])],,
               [enable_documentation=yes])
 AM_CONDITIONAL(ENABLE_DOCUMENTATION,[test "x$enable_documentation" = xyes])
 
@@ -438,12 +438,12 @@ dnl     ============================================================
 dnl     Do we have pdflatex installed?
 dnl     ============================================================
 AS_IF([test "x$enable_documentation" = xyes],
-      AC_CHECK_PROG([PDFLATEX],[pdflatex],[pdflatex])
-      AS_IF([test "x$PDFLATEX" != x],
-            [HAVE_PDFLATEX=yes],
-            [HAVE_PDFLATEX=no
-             AC_MSG_WARN([Unable to create PDF documentation.])]),
-      HAVE_PDFLATEX=no)
+      [AC_CHECK_PROG([PDFLATEX],[pdflatex],[pdflatex])
+       AS_IF([test "x$PDFLATEX" != x],
+             [HAVE_PDFLATEX=yes],
+             [HAVE_PDFLATEX=no
+              AC_MSG_WARN([Unable to create PDF documentation.])])],
+      [HAVE_PDFLATEX=no])
 AC_SUBST([HAVE_PDFLATEX],[$HAVE_PDFLATEX])
 AM_CONDITIONAL([HAVE_PDFLATEX],[test "x$HAVE_PDFLATEX" = xyes])
 
@@ -452,12 +452,12 @@ dnl     ============================================================
 dnl     Do we have pandoc installed?
 dnl     ============================================================
 AS_IF([test "x$enable_documentation" = xyes],
-      AC_CHECK_PROG([PANDOC],[pandoc],[pandoc])
-      AS_IF([test "x$PANDOC" != x],
-            [HAVE_PANDOC=yes],
-            [HAVE_PANDOC=no
-             AC_MSG_WARN([Unable to create Markdown documentation.])]),
-      HAVE_PANDOC=no)
+      [AC_CHECK_PROG([PANDOC],[pandoc],[pandoc])
+       AS_IF([test "x$PANDOC" != x],
+             [HAVE_PANDOC=yes],
+             [HAVE_PANDOC=no
+              AC_MSG_WARN([Unable to create Markdown documentation.])])],
+      [HAVE_PANDOC=no])
 AC_SUBST([HAVE_PANDOC],[$HAVE_PANDOC])
 AM_CONDITIONAL([HAVE_PANDOC],[test "x$HAVE_PANDOC" = xyes])
 
@@ -466,12 +466,12 @@ dnl     ============================================================
 dnl     Do we have doctoc installed?
 dnl     ============================================================
 AS_IF([test "x$enable_documentation" = xyes],
-      AC_CHECK_PROG([DOCTOC],[doctoc],[doctoc])
-      AS_IF([test "x$DOCTOC" != x],
-            [HAVE_DOCTOC=yes],
-            [HAVE_DOCTOC=no
-             AC_MSG_WARN([Unable to generate Markdown table of contents.])]),
-      HAVE_DOCTOC=no)
+      [AC_CHECK_PROG([DOCTOC],[doctoc],[doctoc])
+       AS_IF([test "x$DOCTOC" != x],
+             [HAVE_DOCTOC=yes],
+             [HAVE_DOCTOC=no
+              AC_MSG_WARN([Unable to generate Markdown table of contents.])])],
+      [HAVE_DOCTOC=no])
 AC_SUBST([HAVE_DOCTOC],[$HAVE_DOCTOC])
 AM_CONDITIONAL([HAVE_DOCTOC],[test "x$HAVE_DOCTOC" = xyes])
 
