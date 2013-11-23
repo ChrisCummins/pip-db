@@ -105,14 +105,24 @@
 {% endblock %}
 
 {% block footer %}
+
 <script>
-  $(document).ready(function(){
+  $(document).ready(function() {
+
     /*
-     * Search results link to details page:
+     * SEARCH RESULTS:
+     *
+     * Link each result to its corresponding record page.
      */
-    $('div.sresults table tbody tr').click(function(){
-      window.location = '{{ _links.results }}' + location.search + '&id=' + $(this).attr('record-id');
+    $('.sresults table tr').click(function() {
+
+      window.location = '{{ _links.record }}'
+          + location.search + '&id='
+          + $(this).attr('record-id');
+
     });
+
   });
 </script>
+
 {% endblock %}
