@@ -19,8 +19,10 @@ abstract class Pip_Links {
 			'upload' => '/upload',
 			);
 
-		foreach ( $links as $key => $val )
-			$links[$key] =  $_SERVER['DOCUMENT_PREFIX'] . $val;
+		if ( '' !== '@WWW_PREFIX@' ) {
+			foreach ( $links as $key => $val )
+				$links[$key] =  '@WWW_PREFIX@' . $val;
+		}
 
 		return $links;
 	}
