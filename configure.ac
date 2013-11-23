@@ -43,7 +43,7 @@ dnl   8.     Git
 dnl   8.1.     Are we installing the project git hooks?
 dnl
 dnl   9.     Tools
-dnl   9.1.     Are we building the extra tools?
+dnl   9.1.     Are we building the tools?
 dnl   9.2.     Do we have npm?
 dnl   9.3.     Do we have node?
 dnl   9.4.     Do we have optimist?
@@ -365,13 +365,13 @@ dnl ================================================================
 
 
 dnl     ============================================================
-dnl     Are we building the extra tools?
+dnl     Are we building the tools?
 dnl     ============================================================
-AC_ARG_ENABLE(extra_tools,
-              AS_HELP_STRING([--enable-extra-tools],
+AC_ARG_ENABLE(tools,
+              AS_HELP_STRING([--enable-tools],
                              [Build extra tools (default: yes)]),,
-              [enable_extra_tools=yes])
-AM_CONDITIONAL(ENABLE_EXTRA_TOOLS,[test "x$enable_extra_tools" = xyes])
+              [enable_tools=yes])
+AM_CONDITIONAL(ENABLE_TOOLS,[test "x$enable_tools" = xyes])
 
 
 dnl     ============================================================
@@ -578,7 +578,7 @@ AS_IF([test "x$HAVE_WWW_PREFIX" = xyes],
 echo ""
 echo " • Extras:"
 echo "        Install custom git hooks:       $enable_git_hooks"
-echo "        Build extra tools:              $enable_extra_tools"
+echo "        Build tools:                    $enable_tools"
 echo "        Build LaTeX documentation:      $HAVE_PDFLATEX"
 echo "        Build Markdown documentation:   $HAVE_PANDOC"
 echo "        Build Markdown contents pages:  $HAVE_DOCTOC"

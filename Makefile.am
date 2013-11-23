@@ -1,10 +1,13 @@
 SUBDIRS = \
 	design \
 	Documentation \
-	tools \
 	www \
 	build \
 	$(NULL)
+
+if ENABLE_TOOLS
+SUBDIRS += tools
+endif
 
 EXTRA_DIST = \
 	autogen.sh \

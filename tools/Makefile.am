@@ -1,4 +1,3 @@
-if ENABLE_EXTRA_TOOLS
 noinst_SCRIPTS = \
 	dsa \
 	ghi \
@@ -7,7 +6,6 @@ noinst_SCRIPTS = \
 	sloccount \
 	workflow \
 	$(NULL)
-endif
 
 CLEANFILES = $(noinst_SCRIPTS)
 
