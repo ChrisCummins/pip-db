@@ -2,7 +2,7 @@ SUBDIRS = jar
 
 EXTRA_DIST = README.md
 
-if HAVE_WWW_ROOT
+if ENABLE_INSTALL
 install-data-local:
 	@rsync -avh --delete "$(WWW_BUILD)/" "$(WWW_ROOT)/"
 
