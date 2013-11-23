@@ -112,5 +112,5 @@ $content = array(
 	"last_page" => get_results_page( $num_of_pages )
 	);
 
-$template = new Pip_Template( 'results' );
+$template = new Pip_Template( 'search' );
 $template->render( $content );
