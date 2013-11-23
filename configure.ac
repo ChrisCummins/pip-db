@@ -502,24 +502,10 @@ echo ""
 echo "pip-db - $PIPDB_VERSION"
 echo "--------------"
 
-echo ""
-# Global flags:
-echo " • Global:"
-AS_IF([test "x$HAVE_HTTPD" = xyes],
-      [echo "        httpd:                          $HTTPD"],
-      [echo "        httpd:                          no"])
-echo "        www root:                       $WWW_ROOT/"
-AS_IF([test "x$HAVE_WWW_PREFIX" = xyes],
-      [echo "        Document prefix:                $WWW_PREFIX"],
-      [echo "        Document prefix:                none"])
-AS_IF([test "x$HAVE_MYSQL" = xyes],
-      [echo "        mysql:                          $MYSQL"],
-      [echo "        mysql:                          no"])
 
 echo ""
-# Build options:
 echo " • Build options:"
-echo "        Build directory:                $WWW_BUILD/"
+echo "        Build destionation:             $WWW_BUILD/"
 echo "        Content hashing enabled:        $enable_content_hashing"
 AS_IF([test "x$enable_content_hashing" = xyes],
       [echo "        Content hashing algorithm:      $HASH"
@@ -527,18 +513,34 @@ AS_IF([test "x$enable_content_hashing" = xyes],
 echo "        Minify HTML:                    $enable_minify_html"
 echo "        Minify CSS:                     $enable_minify_css"
 echo "        Minify JS:                      $enable_minify_js"
+echo "        Install to webserver:           $HAVE_WWW_ROOT"
+echo "        Install destination:            $WWW_ROOT"
+
+AS_IF([test "x$HAVE_WWW_ROOT" = xyes],
+      [echo ""
+       echo " • Webserver:"
+       AS_IF([test "x$HAVE_HTTPD" = xyes],
+             [echo "        httpd:                          $HTTPD"],
+             [echo "        httpd:                          no"])
+       AS_IF([test "x$HAVE_MYSQL" = xyes],
+             [echo "        mysql:                          $MYSQL"],
+             [echo "        mysql:                          no"])])
 
 echo ""
-# Features:
-echo " • Features:"
-echo "        Website debugging:              $enable_debug"
+echo " • Website options:"
+echo "        Debugging:                      $enable_debug"
+echo "        Document root:                  $WWW_ROOT/"
+AS_IF([test "x$HAVE_WWW_PREFIX" = xyes],
+      [echo "        Link prefix:                    $WWW_PREFIX"],
+      [echo "        Link prefix:                    none"])
+
 
 echo ""
-# Miscellaneous:
 echo " • Extra:"
-echo "        Project git hooks:              $enable_git_hooks"
+echo "        Install custom git hooks:       $enable_git_hooks"
 echo "        Build extra tools:              $enable_extra_tools"
 echo "        Build LaTeX documentation:      $HAVE_PDFLATEX"
 echo "        Build Markdown documentation:   $HAVE_PANDOC"
+
 
 echo ""
