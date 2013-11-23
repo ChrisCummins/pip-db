@@ -7,31 +7,33 @@
 
 {% block content %}
 
-<div class="search full">
-  <h1 class="logo">pip-db</h1>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 search">
 
-  <!-- Search form -->
-  <form method="GET" action="{{ _links.search }}">
-    <!-- le textbox -->
-    <input id="in" name="q" type="text" autocomplete="off">
+    <h1 class="logo">pip-db</h1>
 
-    <!-- buttons -->
-    <div class="btn-row">
+    <!-- Search form -->
+    <form method="GET" action="{{ _links.search }}">
+      <!-- le textbox -->
+      <input id="in" name="q" type="text" autocomplete="off">
 
-      <a id="search-browse" href="{{ _links.advanced }}" class="btn btn-primary">
-        Advanced
-      </a>
+      <!-- buttons -->
+      <div class="btn-row">
 
-      <button id="search-submit" class="btn btn-success">
-        Search
-      </button>
+        <a id="search-browse" href="{{ _links.advanced }}" class="btn btn-primary">
+          Advanced
+        </a>
 
-    </div> <!-- /.button-row -->
+        <button id="search-submit" class="btn btn-success">
+          Search
+        </button>
 
-  </form>
+      </div> <!-- /.button-row -->
 
+    </form>
 
-</div> <!-- /.search-full -->
+  </div> <!-- /.col-md-8 -->
+</div>
 
 {% endblock %}
 
