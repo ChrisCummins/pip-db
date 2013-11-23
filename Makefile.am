@@ -1,9 +1,12 @@
 SUBDIRS = \
 	design \
-	Documentation \
 	www \
 	build \
 	$(NULL)
+
+if ENABLE_DOCUMENTATION
+SUBDIRS += Documentation
+endif
 
 if ENABLE_TOOLS
 SUBDIRS += tools
