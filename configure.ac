@@ -39,22 +39,22 @@ dnl   7.1.     Are we building a debugging site?
 dnl   7.2.     Do we have a document root?
 dnl   7.3.     Do we have a link prefix?
 dnl
-dnl   8.     Git
-dnl   8.1.     Are we installing the project git hooks?
+dnl   8.     Tools
+dnl   8.1.     Are we building the tools?
+dnl   8.2.     Do we have npm?
+dnl   8.3.     Do we have node?
+dnl   8.4.     Do we have optimist?
 dnl
-dnl   9.     Tools
-dnl   9.1.     Are we building the tools?
-dnl   9.2.     Do we have npm?
-dnl   9.3.     Do we have node?
-dnl   9.4.     Do we have optimist?
+dnl   9.     Documentation
+dnl   9.1.     Are we build the documentation?
+dnl   9.2.     Do we have pdflatex installed?
+dnl   9.3.     Do we have pandoc installed?
+dnl   9.4.     Do we have doctoc installed?
+dnl   9.5.     Should xdg-open be used to open PDFs?
+dnl   9.6.     Should emacsclient be used for editing files?
 dnl
-dnl   10.    Documentation
-dnl   10.1.    Are we build the documentation?
-dnl   10.2.    Do we have pdflatex installed?
-dnl   10.3.    Do we have pandoc installed?
-dnl   10.4.    Do we have doctoc installed?
-dnl   10.5.    Should xdg-open be used to open PDFs?
-dnl   10.6.    Should emacsclient be used for editing files?
+dnl   10.    Git
+dnl   10.1.    Are we installing the project git hooks?
 dnl
 dnl ================================================================
 
@@ -342,22 +342,6 @@ AM_CONDITIONAL([HAVE_WWW_PREFIX],[test "x$HAVE_WWW_PREFIX" = xyes])
 
 
 dnl ================================================================
-dnl Git
-dnl ================================================================
-
-
-dnl     ============================================================
-dnl     Are we installing the project git hooks?
-dnl     ============================================================
-AC_ARG_ENABLE(git_hooks,
-              [AS_HELP_STRING([--enable-git-hooks],
-                              [Install project git hooks (default: yes)])],,
-              [enable_git_hooks=yes])
-AC_SUBST([ENABLE_GIT_HOOKS], ["$enable_git_hooks"])
-AM_CONDITIONAL(ENABLE_GIT_HOOKS,[test "x$enable_git_hooks" = xyes])
-
-
-dnl ================================================================
 dnl Tools
 dnl ================================================================
 
@@ -498,6 +482,22 @@ AC_SUBST([HAVE_EMACSCLIENT],[$HAVE_EMACSCLIENT])
 AM_CONDITIONAL([HAVE_EMACSCLIENT],[test "x$HAVE_EMACSCLIENT" = xyes])
 
 
+dnl ================================================================
+dnl Git
+dnl ================================================================
+
+
+dnl     ============================================================
+dnl     Are we installing the project git hooks?
+dnl     ============================================================
+AC_ARG_ENABLE(git_hooks,
+              [AS_HELP_STRING([--enable-git-hooks],
+                              [Install project git hooks (default: yes)])],,
+              [enable_git_hooks=yes])
+AC_SUBST([ENABLE_GIT_HOOKS], ["$enable_git_hooks"])
+AM_CONDITIONAL(ENABLE_GIT_HOOKS,[test "x$enable_git_hooks" = xyes])
+
+
 AC_OUTPUT([
 	Makefile
 	build/Makefile
@@ -581,11 +581,10 @@ AS_IF([test "x$HAVE_WWW_PREFIX" = xyes],
 # Extras:
 echo ""
 echo " • Extras:"
-echo "        Install custom git hooks:       $enable_git_hooks"
 echo "        Build tools:                    $enable_tools"
 echo "        Build LaTeX documentation:      $HAVE_PDFLATEX"
 echo "        Build Markdown documentation:   $HAVE_PANDOC"
 echo "        Build Markdown contents pages:  $HAVE_DOCTOC"
-
+echo "        Install custom git hooks:       $enable_git_hooks"
 
 echo ""
