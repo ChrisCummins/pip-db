@@ -15,11 +15,24 @@
 
     <div class="info">
 
-      <!-- Number of search results -->
-      Found {{ _title.results }}
-      {% if _title.results > 1 %}results...{% else %}result...{% endif %}
+      <ul class="meta-tags">
 
-      ({{ _title.elapsed_time|number_format(6) }} seconds)
+        <!-- Number of search results -->
+        <li>
+          Found {{ _title.results }}
+          {% if _title.results > 1 %}
+            results...
+          {% else %}
+            result...
+          {% endif %}
+        </li>
+
+        <!-- Elapsed time -->
+        <li>
+          ({{ _title.elapsed_time|number_format(6) }} seconds)
+        </li>
+
+      </ul> <!-- /.meta-tags -->
 
     </div>
 
