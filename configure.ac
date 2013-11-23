@@ -49,7 +49,7 @@ dnl   9.3.     Do we have node?
 dnl   9.4.     Do we have optimist?
 dnl
 dnl   10.    Documentation
-dnl   10.1.    Are we installing the extra documentation?
+dnl   10.1.    Are we build the documentation?
 dnl   10.2.    Do we have pdflatex installed?
 dnl   10.3.    Do we have pandoc installed?
 dnl   10.4.    Do we have doctoc installed?
@@ -419,19 +419,19 @@ dnl ================================================================
 
 
 dnl     ============================================================
-dnl     Are we building the extra documentation?
+dnl     Are we building the documentation?
 dnl     ============================================================
-AC_ARG_ENABLE(extra_documentation,
-              AS_HELP_STRING([--enable-extra-documentation],
+AC_ARG_ENABLE(documentation,
+              AS_HELP_STRING([--enable-documentation],
                              [Build extra documentation (default: no)]),,
-              [enable_extra_documentation=yes])
-AM_CONDITIONAL(ENABLE_EXTRA_DOCUMENTATION,[test "x$enable_extra_documentation" = xyes])
+              [enable_documentation=yes])
+AM_CONDITIONAL(ENABLE_DOCUMENTATION,[test "x$enable_documentation" = xyes])
 
 
 dnl     ============================================================
 dnl     Do we have pdflatex installed?
 dnl     ============================================================
-AS_IF([test "x$enable_extra_documentation" = xyes],
+AS_IF([test "x$enable_documentation" = xyes],
       AC_CHECK_PROG([PDFLATEX],[pdflatex],[pdflatex])
       AS_IF([test "x$PDFLATEX" != x],
             [HAVE_PDFLATEX=yes],
@@ -445,7 +445,7 @@ AM_CONDITIONAL([HAVE_PDFLATEX],[test "x$HAVE_PDFLATEX" = xyes])
 dnl     ============================================================
 dnl     Do we have pandoc installed?
 dnl     ============================================================
-AS_IF([test "x$enable_extra_documentation" = xyes],
+AS_IF([test "x$enable_documentation" = xyes],
       AC_CHECK_PROG([PANDOC],[pandoc],[pandoc])
       AS_IF([test "x$PANDOC" != x],
             [HAVE_PANDOC=yes],
@@ -459,7 +459,7 @@ AM_CONDITIONAL([HAVE_PANDOC],[test "x$HAVE_PANDOC" = xyes])
 dnl     ============================================================
 dnl     Do we have doctoc installed?
 dnl     ============================================================
-AS_IF([test "x$enable_extra_documentation" = xyes],
+AS_IF([test "x$enable_documentation" = xyes],
       AC_CHECK_PROG([DOCTOC],[doctoc],[doctoc])
       AS_IF([test "x$DOCTOC" != x],
             [HAVE_DOCTOC=yes],
