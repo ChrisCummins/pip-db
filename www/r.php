@@ -45,5 +45,5 @@ $content = array(
 	"ref" => $record->get_ref()
 	);
 
-$template = new Pip_Template( 'details' );
+$template = new Pip_Template( 'record' );
 $template->render( $content );
