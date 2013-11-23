@@ -566,6 +566,7 @@ AC_OUTPUT([
 	www/img/Makefile
 	www/js/Makefile
 	www/lib/Makefile
+	www/lib/config.php
 	www/lib/Twig/Makefile
 ])
 
