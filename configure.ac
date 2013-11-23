@@ -353,11 +353,11 @@ AC_ARG_VAR([WWW_ROOT],
 
 AS_IF([test "x$WWW_ROOT" = x],
       [WWW_ROOT=/var/www])
+AC_SUBST([WWW_ROOT],[$WWW_ROOT])
 
 AS_IF([test "x$enable_install" = xyes],
       [AC_CHECK_FILE([$WWW_ROOT],
-                     [HAVE_WWW_ROOT=yes
-                      AC_SUBST([WWW_ROOT])],
+                     [HAVE_WWW_ROOT=yes],
                      [HAVE_WWW_ROOT=no
                       AC_MSG_WARN([Local server root "$WWW_ROOT" not found.])])],
       [HAVE_WWW_ROOT=no])
