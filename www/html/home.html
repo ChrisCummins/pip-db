@@ -15,7 +15,7 @@
     <!-- Search form -->
     <form method="GET" action="{{ _links.search }}">
       <!-- le textbox -->
-      <input name="q" type="text" autocomplete="off">
+      <input id="q" name="q" type="text" autocomplete="off">
 
       <!-- buttons -->
       <div class="btn-row">
@@ -41,7 +41,7 @@
 
   <script>
     $(function() {
-      $('input#in').focus();
+      $('input#q').focus();
     });
   </script>
 
