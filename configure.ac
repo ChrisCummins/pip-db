@@ -301,9 +301,8 @@ dnl     Are we building a debugging site?
 dnl     ============================================================
 AC_ARG_ENABLE([debug],
               [AS_HELP_STRING([--enable-debug],
-                              [Enable extra website debugging features (default: no)])],
-              [enable_debug=yes],
-              [enable_debug=no])
+                              [Enable extra website debugging features (default: no)])],,
+              [enable_debug=yes])
 AC_SUBST([ENABLE_DEBUG], ["$enable_debug"])
 AM_CONDITIONAL(ENABLE_DEBUG,[test "x$enable_debug" = xyes])
 
@@ -352,9 +351,8 @@ dnl     Are we installing the project git hooks?
 dnl     ============================================================
 AC_ARG_ENABLE(git_hooks,
               [AS_HELP_STRING([--enable-git-hooks],
-                              [Install project git hooks (default: no)])],
-              [enable_git_hooks=yes],
-              [enable_git_hooks=no])
+                              [Install project git hooks (default: yes)])],,
+              [enable_git_hooks=yes])
 AC_SUBST([ENABLE_GIT_HOOKS], ["$enable_git_hooks"])
 AM_CONDITIONAL(ENABLE_GIT_HOOKS,[test "x$enable_git_hooks" = xyes])
 
