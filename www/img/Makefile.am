@@ -8,7 +8,7 @@ noinst_SCRIPTS = $(IMG)
 EXTRA_DIST = $(SRC)
 
 # Export images
-$(DEST)/% : %
+$(DEST)/%.png : %.png
 	@test -d $(DEST) || { \
 		$(MKDIR_P) $(DEST); \
 	}
