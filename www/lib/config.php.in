@@ -30,10 +30,10 @@ abstract class Pip_Links {
 
 abstract class PipDatabase {
 
-	const Host = 'localhost';
-	const Username = 'pipdb';
-	const Password = 'ou0aiWiwjohLaen5';
-	const Name = 'pipdb';
+	const Username = '@DB_USERNAME@';
+	const Password = '@DB_PASSWORD@';
+	const Host = '@DB_HOST@';
+	const Name = '@DB_NAME@';
 	const Engine = 'INNODB';
 
 	static function schema() {

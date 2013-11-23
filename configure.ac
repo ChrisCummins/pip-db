@@ -40,6 +40,7 @@ dnl   7.     Website options
 dnl   7.1.     Are we building a debugging site?
 dnl   7.2.     Do we have a document root?
 dnl   7.3.     Do we have a link prefix?
+dnl   7.4.     Set our database credentials
 dnl
 dnl   8.     Tools
 dnl   8.1.     Are we building the tools?
@@ -377,6 +378,35 @@ AS_IF([test "x$WWW_PREFIX" != x],
 
 AC_SUBST([HAVE_WWW_PREFIX],[$HAVE_WWW_PREFIX])
 AM_CONDITIONAL([HAVE_WWW_PREFIX],[test "x$HAVE_WWW_PREFIX" = xyes])
+
+
+dnl     ============================================================
+dnl     7.4. Set our database credentials
+dnl     ============================================================
+AC_ARG_VAR([DB_USERNAME],
+           [The database user name (default: pipdb)])
+AS_IF([test "x$DB_USERNAME" = x],
+      [DB_USERNAME=pipdb])
+AC_SUBST([DB_USERNAME],[$DB_USERNAME])
+
+AC_ARG_VAR([DB_PASSWORD],
+           [The database user password (default: ou0aiWiwjohLaen5)])
+AS_IF([test "x$DB_PASSWORD" = x],
+      [DB_PASSWORD=ou0aiWiwjohLaen5])
+AC_SUBST([DB_PASSWORD],[$DB_PASSWORD])
+
+AC_ARG_VAR([DB_HOST],
+           [The database hostname (default: localhost)])
+AS_IF([test "x$DB_HOST" = x],
+      [DB_HOST=localhost])
+AC_SUBST([DB_HOST],[$DB_HOST])
+
+
+AC_ARG_VAR([DB_NAME],
+           [The database name (default: pipdb)])
+AS_IF([test "x$DB_NAME" = x],
+      [DB_NAME=pipdb])
+AC_SUBST([DB_NAME],[$DB_NAME])
 
 
 dnl ================================================================
