@@ -34,6 +34,7 @@ dnl   6.     Webserver
 dnl   6.1.     Do we have apache2?
 dnl   6.2.     Do we have mysql?
 dnl   6.3.     Do we have php?
+dnl   6.4.     Is apache mod_php enabled?
 dnl
 dnl   7.     Website options
 dnl   7.1.     Are we building a debugging site?
@@ -307,6 +308,25 @@ AS_IF([test "x$enable_install" = xyes],
       [HAVE_PHP=no])
 AC_SUBST([HAVE_PHP],[$HAVE_PHP])
 AM_CONDITIONAL([HAVE_PHP],[test "x$HAVE_PHP" = xyes])
+
+
+dnl     ============================================================
+dnl     Is apache mod_php enabled?
+dnl     ============================================================
+AS_IF([test "x$enable_install" = xyes],
+      [AC_MSG_CHECKING([for mod_php])
+       APACHECTL="/usr/sbin/apache2ctl"
+       mod_php=$($APACHECTL -M 2>/dev/null | grep php5_module)
+       AS_IF([test $? != 0],
+             [HAVE_MOD_PHP=no
+              AC_MSG_RESULT([no])
+	      AC_MSG_WARN([Apache mod_php not enabled])],
+             [HAVE_MOD_PHP=yes
+	      AC_MSG_RESULT([yes])])],
+      [HAVE_MOD_PHP=no])
+
+AC_SUBST([HAVE_MOD_PHP],[$HAVE_MOD_PHP])
+AM_CONDITIONAL([HAVE_PHP],[test "x$HAVE_MOD_PHP" = xyes])
 
 
 dnl ================================================================
