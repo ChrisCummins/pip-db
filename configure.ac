@@ -56,6 +56,9 @@ dnl
 dnl   10.    Git
 dnl   10.1.    Are we installing the project git hooks?
 dnl
+dnl   11.    Generate a config summary document
+dnl   11.1     Dah dah!
+dnl
 dnl ================================================================
 
 
@@ -533,58 +536,71 @@ AC_OUTPUT([
 
 
 dnl ================================================================
-dnl Dah Da!
+dnl Generate a config summary document
 dnl ================================================================
-echo ""
-echo "pip-db - $PIPDB_VERSION"
-echo "--------------"
+
+s=config.summary
+
+echo "This file contains a summary of the configuration options generated" > $s
+echo "by the configure script, generated at $(date)." >> $s
+
+echo "" >> $s
+echo "pip-db - $PIPDB_VERSION" >> $s
+echo "--------------" >> $s
 
 
 # Build options:
-echo ""
-echo " • Build options:"
-echo "        Build destionation:             $WWW_BUILD/"
-echo "        Content hashing enabled:        $enable_content_hashing"
+echo "" >> $s
+echo " • Build options:" >> $s
+echo "        Build destionation:             $WWW_BUILD/" >> $s
+echo "        Content hashing enabled:        $enable_content_hashing" >> $s
 AS_IF([test "x$enable_content_hashing" = xyes],
-      [echo "        Content hashing algorithm:      $HASH"
-       echo "        Content hashes length:          $HASH_LENGTH"])
-echo "        Minify HTML:                    $enable_minify_html"
-echo "        Minify CSS:                     $enable_minify_css"
-echo "        Minify JS:                      $enable_minify_js"
-echo "        Install to webserver:           $enable_install"
+      [echo "        Content hashing algorithm:      $HASH" >> $s
+       echo "        Content hashes length:          $HASH_LENGTH" >> $s])
+echo "        Minify HTML:                    $enable_minify_html" >> $s
+echo "        Minify CSS:                     $enable_minify_css" >> $s
+echo "        Minify JS:                      $enable_minify_js" >> $s
+echo "        Install to webserver:           $enable_install" >> $s
 AS_IF([test "x$enable_install" = xyes],
-      [echo "        Install destination:            $WWW_ROOT"])
+      [echo "        Install destination:            $WWW_ROOT" >> $s])
 
 
 # Webserver:
 AS_IF([test "x$enable_install" = xyes],
-      [echo ""
-       echo " • Webserver:"
+      [echo "" >> $s
+       echo " • Webserver:" >> $s
        AS_IF([test "x$HAVE_HTTPD" = xyes],
-             [echo "        httpd:                          $HTTPD"],
-             [echo "        httpd:                          no"])
+             [echo "        httpd:                          $HTTPD" >> $s],
+             [echo "        httpd:                          no" >> $s])
        AS_IF([test "x$HAVE_MYSQL" = xyes],
-             [echo "        mysql:                          $MYSQL"],
-             [echo "        mysql:                          no"])])
+             [echo "        mysql:                          $MYSQL" >> $s],
+             [echo "        mysql:                          no" >> $s])])
 
 
 # Website options:
-echo ""
-echo " • Website options:"
-echo "        Debugging:                      $enable_debug"
-echo "        Document root:                  $WWW_ROOT/"
+echo "" >> $s
+echo " • Website options:" >> $s
+echo "        Debugging:                      $enable_debug" >> $s
+echo "        Document root:                  $WWW_ROOT/" >> $s
 AS_IF([test "x$HAVE_WWW_PREFIX" = xyes],
-      [echo "        Link prefix:                    $WWW_PREFIX"],
-      [echo "        Link prefix:                    none"])
+      [echo "        Link prefix:                    $WWW_PREFIX" >> $s],
+      [echo "        Link prefix:                    none" >> $s])
 
 
 # Extras:
-echo ""
-echo " • Extras:"
-echo "        Build tools:                    $enable_tools"
-echo "        Build LaTeX documentation:      $HAVE_PDFLATEX"
-echo "        Build Markdown documentation:   $HAVE_PANDOC"
-echo "        Build Markdown contents pages:  $HAVE_DOCTOC"
-echo "        Install custom git hooks:       $enable_git_hooks"
+echo "" >> $s
+echo " • Extras:" >> $s
+echo "        Build tools:                    $enable_tools" >> $s
+echo "        Build LaTeX documentation:      $HAVE_PDFLATEX" >> $s
+echo "        Build Markdown documentation:   $HAVE_PANDOC" >> $s
+echo "        Build Markdown contents pages:  $HAVE_DOCTOC" >> $s
+echo "        Install custom git hooks:       $enable_git_hooks" >> $s
+
+
+dnl     ============================================================
+dnl     Dah dah!
+dnl     ============================================================
+cat $s | tail -n+3
 
 echo ""
+echo "You can now run \`make'."

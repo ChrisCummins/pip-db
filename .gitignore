@@ -89,4 +89,5 @@ Thumbs.db
 #
 # Project-specific ignore patterns
 #
+/config.summary
 /priv
