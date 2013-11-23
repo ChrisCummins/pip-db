@@ -32,19 +32,6 @@ dnl --program-transform-name options
 AC_ARG_PROGRAM
 
 
-dnl ================================================================
-dnl Required versions for dependencies
-dnl ================================================================
-
-dnl TODO: Add dependency versions, examples:
-dnl m4_define([glib_req_version],           [2.32.0])
-dnl m4_define([pangocairo_req_version],     [1.20])
-
-dnl These variables get copied into the generated README
-dnl TODO: Add AC_SUBST for dependencies, examples:
-dnl AC_SUBST([GLIB_REQ_VERSION], [glib_req_version])
-dnl AC_SUBST([GDK_PIXBUF_REQ_VERSION], [gdk_pixbuf_req_version])
-
 dnl Fairly arbitrary, older versions might work too.
 AM_INIT_AUTOMAKE([1.11 -Wall foreign no-define])
 AM_SILENT_RULES([yes])
