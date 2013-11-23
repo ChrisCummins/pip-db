@@ -490,7 +490,7 @@ echo "        Minify JS:                      $enable_minify_js"
 echo "        Install to webserver:           $enable_install"
 echo "        Install destination:            $WWW_ROOT"
 
-AS_IF([test "x$HAVE_WWW_ROOT" = xyes],
+AS_IF([test "x$enable_install" = xyes],
       [echo ""
        echo " • Webserver:"
        AS_IF([test "x$HAVE_HTTPD" = xyes],
