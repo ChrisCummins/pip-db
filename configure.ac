@@ -47,19 +47,6 @@ AC_SUBST([PIPDB_VERSION],[pipdb_version])
 
 
 dnl ================================================================
-dnl Set the package prefix
-dnl ================================================================
-if test "x$prefix" = "xNONE" ; then
-  prefix="/"
-fi
-if test "x$exec_prefix" = "xNONE" ; then
-  exec_prefix=$prefix
-fi
-PREFIX=$prefix
-AC_SUBST([PREFIX])
-
-
-dnl ================================================================
 dnl Compiler stuff
 dnl ================================================================
 
