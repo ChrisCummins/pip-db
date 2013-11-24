@@ -14,8 +14,21 @@
 
     <!-- Search form -->
     <form method="GET" action="{{ _links.search }}">
-      <!-- le textbox -->
-      <input id="q" name="q" type="text" autocomplete="off">
+
+      <div id="qp">
+        <table cellspacing="0" cellpadding="0">
+          <tbody>
+            <tr>
+              <td>
+                <input id="q" name="q" type="text" autocomplete="off">
+              </td>
+              <td id="h">
+                <strong>?</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <!-- buttons -->
       <div class="btn-row">
@@ -41,7 +54,15 @@
 
   <script>
     $(function() {
-      $('input#q').focus();
+      $('#q').focus();
+    });
+
+    $('#q').focus(function() {
+      $('#qp').addClass('active');
+    });
+
+    $('#q').blur(function() {
+      $('#qp').removeClass('active');
     });
   </script>
 

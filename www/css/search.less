@@ -20,11 +20,47 @@
   color: @brand-primary;
   margin: -70px 0 50px;
 }
-.search input {
+
+.search #qp {
+  margin: 10px 0;
+  border: 1px solid @gray-light;
+}
+.search #qp:hover,
+.search #qp.active {
+  box-shadow: 0 0 2px #eee;
+}
+.search #qp:hover {
+  border-color: @gray-dark;
+}
+.search #qp.active {
+  border-color: @brand-success;
+}
+
+.search table {
+  width: 100%;
+}
+
+.search #q {
   width: 100%;
   display: block;
-  margin: 10px 0;
+  border: none;
 }
+.search #q:focus {
+  outline: none;
+}
+
+.search #h {
+  padding-right: 1px;
+  transition: color 0.2s;
+  color: @brand-primary;
+}
+.search #h:hover,
+.search #h:focus {
+  cursor: pointer;
+  color: @brand-success;
+  text-decoration: none;
+}
+
 .search .btn {
   min-width: 116px;
   margin-left: 8px;
