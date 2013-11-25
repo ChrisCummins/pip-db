@@ -105,6 +105,8 @@
 			- [Notes from meeting with Ian](#notes-from-meeting-with-ian-3)
 	- [Friday 22nd](#friday-22nd)
 			- [Notes from meeting with Darren and Fraser](#notes-from-meeting-with-darren-and-fraser)
+	- [Saturday 23rd](#saturday-23rd)
+	- [Monday 25th](#monday-25th)
 
 October 2013 
 =============
@@ -1586,7 +1588,35 @@ Friday 22nd
     2.  A user would like to see all records for a given EC value (for
         example, 3.1).
 
-    3.  
+Saturday 23rd
+-------------
+
+Have been given an account and credentials on one of the PSO uni server
+by Kate Samperi. URL: `http://pso.aston.ac.uk/ cummince`.
+
+Monday 25th
+-----------
+
+Deployed the prototype website to the Aston server (note to self: I
+should look into one of the task-runners like Grunt for generating
+deployment build, the number of configure arguments is getting pretty
+unwieldy!). Notes on initial feedback from Darren:
+
+-   Generally looking positive. The search features that aren’t yet
+    implemented make it quite hard to test (advanced search, empty
+    fields etc.).
+
+-   Homepage is too sparse (address this in D2).
+
+-   The dropdown for experimental methods show lots of duplicates, i.e.
+    the data isn’t standardised. Perhaps it would be possible to keep
+    two separate lists of methods - one which contains the methods that
+    were entered “as is” (with all the duplicates), and a separate,
+    standardised list which can be used for searching (but would be
+    hidden from the user). I’ll take a look into this - it could provide
+    the right balance between keeping an honest record of the data “as
+    recorded”, and constructing a standardised and relational model for
+    categorising the data.
 
 9
 
