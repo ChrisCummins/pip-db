@@ -59,8 +59,9 @@ dnl
 dnl   10.    Git
 dnl   10.1.    Are we installing the project git hooks?
 dnl
-dnl   11.    Generate a config summary document
-dnl   11.1     Dah dah!
+dnl   11.    Generate files
+dnl   11.1.    Generate a config summary document
+dnl   12.2.    Dah dah!
 dnl
 dnl ================================================================
 
@@ -566,6 +567,9 @@ AC_SUBST([ENABLE_GIT_HOOKS], ["$enable_git_hooks"])
 AM_CONDITIONAL(ENABLE_GIT_HOOKS,[test "x$enable_git_hooks" = xyes])
 
 
+dnl ================================================================
+dnl 11. Generate files
+dnl ================================================================
 AC_OUTPUT([
 	Makefile
 	build/Makefile
@@ -600,10 +604,9 @@ AC_OUTPUT([
 	www/lib/Twig/Makefile
 ])
 
-
-dnl ================================================================
-dnl 11. Generate a config summary document
-dnl ================================================================
+dnl     ============================================================
+dnl     11.1. Generate a config summary document
+dnl     ============================================================
 
 s=config.summary
 
@@ -667,7 +670,7 @@ echo "        Install custom git hooks:       $enable_git_hooks" >> $s
 
 
 dnl     ============================================================
-dnl     11.1 Dah dah!
+dnl     11.2 Dah dah!
 dnl     ============================================================
 cat $s | tail -n+3
 
