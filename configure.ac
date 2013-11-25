@@ -352,7 +352,12 @@ AM_CONDITIONAL(ENABLE_DEBUG,[test "x$enable_debug" = xyes])
 dnl     ============================================================
 dnl     7.2. Are we enabling site authentication?
 dnl     ============================================================
-dnl TODO: add a --enable-authentication option
+AC_ARG_ENABLE([authentication],
+              [AS_HELP_STRING([--enable-authentication],
+                              [Enable website password authentication (default: no)])],,
+              [enable_authentication=no])
+AC_SUBST([ENABLE_AUTHENTICATION], ["$enable_authentication"])
+AM_CONDITIONAL(ENABLE_AUTHENTICATION,[test "x$enable_authentication" = xyes])
 
 
 dnl     ============================================================
