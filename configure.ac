@@ -621,6 +621,24 @@ AC_OUTPUT([
 dnl     ============================================================
 dnl     11.1. Add authentication to .htaccess
 dnl     ============================================================
+AS_IF([test "x$enable_authentication" = xyes],
+      [htaccess=www/.htaccess
+
+       echo "Adding authentication requirement to $htaccess"
+
+       echo "" >> $htaccess
+       echo "# ------------------------------------------------------------------------------" >> $htaccess
+       echo "# | Enable site authentication                                                 |" >> $htaccess
+       echo "# ------------------------------------------------------------------------------" >> $htaccess
+       echo "" >> $htaccess
+       echo 'AuthName "Secure Area"' >> $htaccess
+       echo 'AuthType Basic' >> $htaccess
+       echo "AuthUserFile $WWW_ROOT/.htpasswd" >> $htaccess
+       echo 'require valid-user' >> $htaccess
+       echo '' >> $htaccess
+
+       unset htaccess
+       ])
 
 
 dnl     ============================================================
