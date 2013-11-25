@@ -343,7 +343,7 @@ dnl     7.1. Are we building a debugging site?
 dnl     ============================================================
 AC_ARG_ENABLE([debug],
               [AS_HELP_STRING([--enable-debug],
-                              [Enable extra website debugging features (default: no)])],,
+                              [Enable extra website debugging features (default: yes)])],,
               [enable_debug=yes])
 AC_SUBST([ENABLE_DEBUG], ["$enable_debug"])
 AM_CONDITIONAL(ENABLE_DEBUG,[test "x$enable_debug" = xyes])
