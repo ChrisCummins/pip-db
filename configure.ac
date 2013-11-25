@@ -657,6 +657,7 @@ AS_IF([test "x$enable_authentication" = xyes],
 dnl     ============================================================
 dnl     11.2. Generate a config summary document
 dnl     ============================================================
+echo "creating config.summary"
 
 s=config.summary
 
