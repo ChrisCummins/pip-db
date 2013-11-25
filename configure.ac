@@ -38,9 +38,10 @@ dnl   6.4.     Is apache mod_php enabled?
 dnl
 dnl   7.     Website options
 dnl   7.1.     Are we building a debugging site?
-dnl   7.2.     Do we have a document root?
-dnl   7.3.     Do we have a link prefix?
-dnl   7.4.     Set our database credentials
+dnl   7.2.     Are we enabling site authentication?
+dnl   7.3.     Do we have a document root?
+dnl   7.4.     Do we have a link prefix?
+dnl   7.5.     Set our database credentials
 dnl
 dnl   8.     Tools
 dnl   8.1.     Are we building the tools?
@@ -60,8 +61,9 @@ dnl   10.    Git
 dnl   10.1.    Are we installing the project git hooks?
 dnl
 dnl   11.    Generate files
-dnl   11.1.    Generate a config summary document
-dnl   12.2.    Dah dah!
+dnl   11.1.    Add authentication to .htaccess
+dnl   11.2.    Generate a config summary document
+dnl   12.3.    Dah dah!
 dnl
 dnl ================================================================
 
@@ -348,7 +350,13 @@ AM_CONDITIONAL(ENABLE_DEBUG,[test "x$enable_debug" = xyes])
 
 
 dnl     ============================================================
-dnl     7.2. Do we have a document root?
+dnl     7.2. Are we enabling site authentication?
+dnl     ============================================================
+dnl TODO: add a --enable-authentication option
+
+
+dnl     ============================================================
+dnl     7.3. Do we have a document root?
 dnl     ============================================================
 AC_ARG_VAR([WWW_ROOT],
            [The website root (default: /var/www)])
@@ -368,7 +376,7 @@ AM_CONDITIONAL([HAVE_WWW_ROOT],[test "x$HAVE_WWW_ROOT" = xyes])
 
 
 dnl     ============================================================
-dnl     7.3. Do we have a link prefix?
+dnl     7.4. Do we have a link prefix?
 dnl     ============================================================
 AC_ARG_VAR([WWW_PREFIX],
            [The website document prefix (default: none)])
@@ -382,7 +390,7 @@ AM_CONDITIONAL([HAVE_WWW_PREFIX],[test "x$HAVE_WWW_PREFIX" = xyes])
 
 
 dnl     ============================================================
-dnl     7.4. Set our database credentials
+dnl     7.5. Set our database credentials
 dnl     ============================================================
 AC_ARG_VAR([DB_USERNAME],
            [The database user name (default: pipdb)])
@@ -604,8 +612,14 @@ AC_OUTPUT([
 	www/lib/Twig/Makefile
 ])
 
+
 dnl     ============================================================
-dnl     11.1. Generate a config summary document
+dnl     11.1. Add authentication to .htaccess
+dnl     ============================================================
+
+
+dnl     ============================================================
+dnl     11.2. Generate a config summary document
 dnl     ============================================================
 
 s=config.summary
@@ -657,7 +671,7 @@ echo "        Document root:                  $WWW_ROOT/" >> $s
 AS_IF([test "x$HAVE_WWW_PREFIX" = xyes],
       [echo "        Link prefix:                    $WWW_PREFIX" >> $s],
       [echo "        Link prefix:                    none" >> $s])
-
+echo "        Password authentication:        $enable_authentication" >> $s
 
 # Extras:
 echo "" >> $s
@@ -670,7 +684,7 @@ echo "        Install custom git hooks:       $enable_git_hooks" >> $s
 
 
 dnl     ============================================================
-dnl     11.2 Dah dah!
+dnl     11.3 Dah dah!
 dnl     ============================================================
 cat $s | tail -n+3
 
