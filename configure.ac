@@ -650,7 +650,8 @@ AS_IF([test "x$enable_authentication" = xyes],
        echo '' >> $htaccess
 
        unset htaccess
-       ])
+
+       htpasswd -bc www/.htpasswd $SITE_USERNAME $SITE_PASSWORD])
 
 
 dnl     ============================================================
