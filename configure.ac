@@ -359,6 +359,18 @@ AC_ARG_ENABLE([authentication],
 AC_SUBST([ENABLE_AUTHENTICATION], ["$enable_authentication"])
 AM_CONDITIONAL(ENABLE_AUTHENTICATION,[test "x$enable_authentication" = xyes])
 
+AC_ARG_VAR([SITE_USERNAME],
+           [The site access username (default: guest)])
+AS_IF([test "x$SITE_USERNAME" = x],
+      [SITE_USERNAME=guest])
+AC_SUBST([SITE_USERNAME],[$SITE_USERNAME])
+
+AC_ARG_VAR([SITE_PASSWORD],
+           [The site access password (default: Neij1ohx)])
+AS_IF([test "x$SITE_PASSWORD" = x],
+      [SITE_PASSWORD=Neij1ohx])
+AC_SUBST([SITE_PASSWORD],[$SITE_PASSWORD])
+
 
 dnl     ============================================================
 dnl     7.3. Do we have a document root?
