@@ -2,6 +2,7 @@ noinst_SCRIPTS = \
 	dsa \
 	ghi \
 	mkrelease \
+	pipbot \
 	png \
 	sloccount \
 	workflow \
