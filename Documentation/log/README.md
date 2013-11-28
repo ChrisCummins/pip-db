@@ -107,6 +107,9 @@
 			- [Notes from meeting with Darren and Fraser](#notes-from-meeting-with-darren-and-fraser)
 	- [Saturday 23rd](#saturday-23rd)
 	- [Monday 25th](#monday-25th)
+	- [Wednesday 27th](#wednesday-27th)
+			- [External links](#external-links)
+	- [Thursday 28th](#thursday-28th)
 
 October 2013 
 =============
@@ -1617,6 +1620,90 @@ unwieldy!). Notes on initial feedback from Darren:
     the right balance between keeping an honest record of the data “as
     recorded”, and constructing a standardised and relational model for
     categorising the data.
+
+Wednesday 27th
+--------------
+
+#### External links
+
+We could do some pretty advanced verification of external URLs. First
+off, we could verify that external URLs are not dead (don’t return
+404s), and we could also grab the page titles and use those as captions.
+We could even cache the entire page if we think there’s a chance of
+important links going dead.
+
+Thursday 28th
+-------------
+
+Example possible interactive pipbot session:
+
+    $ pipbot
+    Hello there. My name is pipbot. How can I help?
+
+    -> help
+    These are some of the things I can do:
+        pipbot build <build>
+            Build a specific configuration.
+        pipbot issue <verb>
+            Open and close project issues.
+        pipbot list <something>
+            List an entity (builds, issues, etc.).
+        pipbot show <something>
+            Show something
+        pipbot issue
+            Open and close project issues.
+        pipbot repeat
+            Repeat the last instruction.
+
+    -> build local debug
+    Generating... [ok]
+    Configuring... [ok]
+    Cleaning up... [ok]
+    Building... [ok]
+
+    -> deploy
+    Deploying local build to /var/www... [ok]
+
+    -> deploy public production
+    Generating... [ok]
+    Configuring... [ok]
+    Cleaning up... [ok]
+    Building... [ok]
+    Deploying remote build to pso.aston.ac.uk/~cummince... [ok]
+
+    -> show 111
+    Issue #111: Regression in build system
+
+    -> new 111
+    Creating wip/111 branch... [ok]
+
+    -> fixed 111
+    Merging wip/111 into master... [ok]
+
+    -> push upstream
+    Pushing master to origin... [ok]
+
+    -> version
+    Last release branch: 0.0.7
+    Next release branch: 0.0.8
+
+    -> release 0.0.9
+    Releasing version 0.0.8... [ok]
+    Bumping version to 0.0.9... [ok]
+
+    -> wtf?
+    The current version is 0.0.9
+    You're on branch master
+    You're up to date with origin
+    You last deployed a7342cf3 to local
+    You last deployed 3849bef3 to public
+
+    -> show 3849bef3
+    commit 3849bef3325a43ded55cc3359761e070636dad1fe
+    Author: Chris Cummins <chrisc.101@gmail.com>
+    Date:   Mon Nov 25 15:56:41 2013 +0000
+
+        log: Fix regression in blah...
 
 9
 
