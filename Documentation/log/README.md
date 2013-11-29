@@ -111,6 +111,7 @@
 			- [External links](#external-links)
 	- [Thursday 28th](#thursday-28th)
 	- [Friday 29th](#friday-29th)
+			- [Project name](#project-name)
 
 October 2013 
 =============
@@ -1713,6 +1714,11 @@ Found a good article on test coverage in SQLite [@SQLiteND]. Some
 interesting edge-cases are tested such as out-of-memory errors, I/O
 error testing, and fuzz testing. Should refer to this when designing the
 pip-db testing strategy.
+
+#### Project name
+
+refactored source code to new project name ’pip-db’, and rename git
+repository. New url: <https://github.com/ChrisCummins/pip-db>.
 
 9
 
