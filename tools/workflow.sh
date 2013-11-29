@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # The prefix for work-in-progress issue branches
-ISSUE_BRANCH_PREFIX=wip/
+ISSUE_BRANCH_PREFIX=feature/
 
 # The branch to base work-in-progress branches off of
 ISSUE_BRANCH_BASE=master
@@ -72,13 +72,13 @@ get_git_toplevel() {
 }
 
 # Get the name of the current branch
-#    @return Branch name, e.g. 'wip/28', 'master'
+#    @return Branch name, e.g. 'feature/28', 'master'
 get_current_branch() {
 	local refname=`git symbolic-ref HEAD 2>/dev/null`
 	echo ${refname##refs/heads/}
 }
 
-# Get the issue number from the current wip branch
+# Get the issue number from the current feature branch
 #    @return Issue number, e.g. '28'
 get_current_issue() {
 	local branch=`get_current_branch`
@@ -95,10 +95,10 @@ fail_if_not_on_issue_branch() {
 	fi
 }
 
-# Print a summary of the current issues and wip branches
+# Print a summary of the current issues and feature branches
 show() {
 	local branches=$(git branch | grep --color=never "$ISSUE_BRANCH_PREFIX")
-	local issues=$(echo "$branches" | sed 's/.*wip\///')
+	local issues=$(echo "$branches" | sed 's/.*feature\///')
 
 	for i in $issues; do
 		$(get_git_toplevel)/tools/ghi list | grep --color=never '^ *'$i
@@ -109,7 +109,6 @@ show() {
 #    $1 issue number
 new() {
 	local issue=$1
-	local branch=$ISSUE_BRANCH_PREFIX$issue
 
 	if [ -z "$issue" ]; then
 		echo "fatal: no issue number given" >&2
@@ -119,16 +118,10 @@ new() {
 	# Sanity checks
 	execute "fail_if_issue_not_valid $issue" quiet
 
-	# Perform branching
-	execute "git checkout -b wip/$issue $ISSUE_BRANCH_BASE"
-	echo_if_live "git push -u $REMOTE $branch"
-	execute "git push -u $REMOTE $branch"
-
 	$(get_git_toplevel)/tools/ghi show $issue
 
-	# Output results
-	echo ""
-	echo "Execute '$0 close' when completed."
+	# Perform branching
+	execute "git flow feature start $issue"
 }
 
 # Switch back to master and rebase current issue work
@@ -144,8 +137,6 @@ pause() {
 		local have_stashed=yes
 	fi
 	execute "git checkout $ISSUE_BRANCH_BASE"
-	echo_if_live "git rebase $branch"
-	execute "git rebase $branch"
 	test -n "$have_stashed" && execute "git stash pop"
 
 	# Output results
@@ -156,16 +147,12 @@ pause() {
 # Close the current work-in-progress branch and rebase on master
 close() {
 	local branch=`get_current_branch`
-
-	pause $@
-
-	local issue=$(echo "$branch" | sed 's/.*wip\///')
-
-	# Cleanup issue branch
-	execute "git branch -D $branch"
-	execute "git push $REMOTE :$branch"
+	local issue=$(echo "$branch" | sed 's/.*feature\///')
 
 	$(get_git_toplevel)/tools/ghi show $issue
+
+	# Cleanup issue branch
+	execute "git flow feature finish $issue"
 }
 
 main() {
