@@ -1,5 +1,6 @@
 SUBDIRS = \
 	design \
+	scripts \
 	www \
 	build \
 	$(NULL)
