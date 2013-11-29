@@ -1,5 +1,5 @@
 #!/bin/sh
-### autogen.sh - tool to help build protein-db
+### autogen.sh - tool to help build pip-db
 
 # Based on the autogen.sh script from GNU Emacs:
 
@@ -134,7 +134,7 @@ if [ x"$missing" != x ]; then
 
 	cat <<EOF
 
-Building protein-db requires the following specialised programs:
+Building pip-db requires the following specialised programs:
 EOF
 
 	for prog in $progs; do
