@@ -110,6 +110,7 @@
 	- [Wednesday 27th](#wednesday-27th)
 			- [External links](#external-links)
 	- [Thursday 28th](#thursday-28th)
+	- [Friday 29th](#friday-29th)
 
 October 2013 
 =============
@@ -1705,6 +1706,14 @@ Example possible interactive pipbot session:
 
         log: Fix regression in blah...
 
+Friday 29th
+-----------
+
+Found a good article on test coverage in SQLite [@SQLiteND]. Some
+interesting edge-cases are tested such as out-of-memory errors, I/O
+error testing, and fuzz testing. Should refer to this when designing the
+pip-db testing strategy.
+
 9
 
 IBMRUP Wikipedia (ND). IBM Rational Unified Process.
@@ -1762,3 +1771,5 @@ St. (2012). Dependency Injection in PHP. nettuts+.
 SensioLabsND SensioLabs (ND). The Dependency Injection Component.
 Symfony.
 <http://symfony.com/doc/2.0/components/dependency_injection/introduction.html>.
+SQLiteND SQLite (ND). How SQLite is Tested.
+<http://www.sqlite.org/testing.html>.
