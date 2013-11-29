@@ -14,7 +14,6 @@ EXTRA_DIST = \
 	dsa.sh.in \
 	png-payload.js \
 	png.js \
-	pngrc \
 	README.md \
 	workflow.sh \
 	$(NULL)
