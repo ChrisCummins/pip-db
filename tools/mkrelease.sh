@@ -1,7 +1,5 @@
 #!/bin/bash
 
-RELEASE_PREFIX="release/"
-
 # Print program usage
 usage() {
 	echo "Usage: $0 <version>"
@@ -84,18 +82,6 @@ set_new_version() {
 	sed -r -i 's/(.*m4_define\(\s*\[pipdb_micro_version\],\s*\[)[0-9]+(\].*)/\1'$micro'\2/' configure.ac
 }
 
-# Make the git release branch.
-#
-#     @param $1 The current version string
-make_release_branch() {
-	local current_version=$1
-	local branch_name="$RELEASE_PREFIX$current_version"
-
-	echo "Creating release branch... '$branch_name'"
-	git branch $branch_name
-	git push origin $branch_name >/dev/null
-}
-
 # Make the git release tag.
 #
 #     @param $1 The current version string
@@ -131,7 +117,6 @@ do_mkrelease() {
 	local current_version=$(get_current_version)
 	echo "'$current_version'"
 
-	make_release_branch $current_version
 	make_release_tag $current_version
 	set_new_version $current_version $new_version
 	make_version_bump_commit $new_version
