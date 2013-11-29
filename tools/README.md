@@ -66,13 +66,13 @@ version to `<version>`.
     Compressing objects: 100% (78/78), done.
     Writing objects: 100% (78/78), 7.97 KiB, done.
     Total 78 (delta 57), reused 0 (delta 0)
-    To git@github.com:ChrisCummins/protein-db.git
+    To git@github.com:ChrisCummins/pip-db.git
      * [new branch]      release/0.0.1 -> release/0.0.1
     Creating release tag... '0.0.1'
     Counting objects: 1, done.
     Writing objects: 100% (1/1), 169 bytes, done.
     Total 1 (delta 0), reused 0 (delta 0)
-    To git@github.com:ChrisCummins/protein-db.git
+    To git@github.com:ChrisCummins/pip-db.git
      * [new tag]         0.0.1 -> 0.0.1
     Updating version string... 'configure.ac'
     Creating version bump commit... '0.0.2'
@@ -156,7 +156,7 @@ Automated workflow script for managing git branches.
     Compressing objects: 100% (53/53), done.
     Writing objects: 100% (54/54), 6.50 KiB, done.
     Total 54 (delta 38), reused 0 (delta 0)
-    To git@github.com:ChrisCummins/protein-db.git
+    To git@github.com:ChrisCummins/pip-db.git
      * [new branch]      wip/10 -> wip/10
     Branch wip/10 set up to track remote branch wip/10 from origin.
 
@@ -172,7 +172,7 @@ Automated workflow script for managing git branches.
     First, rewinding head to replay your work on top of it...
     Fast-forwarded master to wip/10.
     Deleted branch wip/10 (was 672b654).
-    To git@github.com:ChrisCummins/protein-db.git
+    To git@github.com:ChrisCummins/pip-db.git
      - [deleted]         wip/10
 
     Merged 'wip/10' into 'master'
