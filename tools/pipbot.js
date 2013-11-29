@@ -223,7 +223,7 @@ var fs = require('fs');
 var exec = require('child_process').exec;
 var spawn = require('child_process').spawn;
 
-var projectdir = '/home/chris/src/protein-db';
+var projectdir = '/home/chris/src/pip-db';
 var scriptsdir = projectdir + '/scripts/pipbot';
 
 
