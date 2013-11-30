@@ -142,6 +142,7 @@ project.
     Usage: ./worflow <command> [args]
 
     Commands:
+           s | show <issue-number>  Show an issue number
            n | new <issue-number>   Begin work on a new issue
            p | pause                Pause work on the current issue
            c | close                Complete work on the current issue

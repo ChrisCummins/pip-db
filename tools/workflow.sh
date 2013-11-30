@@ -14,6 +14,7 @@ usage() {
 	echo "Usage: $0 <command> [args]"
 	echo ""
 	echo "Commands:"
+	echo "       s | show <issue-number>  Show an issue number"
 	echo "       n | new <issue-number>   Begin work on a new issue"
 	echo "       p | pause                Pause work on the current issue"
 	echo "       c | close                Complete work on the current issue"
