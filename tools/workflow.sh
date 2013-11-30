@@ -28,9 +28,12 @@ execute() {
 	local quiet=$2
 
 	test -z "$DRY_RUN" && {
-		set -e
 		$cmd;
-		set +e
+
+		if (( $? )); then
+			exit $?
+		fi
+
 	} || {
 		test -z $quiet && echo $cmd
 	}
