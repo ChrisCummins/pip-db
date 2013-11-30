@@ -151,29 +151,61 @@ Automated workflow script for managing git branches.
 
 ### Example Usage
 
-    $ ./tools/workflow new 10
-    Switched to a new branch 'wip/10'
-    Counting objects: 59, done.
-    Compressing objects: 100% (53/53), done.
-    Writing objects: 100% (54/54), 6.50 KiB, done.
-    Total 54 (delta 38), reused 0 (delta 0)
-    To git@github.com:ChrisCummins/pip-db.git
-     * [new branch]      wip/10 -> wip/10
-    Branch wip/10 set up to track remote branch wip/10 from origin.
+    $ ./tools/workflow n 182
+    #182: tools/workflow: Doesn't push feature branches to origin
+    @ChrisCummins opened this issue 12 minutes ago.  open
+    @ChrisCummins is assigned.  Regression   Testing & tooling   Version control
+    Milestone #2: M1: Initial prototype
 
-    Execute './workflow close' when completed.
-    $ echo 'my hotfox' > fix
+
+    Branches 'develop' and 'origin/develop' have diverged.
+    And local branch 'develop' is ahead of 'origin/develop'.
+    M   tools/workflow.sh
+    Switched to a new branch 'feature/182'
+
+    Summary of actions:
+    - A new branch 'feature/182' was created, based on 'develop'
+    - You are now on branch 'feature/182'
+
+    Now, start committing on your feature. When done, use:
+
+         git flow feature finish 182
+
+    Counting objects: 17, done.
+    Delta compression using up to 4 threads.
+    Compressing objects: 100% (13/13), done.
+    Writing objects: 100% (13/13), 1.29 KiB, done.
+    Total 13 (delta 10), reused 0 (delta 0)
+    To git@github.com:ChrisCummins/pip-db.git
+     * [new branch]      feature/182 -> feature/182
+    Branch feature/182 set up to track remote branch feature/182 from origin.
+    $ echo 'woo!' > README.md
     $ git commit -a -m 'Fix for #10'
     [wip/10 672b654] Fix for #10
      1 file changed, 1 insertion(+)
      create mode 100644 tools/fix
-    $ ./workflow close
-    Switched to branch 'master'
-    Your branch is ahead of 'origin/master' by 1 commit.
-    First, rewinding head to replay your work on top of it...
-    Fast-forwarded master to wip/10.
-    Deleted branch wip/10 (was 672b654).
-    To git@github.com:ChrisCummins/pip-db.git
-     - [deleted]         wip/10
+    $ ./tools/workflow c
+    #182: tools/workflow: Doesn't push feature branches to origin
+    @ChrisCummins opened this issue 14 minutes ago.  open
+    @ChrisCummins is assigned.  Regression   Testing & tooling   Version control
+    Milestone #2: M1: Initial prototype
 
-    Merged 'wip/10' into 'master'
+
+    Switched to branch 'develop'
+    Your branch is ahead of 'origin/develop' by 3 commits.
+    Updating bb7b416..124ffa3
+    Fast-forward
+     tools/workflow.sh |    7 +++++++
+     1 file changed, 7 insertions(+)
+    warning: not deleting branch 'feature/182' that is not yet merged to
+             'refs/remotes/origin/feature/182', even though it is merged to HEAD.
+    error: The branch 'feature/182' is not fully merged.
+    If you are sure you want to delete it, run 'git branch -D feature/182'.
+
+    Summary of actions:
+    - The feature branch 'feature/182' was merged into 'develop'
+    - Feature branch 'feature/182' has been removed
+    - You are now on branch 'develop'
+
+    To git@github.com:ChrisCummins/pip-db.git
+     - [deleted]         feature/182
