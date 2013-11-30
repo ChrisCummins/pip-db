@@ -25,6 +25,11 @@ EXTRA_DIST = \
 	@echo '  NODE   $@'
 	@$(INSTALL) --mode=755 $< $@
 
+# Generating executables from python scripts
+%: %.py
+	@echo '  PYTHON $@'
+	@$(INSTALL) --mode=755 $< $@
+
 # Generating executables from shell scripts
 %: %.sh
 	@echo '  SHELL  $@'
