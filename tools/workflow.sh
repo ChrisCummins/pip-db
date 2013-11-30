@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# The prefix for work-in-progress issue branches
-ISSUE_BRANCH_PREFIX=feature/
+# The prefix for feature branches
+FEATURE_BRANCH_PREFIX=feature/
 
-# The branch to base work-in-progress branches off of
-ISSUE_BRANCH_BASE=master
+# The main development branch that feature branches are based off of
+DEVELOPMENT_BRANCH=master
 
 # The remote repository destination
 REMOTE=origin
@@ -14,9 +14,10 @@ usage() {
 	echo "Usage: $0 <command> [args]"
 	echo ""
 	echo "Commands:"
-	echo "       n | new <issue-number>   Begin work on a new issue"
-	echo "       p | pause                Pause work on the current issue"
-	echo "       c | close                Complete work on the current issue"
+	echo "       s | show <issue-number>  Show an issue number"
+	echo "       n | new <issue-number>   Begin work on a new feature"
+	echo "       p | pause                Pause work on the current feature"
+	echo "       c | close                Complete work on the current feature"
 }
 
 # Execute command if we're not on a dry-run, else just print the commnad
@@ -27,9 +28,12 @@ execute() {
 	local quiet=$2
 
 	test -z "$DRY_RUN" && {
-		set -e
 		$cmd;
-		set +e
+
+		if (( $? )); then
+			exit $?
+		fi
+
 	} || {
 		test -z $quiet && echo $cmd
 	}
@@ -82,22 +86,22 @@ get_current_branch() {
 #    @return Issue number, e.g. '28'
 get_current_issue() {
 	local branch=`get_current_branch`
-	echo ${branch##$ISSUE_BRANCH_PREFIX}
+	echo ${branch##$FEATURE_BRANCH_PREFIX}
 }
 
-# Check that the current branch is an issue branch else fail
-fail_if_not_on_issue_branch() {
-	local prefix=`echo $(get_current_branch) | grep "^$ISSUE_BRANCH_PREFIX"`
+# Check that the current branch is a feature branch else fail
+fail_if_not_on_feature_branch() {
+	local prefix=`echo $(get_current_branch) | grep "^$FEATURE_BRANCH_PREFIX"`
 
 	if [ -z $prefix ]; then
-		echo "fatal: not on an issue branch" >&2
+		echo "fatal: not on a feature branch" >&2
 		exit 5
 	fi
 }
 
 # Print a summary of the current issues and feature branches
 show() {
-	local branches=$(git branch | grep --color=never "$ISSUE_BRANCH_PREFIX")
+	local branches=$(git branch | grep --color=never "$FEATURE_BRANCH_PREFIX")
 	local issues=$(echo "$branches" | sed 's/.*feature\///')
 
 	for i in $issues; do
@@ -122,37 +126,44 @@ new() {
 
 	# Perform branching
 	execute "git flow feature start $issue"
+
+	execute "git push -u origin $FEATURE_BRANCH_PREFIX$issue"
 }
 
-# Switch back to master and rebase current issue work
+# Switch back to master and rebase current feature work
 pause() {
 	local branch=`get_current_branch`
 
 	# Sanity checks
-	fail_if_not_on_issue_branch
+	fail_if_not_on_feature_branch
 
 	# Perform branching
 	if ! is_working_tree_clean; then
 		execute "git stash"
 		local have_stashed=yes
 	fi
-	execute "git checkout $ISSUE_BRANCH_BASE"
+
+	execute "git push origin $branch"
+
+	execute "git checkout $DEVELOPMENT_BRANCH"
 	test -n "$have_stashed" && execute "git stash pop"
 
 	# Output results
 	echo ""
-	echo "Merged '$branch' into '$ISSUE_BRANCH_BASE'"
+	echo "Merged '$branch' into '$DEVELOPMENT_BRANCH'"
 }
 
-# Close the current work-in-progress branch and rebase on master
+# Close the current feature branch and rebase on master
 close() {
 	local branch=`get_current_branch`
 	local issue=$(echo "$branch" | sed 's/.*feature\///')
 
 	$(get_git_toplevel)/tools/ghi show $issue
 
-	# Cleanup issue branch
+	# Cleanup feature branch
 	execute "git flow feature finish $issue"
+
+	execute "git push origin :$branch"
 }
 
 main() {
@@ -168,6 +179,12 @@ main() {
 			exit 0
 		fi
 	done
+
+	# Print usage if no arguments given
+	if [ -z "$1" ]; then
+		usage
+		exit 1
+	fi
 
 	# Parse user input
 	case "$1" in
