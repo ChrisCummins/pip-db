@@ -1,12 +1,14 @@
 noinst_SCRIPTS = \
 	dsa \
 	ghi \
-	mkrelease \
 	pipbot \
 	png \
 	sloccount \
-	workflow \
 	$(NULL)
+
+if HAVE_GIT_FLOW
+noinst_SCRIPTS += workflow mkrelease
+endif
 
 CLEANFILES = $(noinst_SCRIPTS)
 
