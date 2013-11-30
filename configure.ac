@@ -601,7 +601,7 @@ git flow version >/dev/null 2>&1
 AS_IF([test $? != 0],
       [HAVE_GIT_FLOW=no
        AC_MSG_RESULT([no])
-       AC_MSG_WARN([Git extensions git-flow are not isntalled])],
+       AC_MSG_WARN([Git extensions git-flow are not installed])],
       [HAVE_GIT_FLOW=yes
        AC_MSG_RESULT([yes])])
 
