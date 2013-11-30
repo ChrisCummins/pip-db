@@ -173,6 +173,12 @@ main() {
 		fi
 	done
 
+	# Print usage if no arguments given
+	if [ -z "$1" ]; then
+		usage
+		exit 1
+	fi
+
 	# Parse user input
 	case "$1" in
 	"show" | "s")
