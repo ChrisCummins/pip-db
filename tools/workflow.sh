@@ -4,7 +4,7 @@
 FEATURE_BRANCH_PREFIX=feature/
 
 # The main development branch that feature branches are based off of
-FEATURE_BRANCH_BASE=master
+DEVELOPMENT_BRANCH=master
 
 # The remote repository destination
 REMOTE=origin
@@ -145,12 +145,12 @@ pause() {
 
 	execute "git push origin $branch"
 
-	execute "git checkout $FEATURE_BRANCH_BASE"
+	execute "git checkout $DEVELOPMENT_BRANCH"
 	test -n "$have_stashed" && execute "git stash pop"
 
 	# Output results
 	echo ""
-	echo "Merged '$branch' into '$FEATURE_BRANCH_BASE'"
+	echo "Merged '$branch' into '$DEVELOPMENT_BRANCH'"
 }
 
 # Close the current feature branch and rebase on master
