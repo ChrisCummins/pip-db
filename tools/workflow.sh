@@ -126,6 +126,8 @@ new() {
 
 	# Perform branching
 	execute "git flow feature start $issue"
+
+	execute "git push -u origin $ISSUE_BRANCH_PREFIX$issue"
 }
 
 # Switch back to master and rebase current issue work
@@ -140,6 +142,9 @@ pause() {
 		execute "git stash"
 		local have_stashed=yes
 	fi
+
+	execute "git push origin $branch"
+
 	execute "git checkout $ISSUE_BRANCH_BASE"
 	test -n "$have_stashed" && execute "git stash pop"
 
@@ -157,6 +162,8 @@ close() {
 
 	# Cleanup issue branch
 	execute "git flow feature finish $issue"
+
+	execute "git push origin :$branch"
 }
 
 main() {
