@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import json
 import subprocess
 import re
 from sys import argv
@@ -63,8 +64,39 @@ def grep(regex, path):
 	return match
 
 
-def build(build_name, deploy_name):
-	# TODO: perform build
+def get_build_json(name):
+	build_etc_file = open(etcdir + "build.json")
+	build_etc_json = json.load(build_etc_file)
+	build_etc_file.close()
+
+	for b in build_etc_json:
+		if b == name:
+			return build_etc_json[b]
+
+
+def get_deploy_json(name):
+	deploy_etc_file = open(etcdir + "deploy.json")
+	deploy_etc_json = json.load(deploy_etc_file)
+	deploy_etc_file.close()
+
+	for d in deploy_etc_json:
+		if d == name:
+			return deploy_etc_json[d]
+
+
+def build(deploy_name, build_name):
+
+	deploy_json = get_deploy_json(deploy_name)
+	build_json = get_build_json(build_name)
+
+	if deploy_json == None:
+		print "Couldn't find deployment configuration '" + deploy_name + "'"
+		return 1
+
+	if build_json == None:
+		print "Couldn't find build configuration '" + build_name + "'"
+		return 1
+
 	return 0
 
 
@@ -94,7 +126,7 @@ def process_command(command, args):
 
 	elif command == "build":
 		if len(args) != 2:
-			print "Usage: pipbot build <build> <deploy>"
+			print "Usage: pipbot build <deploy> <build>"
 			return 1
 
 		return build(args[0], args[1])
