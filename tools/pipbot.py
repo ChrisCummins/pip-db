@@ -73,6 +73,9 @@ def print_help():
 	print "    pipbot pause"
 	print "        Pause work on the current feature branch"
 	print ""
+	print "    pipbot close"
+	print "        Complete work on the current feature branch"
+	print ""
 
 
 def fatal(msg):
@@ -177,6 +180,14 @@ def pause():
 	except:
 		return 2
 
+def close():
+
+	try:
+		run("./tools/workflow close", False)
+		return 0
+	except:
+		return 2
+
 def issue(args):
 
 	try:
@@ -243,6 +254,9 @@ def process_command(command, args):
 
 	elif command == "pause":
 		return pause()
+
+	elif command == "close":
+		return close()
 
 	else:
 		print "I don't understand!"
