@@ -90,6 +90,14 @@ def fatal(msg):
 	exit(1)
 
 
+def is_int(s):
+	try:
+		int(s)
+		return True
+	except ValueError:
+		return False
+
+
 def grep(regex, path):
 	file = open(path, "r")
 
@@ -185,17 +193,10 @@ def undeploy(args):
 		return 2
 
 
-def is_number(s):
-	try:
-		int(s)
-		return True
-	except ValueError:
-		return False
-
 def new(name):
 
 	try:
-		if is_number(name) == True:
+		if is_int(name) == True:
 			run("./tools/ghi show " + name, False)
 
 		run("./tools/workflow new " + name, False)
