@@ -294,7 +294,7 @@ if __name__ == "__main__":
 		command = str(argv[1]);
 	else:
 		print_help()
-		exit(1)
+		exit(0)
 
 	if len(argv) > 2:
 		argv.pop(0)
