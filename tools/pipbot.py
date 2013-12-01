@@ -55,10 +55,7 @@ def print_help():
 	print "    pipbot version"
 	print "        Show the current project version"
 	print ""
-	print "    pipbot wtf"
-	print "        Show the current project configuration"
-	print ""
-	print "    pipbot issue <command>"
+	print "    pipbot issue <command ..>"
 	print "        Issue tracker commands:"
 	print "          list        List all issues"
 	print "          show        Show an issue's details"
@@ -287,10 +284,6 @@ def process_command(command, args):
 
 	elif command == "version":
 		print get_version_string()
-		return 0
-
-	elif command == "wtf":
-		print get_configuration()
 		return 0
 
 	elif command == "issue":
