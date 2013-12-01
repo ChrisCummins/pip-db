@@ -84,8 +84,10 @@ def get_json_from_file(name, path):
 			return json_data[d]
 
 
-def run(cmd):
-	print "$ " + cmd
+def run(cmd, echo=True):
+	if echo == True:
+		print "$ " + cmd
+
 	ret = os.system(cmd)
 	if ret != 0:
 		raise Exception('Command returned error code {0}'.format(ret))
