@@ -140,6 +140,10 @@ def get_version_string():
 	return ".".join([str(i) for i in get_version()])
 
 
+def get_configuration():
+	file = open("config.summary", "r")
+	return file.read()
+
 def process_command(command, args):
 
 	if command == "help":
@@ -158,6 +162,10 @@ def process_command(command, args):
 
 	elif command == "version":
 		print get_version_string()
+		return 0
+
+	elif command == "wtf":
+		print get_configuration()
 		return 0
 
 	else:
