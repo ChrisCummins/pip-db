@@ -110,6 +110,18 @@ def build(target_name, build_name):
 	return 0
 
 
+def deploy(args):
+
+	# Support 'deploy <target> <build>' syntax
+	if len(args) == 2:
+		build(args[0], args[1])
+
+	try:
+		run("make install")
+	except:
+		return 2
+
+
 def get_version():
 	components = ["major", "minor", "micro"]
 	values = []
@@ -140,6 +152,9 @@ def process_command(command, args):
 			return 1
 
 		return build(args[0], args[1])
+
+	elif command == "deploy":
+		return deploy(args)
 
 	elif command == "version":
 		print get_version_string()
