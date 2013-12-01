@@ -77,7 +77,10 @@ def get_json_from_file(name, path):
 
 def run(cmd):
 	print "$ " + cmd
-	os.system(cmd)
+	ret = os.system(cmd)
+	if ret != 0:
+		raise Exception('Command returned error code {0}'.format(ret))
+
 
 def build(target_name, build_name):
 
@@ -97,9 +100,12 @@ def build(target_name, build_name):
 							  build_json["configure"]["env"] +
 							  target_json["configure"]["env"])
 
-	run("./autogen.sh")
-	run("./configure " + configure_args)
-	run("make clean all")
+	try:
+		run("./autogen.sh")
+		run("./configure " + configure_args)
+		run("make clean all")
+	except:
+		return 2
 
 	return 0
 
