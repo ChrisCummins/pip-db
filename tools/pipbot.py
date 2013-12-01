@@ -3,6 +3,7 @@
 import json
 import subprocess
 import re
+import os
 from sys import argv
 from sys import exit
 
@@ -64,38 +65,41 @@ def grep(regex, path):
 	return match
 
 
-def get_build_json(name):
-	build_etc_file = open(etcdir + "build.json")
-	build_etc_json = json.load(build_etc_file)
-	build_etc_file.close()
+def get_json_from_file(name, path):
+	json_file = open(path)
+	json_data = json.load(json_file)
+	json_file.close()
 
-	for b in build_etc_json:
-		if b == name:
-			return build_etc_json[b]
-
-
-def get_deploy_json(name):
-	deploy_etc_file = open(etcdir + "deploy.json")
-	deploy_etc_json = json.load(deploy_etc_file)
-	deploy_etc_file.close()
-
-	for d in deploy_etc_json:
+	for d in json_data:
 		if d == name:
-			return deploy_etc_json[d]
+			return json_data[d]
 
 
-def build(deploy_name, build_name):
+def run(cmd):
+	print "$ " + cmd
+	os.system(cmd)
 
-	deploy_json = get_deploy_json(deploy_name)
-	build_json = get_build_json(build_name)
+def build(target_name, build_name):
 
-	if deploy_json == None:
-		print "Couldn't find deployment configuration '" + deploy_name + "'"
+	target_json = get_json_from_file(target_name, etcdir + "targets.json")
+	build_json = get_json_from_file(build_name, etcdir + "build.json")
+
+	if target_json == None:
+		print "Couldn't find target configuration '" + target_name + "'"
 		return 1
 
 	if build_json == None:
 		print "Couldn't find build configuration '" + build_name + "'"
 		return 1
+
+	configure_args = " ".join(build_json["configure"]["args"] +
+							  target_json["configure"]["args"] +
+							  build_json["configure"]["env"] +
+							  target_json["configure"]["env"])
+
+	run("./autogen.sh")
+	run("./configure " + configure_args)
+	run("make clean all")
 
 	return 0
 
@@ -126,7 +130,7 @@ def process_command(command, args):
 
 	elif command == "build":
 		if len(args) != 2:
-			print "Usage: pipbot build <deploy> <build>"
+			print "Usage: pipbot build <target> <build>"
 			return 1
 
 		return build(args[0], args[1])
@@ -154,6 +158,8 @@ if __name__ == "__main__":
 		args = argv
 	else:
 		args = []
+
+	os.chdir(projectdir)
 
 	ret = process_command(command, args)
 	exit(ret)
