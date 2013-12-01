@@ -158,33 +158,35 @@ def get_config_summary():
 	file = open("config.summary", "r")
 	return file.read()
 
+
+def build_target(target_name, build_name):
+
+	target_json = get_json_from_file(target_name, etcdir + "targets.json")
+	build_json = get_json_from_file(build_name, etcdir + "build.json")
+
+	if target_json == None:
+		print "Couldn't find target configuration '" + target_name + "'"
+		return 1
+
+	if build_json == None:
+		print "Couldn't find build configuration '" + build_name + "'"
+		return 1
+
+	configure_args = " ".join(build_json["configure"]["args"] +
+							  target_json["configure"]["args"] +
+							  build_json["configure"]["env"] +
+							  target_json["configure"]["env"])
+
+	try:
+		run("./autogen.sh")
+		run("./configure " + configure_args)
+		run("make clean all")
+		return 0
+	except:
+		return 2
+
+
 def build(args):
-
-	def build_target(target_name, build_name):
-
-		target_json = get_json_from_file(target_name, etcdir + "targets.json")
-		build_json = get_json_from_file(build_name, etcdir + "build.json")
-
-		if target_json == None:
-			print "Couldn't find target configuration '" + target_name + "'"
-			return 1
-
-		if build_json == None:
-			print "Couldn't find build configuration '" + build_name + "'"
-			return 1
-
-		configure_args = " ".join(build_json["configure"]["args"] +
-								  target_json["configure"]["args"] +
-								  build_json["configure"]["env"] +
-								  target_json["configure"]["env"])
-
-		try:
-			run("./autogen.sh")
-			run("./configure " + configure_args)
-			run("make clean all")
-			return 0
-		except:
-			return 2
 
 	if len(args) < 1:
 		print "Usage: pipbot build <target> <build>"
@@ -199,7 +201,7 @@ def deploy(args):
 
 	# Support 'deploy <target> <build>' syntax
 	if len(args) == 2:
-		build(args[0], args[1])
+		build_target(args[0], args[1])
 
 	try:
 		run("make install")
@@ -211,7 +213,7 @@ def undeploy(args):
 
 	# Support 'undeploy <target> <build>' syntax
 	if len(args) == 2:
-		build(args[0], args[1])
+		build_target(args[0], args[1])
 
 	try:
 		run("make uninstall")
