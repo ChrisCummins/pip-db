@@ -43,8 +43,9 @@ def print_help():
 	print ""
 	print "Hello there. My name is pipbot. These are some of the things I can do:"
 	print ""
-	print "    pipbot build <target> <build>"
-	print "        Build a website configuration of type <build> for destination <target>"
+	print "    pipbot build <command ..>"
+	print "        <target> <build> Build a website configuration"
+	print "        summary          Show the current project configuration"
 	print ""
 	print "    pipbot deploy [<target> <build>]"
 	print "        Deploy a build website configuration to <target>"
@@ -119,34 +120,46 @@ def run(cmd, echo=True):
 	if ret != 0:
 		raise Exception('Command returned error code {0}'.format(ret))
 
+def get_config_summary():
+	file = open("config.summary", "r")
+	return file.read()
 
-def build(target_name, build_name):
+def build(args):
 
-	target_json = get_json_from_file(target_name, etcdir + "targets.json")
-	build_json = get_json_from_file(build_name, etcdir + "build.json")
+	def build_target(target_name, build_name):
 
-	if target_json == None:
-		print "Couldn't find target configuration '" + target_name + "'"
-		return 1
+		target_json = get_json_from_file(target_name, etcdir + "targets.json")
+		build_json = get_json_from_file(build_name, etcdir + "build.json")
 
-	if build_json == None:
-		print "Couldn't find build configuration '" + build_name + "'"
-		return 1
+		if target_json == None:
+			print "Couldn't find target configuration '" + target_name + "'"
+			return 1
 
-	configure_args = " ".join(build_json["configure"]["args"] +
-							  target_json["configure"]["args"] +
-							  build_json["configure"]["env"] +
-							  target_json["configure"]["env"])
+		if build_json == None:
+			print "Couldn't find build configuration '" + build_name + "'"
+			return 1
 
-	try:
-		run("./autogen.sh")
-		run("./configure " + configure_args)
-		run("make clean all")
-	except:
-		return 2
+		configure_args = " ".join(build_json["configure"]["args"] +
+								  target_json["configure"]["args"] +
+								  build_json["configure"]["env"] +
+								  target_json["configure"]["env"])
 
-	return 0
+		try:
+			run("./autogen.sh")
+			run("./configure " + configure_args)
+			run("make clean all")
+			return 0
+		except:
+			return 2
 
+	if len(args) < 1:
+		print "Usage: pipbot build <target> <build>"
+
+	if args[0] == "summary":
+		print get_config_summary()
+
+	if len(args) == 2:
+		return build_target(args[0], args[1])
 
 def deploy(args):
 
@@ -249,11 +262,6 @@ def get_version_string():
 	return ".".join([str(i) for i in get_version()])
 
 
-def get_configuration():
-	file = open("config.summary", "r")
-	return file.read()
-
-
 def sloccount():
 
 	try:
@@ -270,11 +278,7 @@ def process_command(command, args):
 		return 0
 
 	elif command == "build":
-		if len(args) != 2:
-			print "Usage: pipbot build <target> <build>"
-			return 1
-
-		return build(args[0], args[1])
+		return build(args)
 
 	elif command == "deploy":
 		return deploy(args)
