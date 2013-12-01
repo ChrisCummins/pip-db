@@ -76,6 +76,9 @@ def print_help():
 	print "    pipbot close"
 	print "        Complete work on the current feature branch"
 	print ""
+	print "    pipbot release <start|finish>"
+	print "        Start or complete a project release"
+	print ""
 
 
 def fatal(msg):
@@ -188,6 +191,21 @@ def close():
 	except:
 		return 2
 
+
+def release(action):
+
+	if action == "start":
+		cmd = "./tools/mkrelease"
+	elif action == "finish":
+		cmd = "git flow release finish"
+
+	try:
+		run("./tools/mkrelease", False)
+		return 0
+	except:
+		return 2
+
+
 def issue(args):
 
 	try:
@@ -257,6 +275,13 @@ def process_command(command, args):
 
 	elif command == "close":
 		return close()
+
+	elif command == "release":
+		if re.match("(start|finish)", args[0]):
+			return release(args[0])
+		else:
+			print "Usage: pipbot release <start|finish>"
+			return 1
 
 	else:
 		print "I don't understand!"
