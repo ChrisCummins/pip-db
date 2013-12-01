@@ -70,6 +70,9 @@ def print_help():
 	print "    pipbot new <feature>"
 	print "        Start work on a new feature branch"
 	print ""
+	print "    pipbot pause"
+	print "        Pause work on the current feature branch"
+	print ""
 
 
 def fatal(msg):
@@ -166,6 +169,14 @@ def new(name):
 	except:
 		return 2
 
+def pause():
+
+	try:
+		run("./tools/workflow pause", False)
+		return 0
+	except:
+		return 2
+
 def issue(args):
 
 	try:
@@ -229,6 +240,9 @@ def process_command(command, args):
 			return 1
 
 		return new(args[0])
+
+	elif command == "pause":
+		return pause()
 
 	else:
 		print "I don't understand!"
