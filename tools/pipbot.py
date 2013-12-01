@@ -49,6 +49,9 @@ def print_help():
 	print "    pipbot deploy [<target> <build>]"
 	print "        Deploy a build website configuration to <target>"
 	print ""
+	print "    pipbot undeploy [<target> <build>]"
+	print "        Remove a deployed website configuration from <target>"
+	print ""
 	print "    pipbot version"
 	print "        Show the current project version"
 	print ""
@@ -157,6 +160,18 @@ def deploy(args):
 		return 2
 
 
+def undeploy(args):
+
+	# Support 'undeploy <target> <build>' syntax
+	if len(args) == 2:
+		build(args[0], args[1])
+
+	try:
+		run("make uninstall")
+	except:
+		return 2
+
+
 def is_number(s):
 	try:
 		int(s)
@@ -253,6 +268,9 @@ def process_command(command, args):
 
 	elif command == "deploy":
 		return deploy(args)
+
+	elif command == "undeploy":
+		return undeploy(args)
 
 	elif command == "version":
 		print get_version_string()
