@@ -63,6 +63,11 @@ def grep(regex, path):
 	return match
 
 
+def build(build_name, deploy_name):
+	# TODO: perform build
+	return 0
+
+
 def get_version():
 	components = ["major", "minor", "micro"]
 	values = []
@@ -86,6 +91,13 @@ def process_command(command, args):
 	if command == "help":
 		print_help()
 		return 0
+
+	elif command == "build":
+		if len(args) != 2:
+			print "Usage: pipbot build <build> <deploy>"
+			return 1
+
+		return build(args[0], args[1])
 
 	elif command == "version":
 		print get_version_string()
