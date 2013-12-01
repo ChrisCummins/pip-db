@@ -85,6 +85,9 @@ def process_command(command, args):
 	if command == "version":
 		print get_version_string()
 		return 0
+	elif command == "help":
+		print_help()
+		return 0
 	else:
 		print "I don't understand!"
 		return 1
