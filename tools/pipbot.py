@@ -55,6 +55,18 @@ def print_help():
 	print "    pipbot wtf"
 	print "        Show the current project configuration"
 	print ""
+	print "    pipbot issue <command>"
+	print "        Issue tracker commands:"
+	print "          list        List all issues"
+	print "          show        Show an issue's details"
+	print "          open        Open (or reopen) an issue"
+	print "          close       Close an issue"
+	print "          edit        Modify an existing issue"
+	print "          comment     Leave a comment on an issue"
+	print "          label       Create, list, modify, or delete labels"
+	print "          assign      Assign an issue to yourself (or someone else)"
+	print "          milestone   Manage project milestones"
+	print ""
 
 
 def fatal(msg):
@@ -133,6 +145,14 @@ def deploy(args):
 		return 2
 
 
+def issue(args):
+
+	try:
+		run("./tools/ghi " + " ".join(args), False)
+		return 0
+	except:
+		return 2
+
 def get_version():
 	components = ["major", "minor", "micro"]
 	values = []
@@ -178,6 +198,9 @@ def process_command(command, args):
 	elif command == "wtf":
 		print get_configuration()
 		return 0
+
+	elif command == "issue":
+		return issue(args)
 
 	else:
 		print "I don't understand!"
