@@ -67,6 +67,9 @@ def print_help():
 	print "          assign      Assign an issue to yourself (or someone else)"
 	print "          milestone   Manage project milestones"
 	print ""
+	print "    pipbot new <feature>"
+	print "        Start work on a new feature branch"
+	print ""
 
 
 def fatal(msg):
@@ -145,6 +148,24 @@ def deploy(args):
 		return 2
 
 
+def is_number(s):
+	try:
+		int(s)
+		return True
+	except ValueError:
+		return False
+
+def new(name):
+
+	try:
+		if is_number(name) == True:
+			run("./tools/ghi show " + name, False)
+
+		run("./tools/workflow new " + name, False)
+		return 0
+	except:
+		return 2
+
 def issue(args):
 
 	try:
@@ -201,6 +222,13 @@ def process_command(command, args):
 
 	elif command == "issue":
 		return issue(args)
+
+	elif command == "new":
+		if len(args) != 1:
+			print "Usage: pipbot new <feature>"
+			return 1
+
+		return new(args[0])
 
 	else:
 		print "I don't understand!"
