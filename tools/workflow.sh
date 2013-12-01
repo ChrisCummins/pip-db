@@ -122,8 +122,6 @@ new() {
 	# Sanity checks
 	execute "fail_if_issue_not_valid $issue" quiet
 
-	$(get_git_toplevel)/tools/ghi show $issue
-
 	# Perform branching
 	execute "git flow feature start $issue"
 
@@ -157,8 +155,6 @@ pause() {
 close() {
 	local branch=`get_current_branch`
 	local issue=$(echo "$branch" | sed 's/.*feature\///')
-
-	$(get_git_toplevel)/tools/ghi show $issue
 
 	# Cleanup feature branch
 	execute "git flow feature finish $issue"
