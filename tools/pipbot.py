@@ -53,6 +53,9 @@ def print_help():
 	print "    pipbot undeploy [<target> <build>]"
 	print "        Remove a deployed website configuration from <target>"
 	print ""
+	print "    pipbot show <issue-number|commit-id>"
+	print "        Tell me more about a particular thing"
+	print ""
 	print "    pipbot version"
 	print "        Show the current project version"
 	print ""
@@ -96,6 +99,29 @@ def is_int(s):
 		return True
 	except ValueError:
 		return False
+
+
+def show(args):
+	if len(args) != 1:
+		"Usage: show <item>"
+		return 1
+
+	item = args[0]
+
+	# Match issue numbers
+	if is_int(item):
+		try:
+			run("./tools/ghi show " + item, False)
+			return 0
+		except:
+			return 2
+	# Match git commit hashes
+	elif re.match("[0-9a-f]{8}[0-9a-f]*", item):
+		try:
+			run("git show " + item, False)
+			return 0
+		except:
+			return 2
 
 
 def grep(regex, path):
@@ -277,6 +303,9 @@ def process_command(command, args):
 	if command == "help":
 		print_help()
 		return 0
+
+	elif command == "show":
+		return show(args)
 
 	elif command == "build":
 		return build(args)
