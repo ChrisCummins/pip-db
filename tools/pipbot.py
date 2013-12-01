@@ -202,7 +202,7 @@ def release(args):
 		cmd = "git flow release finish"
 
 	try:
-		run("./tools/mkrelease", False)
+		run(cmd, False)
 		return 0
 	except:
 		return 2
