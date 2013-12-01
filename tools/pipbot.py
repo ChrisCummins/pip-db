@@ -82,6 +82,9 @@ def print_help():
 	print "    pipbot release <start|finish> <version>"
 	print "        Start or complete a project release"
 	print ""
+	print "    pipbot sloccount"
+	print "        Show the number of source lines of code"
+	print ""
 
 
 def fatal(msg):
@@ -253,6 +256,16 @@ def get_configuration():
 	file = open("config.summary", "r")
 	return file.read()
 
+
+def sloccount():
+
+	try:
+		run("./tools/sloccount", False)
+		return 0
+	except:
+		return 2
+
+
 def process_command(command, args):
 
 	if command == "help":
@@ -302,6 +315,9 @@ def process_command(command, args):
 		else:
 			print "Usage: pipbot release <start|finish>"
 			return 1
+
+	elif command == "sloccount":
+		return sloccount()
 
 	else:
 		print "I don't understand!"
