@@ -43,8 +43,9 @@ def print_help():
 	print ""
 	print "Hello there. My name is pipbot. These are some of the things I can do:"
 	print ""
-	print "    pipbot build <target> <build>"
-	print "        Build a website configuration of type <build> for destination <target>"
+	print "    pipbot build <command ..>"
+	print "        <target> <build> Build a website configuration"
+	print "        summary          Show the current project configuration"
 	print ""
 	print "    pipbot deploy [<target> <build>]"
 	print "        Deploy a build website configuration to <target>"
@@ -52,13 +53,13 @@ def print_help():
 	print "    pipbot undeploy [<target> <build>]"
 	print "        Remove a deployed website configuration from <target>"
 	print ""
+	print "    pipbot show <issue-number|commit-id>"
+	print "        Tell me more about a particular thing"
+	print ""
 	print "    pipbot version"
 	print "        Show the current project version"
 	print ""
-	print "    pipbot wtf"
-	print "        Show the current project configuration"
-	print ""
-	print "    pipbot issue <command>"
+	print "    pipbot issue <command ..>"
 	print "        Issue tracker commands:"
 	print "          list        List all issues"
 	print "          show        Show an issue's details"
@@ -92,6 +93,37 @@ def fatal(msg):
 	exit(1)
 
 
+def is_int(s):
+	try:
+		int(s)
+		return True
+	except ValueError:
+		return False
+
+
+def show(args):
+	if len(args) != 1:
+		"Usage: show <item>"
+		return 1
+
+	item = args[0]
+
+	# Match issue numbers
+	if is_int(item):
+		try:
+			run("./tools/ghi show " + item, False)
+			return 0
+		except:
+			return 2
+	# Match git commit hashes
+	elif re.match("[0-9a-f]{8}[0-9a-f]*", item):
+		try:
+			run("git show " + item, False)
+			return 0
+		except:
+			return 2
+
+
 def grep(regex, path):
 	file = open(path, "r")
 
@@ -122,8 +154,12 @@ def run(cmd, echo=True):
 	if ret != 0:
 		raise Exception('Command returned error code {0}'.format(ret))
 
+def get_config_summary():
+	file = open("config.summary", "r")
+	return file.read()
 
-def build(target_name, build_name):
+
+def build_target(target_name, build_name):
 
 	target_json = get_json_from_file(target_name, etcdir + "targets.json")
 	build_json = get_json_from_file(build_name, etcdir + "build.json")
@@ -145,17 +181,27 @@ def build(target_name, build_name):
 		run("./autogen.sh")
 		run("./configure " + configure_args)
 		run("make clean all")
+		return 0
 	except:
 		return 2
 
-	return 0
 
+def build(args):
+
+	if len(args) < 1:
+		print "Usage: pipbot build <target> <build>"
+
+	if args[0] == "summary":
+		print get_config_summary()
+
+	if len(args) == 2:
+		return build_target(args[0], args[1])
 
 def deploy(args):
 
 	# Support 'deploy <target> <build>' syntax
 	if len(args) == 2:
-		build(args[0], args[1])
+		build_target(args[0], args[1])
 
 	try:
 		run("make install")
@@ -167,7 +213,7 @@ def undeploy(args):
 
 	# Support 'undeploy <target> <build>' syntax
 	if len(args) == 2:
-		build(args[0], args[1])
+		build_target(args[0], args[1])
 
 	try:
 		run("make uninstall")
@@ -175,17 +221,10 @@ def undeploy(args):
 		return 2
 
 
-def is_number(s):
-	try:
-		int(s)
-		return True
-	except ValueError:
-		return False
-
 def new(name):
 
 	try:
-		if is_number(name) == True:
+		if is_int(name) == True:
 			run("./tools/ghi show " + name, False)
 
 		run("./tools/workflow new " + name, False)
@@ -252,11 +291,6 @@ def get_version_string():
 	return ".".join([str(i) for i in get_version()])
 
 
-def get_configuration():
-	file = open("config.summary", "r")
-	return file.read()
-
-
 def sloccount():
 
 	try:
@@ -272,12 +306,11 @@ def process_command(command, args):
 		print_help()
 		return 0
 
-	elif command == "build":
-		if len(args) != 2:
-			print "Usage: pipbot build <target> <build>"
-			return 1
+	elif command == "show":
+		return show(args)
 
-		return build(args[0], args[1])
+	elif command == "build":
+		return build(args)
 
 	elif command == "deploy":
 		return deploy(args)
@@ -287,10 +320,6 @@ def process_command(command, args):
 
 	elif command == "version":
 		print get_version_string()
-		return 0
-
-	elif command == "wtf":
-		print get_configuration()
 		return 0
 
 	elif command == "issue":

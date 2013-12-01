@@ -17,6 +17,7 @@ dnl
 dnl   3.     Substitutions
 dnl   3.1.     Export the package versioning
 dnl   3.2.     Export the locations of compiler JARs
+dnl   3.3.     Set the PREFIX
 dnl
 dnl   4.     Build requirements
 dnl   4.1.     Do we have a Less CSS compiler?
@@ -122,6 +123,16 @@ m4_define([js_jar],  [jar_dir/closure-compiler.jar])
 AC_SUBST([HTML_JAR], [html_jar])
 AC_SUBST([CSS_JAR],  [css_jar])
 AC_SUBST([JS_JAR],   [js_jar])
+
+
+dnl     ============================================================
+dnl     3.3. Set the PREFIX
+dnl     ============================================================
+AS_IF([test "x$prefix" = "xNONE"],
+      [prefix="$HOME/.local"])
+
+PREFIX=$prefix
+AC_SUBST([PREFIX])
 
 
 dnl ================================================================
