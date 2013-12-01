@@ -6,7 +6,8 @@ from sys import argv
 from sys import exit
 
 projectdir = "/home/chris/src/pip-db/"
-scriptsdir = projectdir + "scripts/pipbot"
+prefixdir = "/home/chris/.local/"
+etcdir = prefixdir + "etc/pipbot/"
 
 def print_help():
 	print "                  ,--.    ,--."
