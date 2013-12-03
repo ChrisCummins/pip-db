@@ -236,7 +236,11 @@ def undeploy(args):
 		return 2
 
 
-def start(name):
+def start(args):
+
+	if len(args) != 1:
+		print "Usage: pipbot start <feature|release>"
+		return 1
 
 	try:
 		if is_int(name) == True:
@@ -348,11 +352,7 @@ def process_command(command, args):
 		return issue(args)
 
 	elif command == "start":
-		if len(args) != 1:
-			print "Usage: pipbot start <feature>"
-			return 1
-
-		return start(args[0])
+		return start(args)
 
 	elif command == "pause":
 		return pause()
