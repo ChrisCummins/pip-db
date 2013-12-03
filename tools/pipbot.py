@@ -431,24 +431,23 @@ def process_command(command, args):
             print get_logo() + "\n" + get_welcome_text() + " " + get_help_text()
         return 0
 
-    elif command == "show":
-        return show(args)
-
     elif command == "build":
         return build(args)
 
     elif command == "deploy":
         return deploy(args)
 
-    elif command == "undeploy":
-        return undeploy(args)
-
-    elif command == "version":
-        print get_version_string()
-        return 0
+    elif command == "finish":
+        return finish(args)
 
     elif command == "issue":
         return issue(args)
+
+    elif command == "show":
+        return show(args)
+
+    elif command == "sloccount":
+        return sloccount()
 
     elif command == "start":
         return start(args)
@@ -456,11 +455,12 @@ def process_command(command, args):
     elif command == "pause":
         return pause(args)
 
-    elif command == "finish":
-        return finish(args)
+    elif command == "undeploy":
+        return undeploy(args)
 
-    elif command == "sloccount":
-        return sloccount()
+    elif command == "version":
+        print get_version_string()
+        return 0
 
     else:
         print "I don't understand!"
