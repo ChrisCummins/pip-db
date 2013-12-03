@@ -449,6 +449,9 @@ def process_command(command, args):
     elif command == "issue":
         return issue(args)
 
+    elif command == "pause":
+        return pause(args)
+
     elif command == "show":
         return show(args)
 
@@ -457,9 +460,6 @@ def process_command(command, args):
 
     elif command == "start":
         return start(args)
-
-    elif command == "pause":
-        return pause(args)
 
     elif command == "undeploy":
         return undeploy(args)
