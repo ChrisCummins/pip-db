@@ -231,7 +231,7 @@ def undeploy(args):
 		build_target(args[0], args[1])
 
 	try:
-		run("make uninstall")
+		perform_action("Undeploying", "make uninstall")
 	except:
 		return 2
 
