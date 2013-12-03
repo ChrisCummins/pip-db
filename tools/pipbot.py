@@ -464,8 +464,7 @@ def process_batch_command(argv):
     else:
         command = "help"
 
-    if len(argv) > 1:
-        argv.pop(0)
+    if len(argv) > 0:
         argv.pop(0)
         args = argv
     else:
