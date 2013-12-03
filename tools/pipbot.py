@@ -5,6 +5,7 @@ import subprocess
 import re
 import os
 import sys
+from git import Repo
 from sys import argv
 from sys import exit
 
