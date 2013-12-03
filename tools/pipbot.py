@@ -237,8 +237,12 @@ def undeploy(args):
 
 
 def start_new_release(version):
-	print "Starting new release " + version
-
+	try:
+		print "Starting new release " + version
+		run("./tools/mkrelease " + version, False)
+		return 0
+	except:
+		return 2
 
 def start_new_issue(issue_number):
 	print "Starting new issue " + issue_number
