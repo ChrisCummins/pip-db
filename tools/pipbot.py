@@ -283,13 +283,36 @@ def start(args):
 		return print_usage_and_return()
 
 
-def pause():
+def pause(args):
 
-	try:
-		run("./tools/workflow pause", False)
-		return 0
-	except:
-		return 2
+	def print_usage_and_return():
+		print "Usage: pipbot pause <issue|feature|release>"
+		return 1
+
+	if len(args) != 1:
+		return print_usage_and_return()
+
+	target = args[0]
+
+	if (re.match("^[0-9]+\.[0-9]+\.[0-9]$", target) or
+		re.match("^[0-9]+$", target) or
+		re.match("^[a-zA-Z0-9_]+$", target)):
+		try:
+			repo = Repo(projectdir)
+			branch = repo.active_branch
+
+			if target != branch.name:
+				print "Target branch does not match current!"
+				return 1
+
+			run("git push -u origin " + branch.name, False)
+			run("git checkout master", False)
+			return 0
+		except:
+			return 2
+	else:
+		return print_usage_and_return()
+
 
 def close():
 
@@ -387,7 +410,7 @@ def process_command(command, args):
 		return start(args)
 
 	elif command == "pause":
-		return pause()
+		return pause(args)
 
 	elif command == "close":
 		return close()
