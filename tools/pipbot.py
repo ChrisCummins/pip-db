@@ -4,6 +4,7 @@ import json
 import subprocess
 import re
 import os
+import sys
 from sys import argv
 from sys import exit
 
@@ -146,13 +147,25 @@ def get_json_from_file(name, path):
 			return json_data[d]
 
 
-def run(cmd, echo=True):
+def run(cmd, echo=True, stdout=True, stderr=True):
 	if echo == True:
 		print "$ " + cmd
+
+	if stdout != True:
+		cmd += " >/dev/null"
+
+	if stderr != True:
+		cmd += " 2>/dev/null"
 
 	ret = os.system(cmd)
 	if ret != 0:
 		raise Exception('Command returned error code {0}'.format(ret))
+
+def perform_action(action, cmd):
+	sys.stdout.write(str(action) + "... ")
+	sys.stdout.flush()
+	run(cmd, False, False, False)
+	print "[ok]"
 
 def get_config_summary():
 	file = open("config.summary", "r")
@@ -178,9 +191,11 @@ def build_target(target_name, build_name):
 							  target_json["configure"]["env"])
 
 	try:
-		run("./autogen.sh")
-		run("./configure " + configure_args)
-		run("make clean all")
+		perform_action("Generating sources", "./autogen.sh")
+		perform_action("Configuring " + target_name + " " + build_name + " build",
+					   "./configure " + configure_args)
+		perform_action("Cleaning working tree", "make clean")
+		perform_action("Building", "make all")
 		return 0
 	except:
 		return 2
@@ -204,7 +219,7 @@ def deploy(args):
 		build_target(args[0], args[1])
 
 	try:
-		run("make install")
+		perform_action("Deploying", "make install")
 	except:
 		return 2
 
@@ -216,7 +231,7 @@ def undeploy(args):
 		build_target(args[0], args[1])
 
 	try:
-		run("make uninstall")
+		perform_action("Undeploying", "make uninstall")
 	except:
 		return 2
 
