@@ -179,8 +179,17 @@ def get_config_summary():
 
 def build_target(target_name, build_name):
 
-    target_json = get_json_from_file(target_name, etcdir + "targets.json")
-    build_json = get_json_from_file(build_name, etcdir + "build.json")
+    try:
+        target_json = get_json_from_file(target_name, etcdir + "targets.json")
+    except IOError:
+        print "Unable to open JSON file '" + etcdir + "targets.json'"
+        return 100
+
+    try:
+        build_json = get_json_from_file(build_name, etcdir + "build.json")
+    except IOError:
+        print "Unable to open JSON file '" + etcdir + "build.json'"
+        return 100
 
     if target_json == None:
         print "Couldn't find target configuration '" + target_name + "'"
