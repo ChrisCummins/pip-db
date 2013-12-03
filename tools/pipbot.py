@@ -468,6 +468,22 @@ def process_command(command, args):
         print get_version_string()
         return 0
 
+    elif (command == "branch" or
+          command == "pull" or
+          command == "push"):
+        return run_extern("git " + command, args)
+
+    elif (command == "./autogen.sh" or
+          command == "autogen" or
+          command == "autogen.sh" or
+          command == "configure" or
+          command == "git" or
+          command == "gitk" or
+          command == "ls" or
+          command == "make" or
+          command == "pwd"):
+        return run_extern(command, args)
+
     else:
         print "I don't understand!"
         return 1
