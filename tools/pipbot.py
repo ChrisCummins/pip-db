@@ -483,6 +483,8 @@ def enter_repl_loop():
     global REPL
     REPL = True
 
+    print get_logo() + get_welcome_text()
+
     while True:
         try:
             sys.stdout.write("-> ")
