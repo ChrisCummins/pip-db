@@ -219,7 +219,7 @@ def deploy(args):
 		build_target(args[0], args[1])
 
 	try:
-		run("make install")
+		perform_action("Deploying", "make install")
 	except:
 		return 2
 
