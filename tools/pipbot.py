@@ -5,6 +5,7 @@ import subprocess
 import re
 import os
 import sys
+from git import Repo
 from sys import argv
 from sys import exit
 
@@ -72,17 +73,11 @@ def print_help():
 	print "          assign      Assign an issue to yourself (or someone else)"
 	print "          milestone   Manage project milestones"
 	print ""
-	print "    pipbot new <feature>"
-	print "        Start work on a new feature branch"
-	print ""
-	print "    pipbot pause"
-	print "        Pause work on the current feature branch"
-	print ""
-	print "    pipbot close"
-	print "        Complete work on the current feature branch"
-	print ""
-	print "    pipbot release <start|finish> <version>"
-	print "        Start or complete a project release"
+	print "    pipbot start  <issue|feature|release>"
+	print "    pipbot pause  <issue|feature|release>"
+	print "    pipbot finish <issue|feature|release>"
+	print "        Start, pause or complete work on an upstream issue,"
+	print "        downstream feature, or product release branch."
 	print ""
 	print "    pipbot sloccount"
 	print "        Show the number of source lines of code"
@@ -236,55 +231,138 @@ def undeploy(args):
 		return 2
 
 
-def new(name):
-
+def start_new_release(version):
 	try:
-		if is_int(name) == True:
-			run("./tools/ghi show " + name, False)
-
-		run("./tools/workflow new " + name, False)
+		print "Starting new release " + version
+		run("./tools/mkrelease " + version, False)
 		return 0
 	except:
 		return 2
 
-def pause():
-
+def start_new_feature(feature):
 	try:
-		run("./tools/workflow pause", False)
+		print "Starting new feature branch '" + feature + "'"
+		run("git flow feature start " + feature, False)
+		repo = Repo(projectdir)
+		branch = repo.active_branch
+		run("git push -u origin " + branch.name, False)
 		return 0
 	except:
 		return 2
 
-def close():
+def start_new_issue(issue_number):
+	return start_new_feature(issue_number)
 
-	try:
-		run("./tools/workflow close", False)
-		return 0
-	except:
-		return 2
+def start(args):
 
-
-def release(args):
-
-	def bad_usage():
-		print "Usage: release <start|finish> <version>"
+	def print_usage_and_return():
+		print "Usage: pipbot start <issue|feature|release>"
 		return 1
 
-	if len(args) != 2 or not re.match("(start|finish)", args[0]):
-		return bad_usage()
+	if len(args) != 1:
+		return print_usage_and_return()
 
-	if args[0] == "start":
-		cmd = "./tools/mkrelease " + args[1]
-	elif args[0] == "finish":
-		cmd = "git flow release finish " + args[1]
+	target = args[0]
+
+	if re.match("^[0-9]+\.[0-9]+\.[0-9]$", target):
+		return start_new_release(target)
+
+	elif re.match("^[0-9]+$", target):
+		return start_new_issue(target)
+
+	elif re.match("^[a-zA-Z0-9_]+$", target):
+		return start_new_feature(target)
+
 	else:
-		return bad_usage()
+		return print_usage_and_return()
 
+
+def pause(args):
+
+	def print_usage_and_return():
+		print "Usage: pipbot pause <issue|feature|release>"
+		return 1
+
+	if len(args) != 1:
+		return print_usage_and_return()
+
+	target = args[0]
+
+	if (re.match("^[0-9]+\.[0-9]+\.[0-9]$", target) or
+		re.match("^[0-9]+$", target) or
+		re.match("^[a-zA-Z0-9_]+$", target)):
+		try:
+			repo = Repo(projectdir)
+			branch = repo.active_branch
+
+			if not re.match("(release|feature)/" + target, branch.name):
+				print "Target branch does not match current!"
+				return 1
+
+			run("git push -u origin " + branch.name, False)
+			run("git checkout master", False)
+			return 0
+		except:
+			return 2
+	else:
+		return print_usage_and_return()
+
+
+def finish_release(version):
 	try:
-		run(cmd, False)
+		print "Finishing release " + version
+		run("git flow release finish " + version, False)
 		return 0
 	except:
 		return 2
+
+
+def finish_feature(feature):
+	try:
+		print "Closing feature branch '" + feature + "'"
+		run("git flow feature finish " + feature, False)
+		repo = Repo(projectdir)
+		branch = repo.active_branch
+		run("git push origin :" + branch.name, False)
+		return 0
+	except:
+		return 2
+
+
+def finish_issue(issue_number):
+	# TODO: Close upstream issue
+	return finish_feature(issue_number)
+
+
+def finish(args):
+
+	def print_usage_and_return():
+		print "Usage: pipbot finish <issue|feature|release>"
+		return 1
+
+	if len(args) != 1:
+		return print_usage_and_return()
+
+	target = args[0]
+
+	repo = Repo(projectdir)
+	branch = repo.active_branch
+
+	if not re.match("(release|feature)/" + target, branch.name):
+		print "Target branch does not match current!"
+		return 1
+
+	if re.match("^[0-9]+\.[0-9]+\.[0-9]$", target):
+		return finish_release(target)
+
+	elif re.match("^[0-9]+$", target):
+		return finish_issue(target)
+
+	elif re.match("^[a-zA-Z0-9_]+$", target):
+		return finish_feature(target)
+
+	else:
+		return print_usage_and_return()
 
 
 def issue(args):
@@ -347,21 +425,14 @@ def process_command(command, args):
 	elif command == "issue":
 		return issue(args)
 
-	elif command == "new":
-		if len(args) != 1:
-			print "Usage: pipbot new <feature>"
-			return 1
-
-		return new(args[0])
+	elif command == "start":
+		return start(args)
 
 	elif command == "pause":
-		return pause()
+		return pause(args)
 
-	elif command == "close":
-		return close()
-
-	elif command == "release":
-		return release(args)
+	elif command == "finish":
+		return finish(args)
 
 	elif command == "sloccount":
 		return sloccount()
