@@ -146,9 +146,15 @@ def get_json_from_file(name, path):
 			return json_data[d]
 
 
-def run(cmd, echo=True):
+def run(cmd, echo=True, stdout=True, stderr=True):
 	if echo == True:
 		print "$ " + cmd
+
+	if stdout != True:
+		cmd += " >/dev/null"
+
+	if stderr != True:
+		cmd += " 2>/dev/null"
 
 	ret = os.system(cmd)
 	if ret != 0:
