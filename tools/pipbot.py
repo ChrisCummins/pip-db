@@ -166,6 +166,12 @@ def run(cmd, echo=True, stdout=True, stderr=True):
     if ret != 0:
         raise Exception('Command returned error code {0}'.format(ret))
 
+def run_extern(command, args):
+	try:
+		run(command + " " + " ".join(args), False)
+	except:
+		return 2
+
 def perform_action(action, cmd):
     sys.stdout.write(str(action) + "... ")
     sys.stdout.flush()
