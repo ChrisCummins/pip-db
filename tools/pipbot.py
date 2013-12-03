@@ -273,8 +273,6 @@ def release(args):
 	if len(args) != 2 or not re.match("(start|finish)", args[0]):
 		return bad_usage()
 
-	action = args[0]
-
 	if args[0] == "start":
 		cmd = "./tools/mkrelease " + args[1]
 	elif args[0] == "finish":
