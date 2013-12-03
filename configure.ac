@@ -18,6 +18,7 @@ dnl   3.     Substitutions
 dnl   3.1.     Set the PREFIX
 dnl   3.2.     Export the package versioning
 dnl   3.3.     Export the locations of compiler JARs
+dnl   3.4.     Export the git configuration
 dnl
 dnl   4.     Build requirements
 dnl   4.1.     Do we have a Less CSS compiler?
@@ -135,6 +136,12 @@ m4_define([js_jar],  [jar_dir/closure-compiler.jar])
 AC_SUBST([HTML_JAR], [html_jar])
 AC_SUBST([CSS_JAR],  [css_jar])
 AC_SUBST([JS_JAR],   [js_jar])
+
+
+dnl     ============================================================
+dnl     3.4. Export the git configuration
+dnl     ============================================================
+AC_SUBST([GIT_RESERVED_BRANCHES],[stable])
 
 
 dnl ================================================================
