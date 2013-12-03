@@ -48,6 +48,10 @@ def get_welcome_text():
     return "Hello there. My name is pipbot."
 
 
+def get_goodbye_text():
+    return "Goodbye!"
+
+
 def get_help_text():
     return ("These are some of the things I can do:\n"
             "\n"
@@ -452,22 +456,52 @@ def process_command(command, args):
         return 1
 
 
+def process_batch_command(argv):
+    if len(argv) > 0:
+        command = str(argv[0]);
+    else:
+        command = "help"
+
+    if len(argv) > 1:
+        argv.pop(0)
+        argv.pop(0)
+        args = argv
+    else:
+        args = []
+
+    ret = process_command(command, args)
+
+
+def enter_repl_loop():
+
+    def goodbye():
+        print get_goodbye_text()
+        return 0
+
+    while True:
+        try:
+            sys.stdout.write("-> ")
+            argv = [i.replace("\n", "") for i in sys.stdin.readline().split(" ")]
+
+            if argv[0] == "exit" or argv[0] == "quit":
+                return goodbye()
+
+            ret = process_batch_command(argv)
+
+        except KeyboardInterrupt:
+            print
+            return goodbye()
+
+
 if __name__ == "__main__":
 
-	if len(argv) > 1:
-		command = str(argv[1]);
-	else:
-		print_help()
-		exit(0)
+    os.chdir(projectdir)
 
-	if len(argv) > 2:
-		argv.pop(0)
-		argv.pop(0)
-		args = argv
-	else:
-		args = []
+    if len(argv) < 2:
+        enter_repl_loop()
+        ret = 0
+    else:
+        argv.pop(0)
+        ret = process_batch_command(argv)
 
-	os.chdir(projectdir)
-
-	ret = process_command(command, args)
-	exit(ret)
+    exit(ret)
