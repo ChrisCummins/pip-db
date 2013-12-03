@@ -15,9 +15,9 @@ dnl
 dnl   2.     Project details
 dnl
 dnl   3.     Substitutions
-dnl   3.1.     Export the package versioning
-dnl   3.2.     Export the locations of compiler JARs
-dnl   3.3.     Set the PREFIX
+dnl   3.1.     Set the PREFIX
+dnl   3.2.     Export the package versioning
+dnl   3.3.     Export the locations of compiler JARs
 dnl
 dnl   4.     Build requirements
 dnl   4.1.     Do we have a Less CSS compiler?
@@ -105,7 +105,17 @@ dnl ================================================================
 
 
 dnl     ============================================================
-dnl     3.1. Export the package versioning
+dnl     3.1. Set the PREFIX
+dnl     ============================================================
+AS_IF([test "x$prefix" = "xNONE"],
+      [prefix="$HOME/.local"])
+
+PREFIX=$prefix
+AC_SUBST([PREFIX])
+
+
+dnl     ============================================================
+dnl     3.2. Export the package versioning
 dnl     ============================================================
 AC_SUBST([PIPDB_MAJOR_VERSION],[pipdb_major_version])
 AC_SUBST([PIPDB_MINOR_VERSION],[pipdb_minor_version])
@@ -114,7 +124,7 @@ AC_SUBST([PIPDB_VERSION],[pipdb_version])
 
 
 dnl     ============================================================
-dnl     3.2. Export the locations of compiler JARs
+dnl     3.3. Export the locations of compiler JARs
 dnl     ============================================================
 m4_define([jar_dir], ["$(pwd)/build/jar"])
 
@@ -125,16 +135,6 @@ m4_define([js_jar],  [jar_dir/closure-compiler.jar])
 AC_SUBST([HTML_JAR], [html_jar])
 AC_SUBST([CSS_JAR],  [css_jar])
 AC_SUBST([JS_JAR],   [js_jar])
-
-
-dnl     ============================================================
-dnl     3.3. Set the PREFIX
-dnl     ============================================================
-AS_IF([test "x$prefix" = "xNONE"],
-      [prefix="$HOME/.local"])
-
-PREFIX=$prefix
-AC_SUBST([PREFIX])
 
 
 dnl ================================================================
