@@ -471,7 +471,8 @@ def process_command(command, args):
     elif (command == "branch" or
           command == "fetch" or
           command == "pull" or
-          command == "push"):
+          command == "push" or
+          command == "status"):
         return run_extern("git " + command, args)
 
     elif (command == "./autogen.sh" or
