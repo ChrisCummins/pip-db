@@ -13,6 +13,9 @@ projectdir = "/home/chris/src/pip-db/"
 prefixdir = "/home/chris/.local/"
 etcdir = prefixdir + "etc/pipbot/"
 
+REPL = False
+
+
 def get_logo():
     return ("                  ,--.    ,--.\n"
             "                 ((O ))--((O ))\n"
@@ -477,6 +480,9 @@ def enter_repl_loop():
     def goodbye():
         print get_goodbye_text()
         return 0
+
+    global REPL
+    REPL = True
 
     while True:
         try:
