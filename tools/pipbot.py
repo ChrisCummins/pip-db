@@ -245,18 +245,24 @@ def start_new_release(version):
 	except:
 		return 2
 
-def start_new_issue(issue_number):
-	print "Starting new issue " + issue_number
-
-
 def start_new_feature(feature):
-	print "Starting new feature " + feature
+	try:
+		print "Starting new feature branch '" + feature + "'"
+		run("git flow feature start " + feature, False)
+		repo = Repo(projectdir)
+		branch = repo.active_branch
+		run("git push -u origin " + branch.name, False)
+		return 0
+	except:
+		return 2
 
+def start_new_issue(issue_number):
+	return start_new_feature(issue_number)
 
 def start(args):
 
 	def print_usage_and_return():
-		print "Usage: pipbot start <issue|finish|release>"
+		print "Usage: pipbot start <issue|feature|release>"
 		return 1
 
 	if len(args) != 1:
