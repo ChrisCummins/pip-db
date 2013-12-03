@@ -266,12 +266,21 @@ def close():
 
 def release(args):
 
+	def bad_usage():
+		print "Usage: release <start|finish> <version>"
+		return 1
+
+	if len(args) != 2 or not re.match("(start|finish)", args[0]):
+		return bad_usage()
+
 	action = args[0]
 
 	if args[0] == "start":
 		cmd = "./tools/mkrelease " + args[1]
 	elif args[0] == "finish":
 		cmd = "git flow release finish " + args[1]
+	else:
+		return bad_usage()
 
 	try:
 		run(cmd, False)
@@ -354,11 +363,7 @@ def process_command(command, args):
 		return close()
 
 	elif command == "release":
-		if re.match("(start|finish)", args[0]):
-			return release(args)
-		else:
-			print "Usage: pipbot release <start|finish>"
-			return 1
+		return release(args)
 
 	elif command == "sloccount":
 		return sloccount()
