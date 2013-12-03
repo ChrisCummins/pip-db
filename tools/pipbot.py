@@ -295,7 +295,7 @@ def pause(args):
 			repo = Repo(projectdir)
 			branch = repo.active_branch
 
-			if target != branch.name:
+			if not re.match("(release|feature)/" + target, branch.name):
 				print "Target branch does not match current!"
 				return 1
 
@@ -348,7 +348,7 @@ def finish(args):
 	repo = Repo(projectdir)
 	branch = repo.active_branch
 
-	if target != branch.name:
+	if not re.match("(release|feature)/" + target, branch.name):
 		print "Target branch does not match current!"
 		return 1
 
