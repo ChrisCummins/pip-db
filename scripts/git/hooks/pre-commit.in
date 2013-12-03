@@ -6,6 +6,21 @@
 # whatever you need to inspect in the code.
 
 #
+# Implement a mechanism to reject commits directly onto branches which we
+# declare as "reserved" (declared at configuration time, see configure.ac).
+#
+for branch in @GIT_RESERVED_BRANCHES@; do
+	if [ $(git symbolic-ref HEAD 2>/dev/null) = "refs/heads/$branch" ]; then
+		echo "               COMMIT REJECTED" >&2
+		echo "" >&2
+		echo "You are attempting to commit directly onto a reserved" >&2
+		echo "branch, which is not allowed. Instead, commit onto a" >&2
+		echo "development branch, and then merge into $branch." >&2
+		exit 1
+	fi
+done
+
+#
 # If we are generating Markdown versions of our project log, then we should
 # update it every time we commit.
 #
