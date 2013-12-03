@@ -470,7 +470,7 @@ def process_batch_command(argv):
     else:
         args = []
 
-    ret = process_command(command, args)
+    return process_command(command, args)
 
 
 def enter_repl_loop():
