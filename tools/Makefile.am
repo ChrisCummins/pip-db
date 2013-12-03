@@ -1,16 +1,17 @@
 noinst_SCRIPTS = \
 	dsa \
 	ghi \
-	pipbot \
 	png \
 	sloccount \
 	$(NULL)
 
 if HAVE_GIT_FLOW
 noinst_SCRIPTS += workflow mkrelease
+
+dist_bin_SCRIPTS = pipbot
 endif
 
-CLEANFILES = $(noinst_SCRIPTS)
+CLEANFILES = $(noinst_SCRIPTS) $(dist_bin_SCRIPTS)
 
 EXTRA_DIST = \
 	dsa.sh.in \

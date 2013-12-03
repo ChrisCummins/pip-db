@@ -17,6 +17,7 @@ dnl
 dnl   3.     Substitutions
 dnl   3.1.     Export the package versioning
 dnl   3.2.     Export the locations of compiler JARs
+dnl   3.3.     Set the PREFIX
 dnl
 dnl   4.     Build requirements
 dnl   4.1.     Do we have a Less CSS compiler?
@@ -48,6 +49,8 @@ dnl   8.1.     Are we building the tools?
 dnl   8.2.     Do we have npm?
 dnl   8.3.     Do we have node?
 dnl   8.4.     Do we have optimist?
+dnl   8.5.     Do we have python?
+dnl   8.6.     Do we have the python git module?
 dnl
 dnl   9.     Documentation
 dnl   9.1.     Are we build the documentation?
@@ -74,7 +77,7 @@ dnl 1. Project versions (i.e. the package version)
 dnl ================================================================
 m4_define([pipdb_major_version],[0])
 m4_define([pipdb_minor_version],[1])
-m4_define([pipdb_micro_version],[3])
+m4_define([pipdb_micro_version],[4])
 m4_define([pipdb_version],[pipdb_major_version.pipdb_minor_version.pipdb_micro_version])
 
 
@@ -122,6 +125,16 @@ m4_define([js_jar],  [jar_dir/closure-compiler.jar])
 AC_SUBST([HTML_JAR], [html_jar])
 AC_SUBST([CSS_JAR],  [css_jar])
 AC_SUBST([JS_JAR],   [js_jar])
+
+
+dnl     ============================================================
+dnl     3.3. Set the PREFIX
+dnl     ============================================================
+AS_IF([test "x$prefix" = "xNONE"],
+      [prefix="$HOME/.local"])
+
+PREFIX=$prefix
+AC_SUBST([PREFIX])
 
 
 dnl ================================================================
@@ -494,6 +507,24 @@ AS_IF([test "x$enable_tools" = xyes],
       [HAVE_NODE_OPTIMIST=no])
 AC_SUBST([HAVE_NODE_OPTIMIST],[$HAVE_NODE_OPTIMIST])
 AM_CONDITIONAL([HAVE_NODE_OPTIMIST],[test "x$HAVE_NODE_OPTIMIST" = xyes])
+
+
+dnl         ========================================================
+dnl         8.5. Do we have python?
+dnl         ========================================================
+AS_IF([test "x$enable_tools" = xyes],
+      [AM_PATH_PYTHON([2.5])])
+
+
+dnl         ========================================================
+dnl         8.6. Do we have the python git module?
+dnl         ========================================================
+AS_IF([test "x$enable_tools" = xyes],
+      [AC_MSG_CHECKING([for python git module])
+       AS_IF([`python -c 'from git import Repo;' 2>/dev/null`],
+             [AC_MSG_RESULT([ok])],
+             [AC_MSG_RESULT([no])
+              AC_MSG_ERROR([Required Python module 'git' is not found])])])
 
 
 dnl ================================================================

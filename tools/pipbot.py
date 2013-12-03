@@ -4,6 +4,8 @@ import json
 import subprocess
 import re
 import os
+import sys
+from git import Repo
 from sys import argv
 from sys import exit
 
@@ -43,8 +45,9 @@ def print_help():
 	print ""
 	print "Hello there. My name is pipbot. These are some of the things I can do:"
 	print ""
-	print "    pipbot build <target> <build>"
-	print "        Build a website configuration of type <build> for destination <target>"
+	print "    pipbot build <command ..>"
+	print "        <target> <build> Build a website configuration"
+	print "        summary          Show the current project configuration"
 	print ""
 	print "    pipbot deploy [<target> <build>]"
 	print "        Deploy a build website configuration to <target>"
@@ -52,13 +55,13 @@ def print_help():
 	print "    pipbot undeploy [<target> <build>]"
 	print "        Remove a deployed website configuration from <target>"
 	print ""
+	print "    pipbot show <issue-number|commit-id>"
+	print "        Tell me more about a particular thing"
+	print ""
 	print "    pipbot version"
 	print "        Show the current project version"
 	print ""
-	print "    pipbot wtf"
-	print "        Show the current project configuration"
-	print ""
-	print "    pipbot issue <command>"
+	print "    pipbot issue <command ..>"
 	print "        Issue tracker commands:"
 	print "          list        List all issues"
 	print "          show        Show an issue's details"
@@ -70,23 +73,51 @@ def print_help():
 	print "          assign      Assign an issue to yourself (or someone else)"
 	print "          milestone   Manage project milestones"
 	print ""
-	print "    pipbot new <feature>"
-	print "        Start work on a new feature branch"
+	print "    pipbot start  <issue|feature|release>"
+	print "    pipbot pause  <issue|feature|release>"
+	print "    pipbot finish <issue|feature|release>"
+	print "        Start, pause or complete work on an upstream issue,"
+	print "        downstream feature, or product release branch."
 	print ""
-	print "    pipbot pause"
-	print "        Pause work on the current feature branch"
-	print ""
-	print "    pipbot close"
-	print "        Complete work on the current feature branch"
-	print ""
-	print "    pipbot release <start|finish> <version>"
-	print "        Start or complete a project release"
+	print "    pipbot sloccount"
+	print "        Show the number of source lines of code"
 	print ""
 
 
 def fatal(msg):
 	print msg
 	exit(1)
+
+
+def is_int(s):
+	try:
+		int(s)
+		return True
+	except ValueError:
+		return False
+
+
+def show(args):
+	if len(args) != 1:
+		"Usage: show <item>"
+		return 1
+
+	item = args[0]
+
+	# Match issue numbers
+	if is_int(item):
+		try:
+			run("./tools/ghi show " + item, False)
+			return 0
+		except:
+			return 2
+	# Match git commit hashes
+	elif re.match("[0-9a-f]{8}[0-9a-f]*", item):
+		try:
+			run("git show " + item, False)
+			return 0
+		except:
+			return 2
 
 
 def grep(regex, path):
@@ -111,16 +142,32 @@ def get_json_from_file(name, path):
 			return json_data[d]
 
 
-def run(cmd, echo=True):
+def run(cmd, echo=True, stdout=True, stderr=True):
 	if echo == True:
 		print "$ " + cmd
+
+	if stdout != True:
+		cmd += " >/dev/null"
+
+	if stderr != True:
+		cmd += " 2>/dev/null"
 
 	ret = os.system(cmd)
 	if ret != 0:
 		raise Exception('Command returned error code {0}'.format(ret))
 
+def perform_action(action, cmd):
+	sys.stdout.write(str(action) + "... ")
+	sys.stdout.flush()
+	run(cmd, False, False, False)
+	print "[ok]"
 
-def build(target_name, build_name):
+def get_config_summary():
+	file = open("config.summary", "r")
+	return file.read()
+
+
+def build_target(target_name, build_name):
 
 	target_json = get_json_from_file(target_name, etcdir + "targets.json")
 	build_json = get_json_from_file(build_name, etcdir + "build.json")
@@ -139,23 +186,35 @@ def build(target_name, build_name):
 							  target_json["configure"]["env"])
 
 	try:
-		run("./autogen.sh")
-		run("./configure " + configure_args)
-		run("make clean all")
+		perform_action("Generating sources", "./autogen.sh")
+		perform_action("Configuring " + target_name + " " + build_name + " build",
+					   "./configure " + configure_args)
+		perform_action("Cleaning working tree", "make clean")
+		perform_action("Building", "make all")
+		return 0
 	except:
 		return 2
 
-	return 0
 
+def build(args):
+
+	if len(args) < 1:
+		print "Usage: pipbot build <target> <build>"
+
+	if args[0] == "summary":
+		print get_config_summary()
+
+	if len(args) == 2:
+		return build_target(args[0], args[1])
 
 def deploy(args):
 
 	# Support 'deploy <target> <build>' syntax
 	if len(args) == 2:
-		build(args[0], args[1])
+		build_target(args[0], args[1])
 
 	try:
-		run("make install")
+		perform_action("Deploying", "make install")
 	except:
 		return 2
 
@@ -164,63 +223,149 @@ def undeploy(args):
 
 	# Support 'undeploy <target> <build>' syntax
 	if len(args) == 2:
-		build(args[0], args[1])
+		build_target(args[0], args[1])
 
 	try:
-		run("make uninstall")
+		perform_action("Undeploying", "make uninstall")
 	except:
 		return 2
 
 
-def is_number(s):
+def start_new_release(version):
 	try:
-		int(s)
-		return True
-	except ValueError:
-		return False
-
-def new(name):
-
-	try:
-		if is_number(name) == True:
-			run("./tools/ghi show " + name, False)
-
-		run("./tools/workflow new " + name, False)
+		print "Starting new release " + version
+		run("./tools/mkrelease " + version, False)
 		return 0
 	except:
 		return 2
 
-def pause():
-
+def start_new_feature(feature):
 	try:
-		run("./tools/workflow pause", False)
+		print "Starting new feature branch '" + feature + "'"
+		run("git flow feature start " + feature, False)
+		repo = Repo(projectdir)
+		branch = repo.active_branch
+		run("git push -u origin " + branch.name, False)
 		return 0
 	except:
 		return 2
 
-def close():
+def start_new_issue(issue_number):
+	return start_new_feature(issue_number)
 
+def start(args):
+
+	def print_usage_and_return():
+		print "Usage: pipbot start <issue|feature|release>"
+		return 1
+
+	if len(args) != 1:
+		return print_usage_and_return()
+
+	target = args[0]
+
+	if re.match("^[0-9]+\.[0-9]+\.[0-9]$", target):
+		return start_new_release(target)
+
+	elif re.match("^[0-9]+$", target):
+		return start_new_issue(target)
+
+	elif re.match("^[a-zA-Z0-9_]+$", target):
+		return start_new_feature(target)
+
+	else:
+		return print_usage_and_return()
+
+
+def pause(args):
+
+	def print_usage_and_return():
+		print "Usage: pipbot pause <issue|feature|release>"
+		return 1
+
+	if len(args) != 1:
+		return print_usage_and_return()
+
+	target = args[0]
+
+	if (re.match("^[0-9]+\.[0-9]+\.[0-9]$", target) or
+		re.match("^[0-9]+$", target) or
+		re.match("^[a-zA-Z0-9_]+$", target)):
+		try:
+			repo = Repo(projectdir)
+			branch = repo.active_branch
+
+			if not re.match("(release|feature)/" + target, branch.name):
+				print "Target branch does not match current!"
+				return 1
+
+			run("git push -u origin " + branch.name, False)
+			run("git checkout master", False)
+			return 0
+		except:
+			return 2
+	else:
+		return print_usage_and_return()
+
+
+def finish_release(version):
 	try:
-		run("./tools/workflow close", False)
+		print "Finishing release " + version
+		repo = Repo(projectdir)
+		branch = repo.active_branch
+		run("git flow release finish " + version, False)
+		run("git push origin :" + branch.name, False)
 		return 0
 	except:
 		return 2
 
 
-def release(args):
-
-	action = args[0]
-
-	if args[0] == "start":
-		cmd = "./tools/mkrelease " + args[1]
-	elif args[0] == "finish":
-		cmd = "git flow release finish " + args[1]
-
+def finish_feature(feature):
 	try:
-		run(cmd, False)
+		print "Closing feature branch '" + feature + "'"
+		repo = Repo(projectdir)
+		branch = repo.active_branch
+		run("git flow feature finish " + feature, False)
+		run("git push origin :" + branch.name, False)
 		return 0
 	except:
 		return 2
+
+
+def finish_issue(issue_number):
+	# TODO: Close upstream issue
+	return finish_feature(issue_number)
+
+
+def finish(args):
+
+	def print_usage_and_return():
+		print "Usage: pipbot finish <issue|feature|release>"
+		return 1
+
+	if len(args) != 1:
+		return print_usage_and_return()
+
+	target = args[0]
+
+	repo = Repo(projectdir)
+	branch = repo.active_branch
+
+	if not re.match("(release|feature)/" + target, branch.name):
+		print "Target branch does not match current!"
+		return 1
+
+	if re.match("^[0-9]+\.[0-9]+\.[0-9]$", target):
+		return finish_release(target)
+
+	elif re.match("^[0-9]+$", target):
+		return finish_issue(target)
+
+	elif re.match("^[a-zA-Z0-9_]+$", target):
+		return finish_feature(target)
+
+	else:
+		return print_usage_and_return()
 
 
 def issue(args):
@@ -249,9 +394,14 @@ def get_version_string():
 	return ".".join([str(i) for i in get_version()])
 
 
-def get_configuration():
-	file = open("config.summary", "r")
-	return file.read()
+def sloccount():
+
+	try:
+		run("./tools/sloccount", False)
+		return 0
+	except:
+		return 2
+
 
 def process_command(command, args):
 
@@ -259,12 +409,11 @@ def process_command(command, args):
 		print_help()
 		return 0
 
-	elif command == "build":
-		if len(args) != 2:
-			print "Usage: pipbot build <target> <build>"
-			return 1
+	elif command == "show":
+		return show(args)
 
-		return build(args[0], args[1])
+	elif command == "build":
+		return build(args)
 
 	elif command == "deploy":
 		return deploy(args)
@@ -276,32 +425,20 @@ def process_command(command, args):
 		print get_version_string()
 		return 0
 
-	elif command == "wtf":
-		print get_configuration()
-		return 0
-
 	elif command == "issue":
 		return issue(args)
 
-	elif command == "new":
-		if len(args) != 1:
-			print "Usage: pipbot new <feature>"
-			return 1
-
-		return new(args[0])
+	elif command == "start":
+		return start(args)
 
 	elif command == "pause":
-		return pause()
+		return pause(args)
 
-	elif command == "close":
-		return close()
+	elif command == "finish":
+		return finish(args)
 
-	elif command == "release":
-		if re.match("(start|finish)", args[0]):
-			return release(args)
-		else:
-			print "Usage: pipbot release <start|finish>"
-			return 1
+	elif command == "sloccount":
+		return sloccount()
 
 	else:
 		print "I don't understand!"
