@@ -311,7 +311,10 @@ def pause(args):
 def finish_release(version):
 	try:
 		print "Finishing release " + version
+		repo = Repo(projectdir)
+		branch = repo.active_branch
 		run("git flow release finish " + version, False)
+		run("git push origin :" + branch.name, False)
 		return 0
 	except:
 		return 2
@@ -320,9 +323,9 @@ def finish_release(version):
 def finish_feature(feature):
 	try:
 		print "Closing feature branch '" + feature + "'"
-		run("git flow feature finish " + feature, False)
 		repo = Repo(projectdir)
 		branch = repo.active_branch
+		run("git flow feature finish " + feature, False)
 		run("git push origin :" + branch.name, False)
 		return 0
 	except:
