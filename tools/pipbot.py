@@ -236,20 +236,41 @@ def undeploy(args):
 		return 2
 
 
+def start_new_release(version):
+	print "Starting new release " + version
+
+
+def start_new_issue(issue_number):
+	print "Starting new issue " + issue_number
+
+
+def start_new_feature(feature):
+	print "Starting new feature " + feature
+
+
 def start(args):
 
-	if len(args) != 1:
-		print "Usage: pipbot start <feature|release>"
+	def print_usage_and_return():
+		print "Usage: pipbot start <issue|finish|release>"
 		return 1
 
-	try:
-		if is_int(name) == True:
-			run("./tools/ghi show " + name, False)
+	if len(args) != 1:
+		return print_usage_and_return()
 
-		run("./tools/workflow new " + name, False)
-		return 0
-	except:
-		return 2
+	target = args[0]
+
+	if re.match("^[0-9]+\.[0-9]+\.[0-9]$", target):
+		return start_new_release(target)
+
+	elif re.match("^[0-9]+$", target):
+		return start_new_issue(target)
+
+	elif re.match("^[a-zA-Z0-9_]+$", target):
+		return start_new_feature(target)
+
+	else:
+		return print_usage_and_return()
+
 
 def pause():
 
