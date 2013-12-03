@@ -469,6 +469,7 @@ def process_command(command, args):
         return 0
 
     elif (command == "branch" or
+          command == "fetch" or
           command == "pull" or
           command == "push"):
         return run_extern("git " + command, args)
