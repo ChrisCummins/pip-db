@@ -191,9 +191,11 @@ def build_target(target_name, build_name):
 							  target_json["configure"]["env"])
 
 	try:
-		run("./autogen.sh")
-		run("./configure " + configure_args)
-		run("make clean all")
+		perform_action("Generating sources", "./autogen.sh")
+		perform_action("Configuring " + target_name + " " + build_name + " build",
+					   "./configure " + configure_args)
+		perform_action("Cleaning working tree", "make clean")
+		perform_action("Building", "make all")
 		return 0
 	except:
 		return 2
