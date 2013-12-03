@@ -94,10 +94,6 @@ def get_help_text():
             "        Show the number of source lines of code\n")
 
 
-def print_help():
-    print get_logo() + "\n" + get_welcome_text() + " " + get_help_text()
-
-
 def fatal(msg):
     print msg
     exit(1)
@@ -420,7 +416,10 @@ def sloccount():
 def process_command(command, args):
 
     if command == "help":
-        print_help()
+        if REPL == True:
+            print get_help_text()
+        else:
+            print get_logo() + "\n" + get_welcome_text() + " " + get_help_text()
         return 0
 
     elif command == "show":
