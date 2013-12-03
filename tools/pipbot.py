@@ -166,6 +166,12 @@ def run(cmd, echo=True, stdout=True, stderr=True):
     if ret != 0:
         raise Exception('Command returned error code {0}'.format(ret))
 
+def run_extern(command, args):
+	try:
+		run(command + " " + " ".join(args), False)
+	except:
+		return 2
+
 def perform_action(action, cmd):
     sys.stdout.write(str(action) + "... ")
     sys.stdout.flush()
@@ -443,6 +449,9 @@ def process_command(command, args):
     elif command == "issue":
         return issue(args)
 
+    elif command == "pause":
+        return pause(args)
+
     elif command == "show":
         return show(args)
 
@@ -452,15 +461,28 @@ def process_command(command, args):
     elif command == "start":
         return start(args)
 
-    elif command == "pause":
-        return pause(args)
-
     elif command == "undeploy":
         return undeploy(args)
 
     elif command == "version":
         print get_version_string()
         return 0
+
+    elif (command == "branch" or
+          command == "pull" or
+          command == "push"):
+        return run_extern("git " + command, args)
+
+    elif (command == "./autogen.sh" or
+          command == "autogen" or
+          command == "autogen.sh" or
+          command == "configure" or
+          command == "git" or
+          command == "gitk" or
+          command == "ls" or
+          command == "make" or
+          command == "pwd"):
+        return run_extern(command, args)
 
     else:
         print "I don't understand!"
