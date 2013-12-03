@@ -79,9 +79,6 @@ def print_help():
 	print "        Start, pause or complete work on an upstream issue,"
 	print "        downstream feature, or product release branch."
 	print ""
-	print "    pipbot release <start|finish> <version>"
-	print "        Start or complete a project release"
-	print ""
 	print "    pipbot sloccount"
 	print "        Show the number of source lines of code"
 	print ""
@@ -368,29 +365,6 @@ def finish(args):
 		return print_usage_and_return()
 
 
-def release(args):
-
-	def bad_usage():
-		print "Usage: release <start|finish> <version>"
-		return 1
-
-	if len(args) != 2 or not re.match("(start|finish)", args[0]):
-		return bad_usage()
-
-	if args[0] == "start":
-		cmd = "./tools/mkrelease " + args[1]
-	elif args[0] == "finish":
-		cmd = "git flow release finish " + args[1]
-	else:
-		return bad_usage()
-
-	try:
-		run(cmd, False)
-		return 0
-	except:
-		return 2
-
-
 def issue(args):
 
 	try:
@@ -459,9 +433,6 @@ def process_command(command, args):
 
 	elif command == "finish":
 		return finish(args)
-
-	elif command == "release":
-		return release(args)
 
 	elif command == "sloccount":
 		return sloccount()
