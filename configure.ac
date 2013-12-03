@@ -50,6 +50,7 @@ dnl   8.2.     Do we have npm?
 dnl   8.3.     Do we have node?
 dnl   8.4.     Do we have optimist?
 dnl   8.5.     Do we have python?
+dnl   8.6.     Do we have the python git module?
 dnl
 dnl   9.     Documentation
 dnl   9.1.     Are we build the documentation?
@@ -513,6 +514,17 @@ dnl         8.5. Do we have python?
 dnl         ========================================================
 AS_IF([test "x$enable_tools" = xyes],
       [AM_PATH_PYTHON([2.5])])
+
+
+dnl         ========================================================
+dnl         8.6. Do we have the python git module?
+dnl         ========================================================
+AS_IF([test "x$enable_tools" = xyes],
+      [AC_MSG_CHECKING([for python git module])
+       AS_IF([`python -c 'from git import Repo;' 2>/dev/null`],
+             [AC_MSG_RESULT([ok])],
+             [AC_MSG_RESULT([no])
+              AC_MSG_ERROR([Required Python module 'git' is not found])])])
 
 
 dnl ================================================================
