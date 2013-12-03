@@ -469,6 +469,7 @@ def process_command(command, args):
         return 0
 
     elif (command == "branch" or
+          command == "checkout" or
           command == "fetch" or
           command == "pull" or
           command == "push" or
