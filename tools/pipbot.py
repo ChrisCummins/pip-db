@@ -314,13 +314,61 @@ def pause(args):
 		return print_usage_and_return()
 
 
-def close():
-
+def finish_release(version):
 	try:
-		run("./tools/workflow close", False)
+		print "Finishing release " + version
+		run("git flow release finish " + version, False)
 		return 0
 	except:
 		return 2
+
+
+def finish_feature(feature):
+	try:
+		print "Closing feature branch '" + feature + "'"
+		run("git flow feature finish " + feature, False)
+		repo = Repo(projectdir)
+		branch = repo.active_branch
+		run("git push origin :" + branch.name, False)
+		return 0
+	except:
+		return 2
+
+
+def finish_issue(issue_number):
+	# TODO: Close upstream issue
+	return finish_feature(issue_number)
+
+
+def finish(args):
+
+	def print_usage_and_return():
+		print "Usage: pipbot finish <issue|feature|release>"
+		return 1
+
+	if len(args) != 1:
+		return print_usage_and_return()
+
+	target = args[0]
+
+	repo = Repo(projectdir)
+	branch = repo.active_branch
+
+	if target != branch.name:
+		print "Target branch does not match current!"
+		return 1
+
+	if re.match("^[0-9]+\.[0-9]+\.[0-9]$", target):
+		return finish_release(target)
+
+	elif re.match("^[0-9]+$", target):
+		return finish_issue(target)
+
+	elif re.match("^[a-zA-Z0-9_]+$", target):
+		return finish_feature(target)
+
+	else:
+		return print_usage_and_return()
 
 
 def release(args):
@@ -412,8 +460,8 @@ def process_command(command, args):
 	elif command == "pause":
 		return pause(args)
 
-	elif command == "close":
-		return close()
+	elif command == "finish":
+		return finish(args)
 
 	elif command == "release":
 		return release(args)
