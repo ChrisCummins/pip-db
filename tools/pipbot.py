@@ -72,7 +72,7 @@ def print_help():
 	print "          assign      Assign an issue to yourself (or someone else)"
 	print "          milestone   Manage project milestones"
 	print ""
-	print "    pipbot new <feature>"
+	print "    pipbot start <feature>"
 	print "        Start work on a new feature branch"
 	print ""
 	print "    pipbot pause"
@@ -236,7 +236,7 @@ def undeploy(args):
 		return 2
 
 
-def new(name):
+def start(name):
 
 	try:
 		if is_int(name) == True:
@@ -347,12 +347,12 @@ def process_command(command, args):
 	elif command == "issue":
 		return issue(args)
 
-	elif command == "new":
+	elif command == "start":
 		if len(args) != 1:
-			print "Usage: pipbot new <feature>"
+			print "Usage: pipbot start <feature>"
 			return 1
 
-		return new(args[0])
+		return start(args[0])
 
 	elif command == "pause":
 		return pause()
