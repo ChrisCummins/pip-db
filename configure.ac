@@ -15,9 +15,10 @@ dnl
 dnl   2.     Project details
 dnl
 dnl   3.     Substitutions
-dnl   3.1.     Export the package versioning
-dnl   3.2.     Export the locations of compiler JARs
-dnl   3.3.     Set the PREFIX
+dnl   3.1.     Set the PREFIX
+dnl   3.2.     Export the package versioning
+dnl   3.3.     Export the locations of compiler JARs
+dnl   3.4.     Export the git configuration
 dnl
 dnl   4.     Build requirements
 dnl   4.1.     Do we have a Less CSS compiler?
@@ -77,7 +78,7 @@ dnl 1. Project versions (i.e. the package version)
 dnl ================================================================
 m4_define([pipdb_major_version],[0])
 m4_define([pipdb_minor_version],[1])
-m4_define([pipdb_micro_version],[4])
+m4_define([pipdb_micro_version],[5])
 m4_define([pipdb_version],[pipdb_major_version.pipdb_minor_version.pipdb_micro_version])
 
 
@@ -105,7 +106,17 @@ dnl ================================================================
 
 
 dnl     ============================================================
-dnl     3.1. Export the package versioning
+dnl     3.1. Set the PREFIX
+dnl     ============================================================
+AS_IF([test "x$prefix" = "xNONE"],
+      [prefix="$HOME/.local"])
+
+PREFIX=$prefix
+AC_SUBST([PREFIX])
+
+
+dnl     ============================================================
+dnl     3.2. Export the package versioning
 dnl     ============================================================
 AC_SUBST([PIPDB_MAJOR_VERSION],[pipdb_major_version])
 AC_SUBST([PIPDB_MINOR_VERSION],[pipdb_minor_version])
@@ -114,7 +125,7 @@ AC_SUBST([PIPDB_VERSION],[pipdb_version])
 
 
 dnl     ============================================================
-dnl     3.2. Export the locations of compiler JARs
+dnl     3.3. Export the locations of compiler JARs
 dnl     ============================================================
 m4_define([jar_dir], ["$(pwd)/build/jar"])
 
@@ -128,13 +139,9 @@ AC_SUBST([JS_JAR],   [js_jar])
 
 
 dnl     ============================================================
-dnl     3.3. Set the PREFIX
+dnl     3.4. Export the git configuration
 dnl     ============================================================
-AS_IF([test "x$prefix" = "xNONE"],
-      [prefix="$HOME/.local"])
-
-PREFIX=$prefix
-AC_SUBST([PREFIX])
+AC_SUBST([GIT_RESERVED_BRANCHES],[stable])
 
 
 dnl ================================================================
