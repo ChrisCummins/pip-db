@@ -123,7 +123,7 @@ The Open Unified Process, alternatively known as the Eclipse Process Framework
 
 Arranged meeting with Darren for 2pm in MB449 tomorrow.
 
-## Friday 11th
+### Friday 11th
 
 Purposes of the project planning module:
 
@@ -251,7 +251,7 @@ on demand, instead of showing a list of links to separate details pages.
 google.com.
 
 
-## Sunday 13th
+### Sunday 13th
 
 Found that the PHP sources for a couple of pages from Facebook were leaked in
 2007, now available on github (https://gist.github.com/nikcub/3833406). Should
@@ -272,7 +272,7 @@ Notes on Facebook source code:
     `render_template($_SERVER['PHP_ROOT'].'/html/index.phpt');`.
 
 
-## Monday 14th
+### Monday 14th
 
 Read up on PHP templating
 (http://coding.smashingmagazine.com/2011/10/17/getting-started-with-php-templating/),
@@ -285,147 +285,106 @@ Started generating project plan (Gantt chart). OpenUP reference:
 http://epf.eclipse.org/wikis/openup/.
 
 
-## Tuesday 15th
+### Tuesday 15th
 
 Created first iteration of site mockups to get a feel for the design.
 Requirements are still changing rapidly so this helps formulate a TODO
 list.
 
-#### Back-end idea
+**Back-end idea**
 
 Don’t just store external URLs for references, instead break it down
 logically into a website name, author, unique ID, etc.
 
-#### Plan for site map
+**Plan for site map**
 
--   Home
-
+- Home
     -   Help
-
     -   About Us
-
     -   Terms & Conditions
-
     -   Privacy Policy
-
     -   Contact Us
-
--   Search Results
-
+- Search Results
     -   Download Results
-
     -   Individual Record
-
     -   Edit Record
-
     -   Add New Record
-
--   Members Page
-
+- Members Page
     -   Register
-
     -   Login
 
 Had meeting first with Fraser. Notes:
 
--   Dataset consist of multiple sheets which can be combined, with an
-    extra field to note the sheet it originated from (1975, PubMed,
-    etc.). Note that data in sixth form sheet may be incorrect or less
-    valid.
-
--   Notes, by field:
-
+- Dataset consist of multiple sheets which can be combined, with an extra field
+to note the sheet it originated from (1975, PubMed, etc.). Note that data in
+sixth form sheet may be incorrect or less valid.
+- Notes, by field:
     -   **E.C.** Enzyme Commission Number. Numerical classification
         scheme, consisting of four positive integer values. Many to one
         relationship of proteins and records to E.C. value. Can be
         unknown.
-
     -   **Protein / Alternative Name(s)** string names of equal value.
-
     -   **Source** Latin binomial. Case sensitivity is important:
         capitalise the Genus, everything else is lower case. Does have
         common names (property).
-
     -   **Organ and/or Subcellular location** a property of the source.
-
     -   **M.W.** Molecular Weight, in units of Daltons (Da).
-
     -   **Subunit No. / M.W (range)** properties of molecular weight.
-
     -   **No. of Iso-enzymes** Values can be vague (e.g. Many/several),
         not that important.
-
     -   **pI maximum value / pI range / pI value of major component /
         pI** various ways to specify pI value with varying precision.
-
     -   **Temperature** Important for replicating experimental results.
-
     -   **Method** Experimental method
-
     -   **Valid sequence(s) available** Values in the fields are
         shorthand, use the key at the bottom of each sheet to decode.
         Entries with ‘1’ are more robust and should be ranked greater
         than entries with ‘0’ values.
-
     -   **Protein sequence / Species Taxonomy / Original Texts /
         PubMed** External links.
-
     -   **Notes** text with additional details. Could be combed through
         to see if info could be added to other fields.
 
-#### Prototyping idea
+**Prototyping idea** - Write a “Plausible Nonsense Generator” which can create
+fake but believable ideal datasets for testing with.
 
-Write a “Plausible Nonsense Generator” which can create fake but
-believable ideal datasets for testing with.
-
-Wednesday 16th
---------------
+### Wednesday 16th
 
 Notes from weekly meeting with Ian:
 
 -   No news yet on availability of server/IP.
-
 -   Registration of domains can be done whenever (he recommended quiet
     late, I’ll recommend quite early), small cost will be reimbursed by
     department.
-
 -   Refer to Kate for answers on: logbook style (is it for my benefit or
     assessors’?), the distribution of marks between testing and
     evaluation, term dates.
-
 -   ‘Balsamiq’ is a UI prototyping tool which is useful for generating
     wireframes and mockups. I should look into this.
-
 -   First iteration of Gantt chart/project plan is lacking in User
     requirements and risk assessment time. More time should be dedicated
     to this, don’t rush into implementation. Also need to propose a
     business case (although this will be pretty minimal: more science =
     better humanity).
-
 -   A proper audit of the previous student’s project should be done and
     recorded (this can be added to project plan). This can be chalked up
     as “Contextual Investigation”
-
 -   Be more honest in risk assessment. Include things like “need to
     learn PHP”, “I’m a MySQL n00b”, etc.
 
-#### TODO
+**TODO**
 
 -   Second iteration of Gantt chart/project plan.
-
 -   Write an assessment of project risks.
-
 -   Talk with Darren about further user investigation.
-
 -   Audit the previous FYP.
-
 -   Download and test Balsamiq.
 
-Thursday 17th
--------------
+### Thursday 17th
 
 #### An examination of pidb back-end
 
+```
     mysql> SHOW TABLES;
     +------------------+
     | Tables_in_pidb   |
@@ -567,21 +526,18 @@ Thursday 17th
     | Type     | varchar(50)  | NO   |     | NULL    |                |
     +----------+--------------+------+-----+---------+----------------+
     5 rows in set (0.00 sec)
+```
 
-Friday 18th
------------
+### Friday 18th
 
-#### Balsamiq
-
-Downloaded and tested Balsamiq (trial addition). It’s absolutely perfect
-for my needs, should but User license when trial expires. Should add a
-‘plan’ directory to github repo for storing mockups.
+Downloaded and tested Balsamiq (trial addition). It’s absolutely perfect for my
+needs, should but User license when trial expires. Should add a ‘plan’ directory
+to github repo for storing mockups.
 
 #### TODO
 
--   Create mockups of previous FYP site designs.
-
--   Create mockups of current site designs.
+- Create mockups of previous FYP site designs.
+- Create mockups of current site designs.
 
 #### Database design
 
@@ -594,24 +550,19 @@ Have been auditing the dataset that Darren sent me. There’s an awful lot
 of repetition of data in almost every field, so the database design
 should be heavily normalised to optimise for this.
 
-Saturday 19th
--------------
+### Saturday 19th
 
 #### TODO
 
 -   Perform full audit of dataset
-
 -   Develop Plausible Nonsense Generator
 
-#### Plausible Nonsense Generator
+**Plausible Nonsense Generator** - Started developing PNG as a HTML/JS tool for
+creating nonsense payloads by using a randomised fake dataset. Should postpone
+further development on this pending completion of the real dataset audit so I
+know how best to mimic it.
 
-Started developing PNG as a HTML/JS tool for creating nonsense payloads
-by using a randomised fake dataset. Should postpone further development
-on this pending completion of the real dataset audit so I know how best
-to mimic it.
-
-Sunday 20th
------------
+## Sunday 20th
 
 Things to discuss at next FYP meeting with Ian:
 
@@ -619,54 +570,42 @@ Things to discuss at next FYP meeting with Ian:
     design, MVC architecture) and user experience flaws. What are Ian’s
     opinions on the implementation. NOTE: I really don’t want anything
     to do with the past project beyond using it as a reference.
-
 -   “Balsamiq” - super awesome. Show early prototypes.
-
 -   Risk assessment - Examples of risk assessments (obviously Google
     returns nothing useful).
-
 -   Database design - UML diagram.
-
 -   Project planning - second iteration Gantt chart.
 
-Monday 21st
------------
+## Monday 21st
 
-I’m starting to get aggravated with the entire software development
-process side to the project. The more that I read about RUP and OpenUp,
-the less I feel that either process would contribute anything positive
-to the project. Additionally, I have been researching recommendations on
-software development processes for solo projects and have found not one
-source that recommends their use for individual work, with both the
-official documentation of development processes anecdotal evidence
-suggesting that their main value is in organising teams. The advice that
-I have seen for solo projects covers things that I already am doing or
-intend to do:
+I’m starting to get aggravated with the entire software development process side
+to the project. The more that I read about RUP and OpenUp, the less I feel that
+either process would contribute anything positive to the project. Additionally,
+I have been researching recommendations on software development processes for
+solo projects and have found not one source that recommends their use for
+individual work, with both the official documentation of development processes
+anecdotal evidence suggesting that their main value is in organising teams. The
+advice that I have seen for solo projects covers things that I already am doing
+or intend to do:
 
 -   Pick a good version control system and use it fastidiously.
-
 -   Write down a list of goals and achievements.
-
 -   Keep a log of your progress and decisions made.
-
 -   Document your code.
-
 -   Use a bug tracker.
 
-I should check with Kate that not using a development process will not
-affect my marks/assessment before “making a stand”, but I am confident
-that being shouldered into having to adopt a process for this project
-would at best be a distraction and at worse would jeopardise my efforts
-by adding artificial constraints that get in the way of progress. One
-exception to this is test driven development, which I have first-hand
-experience of using from ‘emu’ [@Cummins2013] and ‘t4’ [@Cummins2013a],
-and is a process which I intend to use when implementing some of the
-data back-end.
+I should check with Kate that not using a development process will not affect my
+marks/assessment before “making a stand”, but I am confident that being
+shouldered into having to adopt a process for this project would at best be a
+distraction and at worse would jeopardise my efforts by adding artificial
+constraints that get in the way of progress. One exception to this is test
+driven development, which I have first-hand experience of using from ‘emu’
+[@Cummins2013] and ‘t4’ [@Cummins2013a], and is a process which I intend to use
+when implementing some of the data back-end.
 
 #### TODO (planning)
 
 -   Begin writing project plan.
-
 -   Write a set of use cases for common tasks, and create mockups
     showing how to perform those tasks with pidb/protein-db.
 
@@ -674,19 +613,17 @@ data back-end.
 
 -   Add probability control to PNG and re-implement as a native
     application (or as a scriptable web app).
-
 -   Read up on Selenium [@SeleniumND].
-
 -   Implement `make DEBUG=1 all` feature.
-
 -   Move website sources into `www/` subdirectory.
 
-#### Preparing CSV files from Dataset
+**Preparing CSV files from Dataset**
 
-Save the desired sheet as text (tab delimiter).
+1. Save the desired sheet as text (tab delimiter).
 
-#### Working with CSV dataset
+**Working with CSV dataset**
 
+```
     # To remove header line from output
     $ cat dataset.csv | tail -n+2
 
@@ -696,6 +633,7 @@ Save the desired sheet as text (tab delimiter).
     # To count non-empty fields
     $ cat dataset.csv | tail -n+2 | \
       awk -F $'\t' '{print $2}' | sed '/^$/d' | wc -l
+```
 
 Tuesday 22nd
 ------------
