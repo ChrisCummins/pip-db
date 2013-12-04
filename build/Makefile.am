@@ -10,4 +10,4 @@ uninstall-local:
 	rm -rvf "$(WWW_ROOT)"
 endif
 
-CLEANFILES = $(shell find "$(WWW_BUILD)" -type f)
+CLEANFILES = $(shell find "$(WWW_BUILD)" -type f 2>/dev/null)
