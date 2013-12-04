@@ -66,7 +66,7 @@ def get_help_text():
             "    pipbot build summary\n"
             "        Show the current project configuration\n"
             "\n"
-            "    pipbot show <issue-number|commit-id>\n"
+            "    pipbot show <issue-number|commit-id|<target> <build>>\n"
             "        Tell me more about a particular thing\n"
             "\n"
             "    pipbot version\n"
@@ -113,8 +113,16 @@ def show(args):
         print "Usage: pipbot show <issue-number|commit-id|<target> <build>>"
         return 1
 
-    if len(args) != 1:
+    if len(args) < 1:
         return print_usage_and_return()
+
+    # show <target> <build>
+    if len(args) == 2:
+        target = args[0]
+        build = args[1]
+        configure_string = "./configure " + get_configure_args(target, build)
+        print " \\\n        ".join(configure_string.split(" "))
+        return 0
 
     item = args[0]
 
