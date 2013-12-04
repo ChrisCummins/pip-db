@@ -663,7 +663,6 @@ AC_OUTPUT([
 	design/d1/tasks/Makefile
 	design/d1/tasks/renders/Makefile
 	Documentation/Makefile
-	Documentation/log/Makefile
 	Documentation/plan/Makefile
 	scripts/Makefile
 	scripts/git/Makefile
