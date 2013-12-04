@@ -132,6 +132,8 @@ def show(args):
             return 0
         except:
             return 2
+    else:
+        return print_usage_and_return()
 
 
 def grep(regex, path):
