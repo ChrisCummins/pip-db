@@ -66,7 +66,7 @@ def get_help_text():
             "    pipbot build summary\n"
             "        Show the current project configuration\n"
             "\n"
-            "    pipbot show <issue-number|commit-id>\n"
+            "    pipbot show <issue-number|commit-id|<target> <build>>\n"
             "        Tell me more about a particular thing\n"
             "\n"
             "    pipbot version\n"
@@ -108,9 +108,21 @@ def is_int(s):
 
 
 def show(args):
-    if len(args) != 1:
-        "Usage: show <item>"
+
+    def print_usage_and_return():
+        print "Usage: pipbot show <issue-number|commit-id|<target> <build>>"
         return 1
+
+    if len(args) < 1:
+        return print_usage_and_return()
+
+    # show <target> <build>
+    if len(args) == 2:
+        target = args[0]
+        build = args[1]
+        configure_string = "./configure " + get_configure_args(target, build)
+        print " \\\n        ".join(configure_string.split(" "))
+        return 0
 
     item = args[0]
 
@@ -128,6 +140,8 @@ def show(args):
             return 0
         except:
             return 2
+    else:
+        return print_usage_and_return()
 
 
 def grep(regex, path):
@@ -183,32 +197,39 @@ def get_config_summary():
     return file.read()
 
 
-def build_target(target_name, build_name):
-
+def get_configure_args(target, build):
     try:
-        target_json = get_json_from_file(target_name, etcdir + "targets.json")
+        target_json = get_json_from_file(target, etcdir + "targets.json")
     except IOError:
         print "Unable to open JSON file '" + etcdir + "targets.json'"
         return 100
 
     try:
-        build_json = get_json_from_file(build_name, etcdir + "build.json")
+        build_json = get_json_from_file(build, etcdir + "build.json")
     except IOError:
         print "Unable to open JSON file '" + etcdir + "build.json'"
         return 100
 
     if target_json == None:
-        print "Couldn't find target configuration '" + target_name + "'"
+        print "Couldn't find target configuration '" + target + "'"
         return 1
 
     if build_json == None:
-        print "Couldn't find build configuration '" + build_name + "'"
+        print "Couldn't find build configuration '" + build + "'"
         return 1
 
-    configure_args = " ".join(build_json["configure"]["args"] +
-                              target_json["configure"]["args"] +
-                              build_json["configure"]["env"] +
-                              target_json["configure"]["env"])
+    return " ".join(build_json["configure"]["args"] +
+                    target_json["configure"]["args"] +
+                    build_json["configure"]["env"] +
+                    target_json["configure"]["env"])
+
+
+def build_target(target_name, build_name):
+
+    configure_args = get_configure_args(target_name, build_name)
+
+    if configure_args == 100 or configure_args == 1:
+        return configure_args
 
     try:
         perform_action("Generating sources", "./autogen.sh")
