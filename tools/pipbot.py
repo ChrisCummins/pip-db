@@ -189,32 +189,39 @@ def get_config_summary():
     return file.read()
 
 
-def build_target(target_name, build_name):
-
+def get_configure_args(target, build):
     try:
-        target_json = get_json_from_file(target_name, etcdir + "targets.json")
+        target_json = get_json_from_file(target, etcdir + "targets.json")
     except IOError:
         print "Unable to open JSON file '" + etcdir + "targets.json'"
         return 100
 
     try:
-        build_json = get_json_from_file(build_name, etcdir + "build.json")
+        build_json = get_json_from_file(build, etcdir + "build.json")
     except IOError:
         print "Unable to open JSON file '" + etcdir + "build.json'"
         return 100
 
     if target_json == None:
-        print "Couldn't find target configuration '" + target_name + "'"
+        print "Couldn't find target configuration '" + target + "'"
         return 1
 
     if build_json == None:
-        print "Couldn't find build configuration '" + build_name + "'"
+        print "Couldn't find build configuration '" + build + "'"
         return 1
 
-    configure_args = " ".join(build_json["configure"]["args"] +
-                              target_json["configure"]["args"] +
-                              build_json["configure"]["env"] +
-                              target_json["configure"]["env"])
+    return " ".join(build_json["configure"]["args"] +
+                    target_json["configure"]["args"] +
+                    build_json["configure"]["env"] +
+                    target_json["configure"]["env"])
+
+
+def build_target(target_name, build_name):
+
+    configure_args = get_configure_args(target_name, build_name)
+
+    if configure_args == 100 or configure_args == 1:
+        return configure_args
 
     try:
         perform_action("Generating sources", "./autogen.sh")
