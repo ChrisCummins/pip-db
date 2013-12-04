@@ -108,9 +108,13 @@ def is_int(s):
 
 
 def show(args):
-    if len(args) != 1:
-        "Usage: show <item>"
+
+    def print_usage_and_return():
+        print "Usage: pipbot show <issue-number|commit-id|<target> <build>>"
         return 1
+
+    if len(args) != 1:
+        return print_usage_and_return()
 
     item = args[0]
 
