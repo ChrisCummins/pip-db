@@ -56,7 +56,7 @@ class Pip_Record
 			"site" => 'Protein Isoelectric Point Database',
 			"href" => 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']
 			);
-}
+	}
 
 	public function get_names() {
 		return $this->names;
