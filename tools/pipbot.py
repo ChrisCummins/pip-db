@@ -260,7 +260,7 @@ def deploy(args):
         build_target(args[0], args[1])
 
     try:
-        perform_action("Deploying", "make install")
+        perform_action("Deploying", "make -C build/ install")
     except:
         return 2
 
@@ -272,7 +272,7 @@ def undeploy(args):
         build_target(args[0], args[1])
 
     try:
-        perform_action("Undeploying", "make uninstall")
+        perform_action("Undeploying", "make -C build/ uninstall")
     except:
         return 2
 
