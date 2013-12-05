@@ -1,352 +1,175 @@
-**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+# Project Log
 
-- [October 2013 ](#october-2013)
-	- [Monday 7th](#monday-7th)
-	- [Wednesday 9th](#wednesday-9th)
-	- [Thursday 10th](#thursday-10th)
-			- [TODO](#todo)
-			- [Unified Process](#unified-process)
-			- [IBM Rational Unified Process](#ibm-rational-unified-process)
-			- [Problems with RUP](#problems-with-rup)
-			- [OpenUP](#openup)
-	- [Friday 11th](#friday-11th)
-			- [Confidentiality](#confidentiality)
-			- [Integrity](#integrity)
-			- [Accessibility](#accessibility)
-			- [Project Goal](#project-goal)
-			- [Development Plan](#development-plan)
-			- [UI Idea](#ui-idea)
-			- [UI Idea](#ui-idea-1)
-	- [Sunday 13th](#sunday-13th)
-	- [Monday 14th](#monday-14th)
-	- [Tuesday 15th](#tuesday-15th)
-			- [Back-end idea](#back-end-idea)
-			- [Plan for site map](#plan-for-site-map)
-			- [Prototyping idea](#prototyping-idea)
-	- [Wednesday 16th](#wednesday-16th)
-			- [TODO](#todo-1)
-	- [Thursday 17th](#thursday-17th)
-			- [An examination of pidb back-end](#an-examination-of-pidb-back-end)
-	- [Friday 18th](#friday-18th)
-			- [Balsamiq](#balsamiq)
-			- [TODO](#todo-2)
-			- [Database design](#database-design)
-			- [Data repetition within dataset](#data-repetition-within-dataset)
-	- [Saturday 19th](#saturday-19th)
-			- [TODO](#todo-3)
-			- [Plausible Nonsense Generator](#plausible-nonsense-generator)
-	- [Sunday 20th](#sunday-20th)
-	- [Monday 21st](#monday-21st)
-			- [TODO (planning)](#todo-planning)
-			- [TODO (implementation)](#todo-implementation)
-			- [Preparing CSV files from Dataset](#preparing-csv-files-from-dataset)
-			- [Working with CSV dataset](#working-with-csv-dataset)
-	- [Tuesday 22nd](#tuesday-22nd)
-	- [Wedensday 23rd](#wedensday-23rd)
-			- [Laptop TODO](#laptop-todo)
-			- [Demos for Ian](#demos-for-ian)
-			- [Notes from PP meeting with Kate](#notes-from-pp-meeting-with-kate)
-	- [Thursday 24th](#thursday-24th)
-			- [Notes from weekly meeting with Ian](#notes-from-weekly-meeting-with-ian)
-	- [Friday 25th](#friday-25th)
-			- [Notes from meeting with Darren](#notes-from-meeting-with-darren)
-	- [Saturday 26th](#saturday-26th)
-			- [Reading List](#reading-list)
-	- [Sunday 27th](#sunday-27th)
-			- [Build system TODO](#build-system-todo)
-	- [Monday 28th](#monday-28th)
-	- [Tuesday 29th](#tuesday-29th)
-			- [TODO](#todo-4)
-	- [Wednesday 30th](#wednesday-30th)
-			- [Notes for next meeting with Ian](#notes-for-next-meeting-with-ian)
-	- [Thursday 31st](#thursday-31st)
-			- [Notes from meeting with Ian](#notes-from-meeting-with-ian)
-- [November 2013 ](#november-2013)
-	- [Saturday 2nd](#saturday-2nd)
-	- [Sunday 3rd](#sunday-3rd)
-			- [TODO](#todo-5)
-	- [Monday 4th](#monday-4th)
-	- [Tuesday 5th](#tuesday-5th)
-			- [Le grande plan for great success](#le-grande-plan-for-great-success)
-	- [Wednesday 6th](#wednesday-6th)
-			- [TODO](#todo-6)
-			- [Notes for next meeting with Ian](#notes-for-next-meeting-with-ian-1)
-	- [Thursday 7th](#thursday-7th)
-	- [Friday 8th](#friday-8th)
-			- [Notes from meeting with Ian](#notes-from-meeting-with-ian-1)
-			- [Notes for next meeting with Ian](#notes-for-next-meeting-with-ian-2)
-			- [TODO](#todo-7)
-			- [Notes on WordPress](#notes-on-wordpress)
-			- [PHP best practises](#php-best-practises)
-	- [Saturday 9th](#saturday-9th)
-			- [Notes on last FYP](#notes-on-last-fyp)
-			- [top.php](#topphp)
-			- [funcs.php](#funcsphp)
-			- [bottom.php](#bottomphp)
-			- [index.php](#indexphp)
-			- [search.php](#searchphp)
-			- [General notes](#general-notes)
-	- [Sunday 10th](#sunday-10th)
-			- [Website design](#website-design)
-			- [Unit testing](#unit-testing)
-	- [Monday 11th](#monday-11th)
-	- [Tuesday 12th](#tuesday-12th)
-	- [Wednesday 13th](#wednesday-13th)
-			- [TODO](#todo-8)
-	- [Thursday 14th](#thursday-14th)
-			- [Notes from meeting with Ian](#notes-from-meeting-with-ian-2)
-	- [Friday 15th](#friday-15th)
-			- [TODO](#todo-9)
-	- [Saturday 16th](#saturday-16th)
-	- [Sunday 17th](#sunday-17th)
-	- [Tuesday 19th](#tuesday-19th)
-	- [Wednesday 20th](#wednesday-20th)
-	- [Thursday 21st](#thursday-21st)
-			- [Notes from meeting with Ian](#notes-from-meeting-with-ian-3)
-	- [Friday 22nd](#friday-22nd)
-			- [Notes from meeting with Darren and Fraser](#notes-from-meeting-with-darren-and-fraser)
-	- [Saturday 23rd](#saturday-23rd)
-	- [Monday 25th](#monday-25th)
-	- [Wednesday 27th](#wednesday-27th)
-			- [External links](#external-links)
-	- [Thursday 28th](#thursday-28th)
-	- [Friday 29th](#friday-29th)
-			- [Project name](#project-name)
 
-October 2013 
-=============
+## October 2013
 
-Monday 7th
-----------
 
-I’ve organised a meeting with Ian Nabney (i.t.nabney@aston.ac.uk) for
-Thursday 10th 10:30am in MB216A. Topics for discussion:
+### Monday 7th
 
--   Dataset – getting a better understanding of the data which I will be
-    working with, the scientific background behind it, how often it will
-    be updated, whether it is confidential/open source etc.
+I've organised a meeting with Ian Nabney for Thursday 10th 10:30am in
+MB216A. Topics for discussion:
 
--   Users – what is the expected userbase, what are their expectations,
-    concerns, and technical experience? Etc.
+* Dataset - getting a better understanding of the data which I will be working
+with, the scientific background behind it, how often it will be updated, whether
+it is confidential/open source etc.
+* Users - what is the expected userbase, what are their expectations, concerns,
+and technical experience? Etc.
+* Time schedule - should I be using any development processes? How often should
+I be meeting/reporting back? Etc.
+* Difference(s) between the protein diffusion coefficient projects.
+* Additional project requirements - what is the expected site traffic? High or
+low? Do I need to organise dedicated servers?
+* Any existing related databases to use as reference.
+* Any confidentiality/plagiarism issues with hosting WIP code on github
+(effectively open sourcing the whole project)?
 
--   Time schedule – should I be using any development processes? How
-    often should I be meeting/reporting back? Etc.
 
--   Difference(s) between the protein diffusion coefficient projects.
-
--   Additional project requirements – what is the expected site traffic?
-    High or low? Do I need to organise dedicated servers?
-
--   Any existing related databases to use as reference.
-
--   Any confidentiality/plagiarism issues with hosting WIP code on
-    github (effectively open sourcing the whole project)?
-
-Wednesday 9th
--------------
+### Wednesday 9th
 
 Some personal goals for the project:
 
-1.  To produce something of value to the molecular biology community.
+* To produce something of value to the molecular biology community.
+* To exclusively use open source (free as in freedom and free as in free beer)
+software and tools, without exception.
+* To learn more about web development.
+* To get a high mark ($> 70\%$) mark for all assessments.
+* To contribute back to at least one of the tools that I use in some
+quantifiable way.
 
-2.  To exclusively use open source (free as in freedom and free as in
-    free beer) software and tools, without exception.
 
-3.  To learn more
-
-4.  To get a high mark ($> 70\%$) mark for all assessments.
-
-5.  To contribute back to at least one of the tools that I use in some
-    quantifiable way.
-
-Thursday 10th
--------------
+### Thursday 10th
 
 Met with Ian. Notes:
 
--   Choice of process is important - look up RUP (IBM Rational Unified
-    Process) [@IBMRUP] and consider using it. If not, suggest an
-    improved alternative and justify.
+* Choice of process is important - look up RUP (IBM Rational Unified Process)
+(http://en.wikipedia.org/wiki/IBM_Rational_Unified_Process) and consider using
+it. If not, suggest an improved alternative and justify.
+* Choice of language is personal preference. Ian has experience with PHP making
+it a solid choice - but a justified alternative is acceptable.
+* I should meet with Dr. Darren Flower (Aston lecturer, effectively product
+owner for this project) ASAP to discuss the project, and he can give me the data
+and help answer questions about it.
+* I can use github.com to host code, but shouldn't upload the bio data itself.
+* First term work is for a lot more than just planning stage. I should be using
+it to begin work properly and use it to brush up on MySQL/PHP skills as
+required.
+* Weekly meetings are essential, 10:30 on Thursdays.
 
--   Choice of language is personal preference. Ian has experience with
-    PHP making it a solid choice – but a justified alternative is
-    acceptable.
+**TODO:**
 
--   I should meet with Dr. Darren Flower (Aston lecturer, effectively
-    product owner for this project) ASAP to discuss the project, and he
-    can give me the data and help answer questions about it.
+1. Read up on RUP.
+2. Contact Darren to arrange meeting.
+3. Read about git and MySQL
+(http://ben.kulbertis.org/2011/10/synchronizing-a-mysql-database-with-git-and-git-hooks/).
 
--   I can use `github.com` to host code, but shouldn’t upload the bio
-    data itself.
-
--   First term work is for a lot more than just planning stage. I should
-    be using it to begin work properly and use it to brush up on
-    MySQL/PHP skills as required.
-
--   Weekly meetings are essential, 10:30 on Thursdays.
-
-#### TODO
-
--   Read up on RUP.
-
--   Contact Darren to arrange meeting.
-
--   Read about git and MySQL [@Kulbertis2011].
-
-#### Unified Process
+**Unified Process**
 
 The Unified Software Development Process is an iterative and incremental
-software development process framework. The basis of the process is that
-it is a use case driven iterative and incremental process, in which
-Elaboration, Construction and Transition are divided into a series of
-time boxed phases and iterated upon.
+software development process framework. The basis of the process is that it is a
+use case driven iterative and incremental process, in which Elaboration,
+Construction and Transition are divided into a series of time boxed phases and
+iterated upo
 
-#### IBM Rational Unified Process
+**IBM Rational Unified Process**
 
-An iterative software development process framework created by IBM
-(Rational Software Corporation division), which is an implementation of
-the Unified Process. It details six best practises for modern software
-engineering:
+An iterative software development process framework created by IBM (Rational
+Software Corporation division), which is an implementation of the Unified
+Process. It details six best practises for modern software engineering:
 
-1.  Develop iteratively, with risk as the primary iteration driver
-
-2.  Manage requirements
-
-3.  Employ a component-based architecture
-
-4.  Model software visually
-
-5.  Continuously verify quality
-
-6.  Control changes
+1. Develop iteratively, with risk as the primary iteration driver
+2. Manage requirements
+3. Employ a component-based architecture
+4. Model software visually
+5. Continuously verify quality
+6. Control changes
 
 Each iteration contains nine disciplines. Six engineering disciplines:
 
-1.  Business modelling
-
-2.  Requirements
-
-3.  Analysis and Design
-
-4.  Implementation
-
-5.  Test
-
-6.  Deployment
+1. Business modelling
+2. Requirements
+3. Analysis and Design
+4. Implementation
+5. Test
+6. Deployment
 
 And three supporting disciplines:
 
-1.  Configuration and change management
-
-2.  Project management
-
-3.  Environment
+1. Configuration and change management
+2. Project management
+3. Environment
 
 The RUP project life cycle consists of four phases:
 
-1.  Inception phase
+1. Inception phase
+2. Elaboration phase
+3. Construction phase
+4. Transition phase
 
-2.  Elaboration phase
+**Problems with RUP**
 
-3.  Construction phase
+It is isn't open source. A user license for the Rational Method Composer must be
+bought from IBM for $1,080.00 dollars, and so I must look for alternatively so
+as not to violate my personal goal of using purely open source tools/frameworks.
 
-4.  Transition phase
+**OpenUP**
 
-#### Problems with RUP
+The Open Unified Process, alternatively known as the Eclipse Process Framework
+(EPF). This offers an open source minimalist implementation of RUP.
 
-It is isn’t open source. A user license for the Rational Method Composer
-must be bought from IBM for $1,080.00 dollars, and so I must look for
-alternatively so as not to violate my personal goal of using purely open
-source tools/frameworks.
-
-#### OpenUP
-
-The Open Unified Process, alternatively known as the Eclipse Process
-Framework (EPF). This offers an open source minimalist implementation of
-RUP.
-
-> OpenUP is a lean Unified Process that applies iterative and
-> incremental approaches within a structured life-cycle. OpenUP embraces
-> a pragmatic, agile philosophy that focuses on the collaborative nature
-> of software development. It is a tools-agnostic, low-ceremony process
-> that can be extended to address a broad variety of project types.
+> OpenUP is a lean Unified Process that applies iterative and incremental
+> approaches within a structured life-cycle. OpenUP embraces a pragmatic, agile
+> philosophy that focuses on the collaborative nature of software
+> development. It is a tools-agnostic, low-ceremony process that can be extended
+> to address a broad variety of project types.
 
 Arranged meeting with Darren for 2pm in MB449 tomorrow.
 
-Friday 11th
------------
+
+### Friday 11th
 
 Purposes of the project planning module:
 
-1.  Develop a project plan.
-
-2.  Produce a schedule of activities using GANTT charts or similar.
-
-3.  Consider which activities are critical to the success of your
-    project.
-
-4.  Undertake a risk analysis.
-
-5.  Ensure that tangible milestones are identified to measure progress
-    and success.
-
-6.  Determine the resources needed to carry out and complete your
-    project work.
+1. Develop a project plan.
+2. Produce a schedule of activities using GANTT charts or similar.
+3. Consider which activities are critical to the success of your project.
+4. Undertake a risk analysis.
+5. Ensure that tangible milestones are identified to measure progress and
+success.
+6. Determine the resources needed to carry out and complete your project work.
 
 From the guidance notes, a good project topic:
 
-1.  Provides a sufficient intellectual challenge. – will be determined
-    by 3).
-
-2.  Contains a relatively straightforward core part which should be
-    achievable even in the worst-case scenario. – Yes. The creation of
-    an online database.
-
-3.  Has an element of innovation, not necessarily in the research sense,
-    but at least in the sense of ‘not covered or detailed in final-year
-    lectures or in standard textbooks’. – Not sure about this.
-
-4.  Yields results that can be verified in some way. – Yes.
+1. Provides a sufficient intellectual challenge. - will be determined by 3).
+2. Contains a relatively straightforward core part which should be achievable
+even in the worst-case scenario. - Yes. The creation of an online database.
+3. Has an element of innovation, not necessarily in the research sense, but at
+least in the sense of 'not covered or detailed in final-year lectures or in
+standard textbooks'. - Not sure about this.
+4. Yields results that can be verified in some way. - Yes.
 
 Questions for next meeting with Ian:
 
--   Availability of dedicated servers, and public IPs.
-
--   Registration of a domain.
-
--   Clarify the purpose of the project logbook: is it for my benefit or
-    the assessor’s?
-
--   Confirm access to the database module notes.
+- Availability of dedicated servers, and public IPs.
+- Registration of a domain.
+- Clarify the purpose of the project logbook: is it for my benefit or the
+assessor's?
+- Confirm access to the database module notes.
 
 Questions for meeting with Darren:
 
 -   The Dataset:
-
     -   What is it used for?
-
     -   Who is it used by?
-
         -   Confidential or open source?
-
         -   Publicly available or user account based access?
-
     -   How often is it used? (Site traffic)
-
     -   How often is it updated?
-
         -   User submissions or single admin account?
-
     -   Feedback from users?
-
         -   Reddit style popularity mechanism?
-
         -   Comments system?
-
 -   The website:
-
     -   Possible volunteers for user testing?
-
     -   Associated with Aston?
 
 Notes from meeting with Darren:
@@ -354,285 +177,218 @@ Notes from meeting with Darren:
 -   There are hundreds (/thousands) of existing databases which offer
     specific categories of information which tend to interlink with each
     other.
-
 -   Many different use cases for looking up data. Some people will want
     a dump of the whole dataset so as to perform calculations, some
     other cases may be interested in performing more targeted searches,
     such as by type/range of pHs etc.
-
 -   A BLAST search implementation would be useful.
-
 -   Possible visualisations of results such as graphing distribution of
     pI ranges would be useful.
-
 -   Fuzzy matching of search criteria would be useful.
-
 -   All data contains citations to original source.
-
 -   User submitted data could be potentially useful, but would need a
-    way to distinguish it from the ‘authoritative’ source. I think this
-    could be a really interesting topic of research – how can you
+    way to distinguish it from the 'authoritative' source. I think this
+    could be a really interesting topic of research - how can you
     authenticate user submitted data? Ranking by the weight of the
     citation? User rating? Peer reviewing?
-
 -   Version control of the dataset would be useful. For example, viewing
-    history (like Wikipedia’s page history), and the ability to undo
+    history (like Wikipedia's page history), and the ability to undo
     revisions.
-
 -   Site traffic is impossible to predict. It could be used by lots of
     people, or it may not. To accommodate this, I should assume
-    worst-case scenarios for the number of users – in cases of peer
+    worst-case scenarios for the number of users - in cases of peer
     reviewing, assume low userbase; in cases of site traffic, assume
     heavy load.
-
 -   Darren has volunteered for offering user testing of work-in-progress
     sites.
-
 -   Darren would like to hear from me with progress reports, or any
     questions etc. Should keep him in the loop. Perhaps periodic
     progress reports sent by email?
-
 -   Fraser is a final year Biology student who has worked with the
     dataset extensively, and should be able to help go through the data
     with me and explain what it means.
-
 -   Darren will send me the dataset in the near future.
 
 Site security concerns:
 
-#### Confidentiality
+**Confidentiality**
 
-Any user system will require user-names and passwords to remain
-confidential.
+Any user system will require user-names and passwords to remain confidential.
 
-#### Integrity
+**Integrity**
 
-Integrity of dataset is CRUCIAL. Any unwarranted modifications or loss
-of data would invalidate the whole project.
+Integrity of dataset is CRUCIAL. Any unwarranted modifications or loss of data
+would invalidate the whole project.
 
-#### Accessibility
+**Accessibility**
 
-Data must be accessible at all times. System downtime is unacceptable,
-and this means that updates to dataset must occur transparently to the
-user. This also includes making offline copies of the data for users.
+Data must be accessible at all times. System downtime is unacceptable, and this
+means that updates to dataset must occur transparently to the user. This also
+includes making offline copies of the data for users.
 
-#### Project Goal
+**Project Goal**
 
-A reasonable personal goal would be to get the basic search-able
-database online by the end of the year. This provides ample time for
-adding the “fun” stuff, such as visualisation, advanced searching
-techniques, extensive user testing, site design etc. etc.
+A reasonable personal goal would be to get the basic search-able database online
+by the end of the year. This provides ample time for adding the "fun" stuff,
+such as visualisation, advanced searching techniques, extensive user testing,
+site design etc. etc.
 
-Have received dataset from Darren. Note that it is currently
-CONFIDENTIAL “in so far as you shouldn’t pass it on to anyone else, or
-otherwise make it available to others”.
+Have received dataset from Darren. Note that it is currently CONFIDENTIAL "in so
+far as you shouldn't pass it on to anyone else, or otherwise make it available
+to others".
 
-#### Development Plan
+**Development Plan**
 
 1.  Setup MySQL database and suitable tables.
-
 2.  Create a web page to add entries to db and test.
-
 3.  Create a script to import exiting data in spreadsheets.
-
 4.  Create forms to search database.
-
 5.  Create forms to download database/search queries.
 
-#### UI Idea
+**UI Ideas:**
 
-use an accordion model to hide further details of search requests and
-show them on demand, instead of showing a list of links to separate
-details pages.
+1. Use an accordion model to hide further details of search requests and show them
+on demand, instead of showing a list of links to separate details pages.
+2. Use a minimalist front page if we don't have anything to show. Think
+google.com.
 
-#### UI Idea
 
-use a minimalist front page if we don’t have anything to show. Think
-`google.com`.
+### Sunday 13th
 
-Sunday 13th
------------
-
-Found that the PHP sources for a couple of pages from Facebook were
-leaked in 2007, now available on github [@Buvrilovic2013]. Should keep
-tabs on this so as to see how a large database backed website organises
-its code.
+Found that the PHP sources for a couple of pages from Facebook were leaked in
+2007, now available on github (https://gist.github.com/nikcub/3833406). Should
+keep tabs on this so as to see how a large database backed website organises its
+code.
 
 Notes on Facebook source code:
 
 -   Function `get_site_variable()` provides API into state vars.
-
 -   `IS_DEV_SITE` and other globals provide some debugging.
-
 -   `xxx_stats` variable arrays are used for grouping relevant data.
-
 -   Directory structure:
-
-    -   `/html/`
-
-    -   `/libs/`
-
-    -   `/js/`
-
-    -   `/css/`
-
+    - `/html/`
+    - `/libs/`
+    - `/js/`
+    - `/css/`
 -   Templates are used and rendered last:
+    `render_template($_SERVER['PHP_ROOT'].'/html/index.phpt');`.
 
-            render_template($_SERVER['PHP_ROOT'].'/html/index.phpt');
 
-Monday 14th
------------
+### Monday 14th
 
-Read up on PHP templating [@Rakowski2011], should investigate use of
-Twig framework to implement MVC architecture in my project.\
+Read up on PHP templating
+(http://coding.smashingmagazine.com/2011/10/17/getting-started-with-php-templating/),
+should investigate use of Twig framework to implement MVC architecture in my
+project.
 
-Amended meeting time with Fraser to 4pm on Wednesday.\
+Amended meeting time with Fraser to 4pm on Wednesday.
 
 Started generating project plan (Gantt chart). OpenUP reference:
-`http://epf.eclipse.org/wikis/openup/`.
+http://epf.eclipse.org/wikis/openup/.
 
-Tuesday 15th
-------------
+
+### Tuesday 15th
 
 Created first iteration of site mockups to get a feel for the design.
 Requirements are still changing rapidly so this helps formulate a TODO
 list.
 
-#### Back-end idea
+**Back-end idea**
 
-Don’t just store external URLs for references, instead break it down
+Don't just store external URLs for references, instead break it down
 logically into a website name, author, unique ID, etc.
 
-#### Plan for site map
+**Plan for site map**
 
--   Home
-
+- Home
     -   Help
-
     -   About Us
-
     -   Terms & Conditions
-
     -   Privacy Policy
-
     -   Contact Us
-
--   Search Results
-
+- Search Results
     -   Download Results
-
     -   Individual Record
-
     -   Edit Record
-
     -   Add New Record
-
--   Members Page
-
+- Members Page
     -   Register
-
     -   Login
 
 Had meeting first with Fraser. Notes:
 
--   Dataset consist of multiple sheets which can be combined, with an
-    extra field to note the sheet it originated from (1975, PubMed,
-    etc.). Note that data in sixth form sheet may be incorrect or less
-    valid.
-
--   Notes, by field:
-
+- Dataset consist of multiple sheets which can be combined, with an extra field
+to note the sheet it originated from (1975, PubMed, etc.). Note that data in
+sixth form sheet may be incorrect or less valid.
+- Notes, by field:
     -   **E.C.** Enzyme Commission Number. Numerical classification
         scheme, consisting of four positive integer values. Many to one
         relationship of proteins and records to E.C. value. Can be
         unknown.
-
     -   **Protein / Alternative Name(s)** string names of equal value.
-
     -   **Source** Latin binomial. Case sensitivity is important:
         capitalise the Genus, everything else is lower case. Does have
         common names (property).
-
     -   **Organ and/or Subcellular location** a property of the source.
-
     -   **M.W.** Molecular Weight, in units of Daltons (Da).
-
     -   **Subunit No. / M.W (range)** properties of molecular weight.
-
     -   **No. of Iso-enzymes** Values can be vague (e.g. Many/several),
         not that important.
-
     -   **pI maximum value / pI range / pI value of major component /
         pI** various ways to specify pI value with varying precision.
-
     -   **Temperature** Important for replicating experimental results.
-
     -   **Method** Experimental method
-
     -   **Valid sequence(s) available** Values in the fields are
         shorthand, use the key at the bottom of each sheet to decode.
-        Entries with ‘1’ are more robust and should be ranked greater
-        than entries with ‘0’ values.
-
+        Entries with '1' are more robust and should be ranked greater
+        than entries with '0' values.
     -   **Protein sequence / Species Taxonomy / Original Texts /
         PubMed** External links.
-
     -   **Notes** text with additional details. Could be combed through
         to see if info could be added to other fields.
 
-#### Prototyping idea
+**Prototyping idea** - Write a "Plausible Nonsense Generator" which can create
+fake but believable ideal datasets for testing with.
 
-Write a “Plausible Nonsense Generator” which can create fake but
-believable ideal datasets for testing with.
 
-Wednesday 16th
---------------
+### Wednesday 16th
 
 Notes from weekly meeting with Ian:
 
 -   No news yet on availability of server/IP.
-
 -   Registration of domains can be done whenever (he recommended quiet
-    late, I’ll recommend quite early), small cost will be reimbursed by
+    late, I'll recommend quite early), small cost will be reimbursed by
     department.
-
 -   Refer to Kate for answers on: logbook style (is it for my benefit or
-    assessors’?), the distribution of marks between testing and
+    assessors'?), the distribution of marks between testing and
     evaluation, term dates.
-
--   ‘Balsamiq’ is a UI prototyping tool which is useful for generating
+-   ‘Balsamiq' is a UI prototyping tool which is useful for generating
     wireframes and mockups. I should look into this.
-
 -   First iteration of Gantt chart/project plan is lacking in User
     requirements and risk assessment time. More time should be dedicated
-    to this, don’t rush into implementation. Also need to propose a
+    to this, don't rush into implementation. Also need to propose a
     business case (although this will be pretty minimal: more science =
     better humanity).
-
--   A proper audit of the previous student’s project should be done and
+-   A proper audit of the previous student's project should be done and
     recorded (this can be added to project plan). This can be chalked up
-    as “Contextual Investigation”
+    as "Contextual Investigation"
+-   Be more honest in risk assessment. Include things like "need to
+    learn PHP", "I'm a MySQL n00b", etc.
 
--   Be more honest in risk assessment. Include things like “need to
-    learn PHP”, “I’m a MySQL n00b”, etc.
-
-#### TODO
+**TODO**
 
 -   Second iteration of Gantt chart/project plan.
-
 -   Write an assessment of project risks.
-
 -   Talk with Darren about further user investigation.
-
 -   Audit the previous FYP.
-
 -   Download and test Balsamiq.
 
-Thursday 17th
--------------
+
+### Thursday 17th
 
 #### An examination of pidb back-end
 
+```
     mysql> SHOW TABLES;
     +------------------+
     | Tables_in_pidb   |
@@ -774,51 +530,41 @@ Thursday 17th
     | Type     | varchar(50)  | NO   |     | NULL    |                |
     +----------+--------------+------+-----+---------+----------------+
     5 rows in set (0.00 sec)
+```
 
-Friday 18th
------------
+### Friday 18th
 
-#### Balsamiq
-
-Downloaded and tested Balsamiq (trial addition). It’s absolutely perfect
-for my needs, should but User license when trial expires. Should add a
-‘plan’ directory to github repo for storing mockups.
+Downloaded and tested Balsamiq (trial addition). It's absolutely perfect for my
+needs, should but User license when trial expires. Should add a ‘plan' directory
+to github repo for storing mockups.
 
 #### TODO
 
--   Create mockups of previous FYP site designs.
+- Create mockups of previous FYP site designs.
+- Create mockups of current site designs.
 
--   Create mockups of current site designs.
+**Database design** - have created some first ideas for database designs using
+UML database notation. Should add PDF exports of these to repo.
 
-#### Database design
+**Data repetition within dataset** - have been auditing the dataset that Darren
+sent me. There’s an awful lot of repetition of data in almost every field, so
+the database design should be heavily normalised to optimise for this.
 
-Have created some first ideas for database designs using UML database
-notation. Should add PDF exports of these to repo.
 
-#### Data repetition within dataset
-
-Have been auditing the dataset that Darren sent me. There’s an awful lot
-of repetition of data in almost every field, so the database design
-should be heavily normalised to optimise for this.
-
-Saturday 19th
--------------
+### Saturday 19th
 
 #### TODO
 
 -   Perform full audit of dataset
-
 -   Develop Plausible Nonsense Generator
 
-#### Plausible Nonsense Generator
+**Plausible Nonsense Generator** - Started developing PNG as a HTML/JS tool for
+creating nonsense payloads by using a randomised fake dataset. Should postpone
+further development on this pending completion of the real dataset audit so I
+know how best to mimic it.
 
-Started developing PNG as a HTML/JS tool for creating nonsense payloads
-by using a randomised fake dataset. Should postpone further development
-on this pending completion of the real dataset audit so I know how best
-to mimic it.
 
-Sunday 20th
------------
+### Sunday 20th
 
 Things to discuss at next FYP meeting with Ian:
 
@@ -826,54 +572,44 @@ Things to discuss at next FYP meeting with Ian:
     design, MVC architecture) and user experience flaws. What are Ian’s
     opinions on the implementation. NOTE: I really don’t want anything
     to do with the past project beyond using it as a reference.
-
--   “Balsamiq” - super awesome. Show early prototypes.
-
+-   "Balsamiq" - super awesome. Show early prototypes.
 -   Risk assessment - Examples of risk assessments (obviously Google
     returns nothing useful).
-
 -   Database design - UML diagram.
-
 -   Project planning - second iteration Gantt chart.
 
-Monday 21st
------------
 
-I’m starting to get aggravated with the entire software development
-process side to the project. The more that I read about RUP and OpenUp,
-the less I feel that either process would contribute anything positive
-to the project. Additionally, I have been researching recommendations on
-software development processes for solo projects and have found not one
-source that recommends their use for individual work, with both the
-official documentation of development processes anecdotal evidence
-suggesting that their main value is in organising teams. The advice that
-I have seen for solo projects covers things that I already am doing or
-intend to do:
+### Monday 21st
+
+I'm starting to get aggravated with the entire software development process side
+to the project. The more that I read about RUP and OpenUp, the less I feel that
+either process would contribute anything positive to the project. Additionally,
+I have been researching recommendations on software development processes for
+solo projects and have found not one source that recommends their use for
+individual work, with both the official documentation of development processes
+anecdotal evidence suggesting that their main value is in organising teams. The
+advice that I have seen for solo projects covers things that I already am doing
+or intend to do:
 
 -   Pick a good version control system and use it fastidiously.
-
 -   Write down a list of goals and achievements.
-
 -   Keep a log of your progress and decisions made.
-
 -   Document your code.
-
 -   Use a bug tracker.
 
-I should check with Kate that not using a development process will not
-affect my marks/assessment before “making a stand”, but I am confident
-that being shouldered into having to adopt a process for this project
-would at best be a distraction and at worse would jeopardise my efforts
-by adding artificial constraints that get in the way of progress. One
-exception to this is test driven development, which I have first-hand
-experience of using from ‘emu’ [@Cummins2013] and ‘t4’ [@Cummins2013a],
-and is a process which I intend to use when implementing some of the
-data back-end.
+I should check with Kate that not using a development process will not affect my
+marks/assessment before "making a stand", but I am confident that being
+shouldered into having to adopt a process for this project would at best be a
+distraction and at worse would jeopardise my efforts by adding artificial
+constraints that get in the way of progress. One exception to this is test
+driven development, which I have first-hand experience of using from ‘emu’
+(https://github.com/ChrisCummins/emu) and ‘t4’
+(https://github.com/ChrisCummins/t4), and is a process which I intend to use
+when implementing some of the data back-end.
 
 #### TODO (planning)
 
 -   Begin writing project plan.
-
 -   Write a set of use cases for common tasks, and create mockups
     showing how to perform those tasks with pidb/protein-db.
 
@@ -881,19 +617,17 @@ data back-end.
 
 -   Add probability control to PNG and re-implement as a native
     application (or as a scriptable web app).
-
--   Read up on Selenium [@SeleniumND].
-
+-   Read up on Selenium (http://docs.seleniumhq.org/).
 -   Implement `make DEBUG=1 all` feature.
-
 -   Move website sources into `www/` subdirectory.
 
-#### Preparing CSV files from Dataset
+**Preparing CSV files from Dataset**
 
-Save the desired sheet as text (tab delimiter).
+1. Save the desired sheet as text (tab delimiter).
 
-#### Working with CSV dataset
+**Working with CSV dataset**
 
+```
     # To remove header line from output
     $ cat dataset.csv | tail -n+2
 
@@ -903,90 +637,73 @@ Save the desired sheet as text (tab delimiter).
     # To count non-empty fields
     $ cat dataset.csv | tail -n+2 | \
       awk -F $'\t' '{print $2}' | sed '/^$/d' | wc -l
+```
 
-Tuesday 22nd
-------------
+### Tuesday 22nd
 
-Began creating Objectives, Milestones, Success, Use Cases and Risks
-tables for use in project planning meeting tomorrow.\
+Began creating Objectives, Milestones, Success, Use Cases and Risks tables for
+use in project planning meeting tomorrow.\
 
-Created side-by-side mockups of common tasks in pidb and my first
-iteration design using Balsamiq.
+Created side-by-side mockups of common tasks in pidb and my first iteration
+design using Balsamiq.
 
-Wedensday 23rd
---------------
 
-#### Laptop TODO
+### Wedensday 23rd
+
+##### Laptop TODO
 
 -   Install balsamiq trial
-
 -   Install lessc
-
 -   Install tablify
-
 -   Test dsa, png and build system
 
-#### Demos for Ian
+**Demos for Ian:**
 
 -   Balsamiq mockups
-
 -   Build system
-
 -   dsa
-
 -   png
 
-#### Notes from PP meeting with Kate
+**Notes from PP meeting with Kate**
 
 -   Final poster assessment is A1 size - glossy paper looks best.
-
 -   Gantt chart week numbers should include some dates for reference.
-
 -   Gantt chart needs project plan marked on it.
-
 -   Be clear in project plan of which activities depend on each other
-    and which milestones are “blocking” achievements.
-
+    and which milestones are "blocking" achievements.
 -   There are 26 work weeks in the term.
-
 -   Deadline for preliminary project plan is November 1st.
-
 -   Next PP meeting is a peer review of project plans on November 11th.
 
-Thursday 24th
--------------
 
-#### Notes from weekly meeting with Ian
+### Thursday 24th
+
+**Notes from weekly meeting with Ian**
 
 -   Make a third iteration Gantt chart, and send to Ian.
-
--   Discuss “purpose of project” with Darren at next meeting, not just
+-   Discuss "purpose of project" with Darren at next meeting, not just
     user interface.
-
 -   Make a list of mitigation strategies for each of the risks in the
     Risk list.
 
-Started using the GitHub issue tracker and imported the milestones and
-current task list. Added GitHub pages for the repo, should populate that
-later. Ideas for public page: a link to latest PDF build of this log,
-automatic burndown charts, a dynamic list of top bugs and most recent
-commits, etc.
+Started using the GitHub issue tracker and imported the milestones and current
+task list. Added GitHub pages for the repo, should populate that later. Ideas
+for public page: a link to latest PDF build of this log, automatic burndown
+charts, a dynamic list of top bugs and most recent commits, etc.
 
-Friday 25th
------------
 
-Prepared Balsamiq mockups for meeting with Darren at 2pm today, and
-installed previous FYP onto laptop for demonstration.
+### Friday 25th
 
-#### Notes from meeting with Darren
+Prepared Balsamiq mockups for meeting with Darren at 2pm today, and installed
+previous FYP onto laptop for demonstration.
+
+**Notes from meeting with Darren**
 
 -   D1 initial design is OK.
-
 -   The search engine should provide hard limits on the number of
     results it returns (perhaps as a percentage of the dataset size?);
     this is to prevent users from just downloading the whole dataset
     themselves and eradicating the need for the database.
-
 -   In order to achieve this, search criteria should be split into two
     types: primary and secondary. Primary search criteria are those
     which can only return a finite subset of the dataset, whereas
@@ -994,82 +711,68 @@ installed previous FYP onto laptop for demonstration.
     combined with primary criteria. For example, a protein name is a
     primary criterion, whereas a pI range of 0-14 (all possible values)
     is a secondary criterion.
-
 -   Incorporating Blast searching will involve generating a list of
     sequences for every record and then using that database with the
-    blast search program. This is a high priority “bonus”, as it will be
+    blast search program. This is a high priority "bonus", as it will be
     a step above the previous attempts.
-
 -   The design is a very subjective thing - as long as it is functional,
     I have a lot of creative control over how the user should interact
     with the site.
-
 -   I have relative freedom over the project name, but Darren will be
     able to contribute suggestions if necessary.
-
 -   I should see if Fraser has anything he would like to say about the
     design.
 
-Saturday 26th
--------------
+
+### Saturday 26th
 
 Ported PNG to node.js yesterday. Node.js seems fantastic for what I want
-(server-side JS), and the combination of that and MongoDB seems to be
-very interesting - it’s worth reading more into it.
+(server-side JS), and the combination of that and MongoDB seems to be very
+interesting - it’s worth reading more into it.
 
-#### Reading List
+**Reading List:**
 
--   Node.js testing framework - mocha [@HolowaychukND] and should.js
-    [@HolowaychukNDa]
+-   Node.js testing framework - mocha (https://github.com/visionmedia/mocha) and
+    should.js (https://github.com/visionmedia/should.js).
+-   Blog rolling with mongoDB (http://howtonode.org/express-mongodb).
+-   Real Time Web with Node.js
+    (http://courseware.codeschool.com/node_slides.pdf).
+-   Node.js vs PHP (http://webapplog.com/php-vs-node-js/).
 
--   Blog rolling with mongoDB [@Clemson2010].
 
--   Real Time Web with Node.js [@CoursewareND]
+### Sunday 27th
 
--   Node.js vs PHP [@Webapplog2013]
-
-Sunday 27th
------------
-
-Began replacing the static Makefile with an autotooled build system.
-This will provide greater portability and is a more suitable process for
-building the project as it adds the extra configuration stage which can
-be used to specify options such as whether to use content hashing,
-whether to build the TeX sources, etc.
+Began replacing the static Makefile with an autotooled build system.  This will
+provide greater portability and is a more suitable process for building the
+project as it adds the extra configuration stage which can be used to specify
+options such as whether to use content hashing, whether to build the TeX
+sources, etc.
 
 #### Build system TODO
 
--   configure: Add –enable-(html|js|css)-minification=(yes|no) feature
-
+-   configure: Add --enable-(html|js|css)-minification=(yes|no) feature
 -   configure: Check for node else fail
-
 -   configure: Check for dsa runtime dependencies else fail
-
 -   configure: Check for Apache/MySQL else warn
-
 -   automake: Add make install command
-
--   configure: Add –prefix for www\_root
-
--   configure: Add –enable-content-hashing=(yes|no) feature
-
+-   configure: Add --prefix for www\_root
+-   configure: Add --enable-content-hashing=(yes|no) feature
 -   configure: Add summary
-
 -   automake: Add log make open|edit rules
 
-Monday 28th
------------
+
+### Monday 28th
 
 Completed port of build system over to autotools. There are a number of
-additional features that would be nice to add, and these have been filed
-as feature requests in the issue tracker.\
+additional features that would be nice to add, and these have been filed as
+feature requests in the issue tracker.\
 
-Received an email from Darren which clarified a number of concerns and
-suggested some new project titles. In my desire to keep the project name
-as simple and pronounceable as possible, I’ve suggested “pipsearch”.
+Received an email from Darren which clarified a number of concerns and suggested
+some new project titles. In my desire to keep the project name as simple and
+pronounceable as possible, I’ve suggested "pipsearch".
 
-Tuesday 29th
-------------
+
+### Tuesday 29th
 
 Have been writing up Project Plan draft for Friday deadline.
 
@@ -1077,217 +780,172 @@ Have been writing up Project Plan draft for Friday deadline.
 
 -   Add PDF plan deadline to git repo after submission.
 
-Wednesday 30th
---------------
 
-#### Notes for next meeting with Ian
+### Wednesday 30th
+
+**Notes for next meeting with Ian**
 
 -   Purpose of project - recap what I learnt from meeting with Darren
-
 -   Project name - pip-db. Availability of domain, and getting a server
     by next week.
-
 -   Review - mitigation strategies
-
 -   Review - initial design milestone, and changes that can/should be
     made
-
 -   Review - build system (what it is and what it does)
 
-Thursday 31st
--------------
 
-#### Notes from meeting with Ian
+### Thursday 31st
+
+**Notes from meeting with Ian**
 
 -   TODO: Send Ian project plan.
-
 -   TODO: Send Darren a project overview to check that my expectations
     match his.
-
 -   Registering of a domain should go through a member of staff.
-
 -   I should talk with Kat Samperi about acquiring a dedicated server.
-
 -   TODO: Begin prototyping using Node.js AND PHP.
-
 -   TODO: look into Selenium web testing for automation.
-
 -   TODO: Look up some formal HCI practises and apply those to design
     decisions.
-
 -   I should look into EBI and some of the well funded bioinformatics
     databases to see if there are any frameworks or existing
     technologies to aid in development (such as standard XML spec for
     proteins and such).
 
-November 2013 
-==============
 
-Saturday 2nd
-------------
+## November 2013
 
-Read about ionicons, which are a useful set of MIT licensed icons that
-will be useful when designing the UI [@Sperry2013].
 
-Sunday 3rd
-----------
+### Saturday 2nd
 
-Began work on implementing static page designs based on D1 mockups,
-using Bootstrap.
+Read about ionicons, which are a useful set of MIT licensed icons that will be
+useful when designing the UI (https://github.com/driftyco/ionicons).
+
+
+### Sunday 3rd
+
+Began work on implementing static page designs based on D1 mockups, using
+Bootstrap.
 
 #### TODO
 
 -   Homepage - DONE
-
 -   Advanced Search - DONE
-
 -   Search results
-
 -   Details page
-
 -   Login page
-
 -   Add data
 
-Monday 4th
-----------
 
-Incorporated Bootstrap Less CSS sources directly into project repository
-so that I can hack deeply on the frontend framework rather than just
-monkey-patch it.
+### Monday 4th
 
-Tuesday 5th
------------
+Incorporated Bootstrap Less CSS sources directly into project repository so that
+I can hack deeply on the frontend framework rather than just monkey-patch it.
 
-Completed basic sketches for all page mockups. Next task is to tidy up
-the stylesheets and incorporate it better into the Boostrap sources.
 
-#### Le grande plan for great success
+### Tuesday 5th
+
+Completed basic sketches for all page mockups. Next task is to tidy up the
+stylesheets and incorporate it better into the Boostrap sources.
+
+**Le grande plan for great success**
 
 1.  Configure Bootstrap theme
-
 2.  Port D1 mockups to Boostrap components
-
 3.  Add MySQL user accounts backend
-
     -   Deliverable: setup.php which creates MySQL tables
-
 4.  Add PHP user accounts controller
-
     -   Deliverable: API with unit tests
-
 5.  Link frontend with controller for user accounts
-
     -   Deliverable: Functional login page and ubar
-
 6.  Add MySQL payload backend
-
     -   Deliverable: setup.php which creates MySQL tables
-
 7.  Add PHP payload controller
-
     -   Deliverable: API with unit tests
-
 8.  Link frontend with controller for payload
-
     -   Deliverable: Functional details pages
-
 9.  Develop search controller
-
     -   Deliverable: Functional advanced search page
-
 10. Further search controller development
-
     -   Deliverable: inline search component
 
-Wednesday 6th
--------------
 
-Added arguments to configure in the form `–enable-feature` which can be
-used for enabling minifying, content hashing, local exporting, etc. Used
-Cogl’s configure.ac as a template for the refactors.
+### Wednesday 6th
+
+Added arguments to configure in the form `--enable-feature` which can be used for
+enabling minifying, content hashing, local exporting, etc. Used Cogl’s
+configure.ac as a template for the refactors.
 
 #### TODO
 
 -   Research formal HCI methods for web design. Screen recording
     software for user testing?
 
-#### Notes for next meeting with Ian
+**Notes for next meeting with Ian**
 
 -   Build system - le grande demonstration. Will write blog post
     detailing how it works/how to use it.
-
 -   Frontend - Bootstrap, using Less CSS sources.
-
 -   D1 mockups - static prototypes.
+-   Next progress - the "grande plan for great success".
 
--   Next progress - the “grande plan for great success”.
 
-Thursday 7th
-------------
+### Thursday 7th
 
-Incorporated the site style into Bootstrap, and defined the first two
-PHP functions:
+Incorporated the site style into Bootstrap, and defined the first two PHP
+functions:
 
+```
     function get_header( $inline_search = false, $value = null,
                          $login_only = false );
 
     function get_footer();
+```
 
-Friday 8th
-----------
 
-#### Notes from meeting with Ian
+### Friday 8th
+
+**Notes from meeting with Ian**
 
 The theme of this week’s meeting is: PROCESS, PROCESS, PROCESS.
 
 -   I need a more definite set of goals for this construction phase.
-
 -   Bring a copy of the Gantt chart to each meeting.
-
 -   Make more constructive notes on the research and planning work done.
 
-#### Notes for next meeting with Ian
+**Notes for next meeting with Ian**
 
 -   HCI - The next round of design work is at the start of next term.
     The remainder of effort this term will be focused on implementation,
     although I will still be checking design with Darren in the
     meantime.
-
 -   Software architecture planning - Discuss analysis of WordPress,
     previous FYP project, dataset analysis, and database designs.
-
 -   Development plan - Le grande 8 step plan.
-
 -   Development process - show the GitHub issue tracker and milestones.
-    Issues are created on a “as needed” basis, hence the second term
+    Issues are created on a "as needed" basis, hence the second term
     milestones have nothing. Show `./tools/worflow` and development flow
     diagram.
 
 #### TODO
 
 -   Complete issues for ‘Draft Project Plan submission’.
-
 -   Make a write-up of analysis of WordPress source code, previous FYP
     sources, and any other similar projects.
-
 -   Further research of EBI.
-
 -   Research PHP templating.
 
-#### Notes on WordPress
-
-found a detailed description of the WordPress database design
-[@WordPressND]. There is also detailed documentation for all of the APIs
-[@WordPressNDa].
+**Notes on WordPress** - found a detailed description of the WordPress database
+design http://codex.wordpress.org/Database_Description. There is also detailed
+documentation for all of the APIs (http://codex.wordpress.org/WordPress_APIs).
 
 -   There are filesystem and database APIs to completely abstract the
     underlying system. The user should never have to write system or
     MySQL calls.
-
 -   There is a global $wpdb variable which is used to talk to the
     WordPress database. API:
 
+```
             $wpdb->delete( $table, $where, $where_format = null );
             $wpdb->get_col( 'query', column_offset );
             $wpdb->get_results( 'query', output_type );
@@ -1301,27 +959,25 @@ found a detailed description of the WordPress database design
             $wpdb->hide_errors();
             $wpdb->get_col_info('type', offset);
             $wpdb->flush();
+```
 
 -   ID fields in each table are prefixed with the table name and are of
     type BIGINT(20).
-
 -   A `wp_options` table stores the settings for the site.
-
 -   A file `wp-admin/includes/schema.php` contains the database
     information and description.
 
-#### PHP best practises
+**PHP best practises** - read up on how PHP is not object orientated
+(http://michaelkimsal.com/blog/php-is-not-object-oriented/), and PHP templating
+practises
+(http://coding.smashingmagazine.com/2011/10/17/getting-started-with-php-templating/).
 
-Read up on how PHP is not object orientated [@Kimsal2011], and PHP
-templating practises [@Rakowski2011].
 
-Saturday 9th
-------------
+### Saturday 9th
 
-#### Notes on last FYP
+**Notes on last FYP** - 2533 lines of PHP. File structure:
 
-2533 lines of PHP. File structure:
-
+```
     -rw-r--r-- 1 chris chris  465 Dec 21  2011 ajax.js
     -rw-r--r-- 1 chris chris 1.9K Mar 22  2012 ajax.php
     -rw-r--r-- 1 chris chris  311 Mar 23  2012 back-up.php
@@ -1365,225 +1021,194 @@ Saturday 9th
     -rw-r--r-- 1 chris chris 1.1M Mar 13  2012 pidb_1981.csv
     -rw-r--r-- 1 chris chris  26K Mar 13  2012 pidb_1995.csv
     -rw-r--r-- 1 chris chris 903K Mar 13  2012 pidb_brenda.csv
+```
 
-#### top.php
+**top.php**
 
 1.  Sets the session
-
 2.  Connects to mysql
-
 3.  Sets a `$root_dir` variable
-
 4.  Prints HTML header
 
-#### funcs.php
+**funcs.php**
 
 Defines `get_record($record_if)`.
 
-#### bottom.php
+**bottom.php**
 
 Prints out a page footer and closes MySQL connection.
 
-#### index.php
+**index.php**
 
 1.  Include `top.php`
-
 2.  Output page contents with inline PHP logic
-
 3.  Connects to mysql
 
-#### search.php
+**search.php**
 
 515 lines of intermingled MySQL commands, PHP logic and HTML.
 
-#### General notes
+**General notes**
 
 -   Multiple copies of constants scattered throughout sources
-
 -   Spaghetti code source files - a mixture of inline PHP and HTML.
-
 -   MySQL commands embedded into page sources - no MVC separation.
 
-Sunday 10th
------------
 
-#### Website design
+### Sunday 10th
 
-found a good checklist of annoying web design decisions to avoid
-[@Saltman2013].
+**xWebsite design** - found a good checklist of annoying web design decisions to
+avoid
+(http://harknesslabs.com/post/66570723467/stop-doing-this-crap-on-your-startups-website).
 
-#### Unit testing
+**Unit testing** - read about Zombie.js, a Node.js framework for insanely fast
+browser testing (looks awesome!)
+(http://www.slideshare.net/iloire/building-web-apps-with-nodejs-socketio-knockoutjs-and-zombiejs-codemotion-2012).
 
-read about Zombie.js, a Node.js framework for insanely fast browser
-testing (looks awesome!) [@Loire2012].
 
-Monday 11th
------------
+### Monday 11th
 
-Found out about SheetJS - a pure-JavaScript excel parser [@SheetJS2013].
-This could be useful for client-side parsing of uploaded data.
+Found out about SheetJS - a pure-JavaScript excel parser
+(http://oss.sheetjs.com/). This could be useful for client-side parsing of
+uploaded data.
 
-Tuesday 12th
-------------
+
+### Tuesday 12th
 
 Setup Twig for server-side rendering of HTML templates.
 
-Wednesday 13th
---------------
+
+### Wednesday 13th
 
 Imported Bootswatch Flatly theme.
 
 #### TODO
 
 -   Fixup color scheme for flatly
-
 -   Reduce vertical padding for items
 
-Thursday 14th
--------------
+### Thursday 14th
 
-#### Notes from meeting with Ian
+*8Notes from meeting with Ian**
 
--   TODO: Turn the “le grande 8 steps” into a set of prototype
+-   TODO: Turn the "le grande 8 steps" into a set of prototype
     requirements (functional and non-functional), with each requirement
     being testable and QUANTIFIABLE with success criteria.
-
 -   TODO: Create an elaboration and construction plan with requirements
     (functional and non-functional), with each requirement being
     testable and QUANTIFIABLE with success criteria.
-
 -   When making decisions (design or implementation), use the smallest
     experiment which can isolate the decision.
-
 -   TODO: Organise next meeting with Darren to discuss EBI technologies,
     usability design and database design.
-
 -   TODO: So side-by-side implementations of object orientated vs.
     non-object orientated library function.
-
 -   TODO: Create a set of functional and non functional requirements for
     the project based on objectives.
-
 -   Design decisions must be quantifiable and testable, not vague like
-    “should be user friendly”.
-
+    "should be user friendly".
 -   TODO: For next meeting, demo google analytics on Myrmidon books
     website.
-
 -   TODO: Add a requirements analysis to project plan.
 
-Friday 15th
------------
+
+### Friday 15th
 
 #### TODO
 
 -   Read up on phpDocumentor.
 
-Saturday 16th
--------------
 
-Read up on MVC architecture in PHP [@Butler2010] and some decent
-arguments again static variables and methods [@Butler2012]. Google has a
-nice guide to writing testable code and code smells and symptoms of bad
-design to look for [@Hevery2008].
+### Saturday 16th
 
-Sunday 17th
------------
+Read up on MVC architecture in PHP (http://r.je/mvc-in-php.html) and some decent
+arguments again static variables and methods
+(http://r.je/static-methods-bad-practice.html). Google has a nice guide to
+writing testable code and code smells and symptoms of bad design to look for
+(http://misko.hevery.com/code-reviewers-guide/).
+
+
+### Sunday 17th
 
 Began implementing MySQL backend in library file `db.php`.
 
-Tuesday 19th
-------------
 
-Implement a `./tools/mkrelease` script which can be used to bump version
-number and create a release branch/tag. Bumped project version to 0.0.2.
+### Tuesday 19th
 
-Wednesday 20th
---------------
+Implement a `./tools/mkrelease` script which can be used to bump version number
+and create a release branch/tag. Bumped project version to 0.0.2.
 
-Have been reading about Dependency Injection in PHP, have found a good
-intro article [@Rodrigue2012] which recommends a tool Symphony
-[@SensioLabsND].
 
-Thursday 21st
--------------
+### Wednesday 20th
 
-#### Notes from meeting with Ian
+Have been reading about Dependency Injection in PHP, have found a good intro
+article (http://net.tutsplus.com/tutorials/php/dependency-injection-in-php/)
+which recommends a tool Symphony
+(http://symfony.com/doc/2.0/components/dependency_injection/introduction.html).
+
+
+### Thursday 21st
+
+**Notes from meeting with Ian**
 
 -   Requirements should be uniquely identified, for example, the
     milestone requirements could be identified with M1.1, D3.2, etc.
-
 -   Requirements should be incredibly DETAILED. They are contractual, so
     the ability to irrefutably determine whether a requirement has been
     met or not is essential.
-
 -   Requirements for each iteration should be created at the start,
     before beginning work. The start of next term will begin with
     generating a set of requirements for the second iteration.
-
 -   TODO: Write a set of testable requirements for this first
     elaboration/construction iteration.
-
 -   TODO: Continue/complete development of prototype.
 
-Friday 22nd
------------
 
-#### Notes from meeting with Darren and Fraser
+### Friday 22nd
+
+**Notes from meeting with Darren and Fraser**
 
 -   Prototype looks very good, and is mostly what would be expected of
     the final design (save for the unnecessarily spartan homepage).
-
 -   Advanced Search is a high priority TODO, as this will enable user
     testing.
-
 -   Fraser suggested posting to the Life and Health Sciences department
     a request for user testers, or a survey which suggests whether
     people find it useful, or how they would use such a tool.
-
 -   The Enzyme Commission number is a property of enzymes, and not all
     proteins listed in the dataset are enzymes, so not all will have EC
     numbers.
-
 -   The ONLY two prerequisites for data being entered into the
     repository are that it should contain a protein and an isoelectric
     point.
-
 -   Fraser noticed that some records which had Greek letters within
     their names (like beta) were displayed incorrectly.
-
 -   I should look through the number of unique values within the dataset
     to determine whether the advanced search page should have a dropdown
     selector or a free-text field.
-
 -   Enzyme Commission number is a hierarchical search property, so
     people may want to start searching with the top (leftmost) value,
     then specify additional tiers. E.g. 3..., 3.1.., 3.1.2., 3.1.2.4.
     It’s unlikely you’d ever want to search for ..2.0.
-
 -   It’s hard to anticipate how users would want to query the database,
     so it would be nice to keep a record of all the queries that people
     make, and to use this to influence the design. Additionally, we
     could record IP address of the user so as to help collate the number
     of different users.
-
 -   The purpose of the database is to act as a passive repository of
     information that has been gathered. It is a carbon copy of a set of
     research data, so shouldn’t make any assumptions or assertions about
     the data, i.e. don’t process the data. To this end, my
     super-overly-optimised database design is crap, and we’d be much
-    better off with “documents”, not “relational data”.
-
+    better off with "documents", not "relational data".
 -   One possibility for administering the dataset could be to allow
     anyone to create an account and upload data, but for this data to be
-    help in a “holding bay”, pending approval from an admin. The admin
+    help in a "holding bay", pending approval from an admin. The admin
     would then see that someone has submitted new data and could
     review/accept it.
-
 -   The cost of domain registration should come from my project budget,
     but could be done in the Uni’s name. Should sort this out in next
     meeting with Ian.
-
 -   Example use cases:
 
     1.  A user is writing a paper on a certain protein, and would like
@@ -1593,52 +1218,49 @@ Friday 22nd
     2.  A user would like to see all records for a given EC value (for
         example, 3.1).
 
-Saturday 23rd
--------------
 
-Have been given an account and credentials on one of the PSO uni server
-by Kate Samperi. URL: `http://pso.aston.ac.uk/ cummince`.
+### Saturday 23rd
 
-Monday 25th
------------
+Have been given an account and credentials on one of the PSO uni server by Kate
+Samperi. URL: http://pso.aston.ac.uk/cummince.
 
-Deployed the prototype website to the Aston server (note to self: I
-should look into one of the task-runners like Grunt for generating
-deployment build, the number of configure arguments is getting pretty
-unwieldy!). Notes on initial feedback from Darren:
+
+### Monday 25th
+
+Deployed the prototype website to the Aston server (note to self: I should look
+into one of the task-runners like Grunt for generating deployment build, the
+number of configure arguments is getting pretty unwieldy!). Notes on initial
+feedback from Darren:
 
 -   Generally looking positive. The search features that aren’t yet
     implemented make it quite hard to test (advanced search, empty
     fields etc.).
-
 -   Homepage is too sparse (address this in D2).
-
 -   The dropdown for experimental methods show lots of duplicates, i.e.
-    the data isn’t standardised. Perhaps it would be possible to keep
+    the data isn't standardised. Perhaps it would be possible to keep
     two separate lists of methods - one which contains the methods that
-    were entered “as is” (with all the duplicates), and a separate,
+    were entered "as is" (with all the duplicates), and a separate,
     standardised list which can be used for searching (but would be
-    hidden from the user). I’ll take a look into this - it could provide
-    the right balance between keeping an honest record of the data “as
-    recorded”, and constructing a standardised and relational model for
+    hidden from the user). I'll take a look into this - it could provide
+    the right balance between keeping an honest record of the data "as
+    recorded", and constructing a standardised and relational model for
     categorising the data.
 
-Wednesday 27th
---------------
 
-#### External links
+### Wednesday 27th
 
-We could do some pretty advanced verification of external URLs. First
-off, we could verify that external URLs are not dead (don’t return
-404s), and we could also grab the page titles and use those as captions.
-We could even cache the entire page if we think there’s a chance of
-important links going dead.
+**External links** - we could do some pretty advanced verification of external
+URLs. First off, we could verify that external URLs are not dead (don’t return
+404s), and we could also grab the page titles and use those as captions.  We
+could even cache the entire page if we think there’s a chance of important links
+going dead.
 
-Thursday 28th
--------------
+
+### Thursday 28th
 
 Example possible interactive pipbot session:
 
+```
     $ pipbot
     Hello there. My name is pipbot. How can I help?
 
@@ -1706,76 +1328,15 @@ Example possible interactive pipbot session:
     Date:   Mon Nov 25 15:56:41 2013 +0000
 
         log: Fix regression in blah...
+```
 
-Friday 29th
------------
 
-Found a good article on test coverage in SQLite [@SQLiteND]. Some
-interesting edge-cases are tested such as out-of-memory errors, I/O
-error testing, and fuzz testing. Should refer to this when designing the
-pip-db testing strategy.
+### Friday 29th
 
-#### Project name
+Found a good article on test coverage in SQLite
+(http://www.sqlite.org/testing.html). Some interesting edge-cases are tested
+such as out-of-memory errors, I/O error testing, and fuzz testing. Should refer
+to this when designing the pip-db testing strategy.
 
-refactored source code to new project name ’pip-db’, and rename git
-repository. New url: <https://github.com/ChrisCummins/pip-db>.
-
-9
-
-IBMRUP Wikipedia (ND). IBM Rational Unified Process.
-<http://en.wikipedia.org/wiki/IBM\_Rational\_Unified\_Process>.
-Kulbertis2011 Kulbertis, B (2011). Synchronizing a MySQL Database with
-Git and Git Hooks.
-<http://ben.kulbertis.org/2011/10/synchronizing-a-mysql-database-with-git-and-git-hooks/>.
-Buvrilovic2013 Cubrilovic, N (2013). Facebook PHP Source Code from
-August 2007. GitHubGist. <https://gist.github.com/nikcub/3833406>.
-Rakowski2011 Rakowski, K. Getting Started With PHP Templating. Smashing
-Magazine.
-<http://coding.smashingmagazine.com/2011/10/17/getting-started-with-php-templating/>.
-Cummins2013 Cummins, C (2013). Emu - a snapshot backup program. GitHub.
-<https://github.com/ChrisCummins/emu>. Cummins2013a Cummins, C (2013).
-t4 - a tool for generating tests as shell scripts from m4 macros.
-GitHub. <https://github.com/ChrisCummins/t4>. SeleniumND Selenium (ND).
-SeleniumHQ Browser Automation. <http://docs.seleniumhq.org/>.
-HolowaychukND Holowaychuck, T. D. (ND). Mocha - simple, flexible, fun
-javascript test framework for node.js & the browser. (BDD, TDD, QUnit
-styles via interfaces. GitHub. <https://github.com/visionmedia/mocha>.
-HolowaychukNDa Holowaychuck, T. J. Should.js - BDD style assertions for
-node.js – test framework agnostic. GitHub.
-<https://github.com/visionmedia/should.js>. Clemson2010 Clemson, T
-(2010). Blog rolling with mongoDB, express and Node.js. How to Node.
-<http://howtonode.org/express-mongodb>. CoursewareND Courseware (ND).
-Real Time Web with Node.js. Courseware code school.
-<http://courseware.codeschool.com/node_slides.pdf>. Webapplog2013
-Webappllog (2013). PHP vs. Node.js.
-<http://webapplog.com/php-vs-node-js/>. Sperry2013 Sperry, B. (2013).
-ionicons - The premium icon font for Ionic Framework. GitHub.
-<https://github.com/driftyco/ionicons> WordPressND Wordpress (ND).
-Database Description. <http://codex.wordpress.org/Database_Description>.
-WordPressNDa WordPress (ND). WordPress APIs.
-<http://codex.wordpress.org/WordPress_APIs>. Kimsal2011 Kimsal, M.
-(2011). PHP is not object oriented! Michael Kimsal’s weblog.
-<http://michaelkimsal.com/blog/php-is-not-object-oriented/>.
-Rakowski2011 Rakowski, K. (2011). Getting Started with PHP Templating.
-Smashing Magazine.
-<http://coding.smashingmagazine.com/2011/10/17/getting-started-with-php-templating/>.
-Saltman2013 Saltman, D. B. (2013). Stop doing this crap on your startups
-website. harknesslabls.
-<http://harknesslabs.com/post/66570723467/stop-doing-this-crap-on-your-startups-website>.
-Loire2012 Loire, I. (2012). Building web apps with node.js, socket.io,
-knockout.js and zombie.js - Codemotion 2012. slideshare.
-<http://www.slideshare.net/iloire/building-web-apps-with-nodejs-socketio-knockoutjs-and-zombiejs-codemotion-2012>.
-SheetJS2013 SheetJS (2013). SheetJS In-Browser Live Grid Demo
-<http://oss.sheetjs.com/>. Butler2010 Butler, T. (2010). MVC in PHP
-tutorial part 1: Hello World. <http://r.je/mvc-in-php.html>. Butler2012
-Butler, T. (2012). Are Static Methods/Variables bad practice?
-<http://r.je/static-methods-bad-practice.html>. Hevery2008 Hevery, M.
-(2008). Guide: Writing Testable Code.
-<http://misko.hevery.com/code-reviewers-guide/>. Rodrigue2012 Rodrigue,
-St. (2012). Dependency Injection in PHP. nettuts+.
-<http://net.tutsplus.com/tutorials/php/dependency-injection-in-php/>.
-SensioLabsND SensioLabs (ND). The Dependency Injection Component.
-Symfony.
-<http://symfony.com/doc/2.0/components/dependency_injection/introduction.html>.
-SQLiteND SQLite (ND). How SQLite is Tested.
-<http://www.sqlite.org/testing.html>.
+**Project name** - refactored source code to new project name `pip-db`, and
+rename git repository. New url: https://github.com/ChrisCummins/pip-db.

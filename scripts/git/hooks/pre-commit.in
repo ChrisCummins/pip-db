@@ -20,16 +20,4 @@ for branch in @GIT_RESERVED_BRANCHES@; do
 	fi
 done
 
-#
-# If we are generating Markdown versions of our project log, then we should
-# update it every time we commit.
-#
-if test "x@HAVE_PANDOC@" = xyes; then
-	md="README.md"
-	dir="Documentation/log"
-
-	make -C $dir $md
-	git add $dir/$md
-fi
-
 exit 0
