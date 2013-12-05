@@ -1,6 +1,8 @@
-<?php
+<?php require_once( $_SERVER['PHP_ROOT'] . 'init.php' );
 
-require_once( $_SERVER['PHP_ROOT'] . 'init.php' );
+/*
+ * The user account login page.
+ */
 
 $content = array(
 	/*

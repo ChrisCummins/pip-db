@@ -1,8 +1,8 @@
-<?php
+<?php require_once( $_SERVER['PHP_ROOT'] . 'init.php' );
 
-require_once( $_SERVER['PHP_ROOT'] . 'init.php' );
-
-$content = array();
+/*
+ * The search home page.
+ */
 
 $template = new Pip_Template( 'home' );
-$template->render( $content );
+$template->render();
