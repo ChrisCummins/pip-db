@@ -1,6 +1,12 @@
 <?php
 
 /*
+ * $_FILES superglobal wrapper.
+ *
+ * Provides a sane API for dealing with $_FILES variables.
+ */
+
+/*
  * The names of valid FILES variables. All accessing of FILES variables should be
  * done indirectly using the pip_{get,set}_files_var() API and using the values
  * found in this class.

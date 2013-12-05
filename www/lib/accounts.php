@@ -1,6 +1,12 @@
 <?php
 
 /*
+ * Accounts management.
+ *
+ * Provides an API for creating and validating account credentials.
+ */
+
+/*
  * Check that a given password is correct.
  */
 function pip_accounts_password_is_correct( $username, $password ) {

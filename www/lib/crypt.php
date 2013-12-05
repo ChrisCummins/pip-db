@@ -1,6 +1,11 @@
 <?php
 
-/* Crypt algorithm */
+/*
+ * Cryptography.
+ *
+ * Provides an API for generating salting hashes.
+ */
+
 function pip_crypt( $string, $rounds = 10 ) {
 
 	$salt = "";
