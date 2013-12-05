@@ -497,6 +497,10 @@ def process_command(command, args):
           command == "status"):
         return run_extern("git " + command, args)
 
+    elif (command == "install" or
+          command == "uninstall"):
+        return run_extern("make " + command, args)
+
     elif (command == "./autogen.sh" or
           command == "autogen" or
           command == "autogen.sh" or
