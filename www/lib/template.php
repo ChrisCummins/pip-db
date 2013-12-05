@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Content templating.
+ *
+ * Provides an API for creating and rendering templates.
+ */
+
 class Pip_Template
 {
 	private $name;

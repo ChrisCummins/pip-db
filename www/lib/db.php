@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Database API.
+ *
+ * Provides an API for creating connections with the database back-end, and
+ * wrapper functions for the MySQL API.
+ */
 
 class PipDbException extends Exception {}
 

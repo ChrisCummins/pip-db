@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * The Record class.
+ *
+ * Provides a model of a single record in the database.
+ */
 class Pip_Record
 {
 	private $id;

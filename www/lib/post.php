@@ -1,6 +1,12 @@
 <?php
 
 /*
+ * $_POST superglobal wrapper.
+ *
+ * Provides a sane API for dealing with $_POST variables.
+ */
+
+/*
  * The names of valid POST variables. All accessing of POST variables should be
  * done indirectly using the pip_{get,set}_post_var() API and using the values
  * found in this class.

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * PIP initialisation
+ * PIP initialisation.
  *
  * The purpose of this file is to setup the website controller, exposing
  * functions to communicate with the data backend and an API for rendering the

@@ -1,6 +1,12 @@
 <?php
 
 /*
+ * Browser history.
+ *
+ * Tracks session history.
+ */
+
+/*
  * Returns the URL of the referring page. If there is none, then default to the
  * homepage.
  */

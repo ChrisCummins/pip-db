@@ -1,6 +1,12 @@
 <?php
 
 /*
+ * Error handling.
+ *
+ * Provides error and exception handling.
+ */
+
+/*
  * Don't show errors.
  */
 function pip_error_disable() {
