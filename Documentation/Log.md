@@ -1340,3 +1340,23 @@ to this when designing the pip-db testing strategy.
 
 **Project name** - refactored source code to new project name `pip-db`, and
 rename git repository. New url: https://github.com/ChrisCummins/pip-db.
+
+
+## December 2013
+
+### Thursday 5th
+
+**Notes from meeting with Ian**
+
+- I should tell Kate about the change in project scope - the majority of time
+  has been spent working on tooling/process/frameworks, and not the actual
+  project spec (just the website).
+- The meeting with moderator and technician would be the best time to talk about
+  buying the pip-db.org domain.
+- Possible branching model in the database backend to accomodate for user
+  submissions, errors in the dataset, etc.
+- Lots of room for project expansion is opened up by the "honest record of data"
+  requirement from Darren. In addition to storing the recorded fields, the
+  backend could still build a relational model between each of the fields.
+- TODO: Email Ian with URLs for pulic prototpye (with credentials), this log
+  file, repository, issue tracker, etc.
