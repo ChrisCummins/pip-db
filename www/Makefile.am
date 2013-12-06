@@ -7,8 +7,8 @@ TEMPLATE_SRC = $(shell find html -maxdepth 1 -name '*.html' -exec basename {} \;
 HTML = $(addprefix $(TEMPLATE_DEST)/,$(TEMPLATE_SRC))
 export HTML
 
-# We must build this directory first in order to allow for content hashing ref
-# updating of HTML build files.
+# We must build the HTML sources first in order to allow for content hashing ref
+# updating.
 SUBDIRS = \
 	html \
 	css \
