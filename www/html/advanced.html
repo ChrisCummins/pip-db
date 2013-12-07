@@ -37,9 +37,11 @@
 
     <div class="row">
       <div class="col-md-2">
-        <label for="words-exact">this exact word or phrase:</label>
+        <label for="q_eq">this exact word or phrase:</label>
       </div>
-      <div class="col-md-6"><input id="words-exact" type="text" autocomplete="off"></div>
+      <div class="col-md-6">
+        <input name="q_eq" type="text" autocomplete="off">
+      </div>
       <div class="col-md-4"><div class="info">
           Type exact phrases to match in protein names.
       </div></div>
@@ -47,9 +49,11 @@
 
     <div class="row">
       <div class="col-md-2">
-        <label for="words-any">any of these words:</label>
+        <label for="q_any">any of these words:</label>
       </div>
-      <div class="col-md-6"><input id="words-any" type="text" autocomplete="off"></div>
+      <div class="col-md-6">
+        <input name="q_any" type="text" autocomplete="off">
+      </div>
       <div class="col-md-4"><div class="info">
           Select proteins from a range of keywords.
       </div></div>
@@ -57,9 +61,11 @@
 
     <div class="row">
       <div class="col-md-2">
-        <label for="words-none">none of these words:</label>
+        <label for="q_ne">none of these words:</label>
       </div>
-      <div class="col-md-6"><input id="words-none" type="text" autocomplete="off"></div>
+      <div class="col-md-6">
+        <input name="q_ne" type="text" autocomplete="off">
+      </div>
       <div class="col-md-4"><div class="info">
           Exclude proteins which contain these keywords.
       </div></div>
@@ -67,9 +73,11 @@
 
     <div class="row">
       <div class="col-md-2">
-        <label for="source">source:</label>
+        <label for="q_s">source:</label>
       </div>
-      <div class="col-md-6"><input id="source" type="text" autocomplete="off"></div>
+      <div class="col-md-6">
+        <input name="q_s" type="text" autocomplete="off">
+      </div>
       <div class="col-md-4"><div class="info">
           Enter the Latin binomial or common names.
       </div></div>
@@ -77,9 +85,11 @@
 
     <div class="row">
       <div class="col-md-2">
-        <label for="location">location:</label>
+        <label for="q_l">location:</label>
       </div>
-      <div class="col-md-6"><input id="location" type="text" autocomplete="off"></div>
+      <div class="col-md-6">
+        <input name="q_l" type="text" autocomplete="off">
+      </div>
       <div class="col-md-4"><div class="info">
           Enter the location or organ.
       </div></div>
@@ -93,21 +103,21 @@
 
     <div class="row">
       <div class="col-md-2">
-        <label for="location">enzyme commision number:</label>
+        <label for="ec1">enzyme commision number:</label>
       </div>
       <div class="col-md-6">
         <div style="display: table; width:100%;">
           <div style="display: table-cell; padding-right: 16px;">
-            <input id="ec1" type="text" autocomplete="off">
+            <input name="ec1" type="text" autocomplete="off">
           </div>
           <div style="display: table-cell; padding-right: 16px;">
-            <input id="ec2" type="text" autocomplete="off">
+            <input name="ec2" type="text" autocomplete="off">
           </div>
           <div style="display: table-cell; padding-right: 16px;">
-            <input id="ec3" type="text" autocomplete="off">
+            <input name="ec3" type="text" autocomplete="off">
           </div>
           <div style="display: table-cell;">
-            <input id="ec4" type="text" autocomplete="off">
+            <input name="ec4" type="text" autocomplete="off">
           </div>
         </div>
       </div>
@@ -118,16 +128,16 @@
 
     <div class="row">
       <div class="col-md-2">
-        <label for="pi-min">isoelectric point:</label>
+        <label for="pi_l">isoelectric point:</label>
       </div>
       <div class="col-md-6">
         <div style="display: table; width:100%;">
           <div style="display: table-cell;">
-            <input id="pi-min" type="text" autocomplete="off">
+            <input name="pi_l" type="text" autocomplete="off">
           </div>
           <div style="display: table-cell;width:40px;padding-right:6px;padding-left:6px;text-align: center;">to</div>
           <div style="display: table-cell;">
-            <input id="pi-max" type="text" autocomplete="off">
+            <input name="pi_h" type="text" autocomplete="off">
           </div>
         </div>
       </div>
@@ -138,16 +148,16 @@
 
     <div class="row">
       <div class="col-md-2">
-        <label for="location">molecular weight:</label>
+        <label for="mw_l">molecular weight:</label>
       </div>
       <div class="col-md-6">
         <div style="display: table; width:100%;">
           <div style="display: table-cell;">
-            <input id="mw-min" type="text" autocomplete="off">
+            <input name="mw_l" type="text" autocomplete="off">
           </div>
           <div style="display: table-cell;width:40px;padding-right:6px;padding-left:6px;text-align: center;">to</div>
           <div style="display: table-cell;">
-            <input id="mw-max" type="text" autocomplete="off">
+            <input name="mw_h" type="text" autocomplete="off">
           </div>
         </div>
       </div>
@@ -158,10 +168,10 @@
 
     <div class="row">
       <div class="col-md-2">
-        <label for="location">experimental method:</label>
+        <label for="ex">experimental method:</label>
       </div>
       <div class="col-md-6">
-        <select>
+        <select name="ex">
           <option>Analytical gel isoelectric focusing</option>
           <option>Analytical isoelectric focusing</option>
           <option>Carrier-free isoelectric focusing</option>
@@ -204,16 +214,16 @@
 
     <div class="row">
       <div class="col-md-2">
-        <label for="location">temperature:</label>
+        <label for="t_l">temperature:</label>
       </div>
       <div class="col-md-6">
         <div style="display: table; width:100%;">
           <div style="display: table-cell;">
-            <input id="location" type="text" autocomplete="off">
+            <input name="t_l" type="text" autocomplete="off">
           </div>
           <div style="display: table-cell;width:40px;padding-right:6px;padding-left:6px;text-align: center;">to</div>
           <div style="display: table-cell;">
-            <input id="location" type="text" autocomplete="off">
+            <input name="t_h" type="text" autocomplete="off">
           </div>
         </div>
       </div>
