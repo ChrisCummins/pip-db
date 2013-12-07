@@ -76,6 +76,9 @@ def get_help_text():
             "    pipbot burndown release\n"
             "        Show the changes made since the last release\n"
             "\n"
+            "    pipbot burndown <number> days\n"
+            "        Show the changes made in the last <number> of days\n"
+            "\n"
             "    pipbot show <issue-number|commit-id|<target> <build>>\n"
             "        Tell me more about a particular thing\n"
             "\n"
@@ -301,6 +304,21 @@ def rd_to_string(rd):
     return s[:-2]
 
 
+# Find the last commit that is older than the target time (in seconds since
+# epoch).
+def get_first_commit_since(time, commit_list):
+    last_commit = commit_list.next()
+    for commit in commit_list:
+        if commit.committed_date < time:
+            return last_commit
+        else:
+            last_commit = commit
+
+    # If we reached the last commit without matching our start date, then
+    # just use the last commit found.
+    return commit
+
+
 def burndown(args):
     def print_usage_and_return():
         print "Usage: pipbot burndown [release]"
@@ -316,6 +334,19 @@ def burndown(args):
     elif argc == 1 and args[0] == "release":
         origin = { "name": "master", "head": repo.heads.master.commit }
         target = { "name": "stable", "head": repo.heads.stable.commit }
+    elif argc == 2 and (args[1] == "day" or args[1] == "days"):
+        if not is_int(args[0]):
+            return print_usage_and_return()
+
+        current_date = calendar.timegm(time.gmtime())
+        target_date = current_date - int(args[0]) * 86400
+
+        origin = { "name": "master", "head": repo.heads.master.commit }
+        target = {
+            "name" : "master",
+            "head": get_first_commit_since(target_date,
+                                           repo.iter_commits("master"))
+          }
     else:
         return print_usage_and_return()
 
