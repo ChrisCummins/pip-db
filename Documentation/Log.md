@@ -32,7 +32,7 @@ Some personal goals for the project:
 * To exclusively use open source (free as in freedom and free as in free beer)
 software and tools, without exception.
 * To learn more about web development.
-* To get a high mark ($> 70\%$) mark for all assessments.
+* To get a high mark (> 70%) mark for all assessments.
 * To contribute back to at least one of the tools that I use in some
 quantifiable way.
 
