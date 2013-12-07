@@ -277,6 +277,13 @@ def undeploy(args):
         return 2
 
 
+def burndown(args):
+    #TODO: actually parse args
+
+    print "coor blimey!"
+    return 0
+
+
 def start_new_release(version):
     try:
         print "Starting new release " + version
@@ -460,6 +467,9 @@ def process_command(command, args):
 
     elif command == "build":
         return build(args)
+
+    elif command == "burndown":
+        return burndown(args)
 
     elif command == "deploy":
         return deploy(args)
