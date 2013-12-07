@@ -73,7 +73,7 @@ def get_help_text():
             "    pipbot burndown\n"
             "        Compare the current branch against master\n"
             "\n"
-            "    pipbot burndown stable\n"
+            "    pipbot burndown release\n"
             "        Compare the master branch against stable\n"
             "\n"
             "    pipbot show <issue-number|commit-id|<target> <build>>\n"
