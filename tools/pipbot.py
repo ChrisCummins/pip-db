@@ -1,10 +1,14 @@
 #!/usr/bin/env python
 
+import calendar
 import json
 import subprocess
 import re
 import os
 import sys
+import time
+import datetime
+import dateutil.relativedelta
 from git import Repo
 from sys import argv
 from sys import exit
@@ -283,10 +287,57 @@ def undeploy(args):
         return 2
 
 
-def burndown(args):
-    #TODO: actually parse args
+def rd_to_string(rd):
+    s = ""
+    if rd.years > 0:
+        s += "%d years, " % rd.years
+    if rd.months > 0:
+        s += "%d months, " % rd.months
+    if rd.days > 0:
+        s += "%d days, " % rd.days
+    if rd.hours > 0:
+        s += "%d hours, " % rd.hours
 
-    print "coor blimey!"
+    return s[:-2]
+
+
+def burndown(args):
+    def print_usage_and_return():
+        print "Usage: pipbot burndown [release]"
+        return 1
+
+    argc = len(args)
+
+    repo = Repo(projectdir)
+
+    if argc < 1:
+        origin = { "name": "HEAD", "head": repo.head.reference }
+        target = { "name": "master", "head": repo.heads.master }
+    elif argc == 1 and args[0] == "release":
+        origin = { "name": "master", "head": repo.heads.master }
+        target = { "name": "stable", "head": repo.heads.stable }
+    else:
+        return print_usage_and_return()
+
+    print ("Comparing '" + origin["name"] +
+           "' against '" + target["name"] + "'...")
+    print
+
+    commit_count = origin["head"].commit.count() - target["head"].commit.count()
+
+    if commit_count > 1:
+        print "  There are " + str(commit_count) + " new commits"
+    elif commit_count == 1:
+        print "  There is " + str(commit_count) + " new commit"
+    else:
+        print "  There are no new commits"
+
+    if commit_count > 0:
+        commit_date = datetime.datetime.fromtimestamp(target["head"].commit.committed_date)
+        current_date = datetime.datetime.fromtimestamp(calendar.timegm(time.gmtime()))
+        rd = dateutil.relativedelta.relativedelta(current_date, commit_date)
+        print "  Last commit was " + rd_to_string(rd) + " ago"
+
     return 0
 
 
