@@ -311,11 +311,11 @@ def burndown(args):
     repo = Repo(projectdir)
 
     if argc < 1:
-        origin = { "name": "HEAD", "head": repo.head.reference }
-        target = { "name": "master", "head": repo.heads.master }
+        origin = { "name": "HEAD", "head": repo.head.reference.commit }
+        target = { "name": "master", "head": repo.heads.master.commit }
     elif argc == 1 and args[0] == "release":
-        origin = { "name": "master", "head": repo.heads.master }
-        target = { "name": "stable", "head": repo.heads.stable }
+        origin = { "name": "master", "head": repo.heads.master.commit }
+        target = { "name": "stable", "head": repo.heads.stable.commit }
     else:
         return print_usage_and_return()
 
@@ -323,7 +323,7 @@ def burndown(args):
            "' against '" + target["name"] + "'...")
     print
 
-    commit_count = origin["head"].commit.count() - target["head"].commit.count()
+    commit_count = origin["head"].count() - target["head"].count()
 
     if commit_count > 1:
         print "  There are " + str(commit_count) + " new commits"
@@ -333,7 +333,7 @@ def burndown(args):
         print "  There are no new commits"
 
     if commit_count > 0:
-        commit_date = datetime.datetime.fromtimestamp(target["head"].commit.committed_date)
+        commit_date = datetime.datetime.fromtimestamp(target["head"].committed_date)
         current_date = datetime.datetime.fromtimestamp(calendar.timegm(time.gmtime()))
         rd = dateutil.relativedelta.relativedelta(current_date, commit_date)
         print "  Last commit was " + rd_to_string(rd) + " ago"
