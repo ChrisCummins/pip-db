@@ -1343,3 +1343,18 @@ Notes from meeting with Ian:
   backend could still build a relational model between each of the fields.
 - TODO: Email Ian with URLs for pulic prototpye (with credentials), this log
   file, repository, issue tracker, etc.
+
+### Friday 6th
+
+Started adapting parts of the pip-db prototype for http://chriscummins.cc. Notes
+on the things that I've nicked:
+
+- Build system - a relatively painless process to copy accross the important
+  parts (`autogen.sh`, `configure.ac`, and `Makefile.am`s). Patched up the image
+  file extension support and ported back to pip-db.
+- PHP library - I copied accross all the `www/lib/*.php` files, and then cleaned
+  up `init.php` to remove the useless stuff.
+
+Overall it actually went better than I was expecting, the pip-db infrastructure
+is fairly robust and flexible. Some things though (like `pipbot`) are too
+project-specific to be copied accross, even though they are useful.
