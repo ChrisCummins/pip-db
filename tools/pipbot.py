@@ -77,7 +77,8 @@ def get_help_text():
             "        Show the changes made since the last release\n"
             "\n"
             "    pipbot burndown <number> days\n"
-            "        Show the changes made in the last <number> of days\n"
+            "    pipbot burndown <number> hours\n"
+            "        Show the changes made in the last <number> of days/hours\n"
             "\n"
             "    pipbot show <issue-number|commit-id|<target> <build>>\n"
             "        Tell me more about a particular thing\n"
@@ -340,6 +341,19 @@ def burndown(args):
 
         current_date = calendar.timegm(time.gmtime())
         target_date = current_date - int(args[0]) * 86400
+
+        origin = { "name": "master", "head": repo.heads.master.commit }
+        target = {
+            "name" : "master",
+            "head": get_first_commit_since(target_date,
+                                           repo.iter_commits("master"))
+          }
+    elif argc == 2 and (args[1] == "hour" or args[1] == "hours"):
+        if not is_int(args[0]):
+            return print_usage_and_return()
+
+        current_date = calendar.timegm(time.gmtime())
+        target_date = current_date - int(args[0]) * 3600
 
         origin = { "name": "master", "head": repo.heads.master.commit }
         target = {
