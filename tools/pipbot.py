@@ -386,15 +386,6 @@ def burndown(args):
     return 0
 
 
-def start_new_release(version):
-    try:
-        print "Starting new release " + version
-        run("./tools/mkrelease " + version, False)
-        return 0
-    except:
-        return 2
-
-
 def create_new_working_branch(branch, base, remote_name):
 
     repo = Repo(projectdir)
@@ -463,6 +454,32 @@ def start_new_issue(issue):
     print "Now, start committing on your issue. When done, use:"
     print
     print "     pipbot finish " + str(issue)
+    print ""
+
+
+def start_new_release(version):
+
+    release_branch_prefix = "release/"
+    release_branch_base = "master"
+    remote = "origin"
+
+    branch = release_branch_prefix + str(version)
+
+    ret = create_new_working_branch(branch, release_branch_base, remote)
+    if ret > 0:
+        return ret
+
+    try:
+        run("./tools/mkrelease " + version, False)
+        print ("- The version  number has been bumped to " + str(version) +
+               " and committed")
+    except:
+        return 2
+
+    print ""
+    print "Now, start performing release fixes. When done, use:"
+    print
+    print "     pipbot finish " + str(version)
     print ""
 
 
