@@ -305,7 +305,8 @@ def rd_to_string(rd):
     if (rd.years == 0 and
         rd.months == 0 and
         rd.days == 0 and
-        rd.hours == 0):
+        rd.hours == 0 and
+        rd.minutes > 0):
         s += "%d minutes, " % rd.minutes
 
     if (rd.years == 0 and
