@@ -52,80 +52,109 @@ class Pip_Query
 
 	}
 
-	public function get_query() {
-		return $this->query;
+	protected function split( $query ) {
+		return preg_split( '/\s/', pip_string_sanitise( $query ),
+				   NULL, PREG_SPLIT_NO_EMPTY );
 	}
 
+	/*
+	 * Returns an array of words which should ALL match in the protein's
+	 * name (but not necessarily in order).
+	 */
+	public function get_query_words_all() {
+		return $this->split( $this->query );
+	}
+
+	/*
+	 * Returns an array of words, ANY of which should match in the protein's
+	 * name.
+	 */
+	public function get_query_words_any() {
+		return $this->split( $this->anyword );
+	}
+
+	/*
+	 * Returns a string which must be EXACTLY matched in the protein's name.
+	 */
 	public function get_exactphrase() {
-		return $this->exactphrase;
+		return pip_string_sanitise( $this->exactphrase );
 	}
 
-	public function get_anyword() {
-		return $this->anyword;
+	/*
+	 * Returns an array of words, NONE of which should match in the
+	 * protein's name.
+	 */
+	public function get_excluded_words() {
+		return $this->split( $this->notword );
 	}
 
-	public function get_notword() {
-		return $this->notword;
-	}
-
+	/*
+	 * Returns a string to match the source of a protein.
+	 */
 	public function get_source() {
-		return $this->source;
+		return pip_string_sanitise( $this->source );
 	}
 
+	/*
+	 * Returns a string to match the location/organ of a protein.
+	 */
 	public function get_location() {
-		return $this->location;
+		return pip_string_sanitise( $this->location );
 	}
 
 	public function get_ec1() {
-		return $this->ec1;
+		return pip_string_sanitise( $this->ec1 );
 	}
 
 	public function get_ec2() {
-		return $this->ec2;
+		return pip_string_sanitise( $this->ec2 );
 	}
 
 	public function get_ec3() {
-		return $this->ec3;
+		return pip_string_sanitise( $this->ec3 );
 	}
 
 	public function get_ec4() {
-		return $this->ec4;
+		return pip_string_sanitise( $this->ec4 );
 	}
 
 	public function get_pi_min() {
-		return $this->pimin;
+		return pip_string_sanitise( $this->pimin );
 	}
 
 	public function get_pi_max() {
-		return $this->pimax;
+		return pip_string_sanitise( $this->pimax );
 	}
 
 	public function get_mol_min() {
-		return $this->molecularmin;
+		return pip_string_sanitise( $this->molecularmin );
 	}
 
 	public function get_mol_max() {
-		return $this->molecularmax;
+		return pip_string_sanitise( $this->molecularmax );
 	}
 
-	public function get_experimentatl() {
-		return $this->experimental;
+	/*
+	 * Returns a string to match the experimental method of a record.
+	 */
+	public function get_experimental_method() {
+		return pip_string_sanitise( $this->experimental );
 	}
 
 	public function get_temp_min() {
-		return $this->temperaturemin;
+		return pip_string_sanitise( $this->temperaturemin );
 	}
 
 	public function get_temp_max() {
-		return $this->temperaturemax;
+		return pip_string_sanitise( $this->temperaturemax );
 	}
 
 	public function get_record() {
-		return $this->record;
+		return pip_string_sanitise( $this->record );
 	}
 
 	public function get_start_at() {
-		return $this->startat;
+		return pip_string_sanitise( $this->startat );
 	}
 
 }

@@ -51,19 +51,69 @@ function get_found_rows() {
 	return $array['count'];
 }
 
+function get_query_string( $starting_at = 0 ) {
+	/* The query */
+	$query = new Pip_Query();
+
+	/* The base query string */
+	$q = "SELECT SQL_CALC_FOUND_ROWS
+              record_id, name, source, organ, pi
+              FROM records WHERE";
+
+	/* Find proteins which matches exact phrase */
+	$q .= (" (name LIKE '%" . $query->get_exactphrase() . "%'" .
+	       " OR alt_name LIKE '%" . $query->get_exactphrase() . "%')");
+
+	/* Find proteins with names that contain these keywords */
+	foreach ( $query->get_query_words_all() as $keyword )
+		$q .= (" AND (name LIKE '%" . $keyword . "%'" .
+		       " OR alt_name LIKE '%" . $keyword . "%')");
+
+	/* Select proteins from a range of keywords */
+	if ( 0 < count( $query->get_query_words_any() ) ) {
+		$q .= " AND (";
+
+		foreach ( $query->get_query_words_any() as $keyword )
+			$q .= ("(name LIKE '%" . $keyword . "%'" .
+			       " OR alt_name LIKE '%" . $keyword . "%') OR ");
+
+		// Strip the last " OR " statement
+		$q = preg_replace( '/ OR $/', '', $q );
+		$q .= ")";
+	}
+
+	/* Exclude keywords from query */
+	foreach ( $query->get_excluded_words() as $keyword )
+		$q .= (" AND (name NOT LIKE '%" . $keyword . "%'" .
+		       " OR alt_name LIKE '%" . $keyword . "%')");
+
+	/* Select proteins from specific sources */
+	if ( '' !== $query->get_source() )
+		$q .= " AND (source LIKE '%" . $query->get_source() . "%')";
+
+	/* Select proteins from specific locations/organs */
+	if ( '' !== $query->get_source() )
+		$q .= " AND (organ LIKE '%" . $query->get_location() . "%')";
+
+	/* Select proteins by experimental method used */
+	if ( '' !== $query->get_experimental_method() ) {
+		$q .= " AND (method LIKE '%" .
+			$query->get_experimental_method() . "%')";
+	}
+
+	/* Limit the number of results */
+	$q .= " LIMIT " . $starting_at . "," . Pip_Search::ResultsPerPage;
+
+	return $q;
+}
+
 $start_time = microtime( true );
 
 $starting_at = pip_get_isset( GetVariables::StartAt ) ? pip_get( GetVariables::StartAt ) : 0;
 $ending_at = $starting_at + Pip_Search::ResultsPerPage;
 
-$search_text = pip_get( GetVariables::Query );
-$resource = pip_db_query( "SELECT SQL_CALC_FOUND_ROWS
-                           record_id, name, source, organ, pi
-			   FROM records
-                           WHERE name LIKE '%" .
-			  pip_string_sanitise( $search_text ) . "%'" .
-                          " LIMIT " .
-			  $starting_at . "," . Pip_Search::ResultsPerPage );
+/* Perform the query */
+$resource = pip_db_query( get_query_string( $starting_at ) );
 
 if ( !$resource )
 	throw new Exception( 'Failed to query database!' );
@@ -97,7 +147,7 @@ $content = array(
 	/*
 	 * The search text.
 	 */
-	"search_text" => $search_text,
+	"search_text" => pip_get( GetVariables::Query ),
 	/*
 	 * The elapsed time for the query (in seconds).
 	 */
