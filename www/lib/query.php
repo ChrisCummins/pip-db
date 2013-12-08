@@ -61,12 +61,12 @@ class Pip_Query
 		return $this->split( $this->query );
 	}
 
-	public function get_exactphrase() {
-		return pip_string_sanitise( $this->exactphrase );
+	public function get_query_words_any() {
+		return $this->split( $this->anyword );
 	}
 
-	public function get_anyword() {
-		return pip_string_sanitise( $this->anyword );
+	public function get_exactphrase() {
+		return pip_string_sanitise( $this->exactphrase );
 	}
 
 	public function get_excluded_words() {
