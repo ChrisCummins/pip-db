@@ -1,6 +1,12 @@
 <?php
 
 /*
+ * Login functionality.
+ *
+ * Provides an API for allowing users to login and logout.
+ */
+
+/*
  * Returns whether the user is currently logged in or not.
  */
 function pip_login_is_logged_in() {

@@ -1,6 +1,12 @@
 <?php
 
 /*
+ * $_SESSION superglobal wrapper.
+ *
+ * Provides a sane API for dealing with $_SESSION variables.
+ */
+
+/*
  * The names of SessionVariables. All accessing of sesion variables should be
  * done indirectly using the pip_{get,set}_session_var() API and using the
  * values found in this class.

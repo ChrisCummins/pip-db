@@ -1,6 +1,12 @@
 <?php
 
 /*
+ * Configuration file.
+ *
+ * Contains global configuration and constants.
+ */
+
+/*
  * Global config constants
  */
 abstract class Pip_Links {

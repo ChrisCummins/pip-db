@@ -1,10 +1,14 @@
 #!/usr/bin/env python
 
+import calendar
 import json
 import subprocess
 import re
 import os
 import sys
+import time
+import datetime
+import dateutil.relativedelta
 from git import Repo
 from sys import argv
 from sys import exit
@@ -66,6 +70,16 @@ def get_help_text():
             "    pipbot build summary\n"
             "        Show the current project configuration\n"
             "\n"
+            "    pipbot burndown\n"
+            "        Show the changes made on a feature branch\n"
+            "\n"
+            "    pipbot burndown release\n"
+            "        Show the changes made since the last release\n"
+            "\n"
+            "    pipbot burndown <number> days\n"
+            "    pipbot burndown <number> hours\n"
+            "        Show the changes made in the last <number> of days/hours\n"
+            "\n"
             "    pipbot show <issue-number|commit-id|<target> <build>>\n"
             "        Tell me more about a particular thing\n"
             "\n"
@@ -85,8 +99,8 @@ def get_help_text():
             "          milestone   Manage project milestones\n"
             "\n"
             "    pipbot start  <issue|feature|release>\n"
-            "    pipbot pause  <issue|feature|release>\n"
-            "    pipbot finish <issue|feature|release>\n"
+            "    pipbot pause  [issue|feature|release]\n"
+            "    pipbot finish [issue|feature|release]\n"
             "        Start, pause or complete work on an upstream issue,\n"
             "        downstream feature, or product release branch.\n"
             "\n"
@@ -181,10 +195,10 @@ def run(cmd, echo=True, stdout=True, stderr=True):
         raise Exception('Command returned error code {0}'.format(ret))
 
 def run_extern(command, args):
-	try:
-		run(command + " " + " ".join(args), False)
-	except:
-		return 2
+    try:
+        run(command + " " + " ".join(args), False)
+    except:
+        return 2
 
 def perform_action(action, cmd):
     sys.stdout.write(str(action) + "... ")
@@ -277,27 +291,197 @@ def undeploy(args):
         return 2
 
 
-def start_new_release(version):
+def rd_to_string(rd):
+    s = ""
+    if rd.years > 0:
+        s += "%d years, " % rd.years
+    if rd.months > 0:
+        s += "%d months, " % rd.months
+    if rd.days > 0:
+        s += "%d days, " % rd.days
+    if rd.hours > 0:
+        s += "%d hours, " % rd.hours
+
+    return s[:-2]
+
+
+# Find the last commit that is older than the target time (in seconds since
+# epoch).
+def get_first_commit_since(time, commit_list):
+    last_commit = commit_list.next()
+    for commit in commit_list:
+        if commit.committed_date < time:
+            return last_commit
+        else:
+            last_commit = commit
+
+    # If we reached the last commit without matching our start date, then
+    # just use the last commit found.
+    return commit
+
+
+def burndown(args):
+    def print_usage_and_return():
+        print "Usage: pipbot burndown [release]"
+        return 1
+
+    argc = len(args)
+
+    repo = Repo(projectdir)
+
+    if argc < 1:
+        origin = { "name": "HEAD", "head": repo.head.reference.commit }
+        target = { "name": "master", "head": repo.heads.master.commit }
+    elif argc == 1 and args[0] == "release":
+        origin = { "name": "master", "head": repo.heads.master.commit }
+        target = { "name": "stable", "head": repo.heads.stable.commit }
+    elif argc == 2 and (args[1] == "day" or args[1] == "days"):
+        if not is_int(args[0]):
+            return print_usage_and_return()
+
+        current_date = calendar.timegm(time.gmtime())
+        target_date = current_date - int(args[0]) * 86400
+
+        origin = { "name": "master", "head": repo.heads.master.commit }
+        target = {
+            "name" : "master",
+            "head": get_first_commit_since(target_date,
+                                           repo.iter_commits("master"))
+          }
+    elif argc == 2 and (args[1] == "hour" or args[1] == "hours"):
+        if not is_int(args[0]):
+            return print_usage_and_return()
+
+        current_date = calendar.timegm(time.gmtime())
+        target_date = current_date - int(args[0]) * 3600
+
+        origin = { "name": "master", "head": repo.heads.master.commit }
+        target = {
+            "name" : "master",
+            "head": get_first_commit_since(target_date,
+                                           repo.iter_commits("master"))
+          }
+    else:
+        return print_usage_and_return()
+
+    print ("Comparing '" + origin["name"] +
+           "' against '" + target["name"] + "'...")
+    print
+
+    commit_count = origin["head"].count() - target["head"].count()
+
+    if commit_count > 1:
+        print "  There are " + str(commit_count) + " new commits"
+    elif commit_count == 1:
+        print "  There is " + str(commit_count) + " new commit"
+    else:
+        print "  There are no new commits"
+
+    if commit_count > 0:
+        commit_date = datetime.datetime.fromtimestamp(target["head"].committed_date)
+        current_date = datetime.datetime.fromtimestamp(calendar.timegm(time.gmtime()))
+        rd = dateutil.relativedelta.relativedelta(current_date, commit_date)
+        print "  Last commit was " + rd_to_string(rd) + " ago"
+
+    return 0
+
+
+def create_new_working_branch(branch, base, remote_name):
+
+    repo = Repo(projectdir)
+    remote = repo.remotes[remote_name]
+
+    if repo.is_dirty() == True:
+        print "The working tree contains uncommitted changes, commit or stash "
+        print "these and try again."
+        return 1
+
     try:
-        print "Starting new release " + version
-        run("./tools/mkrelease " + version, False)
-        return 0
-    except:
-        return 2
+        head = repo.create_head(branch, base)
+        print "Summary of actions:"
+        print "- A new branch " + branch + " was created, based on " + base + "."
+    except OSError:
+        print "A branch " + branch + " already exists!"
+        return 1
+
+    ret = remote.push(head)
+    info = ret[0]
+    print ("- A new remote branch " + branch + " was created on " +
+           remote_name + ".")
+
+    head.set_tracking_branch(info.remote_ref)
+    print ("- Branch " + branch + " tracks remote branch " + branch +
+           " from " + remote_name + ".")
+
+    head.checkout()
+
+    print "- You are now on branch " + branch + "."
+
+    return 0
+
 
 def start_new_feature(feature):
+    feature_branch_prefix = "feature/"
+    feature_branch_base = "master"
+    remote = "origin"
+
+    branch = feature_branch_prefix + str(feature)
+
+    ret = create_new_working_branch(branch, feature_branch_base, remote)
+    if ret > 0:
+        return ret
+
+    print ""
+    print "Now, start committing on your feature. When done, use:"
+    print
+    print "     pipbot finish " + str(feature)
+    print ""
+
+
+def start_new_issue(issue):
+
+    issue_branch_prefix = "issue/"
+    issue_branch_base = "master"
+    remote = "origin"
+
+    branch = issue_branch_prefix + str(issue)
+
+    ret = create_new_working_branch(branch, issue_branch_base, remote)
+    if ret > 0:
+        return ret
+
+    print ""
+    print "Now, start committing on your issue. When done, use:"
+    print
+    print "     pipbot finish " + str(issue)
+    print ""
+
+
+def start_new_release(version):
+
+    release_branch_prefix = "release/"
+    release_branch_base = "master"
+    remote = "origin"
+
+    branch = release_branch_prefix + str(version)
+
+    ret = create_new_working_branch(branch, release_branch_base, remote)
+    if ret > 0:
+        return ret
+
     try:
-        print "Starting new feature branch '" + feature + "'"
-        run("git flow feature start " + feature, False)
-        repo = Repo(projectdir)
-        branch = repo.active_branch
-        run("git push -u origin " + branch.name, False)
-        return 0
+        run("./tools/mkrelease " + version, False, False)
+        print ("- The version  number has been bumped to " + str(version) +
+               " and committed")
     except:
         return 2
 
-def start_new_issue(issue_number):
-    return start_new_feature(issue_number)
+    print ""
+    print "Now, start performing release fixes. When done, use:"
+    print
+    print "     pipbot finish " + str(version)
+    print ""
+
 
 def start(args):
 
@@ -323,92 +507,181 @@ def start(args):
         return print_usage_and_return()
 
 
+def get_branch_name(tail):
+    if re.match("^[0-9]+\.[0-9]+\.[0-9]$", tail):
+        return "release/" + tail
+    elif re.match("^[0-9]+$", tail):
+        return "issue/" + tail
+    else:
+        return "feature/" + tail
+
+
 def pause(args):
 
     def print_usage_and_return():
-        print "Usage: pipbot pause <issue|feature|release>"
+        print "Usage: pipbot pause [issue|feature|release]"
         return 1
 
-    if len(args) != 1:
-        return print_usage_and_return()
+    argc = len(args)
 
-    target = args[0]
+    repo = Repo(projectdir)
+    remote = repo.remotes["origin"]
 
-    if (re.match("^[0-9]+\.[0-9]+\.[0-9]$", target) or
-        re.match("^[0-9]+$", target) or
-        re.match("^[a-zA-Z0-9_]+$", target)):
+    if repo.is_dirty() == True:
+        print "The working tree contains uncommitted changes, commit or stash "
+        print "these and try again."
+        return 1
+
+    if argc == 0:
+
+        target = repo.active_branch.name
+
+        if not re.match("^(release|feature|issue)/", target):
+            print "Not on a release, feature, or issue branch!"
+            return 1
+
+    elif argc == 1:
+
+        target = get_branch_name(args[0])
+
         try:
-            repo = Repo(projectdir)
-            branch = repo.active_branch
-
-            if not re.match("(release|feature)/" + target, branch.name):
-                print "Target branch does not match current!"
-                return 1
-
-            run("git push -u origin " + branch.name, False)
-            run("git checkout master", False)
-            return 0
+            repo.heads[target]
         except:
-            return 2
-    else:
+            print "Branch " + target + " not found!"
+            return 1
+
+    elif argc > 1:
         return print_usage_and_return()
 
+    head = repo.heads[target]
+    remote.push(head)
+    print "Summary of actions:"
+    print "- Remote branch " + target + " on origin was updated."
 
-def finish_release(version):
-    try:
-        print "Finishing release " + version
-        repo = Repo(projectdir)
-        branch = repo.active_branch
-        run("git flow release finish " + version, False)
-        run("git push origin :" + branch.name, False)
-        return 0
-    except:
-        return 2
+    master = repo.heads.master
+    master.checkout()
+    print "- You are now on branch master."
+    print ""
 
 
-def finish_feature(feature):
-    try:
-        print "Closing feature branch '" + feature + "'"
-        repo = Repo(projectdir)
-        branch = repo.active_branch
-        run("git flow feature finish " + feature, False)
-        run("git push origin :" + branch.name, False)
-        return 0
-    except:
-        return 2
+def finish_release(branch):
+
+    version = branch.replace("release/", "")
+
+    repo = Repo(projectdir)
+    remote = repo.remotes["origin"]
+
+    if repo.is_dirty() == True:
+        print "The working tree contains uncommitted changes, commit or stash "
+        print "these and try again."
+        return 1
+
+    print "Summary of actions:"
+    stable = repo.heads.stable
+    stable.checkout()
+    repo.git.merge(branch, '--no-ff')
+    print ("- Branch " + branch + " was merged into stable.")
+
+    tag = repo.create_tag(version)
+    print ("- A release tag " + version + " was created.")
+
+    remote.push(tag)
+    print ("- Tag " + version + " was pushed to origin.")
+
+    master = repo.heads.master
+    master.checkout()
+    repo.git.merge(branch, '--no-ff')
+    print ("- Branch " + branch + " was merged into master.")
+
+    repo.delete_head(branch, force=True)
+    print ("- Branch " + branch + " was deleted.")
+
+    ret = remote.push(":" + branch)
+    print ("- Remote branch " + branch + " on " + remote_name + " was deleted.")
+
+    remote.push(master)
+    print ("- Merged changes on stable were pushed to " + remote_name + ".")
+
+    print "- You are now on branch master."
+
+    return 0
 
 
-def finish_issue(issue_number):
-    # TODO: Close upstream issue
-    return finish_feature(issue_number)
+def close_working_branch(branch, remote_name):
+
+    repo = Repo(projectdir)
+    remote = repo.remotes[remote_name]
+
+    if repo.is_dirty() == True:
+        print "The working tree contains uncommitted changes, commit or stash "
+        print "these and try again."
+        return 1
+
+    print "Summary of actions:"
+    master = repo.heads.master
+    master.checkout()
+
+    repo.git.merge(branch, '--no-ff')
+    print ("- Branch " + branch + " was merged into master.")
+
+    repo.delete_head(branch, force=True)
+    print ("- Branch " + branch + " was deleted.")
+
+    ret = remote.push(":" + branch)
+    print ("- Remote branch " + branch + " on " + remote_name + " was deleted.")
+
+    remote.push(master)
+    print ("- Merged changes on master were pushed to " + remote_name + ".")
+
+    print "- You are now on branch master."
+
+    return 0
 
 
 def finish(args):
 
     def print_usage_and_return():
-        print "Usage: pipbot finish <issue|feature|release>"
+        print "Usage: pipbot finish [issue|feature|release]"
         return 1
 
-    if len(args) != 1:
-        return print_usage_and_return()
+    remote = "origin"
 
-    target = args[0]
+    argc = len(args)
 
     repo = Repo(projectdir)
-    branch = repo.active_branch
 
-    if not re.match("(release|feature)/" + target, branch.name):
-        print "Target branch does not match current!"
-        return 1
+    if argc == 0:
 
-    if re.match("^[0-9]+\.[0-9]+\.[0-9]$", target):
+        target = repo.active_branch.name
+
+        if not re.match("^(release|feature|issue)/", target):
+            print "Not on a release, feature, or issue branch!"
+            return 1
+
+    elif argc == 1:
+
+        target = get_branch_name(args[0])
+
+        try:
+            repo.heads[target]
+        except:
+            print "Branch " + target + " not found!"
+            return 1
+
+    elif argc > 1:
+        return print_usage_and_return()
+
+    if re.match("^release/", target):
         return finish_release(target)
 
-    elif re.match("^[0-9]+$", target):
-        return finish_issue(target)
+    elif (re.match("^issue/", target) or
+          re.match("^feature/", target)):
+        ret = close_working_branch(target, remote)
+        if ret > 0:
+            return ret
 
-    elif re.match("^[a-zA-Z0-9_]+$", target):
-        return finish_feature(target)
+        print ""
+        return 0
 
     else:
         return print_usage_and_return()
@@ -460,6 +733,9 @@ def process_command(command, args):
 
     elif command == "build":
         return build(args)
+
+    elif command == "burndown":
+        return burndown(args)
 
     elif command == "deploy":
         return deploy(args)

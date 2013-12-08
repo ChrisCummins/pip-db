@@ -1,6 +1,12 @@
 <?php
 
 /*
+ * User registration.
+ *
+ * Provides an API for allowing users to register an account at pip-db.
+ */
+
+/*
  * Returns whether the user is currently attempting to register a new account.
  */
 function pip_register_attempting_registration() {

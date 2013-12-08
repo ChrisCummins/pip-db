@@ -105,7 +105,6 @@ do_mkrelease() {
 	local current_version=$(get_current_version)
 	echo "'$current_version'"
 
-	git flow release start $new_version
 	set_new_version $current_version $new_version
 	make_version_bump_commit $new_version
 }

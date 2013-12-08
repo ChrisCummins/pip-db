@@ -1,6 +1,12 @@
 <?php
 
 /*
+ * $_GET superglobal wrapper.
+ *
+ * Provides a sane API for dealing with $_GET variables.
+ */
+
+/*
  * The names of valid GET variables. All accessing of GET variables should be
  * done indirectly using the pip_{get,set}_get_var() API and using the values
  * found in this class.

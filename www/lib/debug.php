@@ -1,6 +1,12 @@
 <?php
 
 /*
+ * Debugging.
+ *
+ * Debugging-specific functionality.
+ */
+
+/*
  * Returns whether the site is in debugging mode or not.
  */
 function pip_debugging() {

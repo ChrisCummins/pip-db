@@ -1,6 +1,12 @@
 <?php
 
 /*
+ * Uploading data.
+ *
+ * Provides an API to add new data to the database back-end.
+ */
+
+/*
  * Returns whether we're currently attempting to upload a new file.
  */
 function pip_upload_new_file() {
