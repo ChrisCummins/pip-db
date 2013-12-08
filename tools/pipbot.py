@@ -565,27 +565,46 @@ def pause(args):
 
 
 def finish_release(version):
-    try:
-        print "Finishing release " + version
-        repo = Repo(projectdir)
-        branch = repo.active_branch
-        run("git flow release finish " + version, False)
-        run("git push origin :" + branch.name, False)
-        return 0
-    except:
-        return 2
 
+    branch = "release/" + version
 
-def finish_feature(feature):
-    try:
-        print "Closing feature branch '" + feature + "'"
-        repo = Repo(projectdir)
-        branch = repo.active_branch
-        run("git flow feature finish " + feature, False)
-        run("git push origin :" + branch.name, False)
-        return 0
-    except:
-        return 2
+    repo = Repo(projectdir)
+    remote = repo.remotes["origin"]
+
+    if repo.is_dirty() == True:
+        print "The working tree contains uncommitted changes, commit or stash "
+        print "these and try again."
+        return 1
+
+    print "Summary of actions:"
+    stable = repo.heads.stable
+    stable.checkout()
+    repo.git.merge(branch, '--no-ff')
+    print ("- Branch " + branch + " was merged into stable.")
+
+    tag = repo.create_tag(version, "'" + version + "' Release")
+    print ("- A release tag " + version + " was created.")
+
+    remote.push(tag)
+    print ("- Tag " + version + " was pushed to origin.")
+
+    master = repo.heads.master
+    master.checkout()
+    repo.git.merge(branch, '--no-ff')
+    print ("- Branch " + branch + " was merged into master.")
+
+    repo.delete_head(branch, force=True)
+    print ("- Branch " + branch + " was deleted.")
+
+    ret = remote.push(":" + branch)
+    print ("- Remote branch " + branch + " on " + remote_name + " was deleted.")
+
+    remote.push(master)
+    print ("- Merged changes on stable were pushed to " + remote_name + ".")
+
+    print "- You are now on branch master."
+
+    return 0
 
 
 def close_working_branch(branch, remote_name):
@@ -653,7 +672,7 @@ def finish(args):
         return print_usage_and_return()
 
     if re.match("^release/", target):
-        return finish_release(target)
+        return finish_release(args[0])
 
     elif (re.match("^issue/", target) or
           re.match("^feature/", target)):
