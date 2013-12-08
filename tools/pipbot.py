@@ -470,7 +470,7 @@ def start_new_release(version):
         return ret
 
     try:
-        run("./tools/mkrelease " + version, False)
+        run("./tools/mkrelease " + version, False, False)
         print ("- The version  number has been bumped to " + str(version) +
                " and committed")
     except:
@@ -564,9 +564,9 @@ def pause(args):
     print ""
 
 
-def finish_release(version):
+def finish_release(branch):
 
-    branch = "release/" + version
+    version = branch.replace("release/", "")
 
     repo = Repo(projectdir)
     remote = repo.remotes["origin"]
@@ -582,7 +582,7 @@ def finish_release(version):
     repo.git.merge(branch, '--no-ff')
     print ("- Branch " + branch + " was merged into stable.")
 
-    tag = repo.create_tag(version, "'" + version + "' Release")
+    tag = repo.create_tag(version)
     print ("- A release tag " + version + " was created.")
 
     remote.push(tag)
@@ -672,7 +672,7 @@ def finish(args):
         return print_usage_and_return()
 
     if re.match("^release/", target):
-        return finish_release(args[0])
+        return finish_release(target)
 
     elif (re.match("^issue/", target) or
           re.match("^feature/", target)):
