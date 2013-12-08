@@ -405,6 +405,8 @@ def burndown(args):
 
     commit_count = origin["head"].count() - target["head"].count()
 
+    if args[0] == "release":
+        print "  The last release was " + get_version_string()
     if commit_count > 1:
         print "  There are " + str(commit_count) + " new commits"
     elif commit_count == 1:
