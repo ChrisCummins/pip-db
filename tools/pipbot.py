@@ -293,27 +293,48 @@ def undeploy(args):
 
 def rd_to_string(rd):
     s = ""
-    if rd.years > 0:
+    if rd.years > 1:
         s += "%d years, " % rd.years
-    if rd.months > 0:
+    elif rd.years > 0:
+        s += "%d year, " % rd.years
+    if rd.months > 1:
         s += "%d months, " % rd.months
-    if rd.days > 0:
+    elif rd.months > 0:
+        s += "%d month, " % rd.months
+    if rd.days > 1:
         s += "%d days, " % rd.days
-    if rd.hours > 0:
+    elif rd.days > 0:
+        s += "%d day, " % rd.days
+    if rd.hours > 1:
         s += "%d hours, " % rd.hours
+    elif rd.hours > 0:
+        s += "%d hour, " % rd.hours
 
     if (rd.years == 0 and
         rd.months == 0 and
         rd.days == 0 and
         rd.hours == 0 and
-        rd.minutes > 0):
+        rd.minutes > 1):
         s += "%d minutes, " % rd.minutes
+    elif (rd.years == 0 and
+          rd.months == 0 and
+          rd.days == 0 and
+          rd.hours == 0 and
+          rd.minutes == 1):
+        s += "%d minute, " % rd.minutes
 
     if (rd.years == 0 and
         rd.months == 0 and
         rd.days == 0 and
         rd.hours == 0 and
-        rd.minutes == 0):
+        rd.minutes == 0 and
+        rd.seconds == 1):
+        s += "%d second, " % rd.seconds
+    elif (rd.years == 0 and
+          rd.months == 0 and
+          rd.days == 0 and
+          rd.hours == 0 and
+          rd.minutes == 0):
         s += "%d seconds, " % rd.seconds
 
     return s[:-2]
