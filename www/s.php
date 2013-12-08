@@ -67,6 +67,16 @@ function get_query_string( $starting_at = 0 ) {
 	foreach ( $query->get_query_words_all() as $keyword )
 		$q .= " AND name LIKE '%" . $keyword . "%'";
 
+	/* Select proteins from a range of keywords */
+	if ( 0 < count( $query->get_query_words_any() ) ) {
+		$q .= " AND (";
+		foreach ( $query->get_query_words_any() as $keyword )
+			$q .= "name LIKE '%" . $keyword . "%' OR ";
+		// Strip the last " OR " statement
+		$q = preg_replace( '/ OR $/', '', $q );
+		$q .= ")";
+	}
+
 	/* Exclude keywords from query */
 	foreach ( $query->get_excluded_words() as $keyword )
 		$q .= " AND name NOT LIKE '%" . $keyword . "%'";
