@@ -85,7 +85,7 @@ function get_query_string( $starting_at = 0 ) {
 	/* Exclude keywords from query */
 	foreach ( $query->get_excluded_words() as $keyword )
 		$q .= (" AND (name NOT LIKE '%" . $keyword . "%'" .
-		       " OR alt_name LIKE '%" . $keyword . "%')");
+		       " AND alt_name NOT LIKE '%" . $keyword . "%')");
 
 	/* Select proteins from specific sources */
 	if ( '' !== $query->get_source() )
