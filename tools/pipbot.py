@@ -302,6 +302,19 @@ def rd_to_string(rd):
     if rd.hours > 0:
         s += "%d hours, " % rd.hours
 
+    if (rd.years == 0 and
+        rd.months == 0 and
+        rd.days == 0 and
+        rd.hours == 0):
+        s += "%d minutes, " % rd.minutes
+
+    if (rd.years == 0 and
+        rd.months == 0 and
+        rd.days == 0 and
+        rd.hours == 0 and
+        rd.minutes == 0):
+        s += "%d seconds, " % rd.seconds
+
     return s[:-2]
 
 
