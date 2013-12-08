@@ -507,6 +507,15 @@ def start(args):
         return print_usage_and_return()
 
 
+def get_branch_name(tail):
+    if re.match("^[0-9]+\.[0-9]+\.[0-9]$", tail):
+        return "release/" + tail
+    elif re.match("^[0-9]+$", tail):
+        return "issue/" + tail
+    else:
+        return "feature/" + tail
+
+
 def pause(args):
 
     def print_usage_and_return():
@@ -533,12 +542,7 @@ def pause(args):
 
     elif argc == 1:
 
-        target = args[0]
-
-        if not (re.match("^[0-9]+\.[0-9]+\.[0-9]$", target) or
-                re.match("^[0-9]+$", target) or
-                re.match("^[a-zA-Z0-9_]+$", target)):
-            return print_usage_and_return()
+        target = get_branch_name(args[0])
 
         try:
             repo.heads[target]
