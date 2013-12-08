@@ -603,6 +603,7 @@ def finish_release(branch):
     print ("- Merged changes on stable were pushed to origin.")
 
     print "- You are now on branch master."
+    print ""
 
     return 0
 
