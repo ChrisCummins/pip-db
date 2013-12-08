@@ -12,13 +12,48 @@
  * found in this class.
  */
 abstract class GetVariables {
+
+	/* Query variables */
 	const Query = "q";
+	const QueryExactPhrase = "q_eq";
+	const QueryAnyWord = "q_any";
+	const QueryNotWord = "q_ne";
+	const QuerySource = "q_s";
+	const QueryLocation = "q_l";
+	const QueryEC1 = "ec1";
+	const QueryEC2 = "ec2";
+	const QueryEC3 = "ec3";
+	const QueryEC4 = "ec4";
+	const QueryPiMin = "pi_l";
+	const QueryPiMax = "pi_h";
+	const QueryMolecularWeightMin = "mw_l";
+	const QueryMolecularWeightMax = "mw_h";
+	const QueryExperimentalMethod = "ex";
+	const QueryTemperatureMin = "t_l";
+	const QueryTemperatureMax = "t_h";
+
 	const Record = "id";
 	const StartAt = "start";
 
 	static function val() {
 		return array(
 			self::Query,
+			self::QueryExactPhrase,
+			self::QueryAnyWord,
+			self::QueryNotWord,
+			self::QuerySource,
+			self::QueryLocation,
+			self::QueryEC1,
+			self::QueryEC2,
+			self::QueryEC3,
+			self::QueryEC4,
+			self::QueryPiMin,
+			self::QueryPiMax,
+			self::QueryMolecularWeightMin,
+			self::QueryMolecularWeightMax,
+			self::QueryExperimentalMethod,
+			self::QueryTemperatureMin,
+			self::QueryTemperatureMax,
 			self::Record,
 			self::StartAt
 			);

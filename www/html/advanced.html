@@ -18,7 +18,7 @@
 {% block content %}
 
 <div class="advsearch">
-  <form method="GET" action="{{ _links.search }}">
+  <form id="as" method="GET" action="{{ _links.html.search }}">
 
     <div class="row">
       <div class="col-md-12"><h4>Find proteins with...</h4></div>
@@ -172,6 +172,7 @@
       </div>
       <div class="col-md-6">
         <select name="ex">
+          <option>-- Select an experimental method --</option>
           <option>Analytical gel isoelectric focusing</option>
           <option>Analytical isoelectric focusing</option>
           <option>Carrier-free isoelectric focusing</option>
@@ -244,4 +245,8 @@
 
 </div> <!-- /.advanced-search -->
 
+{% endblock %}
+
+{% block footer %}
+<script src="{{ _links.root }}/js/as.js"></script>
 {% endblock %}

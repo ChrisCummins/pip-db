@@ -61,6 +61,7 @@ pip_db_init();
 /******************************/
 /* High level data structures */
 /******************************/
+require_once( $_SERVER['PHP_ROOT'] . 'query.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'record.php' );
 
 
