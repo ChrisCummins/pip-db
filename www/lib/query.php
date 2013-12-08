@@ -64,8 +64,9 @@ class Pip_Query
 		return pip_string_sanitise( $this->anyword );
 	}
 
-	public function get_notword() {
-		return pip_string_sanitise( $this->notword );
+	public function get_excluded_words() {
+		return preg_split( '/\s/', pip_string_sanitise( $this->notword ),
+				   NULL, PREG_bSPLIT_NO_EMPTY );
 	}
 
 	public function get_source() {

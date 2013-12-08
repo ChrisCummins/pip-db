@@ -63,6 +63,10 @@ function get_query_string( $starting_at = 0 ) {
 	/* Match exact phrase in name */
 	$q .= " name LIKE '%" . $query->get_query() . "%'";
 
+	/* Exclude keywords from query */
+	foreach ( $query->get_excluded_words() as $keyword )
+		$q .= " AND name NOT LIKE '%" . $keyword . "%'";
+
 	/* Limit the number of results */
 	$q .= " LIMIT " . $starting_at . "," . Pip_Search::ResultsPerPage;
 
