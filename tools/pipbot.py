@@ -513,29 +513,51 @@ def pause(args):
         print "Usage: pipbot pause <issue|feature|release>"
         return 1
 
-    if len(args) != 1:
-        return print_usage_and_return()
+    argc = len(args)
 
-    target = args[0]
+    repo = Repo(projectdir)
+    remote = repo.remotes["origin"]
 
-    if (re.match("^[0-9]+\.[0-9]+\.[0-9]$", target) or
-        re.match("^[0-9]+$", target) or
-        re.match("^[a-zA-Z0-9_]+$", target)):
+    if repo.is_dirty() == True:
+        print "The working tree contains uncommitted changes, commit or stash "
+        print "these and try again."
+        return 1
+
+    if argc == 0:
+
+        target = repo.active_branch.name
+
+        if not re.match("^(release|feature|issue)/", target):
+            print "Not on a release, feature, or issue branch!"
+            return 1
+
+    elif argc == 1:
+
+        target = args[0]
+
+        if not (re.match("^[0-9]+\.[0-9]+\.[0-9]$", target) or
+                re.match("^[0-9]+$", target) or
+                re.match("^[a-zA-Z0-9_]+$", target)):
+            return print_usage_and_return()
+
         try:
-            repo = Repo(projectdir)
-            branch = repo.active_branch
-
-            if not re.match("(release|feature)/" + target, branch.name):
-                print "Target branch does not match current!"
-                return 1
-
-            run("git push -u origin " + branch.name, False)
-            run("git checkout master", False)
-            return 0
+            repo.heads[target]
         except:
-            return 2
-    else:
+            print "Branch " + target + " not found!"
+            return 1
+
+    elif argc > 1:
         return print_usage_and_return()
+
+    head = repo.heads[target]
+    remote.push(head)
+    print "Summary of actions:"
+    print "- Remote branch " + target + " on origin was updated."
+
+    master = repo.heads.master
+    master.checkout()
+    print "- You are now on branch master."
+    print ""
 
 
 def finish_release(version):
