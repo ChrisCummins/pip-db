@@ -99,7 +99,7 @@ def get_help_text():
             "          milestone   Manage project milestones\n"
             "\n"
             "    pipbot start  <issue|feature|release>\n"
-            "    pipbot pause  <issue|feature|release>\n"
+            "    pipbot pause  [issue|feature|release]\n"
             "    pipbot finish <issue|feature|release>\n"
             "        Start, pause or complete work on an upstream issue,\n"
             "        downstream feature, or product release branch.\n"
@@ -510,7 +510,7 @@ def start(args):
 def pause(args):
 
     def print_usage_and_return():
-        print "Usage: pipbot pause <issue|feature|release>"
+        print "Usage: pipbot pause [issue|feature|release]"
         return 1
 
     argc = len(args)
