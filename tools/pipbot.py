@@ -425,11 +425,6 @@ def create_new_working_branch(branch, base, remote_name):
     head.checkout()
 
     print "- You are now on branch " + branch + "."
-    print ""
-    print "Now, start committing on your branch. When done, use:"
-    print
-    print "     pipbot finish"
-    print ""
 
     return 0
 
@@ -441,7 +436,15 @@ def start_new_feature(feature):
 
     branch = feature_branch_prefix + str(feature)
 
-    return create_new_working_branch(branch, feature_branch_base, remote)
+    ret = create_new_working_branch(branch, feature_branch_base, remote)
+    if ret > 0:
+        return ret
+
+    print ""
+    print "Now, start committing on your feature. When done, use:"
+    print
+    print "     pipbot finish " + str(feature)
+    print ""
 
 
 def start_new_issue(issue):
@@ -452,7 +455,15 @@ def start_new_issue(issue):
 
     branch = issue_branch_prefix + str(issue)
 
-    return create_new_working_branch(branch, issue_branch_base, remote)
+    ret = create_new_working_branch(branch, issue_branch_base, remote)
+    if ret > 0:
+        return ret
+
+    print ""
+    print "Now, start committing on your issue. When done, use:"
+    print
+    print "     pipbot finish " + str(issue)
+    print ""
 
 
 def start(args):
