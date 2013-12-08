@@ -57,26 +57,47 @@ class Pip_Query
 				   NULL, PREG_SPLIT_NO_EMPTY );
 	}
 
+	/*
+	 * Returns an array of words which should ALL match in the protein's
+	 * name (but not necessarily in order).
+	 */
 	public function get_query_words_all() {
 		return $this->split( $this->query );
 	}
 
+	/*
+	 * Returns an array of words, ANY of which should match in the protein's
+	 * name.
+	 */
 	public function get_query_words_any() {
 		return $this->split( $this->anyword );
 	}
 
+	/*
+	 * Returns a string which must be EXACTLY matched in the protein's name.
+	 */
 	public function get_exactphrase() {
 		return pip_string_sanitise( $this->exactphrase );
 	}
 
+	/*
+	 * Returns an array of words, NONE of which should match in the
+	 * protein's name.
+	 */
 	public function get_excluded_words() {
 		return $this->split( $this->notword );
 	}
 
+	/*
+	 * Returns a string to match the source of a protein.
+	 */
 	public function get_source() {
 		return pip_string_sanitise( $this->source );
 	}
 
+	/*
+	 * Returns a string to match the location/organ of a protein.
+	 */
 	public function get_location() {
 		return pip_string_sanitise( $this->location );
 	}
@@ -113,6 +134,9 @@ class Pip_Query
 		return pip_string_sanitise( $this->molecularmax );
 	}
 
+	/*
+	 * Returns a string to match the experimental method of a record.
+	 */
 	public function get_experimental_method() {
 		return pip_string_sanitise( $this->experimental );
 	}
