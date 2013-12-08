@@ -100,7 +100,7 @@ def get_help_text():
             "\n"
             "    pipbot start  <issue|feature|release>\n"
             "    pipbot pause  [issue|feature|release]\n"
-            "    pipbot finish <issue|feature|release>\n"
+            "    pipbot finish [issue|feature|release]\n"
             "        Start, pause or complete work on an upstream issue,\n"
             "        downstream feature, or product release branch.\n"
             "\n"
@@ -596,7 +596,7 @@ def finish_issue(issue_number):
 def finish(args):
 
     def print_usage_and_return():
-        print "Usage: pipbot finish <issue|feature|release>"
+        print "Usage: pipbot finish [issue|feature|release]"
         return 1
 
     if len(args) != 1:
