@@ -394,19 +394,66 @@ def start_new_release(version):
     except:
         return 2
 
-def start_new_feature(feature):
-    try:
-        print "Starting new feature branch '" + feature + "'"
-        run("git flow feature start " + feature, False)
-        repo = Repo(projectdir)
-        branch = repo.active_branch
-        run("git push -u origin " + branch.name, False)
-        return 0
-    except:
-        return 2
 
-def start_new_issue(issue_number):
-    return start_new_feature(issue_number)
+def create_new_working_branch(branch, base, remote_name):
+
+    repo = Repo(projectdir)
+    remote = repo.remotes[remote_name]
+
+    if repo.is_dirty() == True:
+        print "The working tree contains uncommitted changes, commit or stash "
+        print "these and try again."
+        return 1
+
+    try:
+        head = repo.create_head(branch, base)
+        print "Summary of actions:"
+        print "- A new branch " + branch + " was created, based on " + base + "."
+    except OSError:
+        print "A branch " + branch + " already exists!"
+        return 1
+
+    ret = remote.push(head)
+    info = ret[0]
+    print ("- A new remote branch " + branch + " was created on " +
+           remote_name + ".")
+
+    head.set_tracking_branch(info.remote_ref)
+    print ("- Branch " + branch + " tracks remote branch " + branch +
+           " from " + remote_name + ".")
+
+    head.checkout()
+
+    print "- You are now on branch " + branch + "."
+    print ""
+    print "Now, start committing on your branch. When done, use:"
+    print
+    print "     pipbot finish"
+    print ""
+
+    return 0
+
+
+def start_new_feature(feature):
+    feature_branch_prefix = "feature/"
+    feature_branch_base = "master"
+    remote = "origin"
+
+    branch = feature_branch_prefix + str(feature)
+
+    return create_new_working_branch(branch, feature_branch_base, remote)
+
+
+def start_new_issue(issue):
+
+    issue_branch_prefix = "issue/"
+    issue_branch_base = "master"
+    remote = "origin"
+
+    branch = issue_branch_prefix + str(issue)
+
+    return create_new_working_branch(branch, issue_branch_base, remote)
+
 
 def start(args):
 
