@@ -20,7 +20,7 @@
       </button>
 
       <!-- The logo -->
-      <a class="navbar-brand" href="{{ _links.index }}">pip-db</a>
+      <a class="navbar-brand" href="{{ _links.html.index }}">pip-db</a>
 
     </div> <!-- /.navbar-header -->
 
@@ -29,7 +29,7 @@
       {% if _navbar.search %}
       <div class="col-sm-7 col-md-7 navbar-search">
 
-        <form action="{{ _links.search }}" class="navbar-form" role="search">
+        <form action="{{ _links.html.search }}" class="navbar-form" role="search">
           <div class="input-group">
 
             <!-- Search bar -->
@@ -52,7 +52,7 @@
         <li>
           <div class="navbar-button-group">
             <div class="navbar-button">
-              <a href="{{ _links.advanced }}" class="btn btn-primary">
+              <a href="{{ _links.html.advanced }}" class="btn btn-primary">
                 Advanced
               </a>
             </div>
@@ -71,18 +71,18 @@
             {{ session.user }} <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" aria-labelledby="themes">
-            <li><a tabindex="-1" href="{{ _links.setup }}">Run initial setup</a></li>
-            <li><a tabindex="-1" href="{{ _links.upload }}">Upload new data</a></li>
+            <li><a tabindex="-1" href="{{ _links.html.setup }}">Run initial setup</a></li>
+            <li><a tabindex="-1" href="{{ _links.html.upload }}">Upload new data</a></li>
             <li><a tabindex="-1" href="#">Preferences</a></li>
             <li class="divider"></li>
-            <li><a tabindex="-1" href="{{ _links.logout }}">Log out</a></li>
+            <li><a tabindex="-1" href="{{ _links.html.logout }}">Log out</a></li>
           </ul>
         </li>
 
         {% else %}
 
         <!-- Login button -->
-        <li><a href="{{ _links.login }}">Login</a></li>
+        <li><a href="{{ _links.html.login }}">Login</a></li>
 
         {% endif %}
       </ul> <!-- /.navbar-right -->
