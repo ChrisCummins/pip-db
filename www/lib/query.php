@@ -52,6 +52,11 @@ class Pip_Query
 
 	}
 
+	protected function split( $query ) {
+		return preg_split( '/\s/', pip_string_sanitise( $query ),
+				   NULL, PREG_SPLIT_NO_EMPTY );
+	}
+
 	public function get_query() {
 		return pip_string_sanitise( $this->query );
 	}
@@ -65,8 +70,7 @@ class Pip_Query
 	}
 
 	public function get_excluded_words() {
-		return preg_split( '/\s/', pip_string_sanitise( $this->notword ),
-				   NULL, PREG_bSPLIT_NO_EMPTY );
+		return $this->split( $this->notword );
 	}
 
 	public function get_source() {
