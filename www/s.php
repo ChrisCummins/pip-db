@@ -51,19 +51,31 @@ function get_found_rows() {
 	return $array['count'];
 }
 
+function get_query_string( $starting_at = 0 ) {
+	/* The base query string */
+	$q = "SELECT SQL_CALC_FOUND_ROWS
+              record_id, name, source, organ, pi
+              FROM records WHERE";
+
+	/* The query */
+	$query = new Pip_Query();
+
+	/* Match exact phrase in name */
+	$q .= " name LIKE '%" . $query->get_query() . "%'";
+
+	/* Limit the number of results */
+	$q .= " LIMIT " . $starting_at . "," . Pip_Search::ResultsPerPage;
+
+	return $q;
+}
+
 $start_time = microtime( true );
 
 $starting_at = pip_get_isset( GetVariables::StartAt ) ? pip_get( GetVariables::StartAt ) : 0;
 $ending_at = $starting_at + Pip_Search::ResultsPerPage;
 
-$search_text = pip_get( GetVariables::Query );
-$resource = pip_db_query( "SELECT SQL_CALC_FOUND_ROWS
-                           record_id, name, source, organ, pi
-			   FROM records
-                           WHERE name LIKE '%" .
-			  pip_string_sanitise( $search_text ) . "%'" .
-                          " LIMIT " .
-			  $starting_at . "," . Pip_Search::ResultsPerPage );
+/* Perform the query */
+$resource = pip_db_query( get_query_string( $starting_at ) );
 
 if ( !$resource )
 	throw new Exception( 'Failed to query database!' );
@@ -97,7 +109,7 @@ $content = array(
 	/*
 	 * The search text.
 	 */
-	"search_text" => $search_text,
+	"search_text" => pip_get( GetVariables::Query ),
 	/*
 	 * The elapsed time for the query (in seconds).
 	 */
