@@ -588,9 +588,35 @@ def finish_feature(feature):
         return 2
 
 
-def finish_issue(issue_number):
-    # TODO: Close upstream issue
-    return finish_feature(issue_number)
+def close_working_branch(branch, remote_name):
+
+    repo = Repo(projectdir)
+    remote = repo.remotes[remote_name]
+
+    if repo.is_dirty() == True:
+        print "The working tree contains uncommitted changes, commit or stash "
+        print "these and try again."
+        return 1
+
+    print "Summary of actions:"
+    master = repo.heads.master
+    master.checkout()
+
+    repo.git.merge(branch, '--no-ff')
+    print ("- Branch " + branch + " was merged into master.")
+
+    repo.delete_head(branch, force=True)
+    print ("- Branch " + branch + " was deleted.")
+
+    ret = remote.push(":" + branch)
+    print ("- Remote branch " + branch + " on " + remote_name + " was deleted.")
+
+    remote.push(master)
+    print ("- Merged changes on master were pushed to " + remote_name + ".")
+
+    print "- You are now on branch master."
+
+    return 0
 
 
 def finish(args):
@@ -599,26 +625,44 @@ def finish(args):
         print "Usage: pipbot finish [issue|feature|release]"
         return 1
 
-    if len(args) != 1:
-        return print_usage_and_return()
+    remote = "origin"
 
-    target = args[0]
+    argc = len(args)
 
     repo = Repo(projectdir)
-    branch = repo.active_branch
 
-    if not re.match("(release|feature)/" + target, branch.name):
-        print "Target branch does not match current!"
-        return 1
+    if argc == 0:
 
-    if re.match("^[0-9]+\.[0-9]+\.[0-9]$", target):
+        target = repo.active_branch.name
+
+        if not re.match("^(release|feature|issue)/", target):
+            print "Not on a release, feature, or issue branch!"
+            return 1
+
+    elif argc == 1:
+
+        target = get_branch_name(args[0])
+
+        try:
+            repo.heads[target]
+        except:
+            print "Branch " + target + " not found!"
+            return 1
+
+    elif argc > 1:
+        return print_usage_and_return()
+
+    if re.match("^release/", target):
         return finish_release(target)
 
-    elif re.match("^[0-9]+$", target):
-        return finish_issue(target)
+    elif (re.match("^issue/", target) or
+          re.match("^feature/", target)):
+        ret = close_working_branch(target, remote)
+        if ret > 0:
+            return ret
 
-    elif re.match("^[a-zA-Z0-9_]+$", target):
-        return finish_feature(target)
+        print ""
+        return 0
 
     else:
         return print_usage_and_return()
