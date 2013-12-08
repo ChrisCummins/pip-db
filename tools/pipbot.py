@@ -597,10 +597,10 @@ def finish_release(branch):
     print ("- Branch " + branch + " was deleted.")
 
     ret = remote.push(":" + branch)
-    print ("- Remote branch " + branch + " on " + remote_name + " was deleted.")
+    print ("- Remote branch " + branch + " on origin was deleted.")
 
     remote.push(master)
-    print ("- Merged changes on stable were pushed to " + remote_name + ".")
+    print ("- Merged changes on stable were pushed to origin.")
 
     print "- You are now on branch master."
 
