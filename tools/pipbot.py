@@ -596,6 +596,9 @@ def finish_release(branch):
     remote.push(master)
     print ("- Merged changes on master were pushed to origin.")
 
+    remote.push(stable)
+    print ("- Merged changes on stable were pushed to origin.")
+
     repo.delete_head(branch, force=True)
     print ("- Branch " + branch + " was deleted.")
 
