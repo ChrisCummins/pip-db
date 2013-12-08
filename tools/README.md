@@ -9,7 +9,6 @@ required for the production system.
 * [mkrelease - Project release generator](#mkrelease)
 * [png - Plausible Nonsense Generator](#png)
 * [sloccount - Source code line count](#sloccount)
-* [workflow - Workflow scripts](#workflow)
 
 ## dsa
     Usage: ./dsa <csv-dataset>
@@ -137,75 +136,3 @@ project.
     703   Shell       (31.68%)
 
     Total physical source lines of code: 33342
-
-## workflow
-    Usage: ./worflow <command> [args]
-
-    Commands:
-           s | show <issue-number>  Show an issue number
-           n | new <issue-number>   Begin work on a new issue
-           p | pause                Pause work on the current issue
-           c | close                Complete work on the current issue
-
-Automated workflow script for managing git branches.
-
-### Example Usage
-
-    $ ./tools/workflow n 182
-    #182: tools/workflow: Doesn't push feature branches to origin
-    @ChrisCummins opened this issue 12 minutes ago.  open
-    @ChrisCummins is assigned.  Regression   Testing & tooling   Version control
-    Milestone #2: M1: Initial prototype
-
-
-    Branches 'develop' and 'origin/develop' have diverged.
-    And local branch 'develop' is ahead of 'origin/develop'.
-    M   tools/workflow.sh
-    Switched to a new branch 'feature/182'
-
-    Summary of actions:
-    - A new branch 'feature/182' was created, based on 'develop'
-    - You are now on branch 'feature/182'
-
-    Now, start committing on your feature. When done, use:
-
-         git flow feature finish 182
-
-    Counting objects: 17, done.
-    Delta compression using up to 4 threads.
-    Compressing objects: 100% (13/13), done.
-    Writing objects: 100% (13/13), 1.29 KiB, done.
-    Total 13 (delta 10), reused 0 (delta 0)
-    To git@github.com:ChrisCummins/pip-db.git
-     * [new branch]      feature/182 -> feature/182
-    Branch feature/182 set up to track remote branch feature/182 from origin.
-    $ echo 'woo!' > README.md
-    $ git commit -a -m 'Fix for #10'
-    [wip/10 672b654] Fix for #10
-     1 file changed, 1 insertion(+)
-     create mode 100644 tools/fix
-    $ ./tools/workflow c
-    #182: tools/workflow: Doesn't push feature branches to origin
-    @ChrisCummins opened this issue 14 minutes ago.  open
-    @ChrisCummins is assigned.  Regression   Testing & tooling   Version control
-    Milestone #2: M1: Initial prototype
-
-
-    Switched to branch 'develop'
-    Your branch is ahead of 'origin/develop' by 3 commits.
-    Updating bb7b416..124ffa3
-    Fast-forward
-     tools/workflow.sh |    7 +++++++
-     1 file changed, 7 insertions(+)
-    warning: not deleting branch 'feature/182' that is not yet merged to
-             'refs/remotes/origin/feature/182', even though it is merged to HEAD.
-    error: The branch 'feature/182' is not fully merged.
-    If you are sure you want to delete it, run 'git branch -D feature/182'.
-
-    Summary of actions:
-    - The feature branch 'feature/182' was merged into 'develop'
-    - Feature branch 'feature/182' has been removed
-    - You are now on branch 'develop'
-
-    To git@github.com:ChrisCummins/pip-db.git
-     - [deleted]         feature/182
