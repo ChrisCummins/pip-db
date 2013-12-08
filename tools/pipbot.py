@@ -582,7 +582,7 @@ def finish_release(branch):
     repo.git.merge(branch, '--no-ff')
     print ("- Branch " + branch + " was merged into stable.")
 
-    tag = repo.create_tag(version, "'" + version + "' Release")
+    tag = repo.create_tag(version)
     print ("- A release tag " + version + " was created.")
 
     remote.push(tag)
