@@ -649,7 +649,6 @@ AC_OUTPUT([
 	Documentation/plan/Makefile
 	scripts/Makefile
 	scripts/git/Makefile
-	scripts/git/flow/Makefile
 	scripts/git/hooks/Makefile
 	scripts/git/hooks/pre-commit
 	tools/Makefile
