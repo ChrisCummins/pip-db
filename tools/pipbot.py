@@ -593,14 +593,14 @@ def finish_release(branch):
     repo.git.merge(branch, '--no-ff')
     print ("- Branch " + branch + " was merged into master.")
 
+    remote.push(master)
+    print ("- Merged changes on master were pushed to origin.")
+
     repo.delete_head(branch, force=True)
     print ("- Branch " + branch + " was deleted.")
 
     ret = remote.push(":" + branch)
     print ("- Remote branch " + branch + " on origin was deleted.")
-
-    remote.push(master)
-    print ("- Merged changes on stable were pushed to origin.")
 
     print "- You are now on branch master."
     print ""
