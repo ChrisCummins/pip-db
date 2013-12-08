@@ -390,11 +390,10 @@ def burndown(args):
     else:
         print "  There are no new commits"
 
-    if commit_count > 0:
-        commit_date = datetime.datetime.fromtimestamp(target["head"].committed_date)
-        current_date = datetime.datetime.fromtimestamp(calendar.timegm(time.gmtime()))
-        rd = dateutil.relativedelta.relativedelta(current_date, commit_date)
-        print "  Last commit was " + rd_to_string(rd) + " ago"
+    commit_date = datetime.datetime.fromtimestamp(target["head"].committed_date)
+    current_date = datetime.datetime.fromtimestamp(calendar.timegm(time.gmtime()))
+    rd = dateutil.relativedelta.relativedelta(current_date, commit_date)
+    print "  Last commit was " + rd_to_string(rd) + " ago"
 
     return 0
 
