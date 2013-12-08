@@ -113,7 +113,7 @@ class Pip_Query
 		return pip_string_sanitise( $this->molecularmax );
 	}
 
-	public function get_experimentatl() {
+	public function get_experimental_method() {
 		return pip_string_sanitise( $this->experimental );
 	}
 

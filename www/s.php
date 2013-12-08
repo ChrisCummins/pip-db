@@ -89,6 +89,12 @@ function get_query_string( $starting_at = 0 ) {
 	if ( '' !== $query->get_source() )
 		$q .= " AND organ LIKE '%" . $query->get_location() . "%'";
 
+	/* Select proteins by experimental method used */
+	if ( '' !== $query->get_experimental_method() ) {
+		$q .= " AND method LIKE '%" .
+			$query->get_experimental_method() . "%'";
+	}
+
 	/* Limit the number of results */
 	$q .= " LIMIT " . $starting_at . "," . Pip_Search::ResultsPerPage;
 
