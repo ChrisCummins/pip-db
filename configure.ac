@@ -63,7 +63,6 @@ dnl   9.6.     Should emacsclient be used for editing files?
 dnl
 dnl   10.    Git
 dnl   10.1.    Are we installing the project git hooks?
-dnl   10.2.    Do we have git-flow installed?
 dnl
 dnl   11.    Generate files
 dnl   11.1.    Add authentication to .htaccess
@@ -629,22 +628,6 @@ AC_ARG_ENABLE(git_hooks,
               [enable_git_hooks=yes])
 AC_SUBST([ENABLE_GIT_HOOKS], ["$enable_git_hooks"])
 AM_CONDITIONAL(ENABLE_GIT_HOOKS,[test "x$enable_git_hooks" = xyes])
-
-
-dnl     ============================================================
-dnl     10.2. Do we have git-flow installed?
-dnl     ============================================================
-AC_MSG_CHECKING([for git-flow])
-git flow version >/dev/null 2>&1
-AS_IF([test $? != 0],
-      [HAVE_GIT_FLOW=no
-       AC_MSG_RESULT([no])
-       AC_MSG_WARN([Git extensions git-flow are not installed])],
-      [HAVE_GIT_FLOW=yes
-       AC_MSG_RESULT([yes])])
-
-AC_SUBST([HAVE_GIT_FLOW],[$HAVE_GIT_FLOW])
-AM_CONDITIONAL([HAVE_GIT_FLOW],[test "x$HAVE_GIT_FLOW" = xyes])
 
 
 dnl ================================================================
