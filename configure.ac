@@ -52,6 +52,7 @@ dnl   8.3.     Do we have node?
 dnl   8.4.     Do we have optimist?
 dnl   8.5.     Do we have python?
 dnl   8.6.     Do we have the python git module?
+dnl   8.7.     Do we have the python dateutil module?
 dnl
 dnl   9.     Documentation
 dnl   9.1.     Are we build the documentation?
@@ -63,7 +64,6 @@ dnl   9.6.     Should emacsclient be used for editing files?
 dnl
 dnl   10.    Git
 dnl   10.1.    Are we installing the project git hooks?
-dnl   10.2.    Do we have git-flow installed?
 dnl
 dnl   11.    Generate files
 dnl   11.1.    Add authentication to .htaccess
@@ -78,7 +78,7 @@ dnl 1. Project versions (i.e. the package version)
 dnl ================================================================
 m4_define([pipdb_major_version],[0])
 m4_define([pipdb_minor_version],[1])
-m4_define([pipdb_micro_version],[7])
+m4_define([pipdb_micro_version],[8])
 m4_define([pipdb_version],[pipdb_major_version.pipdb_minor_version.pipdb_micro_version])
 
 
@@ -534,6 +534,17 @@ AS_IF([test "x$enable_tools" = xyes],
               AC_MSG_ERROR([Required Python module 'git' is not found])])])
 
 
+dnl         ========================================================
+dnl         8.7. Do we have the python dateutil module?
+dnl         ========================================================
+AS_IF([test "x$enable_tools" = xyes],
+      [AC_MSG_CHECKING([for python dateutil module])
+       AS_IF([`python -c 'import dateutil.relativedelta;' 2>/dev/null`],
+             [AC_MSG_RESULT([ok])],
+             [AC_MSG_RESULT([no])
+              AC_MSG_ERROR([Required Python module 'dateutil' is not found])])])
+
+
 dnl ================================================================
 dnl 9. Documentation
 dnl ================================================================
@@ -631,22 +642,6 @@ AC_SUBST([ENABLE_GIT_HOOKS], ["$enable_git_hooks"])
 AM_CONDITIONAL(ENABLE_GIT_HOOKS,[test "x$enable_git_hooks" = xyes])
 
 
-dnl     ============================================================
-dnl     10.2. Do we have git-flow installed?
-dnl     ============================================================
-AC_MSG_CHECKING([for git-flow])
-git flow version >/dev/null 2>&1
-AS_IF([test $? != 0],
-      [HAVE_GIT_FLOW=no
-       AC_MSG_RESULT([no])
-       AC_MSG_WARN([Git extensions git-flow are not installed])],
-      [HAVE_GIT_FLOW=yes
-       AC_MSG_RESULT([yes])])
-
-AC_SUBST([HAVE_GIT_FLOW],[$HAVE_GIT_FLOW])
-AM_CONDITIONAL([HAVE_GIT_FLOW],[test "x$HAVE_GIT_FLOW" = xyes])
-
-
 dnl ================================================================
 dnl 11. Generate files
 dnl ================================================================
@@ -666,7 +661,6 @@ AC_OUTPUT([
 	Documentation/plan/Makefile
 	scripts/Makefile
 	scripts/git/Makefile
-	scripts/git/flow/Makefile
 	scripts/git/hooks/Makefile
 	scripts/git/hooks/pre-commit
 	tools/Makefile

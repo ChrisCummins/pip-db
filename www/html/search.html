@@ -116,7 +116,7 @@
      */
     $('.sresults table tr').click(function() {
 
-      window.location = '{{ _links.record }}'
+      window.location = '{{ _links.html.record }}'
           + location.search + '&id='
           + $(this).attr('record-id');
 

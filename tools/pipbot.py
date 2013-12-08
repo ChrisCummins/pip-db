@@ -293,14 +293,49 @@ def undeploy(args):
 
 def rd_to_string(rd):
     s = ""
-    if rd.years > 0:
+    if rd.years > 1:
         s += "%d years, " % rd.years
-    if rd.months > 0:
+    elif rd.years > 0:
+        s += "%d year, " % rd.years
+    if rd.months > 1:
         s += "%d months, " % rd.months
-    if rd.days > 0:
+    elif rd.months > 0:
+        s += "%d month, " % rd.months
+    if rd.days > 1:
         s += "%d days, " % rd.days
-    if rd.hours > 0:
+    elif rd.days > 0:
+        s += "%d day, " % rd.days
+    if rd.hours > 1:
         s += "%d hours, " % rd.hours
+    elif rd.hours > 0:
+        s += "%d hour, " % rd.hours
+
+    if (rd.years == 0 and
+        rd.months == 0 and
+        rd.days == 0 and
+        rd.hours == 0 and
+        rd.minutes > 1):
+        s += "%d minutes, " % rd.minutes
+    elif (rd.years == 0 and
+          rd.months == 0 and
+          rd.days == 0 and
+          rd.hours == 0 and
+          rd.minutes == 1):
+        s += "%d minute, " % rd.minutes
+
+    if (rd.years == 0 and
+        rd.months == 0 and
+        rd.days == 0 and
+        rd.hours == 0 and
+        rd.minutes == 0 and
+        rd.seconds == 1):
+        s += "%d second, " % rd.seconds
+    elif (rd.years == 0 and
+          rd.months == 0 and
+          rd.days == 0 and
+          rd.hours == 0 and
+          rd.minutes == 0):
+        s += "%d seconds, " % rd.seconds
 
     return s[:-2]
 
@@ -370,18 +405,22 @@ def burndown(args):
 
     commit_count = origin["head"].count() - target["head"].count()
 
+    if argc > 0 and args[0] == "release":
+        print "  The last release was " + get_version_string()
     if commit_count > 1:
-        print "  There are " + str(commit_count) + " new commits"
+        print ("  There are " + str(commit_count) + " new commits on "
+               + origin["name"])
     elif commit_count == 1:
-        print "  There is " + str(commit_count) + " new commit"
+        print ("  There is " + str(commit_count) + " new commit on "
+               + origin["name"])
     else:
-        print "  There are no new commits"
+        print "  There are no new commits on " + origin["name"]
 
-    if commit_count > 0:
-        commit_date = datetime.datetime.fromtimestamp(target["head"].committed_date)
-        current_date = datetime.datetime.fromtimestamp(calendar.timegm(time.gmtime()))
-        rd = dateutil.relativedelta.relativedelta(current_date, commit_date)
-        print "  Last commit was " + rd_to_string(rd) + " ago"
+    commit_date = datetime.datetime.fromtimestamp(target["head"].committed_date)
+    current_date = datetime.datetime.fromtimestamp(calendar.timegm(time.gmtime()))
+    rd = dateutil.relativedelta.relativedelta(current_date, commit_date)
+    print ("  The last commit on " + target["name"]
+           + " was " + rd_to_string(rd) + " ago")
 
     return 0
 
@@ -593,16 +632,20 @@ def finish_release(branch):
     repo.git.merge(branch, '--no-ff')
     print ("- Branch " + branch + " was merged into master.")
 
+    remote.push(master)
+    print ("- Merged changes on master were pushed to origin.")
+
+    remote.push(stable)
+    print ("- Merged changes on stable were pushed to origin.")
+
     repo.delete_head(branch, force=True)
     print ("- Branch " + branch + " was deleted.")
 
     ret = remote.push(":" + branch)
-    print ("- Remote branch " + branch + " on " + remote_name + " was deleted.")
-
-    remote.push(master)
-    print ("- Merged changes on stable were pushed to " + remote_name + ".")
+    print ("- Remote branch " + branch + " on origin was deleted.")
 
     print "- You are now on branch master."
+    print ""
 
     return 0
 
