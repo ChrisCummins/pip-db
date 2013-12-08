@@ -56,7 +56,6 @@ website.
 * [Node.js](http://nodejs.org/)
 * [Less](http://lesscss.org/)
 * [Git](http://git-scm.com/) *(optional, required only to build the extra tools)*
-* [gitflow](https://github.com/nvie/gitflow) *(optional, required only to build the extra tools)*
 * [npm](https://npmjs.org/) *(optional, required only to build the extra tools)*
 * [node-optimist](https://github.com/substack/node-optimist) *(optional, required only to build the extra tools)*
 * [Python](http://www.python.org/) *(optional, required only to build the extra tools)*

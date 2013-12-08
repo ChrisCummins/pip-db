@@ -1,1 +1,1 @@
-SUBDIRS = flow hooks
+SUBDIRS = hooks
