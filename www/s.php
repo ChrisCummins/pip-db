@@ -52,13 +52,14 @@ function get_found_rows() {
 }
 
 function get_query_string( $starting_at = 0 ) {
+	/* The query */
+	$query = new Pip_Query();
+
 	/* The base query string */
 	$q = "SELECT SQL_CALC_FOUND_ROWS
               record_id, name, source, organ, pi
               FROM records WHERE";
 
-	/* The query */
-	$query = new Pip_Query();
 
 	/* Match exact phrase in name */
 	$q .= " name LIKE '%" . $query->get_query() . "%'";
