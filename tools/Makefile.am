@@ -6,7 +6,7 @@ noinst_SCRIPTS = \
 	$(NULL)
 
 if HAVE_GIT_FLOW
-noinst_SCRIPTS += workflow mkrelease
+noinst_SCRIPTS += mkrelease
 
 dist_bin_SCRIPTS = pipbot
 endif
@@ -18,7 +18,6 @@ EXTRA_DIST = \
 	png-payload.js \
 	png.js \
 	README.md \
-	workflow.sh \
 	$(NULL)
 
 # Generating executables from Node.js scripts
