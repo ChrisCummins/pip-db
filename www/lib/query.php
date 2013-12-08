@@ -57,8 +57,8 @@ class Pip_Query
 				   NULL, PREG_SPLIT_NO_EMPTY );
 	}
 
-	public function get_query() {
-		return pip_string_sanitise( $this->query );
+	public function get_query_words_all() {
+		return $this->split( $this->query );
 	}
 
 	public function get_exactphrase() {

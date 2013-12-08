@@ -60,9 +60,12 @@ function get_query_string( $starting_at = 0 ) {
               record_id, name, source, organ, pi
               FROM records WHERE";
 
+	/* Find proteins which matches exact phrase */
+	$q .= " name LIKE '%" . $query->get_exactphrase() . "%'";
 
-	/* Match exact phrase in name */
-	$q .= " name LIKE '%" . $query->get_query() . "%'";
+	/* Find proteins with names that contain these keywords */
+	foreach ( $query->get_query_words_all() as $keyword )
+		$q .= " AND name LIKE '%" . $keyword . "%'";
 
 	/* Exclude keywords from query */
 	foreach ( $query->get_excluded_words() as $keyword )
