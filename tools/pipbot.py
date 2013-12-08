@@ -564,9 +564,9 @@ def pause(args):
     print ""
 
 
-def finish_release(version):
+def finish_release(branch):
 
-    branch = "release/" + version
+    version = branch.replace("release/", "")
 
     repo = Repo(projectdir)
     remote = repo.remotes["origin"]
@@ -672,7 +672,7 @@ def finish(args):
         return print_usage_and_return()
 
     if re.match("^release/", target):
-        return finish_release(args[0])
+        return finish_release(target)
 
     elif (re.match("^issue/", target) or
           re.match("^feature/", target)):
