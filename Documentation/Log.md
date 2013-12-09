@@ -1412,7 +1412,7 @@ CompositeCondition extends Condition
 And example usage:
 
 ```
-$query = new PipQueryBuilder( new PipSearchQueryValues() );
+$query = PipQueryBuilder::build( new PipSearchQueryValues() );
 
 $select = new Select( "records",
 		      array( "record_id",
