@@ -29,13 +29,13 @@ class Select implements MySQLStatement
 
 abstract class ConditionLogic
 {
-	const AND_ = "AND";
-	const OR_ = "OR";
+	const LOGICAL_AND = "AND";
+	const LOGICAL_OR = "OR";
 
 	static function val() {
 		return array(
-			self::_AND,
-			self::_OR
+			self::LOGICAL_AND,
+			self::LOGICAL_OR
 			);
 	}
 }
