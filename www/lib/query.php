@@ -78,16 +78,28 @@ class CompositeCondition extends Condition {
 	private $conditions;
 	private $logic;
 
-	public function __construct( $logic, $conditions ) {
-
+	public function __construct( $logic = ConditionLogic::LOGICAL_AND,
+				     $conditions = array() ) {
+		$this->logic = $logic;
+		$this->conditions = $conditions;
 	}
 
 	public function add_condition( $condition ) {
-
+		return array_push( $this->conditions, $condition );
 	}
 
 	public function get_mysql_query() {
-		return "";
+		$s = "(";
+
+		foreach( $this->conditions as $condition )
+			$s .= $condition->get_mysql_query() . " $this->logic ";
+
+		// Strip the last logic
+		$s = preg_replace( "/ " . $this->logic . " $/", '', $s );
+
+		$s .= ")";
+
+		return $s;
 	}
 }
 
