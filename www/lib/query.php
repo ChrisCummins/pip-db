@@ -13,17 +13,30 @@ class Select implements MySQLStatement
 	private $prefix;
 	private $suffix;
 
-	public function __construct( $table, $columns, $condition,
+	public function __construct( $table, $columns, $where,
 				     $prefix = "", $suffix = "" ) {
 		$this->table = $table;
 		$this->columns = $columns;
-		$this->condition = $condition;
+		$this->where = $where;
 		$this->prefix = $prefix;
 		$this->suffix = $suffix;
 	}
 
 	public function get_mysql_query() {
-		return "SELECT $prefix ";
+		$s = "SELECT $this->prefix ";
+
+		foreach( $this->columns as $column )
+			$s .= "$column, ";
+
+		// Strip the last comma
+		$s = preg_replace( '/, $/', ' ', $s );
+
+		$s .= "FROM $this->table WHERE ";
+		$s .= $this->where->get_mysql_query();
+
+		$s .= " $this->suffix";
+
+		return $s;
 	}
 }
 
