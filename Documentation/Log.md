@@ -1365,3 +1365,27 @@ Implemented further advanced search fields (see 0.1.8 release). Since the
 prototype dataset table consists of entirely text fields, we can't yet do
 numerical comparisons - so a few of the fields (temperature, pI, etc) are
 non-functional.
+
+### Monday 9th
+
+Potential class layout for constructing queries:
+
+```
+Query
+  + get_<property>
+
+QueryComponent
+  + get_mysql_query()
+
+StringQueryComponent
+  + StringQuery( $field, $value, $exact=no )
+
+CompositeQueryComponent
+  + CompositeQuery( $type )
+  + add_query( $query )
+
+QueryBuilder
+  + QueryBuilder()
+  + add_query()
+  + get_mysql_query()
+```
