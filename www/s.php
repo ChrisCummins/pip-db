@@ -52,8 +52,8 @@ function get_found_rows() {
 }
 
 function get_query_string( $starting_at = 0 ) {
-	/* The query */
-	$query = new Pip_Query();
+	/* The search values */
+	$values = new PipSearchQueryValues();
 
 	/* The base query string */
 	$q = "SELECT SQL_CALC_FOUND_ROWS
@@ -61,19 +61,19 @@ function get_query_string( $starting_at = 0 ) {
               FROM records WHERE";
 
 	/* Find proteins which matches exact phrase */
-	$q .= (" (name LIKE '%" . $query->get_exactphrase() . "%'" .
-	       " OR alt_name LIKE '%" . $query->get_exactphrase() . "%')");
+	$q .= (" (name LIKE '%" . $values->get_exactphrase() . "%'" .
+	       " OR alt_name LIKE '%" . $values->get_exactphrase() . "%')");
 
 	/* Find proteins with names that contain these keywords */
-	foreach ( $query->get_query_words_all() as $keyword )
+	foreach ( $values->get_query_words_all() as $keyword )
 		$q .= (" AND (name LIKE '%" . $keyword . "%'" .
 		       " OR alt_name LIKE '%" . $keyword . "%')");
 
 	/* Select proteins from a range of keywords */
-	if ( 0 < count( $query->get_query_words_any() ) ) {
+	if ( 0 < count( $values->get_query_words_any() ) ) {
 		$q .= " AND (";
 
-		foreach ( $query->get_query_words_any() as $keyword )
+		foreach ( $values->get_query_words_any() as $keyword )
 			$q .= ("(name LIKE '%" . $keyword . "%'" .
 			       " OR alt_name LIKE '%" . $keyword . "%') OR ");
 
@@ -83,23 +83,23 @@ function get_query_string( $starting_at = 0 ) {
 	}
 
 	/* Exclude keywords from query */
-	foreach ( $query->get_excluded_words() as $keyword ) {
+	foreach ( $values->get_excluded_words() as $keyword ) {
 		$q .= (" AND (name NOT LIKE '%" . $keyword . "%'" .
 		       " AND alt_name NOT LIKE '%" . $keyword . "%')");
 	}
 
 	/* Select proteins from specific sources */
-	if ( '' !== $query->get_source() )
-		$q .= " AND (source LIKE '%" . $query->get_source() . "%')";
+	if ( '' !== $values->get_source() )
+		$q .= " AND (source LIKE '%" . $values->get_source() . "%')";
 
 	/* Select proteins from specific locations/organs */
-	if ( '' !== $query->get_source() )
-		$q .= " AND (organ LIKE '%" . $query->get_location() . "%')";
+	if ( '' !== $values->get_source() )
+		$q .= " AND (organ LIKE '%" . $values->get_location() . "%')";
 
 	/* Select proteins by experimental method used */
-	if ( '' !== $query->get_experimental_method() ) {
+	if ( '' !== $values->get_experimental_method() ) {
 		$q .= (" AND (method LIKE '%" .
-		       $query->get_experimental_method() . "%')");
+		       $values->get_experimental_method() . "%')");
 	}
 
 	/* Limit the number of results */

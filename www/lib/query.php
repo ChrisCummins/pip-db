@@ -1,11 +1,12 @@
 <?php
 
 /*
- * The Query class.
+ * The PipSearchQueryValues class.
  *
- * Provides a model of user query.
+ * Once instantiated, it obtains all of the search query values from GET
+ * variables, and provides an API for accessing them.
  */
-class Pip_Query
+class PipSearchQueryValues
 {
 
 	private $query;
