@@ -1371,25 +1371,50 @@ non-functional.
 Potential class layout for constructing queries:
 
 ```
-# The generic query components:
-
-Query
+MySQLStatement : interface
   + get_mysql_query() : string
 
-StringQuery implements Query
-  + StringQuery( $field, $value, $exact=no )
+Select implements MySQLStatement
+  + Select( $table : string,
+            $columns : string[],
+	    $query, : Query,
+	    $prefix = "" : string,
+	    $suffix = "" : string)
 
-CompositeQuery implements Query
-  + CompositeQuery( $type : string )
-  + add_component( $query : Query ) : void
+Query implements MySQLStatement
+  + Query()
+  + add_condition( $condition : Condition )
 
-# The pip-specific components
+Condition : abstract class
 
-PipSearchQueryValues
-  + get_<property>
+StringMatchCondition extends Condition implements MySQLStatement
+  + StringMatchCondition( $field : string,
+                          $value : string,
+                          $exact = False : boolean )
 
-PipSearchQuery
-  - query : Query
-  + PipQuery( $PipSearchQueryValues )
-  + get_query() : Query
+ConditionLogic : abstract class
+  + _AND = "AND" : string
+  + _OR = "OR" : string
+
+CompositeCondition extends Condition implements MySQLStatement
+  + CompositeCondition( $logic : ConditionLogic,
+    			$conditions = array() : Condition[] )
+  + add_condition( $condition : Condition )
+```
+
+And example usage:
+
+```
+$query = new PipQueryBuilder( new PipSearchQueryValues() );
+
+$select = new Select( "records",
+		      array( "record_id",
+			     "name",
+			     "source",
+			     "organ",
+			     "pi" ),
+		      $query->get_query(),
+		      "SQL_CALC_FOUND_ROWS",
+		      ("LIMIT $starting_at," .
+		       Pip_Search::ResultsPerPage) );
 ```
