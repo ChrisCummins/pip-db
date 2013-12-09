@@ -74,6 +74,25 @@ class StringMatchCondition extends Condition {
 	}
 }
 
+class StringNotMatchCondition extends Condition {
+	private $field;
+	private $value;
+	private $exact;
+
+	public function __construct( $field, $value, $exact = False ) {
+		$this->field = $field;
+		$this->value = $value;
+		$this->exact = $exact;
+	}
+
+	public function get_mysql_query() {
+		if ( $this->exact )
+			return "$this->field NOT LIKE '$this->value'";
+		else
+			return "$this->field NOT LIKE '%$this->value%'";
+	}
+}
+
 class CompositeCondition extends Condition {
 	private $conditions;
 	private $logic;
