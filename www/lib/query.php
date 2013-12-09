@@ -309,18 +309,56 @@ abstract class PipQueryBuilder {
 
 		/* Select proteins from a range of keywords */
 		if ( 0 < count( $values->get_query_words_any() ) ) {
-			$c = new CompositeCondition(ConditionLogic::LOGICAL_OR);
+			$c = new CompositeCondition( ConditionLogic::LOGICAL_OR );
 
 			foreach ( $values->get_query_words_any() as $keyword ) {
-				$k = new CompositeCondition(ConditionLogic::LOGICAL_OR);
-				$k->add_condition( new StringMatchCondition(
-							   'name', $keyword
-							   ) );
-				$k->add_condition( new StringMatchCondition(
-							   'alt_name', $keyword
-							   ) );
-				$q->add_condition( $c );
+				$k = new CompositeCondition( ConditionLogic::LOGICAL_OR );
+				$s = new StringMatchCondition( 'name',
+							       $keyword );
+				$k->add_condition( $s );
+				$s = new StringMatchCondition( 'alt_name',
+							       $keyword );
+				$k->add_condition( $s );
+				$c->add_condition( $k );
 			}
+
+			$q->add_condition( $c );
+		}
+
+		/* Exclude keywords from query */
+		foreach ( $values->get_excluded_words() as $keyword ) {
+			$c = new CompositeCondition( ConditionLogic::LOGICAL_AND );
+			$s = new StringNotMatchCondition( 'name', $keyword );
+			$c->add_condition( $s );
+			$s = new StringNotMatchCondition( 'alt_name',
+							  $keyword );
+			$c->add_condition( $s );
+			$q->add_condition( $c );
+		}
+
+		/* Select proteins from specific sources */
+		if ( '' !== $values->get_source() ) {
+			$c = new StringMatchCondition( 'source',
+						       $values->get_source() );
+			$q->add_condition( $c );
+		}
+
+		/* Select proteins from specific locations/organs */
+		if ( '' !== $values->get_location() ) {
+			$c = new StringMatchCondition(
+				'organ',
+				$values->get_location()
+				);
+			$q->add_condition( $c );
+		}
+
+		/* Select proteins by experimental method used */
+		if ( '' !== $values->get_experimental_method() ) {
+			$c = new StringMatchCondition(
+				'method',
+				$values->get_experimental_method()
+				);
+			$q->add_condition( $c );
 		}
 
 		return $q;
