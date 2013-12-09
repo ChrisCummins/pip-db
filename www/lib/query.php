@@ -1,59 +1,71 @@
 <?php
 
-interface Query
+interface MySQLStatement
 {
 	public function get_mysql_query();
 }
 
-class StringQuery implements Query
+class Select implements MySQLStatement
 {
+	private $table;
+	private $columns;
+	private $where;
+	private $prefix;
+	private $suffix;
+
+	public function __construct( $table, $columns, $condition,
+				     $prefix, $suffix ) {
+
+	}
+
+	public function get_mysql_query() {
+		return "";
+	}
+}
+
+abstract class ConditionLogic
+{
+	const AND_ = "AND";
+	const OR_ = "OR";
+
+	static function val() {
+		return array(
+			self::_AND,
+			self::_OR
+			);
+	}
+}
+
+abstract class Condition implements MySQLStatement {}
+
+class StringMatchCondition extends Condition {
 	private $field;
 	private $value;
 	private $exact;
 
-	public function __construct( $field, $value, $exact=false ) {
-		$this->field = $field;
-		$this->value = $value;
-		$this->exact = $exact;
+	public function __construct( $field, $value, $exact = False ) {
+
 	}
 
 	public function get_mysql_query() {
-		if ($this->exact)
-			return "$field LIKE '$value'";
-		else
-			return "$field LIKE '%$value%'";
+		return "";
 	}
 }
 
-abstract class CompositeQueryTypes
-{
-	const _AND = "AND";
-}
+class CompositeCondition extends Condition {
+	private $conditions;
+	private $logic;
 
-class CompositeQuery implements Query
-{
-	private $queries;
-	private $type;
+	public function __construct( $logic, $conditions ) {
 
-	public function __construct( $type = CompositeQueryTypes::_AND ) {
-		$this->queries = array();
-		$this->type = $type;
 	}
 
-	public function add_component( $query ) {
-		return array_push( $this->queries, $query );
+	public function add_condition( $condition ) {
+
 	}
 
 	public function get_mysql_query() {
-		$s = "(";
-
-		foreach($this->queries as $query) {
-			$s .= " " . $query->get_mysql_query() . " ";
-		}
-
-		$s .= ")";
-
-		return $s;
+		return "";
 	}
 }
 
@@ -215,16 +227,4 @@ class PipSearchQueryValues
 		return pip_string_sanitise( $this->startat );
 	}
 
-}
-
-class PipSearchQuery {
-	private $query;
-
-	public function __construct( $PipSearchQueryValues ) {
-
-	}
-
-	public function get_query() {
-		return $this->query;
-	}
 }
