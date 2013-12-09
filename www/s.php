@@ -83,9 +83,10 @@ function get_query_string( $starting_at = 0 ) {
 	}
 
 	/* Exclude keywords from query */
-	foreach ( $query->get_excluded_words() as $keyword )
+	foreach ( $query->get_excluded_words() as $keyword ) {
 		$q .= (" AND (name NOT LIKE '%" . $keyword . "%'" .
 		       " AND alt_name NOT LIKE '%" . $keyword . "%')");
+	}
 
 	/* Select proteins from specific sources */
 	if ( '' !== $query->get_source() )
@@ -97,8 +98,8 @@ function get_query_string( $starting_at = 0 ) {
 
 	/* Select proteins by experimental method used */
 	if ( '' !== $query->get_experimental_method() ) {
-		$q .= " AND (method LIKE '%" .
-			$query->get_experimental_method() . "%')";
+		$q .= (" AND (method LIKE '%" .
+		       $query->get_experimental_method() . "%')");
 	}
 
 	/* Limit the number of results */
