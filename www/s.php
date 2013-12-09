@@ -105,6 +105,12 @@ function get_query_string( $starting_at = 0 ) {
 	/* Limit the number of results */
 	$q .= " LIMIT " . $starting_at . "," . Pip_Search::ResultsPerPage;
 
+	$query = PipQueryBuilder::build( new PipSearchQueryValues(),
+					 $starting_at );
+
+	echo $query->get_mysql_query() . "\n\n";
+	var_dump( $query );
+
 	return $q;
 }
 

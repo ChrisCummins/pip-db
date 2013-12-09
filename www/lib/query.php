@@ -265,7 +265,58 @@ class PipSearchQueryValues
 
 abstract class PipQueryBuilder {
 
-	static function build($query_values) {
-		return "";
+	static function get_condition( $values ) {
+		$q = new CompositeCondition( ConditionLogic::LOGICAL_AND );
+
+		/* Find proteins which matches exact phrase */
+		$c = new CompositeCondition( ConditionLogic::LOGICAL_OR );
+		$c->add_condition( new StringMatchCondition(
+					   'name',
+					   $values->get_exactphrase() ) );
+		$c->add_condition( new StringMatchCondition(
+					   'alt_name',
+					   $values->get_exactphrase() ) );
+		$q->add_condition( $c );
+
+		/* Find proteins with names that contain these keywords */
+		foreach ( $values->get_query_words_all() as $keyword ) {
+			$c = new CompositeCondition( ConditionLogic::LOGICAL_OR );
+			$c->add_condition( new StringMatchCondition(
+						   'name', $keyword ) );
+			$c->add_condition( new StringMatchCondition(
+						   'alt_name', $keyword ) );
+			$q->add_condition( $c );
+		}
+
+		/* Select proteins from a range of keywords */
+		if ( 0 < count( $values->get_query_words_any() ) ) {
+			$c = new CompositeCondition(ConditionLogic::LOGICAL_OR);
+
+			foreach ( $values->get_query_words_any() as $keyword ) {
+				$k = new CompositeCondition(ConditionLogic::LOGICAL_OR);
+				$k->add_condition( new StringMatchCondition(
+							   'name', $keyword
+							   ) );
+				$k->add_condition( new StringMatchCondition(
+							   'alt_name', $keyword
+							   ) );
+				$q->add_condition( $c );
+			}
+		}
+
+		return $q;
+	}
+
+	static function build( $query_values, $starting_at ) {
+		return new Select( "records",
+				   array( "record_id",
+					  "name",
+					  "source",
+					  "organ",
+					  "pi" ),
+				   self::get_condition( $query_values ),
+				   "SQL_CALC_FOUND_ROWS",
+				   ("LIMIT $starting_at," .
+				    Pip_Search::ResultsPerPage) );
 	}
 }
