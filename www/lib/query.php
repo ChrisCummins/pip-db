@@ -32,16 +32,28 @@ abstract class CompositeQueryTypes
 
 class CompositeQuery implements Query
 {
-	public function __construct( $type = CompositeQueryTypes::_AND ) {
+	private $queries;
+	private $type;
 
+	public function __construct( $type = CompositeQueryTypes::_AND ) {
+		$this->queries = array();
+		$this->type = $type;
 	}
 
 	public function add_component( $query ) {
-
+		return array_push( $this->queries, $query );
 	}
 
 	public function get_mysql_query() {
-		return "";
+		$s = "(";
+
+		foreach($this->queries as $query) {
+			$s .= " " . $query->get_mysql_query() . " ";
+		}
+
+		$s .= ")";
+
+		return $s;
 	}
 }
 
