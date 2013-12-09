@@ -51,76 +51,14 @@ function get_found_rows() {
 	return $array['count'];
 }
 
-function get_query_string( $starting_at = 0 ) {
-	/* The search values */
-	$values = new PipSearchQueryValues();
-
-	/* The base query string */
-	$q = "SELECT SQL_CALC_FOUND_ROWS
-              record_id, name, source, organ, pi
-              FROM records WHERE";
-
-	/* Find proteins which matches exact phrase */
-	$q .= (" (name LIKE '%" . $values->get_exactphrase() . "%'" .
-	       " OR alt_name LIKE '%" . $values->get_exactphrase() . "%')");
-
-	/* Find proteins with names that contain these keywords */
-	foreach ( $values->get_query_words_all() as $keyword )
-		$q .= (" AND (name LIKE '%" . $keyword . "%'" .
-		       " OR alt_name LIKE '%" . $keyword . "%')");
-
-	/* Select proteins from a range of keywords */
-	if ( 0 < count( $values->get_query_words_any() ) ) {
-		$q .= " AND (";
-
-		foreach ( $values->get_query_words_any() as $keyword )
-			$q .= ("(name LIKE '%" . $keyword . "%'" .
-			       " OR alt_name LIKE '%" . $keyword . "%') OR ");
-
-		// Strip the last " OR " statement
-		$q = preg_replace( '/ OR $/', '', $q );
-		$q .= ")";
-	}
-
-	/* Exclude keywords from query */
-	foreach ( $values->get_excluded_words() as $keyword ) {
-		$q .= (" AND (name NOT LIKE '%" . $keyword . "%'" .
-		       " AND alt_name NOT LIKE '%" . $keyword . "%')");
-	}
-
-	/* Select proteins from specific sources */
-	if ( '' !== $values->get_source() )
-		$q .= " AND (source LIKE '%" . $values->get_source() . "%')";
-
-	/* Select proteins from specific locations/organs */
-	if ( '' !== $values->get_source() )
-		$q .= " AND (organ LIKE '%" . $values->get_location() . "%')";
-
-	/* Select proteins by experimental method used */
-	if ( '' !== $values->get_experimental_method() ) {
-		$q .= (" AND (method LIKE '%" .
-		       $values->get_experimental_method() . "%')");
-	}
-
-	/* Limit the number of results */
-	$q .= " LIMIT " . $starting_at . "," . Pip_Search::ResultsPerPage;
-
-	$query = PipQueryBuilder::build( new PipSearchQueryValues(),
-					 $starting_at );
-
-	echo $query->get_mysql_query() . "\n\n";
-	var_dump( $query );
-
-	return $q;
-}
-
 $start_time = microtime( true );
 
 $starting_at = pip_get_isset( GetVariables::StartAt ) ? pip_get( GetVariables::StartAt ) : 0;
 $ending_at = $starting_at + Pip_Search::ResultsPerPage;
 
 /* Perform the query */
-$resource = pip_db_query( get_query_string( $starting_at ) );
+$query = PipQueryBuilder::build( new PipSearchQueryValues(), $starting_at );
+$resource = pip_db_query( $query->get_mysql_query() );
 
 if ( !$resource )
 	throw new Exception( 'Failed to query database!' );
