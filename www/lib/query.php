@@ -1,5 +1,41 @@
 <?php
 
+interface Query
+{
+	public function get_mysql_query();
+}
+
+class StringQuery implements Query
+{
+	public function __construct( $field, $value, $exact=false ) {
+
+	}
+
+	public function get_mysql_query() {
+		return "";
+	}
+}
+
+abstract class CompositeQueryTypes
+{
+	const _AND = "AND";
+}
+
+class CompositeQuery implements Query
+{
+	public function __construct( $type = CompositeQueryTypes::_AND ) {
+
+	}
+
+	public function add_component( $query ) {
+
+	}
+
+	public function get_mysql_query() {
+		return "";
+	}
+}
+
 /*
  * The PipSearchQueryValues class.
  *
@@ -158,4 +194,16 @@ class PipSearchQueryValues
 		return pip_string_sanitise( $this->startat );
 	}
 
+}
+
+class PipSearchQuery {
+	private $query;
+
+	public function __construct( $PipSearchQueryValues ) {
+
+	}
+
+	public function get_query() {
+		return $this->query;
+	}
 }
