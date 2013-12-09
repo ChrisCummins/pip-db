@@ -7,12 +7,21 @@ interface Query
 
 class StringQuery implements Query
 {
-	public function __construct( $field, $value, $exact=false ) {
+	private $field;
+	private $value;
+	private $exact;
 
+	public function __construct( $field, $value, $exact=false ) {
+		$this->field = $field;
+		$this->value = $value;
+		$this->exact = $exact;
 	}
 
 	public function get_mysql_query() {
-		return "";
+		if ($this->exact)
+			return "$field LIKE '$value'";
+		else
+			return "$field LIKE '%$value%'";
 	}
 }
 
