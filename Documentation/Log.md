@@ -1358,3 +1358,10 @@ on the things that I've nicked:
 Overall it actually went better than I was expecting, the pip-db infrastructure
 is fairly robust and flexible. Some things though (like `pipbot`) are too
 project-specific to be copied accross, even though they are useful.
+
+### Sunday 8th
+
+Implemented further advanced search fields (see 0.1.8 release). Since the
+prototype dataset table consists of entirely text fields, we can't yet do
+numerical comparisons - so a few of the fields (temperature, pI, etc) are
+non-functional.
