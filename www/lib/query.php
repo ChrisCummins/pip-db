@@ -14,12 +14,16 @@ class Select implements MySQLStatement
 	private $suffix;
 
 	public function __construct( $table, $columns, $condition,
-				     $prefix, $suffix ) {
-
+				     $prefix = "", $suffix = "" ) {
+		$this->table = $table;
+		$this->columns = $columns;
+		$this->condition = $condition;
+		$this->prefix = $prefix;
+		$this->suffix = $suffix;
 	}
 
 	public function get_mysql_query() {
-		return "";
+		return "SELECT $prefix ";
 	}
 }
 
