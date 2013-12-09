@@ -48,11 +48,16 @@ class StringMatchCondition extends Condition {
 	private $exact;
 
 	public function __construct( $field, $value, $exact = False ) {
-
+		$this->field = $field;
+		$this->value = $value;
+		$this->exact = $exact;
 	}
 
 	public function get_mysql_query() {
-		return "";
+		if ( $this->exact )
+			return "$this->field LIKE '$this->value'";
+		else
+			return "$this->field LIKE '%$this->value%'";
 	}
 }
 
