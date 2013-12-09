@@ -1371,21 +1371,25 @@ non-functional.
 Potential class layout for constructing queries:
 
 ```
+# The generic query components:
+
 Query
-  + get_<property>
+  + get_mysql_query() : string
 
-QueryComponent
-  + get_mysql_query()
-
-StringQueryComponent
+StringQuery implements Query
   + StringQuery( $field, $value, $exact=no )
 
-CompositeQueryComponent
-  + CompositeQuery( $type )
-  + add_query( $query )
+CompositeQuery implements Query
+  + CompositeQuery( $type : string )
+  + add_component( $query : Query ) : void
 
-QueryBuilder
-  + QueryBuilder()
-  + add_query()
-  + get_mysql_query()
+# The pip-specific components
+
+PipSearchQueryValues
+  + get_<property>
+
+PipSearchQuery
+  - query : Query
+  + PipQuery( $PipSearchQueryValues )
+  + get_query() : Query
 ```
