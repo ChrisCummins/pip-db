@@ -1375,19 +1375,23 @@ MySQLStatement : interface
   + get_mysql_query() : string
 
 Select implements MySQLStatement
+  - $table : string
+  - $columns : string[]
+  - $where : Condition
+  - $prefix : string
+  - $suffix : string
   + Select( $table : string,
             $columns : string[],
-	    $query, : Query,
+	    $where : Conidition,
 	    $prefix = "" : string,
-	    $suffix = "" : string)
+	    $suffix = "" : string )
 
-Query implements MySQLStatement
-  + Query()
-  + add_condition( $condition : Condition )
+Condition : abstract class implements MySQLStatement
 
-Condition : abstract class
-
-StringMatchCondition extends Condition implements MySQLStatement
+StringMatchCondition extends Condition
+  - $field : string
+  - $value : string
+  - $exact : boolean
   + StringMatchCondition( $field : string,
                           $value : string,
                           $exact = False : boolean )
@@ -1395,8 +1399,11 @@ StringMatchCondition extends Condition implements MySQLStatement
 ConditionLogic : abstract class
   + _AND = "AND" : string
   + _OR = "OR" : string
+  + val() : string[]
 
-CompositeCondition extends Condition implements MySQLStatement
+CompositeCondition extends Condition
+  - $conditions : Condition[]
+  - $logic : ConditionLogic
   + CompositeCondition( $logic : ConditionLogic,
     			$conditions = array() : Condition[] )
   + add_condition( $condition : Condition )
