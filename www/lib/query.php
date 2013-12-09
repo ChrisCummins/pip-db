@@ -228,3 +228,10 @@ class PipSearchQueryValues
 	}
 
 }
+
+abstract class PipQueryBuilder {
+
+	static function build($query_values) {
+		return "";
+	}
+}
