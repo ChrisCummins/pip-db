@@ -53,6 +53,7 @@ require_once( $_SERVER['PHP_ROOT'] . 'crypt.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'string.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'password.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'db.php' );
+require_once( $_SERVER['PHP_ROOT'] . 'query.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'accounts.php' );
 
 pip_db_init();
@@ -61,7 +62,7 @@ pip_db_init();
 /******************************/
 /* High level data structures */
 /******************************/
-require_once( $_SERVER['PHP_ROOT'] . 'query.php' );
+require_once( $_SERVER['PHP_ROOT'] . 'pip-query.php' );
 require_once( $_SERVER['PHP_ROOT'] . 'record.php' );
 
 
