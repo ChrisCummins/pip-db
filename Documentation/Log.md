@@ -1425,3 +1425,24 @@ $select = new Select( "records",
 		      ("LIMIT $starting_at," .
 		       Pip_Search::ResultsPerPage) );
 ```
+
+### Thursday 12th
+
+Notes from meeting with Ian:
+
+- Each activity in the project plan needs a unique identifier (e.g. number
+  system like 1.2 1.3).
+- Each risk and mitigation strategy needs to uniquely identified.
+- Sections should be numbered.
+- The Risk Assessment should be a toplevel section.
+- The initial reasearch should be *justified*, it needs to explain why the
+  project plan is like it is.
+- Mention the level of tooling work in the project plan, and explain why it is
+  being done. E.g., we can afford to have a very short deployment process
+  because we've spent all this time developing tools to manage complex
+  deployments.
+- Mention more about GitHub and the cross-referencing issue tracker, milestones
+  etc.
+- Add deployment complexities to the risks list. I.e., Deploying a complex and
+  configurable PHP/MySQL project.
+- All of the non-functional requirements are related to technical aspects.
