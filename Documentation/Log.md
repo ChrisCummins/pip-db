@@ -1358,3 +1358,96 @@ on the things that I've nicked:
 Overall it actually went better than I was expecting, the pip-db infrastructure
 is fairly robust and flexible. Some things though (like `pipbot`) are too
 project-specific to be copied accross, even though they are useful.
+
+### Sunday 8th
+
+Implemented further advanced search fields (see 0.1.8 release). Since the
+prototype dataset table consists of entirely text fields, we can't yet do
+numerical comparisons - so a few of the fields (temperature, pI, etc) are
+non-functional.
+
+### Monday 9th
+
+Potential class layout for constructing queries:
+
+```
+MySQLStatement : interface
+  + get_mysql_query() : string
+
+Select implements MySQLStatement
+  - $table : string
+  - $columns : string[]
+  - $where : Condition
+  - $prefix : string
+  - $suffix : string
+  + Select( $table : string,
+            $columns : string[],
+	    $where : Conidition,
+	    $prefix = "" : string,
+	    $suffix = "" : string )
+
+Condition : abstract class implements MySQLStatement
+
+StringMatchCondition extends Condition
+  - $field : string
+  - $value : string
+  - $exact : boolean
+  + StringMatchCondition( $field : string,
+                          $value : string,
+                          $exact = False : boolean )
+
+ConditionLogic : abstract class
+  + _AND = "AND" : string
+  + _OR = "OR" : string
+  + val() : string[]
+
+CompositeCondition extends Condition
+  - $conditions : Condition[]
+  - $logic : ConditionLogic
+  + CompositeCondition( $logic : ConditionLogic,
+    			$conditions = array() : Condition[] )
+  + add_condition( $condition : Condition )
+```
+
+And example usage:
+
+```
+$query = PipQueryBuilder::build( new PipSearchQueryValues() );
+
+$select = new Select( "records",
+		      array( "record_id",
+			     "name",
+			     "source",
+			     "organ",
+			     "pi" ),
+		      $query->get_query(),
+		      "SQL_CALC_FOUND_ROWS",
+		      ("LIMIT $starting_at," .
+		       Pip_Search::ResultsPerPage) );
+```
+
+### Thursday 12th
+
+Notes from meeting with Ian:
+
+- Each activity in the project plan needs a unique identifier (e.g. number
+  system like 1.2 1.3).
+- Each risk and mitigation strategy needs to uniquely identified.
+- Sections should be numbered.
+- The Risk Assessment should be a toplevel section.
+- The initial reasearch should be *justified*, it needs to explain why the
+  project plan is like it is.
+- Mention the level of tooling work in the project plan, and explain why it is
+  being done. E.g., we can afford to have a very short deployment process
+  because we've spent all this time developing tools to manage complex
+  deployments.
+- Mention more about GitHub and the cross-referencing issue tracker, milestones
+  etc.
+- Add deployment complexities to the risks list. I.e., Deploying a complex and
+  configurable PHP/MySQL project.
+- All of the non-functional requirements are related to technical
+  aspects. There's nothing about user experience. There should be at least one
+  non-functional user expereince requirement such as "Users should be able to
+  perform 90% of their queries without requiring training".
+- Next project meeting should be organised by me, presumably in the week after
+  my January exam.
