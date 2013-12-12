@@ -357,7 +357,7 @@ def get_first_commit_since(time, commit_list):
 
 def burndown(args):
     def print_usage_and_return():
-        print "Usage: pipbot burndown [release]"
+        print "Usage: pipbot burndown [<number> <days|hours>|release]"
         return 1
 
     argc = len(args)
