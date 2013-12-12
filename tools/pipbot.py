@@ -533,7 +533,7 @@ def start(args):
 
     target = args[0]
 
-    if re.match("^[0-9]+\.[0-9]+\.[0-9]$", target):
+    if re.match("^[0-9]+\.[0-9]+\.[0-9]+$", target):
         return start_new_release(target)
 
     elif re.match("^[0-9]+$", target):
@@ -547,7 +547,7 @@ def start(args):
 
 
 def get_branch_name(tail):
-    if re.match("^[0-9]+\.[0-9]+\.[0-9]$", tail):
+    if re.match("^[0-9]+\.[0-9]+\.[0-9]+$", tail):
         return "release/" + tail
     elif re.match("^[0-9]+$", tail):
         return "issue/" + tail
