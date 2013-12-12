@@ -1445,4 +1445,9 @@ Notes from meeting with Ian:
   etc.
 - Add deployment complexities to the risks list. I.e., Deploying a complex and
   configurable PHP/MySQL project.
-- All of the non-functional requirements are related to technical aspects.
+- All of the non-functional requirements are related to technical
+  aspects. There's nothing about user experience. There should be at least one
+  non-functional user expereince requirement such as "Users should be able to
+  perform 90% of their queries without requiring training".
+- Next project meeting should be organised by me, presumably in the week after
+  my January exam.
