@@ -260,14 +260,21 @@ def build_target(target_name, build_name):
 
 def build(args):
 
-    if len(args) < 1:
+    def print_usage_and_return():
         print "Usage: pipbot build <target> <build>"
+        return 1
 
-    if args[0] == "summary":
+    if len(args) < 1:
+        return print_usage_and_return()
+
+    elif args[0] == "summary":
         print get_config_summary()
 
-    if len(args) == 2:
+    elif len(args) == 2:
         return build_target(args[0], args[1])
+
+    else:
+        return print_usage_and_return()
 
 
 def deploy(args):
