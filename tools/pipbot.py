@@ -14,8 +14,8 @@ from sys import argv
 from sys import exit
 
 projectdir = "/home/chris/src/pip-db/"
-prefixdir = "/home/chris/.local/"
-etcdir = prefixdir + "etc/pipbot/"
+prefixdir = "/home/chris/.pipbot/"
+config_file = prefixdir + "config.json"
 
 REPL = False
 
@@ -107,6 +107,20 @@ def get_help_text():
             "    pipbot sloccount\n"
             "        Show the number of source lines of code\n")
 
+def load_json_from_file(path):
+    try:
+        json_file = open(path)
+        json_data = json.load(json_file)
+        json_file.close()
+
+        return json_data
+    except IOError:
+        fatal("Unable to open JSON file '" + path + "'!")
+
+
+def get_pipbot_configuration():
+    return load_json_from_file(config_file)
+
 
 def fatal(msg):
     print msg
@@ -170,16 +184,6 @@ def grep(regex, path):
     return match
 
 
-def get_json_from_file(name, path):
-    json_file = open(path)
-    json_data = json.load(json_file)
-    json_file.close()
-
-    for d in json_data:
-        if d == name:
-            return json_data[d]
-
-
 def run(cmd, echo=True, stdout=True, stderr=True):
     if echo == True:
         print "$ " + cmd
@@ -212,25 +216,18 @@ def get_config_summary():
 
 
 def get_configure_args(target, build):
-    try:
-        target_json = get_json_from_file(target, etcdir + "targets.json")
-    except IOError:
-        print "Unable to open JSON file '" + etcdir + "targets.json'"
-        return 100
+
+    config = get_pipbot_configuration()
 
     try:
-        build_json = get_json_from_file(build, etcdir + "build.json")
-    except IOError:
-        print "Unable to open JSON file '" + etcdir + "build.json'"
-        return 100
+        target_json = config["targets"][target]
+    except KeyError:
+        fatal("Couldn't find target configuration '" + target + "'")
 
-    if target_json == None:
-        print "Couldn't find target configuration '" + target + "'"
-        return 1
-
-    if build_json == None:
-        print "Couldn't find build configuration '" + build + "'"
-        return 1
+    try:
+        build_json = config["build"][build]
+    except KeyError:
+        fatal("Couldn't find build configuration '" + build + "'")
 
     return " ".join(build_json["configure"]["args"] +
                     target_json["configure"]["args"] +
