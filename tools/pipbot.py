@@ -63,8 +63,8 @@ def get_help_text():
     return ("These are some of the things I can do:\n"
             "\n"
             "    pipbot build    <target> <build>\n"
-            "    pipbot deploy   <target> <build>\n"
-            "    pipbot undeploy <target> <build>\n"
+            "    pipbot deploy   [<target> <build>]\n"
+            "    pipbot undeploy [<target> <build>]\n"
             "        Build, deploy or undeploy a website configuration\n"
             "\n"
             "    pipbot build summary\n"
@@ -298,9 +298,16 @@ def deploy(args):
 
 def undeploy(args):
 
+    def print_usage_and_return():
+        print "Usage: pipbot undeploy [<target> <build>]"
+        return 1
+
     # Support 'undeploy <target> <build>' syntax
     if len(args) == 2:
         build_target(args[0], args[1])
+
+    elif len(args) > 0:
+        return print_usage_and_return()
 
     try:
         perform_action("Undeploying", "make -C build/ uninstall")
