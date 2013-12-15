@@ -279,9 +279,16 @@ def build(args):
 
 def deploy(args):
 
+    def print_usage_and_return():
+        print "Usage: pipbot deploy [<target> <build>]"
+        return 1
+
     # Support 'deploy <target> <build>' syntax
     if len(args) == 2:
         build_target(args[0], args[1])
+
+    elif len(args) > 0:
+        return print_usage_and_return()
 
     try:
         perform_action("Deploying", "make -C build/ install")
