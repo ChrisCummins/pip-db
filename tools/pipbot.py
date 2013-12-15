@@ -107,6 +107,7 @@ def get_help_text():
             "    pipbot sloccount\n"
             "        Show the number of source lines of code\n")
 
+
 def load_json_from_file(path):
     try:
         json_file = open(path)
@@ -140,6 +141,7 @@ def show(args):
     def print_usage_and_return():
         print "Usage: pipbot show <issue-number|commit-id|<target> <build>>"
         return 1
+
 
     if len(args) < 1:
         return print_usage_and_return()
@@ -198,17 +200,20 @@ def run(cmd, echo=True, stdout=True, stderr=True):
     if ret != 0:
         raise Exception('Command returned error code {0}'.format(ret))
 
+
 def run_extern(command, args):
     try:
         run(command + " " + " ".join(args), False)
     except:
         return 2
 
+
 def perform_action(action, cmd):
     sys.stdout.write(str(action) + "... ")
     sys.stdout.flush()
     run(cmd, False, False, False)
     print "[ok]"
+
 
 def get_config_summary():
     file = open("config.summary", "r")
@@ -263,6 +268,7 @@ def build(args):
 
     if len(args) == 2:
         return build_target(args[0], args[1])
+
 
 def deploy(args):
 
