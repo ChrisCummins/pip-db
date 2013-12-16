@@ -12,9 +12,10 @@ import dateutil.relativedelta
 from git import Repo
 from sys import argv
 from sys import exit
+from os.path import expanduser
 
-project_root = "/home/chris/src/pip-db/"
-pipbot_root = "/home/chris/.pipbot/"
+project_root = expanduser("~/src/pip-db/")
+pipbot_root = expanduser("~/.pipbot/")
 pipbot_config_file = pipbot_root + "config.json"
 
 REPL = False
