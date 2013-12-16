@@ -14,7 +14,6 @@ from sys import argv
 from sys import exit
 from os.path import expanduser
 
-project_root = expanduser("~/src/pip-db/")
 pipbot_root = expanduser("~/.pipbot/")
 pipbot_config_file = pipbot_root + "config.json"
 
@@ -122,6 +121,11 @@ def load_json_from_file(path):
 
 def get_pipbot_configuration():
     return load_json_from_file(pipbot_config_file)
+
+
+def get_project_root():
+    config = get_pipbot_configuration()
+    return expanduser(config["project"]["path"])
 
 
 def fatal(msg):
@@ -387,7 +391,7 @@ def burndown(args):
 
     argc = len(args)
 
-    repo = Repo(project_root)
+    repo = Repo(get_project_root())
 
     if argc < 1:
         origin = { "name": "HEAD", "head": repo.head.reference.commit }
@@ -452,7 +456,7 @@ def burndown(args):
 
 def create_new_working_branch(branch, base, remote_name):
 
-    repo = Repo(project_root)
+    repo = Repo(get_project_root())
     remote = repo.remotes[remote_name]
 
     if repo.is_dirty() == True:
@@ -588,7 +592,7 @@ def pause(args):
 
     argc = len(args)
 
-    repo = Repo(project_root)
+    repo = Repo(get_project_root())
     remote = repo.remotes["origin"]
 
     if repo.is_dirty() == True:
@@ -632,7 +636,7 @@ def finish_release(branch):
 
     version = branch.replace("release/", "")
 
-    repo = Repo(project_root)
+    repo = Repo(get_project_root())
     remote = repo.remotes["origin"]
 
     if repo.is_dirty() == True:
@@ -677,7 +681,7 @@ def finish_release(branch):
 
 def close_working_branch(branch, remote_name):
 
-    repo = Repo(project_root)
+    repo = Repo(get_project_root())
     remote = repo.remotes[remote_name]
 
     if repo.is_dirty() == True:
@@ -716,7 +720,7 @@ def finish(args):
 
     argc = len(args)
 
-    repo = Repo(project_root)
+    repo = Repo(get_project_root())
 
     if argc == 0:
 
@@ -769,7 +773,7 @@ def get_version():
 
     for component in components:
         line = grep("m4_define\(\\s*\\[pipdb_" + component + "_version\\]",
-                    project_root + "configure.ac")
+                    get_project_root() + "configure.ac")
         match = re.match(r"^.*(?P<value>\d+).*$", line)
         value = match.group("value")
         values.append(value)
@@ -904,7 +908,7 @@ def enter_repl_loop():
 
 if __name__ == "__main__":
 
-    os.chdir(project_root)
+    os.chdir(get_project_root())
 
     if len(argv) < 2:
         enter_repl_loop()
