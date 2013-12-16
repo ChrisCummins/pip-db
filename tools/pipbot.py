@@ -12,10 +12,10 @@ import dateutil.relativedelta
 from git import Repo
 from sys import argv
 from sys import exit
+from os.path import expanduser
 
-projectdir = "/home/chris/src/pip-db/"
-prefixdir = "/home/chris/.local/"
-etcdir = prefixdir + "etc/pipbot/"
+pipbot_root = expanduser("~/.pipbot/")
+pipbot_config_file = pipbot_root + "config.json"
 
 REPL = False
 
@@ -63,8 +63,8 @@ def get_help_text():
     return ("These are some of the things I can do:\n"
             "\n"
             "    pipbot build    <target> <build>\n"
-            "    pipbot deploy   <target> <build>\n"
-            "    pipbot undeploy <target> <build>\n"
+            "    pipbot deploy   [<target> <build>]\n"
+            "    pipbot undeploy [<target> <build>]\n"
             "        Build, deploy or undeploy a website configuration\n"
             "\n"
             "    pipbot build summary\n"
@@ -108,6 +108,26 @@ def get_help_text():
             "        Show the number of source lines of code\n")
 
 
+def load_json_from_file(path):
+    try:
+        json_file = open(path)
+        json_data = json.load(json_file)
+        json_file.close()
+
+        return json_data
+    except IOError:
+        fatal("Unable to open JSON file '" + path + "'!")
+
+
+def get_pipbot_configuration():
+    return load_json_from_file(pipbot_config_file)
+
+
+def get_project_root():
+    config = get_pipbot_configuration()
+    return expanduser(config["project"]["path"])
+
+
 def fatal(msg):
     print msg
     exit(1)
@@ -126,6 +146,7 @@ def show(args):
     def print_usage_and_return():
         print "Usage: pipbot show <issue-number|commit-id|<target> <build>>"
         return 1
+
 
     if len(args) < 1:
         return print_usage_and_return()
@@ -170,16 +191,6 @@ def grep(regex, path):
     return match
 
 
-def get_json_from_file(name, path):
-    json_file = open(path)
-    json_data = json.load(json_file)
-    json_file.close()
-
-    for d in json_data:
-        if d == name:
-            return json_data[d]
-
-
 def run(cmd, echo=True, stdout=True, stderr=True):
     if echo == True:
         print "$ " + cmd
@@ -194,11 +205,13 @@ def run(cmd, echo=True, stdout=True, stderr=True):
     if ret != 0:
         raise Exception('Command returned error code {0}'.format(ret))
 
+
 def run_extern(command, args):
     try:
         run(command + " " + " ".join(args), False)
     except:
         return 2
+
 
 def perform_action(action, cmd):
     sys.stdout.write(str(action) + "... ")
@@ -206,31 +219,25 @@ def perform_action(action, cmd):
     run(cmd, False, False, False)
     print "[ok]"
 
+
 def get_config_summary():
     file = open("config.summary", "r")
     return file.read()
 
 
 def get_configure_args(target, build):
-    try:
-        target_json = get_json_from_file(target, etcdir + "targets.json")
-    except IOError:
-        print "Unable to open JSON file '" + etcdir + "targets.json'"
-        return 100
+
+    config = get_pipbot_configuration()
 
     try:
-        build_json = get_json_from_file(build, etcdir + "build.json")
-    except IOError:
-        print "Unable to open JSON file '" + etcdir + "build.json'"
-        return 100
+        target_json = config["targets"][target]
+    except KeyError:
+        fatal("Couldn't find target configuration '" + target + "'")
 
-    if target_json == None:
-        print "Couldn't find target configuration '" + target + "'"
-        return 1
-
-    if build_json == None:
-        print "Couldn't find build configuration '" + build + "'"
-        return 1
+    try:
+        build_json = config["build"][build]
+    except KeyError:
+        fatal("Couldn't find build configuration '" + build + "'")
 
     return " ".join(build_json["configure"]["args"] +
                     target_json["configure"]["args"] +
@@ -258,20 +265,35 @@ def build_target(target_name, build_name):
 
 def build(args):
 
-    if len(args) < 1:
+    def print_usage_and_return():
         print "Usage: pipbot build <target> <build>"
+        return 1
 
-    if args[0] == "summary":
+    if len(args) < 1:
+        return print_usage_and_return()
+
+    elif args[0] == "summary":
         print get_config_summary()
 
-    if len(args) == 2:
+    elif len(args) == 2:
         return build_target(args[0], args[1])
 
+    else:
+        return print_usage_and_return()
+
+
 def deploy(args):
+
+    def print_usage_and_return():
+        print "Usage: pipbot deploy [<target> <build>]"
+        return 1
 
     # Support 'deploy <target> <build>' syntax
     if len(args) == 2:
         build_target(args[0], args[1])
+
+    elif len(args) > 0:
+        return print_usage_and_return()
 
     try:
         perform_action("Deploying", "make -C build/ install")
@@ -281,9 +303,16 @@ def deploy(args):
 
 def undeploy(args):
 
+    def print_usage_and_return():
+        print "Usage: pipbot undeploy [<target> <build>]"
+        return 1
+
     # Support 'undeploy <target> <build>' syntax
     if len(args) == 2:
         build_target(args[0], args[1])
+
+    elif len(args) > 0:
+        return print_usage_and_return()
 
     try:
         perform_action("Undeploying", "make -C build/ uninstall")
@@ -362,7 +391,7 @@ def burndown(args):
 
     argc = len(args)
 
-    repo = Repo(projectdir)
+    repo = Repo(get_project_root())
 
     if argc < 1:
         origin = { "name": "HEAD", "head": repo.head.reference.commit }
@@ -427,7 +456,7 @@ def burndown(args):
 
 def create_new_working_branch(branch, base, remote_name):
 
-    repo = Repo(projectdir)
+    repo = Repo(get_project_root())
     remote = repo.remotes[remote_name]
 
     if repo.is_dirty() == True:
@@ -563,7 +592,7 @@ def pause(args):
 
     argc = len(args)
 
-    repo = Repo(projectdir)
+    repo = Repo(get_project_root())
     remote = repo.remotes["origin"]
 
     if repo.is_dirty() == True:
@@ -607,7 +636,7 @@ def finish_release(branch):
 
     version = branch.replace("release/", "")
 
-    repo = Repo(projectdir)
+    repo = Repo(get_project_root())
     remote = repo.remotes["origin"]
 
     if repo.is_dirty() == True:
@@ -652,7 +681,7 @@ def finish_release(branch):
 
 def close_working_branch(branch, remote_name):
 
-    repo = Repo(projectdir)
+    repo = Repo(get_project_root())
     remote = repo.remotes[remote_name]
 
     if repo.is_dirty() == True:
@@ -691,7 +720,7 @@ def finish(args):
 
     argc = len(args)
 
-    repo = Repo(projectdir)
+    repo = Repo(get_project_root())
 
     if argc == 0:
 
@@ -744,7 +773,7 @@ def get_version():
 
     for component in components:
         line = grep("m4_define\(\\s*\\[pipdb_" + component + "_version\\]",
-                    projectdir + "configure.ac")
+                    get_project_root() + "configure.ac")
         match = re.match(r"^.*(?P<value>\d+).*$", line)
         value = match.group("value")
         values.append(value)
@@ -879,7 +908,7 @@ def enter_repl_loop():
 
 if __name__ == "__main__":
 
-    os.chdir(projectdir)
+    os.chdir(get_project_root())
 
     if len(argv) < 2:
         enter_repl_loop()
