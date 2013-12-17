@@ -15,6 +15,9 @@
 \newcommand*\wrapletters[1]{\wr@pletters#1\@nil}
 \def\wr@pletters#1#2\@nil{#1\allowbreak\if&#2&\else\wr@pletters#2\@nil\fi}
 
+\usepackage{enumitem}
+\setenumerate{itemsep=0pt}
+
 \input{title-section}
 
 \section{INTRODUCTION \hrulefill}
