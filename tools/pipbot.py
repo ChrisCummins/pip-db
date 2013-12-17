@@ -774,7 +774,7 @@ def get_version():
     for component in components:
         line = grep("m4_define\(\\s*\\[pipdb_" + component + "_version\\]",
                     get_project_root() + "configure.ac")
-        match = re.match(r"^.*(?P<value>\d+).*$", line)
+        match = re.match(r"^.*,\s*\[?\s*(?P<value>\d+).*$", line)
         value = match.group("value")
         values.append(value)
 
