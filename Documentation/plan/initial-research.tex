@@ -13,10 +13,11 @@ by Dr. Flower in the form of a Microsoft Excel spreadsheet consisting of a
 single table with 5,773 unique rows over 22 columns. In order to develop a
 relational model for this data, each of the 22 unique columns can be considered
 as a set of attributes \textit{A1,A2,\ldots,A22} and combined to form a
-relational schema \textit{R} (Figure 2 shows this schema with attribute names
-taken from the spreadsheet column headings), with the spreadsheet values forming
-an instance of this relation \textit{r(R)} in which each row can be considered a
-set of tuples where \textit{t' = {t'(A1),t'(A2),\ldots,t'(A22)} $\in$ r(R)}.
+relational schema \textit{R} (Figure \ref{fig:formal-schema-names-attributes}
+shows this schema with attribute names taken from the spreadsheet column
+headings), with the spreadsheet values forming an instance of this relation
+\textit{r(R)} in which each row can be considered a set of tuples where
+\textit{t' = {t'(A1),t'(A2),\ldots,t'(A22)} $\in$ r(R)}.
 
 \begin{figure}[H]
 \centering
@@ -35,12 +36,12 @@ Each tuple represents a single recording of experimentally-derived data, which
 lists the origin of the record (such as a research paper, or academic journal),
 and 21 attributes which describe the properties of the protein, the experimental
 result and the method used to derive it, and links to relevant online
-resources. Figure 3 shows a breakdown of the different origins for all of the
-records. In order to aid in the design of the database which will be used to
-store this dataset, a dataset analysis tool was developed which parses the
-dataset file and extracts and derives key information about its properties, and
-this information can be used to help determine the best method to use when
-storing this data.
+resources. Figure \ref{fig:chart-dataset-origin} shows a breakdown of the
+different origins for all of the records. In order to aid in the design of the
+database which will be used to store this dataset, a dataset analysis tool was
+developed which parses the dataset file and extracts and derives key information
+about its properties, and this information can be used to help determine the
+best method to use when storing this data.
 
 \begin{figure}[H]
 \centering
