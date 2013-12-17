@@ -1,11 +1,11 @@
 \section{DEVELOPMENT PROCESS \hrulefill}
 
 The software development process used for this project is based the Open Unified
-Process (OpenUP), a part of the Eclipse Process Framework (6). The reasoning
-behind this choice is that, as a Rational Unified Process derivative, OpenUP
-offers an open source process framework which is targeted at agile development
-in small teams and provides a number of development phases and activities which
-can be used when designing the project plan (Figure 6).
+Process (OpenUP), a part of the Eclipse Process Framework \cite{EclipseND}. The
+reasoning behind this choice is that, as a Rational Unified Process derivative,
+OpenUP offers an open source process framework which is targeted at agile
+development in small teams and provides a number of development phases and
+activities which can be used when designing the project plan (Figure 6).
 
 \begin{figure}[H]
 \centering
@@ -18,7 +18,7 @@ can be used when designing the project plan (Figure 6).
 \subsection{Work Breakdown Structure}
 The crux of OpenUP is in breaking down a large development project into four key
 phases to iterate on: the Inception Phase, Elaboration Phase, Construction Phase
-and Transition Phase (7).
+and Transition Phase \cite{Rational2011}.
 
 \paragraph{Inception Phase} The inception phase represents the initial work
 which defines the scope and objectives of the project. Key tasks include
@@ -65,11 +65,12 @@ public server and conducting extensive user testing.
 A revision control and source code management (SCM) system will be used during
 all development to keep an auditable and transparent log of progress, and Git
 will be used for this. There are numerous advantages that Git has over other
-SCMs, chiefly that it is entirely open source and GPL licensed (8), it has a
-very lightweight branching model and good support for rebasing and merging, and
-there are numerous sources which offer free hosting of open source licensed
-projects that are tracked by Git. A public repository of the source code and all
-relevant documentation for this project is available on GitHub (9).
+SCMs, chiefly that it is entirely open source and GPL licensed \cite{FSF1991},
+it has a very lightweight branching model and good support for rebasing and
+merging, and there are numerous sources which offer free hosting of open source
+licensed projects that are tracked by Git. A public repository of the source
+code and all relevant documentation for this project is available on GitHub
+\cite{Cummins2013}.
 
 \subsubsection{Issue Tracker}
 
@@ -98,4 +99,4 @@ development branch for an issue and then writing failing test cases which can
 then be patched. Using this model of development ensures that all work
 undertaken is relevant to the project and directly affects progress, minimising
 the amount of time wastage and increasing the stability of the codebase by
-ensuring adequate test coverage (10).
+ensuring adequate test coverage \cite{Martin2011}.
