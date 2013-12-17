@@ -103,12 +103,12 @@ document as secondary features:
 %TODO: ref
 
 \subsection{Required Resources}
-The deliverable product for this project is a web service that will be publicly
-available. To this end, there are three required resources:
+The deliverable product for this product is a website that offers a publicly
+available service. To this end, there are three required resources:
 
 \begin{enumerate}
-\item A server which can be host the web-service and process and respond to
-  requests from clients.
+\item A server which can be host the website and process and respond to requests
+  from clients.
 \item A public IP address which this server can be assigned to for external
   access.
 \item A domain name which will resolve to this IP address.
@@ -128,48 +128,35 @@ functionality required to implement this project. From a time-management
 perspective, one of the main priorities for the work undertaken in the first
 term is to research these existing technologies, and to gain a better
 understanding of the strengths of each in order to select an appropriate choice
-for the implementation of the final project. Figure 1 shows the process by which
-these choices are made, starting off with the highest-level decision (the type
-of paradigm to use: whether it be a client-server model, a distributed network
+for the implementation of the final product. Figure 1 shows the process by which
+these choices are made, starting off with the highest-level decision (the choice
+of paradigms: whether it be a client-server model, a distributed network
 application, the format for data transmission etc.) and increasing in
 granularity down to the lowest-level choice of individual frameworks and
-libraries. It is important to note that each decision is not immutable, and
-previous decisions may be re-evaluated over time as further research is
-undertaken. This is to encourage implementation work to begin at an early stage
-in order to produce a functioning prototype, without the need to have performed
-a depth first analysis of every possible different technology which could be
-used. Work on the implementation can begin once the programming language(s) have
-been decided upon, so it is important to reach a decision upon this as early
-into TP1 as is possible, although this decision is free to change over the
-course of the project, providing there is a realistic justification for this
-change and adequate time to re-implement any existing functionality.
+libraries. Each decision is not immutable, and previous decisions may be
+re-evaluated over time in an iterative fashion. This is to encourage
+implementation work to begin at an early stage in order to produce a functioning
+prototype, without the need to have performed a depth first analysis of every
+possible technology which could be used. Work on the implementation can begin
+once the programming language(s) have been decided upon, so it is important to
+reach a decision upon this as early into TP1 as is possible, although this
+decision is free to change over the course of the project, providing there is a
+realistic justification for this change and adequate time to re-implement any
+existing functionality.
 
 \begin{figure}[H]
 \centering
 \includegraphics{assets/flow-tech-choices.png}
-\caption{A graph of dropped packets as a function of the transmission packet
-  interval}
-\label{fig:graph-interval-dropped}
+\caption{A diagrammatic view of the process of adopting technologies}
+\label{fig:flow-tech-choices}
 \end{figure}
-
-\paragraph{Server-side technologies} by far the most prevalent technology used
-to implement dynamic websites is the combination of PHP and MySQL on an Apache
-webserver stack. The advantages of this combination of software is that is
-widely supported and adopted, although it is by no means the only technology
-used, with alternative data back-ends such as MongoDB increasing in popularity,
-along with the decline of PHP scripting in favour of more robust programming
-languages such as Ruby and Python, and even full JavaScript stacks which can be
-implemented using Node.js.
-\paragraph{Client-side technologies} the backbone of almost every website is
-built upon HTML, JavaScript and CSS; although some level of research should be
-made into the choice of front-end frameworks such as Bootstrap and Knockout,
-along with proper use of AJAX and browser compatibility checks.
 
 \subsection{Required Skills}
 This technically ambitious project will require the adoption of a number of new
 skillsets, a brief overview of which is included below:
 
 \subsubsection{Project management}
+
 \paragraph{Single-developer project management} including good communication
 with clients and stakeholders, selecting an appropriate software development
 process, setting realistic deadlines and goals, and tracking the progress of a
@@ -179,18 +166,18 @@ long term development project.
 and use of a sane branching model, and documenting decisions and all source code
 throughout the duration of development.
 
-\paragraph{Maintenance and tooling} developing a software project with long-term
+\paragraph{Maintenance and tooling} developing a software product with long-term
 usability as a primary goal, as well as appropriate documentation to allow other
 developers to administrate the website.
 
-\paragraph{Software quality} Appropriate use of issue trackers and bug ticketing
-to track the life cycle of implementation bugs and regressions, and adopting a
-meaningful release and version numbering scheme.
+\paragraph{Software quality} appropriate use of issue trackers and bug ticketing
+to track the lifecycle of implementation bugs and regressions, and adopting a
+meaningful release cycle and version numbering scheme.
 
 \subsubsection{Back-end development}
 
 \paragraph{Relational data modelling and database design} designing and
-formalising database schemas, and providing meaningful querying functionality.
+formalising database schemas, and providing advanced querying functionality.
 
 \paragraph{Computing with large datasets} appropriately using existing tools and
 software patterns for working with large persistent data models.
@@ -200,7 +187,7 @@ performance serving of web pages such as caching, and successful cache
 invalidation techniques for the webserver and database.
 
 \paragraph{Designing secure web applications} using formal and established
-methods to ensure data integrity.
+methods to ensure data integrity of critical biological research data.
 
 \subsubsection{Front-end development}
 
@@ -217,19 +204,25 @@ and control.
 
 \section{Initial Research}
 
-\subsection{Dataset Analysis}
+The purpose of the initial project research phase is to enable early
+identification of risks, design decisions, and other factors which will
+contribute to the creation of the project plan.
 
-In order to determine the technical scope of the project it was necessary to
+\subsection{Analysis of the Dataset}
+
+In order to determine the technical scope of the project it is necessary to
 analyse the dataset which the web service will house. The dataset was supplied
 by Dr. Flower in the form of a Microsoft Excel spreadsheet consisting of a
 single table with 5,773 unique rows over 22 columns. In order to develop a
 relational model for this data, each of the 22 unique columns can be considered
-as a set of attributes A1,A2,...,A22 and combined to form a relational schema R
+as a set of attributes A1,A2,…,A22 and combined to form a relational schema R
 (Figure 2 shows this schema with attribute names taken from the spreadsheet
 column headings), with the spreadsheet values forming an instance of this
-relation r(R) in which each row can be considered an set of tuples where t’ =
-{t’(A1),t’(A2),...,t’(A22)} ε r(R).
+relation r(R) in which each row can be considered a set of tuples where t’ =
+{t’(A1),t’(A2),…,t’(A22)} ϵ r(R).
 
+\begin{figure}[H]
+\centering
 \begin{quote}
 \textit{R = \{Origin, EC, Protein, Alternative name(s), Source, Organ and/or
   Subcellular locaction, M.W, No., M.W2, No. of Iso-enzymes, pI maximum value,
@@ -237,12 +230,16 @@ relation r(R) in which each row can be considered an set of tuples where t’ =
   Method, Valid sequence(s) available, UniportKB/ Swiss-Prot/ Protein sequence,
   Species Taxonomy, Full text, Abstract only, Pubmed, Notes\}}
 \end{quote}
+\caption{A formal relation schema with named attributes}
+\label{fig:formal-schema-names-attributes}
+\end{figure}
 
 Each tuple represents a single recording of experimentally-derived data, which
-lists the origin of the record, and 21 attributes which contain properties of
-the protein, the experimental method and its results, and links to relevant
-online resources. Figure 3 shows a breakdown of the different origins for all of
-the records. In order to aid in the design of the database which will be used to
+lists the origin of the record (such as a research paper, or academic journal),
+and 21 attributes which describe the properties of the protein, the experimental
+result and the method used to derive it, and links to relevant online
+resources. Figure 3 shows a breakdown of the different origins for all of the
+records. In order to aid in the design of the database which will be used to
 store this dataset, a dataset analysis tool was developed which parses the
 dataset file and extracts and derives key information about its properties, and
 this information can be used to help determine the best method to use when
@@ -251,35 +248,34 @@ storing this data.
 \begin{figure}[H]
 \centering
 \includegraphics{assets/chart-dataset-origin.png}
-\caption{A graph of dropped packets as a function of the transmission packet
-  interval}
-\label{fig:graph-interval-dropped}
+\caption{A breakdown of the tuple origins within the dataset}
+\label{fig:chart-dataset-origin}
 \end{figure}
 
 \newpage
 \begin{figure}[H]
 \centering
 \includegraphics{assets/chart-dataset-populated.png}
-\caption{A graph of dropped packets as a function of the transmission packet
-  interval}
-\label{fig:graph-interval-dropped}
+\caption{The number of populated keys for each tuple within the dataset}
+\label{fig:chart-dataset-populated}
 \end{figure}
 
 This early dataset analysis highlighted a number of properties which will
 greatly influence the design of the database backend. Chiefly, that the dataset
-contains a large number of duplicate values, and for each tuple, many of the
-individual properties may be empty. This information will have a great influence
-on the design of the database; for example, the low percentage of unique values
-for many of the records in the dataset indicate that a 3NF normalisation pattern
-could be used to gain maximum size efficiency of the stored database (2).
+contains a large number of duplicate keys, and for each tuple, many of the keys
+may not be given. This information will have a great influence on the design of
+the database; for example, the low percentage of unique values for many of the
+records in the dataset indicate that a 3NF normalisation pattern could be used
+to gain maximum size efficiency of the stored database (2), and so time should
+be allocated in project plan to allow for database design decisions to be
+investigated and tested.
 % TODO: ref
 
 \begin{figure}[H]
 \centering
 \includegraphics{assets/chart-dataset-unique.png}
-\caption{A graph of dropped packets as a function of the transmission packet
-  interval}
-\label{fig:graph-interval-dropped}
+\caption{The number of unique keys for each tuple within the dataset}
+\label{fig:chart-dataset-unique}
 \end{figure}
 
 \newpage
@@ -322,9 +318,9 @@ user experience. Of course this has no bearing on the usefulness of the service
 and data offered by the websites, but a greater level of ease of use and control
 over the format in which search results are displayed could lead to a more
 engaging experience for the user, as well as allowing them to attain the data
-they need in a more streamlined fashion.
+they need in a more efficient manner.
 
-\subsection{Previous Final Year Project}
+\subsection{Previous Final Year Project Analysis}
 
 In addition to the existing public bioinformatics databases which Dr. Flower
 assisted in creating, students from previous years have attempted to develop a
@@ -340,16 +336,15 @@ application logic and presentation tier, and the querying mechanism is quite
 primitive, with little ability to perform advanced searching within the
 dataset. Appendix B (page 17) contains a UML diagram of the database schema
 used, which highlights the small number of tables used, with few relational
-links between records, which is the primary cause of this simplistic searching
-mechanism.
+links between records leading to a simplistic searching mechanism.
 
 \section{Risk Assessment}
 
 Table 1 lists some of the potential project risks that were identified during
-the initial inception phase which could influence the success of the project and
+the initial research phase which could influence the success of the project and
 its ability to meet the objectives and deliverables. For each risk, the
 probability of it occurring and impact it would have on the project have been
-assigned a value between 1 and 5.
+assigned a value between 1 and 5 to indicate their magnitude.
 
 \subsection{Mitigation Strategies}
 
@@ -373,20 +368,26 @@ focus on each one separately, as well as keeping small iterative development
 cycles and adequate test coverage to prevent regressions when implementing new
 functionality.
 
+\paragraph{Complex deployment of production website} a website with independent
+data and application logic components can result in an intricate deployment
+process. This is a common problem in the development of complex web application,
+where development and production environments must be synchronised and
+differences between debugging and releases builds must be accounted for. In
+order to mitigate this risk, a suite of tools to configure, build and deploy the
+website should be developed at an early stage, allowing for fast deployment of
+public releases.
+
 \paragraph{Project milestones not clearly defined} a thoroughly described and well
 thought out project plan will help to prevent scheduling issues and delays in
 development that would arise from this risk.
-
 
 \paragraph{System requirements not adequately identified} a comprehensive specification
 of the finished product before implementation begins will help to mitigate this
 risk.
 
-
 \paragraph{Change in project requirements during development} an agile approach towards
 accommodating for changes in the requirements should be used so as to keep the
 time between user feedback sessions and input from stakeholders low.
-
 
 \paragraph{Changes in dataset form at during development} it is not possible to entirely
 avoid this risk due its nature and the dependence on third parties, but steps
@@ -394,12 +395,10 @@ can be taken to prevent any delays that this would cause, chiefly, a well
 abstracted data parsing component which can be switched and modified if
 necessary to accommodate for a new dataset format.
 
-
 \paragraph{Unable to obtain required resources} since the project does not require many
 resources, it is important to acquire these as early on in the development
 process as possible, and alternative resources should be planned for, such as
 local test servers.
-
 
 \paragraph{Users not committed to the project, lack of cooperation from users,
   and users with negative attitudes toward the project} the useful of the
