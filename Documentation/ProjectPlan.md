@@ -1,7 +1,33 @@
-This document contains a proposal and plan to develop a Protein Isoelectric
-Point Database as a final year project, under the supervision of Professor Ian
-Nabney and based on research undertaken by Dr. Darren Flower and members of
-Aston University’s Life and Health Sciences department.
+# Contents
+
+- [Introduction](#introduction)
+	- [Background](#background)
+	- [Objectives](#objectives)
+	- [Deliverables](#deliverables)
+	- [Required Resources](#required-resources)
+	- [Required Technologies](#required-technologies)
+	- [Required Skills](#required-skills)
+		- [Project management](#project-management)
+		- [Back-end development](#back-end-development)
+		- [Front-end development](#front-end-development)
+- [Initial Research](#initial-research)
+	- [Analysis of the Dataset](#analysis-of-the-dataset)
+	- [Related Bioinformatics Databases](#related-bioinformatics-databases)
+	- [Previous Final Year Project Analysis](#previous-final-year-project-analysis)
+- [Risk Assessment](#risk-assessment)
+	- [Mitigation Strategies](#mitigation-strategies)
+- [Development Process](#development-process)
+	- [Work Breakdown Structure](#work-breakdown-structure)
+	- [Version Control](#version-control)
+		- [Issue Tracker](#issue-tracker)
+		- [Test Driven Development](#test-driven-development)
+- [Project Schedule](#project-schedule)
+	- [Milestones](#milestones)
+		- [Design Milestones](#design-milestones)
+		- [Implementation Milestones](#implementation-milestones)
+- [References](#references)
+- [Project Gantt Chart](#project-gantt-chart)
+- [Previous Final Year Project Database Design](#previous-final-year-project-database-design)
 
 # Introduction
 
