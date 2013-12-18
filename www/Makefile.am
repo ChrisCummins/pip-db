@@ -28,7 +28,6 @@ endif
 EXTRA_DIST = \
 	$(SRC) \
 	.htaccess.in \
-	README.md \
 	$(NULL)
 
 $(WWW_BUILD)/%.php: %.php
