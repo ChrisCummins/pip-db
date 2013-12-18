@@ -15,6 +15,7 @@ endif
 
 EXTRA_DIST = \
 	autogen.sh \
+	LICENSE \
 	$(NULL)
 
 help:
