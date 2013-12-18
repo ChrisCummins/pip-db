@@ -142,7 +142,7 @@ decision is free to change over the course of the project, providing there is a
 realistic justification for this change and adequate time to re-implement any
 existing functionality.
 
-![image](plan/assets/flow-tech-choices.pdf)
+![image](plan/assets/flow-tech-choices.png)
 A diagrammatic view of the process of adopting technologies
 [fig:flow-tech-choices]
 
@@ -423,7 +423,7 @@ development in small teams and provides a number of development phases and
 activities which can be used when designing the project plan (Figure
 [fig:sequence-openup]).
 
-![image](plan/assets/sequence-openup.pdf)
+![image](plan/assets/sequence-openup.png)
 A sequence diagram showing a single full iteration of the OpenUP process
 [fig:sequence-openup]
 
@@ -506,7 +506,7 @@ undertaken is relevant to the project and directly affects progress, minimising
 the amount of time wastage and increasing the stability of the codebase by
 ensuring adequate test coverage \cite{Martin2011}.
 
-![image](plan/assets/flow-tdd.pdf)
+![image](plan/assets/flow-tdd.png)
 A single iteration of the project’s test-driven development workflow
 [fig:flow-tdd]
 
@@ -750,4 +750,4 @@ Previous Final Year Project Database Design
 
 [appendix:previous-fyp-uml]
 
-![image](plan/assets/uml-previous-fyp-database.pdf)
+![image](plan/assets/uml-previous-fyp-database.png)
