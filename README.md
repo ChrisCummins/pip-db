@@ -9,6 +9,7 @@ making the valuable research accessible to all.
 The project is developed by Chris Cummins (http://chriscummins.cc) as part of an
 ongoing assessment towards an MEng Electronic Engineering & Computer Science
 course at the University of Aston.
+[Read the project plan](Documentation/ProjectPlan.md).
 
 ## Background
 
@@ -32,8 +33,8 @@ pertinent data. There are also links to a heterogeneous collection of databases
 containing associated data, such as amino acid sequence, function, etc. A
 web-accessible database that warehouses this data and offers a robust and
 adaptable GUI for searching, viewing and downloading results would greatly
-increase the accessibility of the dataset. For more background information about
-pip-db, see the [documentation](Documentation/).
+increase the accessibility of the dataset. For more detailed information about
+pip-db, see [the documentation](Documentation/).
 
 ## Building the website
 
@@ -78,7 +79,7 @@ The website can be deployed on a LAMP stack, by exporting the contents of the
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
 Foundation, either version 3 of the License, or (at your option) any later
-version.
+version. [Read the license](LICENSE).
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A

@@ -1451,3 +1451,23 @@ Notes from meeting with Ian:
   perform 90% of their queries without requiring training".
 - Next project meeting should be organised by me, presumably in the week after
   my January exam.
+
+### Friday 13th
+
+Found a nice article on avoiding the assignment statement
+(http://loup-vaillant.fr/tutorials/avoid-assignment), which seems especially
+relevant for PHP programming, given that weak typing can make it hard to see if
+a new variable is being declared or if an existing variable is being
+modified. Example:
+
+```
+$c = 0;
+
+...
+
+$c = 5; // Is $c a new variable, or an existing one???
+```
+
+Also, the same author has written a nice write-up on the downsides of a
+pervasive mutable state (http://loup-vaillant.fr/articles/classes-suck), as
+inferred by class based programming.

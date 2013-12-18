@@ -1,0 +1,45 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage[title]{appendix}
+\usepackage[dotinlabels]{titletoc}
+\usepackage[nottoc,numbib]{tocbibind}
+\usepackage{mathtools}
+\usepackage[margin=0.5in]{geometry}
+\renewcommand{\thefootnote}{\arabic{footnote}}
+
+\newcommand*\wrapletters[1]{\wr@pletters#1\@nil}
+\def\wr@pletters#1#2\@nil{#1\allowbreak\if&#2&\else\wr@pletters#2\@nil\fi}
+
+\usepackage{enumitem}
+\setenumerate{itemsep=0pt}
+
+% Add support for multi-page tables.
+\usepackage{longtable}
+
+\pagenumbering{Roman}
+
+\input{title-section}
+\tableofcontents
+\newpage
+
+\pagenumbering{arabic}
+
+\input{introduction}
+\input{initial-research}
+\input{risk-assessment}
+\input{development-process}
+\input{project-schedule}
+
+\setcounter{secnumdepth}{1}
+\appendix
+\begin{subappendices}
+  \input{ref}
+  \input{appendices}
+\end{subappendices}
+
+\end{document}

@@ -1,0 +1,234 @@
+\section{PROJECT SCHEDULE \hrulefill}
+The project development is spread over a 26 week period, with 11 weeks in the
+first teaching period and the remaining 15 in the second. In order to maximise
+the effectiveness of this time, a list of tasks for each of the four OpenUP
+development phases was constructed, and a time allowance associated with
+each. The final project plan consists of 8 phases: the inception phase and
+transition phases, and four iterations of elaboration and construction.  The
+smaller elaboration and construction cycles were used so as to maximise the
+allowance for changes in the project specification caused by user feedback and
+review without causing delays in the development. This is to minimise the impact
+of the ``Change in project requirements during development'' risk (R7, see page
+\pageref{tab:risk-assessment}). Once the list of tasks was assembled, a Gantt
+chart (Appendix \ref{appendix:project-gantt-chart}) was constructed which
+ordered each of these tasks and distributed them across the timespan. Careful
+ordering of the tasks ensured that there is the least chance for blocking
+between activities, where one task runs over the specified time allowance and
+causes later tasks to be postponed until it's finished.  The final project plan
+allows for the maximum amount of parallel activities and development by ensuring
+that there are adequate gaps between activities that depend on each other.
+
+\subsection{Milestones}
+In order to provide a running measure of success for the project, a set of
+milestones were defined which track the development process from inception
+through to transition and provides completion deadlines for a set of activities.
+Two types of milestones are used: design and implementation.
+
+Design milestones cover the design of the user interface, such as the ``look and
+feel'' of the project, and the interaction design. Each design milestone is
+preceded by a round of user testing, in which feedback and opinions can be
+gathered by the project stakeholders in order to influence the next iteration of
+design.
+
+The implementation milestones cover the technical development, with each
+milestone marking a set improvement in the implementation of the backend,
+frontend, and controller, from the initial prototyping phase to the ``feature
+complete'' endpoint. Unlike the design milestones, the implementation milestones
+are less reliant on input from third parties and so are more a personal measure
+of my own development; however they have a great value in providing exact dates
+to complete the implementation of features by, allowing for early sub-system
+testing and providing adequate time for final product validation.
+
+For each milestone, a set of requirements has been created which can be used as
+success criteria for deciding when a milestone has been achieved. The
+requirements of the milestones are cumulative, meaning that requirements for the
+final milestone of each type includes all of the requirements of the previous
+milestones of that type. The requirements have been split into functional and
+non-functional requirements, where functional requirements describe the
+behaviour and functionality of the product, and non- functional requirements
+describe the criteria which can be used to judge the functional behaviour.
+
+\subsubsection{Design Milestones}
+
+\paragraph{D1 First iteration design (week 3)} at this early stage of
+development, the design should consist of a set of non-interactive ``paper
+prototypes'' or static renders of the application interface, which can be used
+as a rough guide for beginning to prototype the interaction design.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ l l p{12cm} }
+\textbf{ID} & \textbf{Type} & \textbf{Description}\\ \hline
+
+D1.1 & Non-functional & A set of mock-ups for the design of common site pages:
+search page, results page, details page (if applicable), advanced search, login
+page, and upload new data page.\\
+
+D1.2 & Non-functional & A set of interaction mock-ups for common site tasks:
+searching for a record by protein name, searching records from a specific
+source, searching for records in a pI range, performing an advanced search,
+adding a new record, uploading a new dataset.\\
+
+\hline
+\end{tabular}
+\caption{D1 milestone requirements}
+\label{tab:d1-requirements}
+\end{table}
+
+\paragraph{D2 Second iteration design (week 13)} the user interaction design
+should be the primary focus of this second iteration, with many of the common
+tasks (searching for a result, looking up a record, etc.) being more tightly
+defined.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ l l p{12cm} }
+\textbf{ID} & \textbf{Type} & \textbf{Description}\\ \hline
+
+D2.1 & Functional & An interactive prototype which implements common site tasks:
+logging in and out using credentials, searching for a record by protein name,
+searching records from a specific source, searching for records in a pI range,
+performing an advanced search, adding a new record, uploading a new dataset.\\
+
+D2.2 & Non-functional & A set of interaction mock-ups for `edge case' or
+uncommon events: an error on the server-side, performing a search which returns
+no results, attempting to log in with incorrect credentials.\\
+
+\hline
+\end{tabular}
+\caption{D2 milestone requirements}
+\label{tab:d2-requirements}
+\end{table}
+
+\paragraph{D3 Third iteration design (week 18)} by the third iteration, the
+interaction design should be complete, allowing the focus of development to be
+placed on polishing the look and feel of the application and establishing a
+common aesthetic style.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ l l p{12cm} }
+\textbf{ID} & \textbf{Type} & \textbf{Description}\\ \hline
+
+D3.1 & Functional & An interactive website which implements the full interaction
+design.\\
+
+D3.2 & Non-Functional & A set of revised mock-ups for the aesthetic design of
+all site pages.\\
+
+\hline
+\end{tabular}
+\caption{D3 milestone requirements}
+\label{tab:d3-requirements}
+\end{table}
+
+\paragraph{D4 Finalised design (week 24)} this last design milestone marks the
+endpoint of all design changes, and can be used to review the quality and
+effectiveness of the fully evolved product.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ l l p{12cm} }
+\textbf{ID} & \textbf{Type} & \textbf{Description}\\ \hline
+
+D4.1 & Functional & An interactive website which implements the full aesthetics
+and interaction design, providing 100\% coverage of all interactions and
+scenarios described by the mock-ups.\\
+
+\hline
+\end{tabular}
+\caption{D4 milestone requirements}
+\label{tab:d4-requirements}
+\end{table}
+
+\subsubsection{Implementation Milestones}
+
+\paragraph{M1 Initial prototype (week 11)} by the end of the first term,
+breath-first and depth-first prototypes of the system which some of the more
+common user tasks should have been implemented, although the underlying software
+architecture and technologies are free to change for the production system.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ l l p{12cm} }
+\textbf{ID} & \textbf{Type} & \textbf{Description}\\ \hline
+
+M1.1 & Functional & A breadth-first prototype which implements coverage for the
+common site pages and tasks.\\
+
+M1.2 & Functional & A depth-first prototype of the user accounts system and data
+back-end.\\
+
+M1.3 & Functional & The prototype should allow for potential users to interact
+with a website which implements a limited subset of the final functionality,
+allowing for early feedback on the design.\\
+
+M1.4 & Non-Functional & An architectural design for the final system database.\\
+
+M1.5 & Non-Functional & A tool to generate fake datasets and upload them to the
+prototype for testing purposes.\\
+
+\hline
+\end{tabular}
+\caption{M1 milestone requirements}
+\label{tab:m1-requirements}
+\end{table}
+
+\paragraph{M2 Working system (week 18)} by week 18 the software architecture and
+choice of technologies should have been fully realised, and the functional
+backend of the majority of use-cases should have been implemented, along with
+good test coverage of each.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ l l p{12cm} }
+\textbf{ID} & \textbf{Type} & \textbf{Description}\\ \hline
+
+M2.1 & Non-Functional & A software design which stipulates the final decision on
+which technologies will be used.\\
+
+M2.2 & Non-Functional & An architectural design which covers the full model view
+controller stack and components of each.\\
+
+M2.3 & Non-Functional & A test harness and accompanying automated unit tests
+with full coverage of the API under common states.\\
+
+\hline
+\end{tabular}
+\caption{M2 milestone requirements}
+\label{tab:m2-requirements}
+\end{table}
+
+\newpage
+\paragraph{M3 Feature complete (week 24)} the feature complete milestone marks
+the end of the development of new features. By this point, the system should be
+fully functional and optimised, allowing for final stress and load testing to
+take place, and for the system to be deployed.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ l l p{12cm} }
+\textbf{ID} & \textbf{Type} & \textbf{Description}\\ \hline
+
+M3.1 & Functional & A secured server which is publicly accessible from a domain
+name.\\
+
+M3.2 & Functional & An optimised software stack which can serve pages within a
+determined time limit.\\
+
+M3.3 & Functional & A software architecture which can support datasets of up to
+a million records.\\
+
+M3.4 & Non-Functional & Full test coverage of the API and automated black-box
+testing of the common website tasks.\\
+
+M3.5 & Non-Functional & The source code should be available online and licensed
+with an appropriate open source license.\\
+
+M3.6 & Non-Functional & Full documentation coverage of the internal API.\\
+
+\hline
+\end{tabular}
+\caption{M3 milestone requirements}
+\label{tab:m3-requirements}
+\end{table}
