@@ -1,4 +1,13 @@
-# Contents
+# MEng Final Year Project Plan
+
+Chris Cummins, December 18, 2013
+
+**Abstract** - This document contains a proposal and plan to develop a Protein
+Isoelectric Point Database as a final year project, under the supervision of
+Professor Ian Nabney and based on research undertaken by Dr. Darren Flower and
+members of Aston University’s Life and Health Sciences department.
+
+### Contents
 
 - [Introduction](#introduction)
 	- [Background](#background)
