@@ -317,22 +317,20 @@ its ability to meet the objectives and deliverables. For each risk, the
 probability of it occurring and impact it would have on the project have been
 assigned a value between 1 and 5 to indicate their magnitude.
 
-**Risk** & **Description** & **Category** & **Probability** &
-**Impact**\
-R1 & Design is not intuitive & Design & 2 & 3\
-R2 & Project involves use of new technical skills & Development & 5 & 5\
-R3 & High Level of technical complexity & Development & 5 & 3\
-R4 & Complex deployment of production website & Development & 5 & 4\
-R5 & Project milestones not clearly defined & Planning & 1 & 1\
-R6 & System requirements not adequately identified & Requirements & 2 &
-5\
-R7 & Change in project requirements during development & Requirements &
-1 & 5\
-R8 & Changes in dataset format during development & Resources & 2 & 5\
-R9 & Unable to obtain required resources & Resources & 1 & 1\
-R10 & Users not committed to the project & Users & 2 & 4\
-R11 & Lack of cooperation from users & Users & 1 & 4\
-R12 & Users with negative attitudes toward the project & Users & 1 & 2\
+**Risk** | **Description** | **Category** | **Probability** | **Impact**
+-------- | --------------- | ------------ | --------------- | ----------
+R1 | Design is not intuitive | Design | 2 | 3
+R2 | Project involves use of new technical skills | Development | 5 | 5
+R3 | High Level of technical complexity | Development | 5 | 3
+R4 | Complex deployment of production website | Development | 5 | 4
+R5 | Project milestones not clearly defined | Planning | 1 | 1
+R6 | System requirements not adequately identified | Requirements | 2 | 5
+R7 | Change in project requirements during development | Requirements | 1 | 5
+R8 | Changes in dataset format during development | Resources | 2 | 5
+R9 | Unable to obtain required resources | Resources | 1 | 1
+R10 | Users not committed to the project | Users | 2 | 4
+R11 | Lack of cooperation from users | Users | 1 | 4
+R12 | Users with negative attitudes toward the project | Users | 1 | 2
 
 Table 1: A list of potential project risks and their severity
 
@@ -342,66 +340,60 @@ For each of the risks discovered in the assessment, mitigation strategies have
 been defined which provide techniques to avoid or minimise the threat of each
 risk.
 
-**Risks** & **Description** & **Mitigation Strategy**\
+*R1 - Design is not intuitive* - The key to mitigation of this risk is in
+frequent and effective user testing and an understanding of typical and common
+use-cases for the product.
 
-**Risks** & **Description** & **Mitigation Strategy**\
-
-3r*Continued on next page…*
-
-R1 & Design is not intuitive & The key to mitigation of this risk is in frequent
-and effective user testing and an understanding of typical and common use-cases
-for the product.\
-
-R2 & Project involves use of new technical skills & In order to prevent this
+*R2 - Project involves use of new technical skills* - In order to prevent this
 risk from having a serious impact on the project, it will be necessary to begin
 studying and reading about the technologies that will be used at a very early
-stage in the project, long before the start of the implementation.\
+stage in the project, long before the start of the implementation.
 
-R3 & High Level of technical complexity & Avoiding this risk will involve
+*R3 - High Level of technical complexity* - Avoiding this risk will involve
 ensuring that the scope of the project remains technically feasible, and that
 the software architecture is abstracted into small enough units that it is
 easier to focus on each one separately, as well as keeping small iterative
 development cycles and adequate test coverage to prevent regressions when
-implementing new functionality.\
+implementing new functionality.
 
-R4 & Complex deployment of production website & A website with independent data
-and application logic components can result in an intricate deployment
+*R4 - Complex deployment of production website* - A website with independent
+data and application logic components can result in an intricate deployment
 process. This is a common problem in the development of complex web application,
 where development and production environments must be synchronised and
 differences between debugging and releases builds must be accounted for. In
 order to mitigate this risk, a suite of tools to configure, build and deploy the
 website should be developed at an early stage, allowing for fast deployment of
-public releases.\
+public releases.
 
-R5 & Project milestones not clearly defined & A thoroughly described and well
+*R5 - Project milestones not clearly defined* - A thoroughly described and well
 thought out project plan will help to prevent scheduling issues and delays in
-development that would arise from this risk.\
+development that would arise from this risk.
 
-R6 & System requirements not adequately identified & A comprehensive
+*R6 - System requirements not adequately identified* - A comprehensive
 specification of the finished product before implementation begins will help to
-mitigate this risk.\
+mitigate this risk.
 
-R7 & Change in project requirements during development & An agile approach
+*R7 - Change in project requirements during development* - An agile approach
 towards accommodating for changes in the requirements should be used so as to
-keep the time between user feedback sessions and input from stakeholders low.\
+keep the time between user feedback sessions and input from stakeholders low.
 
-R8 & Changes in dataset form at during development & It is not possible to
+*R8 - Changes in dataset form at during development* - It is not possible to
 entirely avoid this risk due its nature and the dependence on third parties, but
 steps can be taken to prevent any delays that this would cause, chiefly, a well
 abstracted data parsing component which can be switched and modified if
-necessary to accommodate for a new dataset format.\
+necessary to accommodate for a new dataset format.
 
-R9 & Unable to obtain required resources & Since the project does not require
+*R9 - Unable to obtain required resources* - Since the project does not require
 many resources, it is important to acquire these as early on in the development
 process as possible, and alternative resources should be planned for, such as
-local test servers.\
+local test servers.
 
-R10, R11, R12 & Users not committed to the project, lack of cooperation from
-users, and users with negative attitudes toward the project & The usefulness of
+*R10, R11, R12 - Users not committed to the project, lack of cooperation from
+users, and users with negative attitudes toward the project* - The usefulness of
 the finished project will depend largely on ensuring that the needs of the users
 are considered the primary goals of the design.  Violating this principle may
 cause disillusionment from the people who are volunteering their time to assist
-in the project.\
+in the project.
 
 Table 2: Risk mitigation strategies
 
@@ -559,16 +551,14 @@ design should consist of a set of non-interactive “paper prototypes” or stat
 renders of the application interface, which can be used as a rough guide for
 beginning to prototype the interaction design.
 
-**ID** & **Type** & **Description**\
+*D1.1 - Non-functional* - A set of mock-ups for the design of common site pages:
+search page, results page, details page (if applicable), advanced search, login
+page, and upload new data page.
 
-D1.1 & Non-functional & A set of mock-ups for the design of common site
-pages: search page, results page, details page (if applicable), advanced
-search, login page, and upload new data page.\
-
-D1.2 & Non-functional & A set of interaction mock-ups for common site
-tasks: searching for a record by protein name, searching records from a
-specific source, searching for records in a pI range, performing an
-advanced search, adding a new record, uploading a new dataset.\
+*D1.2 - Non-functional* - A set of interaction mock-ups for common site tasks:
+searching for a record by protein name, searching records from a specific
+source, searching for records in a pI range, performing an advanced search,
+adding a new record, uploading a new dataset.
 
 Table 3: D1 milestone requirements
 
@@ -576,19 +566,15 @@ Table 3: D1 milestone requirements
 the primary focus of this second iteration, with many of the common tasks
 (searching for a result, looking up a record, etc.) being more tightly defined.
 
-l l p12cm
+*D2.1 - Functional* - An interactive prototype which implements common site
+tasks: logging in and out using credentials, searching for a record by protein
+name, searching records from a specific source, searching for records in a pI
+range, performing an advanced search, adding a new record, uploading a new
+dataset.
 
-**ID** & **Type** & **Description**\
-
-D2.1 & Functional & An interactive prototype which implements common
-site tasks: logging in and out using credentials, searching for a record
-by protein name, searching records from a specific source, searching for
-records in a pI range, performing an advanced search, adding a new
-record, uploading a new dataset.\
-
-D2.2 & Non-functional & A set of interaction mock-ups for ‘edge case’ or
-uncommon events: an error on the server-side, performing a search which
-returns no results, attempting to log in with incorrect credentials.\
+*D2.2 - Non-functional* - A set of interaction mock-ups for ‘edge case’ or
+uncommon events: an error on the server-side, performing a search which returns
+no results, attempting to log in with incorrect credentials.
 
 Table 4: D2 milestone requirements
 
@@ -597,13 +583,11 @@ design should be complete, allowing the focus of development to be placed on
 polishing the look and feel of the application and establishing a common
 aesthetic style.
 
-**ID** & **Type** & **Description**\
+*D3.1 - Functional* - An interactive website which implements the full
+interaction design.
 
-D3.1 & Functional & An interactive website which implements the full
-interaction design.\
-
-D3.2 & Non-Functional & A set of revised mock-ups for the aesthetic
-design of all site pages.\
+*D3.2 - Non-Functional* - A set of revised mock-ups for the aesthetic design of
+all site pages.
 
 Table 5: D3 milestone requirements
 
@@ -611,11 +595,9 @@ Table 5: D3 milestone requirements
 of all design changes, and can be used to review the quality and effectiveness
 of the fully evolved product.
 
-**ID** & **Type** & **Description**\
-
-D4.1 & Functional & An interactive website which implements the full
-aesthetics and interaction design, providing 100% coverage of all
-interactions and scenarios described by the mock-ups.\
+*D4.1 - Functional* - An interactive website which implements the full
+aesthetics and interaction design, providing 100% coverage of all interactions
+and scenarios described by the mock-ups.
 
 Table 6: D4 milestone requirements
 
@@ -626,23 +608,20 @@ and depth-first prototypes of the system which some of the more common user
 tasks should have been implemented, although the underlying software
 architecture and technologies are free to change for the production system.
 
-**ID** & **Type** & **Description**\
+*M1.1 - Functional* - A breadth-first prototype which implements coverage for
+the common site pages and tasks.
 
-M1.1 & Functional & A breadth-first prototype which implements coverage
-for the common site pages and tasks.\
+*M1.2 - Functional* - A depth-first prototype of the user accounts system and
+data back-end.
 
-M1.2 & Functional & A depth-first prototype of the user accounts system
-and data back-end.\
+*M1.3 - Functional* - The prototype should allow for potential users to interact
+with a website which implements a limited subset of the final functionality,
+allowing for early feedback on the design.
 
-M1.3 & Functional & The prototype should allow for potential users to
-interact with a website which implements a limited subset of the final
-functionality, allowing for early feedback on the design.\
+*M1.4 - Non-Functional* - An architectural design for the final system database.
 
-M1.4 & Non-Functional & An architectural design for the final system
-database.\
-
-M1.5 & Non-Functional & A tool to generate fake datasets and upload them
-to the prototype for testing purposes.\
+*M1.5 - Non-Functional* - A tool to generate fake datasets and upload them to
+the prototype for testing purposes.
 
 Table 7: M1 milestone requirements
 
@@ -651,16 +630,14 @@ of technologies should have been fully realised, and the functional backend of
 the majority of use-cases should have been implemented, along with good test
 coverage of each.
 
-**ID** & **Type** & **Description**\
+*M2.1 - Non-Functional* - A software design which stipulates the final decision
+on which technologies will be used.
 
-M2.1 & Non-Functional & A software design which stipulates the final
-decision on which technologies will be used.\
+*M2.2 - Non-Functional* - An architectural design which covers the full model
+view controller stack and components of each.
 
-M2.2 & Non-Functional & An architectural design which covers the full
-model view controller stack and components of each.\
-
-M2.3 & Non-Functional & A test harness and accompanying automated unit
-tests with full coverage of the API under common states.\
+*M2.3 - Non-Functional* - A test harness and accompanying automated unit tests
+with full coverage of the API under common states.
 
 Table 8: M2 milestone requirements
 
@@ -669,25 +646,22 @@ of the development of new features. By this point, the system should be fully
 functional and optimised, allowing for final stress and load testing to take
 place, and for the system to be deployed.
 
-**ID** & **Type** & **Description**\
+*M3.1 - Functional* - A secured server which is publicly accessible from a
+domain name.
 
-M3.1 & Functional & A secured server which is publicly accessible from a
-domain name.\
+*M3.2 - Functional* - An optimised software stack which can serve pages within a
+determined time limit.
 
-M3.2 & Functional & An optimised software stack which can serve pages
-within a determined time limit.\
+*M3.3 - Functional* - A software architecture which can support datasets of up
+to a million records.
 
-M3.3 & Functional & A software architecture which can support datasets
-of up to a million records.\
+*M3.4 - Non-Functional* - Full test coverage of the API and automated black-box
+testing of the common website tasks.
 
-M3.4 & Non-Functional & Full test coverage of the API and automated
-black-box testing of the common website tasks.\
+*M3.5 - Non-Functional* - The source code should be available online and
+licensed with an appropriate open source license.
 
-M3.5 & Non-Functional & The source code should be available online and
-licensed with an appropriate open source license.\
-
-M3.6 & Non-Functional & Full documentation coverage of the internal
-API.\
+*M3.6 - Non-Functional* - Full documentation coverage of the internal API.
 
 Table 9: M3 milestone requirements
 
