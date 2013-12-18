@@ -1471,3 +1471,24 @@ $c = 5; // Is $c a new variable, or an existing one???
 Also, the same author has written a nice write-up on the downsides of a
 pervasive mutable state (http://loup-vaillant.fr/articles/classes-suck), as
 inferred by class based programming.
+
+### Wednesday 18th
+
+Have been reading up on improving page rendering times. I found a great article
+by Google on blocking of page rendering caused by JavaScript
+(https://developers.google.com/speed/docs/insights/BlockingJS) which provides a
+nice inline snippet for deferring the download of JavaScript sources that aren't
+directly needed to render the page.
+
+Additionally, read a good blog post on using Google's Page Insights tool as a
+performance metric for optimising Bootstrap
+(http://www.appneta.com/blog/bootstrap-pagespeed/). Definitiely useful future
+reference material here, and I should consider using PageSpeed scores and also
+DOMContentLoaded times as a metrics for the optimisation sections of
+development.
+
+Further reading on established practises for web performance:
+
+ - https://developers.google.com/speed/docs/best-practices/rules_intro
+ - http://stevesouders.com/hpws/rules.php
+ - http://developer.yahoo.com/performance/rules.html
