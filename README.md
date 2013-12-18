@@ -9,6 +9,7 @@ making the valuable research accessible to all.
 The project is developed by Chris Cummins (http://chriscummins.cc) as part of an
 ongoing assessment towards an MEng Electronic Engineering & Computer Science
 course at the University of Aston.
+[Read the project plan](Documentation/ProjectPlan.md).
 
 ## Background
 
