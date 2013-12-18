@@ -126,13 +126,13 @@ functionality required to implement this project. From a time-management
 perspective, one of the main priorities for the work undertaken in the first
 term is to research these existing technologies, and to gain a better
 understanding of the strengths of each in order to select an appropriate choice
-for the implementation of the final product. Figure [fig:flow-tech-choices]
-shows the process by which these choices are made, starting off with the
-highest-level decision (the choice of paradigms: whether it be a client-server
-model, a distributed network application, the format for data transmission etc.)
-and increasing in granularity down to the lowest-level choice of individual
-frameworks and libraries. Each decision is not immutable, and previous decisions
-may be re-evaluated over time in an iterative fashion. This is to encourage
+for the implementation of the final product. Figure 1 shows the process by which
+these choices are made, starting off with the highest-level decision (the choice
+of paradigms: whether it be a client-server model, a distributed network
+application, the format for data transmission etc.)  and increasing in
+granularity down to the lowest-level choice of individual frameworks and
+libraries. Each decision is not immutable, and previous decisions may be
+re-evaluated over time in an iterative fashion. This is to encourage
 implementation work to begin at an early stage in order to produce a functioning
 prototype, without the need to have performed a depth first analysis of every
 possible technology which could be used.  Work on the implementation can begin
@@ -143,8 +143,7 @@ realistic justification for this change and adequate time to re-implement any
 existing functionality.
 
 ![image](plan/assets/flow-tech-choices.png)
-A diagrammatic view of the process of adopting technologies
-[fig:flow-tech-choices]
+Figure 1: A diagrammatic view of the process of adopting technologies
 
 ## Required Skills
 
@@ -204,11 +203,10 @@ by Dr. Flower in the form of a Microsoft Excel spreadsheet consisting of a
 single table with 5,773 unique rows over 22 columns. In order to develop a
 relational model for this data, each of the 22 unique columns can be considered
 as a set of attributes *A1,A2,…,A22* and combined to form a relational schema
-*R* (Figure [fig:formal-schema-names-attributes] shows this schema with
-attribute names taken from the spreadsheet column headings), with the
-spreadsheet values forming an instance of this relation *r(R)* in which each row
-can be considered a set of tuples where *t’ = t’(A1),t’(A2),…,t’(A22) $\in$
-r(R)*.
+*R* (Figure 2 shows this schema with attribute names taken from the spreadsheet
+column headings), with the spreadsheet values forming an instance of this
+relation *r(R)* in which each row can be considered a set of tuples where *t’ =
+t’(A1),t’(A2),…,t’(A22) $\in$ r(R)*.
 
     R = {Origin, EC, Protein, Alternative name(s), Source, Organ and/or
     Subcellular locaction, M.W, No., M.W2, No. of Iso-enzymes, pI maximum value,
@@ -216,26 +214,24 @@ r(R)*.
     (oC), Method, Valid sequence(s) available, UniportKB/ Swiss-Prot/ Protein
     sequence, Species Taxonomy, Full text, Abstract only, Pubmed, Notes}
 
-A formal relation schema with named attributes
-[fig:formal-schema-names-attributes]
+Figure 2: A formal relation schema with named attributes
 
 Each tuple represents a single recording of experimentally-derived data, which
 lists the origin of the record (such as a research paper, or academic journal),
 and 21 attributes which describe the properties of the protein, the experimental
 result and the method used to derive it, and links to relevant online
-resources. Figure [fig:chart-dataset-origin] shows a breakdown of the different
-origins for all of the records. In order to aid in the design of the database
-which will be used to store this dataset, a dataset analysis tool was developed
-which parses the dataset file and extracts and derives key information about its
-properties, and this information can be used to help determine the best method
-to use when storing this data.
+resources. Figure 3 shows a breakdown of the different origins for all of the
+records. In order to aid in the design of the database which will be used to
+store this dataset, a dataset analysis tool was developed which parses the
+dataset file and extracts and derives key information about its properties, and
+this information can be used to help determine the best method to use when
+storing this data.
 
 ![image](plan/assets/chart-dataset-origin.png)
-A breakdown of the tuple origins within the dataset [fig:chart-dataset-origin]
+Figure 3: A breakdown of the tuple origins within the dataset
 
 ![image](plan/assets/chart-dataset-populated.png)
-The number of populated keys for each tuple within the dataset
-[fig:chart-dataset-populated]
+Figure 4: The number of populated keys for each tuple within the dataset
 
 This early dataset analysis highlighted a number of properties which will
 greatly influence the design of the database backend. Chiefly, that the dataset
@@ -248,8 +244,7 @@ adequate time should be allocated in the project plan to allow for database
 design decisions to be investigated and tested.
 
 ![image](plan/assets/chart-dataset-unique.png)
-The number of unique keys for each tuple within the dataset
-[fig:chart-dataset-unique]
+Figure 5: The number of unique keys for each tuple within the dataset
 
 ## Related Bioinformatics Databases
 
@@ -308,20 +303,20 @@ things that could be improved upon - largely that the codebase is a somewhat
 impenetrable mixture of PHP with inline HTML, with no distinction between the
 application logic and presentation tier, and the querying mechanism is quite
 primitive, with little ability to perform advanced searching within the
-dataset. Appendix [appendix:previous-fyp-uml] contains a UML diagram of the
-database schema used, which highlights the small number of tables used, with few
-relational links between records leading to a simplistic searching mechanism. As
-identified in the initial dataset analysis, using a more normalised design could
-result in a more compact database and allow for more in-depth searching of
-results.
+dataset. [Appendix C](#c-previous-final-year-project-database-design) contains a
+UML diagram of the database schema used, which highlights the small number of
+tables used, with few relational links between records leading to a simplistic
+searching mechanism. As identified in the initial dataset analysis, using a more
+normalised design could result in a more compact database and allow for more
+in-depth searching of results.
 
 # Risk Assessment
 
-Table [tab:risk-assessment] lists some of the potential project risks that were
-identified during the initial research phase which could influence the success
-of the project and its ability to meet the objectives and deliverables. For each
-risk, the probability of it occurring and impact it would have on the project
-have been assigned a value between 1 and 5 to indicate their magnitude.
+Table 1 lists some of the potential project risks that were identified during
+the initial research phase which could influence the success of the project and
+its ability to meet the objectives and deliverables. For each risk, the
+probability of it occurring and impact it would have on the project have been
+assigned a value between 1 and 5 to indicate their magnitude.
 
 **Risk** & **Description** & **Category** & **Probability** &
 **Impact**\
@@ -340,8 +335,7 @@ R10 & Users not committed to the project & Users & 2 & 4\
 R11 & Lack of cooperation from users & Users & 1 & 4\
 R12 & Users with negative attitudes toward the project & Users & 1 & 2\
 
-A list of potential project risks and their severity
-[tab:risk-assessment]
+Table 1: A list of potential project risks and their severity
 
 ## Mitigation Strategies
 
@@ -410,8 +404,7 @@ are considered the primary goals of the design.  Violating this principle may
 cause disillusionment from the people who are volunteering their time to assist
 in the project.\
 
-Risk mitigation strategies
-[tab:mitigation-strategies]
+Table 2: Risk mitigation strategies
 
 # Development Process
 
@@ -420,12 +413,11 @@ Process (OpenUP), a part of the Eclipse Process Framework \cite{EclipseND}. The
 reasoning behind this choice is that, as a Rational Unified Process derivative,
 OpenUP offers an open source process framework which is targeted at agile
 development in small teams and provides a number of development phases and
-activities which can be used when designing the project plan (Figure
-[fig:sequence-openup]).
+activities which can be used when designing the project plan (Figure 6).
 
 ![image](plan/assets/sequence-openup.png)
-A sequence diagram showing a single full iteration of the OpenUP process
-[fig:sequence-openup]
+Figure 6: A sequence diagram showing a single full iteration of the OpenUP
+process
 
 ## Work Breakdown Structure
 
@@ -498,8 +490,8 @@ development towards a specific goal.
 
 By combining the available issue tracker with good version control practises, it
 is possible to implement a simple and functional test driven approach to
-development (Figure [fig:flow-tdd]). This breaks down the development process
-into single-issue chunks, with each iteration beginning with creating a local
+development (Figure 7). This breaks down the development process into
+single-issue chunks, with each iteration beginning with creating a local
 development branch for an issue and then writing failing test cases which can
 then be patched. Using this model of development ensures that all work
 undertaken is relevant to the project and directly affects progress, minimising
@@ -507,8 +499,7 @@ the amount of time wastage and increasing the stability of the codebase by
 ensuring adequate test coverage \cite{Martin2011}.
 
 ![image](plan/assets/flow-tdd.png)
-A single iteration of the project’s test-driven development workflow
-[fig:flow-tdd]
+Figure 7: A single iteration of the project’s test-driven development workflow
 
 # Project Schedule
 
@@ -521,15 +512,15 @@ transition phases, and four iterations of elaboration and construction. The
 smaller elaboration and construction cycles were used so as to maximise the
 allowance for changes in the project specification caused by user feedback and
 review without causing delays in the development. This is to minimise the impact
-of the “Change in project requirements during development” risk (R7, see page
-tab:risk-assessment). Once the list of tasks was assembled, a Gantt chart
-(Appendix [appendix:project-gantt-chart]) was constructed which ordered each of
-these tasks and distributed them across the timespan. Careful ordering of the
-tasks ensured that there is the least chance for blocking between activities,
-where one task runs over the specified time allowance and causes later tasks to
-be postponed until it’s finished. The final project plan allows for the maximum
-amount of parallel activities and development by ensuring that there are
-adequate gaps between activities that depend on each other.
+of the “Change in project requirements during development” risk (R7). Once the
+list of tasks was assembled, a Gantt chart ([Appendix
+B](#b-project-gantt-chart)) was constructed which ordered each of these tasks
+and distributed them across the timespan. Careful ordering of the tasks ensured
+that there is the least chance for blocking between activities, where one task
+runs over the specified time allowance and causes later tasks to be postponed
+until it’s finished. The final project plan allows for the maximum amount of
+parallel activities and development by ensuring that there are adequate gaps
+between activities that depend on each other.
 
 ## Milestones
 
@@ -580,7 +571,7 @@ tasks: searching for a record by protein name, searching records from a
 specific source, searching for records in a pI range, performing an
 advanced search, adding a new record, uploading a new dataset.\
 
-D1 milestone requirements [tab:d1-requirements]
+Table 3: D1 milestone requirements
 
 **D2 Second iteration design (week 13)** the user interaction design should be
 the primary focus of this second iteration, with many of the common tasks
@@ -600,7 +591,7 @@ D2.2 & Non-functional & A set of interaction mock-ups for ‘edge case’ or
 uncommon events: an error on the server-side, performing a search which
 returns no results, attempting to log in with incorrect credentials.\
 
-D2 milestone requirements [tab:d2-requirements]
+Table 4: D2 milestone requirements
 
 **D3 Third iteration design (week 18)** by the third iteration, the interaction
 design should be complete, allowing the focus of development to be placed on
@@ -615,7 +606,7 @@ interaction design.\
 D3.2 & Non-Functional & A set of revised mock-ups for the aesthetic
 design of all site pages.\
 
-D3 milestone requirements [tab:d3-requirements]
+Table 5: D3 milestone requirements
 
 **D4 Finalised design (week 24)** this last design milestone marks the endpoint
 of all design changes, and can be used to review the quality and effectiveness
@@ -627,7 +618,7 @@ D4.1 & Functional & An interactive website which implements the full
 aesthetics and interaction design, providing 100% coverage of all
 interactions and scenarios described by the mock-ups.\
 
-D4 milestone requirements [tab:d4-requirements]
+Table 6: D4 milestone requirements
 
 ### Implementation Milestones
 
@@ -654,7 +645,7 @@ database.\
 M1.5 & Non-Functional & A tool to generate fake datasets and upload them
 to the prototype for testing purposes.\
 
-M1 milestone requirements [tab:m1-requirements]
+Table 7: M1 milestone requirements
 
 **M2 Working system (week 18)** by week 18 the software architecture and choice
 of technologies should have been fully realised, and the functional backend of
@@ -672,7 +663,7 @@ model view controller stack and components of each.\
 M2.3 & Non-Functional & A test harness and accompanying automated unit
 tests with full coverage of the API under common states.\
 
-M2 milestone requirements [tab:m2-requirements]
+Table 8: M2 milestone requirements
 
 **M3 Feature complete (week 24)** the feature complete milestone marks the end
 of the development of new features. By this point, the system should be fully
@@ -699,7 +690,7 @@ licensed with an appropriate open source license.\
 M3.6 & Non-Functional & Full documentation coverage of the internal
 API.\
 
-M3 milestone requirements [tab:m3-requirements]
+Table 9: M3 milestone requirements
 
 # A. References
 
@@ -741,12 +732,8 @@ Practices. Pearson, 2011.
 
 # B. Project Gantt Chart
 
-[appendix:project-gantt-chart]
-
 ![image](plan/assets/gantt-plan.png)
 
 # C. Previous Final Year Project Database Design
-
-[appendix:previous-fyp-uml]
 
 ![image](plan/assets/uml-previous-fyp-database.png)
