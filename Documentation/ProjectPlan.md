@@ -98,7 +98,7 @@ Additionally, two further deliverables can be derived from the same requirements
 document as secondary features:
 
 1.  A web-accessible GUI to support editing and uploading new data.
-2.  Support for NCBI BLAST protein sequence matching \cite{NCBIND}.
+2.  Support for NCBI BLAST protein sequence matching (NCBI, ND).
 
 ## Required Resources
 
@@ -239,7 +239,7 @@ contains a large number of duplicate keys, and for each tuple, many of the keys
 may not be given. This information will have a great influence on the design of
 the database; for example, the low percentage of unique values for many of the
 records in the dataset indicate that a 3NF normalisation pattern could be used
-to gain maximum size efficiency of the stored database \cite{Maier1983}, and so
+to gain maximum size efficiency of the stored database (Maier, 1983), and so
 adequate time should be allocated in the project plan to allow for database
 design decisions to be investigated and tested.
 
@@ -255,22 +255,21 @@ biological databases of protein properties abound, and Dr. Flower’s
 bioinformatics research has led to the creation of three such databases:
 AntiJen, DSD, and PPD:
 
-**AntiJen** a kinetic, thermodynamic and cellular database
-\cite{DDG1999}. AntiJen is a database containing quantitative binding data for
-peptides. The database houses over 24,000 entries from published experimentally
-determined data, and offers keyword searching of this dataset, with results
-being returned in a tabular format.
+**AntiJen** a kinetic, thermodynamic and cellular database (DDG, 1999). AntiJen
+is a database containing quantitative binding data for peptides. The database
+houses over 24,000 entries from published experimentally determined data, and
+offers keyword searching of this dataset, with results being returned in a
+tabular format.
 
-**DSD** A database of dehydrogenase stereospecificities \cite{DDGND}. DSD offers
-a similar set of features as AntiJen but for a different dataset. In addition to
+**DSD** A database of dehydrogenase stereospecificities (DDG, ND). DSD offers a
+similar set of features as AntiJen but for a different dataset. In addition to
 keyword searching, the website supports viewing data by selecting from
 categories, and additionally offers BLAST searching, which is a feature that
 will be incorporated into this project.
 
-**PPD** Protein pKa Database \cite{DDGNDa}. PPD offers data lookup by either
-BLAST search or a detailed search page which allows the user to select from a
-given set of criteria, such as protein name, experimental method, and amino acid
-name.
+**PPD** Protein pKa Database (DDG, ND 2). PPD offers data lookup by either BLAST
+search or a detailed search page which allows the user to select from a given
+set of criteria, such as protein name, experimental method, and amino acid name.
 
 In each of the websites, a large dataset of very specific biological data is
 hosted on a website which offers a service for members of the public to query
@@ -409,7 +408,7 @@ Table 2: Risk mitigation strategies
 # Development Process
 
 The software development process used for this project is based the Open Unified
-Process (OpenUP), a part of the Eclipse Process Framework \cite{EclipseND}. The
+Process (OpenUP), a part of the Eclipse Process Framework (Eclipse, ND). The
 reasoning behind this choice is that, as a Rational Unified Process derivative,
 OpenUP offers an open source process framework which is targeted at agile
 development in small teams and provides a number of development phases and
@@ -423,7 +422,7 @@ process
 
 The crux of OpenUP is in breaking down a large development project into four key
 phases to iterate on: the Inception Phase, Elaboration Phase, Construction Phase
-and Transition Phase \cite{Rational2011}.
+and Transition Phase (Rational, 2011).
 
 **Inception Phase** The inception phase represents the initial work which
 defines the scope and objectives of the project. Key tasks include generating a
@@ -451,7 +450,7 @@ prototypes of the database backend.
 
 **Construction Phase** The construction phase covers the development of the main
 software architecture and associated documentation, and should result in
-“Initial Operational Capability” \cite{Rational2011}. Success criteria for this
+“Initial Operational Capability” (Rational, 2011). Success criteria for this
 development phase includes whether the product is mature enough to be deployed
 to users, and so for this project will require meeting with stakeholders to
 ensure that the implementation of the plan is acceptable.
@@ -469,12 +468,12 @@ and conducting extensive user testing.
 A revision control and source code management (SCM) system will be used during
 all development to keep an auditable and transparent log of progress, and Git
 will be used for this. There are numerous advantages that Git has over other
-SCMs, chiefly that it is entirely open source and GPL licensed \cite{FSF1991},
-it has a very lightweight branching model and good support for rebasing and
+SCMs, chiefly that it is entirely open source and GPL licensed (FSF, 1991), it
+has a very lightweight branching model and good support for rebasing and
 merging, and there are numerous sources which offer free hosting of open source
 licensed projects that are tracked by Git. A public repository of the source
 code and all relevant documentation for this project is available on GitHub
-\cite{Cummins2013}.
+(Cummins, 2013).
 
 ### Issue Tracker
 
@@ -496,7 +495,7 @@ development branch for an issue and then writing failing test cases which can
 then be patched. Using this model of development ensures that all work
 undertaken is relevant to the project and directly affects progress, minimising
 the amount of time wastage and increasing the stability of the codebase by
-ensuring adequate test coverage \cite{Martin2011}.
+ensuring adequate test coverage (Martin, 2011).
 
 ![image](plan/assets/flow-tdd.png)
 Figure 7: A single iteration of the project’s test-driven development workflow
