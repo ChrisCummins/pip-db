@@ -33,8 +33,8 @@ pertinent data. There are also links to a heterogeneous collection of databases
 containing associated data, such as amino acid sequence, function, etc. A
 web-accessible database that warehouses this data and offers a robust and
 adaptable GUI for searching, viewing and downloading results would greatly
-increase the accessibility of the dataset. For more background information about
-pip-db, see the [documentation](Documentation/).
+increase the accessibility of the dataset. For more detailed information about
+pip-db, see [the documentation](Documentation/).
 
 ## Building the website
 
