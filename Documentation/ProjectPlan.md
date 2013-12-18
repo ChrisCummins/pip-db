@@ -34,9 +34,9 @@ members of Aston University’s Life and Health Sciences department.
 	- [Milestones](#milestones)
 		- [Design Milestones](#design-milestones)
 		- [Implementation Milestones](#implementation-milestones)
-- [References](#references)
-- [Project Gantt Chart](#project-gantt-chart)
-- [Previous Final Year Project Database Design](#previous-final-year-project-database-design)
+- [A. References](#a-references)
+- [B. Project Gantt Chart](#b-project-gantt-chart)
+- [C. Previous Final Year Project Database Design](#c-previous-final-year-project-database-design)
 
 # Introduction
 
@@ -701,7 +701,7 @@ API.\
 
 M3 milestone requirements [tab:m3-requirements]
 
-# References
+# A. References
 
 NCBIND National Center for Biotechnology Information. About NCBI. NCI.  [Online]
 ND. [Cited: 31st October 2013.]  <http://blast.ncbi.nlm.nih.gov/Blast.cgi>.
@@ -739,14 +739,13 @@ isoelectric points. GitHub. [Online] 14th October 2013. [Cited: 31st October
 Martin2011 Martin, R. C. Agile Software Development, Principles, Patterns, and
 Practices. Pearson, 2011.
 
-# Project Gantt Chart
+# B. Project Gantt Chart
 
 [appendix:project-gantt-chart]
 
 ![image](plan/assets/gantt-plan.png)
 
-Previous Final Year Project Database Design
-===========================================
+# C. Previous Final Year Project Database Design
 
 [appendix:previous-fyp-uml]
 
