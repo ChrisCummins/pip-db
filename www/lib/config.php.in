@@ -15,7 +15,11 @@ abstract class Pip_Links {
 		$links = array(
 			'root' => '',
 			'html' => array(
-				'setup' => '/admin/setup',
+				'admin' => array(
+					'theme' => '/admin/theme',
+					'setup' => '/admin/setup',
+					'sanity' => '/admin/sanity-check'
+					),
 				'advanced' => '/advanced',
 				'results' => '/s',
 				'index' => '/home',
