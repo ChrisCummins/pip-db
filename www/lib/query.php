@@ -56,9 +56,9 @@ abstract class ConditionLogic
 abstract class Condition implements MySQLStatement {}
 
 class StringMatchCondition extends Condition {
-	private $field;
-	private $value;
-	private $exact;
+	protected $field;
+	protected $value;
+	protected $exact;
 
 	public function __construct( $field, $value, $exact = False ) {
 		$this->field = $field;
@@ -74,15 +74,10 @@ class StringMatchCondition extends Condition {
 	}
 }
 
-class StringNotMatchCondition extends Condition {
-	private $field;
-	private $value;
-	private $exact;
+class StringNotMatchCondition extends StringMatchCondition {
 
 	public function __construct( $field, $value, $exact = False ) {
-		$this->field = $field;
-		$this->value = $value;
-		$this->exact = $exact;
+		parent::__construct( $field, $value, $exact );
 	}
 
 	public function get_mysql_query() {
