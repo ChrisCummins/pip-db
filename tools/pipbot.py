@@ -256,8 +256,9 @@ def build_target(target_name, build_name):
         perform_action("Generating sources", "./autogen.sh")
         perform_action("Configuring " + target_name + " " + build_name + " build",
                        "./configure " + configure_args)
-        perform_action("Cleaning working tree", "make clean")
-        perform_action("Building", "make all")
+        perform_action("Cleaning build tree", "make -C build/ clean")
+        perform_action("Cleaning source tree", "make -C www/ clean")
+        perform_action("Building", "make -C www all")
         return 0
     except:
         return 2
