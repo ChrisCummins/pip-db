@@ -10,6 +10,7 @@
  */
 
 require_once( $_SERVER['PHP_ROOT'] . 'config.php' );
+require_once( $_SERVER['PHP_ROOT'] . 'build-summary.php' );
 
 /*********************************************************/
 /* Enable debugging, error handling, and server-side API */
