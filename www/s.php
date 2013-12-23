@@ -24,16 +24,22 @@ function fetch_all( $resource ) {
 }
 
 function get_results_page_url( $num ) {
-	$base_url = 'http://';
-	$base_url .= $_SERVER['SERVER_NAME'] . $_SERVER['DOCUMENT_PREFIX'];
-	$base_url .= '/s?';
-	$base_url .= GetVariables::Query . '=';
-	$base_url .= urlencode( pip_get( GetVariables::Query ) );
+	$current_url = pip_history_get_current();;
 
-	$url = $base_url;
+	if ( $num > 1 ) {
+		$start_at_number = ( $num - 1 ) * Pip_Search::ResultsPerPage;
 
-	if ( $num > 1 )
-		$url .= '&start=' . ( $num - 1 ) * Pip_Search::ResultsPerPage;
+		if ( preg_match( '/&start=\d+/', $current_url ) ) {
+			$url = preg_replace( '/&start=\d+/',
+					     '&start=' . $start_at_number,
+					     $current_url );
+		} else {
+			$url = $current_url .'&start=' . $start_at_number;
+		}
+
+	} else {
+		$url = preg_replace( '/&start=\d+/', '', $current_url );
+	}
 
 	return $url;
 }

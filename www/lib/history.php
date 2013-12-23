@@ -16,3 +16,22 @@ function pip_history_get_referer() {
 	else
 		return '/home';
 }
+
+/*
+ * Returns the current page URL.
+ */
+function pip_history_get_current() {
+	$url = 'http';
+
+	if ( "on" == pip_server_get( "HTTPS" ) )
+		$url .= "s";
+
+	$url .= "://" . $_SERVER["SERVER_NAME"];
+
+	if ( "80" != pip_server_get( "SERVER_PORT" ) )
+		$url .= ":" .$_SERVER["SERVER_PORT"];
+
+	$url .= $_SERVER["REQUEST_URI"];
+
+	return $url;
+}
