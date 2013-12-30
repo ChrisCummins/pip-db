@@ -1497,3 +1497,32 @@ Further reading on established practises for web performance:
  - https://developers.google.com/speed/docs/best-practices/rules_intro
  - http://stevesouders.com/hpws/rules.php
  - http://developer.yahoo.com/performance/rules.html
+
+### Sunday 29th
+
+I have been revamping my personal http://chriscummins.cc site, and
+started off by importing a lot of the pip-db PHP logic and templating
+engine, intending to use this as a starting point and to build a new
+front end. (see December 6th entry). Having re-evaluated the purpose
+of the site, I decided that a static HTML generator would be much more
+easy to manage, and covers all of the use cases I can think off.
+
+Having decided on using a Jekyll/GitHub pages combination, I could
+apply a few of the interesting features from this static site
+generation techniques to pip-db. Chiefly, the use of Markdown and
+other easy-to-read file formats for content makes a lot of sense, and
+help abstract the site data from the application logic.
+
+### Monday 30th
+
+It's the end of TP1 and this logbook has already reached 58KB in
+size. I need to consider a more manageable way of working with large
+Markdown documents. Perhaps I should use a similar structure to Jekyll
+blog posts used in GitHub pages - i.e. create a new Markdown file for
+each day?
+
+This would result in a directory with around 100 separate Markdown
+files in it, with filenames like `2013-12-29.md` and
+`2013-12-30.md`. The advantage of that is that it produces many
+smaller and separate files, although this would make it harder to do
+whole-document re-factors.
