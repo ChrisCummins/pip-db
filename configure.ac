@@ -649,15 +649,15 @@ AC_OUTPUT([
 	Makefile
 	build/Makefile
 	build/jar/Makefile
-	design/Makefile
-	design/d1/Makefile
-	design/d1/pages/Makefile
-	design/d1/pages/renders/Makefile
-	design/d1/previous/Makefile
-	design/d1/previous/renders/Makefile
-	design/d1/tasks/Makefile
-	design/d1/tasks/renders/Makefile
 	Documentation/Makefile
+	Documentation/design/Makefile
+	Documentation/design/d1/Makefile
+	Documentation/design/d1/pages/Makefile
+	Documentation/design/d1/pages/renders/Makefile
+	Documentation/design/d1/previous/Makefile
+	Documentation/design/d1/previous/renders/Makefile
+	Documentation/design/d1/tasks/Makefile
+	Documentation/design/d1/tasks/renders/Makefile
 	Documentation/plan/Makefile
 	scripts/Makefile
 	scripts/git/Makefile

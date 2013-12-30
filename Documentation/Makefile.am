@@ -1,4 +1,5 @@
-SUBDIRS = \
+SUBDIRS =
+	design \
 	plan \
 	$(NULL)
 
