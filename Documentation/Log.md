@@ -41,9 +41,10 @@ quantifiable way.
 
 Met with Ian. Notes:
 
-* Choice of process is important - look up RUP (IBM Rational Unified Process)
-(http://en.wikipedia.org/wiki/IBM_Rational_Unified_Process) and consider using
-it. If not, suggest an improved alternative and justify.
+* Choice of process is important - look up
+[RUP](http://en.wikipedia.org/wiki/IBM_Rational_Unified_Process) (IBM
+Rational Unified Process) and consider using it. If not, suggest an
+improved alternative and justify.
 * Choice of language is personal preference. Ian has experience with PHP making
 it a solid choice - but a justified alternative is acceptable.
 * I should meet with Dr. Darren Flower (Aston lecturer, effectively product
@@ -59,14 +60,13 @@ TODO:
 
 1. Read up on RUP.
 2. Contact Darren to arrange meeting.
-3. Read about git and MySQL
-(http://ben.kulbertis.org/2011/10/synchronizing-a-mysql-database-with-git-and-git-hooks/).
+3. Read about [git and MySQL](http://ben.kulbertis.org/2011/10/synchronizing-a-mysql-database-with-git-and-git-hooks/).
 
-Unified Process - The Unified Software Development Process is an iterative and
-incremental software development process framework. The basis of the process is
-that it is a use case driven iterative and incremental process, in which
-Elaboration, Construction and Transition are divided into a series of time boxed
-phases and iterated upo
+Unified Process - The Unified Software Development Process is an
+iterative and incremental software development process framework. The
+basis of the process is that it is a use case driven iterative and
+incremental process, in which Elaboration, Construction and Transition
+are divided into a series of time boxed phases and iterated upon.
 
 IBM Rational Unified Process - An iterative software development process
 framework created by IBM (Rational Software Corporation division), which is an
@@ -243,10 +243,11 @@ google.com.
 
 ### Sunday 13th
 
-Found that the PHP sources for a couple of pages from Facebook were leaked in
-2007, now available on github (https://gist.github.com/nikcub/3833406). Should
-keep tabs on this so as to see how a large database backed website organises its
-code.
+Found that the PHP sources for a couple of pages from Facebook were
+leaked in 2007,
+[now available](https://gist.github.com/nikcub/3833406) on
+GitHub. Should keep tabs on this so as to see how a large database
+backed website organises its code.
 
 Notes on Facebook source code:
 
@@ -264,10 +265,10 @@ Notes on Facebook source code:
 
 ### Monday 14th
 
-Read up on PHP templating
-(http://coding.smashingmagazine.com/2011/10/17/getting-started-with-php-templating/),
-should investigate use of Twig framework to implement MVC architecture in my
-project.
+Read up on
+[PHP templating](http://coding.smashingmagazine.com/2011/10/17/getting-started-with-php-templating/),
+should investigate use of Twig framework to implement MVC architecture
+in my project.
 
 Amended meeting time with Fraser to 4pm on Wednesday.
 
@@ -583,15 +584,16 @@ or intend to do:
 -   Document your code.
 -   Use a bug tracker.
 
-I should check with Kate that not using a development process will not affect my
-marks/assessment before "making a stand", but I am confident that being
-shouldered into having to adopt a process for this project would at best be a
-distraction and at worse would jeopardise my efforts by adding artificial
-constraints that get in the way of progress. One exception to this is test
-driven development, which I have first-hand experience of using from ‘emu’
-(https://github.com/ChrisCummins/emu) and ‘t4’
-(https://github.com/ChrisCummins/t4), and is a process which I intend to use
-when implementing some of the data back-end.
+I should check with Kate that not using a development process will not
+affect my marks/assessment before "making a stand", but I am confident
+that being shouldered into having to adopt a process for this project
+would at best be a distraction and at worse would jeopardise my
+efforts by adding artificial constraints that get in the way of
+progress. One exception to this is test driven development, which I
+have first-hand experience of using from
+[emu](https://github.com/ChrisCummins/emu) and
+[t4](https://github.com/ChrisCummins/t4), and is a process which I
+intend to use when implementing some of the data back-end.
 
 Planning TODO:
 
@@ -603,7 +605,7 @@ Implementation TODO:
 
 -   Add probability control to PNG and re-implement as a native
     application (or as a scriptable web app).
--   Read up on Selenium (http://docs.seleniumhq.org/).
+-   Read up on [Selenium](http://docs.seleniumhq.org/).
 -   Implement `make DEBUG=1 all` feature.
 -   Move website sources into `www/` subdirectory.
 
@@ -718,12 +720,12 @@ interesting - it’s worth reading more into it.
 
 Reading List:
 
--   Node.js testing framework - mocha (https://github.com/visionmedia/mocha) and
-    should.js (https://github.com/visionmedia/should.js).
--   Blog rolling with mongoDB (http://howtonode.org/express-mongodb).
--   Real Time Web with Node.js
-    (http://courseware.codeschool.com/node_slides.pdf).
--   Node.js vs PHP (http://webapplog.com/php-vs-node-js/).
+- Node.js testing framework -
+  [mocha](https://github.com/visionmedia/mocha) and
+  [should.js](https://github.com/visionmedia/should.js).
+- [Blog rolling with mongoDB](http://howtonode.org/express-mongodb).
+- [Real Time Web with Node.js](http://courseware.codeschool.com/node_slides.pdf).
+- [Node.js vs PHP](http://webapplog.com/php-vs-node-js/).
 
 
 ### Sunday 27th
@@ -804,8 +806,9 @@ Notes from meeting with Ian:
 
 ### Saturday 2nd
 
-Read about ionicons, which are a useful set of MIT licensed icons that will be
-useful when designing the UI (https://github.com/driftyco/ionicons).
+Read about ionicons, which are a useful set of
+[MIT licensed icons](https://github.com/driftyco/ionicons) that will
+be useful when designing the UI.
 
 
 ### Sunday 3rd
@@ -918,9 +921,10 @@ TODO:
 -   Further research of EBI.
 -   Research PHP templating.
 
-Notes on WordPress - found a detailed description of the WordPress database
-design http://codex.wordpress.org/Database_Description. There is also detailed
-documentation for all of the APIs (http://codex.wordpress.org/WordPress_APIs).
+Notes on WordPress - found a
+[detailed description of the WordPress database design](http://codex.wordpress.org/Database_Description).
+There is also
+[detailed documentation for all of the APIs](http://codex.wordpress.org/WordPress_APIs).
 
 -   There are filesystem and database APIs to completely abstract the
     underlying system. The user should never have to write system or
@@ -950,10 +954,10 @@ documentation for all of the APIs (http://codex.wordpress.org/WordPress_APIs).
 -   A file `wp-admin/includes/schema.php` contains the database
     information and description.
 
-PHP best practises - read up on how PHP is not object orientated
-(http://michaelkimsal.com/blog/php-is-not-object-oriented/), and PHP templating
-practises
-(http://coding.smashingmagazine.com/2011/10/17/getting-started-with-php-templating/).
+PHP best practises - read up on
+[how PHP is not object orientated](http://michaelkimsal.com/blog/php-is-not-object-oriented/),
+and
+[PHP templating practises](http://coding.smashingmagazine.com/2011/10/17/getting-started-with-php-templating/).
 
 
 ### Saturday 9th
@@ -1040,20 +1044,19 @@ General notes:
 
 ### Sunday 10th
 
-Website design - found a good checklist of annoying web design decisions to
-avoid
-(http://harknesslabs.com/post/66570723467/stop-doing-this-crap-on-your-startups-website).
+Website design - found a good checklist of
+[annoying web design decisions to avoid](http://harknesslabs.com/post/66570723467/stop-doing-this-crap-on-your-startups-website).
 
-Unit testing - read about Zombie.js, a Node.js framework for insanely fast
-browser testing (looks awesome!)
-(http://www.slideshare.net/iloire/building-web-apps-with-nodejs-socketio-knockoutjs-and-zombiejs-codemotion-2012).
+Unit testing - read about
+[Zombie.js](http://www.slideshare.net/iloire/building-web-apps-with-nodejs-socketio-knockoutjs-and-zombiejs-codemotion-2012),
+a Node.js framework for insanely fast browser testing (looks awesome!).
 
 
 ### Monday 11th
 
-Found out about SheetJS - a pure-JavaScript excel parser
-(http://oss.sheetjs.com/). This could be useful for client-side parsing of
-uploaded data.
+Found out about [SheetJS](http://oss.sheetjs.com/) - a pure-JavaScript
+excel parser. This could be useful for client-side parsing of uploaded
+data.
 
 
 ### Tuesday 12th
@@ -1104,11 +1107,12 @@ TODO:
 
 ### Saturday 16th
 
-Read up on MVC architecture in PHP (http://r.je/mvc-in-php.html) and some decent
-arguments again static variables and methods
-(http://r.je/static-methods-bad-practice.html). Google has a nice guide to
-writing testable code and code smells and symptoms of bad design to look for
-(http://misko.hevery.com/code-reviewers-guide/).
+Read up on [MVC architecture in PHP](http://r.je/mvc-in-php.html) and
+some
+[decent arguments again static variables and methods](http://r.je/static-methods-bad-practice.html).
+Google has a
+[nice guide](http://misko.hevery.com/code-reviewers-guide/) to writing
+testable code and code smells and symptoms of bad design to look for.
 
 
 ### Sunday 17th
@@ -1124,10 +1128,10 @@ and create a release branch/tag. Bumped project version to 0.0.2.
 
 ### Wednesday 20th
 
-Have been reading about Dependency Injection in PHP, have found a good intro
-article (http://net.tutsplus.com/tutorials/php/dependency-injection-in-php/)
-which recommends a tool Symphony
-(http://symfony.com/doc/2.0/components/dependency_injection/introduction.html).
+Have been reading about Dependency Injection in PHP, have found a good
+[intro article](http://net.tutsplus.com/tutorials/php/dependency-injection-in-php/)
+which recommends a tool
+[Symphony](http://symfony.com/doc/2.0/components/dependency_injection/introduction.html).
 
 
 ### Thursday 21st
@@ -1316,10 +1320,11 @@ Example possible interactive pipbot session:
 
 ### Friday 29th
 
-Found a good article on test coverage in SQLite
-(http://www.sqlite.org/testing.html). Some interesting edge-cases are tested
-such as out-of-memory errors, I/O error testing, and fuzz testing. Should refer
-to this when designing the pip-db testing strategy.
+Found a good article on
+[test coverage in SQLite](http://www.sqlite.org/testing.html). Some
+interesting edge-cases are tested such as out-of-memory errors, I/O
+error testing, and fuzz testing. Should refer to this when designing
+the pip-db testing strategy.
 
 Project name - refactored source code to new project name `pip-db`, and rename
 git repository. New url: https://github.com/ChrisCummins/pip-db.
@@ -1454,11 +1459,11 @@ Notes from meeting with Ian:
 
 ### Friday 13th
 
-Found a nice article on avoiding the assignment statement
-(http://loup-vaillant.fr/tutorials/avoid-assignment), which seems especially
-relevant for PHP programming, given that weak typing can make it hard to see if
-a new variable is being declared or if an existing variable is being
-modified. Example:
+Found a nice article on
+[avoiding the assignment statement](http://loup-vaillant.fr/tutorials/avoid-assignment),
+which seems especially relevant for PHP programming, given that weak
+typing can make it hard to see if a new variable is being declared or
+if an existing variable is being modified. Example:
 
 ```
 $c = 0;
@@ -1468,24 +1473,24 @@ $c = 0;
 $c = 5; // Is $c a new variable, or an existing one???
 ```
 
-Also, the same author has written a nice write-up on the downsides of a
-pervasive mutable state (http://loup-vaillant.fr/articles/classes-suck), as
-inferred by class based programming.
+Also, the same author has written a nice write-up on
+[the downsides of a pervasive mutable state](http://loup-vaillant.fr/articles/classes-suck),
+as inferred by class based programming.
 
 ### Wednesday 18th
 
-Have been reading up on improving page rendering times. I found a great article
-by Google on blocking of page rendering caused by JavaScript
-(https://developers.google.com/speed/docs/insights/BlockingJS) which provides a
-nice inline snippet for deferring the download of JavaScript sources that aren't
-directly needed to render the page.
+Have been reading up on improving page rendering times. I found a
+great article by Google on
+[blocking of page rendering caused by JavaScript](https://developers.google.com/speed/docs/insights/BlockingJS)
+which provides a nice inline snippet for deferring the download of
+JavaScript sources that aren't directly needed to render the page.
 
-Additionally, read a good blog post on using Google's Page Insights tool as a
-performance metric for optimising Bootstrap
-(http://www.appneta.com/blog/bootstrap-pagespeed/). Definitiely useful future
-reference material here, and I should consider using PageSpeed scores and also
-DOMContentLoaded times as a metrics for the optimisation sections of
-development.
+Additionally, read a good
+[blog post](http://www.appneta.com/blog/bootstrap-pagespeed/) on using
+Google's Page Insights tool as a performance metric for optimising
+Bootstrap. Definitely useful future reference material here, and I
+should consider using PageSpeed scores and also DOMContentLoaded times
+as a metrics for the optimisation sections of development.
 
 Further reading on established practises for web performance:
 
