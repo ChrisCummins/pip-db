@@ -804,6 +804,22 @@ Notes from meeting with Ian:
 ## November 2013
 
 
+### Friday 1st
+
+Technical planning stage is coming to an end, will aim to start
+implementation work properly on Sunday - starting with static HTML
+pages and gradually introducing a greater level of interactivity to
+them as the back end is implemented.
+
+Generated different types of project plan based off of the main one,
+each offering a dedicated subset of the main document. So for Darren,
+I've generated a project plan which glosses over the technical details
+but focuses on the bioinformatics aspect of the project, whereas for
+Ian I have generated a project plan which focuses mostly on the
+deadlines and work breakdown structure, since he won't be as
+interested in the project background.
+
+
 ### Saturday 2nd
 
 Read about ionicons, which are a useful set of
@@ -1117,7 +1133,17 @@ testable code and code smells and symptoms of bad design to look for.
 
 ### Sunday 17th
 
-Began implementing MySQL backend in library file `db.php`.
+Began implementing MySQL backend in library file `db.php`. This will
+involve a set of wrapper functions around the `mysql_` PHP API.
+
+
+### Monday 18th
+
+Began implementing a user accounts back end. Unlike the previous FYP,
+this will store only salted hashes of a user's password, rather than
+plain-text original passwords. I will use PHP's blowfish algorithm for
+the cryptography functionality, being stronger than standard
+non-cryptographic hashing algorithms, like MD5 etc.
 
 
 ### Tuesday 19th
@@ -1210,6 +1236,21 @@ Notes from meeting with Darren and Fraser:
 
 Have been given an account and credentials on one of the PSO uni server by Kate
 Samperi. URL: http://pso.aston.ac.uk/cummince.
+
+
+### Sunday 24th
+
+Encountered some serious flaws while attempting to transfer a compiled
+site over the PSO servers. Chiefly, the URL prefixing pattern was
+causing all of the hyperlinks to break across the entire site. Because
+the website is hosted on a user account, the URL is prefixed with:
+`~cummince`, and so any absolute paths to a URL like
+`/path/to/styles.css` was breaking, as it should have been
+`~/cummins/path/to/styles.css`. This seems like it is a problem that
+should be fixed in the configuration script, so I will add a
+`WWW_PREFIX` environment variable to the `configure.ac` script which
+can optionally set a prefix to all of the site links. Note this is
+different from `WWW_ROOT`, which refers to the file path.
 
 
 ### Monday 25th
@@ -1332,6 +1373,41 @@ git repository. New url: https://github.com/ChrisCummins/pip-db.
 
 ## December 2013
 
+
+### Sunday 1st
+
+The focus for the next iteration of development is tooling and version
+control. This starts with transitioning to the
+[Vincent Driessen branching model](http://nvie.com/posts/a-successful-git-branching-model/),
+which has been adopted for the `0.1.1` release.
+
+
+### Monday 2nd
+
+Have been sketching out an initial implementation of `pipbot` as a
+Node.js application. First functionality is to perform release
+branching, so this involves deprecating part of `tools/mkrelease.sh`
+and porting this over to Node.
+
+### Tuesday 3rd
+
+Have changed pipbot implementation language to Python and continued
+development of build and deploy features. Pipbot accepts a `<target,
+build>` name pair and reads configure arguments from a couple of JSON
+files in order to prepare the source tree.
+
+
+### Wednesday 4rd
+
+Have been re-working the project's documentation to make it clearer
+and more accessible. The idea is that the `Documentation/` directory
+should contain a set of Markdown files which can be viewed using
+GitHub's online viewer tools. This logbook is getting ported from
+LaTeX to Markdown, and several new documents will be created to cover
+things like the directory structure, code styles, branching model,
+etc.
+
+
 ### Thursday 5th
 
 Notes from meeting with Ian:
@@ -1363,6 +1439,32 @@ on the things that I've nicked:
 Overall it actually went better than I was expecting, the pip-db infrastructure
 is fairly robust and flexible. Some things though (like `pipbot`) are too
 project-specific to be copied accross, even though they are useful.
+
+### Saturday 7th
+
+Added the ability for pipbot to generate brief burndowns over a date
+range, for example:
+
+```
+$ pipbot burndown 7 days
+Comparing 'master' against 'master'...
+
+  There are 16 new commits on master
+  The last commit on master was 6 days, 21 hours ago
+```
+
+And also to generate comparisons between the current master branch and
+the last release on stable:
+
+```
+$ pipbot burndown release
+Comparing 'master' against 'stable'...
+
+  The last release was 0.1.11
+  There are 98 new commits on master
+  The last commit on stable was 20 days, 14 hours ago
+```
+
 
 ### Sunday 8th
 
@@ -1477,6 +1579,25 @@ Also, the same author has written a nice write-up on
 [the downsides of a pervasive mutable state](http://loup-vaillant.fr/articles/classes-suck),
 as inferred by class based programming.
 
+### Sunday 15th
+
+Refactored pipbot so that it uses a single configuration file in
+`~/.pipbot/config.json` which contains the full build/deploy/pipbot
+config, rather than having lots of separate configuration files in
+`~/.local/etc/pipbot`.
+
+
+### Tuesday 17th
+
+I have created a
+[Markdown version](https://github.com/ChrisCummins/pip-db/blob/master/Documentation/ProjectPlan.md)
+of the project plan, by porting the LaTeX sources to Markdown using
+`pandoc`, and then hand-editing the generated sources and using
+`doctoc` to generate a table of contents. The idea is that this adds a
+version of the project plan suitable for quick online viewing, without
+having to build a PDF file from sources.
+
+
 ### Wednesday 18th
 
 Have been reading up on improving page rendering times. I found a
@@ -1498,7 +1619,16 @@ Further reading on established practises for web performance:
  - http://stevesouders.com/hpws/rules.php
  - http://developer.yahoo.com/performance/rules.html
 
-### Sunday 29th
+
+### Monday 23rd
+
+The aim of holiday implementation work is to reduce the bug-count on
+the M1 prototype, so I've begun fixing some of the implementation
+issues filed in the tracker, starting with the broken pagination
+problem for advanced queries.
+
+
+### Saturday 28th
 
 I have been revamping my personal http://chriscummins.cc site, and
 started off by importing a lot of the pip-db PHP logic and templating
@@ -1513,7 +1643,7 @@ generation techniques to pip-db. Chiefly, the use of Markdown and
 other easy-to-read file formats for content makes a lot of sense, and
 help abstract the site data from the application logic.
 
-### Monday 30th
+### Sunday 29th
 
 It's the end of TP1 and this logbook has already reached 58KB in
 size. I need to consider a more manageable way of working with large
