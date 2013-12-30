@@ -1656,3 +1656,10 @@ files in it, with filenames like `2013-12-29.md` and
 `2013-12-30.md`. The advantage of that is that it produces many
 smaller and separate files, although this would make it harder to do
 whole-document re-factors.
+
+### Monday 30th
+
+Registered the `pip-db.org` domain with GoDaddy for 1 year (no
+renewal), and set up a 301 permanent forward to
+`pso.aston.ac.uk/~cummince/`. When next term starts, should ask Ian
+how to get Uni to reimburse the £9.10 fee.
