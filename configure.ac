@@ -24,6 +24,7 @@ dnl   4.     Build requirements
 dnl   4.1.     Do we have a Less CSS compiler?
 dnl   4.2.     Do we have a Java runtime environment?
 dnl   4.3.     Check for website build destination
+dnl   4.4.     Check for public resources
 dnl
 dnl   5.     Build options
 dnl   5.1.     Are we using content hashing?
@@ -185,6 +186,15 @@ m4_define([www_build],["$(pwd)/build/www"])
 AC_CHECK_FILE([www_build],,[mkdir -pv www_build])
 
 AC_SUBST([WWW_BUILD],[www_build])
+
+dnl     ============================================================
+dnl     4.4. Check for public resources
+dnl     ============================================================
+m4_define([public_resources],["$(pwd)/resources/public"])
+
+AC_CHECK_FILE([public_resources],,[mkdir -pv public_resources])
+
+AC_SUBST([PUBLIC_RESOURCES],[www_build])
 
 
 dnl ================================================================
@@ -665,6 +675,11 @@ AC_OUTPUT([
 	scripts/git/hooks/pre-commit
 	tools/Makefile
 	tools/dsa.sh
+	resources/Makefile
+	resources/css/Makefile
+	resources/fonts/Makefile
+	resources/img/Makefile
+	resources/js/Makefile
 	www/Makefile
 	www/.htaccess
 	www/admin/Makefile

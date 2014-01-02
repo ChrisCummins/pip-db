@@ -1,4 +1,5 @@
 SUBDIRS = \
+	resources \
 	scripts \
 	www \
 	build \
