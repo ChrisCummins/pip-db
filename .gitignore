@@ -93,3 +93,4 @@ Thumbs.db
 /pg
 /target
 /.lein-failures
+/.lein-repl-history
