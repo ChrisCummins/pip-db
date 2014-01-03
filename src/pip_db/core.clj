@@ -3,13 +3,15 @@
         [ring.adapter.jetty :as ring])
   (:require [compojure.route :as route]
             [compojure.handler :as handler]
-            [pip-db.controllers.index :as index]
             [pip-db.views.layout :as layout]
-            [pip-db.models.migration :as migration])
+            [pip-db.models.migration :as migration]
+            [pip-db.controllers.index :as index]
+            [pip-db.controllers.login :as login])
   (:gen-class))
 
 (defroutes routes
   index/routes
+  login/routes
   (route/resources "/")
   (route/not-found (layout/not-found)))
 
