@@ -5,7 +5,7 @@
   (page {
          :title "Upload"
          :navbar {}
-         :heading "Add new data"
+         :heading {:title "Add new data"}
          :body [:div.advsearch
                 [:form {:method "POST" :action "/upload"
                         :enctype "multipart/form-data"}

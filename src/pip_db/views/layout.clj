@@ -5,6 +5,21 @@
   (:require [pip-db.views.navbar :as navbar]
             [pip-db.views.footer :as footer]))
 
+(defn heading [data]
+  [:div.page-title
+   [:div.page-title-inner
+    (if (data :download)
+      [:div.download [:a.btn.btn-warning {:href (data :download)} "Download"]])
+    (if (data :title) [:h3 (data :title)])
+
+    (if (data :meta)
+      [:div.info
+       [:ul.meta-tags
+        [:li (str "Found " (data :meta-results-count)
+                  (if (> (data :meta-results-count) 1)
+                    " results..." " result..."))]
+        [:li (str "(" (data :meta-elapsed) " seconds)")]]])]
+   [:hr]])
 
 (defn page [data]
   (html5 {:lang "en" :class "no-js"}
@@ -23,7 +38,9 @@
 
          [:body
           (if (data :navbar) (navbar/html (data :navbar)))
-          [:div#wrap [:div.container (data :body)]]
+          [:div#wrap [:div.container
+                      (if (data :heading) (heading (data :heading)))
+                      (data :body)]]
           (if (not (data :hide-footer)) (footer/html))
 
           (include-js
