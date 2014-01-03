@@ -1,22 +1,22 @@
 (ns pip-db.views.navbar
   (:use [pip-db.views.components]))
 
-(def navbar-search
-  [[:div.navbar-search.col-sm-7.col-md-7
-    [:form.navbar-form {:action "/s" :role "search"}
-     [:div.input-group
-      [:input#q.form-control {:name "q"
-                              :type "text"
-                              :value ""
-                              :autocomplete "off"}]
-      [:div.input-group-btn
-       [:button.btn.btn-success {:type "submit"} "Search"]]]]]
+(defn navbar-search []
+  '([:div.navbar-search.col-sm-7.col-md-7
+     [:form.navbar-form {:action "/s" :role "search"}
+      [:div.input-group
+       [:input#q.form-control {:name "q"
+                               :type "text"
+                               :value ""
+                               :autocomplete "off"}]
+       [:div.input-group-btn
+        [:button.btn.btn-success {:type "submit"} "Search"]]]]]
 
-   [:ul.nav.navbar-nav
-    [:li
-     [:div.navbar-button-group
-      [:div.navbar-button
-       [:a.btn.btn-primary {:href "/advanced"} "Advanced"]]]]]])
+      [:ul.nav.navbar-nav
+       [:li
+        [:div.navbar-button-group
+         [:div.navbar-button
+          [:a.btn.btn-primary {:href "/advanced"} "Advanced"]]]]]))
 
 (defn html [data]
   [:div.navbar.navbar-fixed-top
@@ -36,7 +36,7 @@
      [:a.navbar-brand {:href "/"} "pip-db"]]
 
     [:div.navbar-collapse.collapse
-     (if (data :search) navbar-search)
+     (if (data :search) (navbar-search))
 
      [:ul.nav.navbar-nav.navbar-right
       (if (data :session)
