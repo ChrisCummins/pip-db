@@ -12,8 +12,11 @@
      [:td [:strong "pI"]]]]
    [:tbody
     (for [record results]
-      [:tr {:data-id (record 0)}
-       (for [value (subvec record 1)] [:td value])])]])
+      [:tr {:data-id (record :id)}
+       [:td (record :name)]
+       [:td (record :source)]
+       [:td (record :organ)]
+       [:td (record :pi)]])]])
 
 (defn search [query results]
   (page {:title query
