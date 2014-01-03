@@ -14,8 +14,8 @@
 
 (defn process-action [action user pass]
   (login (if (= action "register")
-                   (model/attempt-register user pass)
-                   (model/attempt-login user pass))))
+           (model/attempt-register user pass)
+           (model/attempt-login user pass))))
 
 (defn form-is-filled [user pass]
   (and (not (str/blank? user)) (not (str/blank? pass))))
