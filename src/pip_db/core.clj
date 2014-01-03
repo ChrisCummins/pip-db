@@ -8,12 +8,14 @@
             [pip-db.views.layout :as layout]
             [pip-db.models.migration :as migration]
             [pip-db.controllers.index :as index]
+            [pip-db.controllers.search :as search]
             [pip-db.controllers.login :as login]
             [pip-db.controllers.upload :as upload])
   (:gen-class))
 
 (defroutes routes
   index/routes
+  search/routes
   login/routes
   upload/routes
   (route/resources "/")
