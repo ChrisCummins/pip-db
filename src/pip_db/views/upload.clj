@@ -10,7 +10,7 @@
                 [:form {:method "POST" :action "/upload"
                         :enctype "multipart/form-data"}
                  [:div.row
-                  [:div.col-md-12 [:h3 "1. Upload new data from file..."]]]
+                  [:div.col-md-12 [:h4 "1. Upload new data from file..."]]]
                  [:div.row
                   [:div.col-md-12 [:input {:name "f" :type "file"}]]]
                  [:div.row
@@ -18,7 +18,7 @@
                    [:div.info "Accepted file formats: .xls, .xlsx, .csv"]]]
                  [:hr]
                  [:div.row
-                  [:div.col-md-12 [:h3 "2. Or add a new record..."]]]
+                  [:div.col-md-12 [:h4 "2. Or add a new record..."]]]
                  [:div.row
                   [:div.col-md-2 [:label {:for "words-all"} "protein name:"]]
                   [:div.col-md-6 [:input#name {:type "text"}]]
