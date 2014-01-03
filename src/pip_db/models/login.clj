@@ -17,7 +17,7 @@
   (crypto/check plaintext hash))
 
 (defn credentials-are-valid? [user password]
-  (hashes-match? password (get-user user) :pass))
+  (hashes-match? password ((get-user user) :pass)))
 
 (defn add-account [user password]
   (sql/with-connection (System/getenv "DATABASE_URL")
