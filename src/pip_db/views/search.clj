@@ -23,7 +23,7 @@
          :navbar {:search true :search-text query}
          :heading {:meta true
                    :meta-results-count (count results)
-                   :meta-elapsed "0.0s" :download "/"}
+                   :download "/"}
          :body [:div.sresults
                 (if (> (count results) 0)
                   (tablify-results results)

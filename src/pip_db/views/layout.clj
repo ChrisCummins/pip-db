@@ -17,8 +17,7 @@
        [:ul.meta-tags
         [:li (str "Found " (data :meta-results-count)
                   (if (> (data :meta-results-count) 1)
-                    " results..." " result..."))]
-        [:li (str "(" (data :meta-elapsed) " seconds)")]]])]
+                    " results..." " result..."))]]])]
    [:hr]])
 
 (defn page [data]
