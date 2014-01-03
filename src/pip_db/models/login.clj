@@ -10,15 +10,21 @@
       (if (= results nil)
         nil (first (doall results))))))
 
+(defn get-hash [plaintext]
+  (crypto/encrypt plaintext))
+
+(defn hashes-match? [plaintext hash]
+  (crypto/check plaintext hash))
+
 (defn credentials-are-valid? [user password]
-  (crypto/check password ((get-user user) :pass)))
+  (hashes-match? password (get-user user) :pass))
 
 (defn add-account [user password]
   (sql/with-connection (System/getenv "DATABASE_URL")
     (sql/insert-values :users
                        [:email :pass :user_type_id]
-                       [user (crypto/encrypt password) 1]))
-  (str "Add user accound - user: " user " pass: " (crypto/encrypt password)))
+                       [user (get-hash password) 1]))
+  (str "Add user accound - user: " user " pass: " (get-hash password)))
 
 (defn attempt-register [user password]
   (if (not (get-user user))
