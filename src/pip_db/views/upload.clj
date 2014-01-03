@@ -8,7 +8,7 @@
          :heading "Add new data"
          :body [:div.advsearch
                 [:form {:method "POST" :action "/upload"
-                        :enctype "multiplart/form-data"}
+                        :enctype "multipart/form-data"}
                  [:div.row
                   [:div.col-md-12 [:h3 "1. Upload new data from file..."]]]
                  [:div.row

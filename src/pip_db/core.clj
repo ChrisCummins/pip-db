@@ -1,5 +1,7 @@
 (ns pip-db.core
   (:use [compojure.core :only (defroutes)]
+        [ring.middleware.params]
+        [ring.middleware.multipart-params]
         [ring.adapter.jetty :as ring])
   (:require [compojure.route :as route]
             [compojure.handler :as handler]
@@ -17,7 +19,10 @@
   (route/resources "/")
   (route/not-found (layout/not-found)))
 
-(def application (handler/site routes))
+(def application
+  (-> routes
+      wrap-params
+      wrap-multipart-params))
 
 (defn start [port]
   (run-jetty application {:port port :join? false}))
