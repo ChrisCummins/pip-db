@@ -11,5 +11,5 @@
   (POST "/upload" {params :params}
         (let [file (get params "f")]
           (if file
-            (model/upload-file file)
+            (model/parse-csv-file (model/upload-file file))
             "No file found"))))
