@@ -7,10 +7,5 @@
   (view/search query results))
 
 (defroutes routes
-  (GET "/s" [] (search "alkaline"
-                       [["243" "prot" "src" "loc" "pi"]
-                        ["243" "prot" "src" "loc" "pi"]
-                        ["243" "prot" "src" "loc" "pi"]
-                        ["243" "prot" "src" "loc" "pi"]
-                        ["243" "prot" "src" "loc" "pi"]
-                        ["243" "prot" "src" "loc" "pi"]])))
+  (GET "/s" {params :params}
+       (search (get params "q") (model/query params))))
