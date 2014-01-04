@@ -40,7 +40,7 @@
                    (property "pI" (data :pi))
                    (property "Molecular Weight" (data :mw))
                    (property "Sub unit no" (data :sub_no))
-                   (property "Sub unit MW" (data :sub_nw))
+                   (property "Sub unit MW" (data :sub_mw))
                    (property "Number of Iso Enzymes" (data :no_iso))
                    (property "Valid sequences available" (data :valid))
                    (property "Experimental method" (data :method))
