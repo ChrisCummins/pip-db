@@ -4,7 +4,7 @@
 (defn advanced []
   (page {
          :title "Advanced Search"
-         :navbar {:search true}
+         :navbar {}
          :heading {:title "Advanced Search"}
          :body [:div.advsearch
                 [:form#as {:method "GET" :action "/s"}
