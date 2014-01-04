@@ -64,7 +64,7 @@
                   [:div.col-md-12 [:h4 "Then narrow results by..."]]]
                  [:div.row
                   [:div.col-md-2
-                   [:label {:for "location"} "enzyme commission number:"]]
+                   [:label {:for "ec1"} "enzyme commission number:"]]
                   [:div.col-md-6
                    [:div {:style "display: table; width: 100%;"}
                     [:div {:style "display: table-cell; padding-right: 16px;"}
@@ -118,7 +118,7 @@
                     "Enter an exact or range of molecular weights."]]]
                  [:div.row
                   [:div.col-md-2
-                   [:label {:for "location"} "experimental method:"]]
+                   [:label {:for "m"} "experimental method:"]]
                   [:div.col-md-6
                    [:select {:name "m"}
                     [:option "Analytical gel isoelectric focusing"]
