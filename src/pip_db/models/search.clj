@@ -44,7 +44,7 @@
     (str "SELECT id,name,source,organ,pi FROM records WHERE "
          (conditionals params)))
 
-(defn query [params]
+(defn search [params]
   (sql/with-connection (System/getenv "DATABASE_URL")
     (sql/with-query-results results
       [(query-string params)]

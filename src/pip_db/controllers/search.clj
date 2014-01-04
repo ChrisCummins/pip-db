@@ -10,4 +10,4 @@
 (defroutes routes
   (GET "/advanced" [] (advanced/advanced))
   (GET "/s" {params :params}
-       (search (get params "q") (model/query params))))
+       (search (get params "q") (model/search params))))
