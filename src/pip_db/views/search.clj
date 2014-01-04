@@ -18,14 +18,14 @@
        [:td (record :organ)]
        [:td (record :pi)]])]])
 
-(defn search [query results]
+(defn search [query data]
   (page {:title query
          :navbar {:search true :search-text query}
          :heading {:meta true
-                   :meta-results-count (count results)
+                   :meta-results-count (data :results-count)
                    :download "/"}
          :body [:div.sresults
-                (if (> (count results) 0)
-                  (tablify-results results)
+                (if (> (data :results-count) 0)
+                  (tablify-results (data :results))
                   [:p.lead "No results found."])]
          :javascript (inline-js "/js/search.js")}))

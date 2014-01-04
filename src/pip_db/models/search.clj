@@ -46,6 +46,7 @@
 
 (defn search [params]
   (sql/with-connection (System/getenv "DATABASE_URL")
-    (sql/with-query-results results
-      [(query-string params)]
-      (doall results))))
+    (sql/with-query-results results [(query-string params)]
+      (let [data (doall results)]
+        {:results data
+         :results-count (count data)}))))
