@@ -48,4 +48,4 @@
   (sql/with-connection (System/getenv "DATABASE_URL")
     (sql/with-query-results results
       [(query-string params)]
-      (if results (doall results) nil))))
+      (doall results))))
