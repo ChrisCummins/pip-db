@@ -8,7 +8,7 @@
 (def re-empty-condition #" *\(? *\)?\ *")
 
 (defn strip-conditions [conditions]
-  (filter (fn [x] (not (re-matches re-empty-condition x))) conditions))
+  (filter #(not (re-matches re-empty-condition %)) conditions))
 
 (defn compound-condition [join conditions]
   (str "(" (str/join join (strip-conditions conditions)) ")"))
