@@ -16,8 +16,8 @@
       [:div.info
        [:ul.meta-tags
         [:li (str "Found " (data :meta-results-count)
-                  (if (> (data :meta-results-count) 1)
-                    " results..." " result..."))]]])]
+                  (if (= (data :meta-results-count) 1)
+                    " result..." " results..."))]]])]
    [:hr]])
 
 (defn page [data]
