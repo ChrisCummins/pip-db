@@ -13,13 +13,17 @@
 (defn compound-conditional [join conditions]
   (str "(" (str/join join (strip-conditions conditions)) ")"))
 
+(defn match-condition [condition]
+  (if (condition :value)
+    (str "(LOWER(" (condition :field) ") "
+         (if (condition :not) "NOT ") "LIKE "
+         "LOWER('%" (condition :value) "%'))") ""))
+
 (defn EQ [condition]
-  (str "LOWER(" (condition :field) ") LIKE LOWER('%" (condition :value) "%')"))
+  (match-condition condition))
 
 (defn NE [condition]
-  (str "LOWER(" (condition :field)
-       ") NOT LIKE LOWER('%"
-       (condition :value) "%')"))
+  (match-condition (assoc condition :not true)))
 
 (defn AND [conditions]
   (compound-conditional " AND " (doall conditions)))
