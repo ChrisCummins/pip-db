@@ -10,7 +10,7 @@
 (defn strip-conditions [conditions]
   (filter (fn [x] (not (re-matches re-empty-condition x))) conditions))
 
-(defn compound-conditional [join conditions]
+(defn compound-condition [join conditions]
   (str "(" (str/join join (strip-conditions conditions)) ")"))
 
 (defn match-condition [condition]
@@ -26,7 +26,7 @@
   (match-condition (assoc condition :not true)))
 
 (defn AND [conditions]
-  (compound-conditional " AND " (doall conditions)))
+  (compound-condition " AND " (doall conditions)))
 
 (defn OR [conditions]
-  (compound-conditional " OR " (doall conditions)))
+  (compound-condition " OR " (doall conditions)))
