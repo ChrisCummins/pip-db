@@ -1,14 +1,10 @@
 (ns pip-db.views.login
   (:use [pip-db.views.layout :only (page)]
-        [hiccup.form :only (form-to label)]))
+        [pip-db.views.components :only (inline-css)]))
 
 (defn login []
   (page {:title "Sign in"
-         :header [:style
-"body {
-  background: #eee;
-  padding: 40px auto;
-}"]
+         :header (inline-css "/css/login.css")
          :body [:form.form-signin {:method "post" :action "/login"}
                 [:h2.form-signin-heading "Login"]
                 [:input.form-control {:name "user" :type "text"

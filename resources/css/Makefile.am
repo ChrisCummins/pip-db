@@ -1,5 +1,6 @@
 # Less CSS source files@
 LESS = \
+	login.less \
 	styles.less \
 	$(NULL)
 
