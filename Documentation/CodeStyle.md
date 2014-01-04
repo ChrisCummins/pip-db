@@ -1,16 +1,16 @@
 # Code Style
 
+## Clojure
+
+Refer to the [community coding style](https://github.com/bbatsov/clojure-style-guide).
+
 ## JavaScript
 
 Use Felix Geisendörfer's [Node.js Style Guide](http://nodeguide.com/style.html).
 
-## Less CSS
+## HTML/CSS
 
-To be confirmed!
-
-## PHP
-
-Use the [WordPress PHP Coding Standards](http://make.wordpress.org/core/handbook/coding-standards/php/).
+Refer to the [Google HTML/CSS Style Guide](http://google-styleguide.googlecode.com/svn/trunk/htmlcssguide.xml).
 
 ## Python
 
