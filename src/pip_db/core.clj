@@ -1,30 +1,14 @@
 (ns pip-db.core
-  (:use [compojure.core :only (defroutes)]
-        [ring.middleware.params]
+  (:use [ring.middleware.params]
         [ring.middleware.multipart-params]
         [ring.adapter.jetty :as ring])
-  (:require [compojure.route :as route]
-            [compojure.handler :as handler]
-            [pip-db.views.layout :as layout]
-            [pip-db.models.migration :as migration]
-            [pip-db.controllers.index :as index]
-            [pip-db.controllers.search :as search]
-            [pip-db.controllers.record :as record]
-            [pip-db.controllers.login :as login]
-            [pip-db.controllers.upload :as upload])
+  (:require [compojure.handler :as handler]
+            [pip-db.router :as router]
+            [pip-db.models.migration :as migration])
   (:gen-class))
 
-(defroutes routes
-  index/routes
-  search/routes
-  record/routes
-  login/routes
-  upload/routes
-  (route/resources "/")
-  (route/not-found (layout/not-found)))
-
 (def application
-  (-> routes
+  (-> router/routes
       wrap-params
       wrap-multipart-params))
 
