@@ -47,7 +47,8 @@
           [:script "window.jQuery || document.write('"
            "<script src=\"/js/jquery-1.10.2.min.js\"><\\/script>');"]
           (include-js "/js/bootstrap-3.0.1.min.js"
-                      "/js/main.js")
+                      "/js/main.js"
+                      "/js/moment.min.js")
           (data :javascript)]))
 
 (defn not-found []
