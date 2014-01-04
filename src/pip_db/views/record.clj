@@ -1,5 +1,6 @@
 (ns pip-db.views.record
-  (:use [pip-db.views.layout :only (page)])
+  (:use [pip-db.views.layout :only (page)]
+        [pip-db.views.components :only (inline-js)])
   (:require [clojure.string :as str]))
 
 (defn properties [& properties]
@@ -59,26 +60,7 @@
                     [:h3.panel-title "Reference this page"]]
                    [:div.panel-body
                     [:blockquote#reference]]]]]]
-         :javascript [:script
-"$(document).ready(function() {
-  /*
-   * REFERENCE THIS PAGE:
-   */
-  $('#reference').html('Protein Isoelectric point Database (2014) <i>' +
-                       window.document.title.replace(/pip-db /, '') +
-                       '</i>, pip-db. Available from: &lt;' +
-                       '<span class=\"url\">' +
-                       window.location + '</span>&gt;<br/>[Cited ' +
-                       moment().format('Do MMMM, YYYY') + '].');
-
-  /*
-   * RECORD ADDED:
-   */
-  $('#date-added').html('Added ' +
-                        moment($('#date-added').attr('data-date')).fromNow() +
-                        '.');
-
-});"]}))
+         :javascript (inline-js "/js/record.js")}))
 
 (defn no-record []
   (page {:title "Not Found"
