@@ -90,3 +90,8 @@ Thumbs.db
 # Project-specific ignore patterns
 #
 /config.summary
+/pg
+/target
+/.lein-failures
+/.lein-repl-history
+/.nrepl-port
