@@ -2,10 +2,10 @@ $(document).ready(function() {
   /*
    * REFERENCE THIS PAGE:
    */
-  $('#reference').html('Protein Isoelectric point Database (2014) <i>' +
+  $('#reference').html('pip-db (2014). <i>' +
                        window.document.title.replace(/pip-db /, '') +
-                       '</i>, pip-db. Available from: &lt;' +
-                       '<span class=\"url\">' +
+                       '</i>, Protein Isoelectric point Database. ' +
+                       'Available from: &lt;<span class=\"url\">' +
                        window.location + '</span>&gt;<br/>[Cited ' +
                        moment().format('Do MMMM, YYYY') + '].');
 
