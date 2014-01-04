@@ -194,7 +194,7 @@ m4_define([public_resources],["$(pwd)/resources/public"])
 
 AC_CHECK_FILE([public_resources],,[mkdir -pv public_resources])
 
-AC_SUBST([PUBLIC_RESOURCES],[www_build])
+AC_SUBST([PUBLIC_RESOURCES],[public_resources])
 
 
 dnl ================================================================
