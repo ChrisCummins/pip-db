@@ -514,7 +514,7 @@ dnl         8.4. Do we have optimist?
 dnl         ========================================================
 AS_IF([test "x$enable_tools" = xyes],
       [AC_MSG_CHECKING([for optimist package])
-       AS_IF([test -n "$(npm ls -g | grep optimist)"],
+       AS_IF([test -n "$(npm ls -g 2>/dev/null | grep optimist)"],
              [HAVE_NODE_OPTIMIST=yes],
              [HAVE_NODE_OPTIMIST=no])
        AC_MSG_RESULT([$HAVE_NODE_OPTIMIST])
