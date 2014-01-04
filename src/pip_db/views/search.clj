@@ -1,6 +1,6 @@
 (ns pip-db.views.search
-  (:use [pip-db.views.layout]
-        [hiccup.core]))
+  (:use [pip-db.views.layout :only (page)]
+        [pip-db.views.components :only (inline-js)]))
 
 (defn tablify-results [results]
   [:table.table.table-striped.table-hover.table-bordered
@@ -28,14 +28,4 @@
                 (if (> (count results) 0)
                   (tablify-results results)
                   [:p.lead "No results found."])]
-         :javascript [:script
-"$(document).ready(function() {
-  /*
-   * SEARCH RESULTS:
-   *
-   * Link each result to its corresponding record page.
-   */
-  $('.sresults table tr').click(function() {
-    window.location = '/record/' + $(this).attr('data-id');
-  });
-});"]}))
+         :javascript (inline-js "/js/search.js")}))
