@@ -40,13 +40,13 @@
       (EQ {:field "organ" :value q_l})
       (EQ {:field "method" :value m})))))
 
-(defn query-string [params]
+(defn query [params]
     (str "SELECT id,name,source,organ,pi FROM records WHERE "
          (conditionals params)))
 
 (defn search [params]
   (sql/with-connection (System/getenv "DATABASE_URL")
-    (sql/with-query-results results [(query-string params)]
+    (sql/with-query-results results [(query params)]
       (let [data (doall results)]
         {:results data
          :results-count (count data)}))))
