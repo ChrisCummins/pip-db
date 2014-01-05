@@ -9,8 +9,8 @@
  * @param array(string) $legal_values An array of legal variable names.
  */
 class IllegalSuperglobalException extends Exception {
-	public function __construct($value, $super_type = "",
-				    $legal_values = null) {
+	public function __construct( $value, $super_type = "",
+				     $legal_values = null ) {
 		$message = 'Illegal ';
 		$message .= ( '' == $super_type ) ? 'superglobal' : $super_type;
 		$message .= ' variable: "' . $value . '".';
@@ -18,13 +18,13 @@ class IllegalSuperglobalException extends Exception {
 		if ( null !== $legal_values ) {
 			$message .= ' Legal values: [ ';
 
-			foreach ($legal_values as $val) {
+			foreach ( $legal_values as $val ) {
 				$message .= '"' . $val . '" ';
 			}
 
 			$message .= '].';
 		}
 
-		parent::__construct($message);
+		parent::__construct( $message );
 	}
 }
