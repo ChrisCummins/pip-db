@@ -44,7 +44,7 @@ find_files_with_extension() {
 
   cd "$(get_project_root)"
 
-  find ".$subdir" $args -type f -name '*.'"$ext" | grep -v '/build/www/' | sort
+  find ".$subdir" $args -type f -name '*.'"$ext" | grep -v '/resources/public/' | sort
 }
 
 # Returns the line counts for a list of files.
@@ -106,6 +106,26 @@ get_build_sloccounts() {
   print_sloccount $makefile $total "Makefile.am"
 }
 
+# Returns a list of sloccounts for the resources.
+get_resources_sloccounts() {
+  local js=$(get_lc_of_files "$(find_files_with_extension js resources)")
+  local less=$(get_lc_of_files "$(find_files_with_extension less resources)")
+  local total=$((js+less))
+
+  print_sloccount $js    $total "JavaScript"
+  print_sloccount $less  $total "Less CSS"
+}
+
+# Returns a list of sloccounts for the sources.
+get_src_sloccounts() {
+  local src=$(get_lc_of_files "$(find_files_with_extension clj src)")
+  local test=$(get_lc_of_files "$(find_files_with_extension clj test)")
+  local total=$((src+test))
+
+  print_sloccount $src   $total "Clojure"
+  print_sloccount $test  $total "Clojure (tests)"
+}
+
 # Returns a list of sloccounts for the Documentation.
 get_doc_sloccounts() {
   local latex=$(get_lc_of_files "$(find_files_with_extension tex)")
@@ -139,9 +159,11 @@ sum_rows() {
 
 main() {
   local build=$(sum_rows "$(get_build_sloccounts)")
+  local resources=$(sum_rows "$(get_resources_sloccounts)")
+  local src=$(sum_rows "$(get_src_sloccounts)")
   local docs=$(sum_rows "$(get_doc_sloccounts)")
   local tools=$(sum_rows "$(get_tools_sloccounts)")
-  local total=$((build+docs+tools))
+  local total=$((build+resources+src+docs+tools))
 
   echo "$(get_package_string) - Source lines of code"
   echo "$(date)"
@@ -150,6 +172,14 @@ main() {
   echo ""
   echo "Build system: $build"
   get_build_sloccounts | sort -rn | column -t -s $'\t'
+
+  echo ""
+  echo "Resources: $resources"
+  get_resources_sloccounts | sort -rn | column -t -s $'\t'
+
+  echo ""
+  echo "Sources: $src"
+  get_src_sloccounts | sort -rn | column -t -s $'\t'
 
   echo ""
   echo "Documentation: $docs"
