@@ -16,16 +16,6 @@ your JavaScript, analyzes it, removes dead code and rewrites and minimizes
 what's left. It also checks syntax, variable references, and types, and warns
 about common JavaScript pitfalls.
 
-## HTML Compressor
-    HTML Compressor (https://code.google.com/p/htmlcompressor/)
-    License: Apache License 2.0
-
-HtmlCompressor is a small, fast and very easy to use Java library that minifies
-given HTML or XML source by removing extra whitespaces, comments and other
-unneeded characters without breaking the content structure. As a result pages
-become smaller in size and load faster. A command-line version of the compressor
-is also available.
-
 ## YUI Compressor
     YUI COmpressor (https://github.com/yui/yuicompressor)
     License: BSD (revised) open source license

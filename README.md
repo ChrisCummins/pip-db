@@ -38,15 +38,15 @@ adaptable GUI for searching, viewing and downloading results would greatly
 increase the accessibility of the dataset. For more detailed information about
 pip-db, see [the documentation](Documentation/).
 
-## Building the website
+## Installation
 
-The website should build under most GNU/Linux environments, using the standard
-GNU Autotools procedure:
+The project can be built from a GNU/Linux environment using the
+standard GNU Autotools procedure:
 
 ```sh
 $ ./autogen.sh
 $ ./configure
-$ make all
+$ make
 ```
 
 See `./configure --help` for a list of configuration options for building the
@@ -56,6 +56,8 @@ website.
 * [Autoconf](http://www.gnu.org/software/autoconf/)
 * [Automake](http://www.gnu.org/software/automake/)
 * [Java](http://www.java.com/en/)
+* [Leiningen](https://github.com/technomancy/leiningen)
+* [PostgreSQL](http://www.postgresql.org/)
 * [Node.js](http://nodejs.org/)
 * [Less](http://lesscss.org/)
 * [Git](http://git-scm.com/) *(optional, required only to build the extra tools)*
@@ -66,15 +68,17 @@ website.
 * [pandoc](http://johnmacfarlane.net/pandoc/) *(optional, required only to build the extra documentation)*
 * [doctoc](https://github.com/thlorenz/doctoc) *(optional, required only to build the extra documentation)*
 
-## Hosting the website
+## Running the website
 
-The website can be deployed on a LAMP stack, by exporting the contents of the
-`/build/www` directory.
-
-### Requirements
-* [Apache](http://www.apache.org/)
-* [MySQL](http://www.mysql.com/)
-* [PHP](http://php.net/)
+```sh
+# First, setup the required environment variables:
+$ ./scripts/env.sh
+Starting a development shell...
+# Start a user database session:
+$ postgres -D pg >/dev/null &
+# Run the website server:
+$ lein run
+```
 
 ## License
 

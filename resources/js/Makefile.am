@@ -14,6 +14,8 @@ MINIFIED = $(addprefix $(DEST)/, $(EXTERN_SRC))
 
 noinst_SCRIPTS = $(JS)
 
+CLEANFILES = $(noinst_SCRIPTS)
+
 EXTRA_DIST = $(SRC)
 
 # Compilation command

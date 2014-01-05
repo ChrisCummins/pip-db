@@ -4,12 +4,14 @@
   (:require [clojure.string :as str]))
 
 (defn properties [& properties]
-  [:table.table.table-striped.table-bordered
+  [:table#properties.table.table-striped.table-bordered
    [:tbody properties]])
 
-(defn property [name value]
-  (if (not (str/blank? value))
-    [:tr [:td name][:td value]]))
+(defn property [description data key]
+  (let [value (data key)]
+    (if (not (str/blank? value))
+      [:tr.property {:data-key (name key)}
+       [:td.description description][:td.value value]])))
 
 (defn extern-links [& links]
   [:div.panel.panel-primary.panel-extern
@@ -32,19 +34,19 @@
                 [:div.row
                  [:div.col-md-8
                   (properties
-                   (property "Name" (data :name))
-                   (property "Alternative name(s)" (data :alt_name))
-                   (property "Enzyme Commission number" (data :ec))
-                   (property "Source" (data :source))
-                   (property "Location" (data :organ))
-                   (property "pI" (data :pi))
-                   (property "Molecular Weight" (data :mw))
-                   (property "Sub unit no" (data :sub_no))
-                   (property "Sub unit MW" (data :sub_nw))
-                   (property "Number of Iso Enzymes" (data :no_iso))
-                   (property "Valid sequences available" (data :valid))
-                   (property "Experimental method" (data :method))
-                   (property "Experimental method" (data :temp)))
+                   (property "Name" data :name)
+                   (property "Alternative name(s)" data :alt_name)
+                   (property "Enzyme Commission number" data :ec)
+                   (property "Source" data :source)
+                   (property "Location" data :organ)
+                   (property "pI" data :pi)
+                   (property "Molecular Weight" data :mw)
+                   (property "Sub unit no" data :sub_no)
+                   (property "Sub unit MW" data :sub_mw)
+                   (property "Number of Iso Enzymes" data :no_iso)
+                   (property "Valid sequences available" data :valid)
+                   (property "Experimental method" data :method)
+                   (property "Experimental method" data :temp))
                   [:div.meta-holder
                    [:ul.meta-tags
                     [:li#date-added {:data-date (data :created_at)}]]]]
