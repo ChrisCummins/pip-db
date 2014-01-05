@@ -90,7 +90,7 @@ print_sloccount() {
   local percentage=$(get_perc $linecount $total_linecount)
 
   if [[ $linecount > 0 ]]; then
-    echo -e "$linecount\t$file\t($percentage%)"
+    echo -e "$(printf %6d $linecount)\t$file\t($percentage%)"
   fi
 }
 
@@ -101,9 +101,9 @@ get_build_sloccounts() {
   local makefile=$(get_lc_of_files "$(find_files_with_extension am)")
   local total=$((autogen+$configure+$makefile))
 
-  print_sloccount $autogen $total "autogen.sh"
-  print_sloccount $configure $total "configure.ac"
-  print_sloccount $makefile $total "Makefile.am"
+  print_sloccount $autogen   $total "autogen.sh       "
+  print_sloccount $configure $total "configure.ac     "
+  print_sloccount $makefile  $total "Makefile.am      "
 }
 
 # Returns a list of sloccounts for the resources.
@@ -112,8 +112,8 @@ get_resources_sloccounts() {
   local less=$(get_lc_of_files "$(find_files_with_extension less resources)")
   local total=$((js+less))
 
-  print_sloccount $js    $total "JavaScript"
-  print_sloccount $less  $total "Less CSS"
+  print_sloccount $js        $total "JavaScript       "
+  print_sloccount $less      $total "Less CSS         "
 }
 
 # Returns a list of sloccounts for the sources.
@@ -122,8 +122,8 @@ get_src_sloccounts() {
   local test=$(get_lc_of_files "$(find_files_with_extension clj test)")
   local total=$((src+test))
 
-  print_sloccount $src   $total "Clojure"
-  print_sloccount $test  $total "Clojure (tests)"
+  print_sloccount $src       $total "Clojure          "
+  print_sloccount $test      $total "Clojure (tests)  "
 }
 
 # Returns a list of sloccounts for the Documentation.
@@ -132,8 +132,8 @@ get_doc_sloccounts() {
   local md=$(get_lc_of_files "$(find_files_with_extension md)")
   local total=$((latex+$md))
 
-  print_sloccount $latex $total "LaTeX"
-  print_sloccount $md    $total "Markdown"
+  print_sloccount $latex     $total "LaTeX            "
+  print_sloccount $md        $total "Markdown         "
 }
 
 # Returns a list of sloccounts for the tools.
@@ -144,10 +144,10 @@ get_tools_sloccounts() {
   local rb=$(get_lc_of_files "$(find_files_with_extension rb tools/)")
   local total=$((sh+$js+$py+$rb))
 
-  print_sloccount $sh    $total "Shell"
-  print_sloccount $js    $total "JavaScript"
-  print_sloccount $py    $total "Python"
-  print_sloccount $rb    $total "Ruby"
+  print_sloccount $sh        $total "Shell            "
+  print_sloccount $js        $total "JavaScript       "
+  print_sloccount $py        $total "Python           "
+  print_sloccount $rb        $total "Ruby             "
 }
 
 # Returns the sum of a list of integers
