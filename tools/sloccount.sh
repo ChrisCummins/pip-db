@@ -106,36 +106,6 @@ get_build_sloccounts() {
   print_sloccount $makefile $total "Makefile.am"
 }
 
-# Returns a list of sloccounts for the website pages.
-get_page_sloccounts() {
-  local less=$(get_lc_of_files "$(find_files_with_extension less www/)")
-  local html=$(get_lc_of_files "$(find_files_with_extension html www/)")
-  local js=$(get_lc_of_files "$(find_files_with_extension js www/)")
-  local total=$((less+$html+$js))
-
-  print_sloccount $less  $total "Less CSS"
-  print_sloccount $html  $total "HTML"
-  print_sloccount $js    $total "JavaScript"
-}
-
-# Returns a list of sloccounts for the website controller code.
-get_controller_sloccounts() {
-  local pages=$(get_lc_of_files "$(find_files_with_extension php www/ 1)")
-  local lib=$(get_lc_of_files "$(find_files_with_extension php www/lib 1)")
-  local total=$((pages+$lib))
-
-  print_sloccount $pages $total "PHP (pages)"
-  print_sloccount $lib   $total "PHP (lib)"
-}
-
-# Returns a list of sloccounts for the external libraries.
-get_extern_sloccounts() {
-  local twig=$(get_lc_of_files "$(find_files_with_extension php www/lib/Twig)")
-  local total=$((twig))
-
-  print_sloccount $twig  $total "PHP (twig)"
-}
-
 # Returns a list of sloccounts for the Documentation.
 get_doc_sloccounts() {
   local latex=$(get_lc_of_files "$(find_files_with_extension tex)")
@@ -169,12 +139,9 @@ sum_rows() {
 
 main() {
   local build=$(sum_rows "$(get_build_sloccounts)")
-  local page=$(sum_rows "$(get_page_sloccounts)")
-  local cont=$(sum_rows "$(get_controller_sloccounts)")
-  local lib=$(sum_rows "$(get_extern_sloccounts)")
   local docs=$(sum_rows "$(get_doc_sloccounts)")
   local tools=$(sum_rows "$(get_tools_sloccounts)")
-  local total=$((build+$page+$cont+$lib+$docs+$tools))
+  local total=$((build+docs+tools))
 
   echo "$(get_package_string) - Source lines of code"
   echo "$(date)"
@@ -183,18 +150,6 @@ main() {
   echo ""
   echo "Build system: $build"
   get_build_sloccounts | sort -rn | column -t -s $'\t'
-
-  echo ""
-  echo "Page sources: $page"
-  get_page_sloccounts | sort -rn | column -t -s $'\t'
-
-  echo ""
-  echo "Controller sources: $cont"
-  get_controller_sloccounts | sort -rn | column -t -s $'\t'
-
-  echo ""
-  echo "External libraries: $lib"
-  get_extern_sloccounts | sort -rn | column -t -s $'\t'
 
   echo ""
   echo "Documentation: $docs"
