@@ -15,7 +15,7 @@ SRC += $(LESS:.less=.css) # Generated CSS
 
 noinst_SCRIPTS = $(CSS) $(LESS:.less=.css)
 
-CLEANFILES = $(LESS:.less=.css)
+CLEANFILES = $(LESS:.less=.css) $(noinst_SCRIPTS)
 
 # Less CSS compilation
 %.css: %.less $(wildcard *.less)

@@ -7,6 +7,8 @@ IMG = $(addprefix $(DEST)/,$(SRC))
 
 noinst_SCRIPTS = $(IMG)
 
+CLEANFILES = $(noinst_SCRIPTS)
+
 EXTRA_DIST = $(SRC)
 
 # Export images

@@ -5,6 +5,8 @@ FONTS = $(addprefix $(DEST)/,$(SRC))
 
 noinst_SCRIPTS = $(FONTS)
 
+CLEANFILES = $(noinst_SCRIPTS)
+
 EXTRA_DIST = $(SRC)
 
 # Export fonts
