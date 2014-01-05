@@ -1,7 +1,6 @@
 SUBDIRS = \
+	resources \
 	scripts \
-	www \
-	build \
 	$(NULL)
 
 if ENABLE_DOCUMENTATION
