@@ -33,8 +33,9 @@ $(document).ready(function() {
    */
   $('#reference').html('pip-db (2014). <i>' + get_property("name") +
                        '</i>, Protein Isoelectric point Database. ' +
-                       'Available from: &lt;<span class=\"url\">' +
-                       window.location + '</span>&gt;<br/>[Cited ' +
+                       'Available from: &lt;<a href="' + window.location +
+                       '"" class=\"url\">' + window.location +
+                       '</a>&gt;<br/>[Cited ' +
                        moment().format('Do MMMM, YYYY') + '].');
 
   /*
