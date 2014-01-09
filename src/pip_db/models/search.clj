@@ -41,8 +41,10 @@
       (EQ {:field "method" :value m})))))
 
 (defn query [params]
-    (str "SELECT id,name,source,organ,pi FROM records WHERE "
-         (conditionals params)))
+  (let [conditions (conditionals params)]
+    (str "SELECT id,name,source,organ,pi FROM records"
+         (if-not (str/blank? conditions)
+           (str " WHERE " (conditionals params))))))
 
 (defn search [params]
   (sql/with-connection (System/getenv "DATABASE_URL")
