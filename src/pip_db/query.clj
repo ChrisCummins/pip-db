@@ -11,7 +11,9 @@
   (filter #(not (re-matches re-empty-condition %)) conditions))
 
 (defn compound-condition [join conditions]
-  (str "(" (str/join join (strip-conditions conditions)) ")"))
+  (let [stripped (strip-conditions conditions)]
+    (if-not (zero? (count stripped))
+      (str "(" (str/join join stripped) ")") "")))
 
 (defn match-condition [condition]
   (if (condition :value)
@@ -25,8 +27,8 @@
 (defn NE [condition]
   (match-condition (assoc condition :not true)))
 
-(defn AND [conditions]
-  (compound-condition " AND " (doall conditions)))
+(defn AND [& conditions]
+  (compound-condition " AND " (flatten conditions)))
 
-(defn OR [conditions]
-  (compound-condition " OR " (doall conditions)))
+(defn OR [& conditions]
+  (compound-condition " OR " (flatten conditions)))
