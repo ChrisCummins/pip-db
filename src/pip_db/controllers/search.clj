@@ -5,7 +5,7 @@
             [pip-db.views.advanced :as advanced]
             [pip-db.views.search :as view]))
 
-(def results-per-page 20)
+(def results-per-page 10)
 (def max-page-links 10)
 
 (defn search [query results]
