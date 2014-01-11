@@ -44,6 +44,7 @@
         :current-page     current-page
         :results-per-page results-per-page
         :pages-count      pages-count
+        :limited-results  (> (data :results-count) max-results)
         :pages            (range start-page end-page)))))
 
 (defn start-param [params]

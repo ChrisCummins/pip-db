@@ -39,6 +39,12 @@
                                  :data-pages-count pages-count}
       (page-links current-page pages pages-count)]]]])
 
+(defn beta-warning []
+  [:div.alert.alert-info
+   [:strong "Limited Results "]
+   "The number of results has been limited for the beta version of the website."
+   [:a.close {:href "#" :data-dismiss "alert"
+              :aria-hidden "true"} "&times;"]])
 
 (defn search [query data]
   (page {:title query
@@ -49,6 +55,8 @@
          :body [:div.sresults
                 (if (> (data :results-count) 0)
                   (list
+                   (if (data :limited-results)
+                     (beta-warning))
                    (tablify-results (data :results))
                    (pagination-links (data :current-page) (data :pages)
                                      (data :results-per-page)
