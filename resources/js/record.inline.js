@@ -18,8 +18,6 @@ $(document).ready(function () {
         $('#properties .property').each(function (index) {
             var property = $(this).attr('data-key');
 
-            console.log(property + ', KEY: ' + key);
-
             if (key === property) {
                 value = $(this).children('.value').text();
                 return false;           // Break loop
