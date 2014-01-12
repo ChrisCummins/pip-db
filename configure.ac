@@ -183,7 +183,7 @@ PATH=$NODE_BIN_DIR:$PATH
 dnl     ============================================================
 dnl     4.4. Install Less CSS compiler
 dnl     ============================================================
-npm install less
+AC_CHECK_FILE([node_modules/less/bin/lessc],,[npm install less])
 
 LESSC_BIN_DIR=$(pwd)/node_modules/less/bin
 AC_SUBST([LESSC_BIN_DIR],[$LESSC_BIN_DIR])
