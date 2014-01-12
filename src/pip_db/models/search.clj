@@ -4,7 +4,7 @@
             [clojure.string :as str]))
 
 (defn split-args [words]
-  (if words (str/split words #" +") nil))
+  (when words (str/split words #" +")))
 
 (defn conditionals [params]
   (let [q       (split-args (get params "q"))
