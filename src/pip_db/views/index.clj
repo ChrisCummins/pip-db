@@ -1,5 +1,6 @@
 (ns pip-db.views.index
-  (:use [pip-db.views.layout]))
+  (:use [pip-db.views.layout :only (page)]
+        [pip-db.views.components :only (inline-js)]))
 
 (defn index []
   (page {:navbar {:login-only true}
@@ -19,15 +20,4 @@
                    [:a#search-browse.btn.btn-primary {:href "/advanced"}
                     "Advanced"]
                    [:button#search-submit.btn.btn-success "Search"]]]]]
-         :javascript [:script
-"$(function() {
-  $('#q').focus();
-});
-
-$('#q').focus(function() {
-  $('#qp').addClass('active');
-});
-
-$('#q').blur(function() {
-  $('#qp').removeClass('active');
-});"]}))
+         :javascript (inline-js "/js/index.inline.js")}))
