@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#
+# Build pip-db.
+#
+set -e
+
+echo "---> Running autogen.sh"
+./autogen.sh
+
+echo "---> Running configure"
+./configure --disable-documentation \
+    --disable-git-hooks \
+    --disable-tools \
+    --enable-minify-css \
+    --enable-minify-js
+
+echo "---> Running make"
+make all
