@@ -1,3 +1,5 @@
+PATH := $(LESSC_BIN_DIR):$(NODE_BIN_DIR):${PATH}
+
 # Less CSS source files@
 LESS = \
 	login.less \

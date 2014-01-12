@@ -58,8 +58,6 @@ website.
 * [Java](http://www.java.com/en/)
 * [Leiningen](https://github.com/technomancy/leiningen)
 * [PostgreSQL](http://www.postgresql.org/)
-* [Node.js](http://nodejs.org/)
-* [Less](http://lesscss.org/)
 * [Git](http://git-scm.com/) *(optional, required only to build the extra tools)*
 * [npm](https://npmjs.org/) *(optional, required only to build the extra tools)*
 * [node-optimist](https://github.com/substack/node-optimist) *(optional, required only to build the extra tools)*
