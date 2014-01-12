@@ -1,5 +1,6 @@
 (ns pip-db.views.advanced
-  (:use [pip-db.views.layout :only (page)]))
+  (:use [pip-db.views.layout :only (page)]
+        [pip-db.views.components :only (inline-js)]))
 
 (defn advanced []
   (page {
@@ -173,4 +174,4 @@
                    [:button.btn.btn-success.pull-right
                     {:type "submit" :name "action" :value "advanced"}
                     "Advanced Search"]]]]]
-         :javascript [:script {:src "/js/as.js"}]}))
+         :javascript (inline-js "/js/advanced.inline.js")}))
