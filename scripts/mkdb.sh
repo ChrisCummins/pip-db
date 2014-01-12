@@ -10,11 +10,9 @@ dbname=pip-db    # Database name
 # from the current directory. If we haven't found the top directory by the time
 # we reach root (/), fail.
 get_source_directory() {
-    local root=""
-
     while [[ "$(pwd)" != "/" ]]; do
         if [[ "${PWD##*/}" = "$topsrcdir" ]]; then
-            echo "$(pwd)"
+            pwd
             return
         fi
         cd ..
@@ -29,7 +27,7 @@ get_source_directory() {
 
 set -e
 
-cd $(get_source_directory) 2>/dev/null
+cd "$(get_source_directory)" 2>/dev/null
 
 echo "Creating PostreSQL database cluster in '$dir'..."
 

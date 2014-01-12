@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ### sloccount.sh - tool to count source code lines in pip-db
 
 # Lookup the root directory for the project. If unable to locate root, exit
@@ -6,11 +6,9 @@
 #
 #     @return The absolute path to the project root directory
 get_project_root() {
-  local root=""
-
   while [[ "$(pwd)" != "/" ]]; do
     if test -f configure.ac; then
-      echo "$(pwd)"
+      pwd
       return
     fi
     cd ..
@@ -44,7 +42,7 @@ find_files_with_extension() {
 
   cd "$(get_project_root)"
 
-  find ".$subdir" $args -type f -name '*.'"$ext" | grep -v '/resources/public/' | sort
+  find ".$subdir" "$args" -type f -name '*.'"$ext" | grep -v '/resources/public/' | sort
 }
 
 # Returns the line counts for a list of files.
@@ -59,7 +57,7 @@ get_lc_of_files() {
   for f in $files; do
     sloccount=$(wc -l "$f" | awk '{ print $1 }')
 
-    total=$((total+$sloccount))
+    total=$((total+sloccount))
   done
 
   echo $total
@@ -70,7 +68,7 @@ get_lc_of_files() {
 #     $1 Value
 #     $2 Total
 get_perc() {
-  if [[ $2 > 0 ]]; then
+  if (( $2 > 0 )); then
     echo "$1 / $2 * 100" | bc -l | xargs printf "%.2f"
   else
     echo "0.00"
@@ -87,10 +85,10 @@ print_sloccount() {
   local total_linecount=$2
   local file="$3"
 
-  local percentage=$(get_perc $linecount $total_linecount)
+  local percentage=$(get_perc "$linecount" "$total_linecount")
 
-  if [[ $linecount > 0 ]]; then
-    echo -e "$(printf %6d $linecount)\t$file\t($percentage%)"
+  if (( linecount > 0 )); then
+    echo -e "$(printf %6d "$linecount")\t$file\t($percentage%)"
   fi
 }
 
@@ -99,11 +97,11 @@ get_build_sloccounts() {
   local autogen=$(get_lc_of_files "./autogen.sh")
   local configure=$(get_lc_of_files "./configure.ac")
   local makefile=$(get_lc_of_files "$(find_files_with_extension am)")
-  local total=$((autogen+$configure+$makefile))
+  local total=$((autogen+configure+makefile))
 
-  print_sloccount $autogen   $total "autogen.sh       "
-  print_sloccount $configure $total "configure.ac     "
-  print_sloccount $makefile  $total "Makefile.am      "
+  print_sloccount "$autogen"   "$total" "autogen.sh       "
+  print_sloccount "$configure" "$total" "configure.ac     "
+  print_sloccount "$makefile"  "$total" "Makefile.am      "
 }
 
 # Returns a list of sloccounts for the resources.
@@ -112,8 +110,8 @@ get_resources_sloccounts() {
   local less=$(get_lc_of_files "$(find_files_with_extension less resources)")
   local total=$((js+less))
 
-  print_sloccount $js        $total "JavaScript       "
-  print_sloccount $less      $total "Less CSS         "
+  print_sloccount "$js"        "$total" "JavaScript       "
+  print_sloccount "$less"      "$total" "Less CSS         "
 }
 
 # Returns a list of sloccounts for the sources.
@@ -122,18 +120,18 @@ get_src_sloccounts() {
   local test=$(get_lc_of_files "$(find_files_with_extension clj test)")
   local total=$((src+test))
 
-  print_sloccount $src       $total "Clojure          "
-  print_sloccount $test      $total "Clojure (tests)  "
+  print_sloccount "$src"       "$total" "Clojure          "
+  print_sloccount "$test"      "$total" "Clojure (tests)  "
 }
 
 # Returns a list of sloccounts for the Documentation.
 get_doc_sloccounts() {
   local latex=$(get_lc_of_files "$(find_files_with_extension tex)")
   local md=$(get_lc_of_files "$(find_files_with_extension md)")
-  local total=$((latex+$md))
+  local total=$((latex+md))
 
-  print_sloccount $latex     $total "LaTeX            "
-  print_sloccount $md        $total "Markdown         "
+  print_sloccount "$latex"     "$total" "LaTeX            "
+  print_sloccount "$md"        "$total" "Markdown         "
 }
 
 # Returns a list of sloccounts for the tools.
@@ -142,12 +140,12 @@ get_tools_sloccounts() {
   local js=$(get_lc_of_files "$(find_files_with_extension js tools/)")
   local py=$(get_lc_of_files "$(find_files_with_extension py tools/)")
   local rb=$(get_lc_of_files "$(find_files_with_extension rb tools/)")
-  local total=$((sh+$js+$py+$rb))
+  local total=$((sh+js+py+rb))
 
-  print_sloccount $sh        $total "Shell            "
-  print_sloccount $js        $total "JavaScript       "
-  print_sloccount $py        $total "Python           "
-  print_sloccount $rb        $total "Ruby             "
+  print_sloccount "$sh"        "$total" "Shell            "
+  print_sloccount "$js"        "$total" "JavaScript       "
+  print_sloccount "$py"        "$total" "Python           "
+  print_sloccount "$rb"        "$total" "Ruby             "
 }
 
 # Returns the sum of a list of integers
@@ -166,7 +164,7 @@ main() {
   local total=$((build+resources+src+docs+tools))
 
   echo "$(get_package_string) - Source lines of code"
-  echo "$(date)"
+  date
 
   echo ""
   echo ""
