@@ -55,7 +55,7 @@
     (sql/insert-values :user_types [:type_name] [user-type])))
 
 (defn migrate []
-  (when (not (migrated?))
+  (when-not (migrated?)
     (print "Creating database structure...") (flush)
     (create-tables)
     (println " done")

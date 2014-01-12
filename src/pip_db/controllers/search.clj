@@ -14,8 +14,8 @@
 
 (defn start-at [start results-count]
   (if (< start results-count)
-    (if (< 0 start) (- start (mod start results-per-page)) 0)
-    (- results-count 1)))
+    (if (pos? start) (- start (mod start results-per-page)) 0)
+    (dec results-count)))
 
 (defn end-at [end results-count]
   (if (< end results-count)
@@ -35,9 +35,9 @@
           start-at        (start-at start results-count)
           end-at          (end-at (+ start-at results-per-page) results-count)
           pages-count     (math/ceil (/ results-count results-per-page))
-          current-page    (+ (/ start-at results-per-page) 1)
+          current-page    (inc (/ start-at results-per-page))
           start-page      (max 1 (- current-page (/ max-page-links 2)))
-          end-page        (min (+ pages-count 1) (+ start-page max-page-links))]
+          end-page        (min (inc pages-count) (+ start-page max-page-links))]
       (assoc data
         :results          (visible-results results results-count
                                            start-at end-at)
