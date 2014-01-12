@@ -4,15 +4,23 @@
 #
 set -e
 
-echo "---> Running autogen.sh"
-./autogen.sh
+indent() {
+    sed -u 's/^/        /'
+}
 
-echo "---> Running configure"
+status() {
+    echo "------> $@"
+}
+
+status "Running autogen.sh"
+./autogen.sh 2>&1 | indent
+
+status "Running configure"
 ./configure --disable-documentation \
     --disable-git-hooks \
     --disable-tools \
     --enable-minify-css \
-    --enable-minify-js
+    --enable-minify-js 2>&1 | indent
 
-echo "---> Running make"
-make all
+status "Running make"
+make all 2>&1 | indent
