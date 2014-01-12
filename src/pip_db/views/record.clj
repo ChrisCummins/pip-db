@@ -62,7 +62,7 @@
                     [:h3.panel-title "Reference this page"]]
                    [:div.panel-body
                     [:blockquote#reference]]]]]]
-         :javascript (inline-js "/js/record.js")}))
+         :javascript (inline-js "/js/record.inline.js")}))
 
 (defn no-record []
   (page {:title "Not Found"

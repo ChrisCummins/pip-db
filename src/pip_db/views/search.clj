@@ -62,4 +62,4 @@
                                      (data :results-per-page)
                                      (data :pages-count)))
                   [:p.lead "No results found."])]
-         :javascript (inline-js "/js/search.js")}))
+         :javascript (inline-js "/js/search.inline.js")}))
