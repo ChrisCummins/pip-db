@@ -40,13 +40,10 @@ pip-db, see [the documentation](Documentation/).
 
 ## Installation
 
-The project can be built from a GNU/Linux environment using the
-standard GNU Autotools procedure:
+Execute:
 
 ```sh
-$ ./autogen.sh
-$ ./configure
-$ make
+$ ./bin/build
 ```
 
 See `./configure --help` for a list of configuration options for building the
