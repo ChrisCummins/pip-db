@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Automatically indent Clojure source files
 #
@@ -14,7 +14,7 @@ test -f $elpa || {
 
 el=$(echo $elpa | sed 's/\.el$//')
 
-for file in $(find "." -name '*.clj'); do
+find "." -name '*.clj' | while read file; do
     emacs "$file" \
         --batch \
         --eval="(progn
