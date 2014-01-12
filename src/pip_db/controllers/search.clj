@@ -5,8 +5,9 @@
             [pip-db.views.advanced :as advanced]
             [pip-db.views.search :as view]))
 
-(def results-per-page 20)
+(def results-per-page 10)
 (def max-page-links 10)
+(def max-results 50)
 
 (defn search [query results]
   (view/search query results))
@@ -29,7 +30,8 @@
   (if (nil? start)
     (paginate data 0)
     (let [results         (data :results)
-          results-count   (data :results-count)
+          results-count   (if (> (data :results-count) max-results)
+                            max-results (data :results-count))
           start-at        (start-at start results-count)
           end-at          (end-at (+ start-at results-per-page) results-count)
           pages-count     (math/ceil (/ results-count results-per-page))
@@ -42,6 +44,7 @@
         :current-page     current-page
         :results-per-page results-per-page
         :pages-count      pages-count
+        :limited-results  (> (data :results-count) max-results)
         :pages            (range start-page end-page)))))
 
 (defn start-param [params]

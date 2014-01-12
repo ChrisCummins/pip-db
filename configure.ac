@@ -21,9 +21,10 @@ dnl   3.3.     Export the locations of compiler JARs
 dnl   3.4.     Export the git configuration
 dnl
 dnl   4.     Build requirements
-dnl   4.1.     Do we have a Less CSS compiler?
-dnl   4.2.     Do we have a Java runtime environment?
-dnl   4.3.     Check for public resources
+dnl   4.1.     Do we have a Java runtime environment?
+dnl   4.2.     Check for public resources
+dnl   4.3.     Install node and npm
+dnl   4.4.     Install Less CSS compiler
 dnl
 dnl   5.     Resources
 dnl   5.1.     Are we minifying built CSS?
@@ -61,7 +62,7 @@ dnl 1. Project versions (i.e. the package version)
 dnl ================================================================
 m4_define([pipdb_major_version],[0])
 m4_define([pipdb_minor_version],[2])
-m4_define([pipdb_micro_version],[0])
+m4_define([pipdb_micro_version],[1])
 m4_define([pipdb_version],[pipdb_major_version.pipdb_minor_version.pipdb_micro_version])
 
 
@@ -135,19 +136,7 @@ AC_PROG_SED
 
 
 dnl     ============================================================
-dnl     4.1. Do we have a Less CSS compiler?
-dnl     ============================================================
-AC_CHECK_PROG([LESSC],[lessc],[lessc])
-AS_IF([test "x$LESSC" != x],
-      [HAVE_LESSC=yes],
-      [HAVE_LESSC=no
-       AC_MSG_ERROR([Less CSS compiler not found.])])
-AC_SUBST([HAVE_LESSC],[$HAVE_LESSC])
-AM_CONDITIONAL([HAVE_LESSC],[test "x$HAVE_LESSC" = xyes])
-
-
-dnl     ============================================================
-dnl     4.2. Do we have a Java runtime environment?
+dnl     4.1. Do we have a Java runtime environment?
 dnl     ============================================================
 AC_CHECK_PROG([JAVA],[java],[java])
 AS_IF([test "x$JAVA" != x],
@@ -159,13 +148,46 @@ AM_CONDITIONAL([HAVE_JAVA],[test "x$HAVE_JAVA" = xyes])
 
 
 dnl     ============================================================
-dnl     4.3. Check for public resources
+dnl     4.2. Check for public resources
 dnl     ============================================================
 m4_define([public_resources],["$(pwd)/resources/public"])
 
 AC_CHECK_FILE([public_resources],,[mkdir -pv public_resources])
 
 AC_SUBST([PUBLIC_RESOURCES],[public_resources])
+
+
+dnl     ============================================================
+dnl     4.3. Install node and npm
+dnl     ============================================================
+dnl
+dnl Snippet to install node and npm, taken from heroku nodejs buildpack. See:
+dnl https://github.com/heroku/heroku-buildpack-nodejs/blob/master/bin/compile
+dnl
+node_version=0.10.24
+# Download node from Heroku's S3 mirror of nodejs.org/dist
+node_url="http://s3pository.heroku.com/node/v$node_version/node-v$node_version-linux-x64.tar.gz"
+curl $node_url -s -o - | tar xzf - -C build
+
+# Move node (and npm) into ./build/node and make them executable
+mv build/node-v$node_version-linux-x64 build/node
+chmod +x build/node/bin/*
+
+NODE_BIN_DIR=$(pwd)/build/node/bin
+AC_SUBST([NODE_BIN_DIR],[$NODE_BIN_DIR])
+
+PATH=$NODE_BIN_DIR:$PATH
+
+
+dnl     ============================================================
+dnl     4.4. Install Less CSS compiler
+dnl     ============================================================
+npm install less
+
+LESSC_BIN_DIR=$(pwd)/node_modules/less/bin
+AC_SUBST([LESSC_BIN_DIR],[$LESSC_BIN_DIR])
+
+PATH=$PATH:$LESSC_BIN_DIR
 
 
 dnl ================================================================
@@ -241,7 +263,7 @@ dnl         7.4. Do we have optimist?
 dnl         ========================================================
 AS_IF([test "x$enable_tools" = xyes],
       [AC_MSG_CHECKING([for optimist package])
-       AS_IF([test -n "$(npm ls -g | grep optimist)"],
+       AS_IF([test -n "$(npm ls -g 2>/dev/null | grep optimist)"],
              [HAVE_NODE_OPTIMIST=yes],
              [HAVE_NODE_OPTIMIST=no])
        AC_MSG_RESULT([$HAVE_NODE_OPTIMIST])

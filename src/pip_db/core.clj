@@ -17,5 +17,5 @@
 
 (defn -main []
   (migration/migrate)
-  (let [port (Integer/parseInt (or (System/getenv "PIP_DB_PORT") "5000"))]
+  (let [port (Integer/parseInt (or (System/getenv "PORT") "5000"))]
     (start port)))

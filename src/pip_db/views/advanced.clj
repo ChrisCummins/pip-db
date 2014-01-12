@@ -8,14 +8,6 @@
          :heading {:title "Advanced Search"}
          :body [:div.advsearch
                 [:form#as {:method "GET" :action "/s"}
-                 [:div.alert.alert-warning
-                  [:strong "Prototype Website"]
-                  (str "Note that not all of the functionality is completed "
-                       "on this page. Input fields which are greyed-out have "
-                       "not been implemented yet.")
-                  [:a.close {:href "#" :data-dismiss "alert"
-                             :aria-hidden "true"}
-                   "&times;"]]
                  [:div.row
                   [:div.col-md-12 [:h4 "Find proteins with..."]]]
                  [:div.row

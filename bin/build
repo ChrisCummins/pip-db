@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+#
+# Build pip-db.
+#
+set -e
+
+indent() {
+    sed -u 's/^/        /'
+}
+
+status() {
+    echo "------> $@"
+}
+
+status "Running autogen.sh"
+./autogen.sh 2>&1 | indent
+
+status "Running configure"
+./configure --disable-documentation \
+    --disable-git-hooks \
+    --disable-tools \
+    --enable-minify-css \
+    --enable-minify-js 2>&1 | indent
+
+status "Running make"
+make all 2>&1 | indent
