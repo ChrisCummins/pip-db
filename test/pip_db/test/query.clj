@@ -30,7 +30,7 @@
            "(a)"))
 
     (is (= (dut/OR "a" "b" "c" "d")
-           "(a OR b OR c OR d)")))
+           "(a OR b OR c OR d)"))
 
     (is (= (dut/OR "a")
            "(a)")))
@@ -64,4 +64,4 @@
            (str "(" (test-eq :string) ")")))
 
     (is (= (dut/AND (test-eq :query) (test-eq :query))
-           (str "(" (test-eq :string) " AND " (test-eq :string) ")"))))
+           (str "(" (test-eq :string) " AND " (test-eq :string) ")")))))
