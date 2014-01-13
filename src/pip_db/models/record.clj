@@ -4,7 +4,7 @@
             [clojure.string :as str]))
 
 (defn query-string [id]
-  (str "SELECT * FROM RECORDS WHERE id='" id "'"))
+  (str "SELECT * FROM records WHERE id='" id "'"))
 
 (defn record [id]
   (sql/with-connection (System/getenv "DATABASE_URL")
