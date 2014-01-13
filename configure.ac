@@ -269,7 +269,7 @@ AS_IF([test "x$enable_tools" = xyes],
              [HAVE_NODE_OPTIMIST=no])
        AC_MSG_RESULT([$HAVE_NODE_OPTIMIST])
 
-       AS_IF([test "x$HAVE_NODE_OPTIMIST" = xyes],,
+       AS_IF([test "x$HAVE_NODE_OPTIMIST" != xyes],
              [AC_MSG_ERROR([Required node pacakge 'optimist' not found.])])],
       [HAVE_NODE_OPTIMIST=no])
 AC_SUBST([HAVE_NODE_OPTIMIST],[$HAVE_NODE_OPTIMIST])
