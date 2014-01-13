@@ -10,4 +10,4 @@
   (sql/with-connection (System/getenv "DATABASE_URL")
     (sql/with-query-results results
       [(query-string id)]
-      (if results (first (doall results)) nil))))
+      (when results (first (doall results))))))

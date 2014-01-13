@@ -20,6 +20,9 @@
                     " result..." " results..."))]]])]
    [:hr]])
 
+(defn google-analytics []
+  (inline-js "/js/google-analytics.inline.js"))
+
 (defn page [data]
   (html5 {:lang "en" :class "no-js"}
          [:head
@@ -33,7 +36,8 @@
           [:title (str "pip-db " (data :title))]
           (include-css "/css/styles.css")
           (data :header)
-          (include-js "/js/modernizr-2.7.0.min.js")]
+          (include-js "/js/modernizr-2.7.0.min.js")
+          (google-analytics)]
 
          [:body
           (if (data :navbar) (navbar/html (data :navbar)))

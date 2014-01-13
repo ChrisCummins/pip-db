@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 ### autogen.sh - tool to help build pip-db
 #
 # Based on the autogen.sh script from GNU Emacs, written by Glenn Morris
@@ -33,14 +33,14 @@ get_version ()
 ## Echo the major version, eg "2".
 major_version ()
 {
-    echo $1 | sed -e 's/\([0-9][0-9]*\)\..*/\1/'
+    echo "$1" | sed -e 's/\([0-9][0-9]*\)\..*/\1/'
 }
 
 ## $1 = version string, eg "2.59"
 ## Echo the minor version, eg "59".
 minor_version ()
 {
-    echo $1 | sed -e 's/[0-9][0-9]*\.\([0-9][0-9]*\).*/\1/'
+    echo "$1" | sed -e 's/[0-9][0-9]*\.\([0-9][0-9]*\).*/\1/'
 }
 
 ## $1 = program
@@ -52,30 +52,30 @@ minor_version ()
 check_version ()
 {
     ## Respect eg $AUTOMAKE if it is set, like autoreconf does.
-    uprog=`echo $1 | sed 'y/abcdefghijklmnopqrstuvwxyz/ABCDEFGHIJKLMNOPQRSTUVWXYZ/'`
+    uprog=$(echo "$1" | sed 'y/abcdefghijklmnopqrstuvwxyz/ABCDEFGHIJKLMNOPQRSTUVWXYZ/')
 
     eval uprog=\$${uprog}
 
     [ x"$uprog" = x ] && uprog=$1
 
-    have_version=`get_version $uprog`
+    have_version=$(get_version "$uprog")
 
     [ x"$have_version" = x ] && return 1
 
-    have_maj=`major_version $have_version`
-    need_maj=`major_version $2`
+    have_maj=$(major_version "$have_version")
+    need_maj=$(major_version "$2")
 
     [ x"$have_maj" != x ] && [ x"$need_maj" != x ] || return 3
 
-    [ $have_maj -gt $need_maj ] && return 0
-    [ $have_maj -lt $need_maj ] && return 2
+    [ "$have_maj" -gt "$need_maj" ] && return 0
+    [ "$have_maj" -lt "$need_maj" ] && return 2
 
-    have_min=`minor_version $have_version`
-    need_min=`minor_version $2`
+    have_min=$(minor_version "$have_version")
+    need_min=$(minor_version "$2")
 
     [ x"$have_min" != x ] && [ x"$need_min" != x ] || return 3
 
-    [ $have_min -ge $need_min ] && return 0
+    [ "$have_min" -ge "$need_min" ] && return 0
     return 2
 }
 
@@ -89,7 +89,7 @@ for prog in $progs; do
 
     echo -n "Checking for $prog (need at least version $min)... "
 
-    check_version $prog $min
+    check_version "$prog" "$min"
 
     retval=$?
 
@@ -100,7 +100,7 @@ for prog in $progs; do
         *) stat="unable to check" ;;
     esac
 
-    echo $stat
+    echo "$stat"
 
     if [ $retval -ne 0 ]; then
         missing="$missing $prog"

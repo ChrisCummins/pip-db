@@ -7,8 +7,7 @@
   (sql/with-connection (System/getenv "DATABASE_URL")
     (sql/with-query-results results
       [(str "SELECT * FROM users WHERE email='" user "'")]
-      (if (= results nil)
-        nil (first (doall results))))))
+      (when-not (nil? results) (first (doall results))))))
 
 (defn get-hash [plaintext]
   (crypto/encrypt plaintext))
@@ -27,9 +26,9 @@
   (str "Add user accound - user: " user " pass: " (get-hash password)))
 
 (defn attempt-register [user password]
-  (if (not (get-user user))
-    (add-account user password)
-    (str "User account already exists " (str (get-user user)))))
+  (if (get-user user)
+    (str "User account already exists " (str (get-user user)))
+    (add-account user password)))
 
 (defn attempt-login [user password]
   (if (get-user user)
