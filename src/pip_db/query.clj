@@ -16,7 +16,7 @@
       (str "(" (str/join join stripped) ")") "")))
 
 (defn match-condition [condition]
-  (if (condition :value)
+  (if-not (str/blank? (condition :value))
     (str "(LOWER(" (condition :field) ") "
          (if (condition :not) "NOT ") "LIKE "
          "LOWER('%" (condition :value) "%'))") ""))

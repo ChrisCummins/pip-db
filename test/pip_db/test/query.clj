@@ -8,12 +8,31 @@
 (def test-ne {:query  (dut/NE {:field "foo" :value "bar"})
               :string "(LOWER(foo) NOT LIKE LOWER('%bar%'))"})
 
-(deftest match-conditions
-  (testing "EQ"
-    (is (= (test-eq :query) (test-eq :string))))
+(deftest EQ
+  (testing "Standard query"
+    (is (= (test-eq :query)
+           (test-eq :string))))
 
-  (testing "NE"
-    (is (= (test-ne :query) (test-ne :string)))))
+  (testing "Empty query value"
+    (is (= (dut/EQ {:field "foo" :value ""})
+           "")))
+
+  (testing "Missing value key"
+    (is (= (dut/EQ {:field "foo"})
+           ""))))
+
+(deftest NE
+  (testing "Standard query"
+    (is (= (test-ne :query)
+           (test-ne :string))))
+
+  (testing "Empty query value"
+    (is (= (dut/NE {:field "foo" :value ""})
+           "")))
+
+  (testing "Missing value key"
+    (is (= (dut/NE {:field "foo"})
+           ""))))
 
 (deftest compound-conditions
   (testing "list joining"
