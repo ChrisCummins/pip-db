@@ -164,31 +164,27 @@ dnl
 dnl Snippet to install node and npm, taken from heroku nodejs buildpack. See:
 dnl https://github.com/heroku/heroku-buildpack-nodejs/blob/master/bin/compile
 dnl
-AC_CHECK_FILE([build/node/bin/node],,[
-        node_version=0.10.24
-        # Download node from Heroku's S3 mirror of nodejs.org/dist
-        node_url="http://s3pository.heroku.com/node/v$node_version/node-v$node_version-linux-x64.tar.gz"
-        curl $node_url -s -o - | tar xzf - -C build
+AC_CHECK_FILE([build/node/bin/node],,
+              [node_version=0.10.24
+               # Download node from Heroku's S3 mirror of nodejs.org/dist
+               node_url="http://s3pository.heroku.com/node/v$node_version/node-v$node_version-linux-x64.tar.gz"
+               curl $node_url -s -o - | tar xzf - -C build
 
-        # Move node (and npm) into ./build/node and make them executable
-        mv build/node-v$node_version-linux-x64 build/node
-        chmod +x build/node/bin/*])
+               # Move node (and npm) into ./build/node and make them executable
+               mv build/node-v$node_version-linux-x64 build/node
+               chmod +x build/node/bin/*])
 
 NODE_BIN_DIR=$(pwd)/build/node/bin
 AC_SUBST([NODE_BIN_DIR],[$NODE_BIN_DIR])
-
-PATH=$NODE_BIN_DIR:$PATH
 
 
 dnl     ============================================================
 dnl     4.4. Install Less CSS compiler
 dnl     ============================================================
-AC_CHECK_FILE([node_modules/less/bin/lessc],,[npm install less])
+AC_CHECK_FILE([node_modules/less/bin/lessc],,[build/node/bin/npm install less])
 
 LESSC_BIN_DIR=$(pwd)/node_modules/less/bin
 AC_SUBST([LESSC_BIN_DIR],[$LESSC_BIN_DIR])
-
-PATH=$PATH:$LESSC_BIN_DIR
 
 
 dnl ================================================================
@@ -269,7 +265,7 @@ AS_IF([test "x$enable_tools" = xyes],
              [HAVE_NODE_OPTIMIST=no])
        AC_MSG_RESULT([$HAVE_NODE_OPTIMIST])
 
-       AS_IF([test "x$HAVE_NODE_OPTIMIST" = xyes],,
+       AS_IF([test "x$HAVE_NODE_OPTIMIST" != xyes],
              [AC_MSG_ERROR([Required node pacakge 'optimist' not found.])])],
       [HAVE_NODE_OPTIMIST=no])
 AC_SUBST([HAVE_NODE_OPTIMIST],[$HAVE_NODE_OPTIMIST])
