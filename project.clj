@@ -12,6 +12,7 @@
                  [ring/ring-jetty-adapter "1.1.6"]
                  [clojure-csv/clojure-csv "2.0.1"]
                  [crypto-password "0.1.1"]]
-  :plugins [[lein-kibit "0.0.8"]]
+  :plugins [[lein-kibit "0.0.8"]
+            [lein-cloverage "1.0.2"]]
   :main pip-db.core
   :aot [pip-db.core])
