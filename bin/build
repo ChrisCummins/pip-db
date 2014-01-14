@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Build pip-db.
+# Build pip-db. Arguments to this script are passed to ./configure.
 #
 set -e
 
@@ -20,7 +20,7 @@ status "Running configure"
     --disable-git-hooks \
     --disable-tools \
     --enable-minify-css \
-    --enable-minify-js 2>&1 | indent
+    --enable-minify-js $@ 2>&1 | indent
 
 status "Running make"
 make all 2>&1 | indent

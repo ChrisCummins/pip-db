@@ -42,7 +42,7 @@ find_files_with_extension() {
 
   cd "$(get_project_root)"
 
-  find ".$subdir" "$args" -type f -name '*.'"$ext" | grep -v '/resources/public/' | sort
+  find ".$subdir" "$args" -type f -name '*.'"$ext" 2>/dev/null | grep -v '/resources/public/' | sort
 }
 
 # Returns the line counts for a list of files.
