@@ -1643,6 +1643,7 @@ generation techniques to pip-db. Chiefly, the use of Markdown and
 other easy-to-read file formats for content makes a lot of sense, and
 help abstract the site data from the application logic.
 
+
 ### Sunday 29th
 
 It's the end of TP1 and this logbook has already reached 58KB in
@@ -1656,6 +1657,7 @@ files in it, with filenames like `2013-12-29.md` and
 `2013-12-30.md`. The advantage of that is that it produces many
 smaller and separate files, although this would make it harder to do
 whole-document re-factors.
+
 
 ### Monday 30th
 
