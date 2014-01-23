@@ -119,25 +119,19 @@ Below is a series of comparison screenshots between the initial D1
 designs and the M1 implementation:
 
 #### Homepage
-![Design Mockup](design/d1/pages/renders/homepage.png)
-![Implementation](assets/m1-screenshots-homepage.png)
+![Comparison](assets/m1-comparison-homepage.png)
 
 #### Search Results
-![Design Mockup](design/d1/pages/renders/results.png)
-![Implementation](assets/m1-screenshots-results.png)
+![Comparison](assets/m1-comparison-results.png)
 
 #### Details Page
-![Design Mockup](design/d1/pages/renders/details.png)
-![Implementation](assets/m1-screenshots-details.png)
+![Comparison](assets/m1-comparison-details.png)
 
 #### Advanced Search
-![Design Mockup](design/d1/pages/renders/advanced.png)
-![Implementation](assets/m1-screenshots-advanced.png)
+![Comparison](assets/m1-comparison-advanced.png)
 
 #### Login
-![Design Mockup](design/d1/pages/renders/login.png)
-![Implementation](assets/m1-screenshots-login.png)
+![Comparison](assets/m1-comparison-login.png)
 
 #### Upload New Data
-![Design Mockup](design/d1/pages/renders/upload.png)
-![Implementation](assets/m1-screenshots-upload.png)
+![Comparison](assets/m1-comparison-upload.png)

@@ -25,12 +25,12 @@
      (OR                                ; Match exact phrase
       (EQ {:field "name" :value q_eq})
       (EQ {:field "alt_name" :value q_eq}))
-     (OR                               ; Match any keywords
+     (OR                                ; Match any keywords
       (for [word q_any]
         (OR
          (EQ {:field "name" :value word})
          (EQ {:field "alt_name" :value word}))))
-     (AND                              ; Exclude keywords
+     (AND                               ; Exclude keywords
       (for [word q_ne]
         (AND
          (NE {:field "name" :value word})
