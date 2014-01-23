@@ -93,6 +93,7 @@ make_version_bump_commit() {
 
     echo "Creating version bump commit... '$new_version'"
     git add configure.ac
+    git add project.clj
     git commit --allow-empty -m "Bump release version for '$new_version'" >/dev/null
 }
 
