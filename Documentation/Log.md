@@ -1693,3 +1693,110 @@ Have been reading up on
 using it as an API documentation system, being a pseudo
 [literate programming](http://en.wikipedia.org/wiki/Literate_programming)
 tool.
+
+
+### Wednesday 22nd
+
+Notes for meeting with first weekly meeting of the year with Ian:
+
+ 1. Review of TP1 work
+    * Milestones OK, getting used to GitHub issue tracker/workflow.
+    * Comparison screenshots
+    * Project Plan
+ 2. LISP
+    * Total project rewrite
+       * Purely functional programming paradigm
+       * Built on top of JVM
+       * *Very young language* (scope for contributions)
+       * Asynchronous, single threaded, but almost entirely immutable
+         data structures
+       * Model View Controller architecture
+    * Functionally identical to PHP/MySQL prototype
+    * Test coverage!
+       * Continuous integration (Travis CI)
+       * lein cloverage
+ 3. Upcoming work:
+    * D2 milestone - generating designs in Balsamiq (#212).
+
+From project report feedback:
+
+> It is important to ensure there is enough scope for originality to
+> access the highest possible marks at the end of the project.
+
+Areas for originality:
+
+ * Distributed Systems development using functional programming.
+ * Tooling, continuous integration and automated deployment.
+ * No-one is developing these systems using Clojure.
+
+> One area which perhaps needed more intention was in understanding
+> the users and their typical usage pattern which would affect both
+> the user interface design and the database structure.
+
+Recurring theme of assessments so far. How do I express that the we
+don't necessarily *have* a user-base, and that user's behaviour will
+be *analysed* and acted upon, not pre-determined beforehand?
+
+
+### Thursday 23rd
+
+Notes from weekly meeting with Ian:
+
+ * Maintainability - what are the implications of using an esoteric
+   programming language? People know PHP, most people aren't familiar
+   with LISP. How are future students going to add new features?
+ * Stability - if Clojure is such a young and dynamic project, how
+   quickly are things going to break? How are you going to ensure that
+   this project
+ * Deployment - how does this affect the client? Can we still host the
+   site on the PSO servers? Does it still use Apache? Does it take up
+   a lot of disk space/CPU? Create a table of deployment options.
+ * Areas for originality - there's room for originality in dealing
+   with uploading new data. Analysis of the existing dataset and using
+   that to form models and expectations for new data.
+
+Notes for next meeting:
+
+ * Maintainability:
+    * What are the implications of using an esoteric programming
+      language?
+       - Future developers must learn the language (Clojure).
+       - I don't *think* this is an unreasonable requirement (for
+         example, the PHP APIs break all the time: `mysql` vs
+         `mysqli` APIs).
+       - In essence, I am creating a *Domain Specific Language*.
+     * How are future students going to add new features?
+       - Use a literate programming style to document Clojure sources
+         (Marginalia).
+       - Make Clojure accessible (clojure-koans!). It honestly is a
+         great language.
+       - New features can be written in Java and called from Clojure.
+ * Stability:
+    * Each dependency is strictly versioned, and versions are
+      immutable.
+    * Show how project.clj file defines all of the dependencies
+      (including the language itself!), and how this pulls in remote
+      dependencies.
+    * Show how the test suite and Travis CI can be used to test
+      forward and backwards compatibility (different versions of Java,
+      clojure, etc).
+ * Deployment:
+     * Heroku - automated deployments using a single
+       command. Transparently scalable.
+ * pip-db.org domain
+
+From the [Clojure rationale](http://clojure.org/rationale):
+
+> Customers and stakeholders have substantial investments in, and are
+> comfortable with the performance, security and stability of,
+> industry-standard platforms like the JVM. While Java developers may
+> envy the succinctness, flexibility and productivity of dynamic
+> languages, they have concerns about running on customer-approved
+> infrastructure, access to their existing code base and libraries,
+> and performance. In addition, they face ongoing problems dealing
+> with concurrency using native threads and locking. Clojure is an
+> effort in pragmatic dynamic language design in this context. **It
+> endeavours to be a general-purpose language suitable in those areas
+> where Java is suitable**. It reflects the reality that, for the
+> concurrent programming future, pervasive, unmoderated mutation
+> simply has to go.
