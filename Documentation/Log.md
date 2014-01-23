@@ -1665,3 +1665,9 @@ Registered the `pip-db.org` domain with GoDaddy for 1 year (no
 renewal), and set up a 301 permanent forward to
 `pso.aston.ac.uk/~cummince/`. When next term starts, should ask Ian
 how to get Uni to reimburse the £9.10 fee.
+
+
+### Tuesday 31st
+
+Restructured the directory tree so as to put the design files inside
+of the Documentation tree.
