@@ -1671,3 +1671,16 @@ how to get Uni to reimburse the £9.10 fee.
 
 Restructured the directory tree so as to put the design files inside
 of the Documentation tree.
+
+
+### Monday 20th
+
+Reflected on one of the written goals for Christmas holiday work:
+
+> The aim of holiday implementation work is to reduce the bug-count on
+> the M1 prototype...
+
+Over the holiday, 5 issues were closed from the bug tracker, but it is
+clear that the emphasis of work shifted away from just bug hunting and
+further towards re-imagining the entire software stack (heroku, LISP,
+lein, etc.).
