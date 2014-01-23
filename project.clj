@@ -1,5 +1,5 @@
 (defproject pip-db "0.1.11"
-  :description "Shouter app"
+  :description "Protein Isoelectric Point Database"
   :url "https://github.com/ChrisCummins/pip-db"
   :license {:name "GNU General Public License v3"
             :url "http://www.gnu.org/licenses/gpl.html"}
