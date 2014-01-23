@@ -1684,3 +1684,12 @@ Over the holiday, 5 issues were closed from the bug tracker, but it is
 clear that the emphasis of work shifted away from just bug hunting and
 further towards re-imagining the entire software stack (heroku, LISP,
 lein, etc.).
+
+
+### Tuesday 21st
+
+Have been reading up on
+[Marginalia](https://github.com/gdeer81/marginalia) with the intent of
+using it as an API documentation system, being a pseudo
+[literate programming](http://en.wikipedia.org/wiki/Literate_programming)
+tool.
