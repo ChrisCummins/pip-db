@@ -14,5 +14,4 @@ CLEANFILES = $(doc_DATA)
 
 $(HTML_DOCS): $(shell find ../src -name '*.clj')
 	@echo '  DOCS   $(HTML_DOCS)'
-	@echo $<
 	@lein marg --dir ./Documentation -f $(HTML_DOCS) >/dev/null
