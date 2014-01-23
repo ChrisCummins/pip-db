@@ -77,6 +77,10 @@ set_new_version() {
     sed -r -i 's/(.*m4_define\(\s*\[pipdb_major_version\],\s*\[)[0-9]+(\].*)/\1'"$major"'\2/' configure.ac
     sed -r -i 's/(.*m4_define\(\s*\[pipdb_minor_version\],\s*\[)[0-9]+(\].*)/\1'"$minor"'\2/' configure.ac
     sed -r -i 's/(.*m4_define\(\s*\[pipdb_micro_version\],\s*\[)[0-9]+(\].*)/\1'"$micro"'\2/' configure.ac
+
+    echo "Updating version string... 'project.clj'"
+    test -f project.clj || { echo "fatal: 'project.clj' not found!"; exit 3; }
+    sed -r -i 's/(\s*\(defproject\s+pip-db\s+")([0-9\.]+)(")/\1'"$major.$minor.$micro"'\3/' project.clj
 }
 
 # Make the git version bump commit.
