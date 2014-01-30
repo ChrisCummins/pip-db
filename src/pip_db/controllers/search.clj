@@ -7,7 +7,7 @@
 
 (def results-per-page 10)
 (def max-page-links 10)
-(def max-results 50)
+(def max-results 20)
 
 (defn search [query results]
   (view/search query results))
