@@ -1811,7 +1811,7 @@ From
 
 > If literate programming stands as a comprehensive programming
 > methodology at one of end of the spectrum and no documentation
-> stands as i> ts antithesis, then Marginalia falls somewhere
+> stands as its antithesis, then Marginalia falls somewhere
 > between. That is, you should always aim for comprehensive
 > documentation, but the shortest path to a useful subset is the
 > commented source code itself.
@@ -1835,3 +1835,33 @@ http://hammerprinciple.com/therighttool/items/clojure/java
 Comparison of Clojure vs PHP:
 
 http://hammerprinciple.com/therighttool/items/clojure/php
+
+### Wednesday 29th
+
+Notes for meeting with Ian:
+
+ * Maintainability: implications of language choice
+    * Future developers must learn language
+       * HOW - Marginalia / Literate programming
+       * WHY - Great language - clojure-koans
+
+ * Stability
+    * Two dependencies: lein & java
+    * project.clj - immutable versions
+    * Tests using Travis CI - build matrix
+
+ * Deployment
+    * Heroku
+
+### Thursday 30th
+
+Notes from weekly meeting with Ian:
+
+ * Maintainability should be tested on a person. Get a volunteer
+   student to try and implement a new feature, e.g. a new dataset file
+   format extension.
+
+ * It may be a good idea to package the dependency JARs locally so as
+   to future-proof against projects becoming unavailable.
+
+ * Contact Kate regarding reimbursement of domain expense.
