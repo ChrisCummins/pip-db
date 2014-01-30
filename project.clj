@@ -3,6 +3,7 @@
   :url "https://github.com/ChrisCummins/pip-db"
   :license {:name "GNU General Public License v3"
             :url "http://www.gnu.org/licenses/gpl.html"}
+  :min-lein-version "2.0.0"
   :dependencies [[compojure "1.1.6"]
                  [hiccup "1.0.4"]
                  [org.clojure/clojure "1.4.0"]
