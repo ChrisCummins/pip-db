@@ -1768,10 +1768,13 @@ Notes for next meeting:
      * How are future students going to add new features?
        - Use a literate programming style to document Clojure sources
          (Marginalia).
+       - Linters, and a self contained build system can provide early
+         warning.
        - Make Clojure accessible (clojure-koans!). It honestly is a
          great language.
        - New features can be written in Java and called from Clojure.
  * Stability:
+    * List *all* dependencies: Lein (bash script).
     * Each dependency is strictly versioned, and versions are
       immutable.
     * Show how project.clj file defines all of the dependencies
@@ -1800,3 +1803,35 @@ From the [Clojure rationale](http://clojure.org/rationale):
 > where Java is suitable**. It reflects the reality that, for the
 > concurrent programming future, pervasive, unmoderated mutation
 > simply has to go.
+
+### Friday 24th
+
+From
+[Marginalia core](http://gdeer81.github.io/marginalia/#marginalia.core):
+
+> If literate programming stands as a comprehensive programming
+> methodology at one of end of the spectrum and no documentation
+> stands as i> ts antithesis, then Marginalia falls somewhere
+> between. That is, you should always aim for comprehensive
+> documentation, but the shortest path to a useful subset is the
+> commented source code itself.
+
+### The one true way
+
+1. Start by running Marginalia against your code
+2. Cringe at the sad state of your code commentary
+3. Add docstrings and code comments as appropriate
+4. Generate the documentation again
+5. Read the resulting documentation
+6. Make changes to code and documentation so that the "dialog" flows sensibly
+7. Repeat from step #4 until complete
+
+### Monday 27th
+
+Comparison of Clojure vs Java:
+
+http://hammerprinciple.com/therighttool/items/clojure/java
+
+Comparison of Clojure vs PHP:
+
+http://hammerprinciple.com/therighttool/items/clojure/php
