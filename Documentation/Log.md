@@ -1673,6 +1673,22 @@ Restructured the directory tree so as to put the design files inside
 of the Documentation tree.
 
 
+## January 2014
+
+
+### Thursday 2nd
+
+Began a LISP
+
+ * PostgreSQL
+ * Travis CI
+ * lein
+ * View logic
+ * resources
+
+ * MVC
+
+
 ### Monday 20th
 
 Reflected on one of the written goals for Christmas holiday work:
@@ -2152,3 +2168,26 @@ Notes from weekly meeting with Ian:
    to future-proof against projects becoming unavailable.
 
  * Contact Kate regarding reimbursement of domain expense.
+
+
+## February 2014
+
+
+### Sundary 2nd
+
+Read up on Heroku's
+[dyno sleeping policy](https://devcenter.heroku.com/articles/dynos#dyno-sleeping),
+which is causing a 5-10 second delay on HTTP requests when pip-db has
+been inactive for more than an hour. Apps with more than one dyno
+don't have the behaviour, but obviously this would cost money. A
+workaround is to ping the server at regular intervals (there are free
+services for this), but this seems somewhat unethical and exploitative
+of the free service offered by Heroku.
+
+
+### Monday 3rd
+
+Emailed Darren with a status update on the project progress. Suggested
+a meeting in a fortnight to review D2 progress. Topics to discuss
+would include the redesign of the index page, a functioning pI
+backend, and formal user testing.
