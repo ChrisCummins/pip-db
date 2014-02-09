@@ -57,6 +57,7 @@
 
 (defn not-found []
   (page {:title "Page Not Found",
+         :navbar {:search false}
          :body [:div.row
                 [:div.col-lg-12.text-center
                  [:div.jumbotron.errortron
