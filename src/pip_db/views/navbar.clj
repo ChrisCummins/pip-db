@@ -17,6 +17,20 @@
            [:div.navbar-button
             [:a.btn.btn-primary {:href "/advanced"} "Advanced"]]]]]))
 
+(defn navbar-user [data]
+  [:ul.nav.navbar-nav.navbar-right
+   (if (data :session)
+     [:li.dropdown
+      [:a#themes.dropdown-toggle {:href "#" :data-toggle "dropdown"}
+       ((data :session) :user) [:span.caret]]
+      [:ul.dropdown-menu
+       [:li [:a {:href "/admin/setup" :tabindex "-1"} "Run initial setup"]]
+       [:li [:a {:href "/upload" :tabindex "-1"} "Upload new data"]]
+       [:li [:a {:href "/logout" :tabindex "-1"} "Preferences"]]
+       [:li.divider]
+       [:li [:a {:href "/logout" :tabindex "-1"} "Log out"]]]]
+     [:li [:a {:href "/login"} "Login"]])])
+
 (defn html [data]
   [:div.navbar.navbar-fixed-top
 
@@ -36,16 +50,4 @@
 
     [:div.navbar-collapse.collapse
      (if (data :search) (navbar-search data))
-
-     [:ul.nav.navbar-nav.navbar-right
-      (if (data :session)
-        [:li.dropdown
-         [:a#themes.dropdown-toggle {:href "#" :data-toggle "dropdown"}
-          ((data :session) :user) [:span.caret]]
-         [:ul.dropdown-menu
-          [:li [:a {:href "/admin/setup" :tabindex "-1"} "Run initial setup"]]
-          [:li [:a {:href "/upload" :tabindex "-1"} "Upload new data"]]
-          [:li [:a {:href "/logout" :tabindex "-1"} "Preferences"]]
-          [:li.divider]
-          [:li [:a {:href "/logout" :tabindex "-1"} "Log out"]]]]
-        [:li [:a {:href "/login"} "Login"]])]]]])
+     (if (not (data :hide-user)) (navbar-user data))]]])
