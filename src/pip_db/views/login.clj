@@ -4,6 +4,7 @@
 
 (defn login []
   (page {:title "Sign in"
+         :navbar {:hide-user true}
          :header (inline-css "/css/login.css")
          :body [:form.form-signin {:method "post" :action "/login"}
                 [:h2.form-signin-heading "Login"]
@@ -26,5 +27,4 @@
                                     "width: 50%; padding-left: 8px;")}
                   [:button.btn.btn-lg.btn-block.btn-success
                    {:name "action" :type "submit" :value "login"}
-                   "Sign in"]]]]
-         :hide-footer true}))
+                   "Sign in"]]]]}))
