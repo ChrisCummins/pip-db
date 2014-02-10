@@ -46,7 +46,11 @@
       [:span.icon-bar]
       [:span.icon-bar]
       [:span.icon-bar]]
-     [:a.navbar-brand {:href "/"} "pip-db"]]
+     [:a.navbar-brand {:href "/"}
+      [:img {:src "/img/logo-32x32.png"
+             :alt-text "pip-db"
+             :style "margin-right:8px;width:32px;height:32px"}]
+      "pip-db"]]
 
     [:div.navbar-collapse.collapse
      (if (data :search) (navbar-search data))

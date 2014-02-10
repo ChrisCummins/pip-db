@@ -151,7 +151,7 @@
 
 .navbar-brand {
   float: left;
-  padding: @navbar-padding-vertical @navbar-padding-horizontal;
+  padding: (@navbar-padding-vertical - 7px) @navbar-padding-horizontal;
   font-size: @font-size-large;
   line-height: @line-height-computed;
 
@@ -275,7 +275,7 @@
 .navbar-form {
   margin-left: -@navbar-padding-horizontal;
   margin-right: -@navbar-padding-horizontal;
-  padding: 10px @navbar-padding-horizontal;
+  padding: 10px @navbar-padding-horizontal 10px 0; // No left padding
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
   @shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 rgba(255,255,255,.1);
