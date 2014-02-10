@@ -7,7 +7,6 @@
          :body (list [:div.row
                       [:div.search.search-block.text-center
                        [:img {:src "/img/logo-640x226.png"
-                              :style "width:640px;height:226px;"
                               :alt-text "pip-db"
                               :title "pip-db"}]
 
