@@ -1,6 +1,6 @@
 (ns pip-db.views.index
   (:use [pip-db.views.layout :only (page)]
-        [pip-db.views.components :only (inline-js)]))
+        [pip-db.views.components :only (inline-js search-bar)]))
 
 (defn index []
   (page {:navbar {:login-only true}
@@ -11,16 +11,7 @@
                               :alt-text "pip-db"
                               :title "pip-db"}]
 
-                       [:div#s
-                        [:form {:method "GET" :action "/s"}
-                         [:div.input-group
-                          [:input#q.form-control {:name "q"
-                                                  :type "text"
-                                                  :autocomplete "off"}]
-                          [:div.input-group-btn
-                           [:button#search-submit.btn.btn-success "Search"]
-                           [:a#search-browse.btn.btn-primary {:href "/advanced"}
-                            "Advanced"]]]]]]]
+                       [:div#s (search-bar {})]]]
                      [:div.row
                       [:p.lead (str "Lorem ipsum dolor sit amet, consectetur "
                                     "adipiscing elit. Etiam ut aliquet nisi."

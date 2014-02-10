@@ -24,3 +24,8 @@
   (testing "Javascript contents"
     (is (= (dut/inline-js "/js/google-analytics.inline.js")
            [:script (str tracking-code "\n")]))))
+
+(deftest search-bar
+  (testing "Search text"
+    (is (not (= (dut/search-bar {})
+                (dut/search-bar {:search-text "foo"}))))))

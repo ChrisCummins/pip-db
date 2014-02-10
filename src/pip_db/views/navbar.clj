@@ -1,17 +1,8 @@
 (ns pip-db.views.navbar
-  (:use [pip-db.views.components]))
+  (:use [pip-db.views.components :only (search-bar)]))
 
 (defn navbar-search [data]
-  (list [:div.search.navbar-search
-         [:form.navbar-form {:action "/s" :role "search"}
-          [:div.input-group
-           [:input#q.form-control {:name "q"
-                                   :type "text"
-                                   :value (data :search-text)
-                                   :autocomplete "off"}]
-           [:div.input-group-btn
-            [:button.btn.btn-success {:type "submit"} "Search"]
-            [:a.btn.btn-primary {:href "/advanced"} "Advanced"]]]]]))
+  [:div.search.navbar-search (search-bar data)])
 
 (defn navbar-user [data]
   [:ul.nav.navbar-nav.navbar-right
