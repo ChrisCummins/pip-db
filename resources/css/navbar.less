@@ -155,9 +155,12 @@
   font-size: @font-size-large;
   line-height: @line-height-computed;
 
+  .transition(~"opacity ease-in-out .15s, color ease-in-out .15s");
+
   &:hover,
   &:focus {
     text-decoration: none;
+    opacity: 0.7;
   }
 
   @media (min-width: @grid-float-breakpoint) {
