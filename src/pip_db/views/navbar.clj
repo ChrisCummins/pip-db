@@ -2,7 +2,7 @@
   (:use [pip-db.views.components]))
 
 (defn navbar-search [data]
-  (list [:div.navbar-search.col-sm-7.col-md-7
+  (list [:div.search.navbar-search
          [:form.navbar-form {:action "/s" :role "search"}
           [:div.input-group
            [:input#q.form-control {:name "q"
@@ -10,11 +10,7 @@
                                    :value (data :search-text)
                                    :autocomplete "off"}]
            [:div.input-group-btn
-            [:button.btn.btn-success {:type "submit"} "Search"]]]]]
-        [:ul.nav.navbar-nav
-         [:li
-          [:div.navbar-button-group
-           [:div.navbar-button
+            [:button.btn.btn-success {:type "submit"} "Search"]
             [:a.btn.btn-primary {:href "/advanced"} "Advanced"]]]]]))
 
 (defn navbar-user [data]
