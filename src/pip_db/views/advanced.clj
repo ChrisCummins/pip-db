@@ -14,8 +14,9 @@
                  [:div.row
                   [:div.col-md-2 [:label {:for "q"}
                                   "all of these words:"]]
-                  [:div.col-md-6 [:input {:name "q" :type "text"
-                                          :autocomplete "off"}]]
+                  [:div.col-md-6 [:input#q {:name "q" :type "text"
+                                            :autocomplete "off"
+                                            :value (data :search-text)}]]
                   [:div.col-md-4
                    [:div.info (str "Find proteins with names that contain "
                                    "these keywords")]]]
@@ -114,6 +115,7 @@
                    [:label {:for "m"} "experimental method:"]]
                   [:div.col-md-6
                    [:select {:name "m"}
+                    [:option "Any"]
                     [:option "Analytical gel isoelectric focusing"]
                     [:option "Analytical isoelectric focusing"]
                     [:option "Carrier-free isoelectric focusing"]
