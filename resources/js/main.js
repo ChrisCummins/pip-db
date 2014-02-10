@@ -4,12 +4,12 @@
  * This script is sourced from every HTML page.
  */
 
-/*
- * Avoid `console` errors in browsers that lack a console.
- */
 (function () {
     'use strict';
 
+    /*
+     * Avoid `console` errors in browsers that lack a console.
+     */
     var method,
         noop = function () {},
         methods = [
@@ -29,4 +29,10 @@
             console[method] = noop;
         }
     }
+
+    /*
+     * The search bar always grabs page focus.
+     */
+    var value = $("#q").val();
+    $("#q").focus().val('').val(value);
 }());

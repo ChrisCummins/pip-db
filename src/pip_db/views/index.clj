@@ -47,5 +47,4 @@
                                     "ante ut leo tristique, eu vehicula erat "
                                     "egestas. Nulla facilisi. Maecenas "
                                     "volutpat congue velit, vel feugiat quam "
-                                    "condimentum in.")]])
-         :javascript (inline-js "/js/index.inline.js")}))
+                                    "condimentum in.")]])}))
