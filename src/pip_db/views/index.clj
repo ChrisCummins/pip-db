@@ -5,20 +5,22 @@
 (defn index []
   (page {:navbar {:login-only true}
          :body (list [:div.row
-                      [:div.search.text-center
-                       [:div.jumbotron
-                        [:h1 "pip-db"]
-                        [:p.lead "Protein Isoelectric Point Database"]]
+                      [:div.search.search-block.text-center
+                       [:img {:src "/img/logo-640x226.png"
+                              :style "width:640px;height:226px;"
+                              :alt-text "pip-db"
+                              :title "pip-db"}]
 
-                       [:form {:method "GET" :action "/s"}
-                        [:div.input-group
-                         [:input#q.form-control {:name "q"
-                                                 :type "text"
-                                                 :autocomplete "off"}]
-                         [:div.input-group-btn
-                          [:button#search-submit.btn.btn-success "Search"]
-                          [:a#search-browse.btn.btn-primary {:href "/advanced"}
-                           "Advanced"]]]]]]
+                       [:div#s
+                        [:form {:method "GET" :action "/s"}
+                         [:div.input-group
+                          [:input#q.form-control {:name "q"
+                                                  :type "text"
+                                                  :autocomplete "off"}]
+                          [:div.input-group-btn
+                           [:button#search-submit.btn.btn-success "Search"]
+                           [:a#search-browse.btn.btn-primary {:href "/advanced"}
+                            "Advanced"]]]]]]]
                      [:div.row
                       [:p.lead (str "Lorem ipsum dolor sit amet, consectetur "
                                     "adipiscing elit. Etiam ut aliquet nisi."
