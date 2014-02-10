@@ -1,35 +1,36 @@
 $(function () {
-    'use strict';
+  'use strict';
 
-    var hashDiff = function (h1, h2) {
-        var diff = {}, k;
+  var hashDiff = function(h1, h2) {
+    var diff = {}, k;
 
-        for (k in h2) {
-            if (h1[k] !== h2[k]) { diff[k] = h2[k]; }
-        }
+    for (k in h2) {
+      if (h1[k] !== h2[k])
+        diff[k] = h2[k];
+    }
 
-        return diff;
-    },
-        convertSerializedArrayToHash = function (a) {
-            var hash = {};
+    return diff;
+  };
 
-            a.forEach(function (element) {
-                hash[element.name] = element.value;
-            });
+  var hashForm = function(form) {
+    var a = form.serializeArray(), hash = {};
 
-            return hash;
-        },
-        $form = $('#as'),
-        startItems = convertSerializedArrayToHash($form.serializeArray());
-
-    $form.submit(function (event) {
-
-        event.preventDefault();
-
-        var currentItems = convertSerializedArrayToHash($form.serializeArray()),
-            itemsToSubmit = hashDiff(startItems, currentItems);
-
-        window.location = $form.attr('action') + '?' + $.param(itemsToSubmit);
+    a.forEach(function(element) {
+      hash[element.name] = element.value;
     });
+
+    return hash;
+  };
+
+  var $form = $('#as');
+  var startItems = hashForm($form);
+
+  $form.submit(function(e) {
+    e.preventDefault();
+
+    var itemsToSubmit = hashDiff(startItems, hashForm($form));
+
+    window.location = $form.attr('action') + '?' + $.param(itemsToSubmit);
+  });
 
 });
