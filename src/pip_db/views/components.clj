@@ -15,5 +15,5 @@
                             :value (data :search-text)
                             :autocomplete "off"}]
     [:div.input-group-btn
-     [:button#search-submit.btn.btn-success "Search"]
-     [:a#search-browse.btn.btn-primary {:href "/advanced"} "Advanced"]]]])
+     [:button.btn.btn-success {:name "a" :value "s"} "Search"]
+     [:button.btn.btn-primary {:name "a" :value "a"} "Advanced"]]]])

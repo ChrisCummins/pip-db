@@ -52,8 +52,26 @@
         (get params "start"))
        (catch Exception e 0)))
 
+;; Serve a search request.
+(defn do-search [params]
+  (search (get params "q")
+          (paginate (model/search params)
+                    (start-param params))))
+
+;; Serve an advanced search page.
+(defn do-advanced [params]
+  (advanced/advanced {:search-text (get params "q")}))
+
+;; Return the handler to be used for a specific search action. If the
+;; action `a` is used, then we use the advanced handler, else we use
+;; the normal search.
+(defn response-function [action]
+  (if (= "a" action)
+    do-advanced
+    do-search))
+
 (defroutes routes
-  (GET "/advanced" [] (advanced/advanced))
+  (GET "/advanced" {params :params}
+       (do-advanced params))
   (GET "/s" {params :params}
-       (search (get params "q") (paginate (model/search params)
-                                          (start-param params)))))
+       ((response-function (get params "a")) params)))

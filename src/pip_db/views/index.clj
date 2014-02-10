@@ -2,7 +2,7 @@
   (:use [pip-db.views.layout :only (page)]
         [pip-db.views.components :only (inline-js search-bar)]))
 
-(defn index []
+(defn index [data]
   (page {:navbar {:login-only true}
          :body (list [:div.row
                       [:div.search.search-block.text-center
@@ -11,7 +11,7 @@
                               :alt-text "pip-db"
                               :title "pip-db"}]
 
-                       [:div#s (search-bar {})]]]
+                       [:div#s (search-bar data)]]]
                      [:div.row
                       [:p.lead (str "Lorem ipsum dolor sit amet, consectetur "
                                     "adipiscing elit. Etiam ut aliquet nisi."

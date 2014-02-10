@@ -2,7 +2,7 @@
   (:use [pip-db.views.layout :only (page)]
         [pip-db.views.components :only (inline-js)]))
 
-(defn advanced []
+(defn advanced [data]
   (page {
          :title "Advanced Search"
          :navbar {}
@@ -175,5 +175,4 @@
                   [:div.col-md-2.col-md-offset-6
                    [:button.btn.btn-success.pull-right
                     {:type "submit" :name "action" :value "advanced"}
-                    "Advanced Search"]]]]]
-         :javascript (inline-js "/js/advanced.inline.js")}))
+                    "Advanced Search"]]]]]}))

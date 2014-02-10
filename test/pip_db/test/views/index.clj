@@ -4,5 +4,9 @@
 
 (deftest index
   (testing "Page returns string"
-    (is (= (class (dut/index))
-           java.lang.String))))
+    (is (= (class (dut/index {}))
+           java.lang.String)))
+
+  (testing "Preloaded search query"
+    (is (not (= (dut/index {})
+                (dut/index {:search-text "foo"}))))))
