@@ -3,6 +3,8 @@
 Here are some basic things that should be done before making a new
 release.
 
+* Run `git branch -a` and check for any unresolved working branches.
+* Check the issue tracker for unresolved issues for this release.
 * Decide on the new version number and bump it. Run `git log
   stable..master` and look through the changes, do they constitute a
   micro change (single issue fixes, little to no behavioural changes),
