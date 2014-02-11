@@ -6,21 +6,6 @@
             [pip-db.views.navbar :as navbar]
             [pip-db.views.footer :as footer]))
 
-(defn heading [data]
-  [:div.page-title
-   [:div.page-title-inner
-    (if (data :download)
-      [:div.download [:a.btn.btn-warning {:href (data :download)} "Download"]])
-    (if (data :title) [:h3 (data :title)])
-
-    (if (data :meta)
-      [:div.info
-       [:ul.meta-tags
-        [:li (str "Found " (data :meta-results-count)
-                  (if (= (data :meta-results-count) 1)
-                    " result..." " results..."))]]])]
-   [:hr]])
-
 (defn page [data]
   (html5 {:lang "en" :class "no-js"}
          [:head
@@ -40,7 +25,7 @@
          [:body
           (if (data :navbar) (navbar/html (data :navbar)))
           [:div#wrap [:div.container
-                      (if (data :heading) (heading (data :heading)))
+                      (if (data :heading) (ui/heading (data :heading)))
                       (data :body)]]
           (if (not (data :hide-footer)) (footer/html))
 
