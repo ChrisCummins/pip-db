@@ -40,6 +40,10 @@
 ;; A search form is a full-page width entry form for looking up data,
 ;; and consists of a number of elements aligned into rows.
 
+;; A search form text input widget.
+(defn search-form-text-input-widget [name value]
+  [:div.col-md-6 (text-input-widget name value)])
+
 (defn search-form-heading-row
   ([text]    [:div.row [:div.col-md-12 [:h4          text]]])
   ([id text] [:div.row [:div.col-md-12 [:h4 {:id id} text]]]))
@@ -48,9 +52,7 @@
 ;; widget and description.
 (defn search-form-widget-row [label widget description]
   [:div.row
-   [:div.col-md-2 label]
-   [:div.col-md-6 widget]
-   [:div.col-md-4 description]])
+   [:div.col-md-2 label] widget [:div.col-md-4 description]])
 
 ;; A row within a search form for a text search. We can optionally
 ;; provide a value to set the text box to.
@@ -59,7 +61,7 @@
      (search-form-text-row name label-text desc-text ""))
   ([name label-text desc-text input-value]
      (search-form-widget-row (label-widget name (str label-text ":"))
-                             (text-input-widget name input-value)
+                             (search-form-text-input-widget name input-value)
                              (info-widget (str desc-text ".")))))
 
 ;; ### Main search bar
