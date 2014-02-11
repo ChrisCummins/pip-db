@@ -62,19 +62,27 @@
                              (text-input-widget name input-value)
                              (info-widget (str desc-text ".")))))
 
+;; ### Main search bar
+
+(def submit-button
+  [:button.btn.btn-success.disabled {:name "a" :value "s"} "Search"])
+
+(def advanced-button
+  [:button.btn.btn-primary          {:name "a" :value "a"} "Advanced"])
+
+;; This is the main search bar which is embedded into the home page
+;; and navbar. It provides the ability to search by name, and to go
+;; the advanced search page.
 (defn search-bar [data]
   [:form {:method "GET" :action "/s" :role "search"}
    [:div.input-group
-    [:input#q.form-control {:name "q"
-                            :type "text"
+    [:input#q.form-control {:name "q" :type "text"
                             :value (data :search-text)
                             :autocomplete "off"}]
-    [:div.input-group-btn
-     ;; The inline Submit and Advanced search page buttons.
-     [:button.btn.btn-success.disabled {:name "a" :value "s"} "Search"]
-     [:button.btn.btn-primary          {:name "a" :value "a"} "Advanced"]]]])
+    [:div.input-group-btn submit-button advanced-button]]])
 
-;; A page heading.
+;; ### Page heading
+
 (defn heading [data]
   [:div.page-title
    [:div.page-title-inner
