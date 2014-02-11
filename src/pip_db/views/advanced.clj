@@ -172,6 +172,6 @@
 
                  [:div.row
                   [:div.col-md-2.col-md-offset-6
-                   [:button.btn.btn-success.pull-right
-                    {:type "submit" :name "action" :value "advanced"}
+                   [:button.btn.btn-success.disabled.pull-right
+                    {:type "submit" :name "a" :value "s"}
                     "Advanced Search"]]]]]}))

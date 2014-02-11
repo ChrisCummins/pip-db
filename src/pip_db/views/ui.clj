@@ -15,8 +15,9 @@
                             :value (data :search-text)
                             :autocomplete "off"}]
     [:div.input-group-btn
-     [:button.btn.btn-success {:name "a" :value "s"} "Search"]
-     [:button.btn.btn-primary {:name "a" :value "a"} "Advanced"]]]])
+     ;; The inline Submit and Advanced search page buttons.
+     [:button.btn.btn-success.disabled {:name "a" :value "s"} "Search"]
+     [:button.btn.btn-primary          {:name "a" :value "a"} "Advanced"]]]])
 
 ;; Returns the path to the logo file of the given dimensions.
 (defn logo-path [dimensions] (str "/img/logo-" dimensions ".png"))

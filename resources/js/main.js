@@ -53,14 +53,54 @@
     return {length: length, values: items};
   };
 
-  $searchForms = $('form[action="/s"]');
+  /*
+   * Perform the default value checks from stripDefaultValues but
+   * simply return a boolean for whether or not the array did contain
+   * a unique value. This executes much faster since it exits early,
+   * with worst case times O(n).
+   */
+  var containsUniqueValues = function(values, defaults) {
+    try {
+      values.forEach(function(e) {
+        if (e.value !== defaults[e.name])
+          throw new SuccessException;
+      });
+    } catch (e) {
+      return true;
+    }
+
+    return false;
+  };
+
+  var $searchForms = $('form[action="/s"]');
+  var searchFormDefaults = {
+    'q': '',
+    'q_eq': '',
+    'q_any': '',
+    'q_ne': '',
+    'q_s': '',
+    'q_l': '',
+    'ec1': '',
+    'ec2': '',
+    'ec3': '',
+    'ec4': '',
+    'pi_l': '',
+    'pi_h': '',
+    'mw_l': '',
+    'mw_h': '',
+    'm': 'Any',
+    't_l': '',
+    't_h': ''
+  };
 
   /*
    * Append the advanced button value to the form values.
    */
   $(':submit', $searchForms).click(function() {
+    $form = $(this).closest('form');
+
     if ($(this).attr('value') === 'a') {
-      $(this).closest('form').append($("<input type='hidden'>").attr({
+      $form.append($("<input type='hidden'>").attr({
         name: $(this).attr('name'),
         value: $(this).attr('value')
       }));
@@ -70,28 +110,37 @@
   $searchForms.submit(function(e) {
     e.preventDefault();
 
-    var items = stripDefaultValues($(this).serializeArray(), {
-      'q': '',
-      'q_eq': '',
-      'q_any': '',
-      'q_ne': '',
-      'q_s': '',
-      'q_l': '',
-      'ec1': '',
-      'ec2': '',
-      'ec3': '',
-      'ec4': '',
-      'pi_l': '',
-      'pi_h': '',
-      'mw_l': '',
-      'mw_h': '',
-      'm': 'Any',
-      't_l': '',
-      't_h': ''
-    });
+    var items = stripDefaultValues($(this).serializeArray(),
+                                   searchFormDefaults);
 
     if (items.length) // Only submit form if we have some unique values
       window.location = $(this).attr('action') + '?' + $.param(items.values);
   });
+
+  /*
+   * Checks whether a search form has been filled in with data, and
+   * activates the submit button if so.
+   */
+  var activateSubmitIfFormFilled = function($form) {
+    $submit = $(' button[name="a"][value="s"]', $form);
+
+    if (containsUniqueValues($form.serializeArray(), searchFormDefaults))
+      $submit.removeClass('disabled'); // Enable button
+    else
+      $submit.addClass('disabled'); // Disable button
+  }
+
+  // Bind form validation to text input keystrokes
+  $($searchForms).bind('input propertychange', function(e) {
+    activateSubmitIfFormFilled($(this).closest('form'));
+  });
+
+  // Bind form validation to dropdown selections
+  $(' select', $searchForms).change(function(e) {
+    activateSubmitIfFormFilled($(this).closest('form'));
+  });
+
+  // Validate form on load (in case of preloaded criteria)
+  activateSubmitIfFormFilled($searchForms);
 
 }());
