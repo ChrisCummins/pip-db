@@ -17,7 +17,8 @@
           [:meta {:name "msapplication-tooltip"
                   :content "Protein Isoelectric Point Database."}]
           [:title (str "pip-db " (data :title))]
-          (include-css "/css/styles.css")
+          (include-css "/css/styles.css"
+                       "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css")
           (data :header)
           (include-js "/js/modernizr-2.7.0.min.js")
           (ui/google-analytics)]
@@ -34,6 +35,7 @@
           [:script "window.jQuery || document.write('"
            "<script src=\"/js/jquery-1.10.2.min.js\"><\\/script>');"]
           (include-js "/js/bootstrap-3.0.1.min.js"
+                      "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"
                       "/js/main.js"
                       "/js/moment.min.js")
           (data :javascript)]))
