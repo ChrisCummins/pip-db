@@ -2192,3 +2192,18 @@ Emailed Darren with a status update on the project progress. Suggested
 a meeting in a fortnight to review D2 progress. Topics to discuss
 would include the redesign of the index page, a functioning pI
 backend, and formal user testing.
+
+### Friday 7th
+
+Confirmed meeting with Darren for 1pm on Friday. Re-booked meeting
+with Ian for Wednesday 4:30pm.
+
+### Monday 11th
+
+Implement autocomplete functionality using jQuery UI and a hand-picked
+subset of the most common results for each different field (protein
+name, source, location). I suspect that the production version will
+use AJAX and a server-side string matching algorithm implemented in
+Clojure to provide fast suggestions, but for now we can get away with
+client side processing by just passing ~800 suggestions to the client
+through JavaScript and getting them to process it.

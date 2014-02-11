@@ -29,3 +29,11 @@
     width: 70%;
   }
 }
+
+#q {
+  .border-left-radius(@border-radius-base); // Force left rounded edges
+}
+
+.ui-front {
+    z-index: 9999 !important; // Keep autocomplete suggestions on top of navbar
+}

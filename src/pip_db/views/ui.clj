@@ -19,6 +19,26 @@
      [:button.btn.btn-success.disabled {:name "a" :value "s"} "Search"]
      [:button.btn.btn-primary          {:name "a" :value "a"} "Advanced"]]]])
 
+;; A page heading.
+(defn heading [data]
+  [:div.page-title
+   [:div.page-title-inner
+    ;; Download link for search results.
+    (if (data :download)
+      [:div.download [:a.btn.btn-warning {:href (data :download)} "Download"]])
+    ;; The page title.
+    (if (data :title) [:h3 (data :title)])
+    ;; Meta tags for displaying information about search results.
+    (if (data :meta)
+      [:div.info
+       [:ul.meta-tags
+        [:li (str "Found " (data :meta-results-count)
+                  (if (= (data :meta-results-count) 1)
+                    " result..." " results..."))]]])]
+   [:hr]])
+
+;; ## Images
+
 ;; Returns the path to the logo file of the given dimensions.
 (defn logo-path [dimensions] (str "/img/logo-" dimensions ".png"))
 
