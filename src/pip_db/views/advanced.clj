@@ -68,24 +68,7 @@
                               :autocomplete "off"}]]]]
                   [:div.col-md-4
                    [:div.info "Enter one or more categories for the EC."]]]
-                 [:div.row
-                  [:div.col-md-2
-                   [:label {:for "pi-min"} "isoelectric point:"]]
-                  [:div.col-md-6
-                   [:div {:style "display: table; width: 100%;"}
-                    [:div {:style "display: table-cell;"}
-                     [:input {:name "pi_l" :type "text"
-                              :autocomplete "off"}]]
-                    [:div {:style (str "display: table-cell; width:40px; "
-                                       "padding-right: 6px;"
-                                       "padding-left: 6px;"
-                                       "text-align: center;")} "to"]
-                    [:div {:style "display: table-cell;"}
-                     [:input {:name "pi_h" :type "text"
-                              :autocomplete "off"}]]]]
-                  [:div.col-md-4
-                   [:div.info
-                    "Enter an exact or range of isoelectric points."]]]
+                 (ui/search-form-pi-widget data)
                  [:div.row
                   [:div.col-md-2
                    [:label {:for "location"} "molecular weight:"]]

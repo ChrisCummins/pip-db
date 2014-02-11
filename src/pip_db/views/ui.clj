@@ -35,6 +35,31 @@
   [:input {:id name :name name :type "text"
            :autocomplete "off" :value value}])
 
+;; A hidden text input widget.
+(defn hidden-input-widget
+  ([name]
+     [:input {:id name :name name :type "text"
+              :style "display:none;"}])
+  ([name value]
+     [:input {:id name :name name :type "text" :value value
+              :style "display:none;"}]))
+
+;; An On/Off button, in the "Off" position.
+(defn off-on-button-input-widget [id]
+  [:button.btn.btn-block.btn-primary {:id id :type "button"} "Off"])
+
+;; An On/Off button, in the "On" position.
+(defn on-off-button-input-widget [id]
+  [:button.btn.btn-block.btn-warning {:id id :type "button"} "On"])
+
+;; A jQuery UI slider range widget. This consists of three elements:
+;; the div to contain the slider itself, and two invisible form inputs
+;; which are used to store the slider values.
+(defn range-slider-input-widget [id name-low name-high]
+  (list [:div {:id id}]
+        (hidden-input-widget name-low)
+        (hidden-input-widget name-high)))
+
 ;; ### Search form widgets
 ;;
 ;; A search form is a full-page width entry form for looking up data,
@@ -43,6 +68,13 @@
 ;; A search form text input widget.
 (defn search-form-text-input-widget [name value]
   [:div.col-md-6 (text-input-widget name value)])
+
+;; The search form pI input slider.
+(defn search-form-pi-input-widget [data]
+  (list [:div.col-md-1
+         (off-on-button-input-widget "pi-active")]
+        [:div.col-md-5 {:style "padding-left:0;"}
+         (range-slider-input-widget "pi-slider" "pi_l" "pi_h")]))
 
 (defn search-form-heading-row
   ([text]    [:div.row [:div.col-md-12 [:h4          text]]])
@@ -63,6 +95,13 @@
      (search-form-widget-row (label-widget name (str label-text ":"))
                              (search-form-text-input-widget name input-value)
                              (info-widget (str desc-text ".")))))
+
+;; An isoelectric point input search form widget.
+(defn search-form-pi-widget [data]
+  (search-form-widget-row (label-widget "isoelectric point (pH):")
+                          (search-form-pi-input-widget data)
+                          (info-widget (str "Enter an exact or range of "
+                                            "isoelectric points."))))
 
 ;; ### Main search bar
 

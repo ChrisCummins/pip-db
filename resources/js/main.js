@@ -311,6 +311,61 @@
     activateSubmitIfFormFilled($searchForms);
 
     /*
+     * PI SLIDER
+     */
+
+    var $slider = $('#pi-slider');
+
+    // Create our slider
+    $slider.labeledslider({
+        disabled: true,
+        range: true,
+        min: 0,
+        max: 14,
+        step: 0.5,
+        values: [ 6, 8 ],
+        tickInterval: 1,
+        slide: function (event, ui) {
+            setFormValuesFromSlider();
+        }
+    });
+
+    var piActive = false; // Keep track of whether pI search is active
+
+    // Update hidden form inputs
+    var setFormValuesFromSlider = function () {
+        if (piActive) {
+            $('#pi_l').val($slider.labeledslider('values', 0));
+            $('#pi_h').val($slider.labeledslider('values', 1));
+        } else {
+            $('#pi_l').val('');
+            $('#pi_h').val('');
+        }
+    };
+
+    // pI slider button press
+    $('#pi-active').click(function (e) {
+        piActive = !piActive;
+
+        if (piActive) {
+            $(this).text('On');
+            $(this).addClass('btn-warning');
+            $(this).removeClass('btn-primary');
+            $slider.labeledslider('option', 'disabled', false);
+            $('button[name="a"][value="s"]').removeClass('disabled');
+        } else {
+            $(this).text('Off');
+            $(this).addClass('btn-primary');
+            $(this).removeClass('btn-warning');
+            $slider.labeledslider('option', 'disabled', true);
+        }
+
+        // Update form
+        setFormValuesFromSlider();
+        activateSubmitIfFormFilled($(this).closest('form'));
+    });
+
+    /*
      * AUTO-COMPLETE
      */
 
