@@ -16,3 +16,7 @@ release.
 * Run `./scripts/indent.sh` and fix and commit any changes.
 * Run the linter scripts in `./scripts/linter` and fix and commit any
   changes.
+
+### After release
+
+* Deploy stable HEAD to Heroku.
