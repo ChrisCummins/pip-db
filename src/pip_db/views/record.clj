@@ -1,5 +1,5 @@
 (ns pip-db.views.record
-  (:use [pip-db.views.layout :only (page)])
+  (:use [pip-db.views.page :only (page)])
   (:require [pip-db.util :as util]
             [clojure.string :as str]))
 

@@ -1,6 +1,6 @@
 (ns pip-db.views.login
   (:require [pip-db.util :as util])
-  (:use [pip-db.views.layout :only (page)]))
+  (:use [pip-db.views.page :only (page)]))
 
 (defn login []
   (page {:title "Sign in"

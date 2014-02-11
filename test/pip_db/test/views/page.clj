@@ -1,6 +1,6 @@
-(ns pip-db.test.views.layout
+(ns pip-db.test.views.page
   (:use clojure.test)
-  (:require [pip-db.views.layout :as dut]))
+  (:require [pip-db.views.page :as dut]))
 
 (deftest heading
   (testing "No data"

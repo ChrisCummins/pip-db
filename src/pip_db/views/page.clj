@@ -1,4 +1,4 @@
-(ns pip-db.views.layout
+(ns pip-db.views.page
   (:use [hiccup.core :only (html)]
         [hiccup.page :only (html5 include-css include-js)])
   (:require [pip-db.util :as util]

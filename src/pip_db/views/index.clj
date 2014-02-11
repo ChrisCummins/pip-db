@@ -1,6 +1,6 @@
 (ns pip-db.views.index
   (:require [pip-db.views.ui :as ui])
-  (:use [pip-db.views.layout :only (page)]))
+  (:use [pip-db.views.page :only (page)]))
 
 ;; The "above the fold" content, i.e. the main logo and search bar.
 (defn search-block [data]
