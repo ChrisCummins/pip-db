@@ -2192,6 +2192,11 @@ a meeting in a fortnight to review D2 progress. Topics to discuss
 would include the redesign of the index page, a functioning pI
 backend, and formal user testing.
 
+### Friday 7th
+
+Confirmed meeting with Darren for 1pm on Friday. Re-booked meeting
+with Ian for Wednesday 4:30pm.
+
 ### Monday 11th
 
 Implement autocomplete functionality using jQuery UI and a hand-picked
