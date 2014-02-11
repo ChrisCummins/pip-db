@@ -1,9 +1,11 @@
-;; ## User Interface Components
+;; # User Interface Components
 ;;
-;; Define a set of common user interface components
+;; Define a set of common user interface components.
 (ns pip-db.views.ui
   (:require [pip-db.util :as util]))
 
+;; The Google analytics tracking snippet, as an inline embedded
+;; script. Include this on every page to enable analytics tracking.
 (defn google-analytics []
   (util/inline-js "/js/google-analytics.inline.js"))
 
@@ -37,6 +39,7 @@
                     " result..." " results..."))]]])]
    [:hr]])
 
+;; ---------
 ;; ## Images
 
 ;; Returns the path to the logo file of the given dimensions.
