@@ -1,8 +1,8 @@
 (ns pip-db.views.navbar
-  (:use [pip-db.views.components :only (search-bar)]))
+  (:require [pip-db.views.components :as components]))
 
 (defn navbar-search [data]
-  [:div.search.navbar-search (search-bar data)])
+  [:div.search.navbar-search (components/search-bar data)])
 
 (defn navbar-user [data]
   [:ul.nav.navbar-nav.navbar-right
@@ -33,11 +33,7 @@
       [:span.icon-bar]
       [:span.icon-bar]
       [:span.icon-bar]]
-     [:a.navbar-brand {:href "/"}
-      [:img {:src "/img/logo-32x32.png"
-             :alt-text "pip-db"
-             :style "margin-right:8px;width:32px;height:32px"}]
-      "pip-db"]]
+     [:a.navbar-brand {:href "/"} components/small-logo "pip-db"]]
 
     [:div.navbar-collapse.collapse
      (if (data :search) (navbar-search data))

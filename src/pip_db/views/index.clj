@@ -1,13 +1,11 @@
 (ns pip-db.views.index
-  (:use [pip-db.views.layout :only (page)]
-        [pip-db.views.components :only (inline-js search-bar)]))
+  (:require [pip-db.views.components :as components])
+  (:use [pip-db.views.layout :only (page)]))
 
 ;; The "above the fold" content, i.e. the main logo and search bar.
 (defn search-block [data]
   [:div.search.search-block.text-center
-   [:img {:src "/img/logo-640x226.png"
-          :alt-text "pip-db" :title "pip-db"}]
-   [:div#s (search-bar data)]])
+   components/big-logo (components/search-bar data)])
 
 ;; The "below the fold" main body of text, containing a description of
 ;; what the site is, it's purpose, and how to use it.
