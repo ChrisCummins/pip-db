@@ -1,6 +1,37 @@
+;; ## The Advanced Search page
 (ns pip-db.views.advanced
-  (:use [pip-db.views.page :only (page)]))
+  (:use [pip-db.views.page :only (page)])
+  (:require [pip-db.util :as util]
+            [pip-db.views.ui :as ui]))
 
+;; ## Search form widgets
+
+(defn search-keywords-all-widget [data]
+  (ui/search-form-text-row "q" "all of these words"
+                           "Find proteins with names that contain these keywords"
+                           (data :search-text)))
+
+(defn search-keywords-exact-widget [data]
+  (ui/search-form-text-row "q_eq" "this exact word or phrase"
+                           "Type exact phrases to match in protein names"))
+
+(defn search-keywords-any-widget [data]
+  (ui/search-form-text-row "q_any" "any of these words"
+                           "Select proteins from a range of keywords"))
+
+(defn search-keywords-exclude-widget [data]
+  (ui/search-form-text-row "q_ne" "none of these words"
+                           "Exclude proteins which contain these keywords"))
+
+(defn search-source-widget [data]
+  (ui/search-form-text-row "q_s" "source"
+                           "Enter the Latin binomial or common names"))
+
+(defn search-location-widget [data]
+  (ui/search-form-text-row "q_l" "location"
+                           "Enter the location or organ"))
+
+;; ## Page Layout
 (defn advanced [data]
   (page {
          :title "Advanced Search"
@@ -8,53 +39,16 @@
          :heading {:title "Advanced Search"}
          :body [:div.advsearch
                 [:form#as {:method "GET" :action "/s"}
-                 [:div.row
-                  [:div.col-md-12 [:h4 "Find proteins with..."]]]
-                 [:div.row
-                  [:div.col-md-2 [:label {:for "q"}
-                                  "all of these words:"]]
-                  [:div.col-md-6 [:input#q {:name "q" :type "text"
-                                            :autocomplete "off"
-                                            :value (data :search-text)}]]
-                  [:div.col-md-4
-                   [:div.info (str "Find proteins with names that contain "
-                                   "these keywords")]]]
-                 [:div.row
-                  [:div.col-md-2 [:label {:for "q_eq"}
-                                  "this exact word or phrase:"]]
-                  [:div.col-md-6 [:input {:name "q_eq" :type "text"
-                                          :autocomplete "off"}]]
-                  [:div.col-md-4
-                   [:div.info "Type exact phrases to match in protein names."]]]
-                 [:div.row
-                  [:div.col-md-2 [:label {:for "q_any"}
-                                  "any of these words:"]]
-                  [:div.col-md-6 [:input {:name "q_any" :type "text"
-                                          :autocomplete "off"}]]
-                  [:div.col-md-4
-                   [:div.info "Select proteins from a range of keywords."]]]
-                 [:div.row
-                  [:div.col-md-2 [:label {:for "q_ne"}
-                                  "none of these words:"]]
-                  [:div.col-md-6 [:input {:name "q_ne" :type "text"
-                                          :autocomplete "off"}]]
-                  [:div.col-md-4
-                   [:div.info "Exclude proteins which contain these keywords."]]]
-                 [:div.row
-                  [:div.col-md-2 [:label {:for "q_s"} "source:"]]
-                  [:div.col-md-6 [:input {:name "q_s" :type "text"
-                                          :autocomplete "off"}]]
-                  [:div.col-md-4
-                   [:div.info "Enter the Latin binomial or common names."]]]
-                 [:div.row
-                  [:div.col-md-2 [:label {:for "q_l"} "location:"]]
-                  [:div.col-md-6 [:input {:name "q_l" :type "text"
-                                          :autocomplete "off"}]]
-                  [:div.col-md-4
-                   [:div.info "Enter the location or organ."]]]
 
-                 [:div.row
-                  [:div.col-md-12 [:h4 "Then narrow results by..."]]]
+                 (ui/search-form-heading-row "Find proteins with...")
+                 (search-keywords-all-widget data)
+                 (search-keywords-exact-widget data)
+                 (search-keywords-any-widget data)
+                 (search-keywords-exclude-widget data)
+                 (search-source-widget data)
+                 (search-location-widget data)
+
+                 (ui/search-form-heading-row "Then narrow results by...")
                  [:div.row
                   [:div.col-md-2
                    [:label {:for "ec1"} "enzyme commission number:"]]
@@ -74,24 +68,7 @@
                               :autocomplete "off"}]]]]
                   [:div.col-md-4
                    [:div.info "Enter one or more categories for the EC."]]]
-                 [:div.row
-                  [:div.col-md-2
-                   [:label {:for "pi-min"} "isoelectric point:"]]
-                  [:div.col-md-6
-                   [:div {:style "display: table; width: 100%;"}
-                    [:div {:style "display: table-cell;"}
-                     [:input {:name "pi_l" :type "text"
-                              :autocomplete "off"}]]
-                    [:div {:style (str "display: table-cell; width:40px; "
-                                       "padding-right: 6px;"
-                                       "padding-left: 6px;"
-                                       "text-align: center;")} "to"]
-                    [:div {:style "display: table-cell;"}
-                     [:input {:name "pi_h" :type "text"
-                              :autocomplete "off"}]]]]
-                  [:div.col-md-4
-                   [:div.info
-                    "Enter an exact or range of isoelectric points."]]]
+                 (ui/search-form-pi-widget data)
                  [:div.row
                   [:div.col-md-2
                    [:label {:for "location"} "molecular weight:"]]

@@ -1,25 +1,129 @@
-;; ## User Interface Components
+;; # User Interface Components
 ;;
-;; Define a set of common user interface components
+;; Define a set of common user interface components.
 (ns pip-db.views.ui
   (:require [pip-db.util :as util]))
 
+;; The Google analytics tracking snippet, as an inline embedded
+;; script. Include this on every page to enable analytics tracking.
 (defn google-analytics []
   (util/inline-js "/js/google-analytics.inline.js"))
 
+;; ----------
+;; ## Widgets
+;;
+;; A collection of user interface widgets which can be used to
+;; construct pages.
+
+;; ## Input widgets
+;;
+;; These are widgets which are used for user input, such as performing
+;; searches.
+
+;; An input label widget. Optionally, the name of an input can be
+;; provided to assign the label to.
+(defn label-widget
+  ([text]     [:label text])
+  ([for text] [:label {:for for} text]))
+
+;; An info text widget to be used to annotate input forms.
+(defn info-widget [text]
+  [:div.info text])
+
+;; A standard text input widget.
+(defn text-input-widget [name value]
+  [:input {:id name :name name :type "text"
+           :autocomplete "off" :value value}])
+
+;; A hidden text input widget.
+(defn hidden-input-widget
+  ([name]
+     [:input {:id name :name name :type "text"
+              :style "display:none;"}])
+  ([name value]
+     [:input {:id name :name name :type "text" :value value
+              :style "display:none;"}]))
+
+;; An On/Off button, in the "Off" position.
+(defn off-on-button-input-widget [id]
+  [:button.btn.btn-block.btn-primary {:id id :type "button"} "Off"])
+
+;; An On/Off button, in the "On" position.
+(defn on-off-button-input-widget [id]
+  [:button.btn.btn-block.btn-warning {:id id :type "button"} "On"])
+
+;; A jQuery UI slider range widget. This consists of three elements:
+;; the div to contain the slider itself, and two invisible form inputs
+;; which are used to store the slider values.
+(defn range-slider-input-widget [id name-low name-high]
+  (list [:div {:id id}]
+        (hidden-input-widget name-low)
+        (hidden-input-widget name-high)))
+
+;; ### Search form widgets
+;;
+;; A search form is a full-page width entry form for looking up data,
+;; and consists of a number of elements aligned into rows.
+
+;; A search form text input widget.
+(defn search-form-text-input-widget [name value]
+  [:div.col-md-6 (text-input-widget name value)])
+
+;; The search form pI input slider.
+(defn search-form-pi-input-widget [data]
+  (list [:div.col-md-1
+         (off-on-button-input-widget "pi-active")]
+        [:div.col-md-5 {:style "padding-left:0;"}
+         (range-slider-input-widget "pi-slider" "pi_l" "pi_h")]))
+
+(defn search-form-heading-row
+  ([text]    [:div.row [:div.col-md-12 [:h4          text]]])
+  ([id text] [:div.row [:div.col-md-12 [:h4 {:id id} text]]]))
+
+;; A row within a search form consists of three elements, the label,
+;; widget and description.
+(defn search-form-widget-row [label widget description]
+  [:div.row
+   [:div.col-md-2 label] widget [:div.col-md-4 description]])
+
+;; A row within a search form for a text search. We can optionally
+;; provide a value to set the text box to.
+(defn search-form-text-row
+  ([name label-text desc-text]
+     (search-form-text-row name label-text desc-text ""))
+  ([name label-text desc-text input-value]
+     (search-form-widget-row (label-widget name (str label-text ":"))
+                             (search-form-text-input-widget name input-value)
+                             (info-widget (str desc-text ".")))))
+
+;; An isoelectric point input search form widget.
+(defn search-form-pi-widget [data]
+  (search-form-widget-row (label-widget "isoelectric point (pH):")
+                          (search-form-pi-input-widget data)
+                          (info-widget (str "Enter an exact or range of "
+                                            "isoelectric points."))))
+
+;; ### Main search bar
+
+(def submit-button
+  [:button.btn.btn-success.disabled {:name "a" :value "s"} "Search"])
+
+(def advanced-button
+  [:button.btn.btn-primary          {:name "a" :value "a"} "Advanced"])
+
+;; This is the main search bar which is embedded into the home page
+;; and navbar. It provides the ability to search by name, and to go
+;; the advanced search page.
 (defn search-bar [data]
   [:form {:method "GET" :action "/s" :role "search"}
    [:div.input-group
-    [:input#q.form-control {:name "q"
-                            :type "text"
+    [:input#q.form-control {:name "q" :type "text"
                             :value (data :search-text)
                             :autocomplete "off"}]
-    [:div.input-group-btn
-     ;; The inline Submit and Advanced search page buttons.
-     [:button.btn.btn-success.disabled {:name "a" :value "s"} "Search"]
-     [:button.btn.btn-primary          {:name "a" :value "a"} "Advanced"]]]])
+    [:div.input-group-btn submit-button advanced-button]]])
 
-;; A page heading.
+;; ### Page heading
+
 (defn heading [data]
   [:div.page-title
    [:div.page-title-inner
@@ -37,6 +141,7 @@
                     " result..." " results..."))]]])]
    [:hr]])
 
+;; ---------
 ;; ## Images
 
 ;; Returns the path to the logo file of the given dimensions.

@@ -3,12 +3,14 @@
 (ns pip-db.util
   (:use [pip-db.resources :only (resource)]))
 
+;; -----------------
 ;; ## Date utilities
 
 ;; Return the current year as a number, as set by the system clock.
 (defn current-year []
   (+ 1900 (.getYear (new java.util.Date))))
 
+;; --------------------
 ;; ## Working with HTML
 
 ;; Returns an element which represents an embedded <style></style>
