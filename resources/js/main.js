@@ -659,6 +659,194 @@
             return e.length > 2;
         });
 
+    // Most common sources
+    var sources = [
+        "Ambystoma mexicanum (Axolotl)",
+        "Arabidopsis thaliana (Mouse-ear cress)",
+        "Armoracia rusticana (Horseradish)",
+        "Ascaris suum (pig roundworm)",
+        "Ascaris suum (Pig roundworm)",
+        "Aspergillus niger",
+        "Aspergillus oryzae",
+        "Azotobacter vinelandii",
+        "Bacillus licheniformis",
+        "Bacillus species",
+        "Bacillus subtilis",
+        "Bos taurus (Beef)",
+        "Bos taurus (Bovine)",
+        "Bos taurus (Calf)",
+        "Bos taurus (Cow)",
+        "Bos taurus (Ox)",
+        "Bos taurus",
+        "Canis familiaris (Dog)",
+        "Canis lupus familiaris (Dog)",
+        "Cavia porcellus (Guinea Pig)",
+        "Chrysosporium lucknowense",
+        "Citrus sinensis (Sweet orange)",
+        "Clostridium perfringens",
+        "Cricetulus griseus (Chinese hamster)",
+        "Cricetulus griseus (Chinese Hamster)",
+        "Cucurbitaceae",
+        "Dipetalonema viteae",
+        "Drosophila melanogaster (Fruit fly)",
+        "E.coli",
+        "Equus caballus (Horse)",
+        "Equus caballus",
+        "Escherichia coli",
+        "Escherichia coli",
+        "Euroglyphus maynei",
+        "Fasciola hepatica (Liver fluke)",
+        "Fasciola hepatica",
+        "Fomes annosus",
+        "Gallus gallus (Chicken)",
+        "Gallus gallus (Hen)",
+        "Glycera dibranchiata (Bloodworm)",
+        "Glycera gigantea (Bloodworm)",
+        "Glycine max (Soybean)",
+        "Hamster",
+        "Homo sapiens (Human)",
+        "Homo sapiens",
+        "Homo sapiens",
+        "Hordeum vulgare (Barley)",
+        "Human",
+        "Human",
+        "Hypocrea jecorina",
+        "Klebsiella pneumoniae",
+        "Lecanicillium longisporum",
+        "Lipomyces starkeyi (Oleaginous yeast)",
+        "Monkey",
+        "Mus musculus (Mouse)",
+        "Mus musculus",
+        "Mushroom",
+        "Neurospora crassa",
+        "Nicotiana tabacum (Common tobacco)",
+        "Oryctolagus cuniculus (Rabbit)",
+        "Oryctolagus cuniculus (Rabbit)",
+        "Oryza sativa (Rice)",
+        "Ovis aries (Sheep)",
+        "Phlebia radiata (White-rot fungus)",
+        "Physeter macrocephalus (Sperm-Whale)",
+        "Pisum sativum (Garden pea)",
+        "Pisum sativum (Garden Pea)",
+        "Pisum sativum (Pea)",
+        "Pisum sativum",
+        "Polyporus versicolor",
+        "Porphyromonas gingivalis",
+        "Pseudomonas aeruginosa",
+        "Pseudomonas fluorescens",
+        "Pseudomonas putida",
+        "Pseudopleuronectes americanus (Fish)",
+        "Rana temporaria (Frog)",
+        "Rattus norvegicus (Rat)",
+        "Rattus norvegicus",
+        "Saccharomyces cerevisiae (Baker's yeast)",
+        "Saccharomyces cerevisiae (Baker's Yeast)",
+        "Saccharomyces cerevisiae (Yeast)",
+        "Saccharomyces cerevisiae",
+        "Solanum lycopersicum (Tomato)",
+        "Solanum lycopersicum (Tomato)",
+        "Solanum tuberosum (Potato)",
+        "Spinacia oleracea (Spinach)",
+        "Staphylococcus aureus",
+        "Streptococci (Group A /Streptococcus pyogenes)",
+        "Streptomyces griseus",
+        "Sus scrofa (Hog)",
+        "Sus scrofa (Pig)",
+        "Sus scrofa (Porcrine)",
+        "Thermoplasma acidophilum",
+        "Triticum aestivum (Wheat)",
+        "Yeast",
+        "Zea mays (Maize)"
+    ];
+
+    // Most common locations
+    var locations = [
+        "Adipose Tissue",
+        "Amniotic fluid",
+        "Amniotic Fluid",
+        "Anterior pituitary",
+        "Brain",
+        "Brain",
+        "Cell culture",
+        "Cell wall",
+        "Cerebellum",
+        "Cerebrum",
+        "Coelomic cells",
+        "Colon",
+        "Colonic carcinoma",
+        "Colonic Carcinoma",
+        "Cytoplasm",
+        "Cytosol",
+        "Egg",
+        "Embryos",
+        "Epididymis",
+        "Erythrocyte membrane",
+        "Erythrocyte",
+        "Erythrocytes",
+        "Extracellular",
+        "Fibroblasts",
+        "Fibroblasts, leucocytes, amniotic fluid",
+        "Foetal liver",
+        "Foetal Liver",
+        "Fruit",
+        "Fruiting bodies",
+        "gastric mucosa",
+        "Gastric mucosa",
+        "Haemolymph",
+        "Heart",
+        "HeLa cells",
+        "Intestine",
+        "Intestine",
+        "KB cells",
+        "Kidney",
+        "Larva",
+        "Larvae",
+        "Latex",
+        "Leaf",
+        "Leaves",
+        "Lens",
+        "Leukocytes",
+        "Liver cytosol",
+        "Liver lysosomes",
+        "Liver Mitochondria",
+        "Liver",
+        "Liver",
+        "Lung",
+        "Melon (Infected)",
+        "Milk",
+        "Muscle",
+        "Mycelium",
+        "Nodules",
+        "Pancreas",
+        "Pancreatic juice",
+        "Parotid",
+        "Pituitary",
+        "Placenta",
+        "Plasma apo-VLDL",
+        "Plasma",
+        "Pollen",
+        "Red Blood Cells",
+        "Retina",
+        "Root",
+        "Saliva",
+        "Seedling",
+        "Seeds",
+        "Seminal Plasma",
+        "Serum apoHDL, apoVLDL",
+        "Serum",
+        "Shoot",
+        "Skeletal Muscle",
+        "Skin fibroblasts",
+        "Sperm",
+        "Spleen",
+        "Stem",
+        "Testis",
+        "Two basic isoforms",
+        "Urine",
+        "Venom",
+        "Wool"
+    ];
+
     /*
      * Provide protein name suggestions.
      */
@@ -677,6 +865,30 @@
     $('input[name="q_any"], input[name="q_ne"]').autocomplete({
         source: function(request, response) {
             var results = $.ui.autocomplete.filter(proteinNameWords,
+                                                   request.term);
+
+            response(results.slice(0, 10));
+        }
+    });
+
+    /*
+     * Provide source suggestions.
+     */
+    $('input[name="q_s"]').autocomplete({
+        source: function(request, response) {
+            var results = $.ui.autocomplete.filter(sources,
+                                                   request.term);
+
+            response(results.slice(0, 10));
+        }
+    });
+
+    /*
+     * Provide location suggestions.
+     */
+    $('input[name="q_l"]').autocomplete({
+        source: function(request, response) {
+            var results = $.ui.autocomplete.filter(locations,
                                                    request.term);
 
             response(results.slice(0, 10));
