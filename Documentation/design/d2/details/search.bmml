@@ -1,0 +1,447 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="3050" measuredH="686" mockupW="2963" mockupH="641">
+  <controls>
+    <control controlID="57" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="87" y="86" w="668" h="552" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>My%20Search...%20-%20protein-db%0Awww.pip-db.org/s%3Fq%3Dalkaline</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="63" controlTypeID="com.balsamiq.mockups::Label" x="116" y="223" w="-1" h="-1" measuredW="92" measuredH="17" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <size>10</size>
+        <text>Found%20122%20results...</text>
+      </controlProperties>
+    </control>
+    <control controlID="64" controlTypeID="com.balsamiq.mockups::Button" x="617" y="212" w="85" h="22" measuredW="85" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16750848</color>
+        <icon>DownloadIcon%7Cxsmall</icon>
+        <size>10</size>
+        <state>up</state>
+        <text>Download</text>
+      </controlProperties>
+    </control>
+    <control controlID="65" controlTypeID="com.balsamiq.mockups::DataGrid" x="116" y="278" w="592" h="334" measuredW="512" measuredH="480" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <alternateRowColor>15134199</alternateRowColor>
+        <borderStyle>square</borderStyle>
+        <hasHeader>false</hasHeader>
+        <hLines>false</hLines>
+        <rowHeight>25</rowHeight>
+        <selectedIndex>-1</selectedIndex>
+        <size>10</size>
+        <text>Protein%20%5E%2C%20Source%20%5E%2C%20Location%20%5E%2C%20pI%20%5E%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20*alkaline*%20phosphatase%201%2CHuman%2CPlacenta%2C4.6%0AIntestinal-type%20*alkaline*%20phosphatase%2CBos%20taurus%20%28Ox%29%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.4%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20*alkaline*%20phosphatase%201%2CHuman%2CPlacenta%2C4.6%0AIntestinal-type%20*alkaline*%20phosphatase%2CBos%20taurus%20%28Ox%29%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20*alkaline*%20phosphatase%201%2CHuman%2CPlacenta%2C4.6%0AIntestinal-type%20*alkaline*%20phosphatase%2CBos%20taurus%20%28Ox%29%2CPlacenta%2C4.6</text>
+      </controlProperties>
+    </control>
+    <control controlID="66" controlTypeID="com.balsamiq.mockups::Label" x="87" y="45" w="665" h="41" measuredW="189" measuredH="41" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>left</align>
+        <size>32</size>
+        <text>1.%20Load%20page</text>
+      </controlProperties>
+    </control>
+    <control controlID="277" controlTypeID="__group__" x="87" y="155" w="650" h="49" measuredW="650" measuredH="49" zOrder="5" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="2" controlTypeID="__group__" x="0" y="0" w="650" h="49" measuredW="650" measuredH="49" zOrder="0" locked="false" isInGroup="277">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="__group__" x="0" y="0" w="650" h="49" measuredW="650" measuredH="49" zOrder="0" locked="false" isInGroup="2">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="650" h="49" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <color>472931</color>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="19" y="13" w="71" h="-1" measuredW="43" measuredH="22" zOrder="1" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <align>center</align>
+                    <bold>false</bold>
+                    <color>16777215</color>
+                    <size>14</size>
+                    <text>pip-db</text>
+                  </controlProperties>
+                </control>
+                <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="597" y="14" w="-1" h="-1" measuredW="33" measuredH="20" zOrder="2" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <color>16777215</color>
+                    <size>12</size>
+                    <text>Login</text>
+                  </controlProperties>
+                </control>
+                <control controlID="3" controlTypeID="com.balsamiq.mockups::TextInput" x="90" y="11" w="208" h="-1" measuredW="55" measuredH="27" zOrder="3" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <text>Alkaline</text>
+                  </controlProperties>
+                </control>
+                <control controlID="4" controlTypeID="com.balsamiq.mockups::Button" x="298" y="11" w="70" h="27" measuredW="65" measuredH="27" zOrder="4" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <color>40463</color>
+                    <text>Search</text>
+                  </controlProperties>
+                </control>
+                <control controlID="5" controlTypeID="com.balsamiq.mockups::Button" x="368" y="11" w="81" h="27" measuredW="82" measuredH="27" zOrder="5" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <color>472931</color>
+                    <text>Advanced</text>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="279" y="14" w="19" h="21" measuredW="15" measuredH="21" zOrder="1" locked="false" isInGroup="2">
+              <controlProperties>
+                <bold>true</bold>
+                <color>10066329</color>
+                <text>%3F</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="339" controlTypeID="__group__" x="116" y="238" w="591" h="10" measuredW="591" measuredH="10" zOrder="6" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::HRule" x="0" y="0" w="591" h="-1" measuredW="100" measuredH="10" zOrder="0" locked="false" isInGroup="339"/>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="367" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="843" y="86" w="668" h="552" measuredW="450" measuredH="400" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>My%20Search...%20-%20protein-db%0Awww.pip-db.org/s%3Fq%3Dalkaline</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="368" controlTypeID="com.balsamiq.mockups::Label" x="872" y="223" w="-1" h="-1" measuredW="92" measuredH="17" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <size>10</size>
+        <text>Found%20122%20results...</text>
+      </controlProperties>
+    </control>
+    <control controlID="369" controlTypeID="com.balsamiq.mockups::Button" x="1373" y="212" w="85" h="22" measuredW="85" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16750848</color>
+        <icon>DownloadIcon%7Cxsmall</icon>
+        <size>10</size>
+        <state>up</state>
+        <text>Download</text>
+      </controlProperties>
+    </control>
+    <control controlID="370" controlTypeID="com.balsamiq.mockups::DataGrid" x="872" y="278" w="592" h="334" measuredW="512" measuredH="480" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <alternateRowColor>15134199</alternateRowColor>
+        <borderStyle>square</borderStyle>
+        <hasHeader>false</hasHeader>
+        <hLines>false</hLines>
+        <rowHeight>25</rowHeight>
+        <selectedIndex>-1</selectedIndex>
+        <size>10</size>
+        <text>Protein%20%5E%2C%20Source%20%5E%2C%20Location%20%5E%2C%20pI%20%5E%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20*alkaline*%20phosphatase%201%2CHuman%2CPlacenta%2C4.6%0AIntestinal-type%20*alkaline*%20phosphatase%2CBos%20taurus%20%28Ox%29%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.4%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20*alkaline*%20phosphatase%201%2CHuman%2CPlacenta%2C4.6%0AIntestinal-type%20*alkaline*%20phosphatase%2CBos%20taurus%20%28Ox%29%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20*alkaline*%20phosphatase%201%2CHuman%2CPlacenta%2C4.6%0AIntestinal-type%20*alkaline*%20phosphatase%2CBos%20taurus%20%28Ox%29%2CPlacenta%2C4.6</text>
+      </controlProperties>
+    </control>
+    <control controlID="371" controlTypeID="com.balsamiq.mockups::Label" x="843" y="45" w="665" h="41" measuredW="391" measuredH="41" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>left</align>
+        <size>32</size>
+        <text>2.%20Click%20on%20Download%20button</text>
+      </controlProperties>
+    </control>
+    <control controlID="372" controlTypeID="__group__" x="843" y="155" w="650" h="49" measuredW="650" measuredH="49" zOrder="12" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="2" controlTypeID="__group__" x="0" y="0" w="650" h="49" measuredW="650" measuredH="49" zOrder="0" locked="false" isInGroup="372">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="__group__" x="0" y="0" w="650" h="49" measuredW="650" measuredH="49" zOrder="0" locked="false" isInGroup="2">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="650" h="49" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <color>472931</color>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="19" y="13" w="71" h="-1" measuredW="43" measuredH="22" zOrder="1" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <align>center</align>
+                    <bold>false</bold>
+                    <color>16777215</color>
+                    <size>14</size>
+                    <text>pip-db</text>
+                  </controlProperties>
+                </control>
+                <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="597" y="14" w="-1" h="-1" measuredW="33" measuredH="20" zOrder="2" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <color>16777215</color>
+                    <size>12</size>
+                    <text>Login</text>
+                  </controlProperties>
+                </control>
+                <control controlID="3" controlTypeID="com.balsamiq.mockups::TextInput" x="90" y="11" w="208" h="-1" measuredW="55" measuredH="27" zOrder="3" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <text>Alkaline</text>
+                  </controlProperties>
+                </control>
+                <control controlID="4" controlTypeID="com.balsamiq.mockups::Button" x="298" y="11" w="70" h="27" measuredW="65" measuredH="27" zOrder="4" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <color>40463</color>
+                    <text>Search</text>
+                  </controlProperties>
+                </control>
+                <control controlID="5" controlTypeID="com.balsamiq.mockups::Button" x="368" y="11" w="81" h="27" measuredW="82" measuredH="27" zOrder="5" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <color>472931</color>
+                    <text>Advanced</text>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="279" y="14" w="19" h="21" measuredW="15" measuredH="21" zOrder="1" locked="false" isInGroup="2">
+              <controlProperties>
+                <bold>true</bold>
+                <color>10066329</color>
+                <text>%3F</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="373" controlTypeID="__group__" x="872" y="238" w="591" h="10" measuredW="591" measuredH="10" zOrder="13" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::HRule" x="0" y="0" w="591" h="-1" measuredW="100" measuredH="10" zOrder="0" locked="false" isInGroup="373"/>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="374" controlTypeID="com.balsamiq.mockups::Arrow" x="752" y="328" w="92" h="10" measuredW="150" measuredH="100" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="375" controlTypeID="com.balsamiq.mockups::Label" x="1229" y="658" w="-1" h="-1" measuredW="33" measuredH="21" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Click</text>
+      </controlProperties>
+    </control>
+    <control controlID="376" controlTypeID="com.balsamiq.mockups::Arrow" x="1247" y="234" w="160" h="424" measuredW="150" measuredH="100" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>bottom</direction>
+      </controlProperties>
+    </control>
+    <control controlID="377" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="1599" y="86" w="668" h="552" measuredW="450" measuredH="400" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16777215</color>
+        <text>protein-db%0Ahttp%3A//www.pip-db.org/d%3Fq%3Dalkaline</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="378" controlTypeID="com.balsamiq.mockups::Label" x="1634" y="256" w="-1" h="-1" measuredW="58" measuredH="20" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>3355443</color>
+        <size>12</size>
+        <text>Preview...</text>
+      </controlProperties>
+    </control>
+    <control controlID="380" controlTypeID="__group__" x="1599" y="157" w="650" h="49" measuredW="650" measuredH="49" zOrder="19" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="2" controlTypeID="__group__" x="0" y="0" w="650" h="49" measuredW="650" measuredH="49" zOrder="0" locked="false" isInGroup="380">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="__group__" x="0" y="0" w="650" h="49" measuredW="650" measuredH="49" zOrder="0" locked="false" isInGroup="2">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="650" h="49" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <color>472931</color>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="19" y="13" w="71" h="-1" measuredW="43" measuredH="22" zOrder="1" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <align>center</align>
+                    <bold>false</bold>
+                    <color>16777215</color>
+                    <size>14</size>
+                    <text>pip-db</text>
+                  </controlProperties>
+                </control>
+                <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="597" y="14" w="-1" h="-1" measuredW="33" measuredH="20" zOrder="2" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <color>16777215</color>
+                    <size>12</size>
+                    <text>Login</text>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="391" controlTypeID="__group__" x="1632" y="214" w="591" h="34" measuredW="591" measuredH="34" zOrder="20" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::HRule" x="0" y="24" w="591" h="-1" measuredW="100" measuredH="10" zOrder="0" locked="false" isInGroup="391"/>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="132" h="24" measuredW="124" measuredH="24" zOrder="1" locked="false" isInGroup="391">
+          <controlProperties>
+            <color>40463</color>
+            <size>16</size>
+            <text>Download%20results</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="392" controlTypeID="com.balsamiq.mockups::DataGrid" x="1635" y="278" w="585" h="255" measuredW="598" measuredH="455" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <alternateRowColor>15134199</alternateRowColor>
+        <borderStyle>square</borderStyle>
+        <hasHeader>false</hasHeader>
+        <hLines>true</hLines>
+        <rowHeight>25</rowHeight>
+        <selectedIndex>-1</selectedIndex>
+        <size>10</size>
+        <text>Alkaline%20phosphatase%2CHuman%2CPlacenta%2C4.6%2C%20Mycelium%2C%2016000%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C4.6%2C%20Mycelium%2C%2016000%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C4.6%2C%20Mycelium%2C%2016000%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20*alkaline*%20phosphatase%201%2CHuman%2CPlacenta%2C4.6%2C%20Mycelium%0AIntestinal-type%20alkaline%20phosphatase%2CBos%20taurus%20%28Ox%29%2CPlacenta%2C4.6%2C%20Mycelium%2C%2016000%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C4.4%2C%20Mycelium%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C4.6%2C%20Mycelium%2C%2016000%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C4.6%2C%20Mycelium%2C%2016000%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C4.6%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C4.6%2C%20Mycelium%2C%2016000%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20*alkaline*%20phosphatase%201%2CHuman%2CPlacenta%2C4.6%0AIntestinal-type%20*alkaline*%20phosphatase%2CBos%20taurus%20%28Ox%29%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20*alkaline*%20phosphatase%201%2CHuman%2CPlacenta%2C4.6%0AIntestinal-type%20*alkaline*%20phosphatase%2CBos%20taurus%20%28Ox%29%2CPlacenta%2C4.6</text>
+        <verticalScrollbar>false</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="393" controlTypeID="com.balsamiq.mockups::CheckBox" x="1635" y="541" w="-1" h="-1" measuredW="118" measuredH="22" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Include%20headers</text>
+      </controlProperties>
+    </control>
+    <control controlID="394" controlTypeID="com.balsamiq.mockups::ComboBox" x="2070" y="541" w="-1" h="-1" measuredW="58" measuredH="23" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>CSV</text>
+      </controlProperties>
+    </control>
+    <control controlID="395" controlTypeID="com.balsamiq.mockups::Label" x="1994" y="542" w="-1" h="-1" measuredW="70" measuredH="21" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>File%20Format</text>
+      </controlProperties>
+    </control>
+    <control controlID="396" controlTypeID="com.balsamiq.mockups::Button" x="2136" y="539" w="84" h="27" measuredW="78" measuredH="27" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>40463</color>
+        <text>Download</text>
+      </controlProperties>
+    </control>
+    <control controlID="397" controlTypeID="com.balsamiq.mockups::Label" x="1601" y="45" w="665" h="41" measuredW="377" measuredH="41" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>left</align>
+        <size>32</size>
+        <text>3.%20Download%20preview%20page</text>
+      </controlProperties>
+    </control>
+    <control controlID="398" controlTypeID="com.balsamiq.mockups::Label" x="1525" y="665" w="-1" h="-1" measuredW="127" measuredH="21" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Shows%20first%2010%20results</text>
+      </controlProperties>
+    </control>
+    <control controlID="399" controlTypeID="com.balsamiq.mockups::Arrow" x="1579" y="430" w="92" h="235" measuredW="150" measuredH="100" zOrder="28" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>bottom</direction>
+      </controlProperties>
+    </control>
+    <control controlID="400" controlTypeID="com.balsamiq.mockups::Arrow" x="1511" y="328" w="90" h="10" measuredW="150" measuredH="100" zOrder="29" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="401" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="2382" y="86" w="668" h="552" measuredW="450" measuredH="400" zOrder="30" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16777215</color>
+        <text>protein-db%0Ahttp%3A//www.pip-db.org/d%3Fq%3Dalkaline</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="402" controlTypeID="com.balsamiq.mockups::Label" x="2417" y="256" w="-1" h="-1" measuredW="58" measuredH="20" zOrder="31" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>3355443</color>
+        <size>12</size>
+        <text>Preview...</text>
+      </controlProperties>
+    </control>
+    <control controlID="403" controlTypeID="__group__" x="2382" y="157" w="650" h="49" measuredW="650" measuredH="49" zOrder="32" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="2" controlTypeID="__group__" x="0" y="0" w="650" h="49" measuredW="650" measuredH="49" zOrder="0" locked="false" isInGroup="403">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="__group__" x="0" y="0" w="650" h="49" measuredW="650" measuredH="49" zOrder="0" locked="false" isInGroup="2">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="650" h="49" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <color>472931</color>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="19" y="13" w="71" h="-1" measuredW="43" measuredH="22" zOrder="1" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <align>center</align>
+                    <bold>false</bold>
+                    <color>16777215</color>
+                    <size>14</size>
+                    <text>pip-db</text>
+                  </controlProperties>
+                </control>
+                <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="597" y="14" w="-1" h="-1" measuredW="33" measuredH="20" zOrder="2" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <color>16777215</color>
+                    <size>12</size>
+                    <text>Login</text>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="404" controlTypeID="__group__" x="2415" y="214" w="591" h="34" measuredW="591" measuredH="34" zOrder="33" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::HRule" x="0" y="24" w="591" h="-1" measuredW="100" measuredH="10" zOrder="0" locked="false" isInGroup="404"/>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="132" h="24" measuredW="124" measuredH="24" zOrder="1" locked="false" isInGroup="404">
+          <controlProperties>
+            <color>40463</color>
+            <size>16</size>
+            <text>Download%20results</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="405" controlTypeID="com.balsamiq.mockups::DataGrid" x="2418" y="278" w="585" h="255" measuredW="598" measuredH="455" zOrder="34" locked="false" isInGroup="-1">
+      <controlProperties>
+        <alternateRowColor>15134199</alternateRowColor>
+        <borderStyle>square</borderStyle>
+        <hasHeader>false</hasHeader>
+        <hLines>true</hLines>
+        <rowHeight>25</rowHeight>
+        <selectedIndex>-1</selectedIndex>
+        <size>10</size>
+        <text>Alkaline%20phosphatase%2CHuman%2CPlacenta%2C4.6%2C%20Mycelium%2C%2016000%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C4.6%2C%20Mycelium%2C%2016000%0ABeta-fructofuranosidase%20%28Alkaline%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C4.6%2C%20Mycelium%2C%2016000%0AAlkaline%20phosphatase%20Regan%20isozyme%20Placental%20*alkaline*%20phosphatase%201%2CHuman%2CPlacenta%2C4.6%2C%20Mycelium%0AIntestinal-type%20alkaline%20phosphatase%2CBos%20taurus%20%28Ox%29%2CPlacenta%2C4.6%2C%20Mycelium%2C%2016000%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C4.4%2C%20Mycelium%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C4.6%2C%20Mycelium%2C%2016000%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C4.6%2C%20Mycelium%2C%2016000%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C4.6%0AAlkaline%20phosphatase%2CHuman%2CPlacenta%2C4.6%2C%20Mycelium%2C%2016000%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20*alkaline*%20phosphatase%201%2CHuman%2CPlacenta%2C4.6%0AIntestinal-type%20*alkaline*%20phosphatase%2CBos%20taurus%20%28Ox%29%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%2CHuman%2CPlacenta%2C4.6%0ABeta-fructofuranosidase%20%28*Alkaline*%20invertase%20isozyme%20IT%20I%29%2CHuman%2CPlacenta%2C4.6%0A*Alkaline*%20phosphatase%20Regan%20isozyme%20Placental%20*alkaline*%20phosphatase%201%2CHuman%2CPlacenta%2C4.6%0AIntestinal-type%20*alkaline*%20phosphatase%2CBos%20taurus%20%28Ox%29%2CPlacenta%2C4.6</text>
+        <verticalScrollbar>false</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="406" controlTypeID="com.balsamiq.mockups::CheckBox" x="2418" y="541" w="-1" h="-1" measuredW="118" measuredH="22" zOrder="35" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Include%20headers</text>
+      </controlProperties>
+    </control>
+    <control controlID="407" controlTypeID="com.balsamiq.mockups::ComboBox" x="2853" y="541" w="-1" h="-1" measuredW="58" measuredH="94" zOrder="36" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>CSV%0ACSV%0AExcel%0AJSON%0AXML</text>
+      </controlProperties>
+    </control>
+    <control controlID="408" controlTypeID="com.balsamiq.mockups::Label" x="2777" y="542" w="-1" h="-1" measuredW="70" measuredH="21" zOrder="37" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>File%20Format</text>
+      </controlProperties>
+    </control>
+    <control controlID="409" controlTypeID="com.balsamiq.mockups::Button" x="2919" y="539" w="84" h="27" measuredW="78" measuredH="27" zOrder="38" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>40463</color>
+        <text>Download</text>
+      </controlProperties>
+    </control>
+    <control controlID="410" controlTypeID="com.balsamiq.mockups::Label" x="2384" y="45" w="665" h="41" measuredW="286" measuredH="41" zOrder="39" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>left</align>
+        <size>32</size>
+        <text>4.%20Select%20file%20format</text>
+      </controlProperties>
+    </control>
+    <control controlID="411" controlTypeID="com.balsamiq.mockups::Arrow" x="2266" y="328" w="116" h="10" measuredW="150" measuredH="100" zOrder="40" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

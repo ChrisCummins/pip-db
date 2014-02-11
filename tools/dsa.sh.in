@@ -2,119 +2,119 @@
 
 # Print program usage
 usage() {
-	echo "Usage: $0 <csv-dataset>"
+    echo "Usage: $0 <csv-dataset>"
 }
 
 # Output a column $1 from the dataset
 #    $1 column index
 column() {
-	if [[ $USING_HEADERS == 1 ]]; then
-		tail -n+2 $FILE | @AWK@ -F $'\t' '{print $'$1'}'
-	else
-		cat $FILE | @AWK@ -F $'\t' '{print $'$1'}'
-	fi
+    if [[ $USING_HEADERS == 1 ]]; then
+        tail -n+2 $FILE | @AWK@ -F $'\t' '{print $'$1'}'
+    else
+        @AWK@ -F $'\t' '{print $'$1'}' < $FILE
+    fi
 }
 
 # Calculate a percentage total
 #    $1 result
 #    $2 total
 perc() {
-	if [[ -z $1 ]] || [[ -z $2 ]]; then
-		echo "error: Internal calculation error" >&2
-		exit 32
-	fi
-	echo "($1 / $2) * 100" | bc -l | xargs printf '%.2f\n'
+    if [[ -z $1 ]] || [[ -z $2 ]]; then
+        echo "error: Internal calculation error" >&2
+        exit 32
+    fi
+    echo "($1 / $2) * 100" | bc -l | xargs printf '%.2f\n'
 }
 
 # Output a result to temporary file
 output() {
-	echo -e "$@" >> $TMP
+    echo -e "$@" >> $TMP
 }
 
 # Create a $TMP file for output
 create_tmp_file() {
-	# Temporary file used to store results
-	TMP=/tmp/dsa.$(date +%s)
+    # Temporary file used to store results
+    TMP=/tmp/dsa.$(date +%s)
 
-	rm -f $TMP
-	touch $TMP
+    rm -f $TMP
+    touch $TMP
 }
 
 # Clean up $TMP
 destroy_tmp_file() {
-	rm -f $TMP
+    rm -f $TMP
 }
 
 # Iterate over dataset
 analyse_dataset() {
-	# Output headers
-	output "Row\tPopulated\t% \tUnique\t%  "
+    # Output headers
+    output "Row\tPopulated\t% \tUnique\t%  "
 
-	for i in $(seq 1 $NO_COLUMNS); do
+    for i in $(seq 1 $NO_COLUMNS); do
 
-		if [[ $USING_HEADERS == 1 ]]; then
-			COLUMN_NAME=`head -n1 $FILE | @AWK@ -F $'\t' '{print $'$i'}'`
-		else
-			COLUMN_NAME=$i
-		fi
+        if [[ $USING_HEADERS == 1 ]]; then
+            COLUMN_NAME=`head -n1 $FILE | @AWK@ -F $'\t' '{print $'$i'}'`
+        else
+            COLUMN_NAME=$i
+        fi
 
-		NO_POPULATED=`column $i | @SED@ '/^$/d' | wc -l`
-		POPULATED_PERC=`perc $NO_POPULATED $NO_ROWS`
+        NO_POPULATED=`column $i | @SED@ '/^$/d' | wc -l`
+        POPULATED_PERC=`perc $NO_POPULATED $NO_ROWS`
 
-		NO_UNIQUE=`column $i | sort -u | wc -l`
-		UNIQUE_PERC=`perc $NO_UNIQUE $NO_ROWS`
+        NO_UNIQUE=`column $i | sort -u | wc -l`
+        UNIQUE_PERC=`perc $NO_UNIQUE $NO_ROWS`
 
-		output "$COLUMN_NAME\t$NO_POPULATED\t$POPULATED_PERC%\t$NO_UNIQUE\t$UNIQUE_PERC%"
-	done
+        output "$COLUMN_NAME\t$NO_POPULATED\t$POPULATED_PERC%\t$NO_UNIQUE\t$UNIQUE_PERC%"
+    done
 }
 
 # Print out results
 output_results() {
-	if [[ "$2" == "-t" ]]; then
-		column -t -s $'\t' $TMP
-	else
-		tablify $TMP
-	fi
+    if [[ "$2" == "-t" ]]; then
+        column -t -s $'\t' $TMP
+    else
+        tablify $TMP
+    fi
 }
 
 main() {
-	test -n "$DEBUG" && {
-		set -x
-	}
+    test -n "$DEBUG" && {
+        set -x
+    }
 
-	# Check for file argument
-	if [[ -z "$1" ]]; then
-		usage
-		exit 1
-	fi
+    # Check for file argument
+    if [[ -z "$1" ]]; then
+        usage
+        exit 1
+    fi
 
-	# Check that file exists
-	if [[ ! -f "$1" ]]; then
-		echo "fatal: file '$1' not found!">&2
-		exit 1
-	fi
+    # Check that file exists
+    if [[ ! -f "$1" ]]; then
+        echo "fatal: file '$1' not found!">&2
+        exit 1
+    fi
 
-	# Whether the input dataset contains a header row
-	USING_HEADERS=1
+    # Whether the input dataset contains a header row
+    USING_HEADERS=1
 
-	# Our input dataset
-	FILE="$1"
+    # Our input dataset
+    FILE="$1"
 
-	# The dimensions of our dataset in rows and columns
-	NO_COLUMNS=`head -n1 $FILE | @SED@ 's/\t/\n/g' | head -n-1 | wc -l`
-	NO_ROWS=`wc -l $FILE | @AWK@ '{print $1}'`
+    # The dimensions of our dataset in rows and columns
+    NO_COLUMNS=`head -n1 $FILE | @SED@ 's/\t/\n/g' | head -n-1 | wc -l`
+    NO_ROWS=`wc -l $FILE | @AWK@ '{print $1}'`
 
-	if [[ $USING_HEADERS == 1 ]]; then
-		NO_ROWS=$((NO_ROWS-1))
-	fi
+    if [[ $USING_HEADERS == 1 ]]; then
+        NO_ROWS=$((NO_ROWS-1))
+    fi
 
-	echo -e "Dataset: '$FILE' ($NO_ROWS records)\n"
+    echo -e "Dataset: '$FILE' ($NO_ROWS records)\n"
 
-	create_tmp_file
+    create_tmp_file
 
-	analyse_dataset
-	output_results $@
+    analyse_dataset
+    output_results $@
 
-	destroy_tmp_file
+    destroy_tmp_file
 }
 main $@

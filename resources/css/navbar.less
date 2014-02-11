@@ -151,13 +151,16 @@
 
 .navbar-brand {
   float: left;
-  padding: @navbar-padding-vertical @navbar-padding-horizontal;
+  padding: (@navbar-padding-vertical - 7px) @navbar-padding-horizontal;
   font-size: @font-size-large;
   line-height: @line-height-computed;
+
+  .transition(~"opacity ease-in-out .15s, color ease-in-out .15s");
 
   &:hover,
   &:focus {
     text-decoration: none;
+    opacity: 0.7;
   }
 
   @media (min-width: @grid-float-breakpoint) {
@@ -167,6 +170,9 @@
   }
 }
 
+.navbar-brand img {
+  margin-right: 8px;
+}
 
 // Navbar toggle
 //
@@ -272,10 +278,10 @@
 // Extension of the `.form-inline` with some extra flavor for optimum display in
 // our navbars.
 
-.navbar-form {
+.navbar form {
   margin-left: -@navbar-padding-horizontal;
   margin-right: -@navbar-padding-horizontal;
-  padding: 10px @navbar-padding-horizontal;
+  padding: 10px @navbar-padding-horizontal 10px 0; // No left padding
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
   @shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 rgba(255,255,255,.1);
@@ -653,22 +659,6 @@
   &focus {
     color: @navbar-default-link-hover-color;
   }
-}
-
-// Bottom navbar
-
-.navbar-bottom {
-  // Only have a top border
-  border-width: @navbar-border-width 0 0 0;
-
-  // Fixed bottom
-  border-radius: 0;
-}
-
-// No padding on the inline searchbar
-.navbar-search {
-  padding-left: 0;
-  padding-right: 0;
 }
 
 // Button groups

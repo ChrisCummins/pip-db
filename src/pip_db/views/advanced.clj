@@ -1,8 +1,7 @@
 (ns pip-db.views.advanced
-  (:use [pip-db.views.layout :only (page)]
-        [pip-db.views.components :only (inline-js)]))
+  (:use [pip-db.views.layout :only (page)]))
 
-(defn advanced []
+(defn advanced [data]
   (page {
          :title "Advanced Search"
          :navbar {}
@@ -14,8 +13,9 @@
                  [:div.row
                   [:div.col-md-2 [:label {:for "q"}
                                   "all of these words:"]]
-                  [:div.col-md-6 [:input {:name "q" :type "text"
-                                          :autocomplete "off"}]]
+                  [:div.col-md-6 [:input#q {:name "q" :type "text"
+                                            :autocomplete "off"
+                                            :value (data :search-text)}]]
                   [:div.col-md-4
                    [:div.info (str "Find proteins with names that contain "
                                    "these keywords")]]]
@@ -114,6 +114,7 @@
                    [:label {:for "m"} "experimental method:"]]
                   [:div.col-md-6
                    [:select {:name "m"}
+                    [:option "Any"]
                     [:option "Analytical gel isoelectric focusing"]
                     [:option "Analytical isoelectric focusing"]
                     [:option "Carrier-free isoelectric focusing"]
@@ -171,7 +172,6 @@
 
                  [:div.row
                   [:div.col-md-2.col-md-offset-6
-                   [:button.btn.btn-success.pull-right
-                    {:type "submit" :name "action" :value "advanced"}
-                    "Advanced Search"]]]]]
-         :javascript (inline-js "/js/advanced.inline.js")}))
+                   [:button.btn.btn-success.disabled.pull-right
+                    {:type "submit" :name "a" :value "s"}
+                    "Advanced Search"]]]]]}))

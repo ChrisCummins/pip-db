@@ -1,7 +1,7 @@
 (ns pip-db.views.record
-  (:use [pip-db.views.layout :only (page)]
-        [pip-db.views.components :only (inline-js)])
-  (:require [clojure.string :as str]))
+  (:use [pip-db.views.layout :only (page)])
+  (:require [pip-db.util :as util]
+            [clojure.string :as str]))
 
 (defn properties [& properties]
   [:table#properties.table.table-striped.table-bordered
@@ -62,7 +62,7 @@
                     [:h3.panel-title "Reference this page"]]
                    [:div.panel-body
                     [:blockquote#reference]]]]]]
-         :javascript (inline-js "/js/record.inline.js")}))
+         :javascript (util/inline-js "/js/record.inline.js")}))
 
 (defn no-record []
   (page {:title "Not Found"

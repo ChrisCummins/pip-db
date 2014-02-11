@@ -3,66 +3,29 @@
 // --------------------------------------------------
 
 .search {
-  transition: margin-top 0.5s;
-  margin-bottom: 30px;
-  margin-top: 40px;
-
-  @media only screen and (min-height: 400px) { margin-top: 70px;  }
-  @media only screen and (min-height: 500px) { margin-top: 100px; }
-  @media only screen and (min-height: 600px) { margin-top: 130px; }
-  @media only screen and (min-height: 700px) { margin-top: 200px; }
-  @media only screen and (min-height: 950px) { margin-top: 250px; }
+  max-width: 640px;
 }
 
-.search .logo {
-  font-family: @font-family-title;
-  font-size: @font-size-title;
-  color: @brand-primary;
-  margin: -70px 0 50px;
-}
-
-.search #qp {
-  margin: 10px 0;
-  border: 1px solid @gray-light;
-}
-.search #qp:hover,
-.search #qp.active {
-  box-shadow: 0 0 2px #eee;
-}
-.search #qp:hover {
-  border-color: @gray-dark;
-}
-.search #qp.active {
-  border-color: @brand-success;
-}
-
-.search table {
+.search img {
   width: 100%;
-}
-
-.search #q {
-  width: 100%;
-  display: block;
-  border: none;
-}
-.search #q:focus {
-  outline: none;
-}
-
-.search #h {
-  padding-right: 1px;
-  transition: color 0.2s;
-  color: @brand-primary;
-}
-.search #h:hover,
-.search #h:focus {
-  cursor: pointer;
-  color: @brand-success;
-  text-decoration: none;
 }
 
 .search .btn {
-  min-width: 116px;
-  margin-left: 8px;
-  margin-right: 8px;
+  min-width: 100px;
+}
+
+.search-block {
+  margin: 0 auto 30px auto;
+  padding: 0 20px; // Breathing room for small displays
+}
+
+.navbar-search {
+  padding-left: 0; // No padding on the inline searchbar
+  padding-right: 0;
+  float: left;
+}
+@media (max-width: 900px) {
+  .navbar-search {
+    width: 70%;
+  }
 }

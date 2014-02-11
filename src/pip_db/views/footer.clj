@@ -1,20 +1,12 @@
 (ns pip-db.views.footer
-  (:use [pip-db.views.components]))
+  (:require [pip-db.util :as util]))
 
 (defn html []
-  [:div.navbar.navbar-default.navbar-bottom
-   [:div.container
-    [:div.navbar-header
-     [:button.navbar-toggle {:type "button"
-                             :data-toggle "collapse"
-                             :data-target "navbar-collapse"}
-      [:span.icon-bar]
-      [:span.icon-bar]
-      [:span.icon-bar]]]
-    [:div.navbar-collapse.collapse
-     [:ul.nav.navbar-nav
-      [:li [:a {:href "#"} "About"]]
-      [:li [:a {:href "#"} "Contact"]]]
-     [:ul.nav.navbar-nav.navbar-right
-      [:li [:a {:href "#"} "Terms"]]
-      [:li [:a {:href "#"} "Privacy"]]]]]])
+  [:div.footer
+   [:div.container.text-center
+    [:hr]
+    [:ul.footer-nav
+     [:li "© " [:a.muted {:href "http://chriscummins.cc"
+                          :target "_blank"}
+                "Chris Cummins"] " " (util/current-year)]
+     [:li [:a {:href "/about"} "About"]]]]])

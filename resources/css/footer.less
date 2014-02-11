@@ -2,29 +2,26 @@
 // Footer
 // --------------------------------------------------
 
-#footer {
-  height: @navbar-height;
-  background-color: @navbar-default-bg;
-  border-top: @navbar-border-width solid @navbar-default-border;
+// Nav links
+
+.footer .footer-nav {
+  list-style-type: none;
+  margin-bottom: 18px;
 }
-div#footer div.left {
-  float: left !important;
+.footer .footer-nav li {
+  display: inline;
 }
-div#footer div.right {
-  float: right !important;
+.footer .footer-nav li:after {
+    content: " | "; // Horizontal separators between elements
 }
-div#footer div.footer-inner {
-  display: table-cell;
-  vertical-align: middle;
-  height: @navbar-height;
-  padding: 0 15px;
+.footer .footer-nav li:last-child:after {
+    content: ""; // No separator on last element
 }
-div#footer div.footer-inner a {
-  margin: 0 12px;
-  color: @gray-dark;
+.footer .footer-nav li,
+.footer .footer-nav li a.muted {
+  color: @gray;
 }
-div#footer div.footer-inner a:hover,
-div#footer div.footer-inner a:focus {
-  color: @text-color;
-  text-decoration: underline;
+.footer .footer-nav li a {
+  color: @brand-primary;
 }
+

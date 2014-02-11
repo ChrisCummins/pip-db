@@ -1674,6 +1674,22 @@ Restructured the directory tree so as to put the design files inside
 of the Documentation tree.
 
 
+## January 2014
+
+
+### Thursday 2nd
+
+Began a LISP
+
+ * PostgreSQL
+ * Travis CI
+ * lein
+ * View logic
+ * resources
+
+ * MVC
+
+
 ### Monday 20th
 
 Reflected on one of the written goals for Christmas holiday work:
@@ -1769,10 +1785,13 @@ Notes for next meeting:
      * How are future students going to add new features?
        - Use a literate programming style to document Clojure sources
          (Marginalia).
+       - Linters, and a self contained build system can provide early
+         warning.
        - Make Clojure accessible (clojure-koans!). It honestly is a
          great language.
        - New features can be written in Java and called from Clojure.
  * Stability:
+    * List *all* dependencies: Lein (bash script).
     * Each dependency is strictly versioned, and versions are
       immutable.
     * Show how project.clj file defines all of the dependencies
@@ -1801,3 +1820,375 @@ From the [Clojure rationale](http://clojure.org/rationale):
 > where Java is suitable**. It reflects the reality that, for the
 > concurrent programming future, pervasive, unmoderated mutation
 > simply has to go.
+
+### Friday 24th
+
+From
+[Marginalia core](http://gdeer81.github.io/marginalia/#marginalia.core):
+
+> If literate programming stands as a comprehensive programming
+> methodology at one of end of the spectrum and no documentation
+> stands as its antithesis, then Marginalia falls somewhere
+> between. That is, you should always aim for comprehensive
+> documentation, but the shortest path to a useful subset is the
+> commented source code itself.
+
+### The one true way
+
+1. Start by running Marginalia against your code
+2. Cringe at the sad state of your code commentary
+3. Add docstrings and code comments as appropriate
+4. Generate the documentation again
+5. Read the resulting documentation
+6. Make changes to code and documentation so that the "dialog" flows sensibly
+7. Repeat from step #4 until complete
+
+### Saturday 25th
+
+```
+$  git push heroku master
+Fetching repository, done.
+Counting objects: 436, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (208/208), done.
+Writing objects: 100% (394/394), 725.84 KiB | 409 KiB/s, done.
+Total 394 (delta 219), reused 272 (delta 134)
+
+-----> Clojure app detected
+-----> Installing OpenJDK 1.6...done
+Warning: no :min-lein-version found in project.clj; using 1.7.1.
+-----> Using cached Leiningen 1.7.1
+       To use Leiningen 2.x, add this to project.clj: :min-lein-version "2.0.0"
+       Downloading: rlwrap-0.3.7
+       Writing: lein script
+-----> Building with Leiningen
+       Found bin/build; running it instead of default lein invocation.
+       Running: bin/build
+       ------> Running autogen.sh
+               Checking whether you have the necessary tools...
+               Checking for autoconf (need at least version 2.65)... ok
+               Checking for automake (need at least version 1.11)... ok
+               Your system has the required tools, running autoreconf...
+               configure.ac:83: installing `build/install-sh'
+               configure.ac:83: installing `build/missing'
+
+               You can now run `./configure'.
+       ------> Running configure
+               checking for a BSD-compatible install... /usr/bin/install -c
+               checking whether build environment is sane... yes
+               checking for a thread-safe mkdir -p... /bin/mkdir -p
+               checking for gawk... no
+               checking for mawk... mawk
+               checking whether make sets $(MAKE)... yes
+               checking for gawk... (cached) mawk
+               checking for a sed that does not truncate output... /bin/sed
+               checking for java... java
+               checking for /tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/resources/public... no
+               mkdir: created directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/resources/public'
+               checking for build/node/bin/node... no
+               checking for node_modules/less/bin/lessc... no
+               npm http GET https://registry.npmjs.org/less
+               npm http 200 https://registry.npmjs.org/less
+               npm http GET https://registry.npmjs.org/less/-/less-1.6.1.tgz
+               npm http 200 https://registry.npmjs.org/less/-/less-1.6.1.tgz
+               npm http GET https://registry.npmjs.org/mkdirp
+               npm http GET https://registry.npmjs.org/clean-css
+               npm http GET https://registry.npmjs.org/source-map
+               npm http GET https://registry.npmjs.org/mime
+               npm http GET https://registry.npmjs.org/request
+               npm http 200 https://registry.npmjs.org/mkdirp
+               npm http 200 https://registry.npmjs.org/mime
+               npm http GET https://registry.npmjs.org/mkdirp/-/mkdirp-0.3.5.tgz
+               npm http GET https://registry.npmjs.org/mime/-/mime-1.2.11.tgz
+               npm http 200 https://registry.npmjs.org/source-map
+               npm http 200 https://registry.npmjs.org/mkdirp/-/mkdirp-0.3.5.tgz
+               npm http 200 https://registry.npmjs.org/mime/-/mime-1.2.11.tgz
+               npm http GET https://registry.npmjs.org/source-map/-/source-map-0.1.31.tgz
+               npm http 200 https://registry.npmjs.org/clean-css
+               npm http 200 https://registry.npmjs.org/source-map/-/source-map-0.1.31.tgz
+               npm http GET https://registry.npmjs.org/clean-css/-/clean-css-2.0.7.tgz
+               npm http 200 https://registry.npmjs.org/request
+               npm http 200 https://registry.npmjs.org/clean-css/-/clean-css-2.0.7.tgz
+               npm http GET https://registry.npmjs.org/request/-/request-2.33.0.tgz
+               npm http 200 https://registry.npmjs.org/request/-/request-2.33.0.tgz
+               npm http GET https://registry.npmjs.org/qs
+               npm http GET https://registry.npmjs.org/json-stringify-safe
+               npm http GET https://registry.npmjs.org/forever-agent
+               npm http GET https://registry.npmjs.org/node-uuid
+               npm http GET https://registry.npmjs.org/tough-cookie
+               npm http GET https://registry.npmjs.org/tunnel-agent
+               npm http GET https://registry.npmjs.org/http-signature
+               npm http GET https://registry.npmjs.org/form-data
+               npm http GET https://registry.npmjs.org/oauth-sign
+               npm http GET https://registry.npmjs.org/hawk
+               npm http GET https://registry.npmjs.org/aws-sign2
+               npm http 200 https://registry.npmjs.org/json-stringify-safe
+               npm http 200 https://registry.npmjs.org/forever-agent
+               npm http 200 https://registry.npmjs.org/tunnel-agent
+               npm http 200 https://registry.npmjs.org/node-uuid
+               npm http 200 https://registry.npmjs.org/oauth-sign
+               npm http 200 https://registry.npmjs.org/qs
+               npm http 200 https://registry.npmjs.org/aws-sign2
+               npm http GET https://registry.npmjs.org/json-stringify-safe/-/json-stringify-safe-5.0.0.tgz
+               npm http GET https://registry.npmjs.org/forever-agent/-/forever-agent-0.5.0.tgz
+               npm http 200 https://registry.npmjs.org/form-data
+               npm http GET https://registry.npmjs.org/tunnel-agent/-/tunnel-agent-0.3.0.tgz
+               npm http GET https://registry.npmjs.org/node-uuid/-/node-uuid-1.4.1.tgz
+               npm http 200 https://registry.npmjs.org/http-signature
+               npm http GET https://registry.npmjs.org/oauth-sign/-/oauth-sign-0.3.0.tgz
+               npm http GET https://registry.npmjs.org/qs/-/qs-0.6.6.tgz
+               npm http 200 https://registry.npmjs.org/json-stringify-safe/-/json-stringify-safe-5.0.0.tgz
+               npm http 200 https://registry.npmjs.org/tunnel-agent/-/tunnel-agent-0.3.0.tgz
+               npm http 200 https://registry.npmjs.org/forever-agent/-/forever-agent-0.5.0.tgz
+               npm http GET https://registry.npmjs.org/aws-sign2/-/aws-sign2-0.5.0.tgz
+               npm http 200 https://registry.npmjs.org/node-uuid/-/node-uuid-1.4.1.tgz
+               npm http 200 https://registry.npmjs.org/qs/-/qs-0.6.6.tgz
+               npm http GET https://registry.npmjs.org/form-data/-/form-data-0.1.2.tgz
+               npm http 200 https://registry.npmjs.org/oauth-sign/-/oauth-sign-0.3.0.tgz
+               npm http GET https://registry.npmjs.org/http-signature/-/http-signature-0.10.0.tgz
+               npm http 200 https://registry.npmjs.org/aws-sign2/-/aws-sign2-0.5.0.tgz
+               npm http 200 https://registry.npmjs.org/form-data/-/form-data-0.1.2.tgz
+               npm http 200 https://registry.npmjs.org/http-signature/-/http-signature-0.10.0.tgz
+               npm http 200 https://registry.npmjs.org/tough-cookie
+               npm http GET https://registry.npmjs.org/tough-cookie/-/tough-cookie-0.12.1.tgz
+               npm http GET https://registry.npmjs.org/commander
+               npm http 200 https://registry.npmjs.org/tough-cookie/-/tough-cookie-0.12.1.tgz
+               npm http 200 https://registry.npmjs.org/commander
+               npm http 200 https://registry.npmjs.org/hawk
+               npm http GET https://registry.npmjs.org/commander/-/commander-2.0.0.tgz
+               npm http GET https://registry.npmjs.org/hawk/-/hawk-1.0.0.tgz
+               npm http 200 https://registry.npmjs.org/commander/-/commander-2.0.0.tgz
+               npm http 200 https://registry.npmjs.org/hawk/-/hawk-1.0.0.tgz
+               npm http GET https://registry.npmjs.org/amdefine
+               npm http 200 https://registry.npmjs.org/amdefine
+               npm http GET https://registry.npmjs.org/amdefine/-/amdefine-0.1.0.tgz
+               npm http 200 https://registry.npmjs.org/amdefine/-/amdefine-0.1.0.tgz
+               npm http GET https://registry.npmjs.org/combined-stream
+               npm http GET https://registry.npmjs.org/async
+               npm http GET https://registry.npmjs.org/assert-plus/0.1.2
+               npm http GET https://registry.npmjs.org/asn1/0.1.11
+               npm http GET https://registry.npmjs.org/ctype/0.5.2
+               npm http 200 https://registry.npmjs.org/combined-stream
+               npm http 200 https://registry.npmjs.org/async
+               npm http 200 https://registry.npmjs.org/asn1/0.1.11
+               npm http 200 https://registry.npmjs.org/ctype/0.5.2
+               npm http GET https://registry.npmjs.org/combined-stream/-/combined-stream-0.0.4.tgz
+               npm http GET https://registry.npmjs.org/async/-/async-0.2.10.tgz
+               npm http GET https://registry.npmjs.org/ctype/-/ctype-0.5.2.tgz
+               npm http GET https://registry.npmjs.org/asn1/-/asn1-0.1.11.tgz
+               npm http 200 https://registry.npmjs.org/assert-plus/0.1.2
+               npm http 200 https://registry.npmjs.org/ctype/-/ctype-0.5.2.tgz
+               npm http 200 https://registry.npmjs.org/combined-stream/-/combined-stream-0.0.4.tgz
+               npm http 200 https://registry.npmjs.org/asn1/-/asn1-0.1.11.tgz
+               npm http 200 https://registry.npmjs.org/async/-/async-0.2.10.tgz
+               npm http GET https://registry.npmjs.org/assert-plus/-/assert-plus-0.1.2.tgz
+               npm http 200 https://registry.npmjs.org/assert-plus/-/assert-plus-0.1.2.tgz
+               npm http GET https://registry.npmjs.org/punycode
+               npm http GET https://registry.npmjs.org/cryptiles
+               npm http GET https://registry.npmjs.org/hoek
+               npm http 200 https://registry.npmjs.org/punycode
+               npm http GET https://registry.npmjs.org/boom
+               npm http GET https://registry.npmjs.org/sntp
+               npm http 200 https://registry.npmjs.org/cryptiles
+               npm http 200 https://registry.npmjs.org/sntp
+               npm http GET https://registry.npmjs.org/punycode/-/punycode-1.2.3.tgz
+               npm http GET https://registry.npmjs.org/cryptiles/-/cryptiles-0.2.2.tgz
+               npm http GET https://registry.npmjs.org/sntp/-/sntp-0.2.4.tgz
+               npm http 200 https://registry.npmjs.org/boom
+               npm http 200 https://registry.npmjs.org/punycode/-/punycode-1.2.3.tgz
+               npm http 200 https://registry.npmjs.org/cryptiles/-/cryptiles-0.2.2.tgz
+               npm http 200 https://registry.npmjs.org/sntp/-/sntp-0.2.4.tgz
+               npm http GET https://registry.npmjs.org/boom/-/boom-0.4.2.tgz
+               npm http 200 https://registry.npmjs.org/hoek
+               npm http 200 https://registry.npmjs.org/boom/-/boom-0.4.2.tgz
+               npm http GET https://registry.npmjs.org/hoek/-/hoek-0.9.1.tgz
+               npm http 200 https://registry.npmjs.org/hoek/-/hoek-0.9.1.tgz
+               npm http GET https://registry.npmjs.org/delayed-stream/0.0.5
+               npm http 200 https://registry.npmjs.org/delayed-stream/0.0.5
+               npm http GET https://registry.npmjs.org/delayed-stream/-/delayed-stream-0.0.5.tgz
+               npm http 200 https://registry.npmjs.org/delayed-stream/-/delayed-stream-0.0.5.tgz
+               less@1.6.1 node_modules/less
+               ├── mime@1.2.11
+               ├── mkdirp@0.3.5
+               ├── clean-css@2.0.7 (commander@2.0.0)
+               ├── source-map@0.1.31 (amdefine@0.1.0)
+               └── request@2.33.0 (json-stringify-safe@5.0.0, forever-agent@0.5.0, aws-sign2@0.5.0, qs@0.6.6, tunnel-agent@0.3.0, oauth-sign@0.3.0, node-uuid@1.4.1, tough-cookie@0.12.1, form-data@0.1.2, hawk@1.0.0, http-signature@0.10.0)
+               checking for xdg-open... no
+               configure: WARNING: PDF opening feature disabled.
+               checking for emacsclient... no
+               configure: WARNING: Text editor launching features disabled.
+               configure: creating ./config.status
+               config.status: creating Makefile
+               config.status: creating Documentation/Makefile
+               config.status: creating Documentation/design/Makefile
+               config.status: creating Documentation/design/d1/Makefile
+               config.status: creating Documentation/design/d1/pages/Makefile
+               config.status: creating Documentation/design/d1/pages/renders/Makefile
+               config.status: creating Documentation/design/d1/previous/Makefile
+               config.status: creating Documentation/design/d1/previous/renders/Makefile
+               config.status: creating Documentation/design/d1/tasks/Makefile
+               config.status: creating Documentation/design/d1/tasks/renders/Makefile
+               config.status: creating Documentation/plan/Makefile
+               config.status: creating scripts/Makefile
+               config.status: creating scripts/git/Makefile
+               config.status: creating scripts/git/hooks/Makefile
+               config.status: creating scripts/git/hooks/pre-commit
+               config.status: creating tools/Makefile
+               config.status: creating tools/dsa.sh
+               config.status: creating resources/Makefile
+               config.status: creating resources/css/Makefile
+               config.status: creating resources/fonts/Makefile
+               config.status: creating resources/img/Makefile
+               config.status: creating resources/js/Makefile
+               creating config.summary
+
+               pip-db - 0.2.4
+               --------------
+
+                • Resources:
+                       Minify CSS:                     yes
+                       Minify JS:                      yes
+
+                • Extras:
+                       Build tools:                    no
+                       Build LaTeX documentation:      no
+                       Build Markdown documentation:   no
+                       Build Markdown contents pages:  no
+                       Install custom git hooks:       no
+
+               You can now run `make'.
+       ------> Running make
+               Making all in resources
+               make[1]: Entering directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/resources'
+               Making all in css
+               make[2]: Entering directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/resources/css'
+                 LESS   login.css
+                 CSS    login.css
+                 LESS   styles.css
+                 CSS    styles.css
+               make[2]: Leaving directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/resources/css'
+               Making all in fonts
+               make[2]: Entering directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/resources/fonts'
+                 FONT   glyphicons-halflings-regular.eot
+                 FONT   glyphicons-halflings-regular.ttf
+                 FONT   glyphicons-halflings-regular.woff
+                 FONT   glyphicons-halflings-regular.svg
+               make[2]: Leaving directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/resources/fonts'
+               Making all in img
+               make[2]: Entering directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/resources/img'
+                 IMAGE  advanced.png
+                 IMAGE  details.png
+                 IMAGE  homepage.png
+                 IMAGE  login.png
+                 IMAGE  results.png
+                 IMAGE  upload.png
+               make[2]: Leaving directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/resources/img'
+               Making all in js
+               make[2]: Entering directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/resources/js'
+                 JS     modernizr-2.7.0.min.js
+                 JS     search.inline.js
+                 JS     advanced.inline.js
+                 JS     record.inline.js
+                 JS     bootstrap-3.0.1.min.js
+                 JS     jquery-1.10.2.min.js
+                 JS     google-analytics.inline.js
+                 JS     index.inline.js
+                 JS     moment.min.js
+                 JS     main.js
+               make[2]: Leaving directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/resources/js'
+               make[2]: Entering directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/resources'
+               make[2]: Nothing to be done for `all-am'.
+               make[2]: Leaving directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/resources'
+               make[1]: Leaving directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/resources'
+               Making all in scripts
+               make[1]: Entering directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/scripts'
+               Making all in git
+               make[2]: Entering directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/scripts/git'
+               Making all in hooks
+               make[3]: Entering directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/scripts/git/hooks'
+               make[3]: Nothing to be done for `all'.
+               make[3]: Leaving directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/scripts/git/hooks'
+               make[3]: Entering directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/scripts/git'
+               make[3]: Nothing to be done for `all-am'.
+               make[3]: Leaving directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/scripts/git'
+               make[2]: Leaving directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/scripts/git'
+               make[2]: Entering directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/scripts'
+               make[2]: Nothing to be done for `all-am'.
+               make[2]: Leaving directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/scripts'
+               make[1]: Leaving directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406/scripts'
+               make[1]: Entering directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406'
+               make[1]: Nothing to be done for `all-am'.
+               make[1]: Leaving directory `/tmp/build_48bc7414-a749-4fd8-8cf6-d9cf7d74d406'
+-----> Discovering process types
+       Procfile declares types -> web
+
+-----> Compressing... done, 97.8MB
+-----> Launching... done, v26
+       http://pip-db.herokuapp.com deployed to Heroku
+
+To git@heroku.com:pip-db.git
+   9e4436b..9cac266  master -> master
+```
+
+### Monday 27th
+
+Comparison of Clojure vs Java:
+
+http://hammerprinciple.com/therighttool/items/clojure/java
+
+Comparison of Clojure vs PHP:
+
+http://hammerprinciple.com/therighttool/items/clojure/php
+
+### Wednesday 29th
+
+Notes for meeting with Ian:
+
+ * Maintainability: implications of language choice
+    * Future developers must learn language
+       * HOW - Marginalia / Literate programming
+       * WHY - Great language - clojure-koans
+
+ * Stability
+    * Two dependencies: lein & java
+    * project.clj - immutable versions
+    * Tests using Travis CI - build matrix
+
+ * Deployment
+    * Heroku
+
+### Thursday 30th
+
+Notes from weekly meeting with Ian:
+
+ * Maintainability should be tested on a person. Get a volunteer
+   student to try and implement a new feature, e.g. a new dataset file
+   format extension.
+
+ * It may be a good idea to package the dependency JARs locally so as
+   to future-proof against projects becoming unavailable.
+
+ * Contact Kate regarding reimbursement of domain expense.
+
+
+## February 2014
+
+
+### Sundary 2nd
+
+Read up on Heroku's
+[dyno sleeping policy](https://devcenter.heroku.com/articles/dynos#dyno-sleeping),
+which is causing a 5-10 second delay on HTTP requests when pip-db has
+been inactive for more than an hour. Apps with more than one dyno
+don't have the behaviour, but obviously this would cost money. A
+workaround is to ping the server at regular intervals (there are free
+services for this), but this seems somewhat unethical and exploitative
+of the free service offered by Heroku.
+
+
+### Monday 3rd
+
+Emailed Darren with a status update on the project progress. Suggested
+a meeting in a fortnight to review D2 progress. Topics to discuss
+would include the redesign of the index page, a functioning pI
+backend, and formal user testing.
