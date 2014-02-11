@@ -1,7 +1,7 @@
 (ns pip-db.router
   (:use [compojure.core :only (defroutes)])
   (:require [compojure.route :as route]
-            [pip-db.views.page :as page]
+            [pip-db.views.error :as error]
             [pip-db.controllers.index :as index]
             [pip-db.controllers.search :as search]
             [pip-db.controllers.record :as record]
@@ -15,4 +15,4 @@
   login/routes
   upload/routes
   (route/resources "/")
-  (route/not-found (page/not-found)))
+  (route/not-found (error/status-404)))
