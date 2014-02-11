@@ -1,11 +1,11 @@
-(ns pip-db.views.components
-  (:use [pip-db.resources :only (resource)]))
+;; ## User Interface Components
+;;
+;; Define a set of common user interface components
+(ns pip-db.views.ui
+  (:require [pip-db.util :as util]))
 
-(defn inline-css [path]
-  [:style (resource path)])
-
-(defn inline-js [path]
-  [:script (resource path)])
+(defn google-analytics []
+  (util/inline-js "/js/google-analytics.inline.js"))
 
 (defn search-bar [data]
   [:form {:method "GET" :action "/s" :role "search"}

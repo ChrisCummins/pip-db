@@ -1,8 +1,9 @@
 (ns pip-db.views.layout
   (:use [hiccup.core :only (html)]
-        [hiccup.page :only (html5 include-css include-js)]
-        [pip-db.views.components])
-  (:require [pip-db.views.navbar :as navbar]
+        [hiccup.page :only (html5 include-css include-js)])
+  (:require [pip-db.util :as util]
+            [pip-db.views.ui :as ui]
+            [pip-db.views.navbar :as navbar]
             [pip-db.views.footer :as footer]))
 
 (defn heading [data]
@@ -20,9 +21,6 @@
                     " result..." " results..."))]]])]
    [:hr]])
 
-(defn google-analytics []
-  (inline-js "/js/google-analytics.inline.js"))
-
 (defn page [data]
   (html5 {:lang "en" :class "no-js"}
          [:head
@@ -37,7 +35,7 @@
           (include-css "/css/styles.css")
           (data :header)
           (include-js "/js/modernizr-2.7.0.min.js")
-          (google-analytics)]
+          (ui/google-analytics)]
 
          [:body
           (if (data :navbar) (navbar/html (data :navbar)))

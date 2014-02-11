@@ -1,6 +1,5 @@
 (ns pip-db.views.advanced
-  (:use [pip-db.views.layout :only (page)]
-        [pip-db.views.components :only (inline-js)]))
+  (:use [pip-db.views.layout :only (page)]))
 
 (defn advanced [data]
   (page {

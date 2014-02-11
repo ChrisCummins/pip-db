@@ -1,7 +1,7 @@
-(ns pip-db.test.views.components
+(ns pip-db.test.views.ui
   (:use [clojure.test]
         [clojure.java.shell :only (sh)])
-  (:require [pip-db.views.components :as dut]))
+  (:require [pip-db.views.ui :as dut]))
 
 ;; Our Google Analytics tracking snippet. See:
 ;; resources/public/js/google-analytics.inline.js.
@@ -15,17 +15,12 @@
                         "ga(\"create\",\"UA-47069255-1\",\"pip-db.org\");"
                         "ga(\"send\",\"pageview\");"))
 
-(deftest inline-css
-  (testing "Stylesheet contents"
-    (is (= (dut/inline-css "/js/google-analytics.inline.js")
-           [:style (str tracking-code "\n")]))))
-
-(deftest inline-js
-  (testing "Javascript contents"
-    (is (= (dut/inline-js "/js/google-analytics.inline.js")
-           [:script (str tracking-code "\n")]))))
-
 (deftest search-bar
   (testing "Search text"
     (is (not (= (dut/search-bar {})
                 (dut/search-bar {:search-text "foo"}))))))
+
+(deftest google-analytics
+  (testing "Google analytics tracking code"
+    (is (= (dut/google-analytics)
+           [:script (str tracking-code "\n")]))))

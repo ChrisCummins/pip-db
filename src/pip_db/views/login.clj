@@ -1,11 +1,11 @@
 (ns pip-db.views.login
-  (:use [pip-db.views.layout :only (page)]
-        [pip-db.views.components :only (inline-css)]))
+  (:require [pip-db.util :as util])
+  (:use [pip-db.views.layout :only (page)]))
 
 (defn login []
   (page {:title "Sign in"
          :navbar {:hide-user true}
-         :header (inline-css "/css/login.css")
+         :header (util/inline-css "/css/login.css")
          :body [:form.form-signin {:method "post" :action "/login"}
                 [:h2.form-signin-heading "Login"]
                 [:input.form-control {:name "user" :type "text"

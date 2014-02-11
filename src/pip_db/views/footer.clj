@@ -1,6 +1,5 @@
 (ns pip-db.views.footer
-  (:require [pip-db.util :as util])
-  (:use [pip-db.views.components]))
+  (:require [pip-db.util :as util]))
 
 (defn html []
   [:div.footer

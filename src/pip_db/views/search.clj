@@ -1,6 +1,6 @@
 (ns pip-db.views.search
-  (:use [pip-db.views.layout :only (page)]
-        [pip-db.views.components :only (inline-js)]))
+  (:use [pip-db.views.layout :only (page)])
+  (:require [pip-db.util :as util]))
 
 (defn tablify-results [results]
   [:table.table.table-striped.table-hover.table-bordered
@@ -62,4 +62,4 @@
                                      (data :results-per-page)
                                      (data :pages-count)))
                   [:p.lead "No results found."])]
-         :javascript (inline-js "/js/search.inline.js")}))
+         :javascript (util/inline-js "/js/search.inline.js")}))
