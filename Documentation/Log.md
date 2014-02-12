@@ -2230,13 +2230,13 @@ Notes for meeting with Ian:
 
 TODO:
 
- 1) Add 'check test coverage' to release checklist.
- 2) Set `project.clj` version in `mkrelease.sh`.
- 3) Update test coverage with new UI/util functions.
- 4) Implement method to display pI in results page.
- 5) Update log (notes to/from meeting with Darren).
- 6) Implement record ID hash on DB.
- 7) Check for 404 on invalid record URL.
- 8) Implement prototype about page.
- 9) Implement prototype upload preview.
- 10) Implement download results.
+1. Add 'check test coverage' to release checklist.
+2. Set `project.clj` version in `mkrelease.sh`.
+3. Update test coverage with new UI/util functions.
+4. Implement method to display pI in results page.
+5. Update log (notes to/from meeting with Darren).
+6. Implement record ID hash on DB.
+7. Check for 404 on invalid record URL.
+8. Implement prototype about page.
+9. Implement prototype upload preview.
+10. Implement download results.
