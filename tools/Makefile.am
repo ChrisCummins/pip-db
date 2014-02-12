@@ -1,7 +1,6 @@
 noinst_SCRIPTS = \
 	dsa \
 	ghi \
-	mkrelease \
 	png \
 	sloccount \
 	$(NULL)
