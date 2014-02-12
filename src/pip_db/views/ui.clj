@@ -104,10 +104,25 @@
                                             "isoelectric points."))))
 
 ;; ### Main search bar
+;;
+;; The search bar consists of three elements:
 
+;; ### 1. The input text field
+;;
+;; This can be loaded with a value already typed in.
+(defn search-bar-input [text]
+  [:input#q.form-control {:name "q" :type "text" :value text
+                          :autocomplete "off"}])
+
+;; ### 2. Submit button
+;;
+;; This completes the search and takes the user to the results page.
 (def submit-button
   [:button.btn.btn-success.disabled {:name "a" :value "s"} "Search"])
 
+;; ### 3. Advanced Search button
+;;
+;; This takes the user to the advanced search page.
 (def advanced-button
   [:button.btn.btn-primary          {:name "a" :value "a"} "Advanced"])
 
@@ -117,9 +132,7 @@
 (defn search-bar [data]
   [:form {:method "GET" :action "/s" :role "search"}
    [:div.input-group
-    [:input#q.form-control {:name "q" :type "text"
-                            :value (data :search-text)
-                            :autocomplete "off"}]
+    (search-bar-input (data :search-text))
     [:div.input-group-btn submit-button advanced-button]]])
 
 ;; ### Page heading
