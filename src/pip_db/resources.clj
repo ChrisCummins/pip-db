@@ -8,3 +8,11 @@
 
 (defn resource [path]
   (slurp (resource-path path)))
+
+;; ## Public assets
+
+;; Images are served from a base directory relative to
+;; `resource-root`.
+(defn image-path
+  ([] "/img/")
+  ([filename] (str (image-path) filename)))
