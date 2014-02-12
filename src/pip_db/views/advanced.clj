@@ -68,7 +68,7 @@
                               :autocomplete "off"}]]]]
                   [:div.col-md-4
                    [:div.info "Enter one or more categories for the EC."]]]
-                 (ui/search-form-pi-widget data)
+                 (ui/search-form-pi-row data)
                  [:div.row
                   [:div.col-md-2
                    [:label {:for "location"} "molecular weight:"]]

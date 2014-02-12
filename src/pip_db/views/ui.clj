@@ -98,7 +98,7 @@
                              (info-widget (str desc-text ".")))))
 
 ;; An isoelectric point input search form widget.
-(defn search-form-pi-widget [data]
+(defn search-form-pi-row [data]
   (search-form-widget-row (label-widget "isoelectric point (pH):")
                           (search-form-pi-input-widget data)
                           (info-widget (str "Enter an exact or range of "
