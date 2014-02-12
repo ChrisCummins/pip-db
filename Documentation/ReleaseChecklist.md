@@ -13,6 +13,8 @@ release.
   development iterations)?
 * Run `make distclean`, `./autogen.sh`, `./configure`, and `make all
   install`. Does everything build properly?
+* Run `lein cloverage` and check generated test coverage report. Is
+  new code fully tested?
 * Run the test suite. Do any tests unexpectedly fail?
 * Run the application. Does everything behave properly?
 * Run `./scripts/indent.sh` and fix and commit any changes.
