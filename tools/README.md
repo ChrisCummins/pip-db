@@ -6,9 +6,7 @@ required for the production system.
 ## Table of Contents
 
 * [dsa - Dataset Analyser](#dsa)
-* [mkrelease - Project release generator](#mkrelease)
 * [png - Plausible Nonsense Generator](#png)
-* [sloccount - Source code line count](#sloccount)
 
 ## dsa
     Usage: ./dsa <csv-dataset>
@@ -50,32 +48,6 @@ An automated dataset analysis tool.
     +-----------------------------+-----------+---------+--------+--------+
     24 records returned
 
-## mkrelease
-    Usage: ./mkrelease <version>
-
-Creates a release branch/tag for the current version and bumps the project
-version to `<version>`.
-
-### Example Usage
-
-    $ ./mkrelease 0.0.2
-    Getting current version... '0.0.1'
-    Creating release branch... 'release/0.0.1'
-    Counting objects: 82, done.
-    Compressing objects: 100% (78/78), done.
-    Writing objects: 100% (78/78), 7.97 KiB, done.
-    Total 78 (delta 57), reused 0 (delta 0)
-    To git@github.com:ChrisCummins/pip-db.git
-     * [new branch]      release/0.0.1 -> release/0.0.1
-    Creating release tag... '0.0.1'
-    Counting objects: 1, done.
-    Writing objects: 100% (1/1), 169 bytes, done.
-    Total 1 (delta 0), reused 0 (delta 0)
-    To git@github.com:ChrisCummins/pip-db.git
-     * [new tag]         0.0.1 -> 0.0.1
-    Updating version string... 'configure.ac'
-    Creating version bump commit... '0.0.2'
-
 ## png
     Usage: ./png
                -o --output [file]     Output to file
@@ -96,43 +68,3 @@ A program for generating nonsense datasets for testing purposes.
     debug: output file format: CSV
     $ wc -l test.csv
     17 test.csv
-
-## sloccount
-    Usage: ./sloccount
-
-A script to count the physical source lines of code (SLOC) contained in the
-project.
-
-### Example Usage
-
-    $ ./sloccount
-    pip-db 0.0.2 - Source lines of code
-    Wed Nov 20 01:32:20 GMT 2013
-
-
-    Build system: 1164
-    491  configure.ac  (42.18%)
-    480  Makefile.am   (41.24%)
-    193  autogen.sh    (16.58%)
-
-    Page sources: 11622
-    7593  Less CSS    (65.33%)
-    2030  HTML        (17.47%)
-    1999  JavaScript  (17.20%)
-
-    Controller sources: 1206
-    721  PHP (lib)    (59.78%)
-    485  PHP (pages)  (40.22%)
-
-    External libraries: 14151
-    14151  PHP (twig)  (100.00%)
-
-    Documentation: 2980
-    1764  Markdown  (59.19%)
-    1216  LaTeX     (40.81%)
-
-    Tools: 2219
-    1516  JavaScript  (68.32%)
-    703   Shell       (31.68%)
-
-    Total physical source lines of code: 33342

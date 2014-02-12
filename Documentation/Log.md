@@ -2207,3 +2207,37 @@ use AJAX and a server-side string matching algorithm implemented in
 Clojure to provide fast suggestions, but for now we can get away with
 client side processing by just passing ~800 suggestions to the client
 through JavaScript and getting them to process it.
+
+### Tuesday 12th
+
+Notes for meeting with Ian:
+
+ * Deployment fixed - user error! (of course). Causes by silent
+   failing during build, and red herring warnings.
+
+    * Idle status on heroku web apps causes few seconds load delay.
+
+ * Design work - D2 overdue.
+
+    * Balsamiq mockups - more adventurous designs.
+    * Refining the searching experience: sliders and autocomplete.
+    * Upload and Download previews (embedded Excel emulator in JS).
+
+ * Design implementations - demo.
+
+ * NEXT: Back-end work - meeting with Darren on Friday.
+
+### Wednesday 13th
+
+TODO:
+
+ 1) Add 'check test coverage' to release checklist.
+ 2) Set `project.clj` version in `mkrelease.sh`.
+ 3) Update test coverage with new UI/util functions.
+ 4) Implement method to display pI in results page.
+ 5) Update log (notes to/from meeting with Darren).
+ 6) Implement record ID hash on DB.
+ 7) Check for 404 on invalid record URL.
+ 8) Implement prototype about page.
+ 9) Implement prototype upload preview.
+ 10) Implement download results.
