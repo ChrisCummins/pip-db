@@ -2,7 +2,6 @@ noinst_SCRIPTS = \
 	dsa \
 	ghi \
 	png \
-	sloccount \
 	$(NULL)
 
 dist_bin_SCRIPTS = pipbot
