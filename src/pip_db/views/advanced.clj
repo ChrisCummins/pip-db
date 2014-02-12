@@ -49,6 +49,8 @@
                  (search-location-widget data)
 
                  (ui/search-form-heading-row "Then narrow results by...")
+                 (ui/search-form-method-row data)
+                 (ui/search-form-pi-row data)
                  [:div.row
                   [:div.col-md-2
                    [:label {:for "ec1"} "enzyme commission number:"]]
@@ -68,7 +70,6 @@
                               :autocomplete "off"}]]]]
                   [:div.col-md-4
                    [:div.info "Enter one or more categories for the EC."]]]
-                 (ui/search-form-pi-row data)
                  [:div.row
                   [:div.col-md-2
                    [:label {:for "location"} "molecular weight:"]]
@@ -86,7 +87,6 @@
                   [:div.col-md-4
                    [:div.info
                     "Enter an exact or range of molecular weights."]]]
-                 (ui/search-form-method-row data)
                  [:div.row
                   [:div.col-md-2
                    [:label {:for "t_l"} "temperature:"]]
