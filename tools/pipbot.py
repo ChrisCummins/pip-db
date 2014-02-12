@@ -789,7 +789,7 @@ def get_version_string():
 def sloccount():
 
     try:
-        run("./tools/sloccount", False)
+        run("./scripts/sloccount.sh", False)
         return 0
     except:
         return 2
