@@ -2240,3 +2240,24 @@ TODO:
 8. Implement prototype about page.
 9. Implement prototype upload preview.
 10. Implement download results.
+
+Notes from meeting with Ian:
+
+ * Data integrity needs to be the focus of my time. Until the data
+   storage problem is solved, this project's useless.
+
+ * Prepare an agenda for Friday meeting with Darren and make sure I
+   get through everything. Again, the focus should be data storage and
+   integrity.
+
+ * Before making data storage suggestions to Darren, I *need* solid
+   recommendations and options. I can't expect Darren to come up with
+   the solution for me, but rather to help pick from a range of
+   potential solutions.
+
+ * I should make an updated Gantt chart for the remaining time, taking
+   into account the changes in project scope / direction.
+
+ * I should give some thought as to how to accept the Greek letters in
+   searches. Should the server accept substitute Latin characters
+   (e.g. 'b' in place of β).
