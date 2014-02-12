@@ -251,7 +251,7 @@
         'pi_h': '',
         'mw_l': '',
         'mw_h': '',
-        'm': 'Any',
+        'm': '',
         't_l': '',
         't_h': ''
     };
@@ -351,7 +351,6 @@
             $(this).addClass('btn-warning');
             $(this).removeClass('btn-primary');
             $slider.labeledslider('option', 'disabled', false);
-            $('button[name="a"][value="s"]').removeClass('disabled');
         } else {
             $(this).text('Off');
             $(this).addClass('btn-primary');
@@ -362,6 +361,47 @@
         // Update form
         setFormValuesFromSlider();
         activateSubmitIfFormFilled($(this).closest('form'));
+    });
+
+    /*
+     * EXPERIMENTAL METHOD COMBO
+     */
+
+    var methodActive = false; // Keep track of whether method select is active
+    var $methodSelector = $('#m-select');
+
+    // Update hidden form inputs
+    var setFormValuesFromMethod = function () {
+        if (methodActive) {
+            $('#m').val($(' option:selected', $methodSelector).text());
+        } else {
+            $('#m').val('');
+        }
+    };
+
+    // Experimental method button press
+    $('#m-active').click(function (e) {
+        methodActive = !methodActive;
+
+        if (methodActive) {
+            $(this).text('On');
+            $(this).addClass('btn-warning');
+            $(this).removeClass('btn-primary');
+            $methodSelector.removeAttr('disabled');
+        } else {
+            $(this).text('Off');
+            $(this).addClass('btn-primary');
+            $(this).removeClass('btn-warning');
+            $methodSelector.attr('disabled', true);
+        }
+
+        // Update form
+        setFormValuesFromMethod();
+        activateSubmitIfFormFilled($(this).closest('form'));
+    });
+
+    $methodSelector.change(function (e) {
+        setFormValuesFromMethod();
     });
 
     /*
