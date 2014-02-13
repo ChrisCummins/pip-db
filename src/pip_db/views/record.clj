@@ -64,6 +64,7 @@
                    (property "Location" data :organ)
                    (property "pI" data :pi)
                    (property-range "pI" data :pi_range_min :pi_range_max)
+                   (property "pI Maximum" data :pi_max)
                    (property "Molecular Weight" data :mw)
                    (property "Sub unit no" data :sub_no)
                    (property "Sub unit MW" data :sub_mw)
