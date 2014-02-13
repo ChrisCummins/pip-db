@@ -13,6 +13,19 @@
       [:tr.property {:data-key (name key)}
        [:td.description description][:td.value value]])))
 
+;; Represent a numerical property range by providing data keys for
+;; both the min and max values. In this case, the resulting row is
+;; given two additional attributes `min-key` and `max-key`.
+(defn property-range [description data min-key max-key]
+  (let [min-value (data min-key)
+        max-value (data max-key)]
+    (if (and (not (str/blank? min-value))
+             (not (str/blank? max-value)))
+      [:tr.property {:data-key-min (name min-key)
+                     :data-key-max (name max-key)}
+       [:td.description description]
+       [:td.value (str min-value " - " max-value)]])))
+
 ;; External links are presented inside of a panel.
 (defn extern-links [& links]
   (if (not (empty? links))
@@ -50,6 +63,7 @@
                    (property "Source" data :source)
                    (property "Location" data :organ)
                    (property "pI" data :pi)
+                   (property-range "pI" data :pi_range_min :pi_range_max)
                    (property "Molecular Weight" data :mw)
                    (property "Sub unit no" data :sub_no)
                    (property "Sub unit MW" data :sub_mw)
