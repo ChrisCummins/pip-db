@@ -27,6 +27,14 @@
   (if (not (str/blank? url))
     [:li [:a.btn.btn-success.btn-block {:href url :target "_blank"} name]]))
 
+;; Record notes are presented inside of a panel. Note that we don't
+;; return anything if the `text` parameter is empty.
+(defn notes-panel [text]
+  (if (not (str/blank? text))
+    [:div.panel.panel-primary
+     [:div.panel-heading [:h3.panel-title "Notes"]]
+     [:div.panel-body text]]))
+
 (defn record [data]
   (page {:title (get data :name)
          :navbar {:search true}
@@ -59,6 +67,7 @@
                    (extern "PubMed" (data :pubmed))
                    (extern "Species Taxonomy" (data :species))
                    (extern "Protein Sequence" (data :sequence)))
+                  (notes-panel (data :notes))
                   [:div.panel.panel-primary.panel-reference
                    [:div.panel-heading
                     [:h3.panel-title "Reference this page"]]

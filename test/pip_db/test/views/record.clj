@@ -38,6 +38,17 @@
            [:li [:a.btn.btn-success.btn-block
                  {:href "bar", :target "_blank"} "foo"]]))))
 
+(deftest notes-panel
+  (testing "No notes"
+    (is (= (dut/notes-panel nil)
+           (dut/notes-panel "")
+           (dut/notes-panel "  ")
+           nil)))
+
+  (testing "Notes"
+    (is (not (= (dut/notes-panel "foo")
+                (dut/notes-panel "bar"))))))
+
 (deftest record
   (testing "Page title and heading"
     (is (= (class (dut/record {:name "foo"}))
