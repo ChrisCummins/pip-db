@@ -20,10 +20,7 @@
 
 (deftest extern-links
   (testing "No external links"
-    (is (= (dut/extern-links)
-           [:div.panel.panel-primary.panel-extern
-            [:div.panel-heading [:h3.panel-title "External Links"]]
-            [:div.panel-body [:ul.panel-extern-list nil]]])))
+    (is (= (dut/extern-links) nil)))
 
   (testing "External links"
     (is (= (dut/extern-links "foo")

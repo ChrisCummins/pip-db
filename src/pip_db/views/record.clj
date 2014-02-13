@@ -13,13 +13,15 @@
       [:tr.property {:data-key (name key)}
        [:td.description description][:td.value value]])))
 
+;; External links are presented inside of a panel.
 (defn extern-links [& links]
-  [:div.panel.panel-primary.panel-extern
-   [:div.panel-heading
-    [:h3.panel-title "External Links"]]
-   [:div.panel-body
-    [:ul.panel-extern-list
-     links]]])
+  (if (not (empty? links))
+    [:div.panel.panel-primary.panel-extern
+     [:div.panel-heading
+      [:h3.panel-title "External Links"]]
+     [:div.panel-body
+      [:ul.panel-extern-list
+       links]]]))
 
 (defn extern [name url]
   (if (not (str/blank? url))
