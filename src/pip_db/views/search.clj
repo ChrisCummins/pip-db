@@ -30,14 +30,18 @@
    (if (< (last pages) pages-count)
      [:a.page-ref.btn.btn-success {:data-page pages-count} "&raquo;"])))
 
+;; Generate the row of pagination links, if required. We determine if
+;; we need pagination links based on whether we have more than one
+;; page or not.
 (defn pagination-links [current-page pages results-per-page pages-count]
-  [:div.row {:style "margin-bottom: 20px;"}
-   [:div.col-lg-12
-    [:div {:style "text-align: center;"}
-     [:div#pagination.btn-group {:style "margin: 0 auto;"
-                                 :data-results-per-page results-per-page
-                                 :data-pages-count pages-count}
-      (page-links current-page pages pages-count)]]]])
+  (if (> pages-count 1)
+    [:div.row {:style "margin-bottom: 20px;"}
+     [:div.col-lg-12
+      [:div {:style "text-align: center;"}
+       [:div#pagination.btn-group {:style "margin: 0 auto;"
+                                   :data-results-per-page results-per-page
+                                   :data-pages-count pages-count}
+        (page-links current-page pages pages-count)]]]]))
 
 (defn beta-warning []
   [:div.alert.alert-info

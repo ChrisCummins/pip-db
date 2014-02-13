@@ -105,17 +105,12 @@
                [:a.page-ref.btn.btn-success {:data-page 4} "&raquo;"])))) )
 
 (deftest pagination-links
-  (testing "One page"
-    (is (= (dut/pagination-links 1 '(1) 10 1)
-           [:div.row {:style "margin-bottom: 20px;"}
-            [:div.col-lg-12 [:div {:style "text-align: center;"}
-                             [:div#pagination.btn-group
-                              {:data-pages-count 1,
-                               :data-results-per-page 10,
-                               :style "margin: 0 auto;"}
-                              '(nil ([:a.page-ref.btn.btn-success
-                                      {:class "disabled", :data-page 1} 1])
-                                    nil)]]]]))))
+  (testing "Single page (no links)"
+    (is (= (dut/pagination-links 1 '(1) 10 1) nil)))
+
+  (testing "Multiple pages"
+    (is (not (= (dut/pagination-links 1 '(1)   10 1)
+                (dut/pagination-links 1 '(1 2) 10 2))))))
 
 (deftest beta-warning
   (testing "Beta warning"
