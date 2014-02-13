@@ -46,7 +46,8 @@
 (def query-table "records")
 ;; Then we specify a vector of field names from within this table to
 ;; query.
-(def query-fields ["id" "name" "source" "organ" "pi"])
+(def query-fields ["id" "name" "source" "organ"
+                   "pi" "pi_major" "pi_range_min" "pi_range_max"])
 
 (defn query [params]
   (let [conditions (conditionals params)]

@@ -87,10 +87,12 @@
 (deftest query
   (testing "A query with no conditions"
     (is (= (dut/query {})
-           "SELECT id,name,source,organ,pi FROM records")))
+           (str "SELECT id,name,source,organ,"
+                "pi,pi_major,pi_range_min,pi_range_max FROM records"))))
 
   (testing "A query with a condition"
     (is (= (dut/query {"q" "foo"})
-           (str "SELECT id,name,source,organ,pi FROM records WHERE "
-                "((((LOWER(name) LIKE LOWER('%foo%')) OR "
+           (str "SELECT id,name,source,organ,"
+                "pi,pi_major,pi_range_min,pi_range_max FROM records "
+                "WHERE ((((LOWER(name) LIKE LOWER('%foo%')) OR "
                 "(LOWER(alt_name) LIKE LOWER('%foo%')))))")))))
