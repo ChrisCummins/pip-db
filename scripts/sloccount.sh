@@ -163,10 +163,10 @@ main() {
   local tools=$(sum_rows "$(get_tools_sloccounts)")
   local total=$((build+resources+src+docs+tools))
 
-  echo "$(get_package_string) - Source lines of code"
-  date
+  echo -n 'Commit: '; git show HEAD | head -n1 | awk '{print $2}'
+  git show HEAD | grep --color=never '^Date:'
+  echo -n 'Rel:    '; echo "$(get_package_string)"
 
-  echo ""
   echo ""
   echo "Build system: $build"
   get_build_sloccounts | sort -rn | column -t -s $'\t'
