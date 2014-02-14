@@ -6,6 +6,7 @@ required for the production system.
 ## Table of Contents
 
 * [dsa - Dataset Analyser](#dsa)
+* [pipbot - Your friendly neighbourhood robot](#pipbot)
 * [png - Plausible Nonsense Generator](#png)
 
 ## dsa
@@ -47,6 +48,89 @@ An automated dataset analysis tool.
     | Notes                       | 7         | 1.37%   | 5      | 0.98%  |
     +-----------------------------+-----------+---------+--------+--------+
     24 records returned
+
+## pipbot
+
+```
+                  ,--.    ,--.
+                 ((O ))--((O ))
+               ,'_`--'____`--'_`.
+              _:  ____________  :_
+             | | ||::::::::::|| | |
+             | | ||::::::::::|| | |
+             | | ||::::::::::|| | |
+             |_| |/__________\| |_|
+               |________________|
+            __..-'            `-..__
+         .-| : .----------------. : |-.
+       ,\ || | |\______________/| | || /.
+      /`.\:| | ||  __  __  __  || | |;/,'\
+     :`-._\;.| || '--''--''--' || |,:/_.-':
+     |    :  | || .----------. || |  :    |
+     |    |  | || '--pipbot--' || |  |    |
+     |    |  | ||   _   _   _  || |  |    |
+     :,--.;  | ||  (_) (_) (_) || |  :,--.;
+     (`-'|)  | ||______________|| |  (|`-')
+      `--'   | |/______________\| |   `--'
+             |____________________|
+              `.________________,'
+               (_______)(_______)
+               (_______)(_______)
+               (_______)(_______)
+               (_______)(_______)
+              |        ||        |
+              '--------''--------'
+```
+
+Hello there. My name is pipbot. I'm something of a legend around these
+here parts. Be sure to call on me for all of your secretarial needs!
+
+```
+    pipbot build    <target> <build>
+    pipbot deploy   [<target> <build>]
+    pipbot undeploy [<target> <build>]
+        Build, deploy or undeploy a website configuration
+
+    pipbot build summary
+        Show the current project configuration
+
+    pipbot burndown
+        Show the changes made on a feature branch
+
+    pipbot burndown release
+        Show the changes made since the last release
+
+    pipbot burndown <number> days
+    pipbot burndown <number> hours
+        Show the changes made in the last <number> of days/hours
+
+    pipbot show <issue-number|commit-id|<target> <build>>
+        Tell me more about a particular thing
+
+    pipbot version
+        Show the current project version
+
+    pipbot issue <command ..>
+        Issue tracker commands:
+          list        List all issues
+          show        Show an issue's details
+          open        Open (or reopen) an issue
+          close       Close an issue
+          edit        Modify an existing issue
+          comment     Leave a comment on an issue
+          label       Create, list, modify, or delete labels
+          assign      Assign an issue to yourself (or someone else)
+          milestone   Manage project milestones
+
+    pipbot start  <issue|feature|release>
+    pipbot pause  [issue|feature|release]
+    pipbot finish [issue|feature|release]
+        Start, pause or complete work on an upstream issue,
+        downstream feature, or product release branch.
+
+    pipbot sloccount
+        Show the number of source lines of code
+```
 
 ## png
     Usage: ./png

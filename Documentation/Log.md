@@ -2198,7 +2198,7 @@ backend, and formal user testing.
 Confirmed meeting with Darren for 1pm on Friday. Re-booked meeting
 with Ian for Wednesday 4:30pm.
 
-### Monday 11th
+### Monday 10th
 
 Implement autocomplete functionality using jQuery UI and a hand-picked
 subset of the most common results for each different field (protein
@@ -2208,7 +2208,7 @@ Clojure to provide fast suggestions, but for now we can get away with
 client side processing by just passing ~800 suggestions to the client
 through JavaScript and getting them to process it.
 
-### Tuesday 12th
+### Tuesday 11th
 
 Notes for meeting with Ian:
 
@@ -2227,17 +2227,50 @@ Notes for meeting with Ian:
 
  * NEXT: Back-end work - meeting with Darren on Friday.
 
-### Wednesday 13th
+### Wednesday 12th
 
 TODO:
 
- 1) Add 'check test coverage' to release checklist.
- 2) Set `project.clj` version in `mkrelease.sh`.
- 3) Update test coverage with new UI/util functions.
- 4) Implement method to display pI in results page.
- 5) Update log (notes to/from meeting with Darren).
- 6) Implement record ID hash on DB.
- 7) Check for 404 on invalid record URL.
- 8) Implement prototype about page.
- 9) Implement prototype upload preview.
- 10) Implement download results.
+1. Add 'check test coverage' to release checklist.
+2. Set `project.clj` version in `mkrelease.sh`.
+3. Update test coverage with new UI/util functions.
+4. Implement method to display pI in results page.
+5. Update log (notes to/from meeting with Darren).
+6. Implement record ID hash on DB.
+7. Check for 404 on invalid record URL.
+8. Implement prototype about page.
+9. Implement prototype upload preview.
+10. Implement download results.
+
+Notes from meeting with Ian:
+
+ * Data integrity needs to be the focus of my time. Until the data
+   storage problem is solved, this project's useless.
+
+ * Prepare an agenda for Friday meeting with Darren and make sure I
+   get through everything. Again, the focus should be data storage and
+   integrity.
+
+ * Before making data storage suggestions to Darren, I *need* solid
+   recommendations and options. I can't expect Darren to come up with
+   the solution for me, but rather to help pick from a range of
+   potential solutions.
+
+ * I should make an updated Gantt chart for the remaining time, taking
+   into account the changes in project scope / direction.
+
+ * I should give some thought as to how to accept the Greek letters in
+   searches. Should the server accept substitute Latin characters
+   (e.g. 'b' in place of β).
+
+### Friday 14th
+
+Have been reading up on NCBI BLAST
+searching. [Quick start](http://www.ncbi.nlm.nih.gov/blast/Doc/node2.html)
+to the API.
+
+Example search:
+`http://www.ncbi.nlm.nih.gov/blast/Blast.cgi?QUERY=555&DATABASE=nr&HITLIST_SIZE=10&FILTER=L&EXPECT=10&FORMAT_TYPE=XML&PROGRAM=blastn&CLIENT=web&SERVICE=plain&NCBI_GI=on&PAGE=Nucleotides&CMD=Put`
+
+Fetch search results:
+`http://www.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&RID=???&FORMAT_TYPE=XML`
