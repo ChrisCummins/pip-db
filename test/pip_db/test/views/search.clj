@@ -1,6 +1,26 @@
 (ns pip-db.test.views.search
   (:use clojure.test)
-  (:require [pip-db.views.search :as dut]))
+  (:require [pip-db.views.search :as dut]
+            [clojure.string :as str]))
+
+(deftest pi-text
+  (testing "pI value"
+    (is (= (dut/pi-text {:pi "2"}) "2"))
+    (is (not (= (dut/pi-text {:pi "1"})
+                (dut/pi-text {:pi "2"})))))
+
+  (testing "pI major"
+    (is (= (dut/pi-text {:pi_major "2"}) "2m")))
+
+  (testing "pi Ranges"
+    (is (= (dut/pi-text {:pi_range_min "2"}) "2"))
+    (is (= (dut/pi-text {:pi_range_max "2"}) "2"))
+    (is (= (dut/pi-text {:pi_range_min "1"
+                         :pi_range_max "2"})
+           (str "1" dut/pi-range-separator "2"))))
+
+  (testing "No pI"
+    (is (str/blank? (dut/pi-text {})))))
 
 (deftest tablify-results
   (testing "empty table"

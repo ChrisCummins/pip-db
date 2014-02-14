@@ -1,6 +1,29 @@
 (ns pip-db.views.search
   (:use [pip-db.views.page :only (page)])
-  (:require [pip-db.util :as util]))
+  (:require [clojure.string :as str]
+            [pip-db.util :as util]))
+
+;; If a range of pI values are to be displayed, then we use a
+;; separator string to delimit the minimum and maximum values.
+(def pi-range-separator "-")
+
+;; We allow for some flexibility in displaying isoelectric points. We
+;; will try first to show an exact value, else a range of values, or
+;; just an individual result within that range.
+(defn pi-text [record]
+  (let [pi       (record :pi)
+        pi-min   (record :pi_range_min)
+        pi-max   (record :pi_range_max)
+        pi-major (record :pi_major)]
+
+    (if (not (str/blank? pi))
+      pi
+      (if (not (str/blank? pi-major))
+        (str pi-major "m")
+        (if (and (not (str/blank? pi-min))
+                 (not (str/blank? pi-max)))
+          (str pi-min pi-range-separator pi-max)
+          (str pi-min pi-max))))))
 
 (defn tablify-results [results]
   [:table.table.table-striped.table-hover.table-bordered
@@ -16,7 +39,7 @@
        [:td (record :name)]
        [:td (record :source)]
        [:td (record :organ)]
-       [:td (record :pi)]])]])
+       [:td (pi-text record)]])]])
 
 (defn page-links [current-page pages pages-count]
   (list
