@@ -2197,7 +2197,7 @@ backend, and formal user testing.
 Confirmed meeting with Darren for 1pm on Friday. Re-booked meeting
 with Ian for Wednesday 4:30pm.
 
-### Monday 11th
+### Monday 10th
 
 Implement autocomplete functionality using jQuery UI and a hand-picked
 subset of the most common results for each different field (protein
@@ -2207,7 +2207,7 @@ Clojure to provide fast suggestions, but for now we can get away with
 client side processing by just passing ~800 suggestions to the client
 through JavaScript and getting them to process it.
 
-### Tuesday 12th
+### Tuesday 11th
 
 Notes for meeting with Ian:
 
@@ -2226,7 +2226,7 @@ Notes for meeting with Ian:
 
  * NEXT: Back-end work - meeting with Darren on Friday.
 
-### Wednesday 13th
+### Wednesday 12th
 
 TODO:
 
