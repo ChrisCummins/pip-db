@@ -2261,3 +2261,15 @@ Notes from meeting with Ian:
  * I should give some thought as to how to accept the Greek letters in
    searches. Should the server accept substitute Latin characters
    (e.g. 'b' in place of β).
+
+### Friday 14th
+
+Have been reading up on NCBI BLAST
+searching. [Quick start](http://www.ncbi.nlm.nih.gov/blast/Doc/node2.html)
+to the API.
+
+Example search:
+`http://www.ncbi.nlm.nih.gov/blast/Blast.cgi?QUERY=555&DATABASE=nr&HITLIST_SIZE=10&FILTER=L&EXPECT=10&FORMAT_TYPE=XML&PROGRAM=blastn&CLIENT=web&SERVICE=plain&NCBI_GI=on&PAGE=Nucleotides&CMD=Put`
+
+Fetch search results:
+`http://www.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&RID=???&FORMAT_TYPE=XML`
