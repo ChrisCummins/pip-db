@@ -70,10 +70,11 @@
         data: getLoginFormData(),
         success: function(data, status, jqxhr) {
           /* Login succeeded: */
-          clearForm();
-          $('#200').show();
+          clearForm();                      // Clear form contents
+          $('button').addClass('disabled'); // Lock down form
+          $('#200').show();                 // Show success message
 
-          setTimeout(function () {
+          setTimeout(function () { // Redirect user
             window.location = jqxhr.getResponseHeader('Location');
           }, 500);
         },
