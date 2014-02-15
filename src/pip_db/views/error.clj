@@ -1,6 +1,8 @@
 ;; ## Server Error Pages
 (ns pip-db.views.error
-  (:use [pip-db.views.page :only (page)]))
+  (:use [pip-db.views.page :only (page)])
+  (:require [clojure.string :as str]
+            [pip-db.util :as util]))
 
 ;; ### 404 - File Not Found
 ;; The bog standard invalid URL response.
@@ -28,13 +30,19 @@
   ([exception]
      (page {:title "Woops!",
             :navbar {:search false}
-            :body [:div.row
-                   [:div.col-lg-12.text-center
-                    [:div.jumbotron.errortron
-                     [:h1 "500 :("]
-                     [:p (.toString exception)]
-                     [:p
-                      [:a.btn.btn-lg.btn-danger {:href "/"}
-                       "I want to complain!"] " "
-                      [:a.btn.btn-lg.btn-success {:href "/"}
-                       "Just take me home"]]]]]})))
+            :body (list [:div.row
+                         [:div.col-lg-12.text-center
+                          [:div.jumbotron.errortron
+                           [:h1 "500 :("]
+                           [:p (.toString exception)]
+                           [:p
+                            [:a.btn.btn-lg.btn-danger {:href "/"}
+                             "I want to complain!"] " "
+                            [:a.btn.btn-lg.btn-success {:href "/"}
+                             "Just take me home"]]]]]
+                        (if util/debug?
+                          [:div.row
+                           [:div.col-lg-12
+                            [:pre.stack-trace
+                             (map (fn [line] (str line "\n"))
+                                  (.getStackTrace exception))]]]))})))
