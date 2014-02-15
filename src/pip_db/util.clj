@@ -25,12 +25,17 @@
   ([request] (let [host-header ((request :headers) "host")]
                (if (str/blank? host-header) (host) host-header))))
 
+;; The host as a URL.
+(defn host-url
+  ([] (str "http://" (host)))
+  ([request] (str "http://" (host request))))
+
 ;; We can get the HTTP referrer either from the request-map, or we
 ;; just default to the host.
 (defn referer
-  ([]        (host))
+  ([]        (host-url))
   ([request] (let [referer ((request :headers) "referer")]
-               (if (str/blank? referer) (host request) referer))))
+               (if (str/blank? referer) (host-url request) referer))))
 
 ;; -------------------
 ;; ## Type conversions
