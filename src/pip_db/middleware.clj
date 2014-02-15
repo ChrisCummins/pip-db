@@ -1,6 +1,7 @@
 ;; # Application middleware
 (ns pip-db.middleware
-  (:require [pip-db.views.error :as page]))
+  (:require [pip-db.views.error :as page]
+            [clojure.string :as str]))
 
 ;; ## Ring handlers
 ;;
@@ -16,5 +17,7 @@
 (defn wrap-exception [f]
   (fn [request]
     (try (f request)
-      (catch Exception e
-        {:status 500 :body (page/status-500)}))))
+         (catch Exception e
+           (if (str/blank? (System/getenv "DEBUG"))
+             {:status 500 :body (page/status-500)}
+             {:status 500 :body (page/status-500 e)})))))
