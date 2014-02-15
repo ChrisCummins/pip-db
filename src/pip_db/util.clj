@@ -13,6 +13,25 @@
 ;; The port which we are serving over.
 (def port (Integer/parseInt (or (System/getenv "PORT") "5000")))
 
+;; ------------
+;; HTTP Headers
+
+;; We can get the current host either from the request-map, or we just
+;; generate the expected value.
+(defn host
+  ([] (if debug?
+        (str "localhost:" (Integer/parseInt (or (System/getenv "PORT") "5000")))
+        "www.pip-db.org"))
+  ([request] (let [host-header ((request :headers) "host")]
+               (if (str/blank? host-header) (host) host-header))))
+
+;; We can get the HTTP referrer either from the request-map, or we
+;; just default to the host.
+(defn referer
+  ([]        (host))
+  ([request] (let [referer ((request :headers) "referer")]
+               (if (str/blank? referer) (host request) referer))))
+
 ;; -------------------
 ;; ## Type conversions
 
