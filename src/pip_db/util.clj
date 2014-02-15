@@ -1,7 +1,17 @@
 ;; A set of useful utility functions, the purpose of which is to
 ;; provide generic helpers for tasks.
 (ns pip-db.util
-  (:use [pip-db.resources :only (resource)]))
+  (:use [pip-db.resources :only (resource)])
+  (:require [clojure.string :as str]))
+
+;; --------------
+;; ## Environment
+
+;; If we are in a debugging environment, then `(= debug? true)`.
+(def debug? (not (str/blank? (System/getenv "DEBUG"))))
+
+;; The port which we are serving over.
+(def port (Integer/parseInt (or (System/getenv "PORT") "5000")))
 
 ;; -------------------
 ;; ## Type conversions
