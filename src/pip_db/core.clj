@@ -1,7 +1,8 @@
 (ns pip-db.core
   (:use [ring.middleware.params]
         [ring.middleware.multipart-params]
-        [ring.adapter.jetty :as ring])
+        [ring.adapter.jetty :as ring]
+        [pip-db.middleware])
   (:require [compojure.handler :as handler]
             [pip-db.router :as router]
             [pip-db.models.migration :as migration])
@@ -9,6 +10,7 @@
 
 (def application
   (-> router/routes
+      wrap-exception
       wrap-params
       wrap-multipart-params))
 
