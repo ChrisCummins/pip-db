@@ -26,13 +26,11 @@
   (str "Add user accound - user: " user " pass: " (get-hash password)))
 
 (defn attempt-register [user password]
-  (if (get-user user)
-    (str "User account already exists " (str (get-user user)))
-    (add-account user password)))
+  (if (not (get-user user))
+    (do (add-account user password) true)
+    false))
 
 (defn attempt-login [user password]
-  (if (get-user user)
-    (if (credentials-are-valid? user password)
-      "Login successful!"
-      "Incorrect password!")
-    "User account does not exist"))
+  (if (and (get-user user)
+           (credentials-are-valid? user password))
+    true false))
