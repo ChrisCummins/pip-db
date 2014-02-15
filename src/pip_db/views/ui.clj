@@ -142,7 +142,7 @@
 (defn search-form-pi-row [data]
   (search-form-widget-row (label-widget "isoelectric point (pH):")
                           (search-form-pi-input-widget data)
-                          (info-widget (str "Enter an exact or range of "
+                          (info-widget (str "Select from a range of "
                                             "isoelectric points."))))
 
 ;; An experimental method selection search form row.
