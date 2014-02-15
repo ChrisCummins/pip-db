@@ -29,17 +29,17 @@
   [:table.table.table-striped.table-hover.table-bordered
    [:thead
     [:tr
-     [:td [:strong "Protein"]]
-     [:td [:strong "Source"]]
-     [:td [:strong "Location"]]
-     [:td [:strong "pI"]]]]
+     [:td.name     "Protein"]
+     [:td.source   "Source"]
+     [:td.location "Location"]
+     [:td.pi       "pI"]]]
    [:tbody
     (for [record results]
       [:tr {:data-id (record :id)}
-       [:td (record :name)]
-       [:td (record :source)]
-       [:td (record :organ)]
-       [:td (pi-text record)]])]])
+       [:td.name     (record :name)]
+       [:td.source   (record :source)]
+       [:td.location (record :organ)]
+       [:td.pi       (pi-text record)]])]])
 
 (defn page-links [current-page pages pages-count]
   (list

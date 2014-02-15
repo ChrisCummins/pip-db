@@ -6,7 +6,21 @@
   cursor: pointer;
 }
 
-.sresults table tbody td {
+.sresults table td {
   font-size: floor(@font-size-base * 1.15);
   font-weight: 200;
+  text-overflow: ellipsis; // Ellipsise overflow
+}
+
+// Table widths
+.sresults table td.source,
+.sresults table td.location {
+  width: 20%;
+}
+.sresults table td.pi {
+  width: 8%;
+}
+
+.sresults table thead td {
+  font-weight: bold;
 }

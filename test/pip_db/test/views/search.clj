@@ -23,79 +23,36 @@
     (is (str/blank? (dut/pi-text {})))))
 
 (deftest tablify-results
-  (testing "empty table"
-    (is (= (dut/tablify-results '())
-           [:table.table.table-striped.table-hover.table-bordered
-            [:thead [:tr
-                     [:td [:strong "Protein"]]
-                     [:td [:strong "Source"]]
-                     [:td [:strong "Location"]]
-                     [:td [:strong "pI"]]]]
-            [:tbody '()]])))
+  (testing "Table contents"
+    (is (not (= (dut/tablify-results '())
+                (dut/tablify-results '({:id 10
+                                        :name "foo"
+                                        :source "bar"
+                                        :organ "alpha"
+                                        :pi "5"}))
+                (dut/tablify-results '({:id 10
+                                        :name "foo"
+                                        :source "bar"
+                                        :organ "alpha"
+                                        :pi "5"}
+                                       {:id 11
+                                        :name "bar"
+                                        :source "foo"
+                                        :organ "beta"
+                                        :pi "7"}))))))
 
-  (testing "single record"
+  (testing "Out of order elements"
     (is (= (dut/tablify-results '({:id 10
                                    :name "foo"
                                    :source "bar"
                                    :organ "alpha"
                                    :pi "5"}))
-           [:table.table.table-striped.table-hover.table-bordered
-            [:thead [:tr
-                     [:td [:strong "Protein"]]
-                     [:td [:strong "Source"]]
-                     [:td [:strong "Location"]]
-                     [:td [:strong "pI"]]]]
-            [:tbody '([:tr {:data-id 10}
-                       [:td "foo"]
-                       [:td "bar"]
-                       [:td "alpha"]
-                       [:td "5"]])]])))
-
-  (testing "out of order elements"
-    (is (= (dut/tablify-results '({:source "bar"
+           (dut/tablify-results '({:source "bar"
                                    :id 10
                                    :name "foo"
                                    :pi "5"
-                                   :organ "alpha"}))
-           [:table.table.table-striped.table-hover.table-bordered
-            [:thead [:tr
-                     [:td [:strong "Protein"]]
-                     [:td [:strong "Source"]]
-                     [:td [:strong "Location"]]
-                     [:td [:strong "pI"]]]]
-            [:tbody '([:tr {:data-id 10}
-                       [:td "foo"]
-                       [:td "bar"]
-                       [:td "alpha"]
-                       [:td "5"]])]])))
+                                   :organ "alpha"}))))))
 
-  (testing "multiple records"
-    (is (= (dut/tablify-results '({:id 10
-                                   :name "foo"
-                                   :source "bar"
-                                   :organ "alpha"
-                                   :pi "5"}
-                                  {:id 11
-                                   :name "bar"
-                                   :source "foo"
-                                   :organ "beta"
-                                   :pi "7"}))
-           [:table.table.table-striped.table-hover.table-bordered
-            [:thead [:tr
-                     [:td [:strong "Protein"]]
-                     [:td [:strong "Source"]]
-                     [:td [:strong "Location"]]
-                     [:td [:strong "pI"]]]]
-            [:tbody '([:tr {:data-id 10}
-                       [:td "foo"]
-                       [:td "bar"]
-                       [:td "alpha"]
-                       [:td "5"]]
-                        [:tr {:data-id 11}
-                         [:td "bar"]
-                         [:td "foo"]
-                         [:td "beta"]
-                         [:td "7"]])]]))))
 
 (deftest page-links
   (testing "One page"
