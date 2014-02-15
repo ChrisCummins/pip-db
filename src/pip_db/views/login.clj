@@ -21,7 +21,7 @@
                  [:div {:style (str "display: table-cell; "
                                     "width: 50%; padding-right: 8px;")}
                   [:button.btn.btn-lg.btn-block.btn-primary
-                   {:name "action" :value "register"}
+                   {:name "action" :value "register" :type "button"}
                    "Register"]]
                  [:div {:style (str "display: table-cell; "
                                     "width: 50%; padding-left: 8px;")}
