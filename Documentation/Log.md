@@ -2263,6 +2263,17 @@ Notes from meeting with Ian:
    searches. Should the server accept substitute Latin characters
    (e.g. 'b' in place of β).
 
+### Thursday 13th
+
+Notes for meeting with Darren:
+
+ * How should we display results with only pI major component? Example
+   search: `Alcohol dehydrogenase`.
+
+ * NCBI BLAST search: I know *how* to perform a query, now I need to
+   learn *what* query to perform. It looks like there's two parts: a
+   database and a query.
+
 ### Friday 14th
 
 Have been reading up on NCBI BLAST
@@ -2274,3 +2285,42 @@ Example search:
 
 Fetch search results:
 `http://www.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Get&RID=???&FORMAT_TYPE=XML`
+
+Notes from meeting with Darren:
+
+ * The two issues to focus on: data searching and BLAST.
+
+ * Darren offer to provide copy for the front page text.
+
+ * The Advanced Search pI slider should operate in .1 steps, and
+   should show the currently selected value.
+
+ * On the record page, rename the "Abstract" button to "Publisher's
+   Abstract".
+
+ * On the record page, the pubmed link should be the first external
+   button.
+
+ * Don't try and filter/process the record names dataset.
+
+ * For the experimental method, create a combined reduced list. Merge
+   the obvious candidates, and then use this reduced list in the
+   search page. Darren has offered to run it past him.
+
+ * For the pI dataset, store numerical values for pI min and pI max,
+   if possible. For "aproximate" values, like "~7.5", don't store
+   anything.
+
+ * To implement BLAST searches:
+
+      1. Scrape through the UniProt sequences for each record. Each
+         record has a protein sequence link. On each linked page,
+         there is a link to download the raw sequence. Download that,
+         and add it to the records table.
+
+      2. Create a BLAST database from the scraped sequences in the
+         records table.
+
+      3. Point the BLAST program to this database and post-process the
+         outputs so as to link back to the records with the records
+         table.

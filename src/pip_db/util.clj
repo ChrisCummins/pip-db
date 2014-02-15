@@ -3,6 +3,18 @@
 (ns pip-db.util
   (:use [pip-db.resources :only (resource)]))
 
+;; -------------------
+;; ## Type conversions
+
+;; A robust string to integer parser, without any gotchas. Under
+;; normal circumstances, it behaves as you would expect, e.g.
+;; `(= (string->int "5") 5)`. In case of error, it returns nil, e.g.
+;; `(= (string->int "abcd") nil)`.
+(defn string->int [string]
+  (try
+    (Integer/parseInt string)
+    (catch NumberFormatException e nil)))
+
 ;; -----------------
 ;; ## Date utilities
 

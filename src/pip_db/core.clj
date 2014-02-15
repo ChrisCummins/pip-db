@@ -1,19 +1,12 @@
 (ns pip-db.core
-  (:use [ring.middleware.params]
-        [ring.middleware.multipart-params]
-        [ring.adapter.jetty :as ring])
   (:require [compojure.handler :as handler]
-            [pip-db.router :as router]
+            [ring.adapter.jetty :as ring]
+            [pip-db.middleware :as middleware]
             [pip-db.models.migration :as migration])
   (:gen-class))
 
-(def application
-  (-> router/routes
-      wrap-params
-      wrap-multipart-params))
-
 (defn start [port]
-  (run-jetty application {:port port :join? false}))
+  (ring/run-jetty middleware/middleware {:port port :join? false}))
 
 (defn -main []
   (migration/migrate)

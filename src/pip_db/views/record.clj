@@ -90,10 +90,3 @@
                    [:div.panel-body
                     [:blockquote#reference]]]]]]
          :javascript (util/inline-js "/js/record.inline.js")}))
-
-(defn no-record []
-  (page {:title "Not Found"
-         :navbar {:search true}
-         :heading {}
-         :body [:div.record
-                [:p.lead "Record not found."]]}))
