@@ -35,10 +35,7 @@
 (defn wrap-exception [f]
   (fn [request]
     (try (f request)
-         (catch Exception e
-           (if (str/blank? (System/getenv "DEBUG"))
-             {:status 500 :body (error/status-500)}
-             {:status 500 :body (error/status-500 e)})))))
+         (catch Exception e {:status 500 :body (error/status-500 e)}))))
 
 (def middleware
   (-> routes
