@@ -187,21 +187,24 @@
 ;; ### Page heading
 
 (defn heading [data]
-  [:div.page-title
-   [:div.page-title-inner
-    ;; Download link for search results.
-    (if (data :download)
-      [:div.download [:a.btn.btn-warning {:href (data :download)} "Download"]])
-    ;; The page title.
-    (if (data :title) [:h3 (data :title)])
-    ;; Meta tags for displaying information about search results.
-    (if (data :meta)
-      [:div.info
-       [:ul.meta-tags
-        [:li (str "Found " (data :meta-results-count)
-                  (if (= (data :meta-results-count) 1)
-                    " result..." " results..."))]]])]
-   [:hr]])
+  (let [download (data :download)]
+    [:div.page-title
+     [:div.page-title-inner
+      ;; Download link for search results.
+      (if download
+        [:div.download [:a#download.btn.btn-warning
+                        (if (string? download) {:href download})
+                        "Download"]])
+      ;; The page title.
+      (if (data :title) [:h3 (data :title)])
+      ;; Meta tags for displaying information about search results.
+      (if (data :meta)
+        [:div.info
+         [:ul.meta-tags
+          [:li (str "Found " (data :meta-results-count)
+                    (if (= (data :meta-results-count) 1)
+                      " result..." " results..."))]]])]
+     [:hr]]))
 
 ;; ---------
 ;; ## Images
