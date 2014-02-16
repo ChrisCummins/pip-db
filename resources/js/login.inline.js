@@ -4,6 +4,7 @@
   var emailRe = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   var $submit = $('button[name="action"][value="login"]');
+  var $register = $('button[name="action"][value="register"]');
   var $email = $('input[name="user"]');
   var $pass = $('input[name="pass"]');
 
@@ -59,10 +60,10 @@
   };
 
   $submit.click(function (e) {
-    e.preventDefault(); // Don't submit form
+    e.preventDefault();         // Don't submit form
 
     if (formIsValid()) {
-      $('.alert').hide(); // Hide existing messages
+      $('#messages').children().hide(); // Hide existing messages
 
       $.ajax({
         type: 'POST',
@@ -92,6 +93,13 @@
         }
       });
     }
+  });
+
+  $register.click(function (e) {
+    e.preventDefault();         // Don't submit form
+
+    $(this).addClass('disabled'); // Disable Register button
+    $('#registration').show();    // Show the error message
   });
 
 }());

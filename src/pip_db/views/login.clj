@@ -2,11 +2,15 @@
   (:require [pip-db.util :as util])
   (:use [pip-db.views.page :only (page)]))
 
+(defn alert [id message class]
+  [:div.text-center {:id id :class class :style "display:none;"}
+   [:strong message]])
+
 (defn error-alert [id message]
-  [:div.alert.alert-danger {:id id :style "display:none;"} [:strong message]])
+  (alert id message "login-fail"))
 
 (defn success-alert [id message]
-  [:div.alert.alert-success {:id id :style "display:none;"} [:strong message]])
+  (alert id message "login-success"))
 
 (defn login []
   (page {:title "Sign in"
@@ -36,6 +40,13 @@
                    {:name "action" :value "login"}
                    "Sign in"]]]
                 (success-alert "200" "Log in successful. Redirecting...")
-                (error-alert "403" "Incorrect details")
-                (error-alert "500" "Unknown Error")]
+                [:div#messages
+                 (error-alert "403" "Incorrect details")
+                 (error-alert "500" "Unknown Error")
+                 [:div#registration
+                  {:style "display:none;"}
+                  "Unfortunately at this time account registration is by "
+                  [:strong "approval only"] ". Please "
+                  [:a {:href "/contact-us"} "contact us"] " to request an "
+                  "account, stating your reasons."]]]
          :javascript (util/inline-js "/js/login.inline.js")}))
