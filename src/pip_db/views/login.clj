@@ -11,7 +11,6 @@
 (defn login []
   (page {:title "Sign in"
          :navbar {:hide-user true}
-         :header (util/inline-css "/css/login.css")
          :body [:form.form-signin {:method "post" :action "/login"}
                 [:h2.form-signin-heading "Login"]
                 [:div.form-group
