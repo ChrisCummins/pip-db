@@ -6,33 +6,39 @@
 
 ;; ## Search form widgets
 
-(defn search-keywords-all-widget [data]
+(defn search-keywords-all-widget [request]
   (ui/search-form-text-row "q" "all of these words"
                            "Find proteins with names that contain these keywords"
-                           (data :search-text)))
+                           ((request :params) "q")))
 
-(defn search-keywords-exact-widget [data]
+(defn search-keywords-exact-widget [request]
   (ui/search-form-text-row "q_eq" "this exact word or phrase"
-                           "Type exact phrases to match in protein names"))
+                           "Type exact phrases to match in protein names"
+                           ((request :params) "q_eq")))
 
-(defn search-keywords-any-widget [data]
+(defn search-keywords-any-widget [request]
   (ui/search-form-text-row "q_any" "any of these words"
-                           "Select proteins from a range of keywords"))
+                           "Select proteins from a range of keywords"
+                           ((request :params) "q_any")))
 
-(defn search-keywords-exclude-widget [data]
+(defn search-keywords-exclude-widget [request]
   (ui/search-form-text-row "q_ne" "none of these words"
-                           "Exclude proteins which contain these keywords"))
+                           "Exclude proteins which contain these keywords"
+                           ((request :params) "q_ne")))
 
-(defn search-source-widget [data]
+(defn search-source-widget [request]
   (ui/search-form-text-row "q_s" "source"
-                           "Enter the Latin binomial or common names"))
+                           "Enter the Latin binomial or common names"
+                           ((request :params) "q_s")))
 
-(defn search-location-widget [data]
+(defn search-location-widget [request]
   (ui/search-form-text-row "q_l" "location"
-                           "Enter the location or organ"))
+                           "Enter the location or organ"
+                           ((request :params) "q_l")))
 
 ;; ## Page Layout
-(defn advanced [data]
+(defn advanced [request]
+  request
   (page {
          :title "Advanced Search"
          :navbar {}
@@ -41,16 +47,16 @@
                 [:form#as {:method "GET" :action "/s"}
 
                  (ui/search-form-heading-row "Find proteins with...")
-                 (search-keywords-all-widget data)
-                 (search-keywords-exact-widget data)
-                 (search-keywords-any-widget data)
-                 (search-keywords-exclude-widget data)
-                 (search-source-widget data)
-                 (search-location-widget data)
+                 (search-keywords-all-widget request)
+                 (search-keywords-exact-widget request)
+                 (search-keywords-any-widget request)
+                 (search-keywords-exclude-widget request)
+                 (search-source-widget request)
+                 (search-location-widget request)
 
                  (ui/search-form-heading-row "Then narrow results by...")
-                 (ui/search-form-method-row data)
-                 (ui/search-form-pi-row data)
+                 (ui/search-form-method-row request)
+                 (ui/search-form-pi-row request)
                  [:div.row
                   [:div.col-md-2
                    [:label {:for "ec1"} "enzyme commission number:"]]

@@ -6,7 +6,9 @@
             [pip-db.views.navbar :as navbar]
             [pip-db.views.footer :as footer]))
 
-(defn page [data]
+(def empty-request {:params {}})
+
+(defn render-request [request]
   (html5 {:lang "en" :class "no-js"}
          [:head
           [:meta {:charset "utf-8"}]
@@ -16,19 +18,19 @@
                   :content "width=device-width, initial-scale=1"}]
           [:meta {:name "msapplication-tooltip"
                   :content "Protein Isoelectric Point Database."}]
-          [:title (str "pip-db " (data :title))]
+          [:title (str "pip-db " (request :title))]
           (include-css "/css/styles.css"
                        "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css")
-          (data :header)
+          (request :header)
           (include-js "/js/modernizr-2.7.0.min.js")
           (ui/google-analytics)]
 
          [:body
-          (if (data :navbar) (navbar/html (data :navbar)))
+          (if (request :navbar) (navbar/html request))
           [:div#wrap [:div.container
-                      (if (data :heading) (ui/heading (data :heading)))
-                      (data :body)]]
-          (if (not (data :hide-footer)) (footer/html))
+                      (if (request :heading) (ui/heading (request :heading)))
+                      (request :body)]]
+          (if (not (request :hide-footer)) (footer/html))
 
           (include-js
            "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
@@ -38,4 +40,8 @@
                       "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"
                       "/js/main.js"
                       "/js/moment.min.js")
-          (data :javascript)]))
+          (request :javascript)]))
+
+(defn page
+  ([contents]         (page empty-request contents))
+  ([request contents] (render-request (merge request contents))))

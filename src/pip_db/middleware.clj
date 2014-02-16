@@ -3,7 +3,7 @@
   (:use [ring.middleware.cookies :only (wrap-cookies)]
         [ring.middleware.params :only (wrap-params)]
         [ring.middleware.multipart-params :only (wrap-multipart-params)]
-        [compojure.core :only (defroutes)])
+        [compojure.core :only (defroutes GET POST)])
   (:require [pip-db.views.error :as error]
             [pip-db.controllers.index :as index]
             [pip-db.controllers.search :as search]
@@ -21,11 +21,14 @@
 ;; > map.
 ;;
 (defroutes routes
-  index/routes
-  search/routes
-  record/routes
-  login/routes
-  upload/routes
+  (GET  "/"                   [:as request] (index/handler             request))
+  (GET  "/advanced"           [:as request] (search/advanced-handler   request))
+  (GET  "/record/:id"         [:as request] (record/handler            request))
+  (GET  "/s"                  [:as request] (search/handler            request))
+  (GET  "/login"              [:as request] (login/get-handler         request))
+  (POST "/login"              [:as request] (login/post-handler        request))
+  (GET  "/upload"             [:as request] (upload/get-handler        request))
+  (POST "/upload"             [:as request] (upload/post-handler       request))
   (route/resources "/")
   (route/not-found (error/status-404)))
 

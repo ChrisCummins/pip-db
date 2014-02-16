@@ -48,45 +48,47 @@
      [:div.panel-heading [:h3.panel-title "Notes"]]
      [:div.panel-body text]]))
 
-(defn record [data]
-  (page {:title (get data :name)
-         :navbar {:search true}
-         :heading {:title (get data :name)
-                   :download "/"}
-         :body [:div.record
-                [:div.row
-                 [:div.col-md-8
-                  (properties
-                   (property "Name" data :name)
-                   (property "Alternative name(s)" data :alt_name)
-                   (property "Enzyme Commission number" data :ec)
-                   (property "Source" data :source)
-                   (property "Location" data :organ)
-                   (property "pI" data :pi)
-                   (property-range "pI" data :pi_range_min :pi_range_max)
-                   (property "pI Maximum" data :pi_max)
-                   (property "pI of major component" data :pi_major)
-                   (property "Molecular Weight" data :mw)
-                   (property "Sub unit no" data :sub_no)
-                   (property "Sub unit MW" data :sub_mw)
-                   (property "Number of Iso Enzymes" data :no_iso)
-                   (property "Valid sequences available" data :valid)
-                   (property "Experimental method" data :method)
-                   (property "Experimental method" data :temp))
-                  [:div.meta-holder
-                   [:ul.meta-tags
-                    [:li#date-added {:data-date (data :created_at)}]]]]
-                 [:div.col-md-4
-                  (extern-links
-                   (extern "Full Text" (data :citations))
-                   (extern "Abstract" (data :abstract))
-                   (extern "PubMed" (data :pubmed))
-                   (extern "Species Taxonomy" (data :species))
-                   (extern "Protein Sequence" (data :sequence)))
-                  (notes-panel (data :notes))
-                  [:div.panel.panel-primary.panel-reference
-                   [:div.panel-heading
-                    [:h3.panel-title "Reference this page"]]
-                   [:div.panel-body
-                    [:blockquote#reference]]]]]]
-         :javascript (util/inline-js "/js/record.inline.js")}))
+(defn record [request]
+  (page
+   request
+   {:title (get request :name)
+    :navbar {:search true}
+    :heading {:title (get request :name)
+              :download "/"}
+    :body [:div.record
+           [:div.row
+            [:div.col-md-8
+             (properties
+              (property "Name" request :name)
+              (property "Alternative name(s)" request :alt_name)
+              (property "Enzyme Commission number" request :ec)
+              (property "Source" request :source)
+              (property "Location" request :organ)
+              (property "pI" request :pi)
+              (property-range "pI" request :pi_range_min :pi_range_max)
+              (property "pI Maximum" request :pi_max)
+              (property "pI of major component" request :pi_major)
+              (property "Molecular Weight" request :mw)
+              (property "Sub unit no" request :sub_no)
+              (property "Sub unit MW" request :sub_mw)
+              (property "Number of Iso Enzymes" request :no_iso)
+              (property "Valid sequences available" request :valid)
+              (property "Experimental method" request :method)
+              (property "Experimental method" request :temp))
+             [:div.meta-holder
+              [:ul.meta-tags
+               [:li#date-added {:data-date (request :created_at)}]]]]
+            [:div.col-md-4
+             (extern-links
+              (extern "Full Text" (request :citations))
+              (extern "Abstract" (request :abstract))
+              (extern "PubMed" (request :pubmed))
+              (extern "Species Taxonomy" (request :species))
+              (extern "Protein Sequence" (request :sequence)))
+             (notes-panel (request :notes))
+             [:div.panel.panel-primary.panel-reference
+              [:div.panel-heading
+               [:h3.panel-title "Reference this page"]]
+              [:div.panel-body
+               [:blockquote#reference]]]]]]
+    :javascript (util/inline-js "/js/record.inline.js")}))

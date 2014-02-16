@@ -32,6 +32,11 @@
          (do-login user pass))
        {:status 400})))                 ; Missing form details
 
-(defroutes routes
-  (GET  "/login" [] (login))
-  (POST "/login" [user pass action] (login user pass action)))
+(defn post-handler [request]
+  (let [params (request :params)
+        user   (params "user")
+        pass   (params "pass")
+        action (params "action")]
+    (login user pass action)))
+
+(defn get-handler [request] (login))

@@ -4,5 +4,5 @@
 
 (deftest upload
   (testing "Page contents"
-    (is (= (class (dut/upload))
+    (is (= (class (dut/upload {:params {}}))
            java.lang.String))))
