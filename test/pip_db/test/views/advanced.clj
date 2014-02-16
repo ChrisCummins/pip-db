@@ -4,9 +4,9 @@
 
 (deftest advanced
   (testing "Page returns string"
-    (is (= (class (dut/advanced {}))
+    (is (= (class (dut/advanced {:params {}}))
            java.lang.String)))
 
   (testing "Preloaded search query"
-    (is (not (= (dut/advanced {})
-                (dut/advanced {:search-text "foo"}))))))
+    (is (not (= (dut/advanced {:params {}})
+                (dut/advanced {:params {"q" "foo"}}))))))

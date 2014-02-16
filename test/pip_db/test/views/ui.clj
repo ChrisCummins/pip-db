@@ -103,9 +103,9 @@
 
 (deftest search-bar
   (testing "Search text"
-    (is (not (= (dut/search-bar {})
-                (dut/search-bar {:search-text "foo"})
-                (dut/search-bar {:search-text "bar"}))))))
+    (is (not (= (dut/search-bar {:params {}})
+                (dut/search-bar {:params {"q" "foo"}})
+                (dut/search-bar {:params {"q" "bar"}}))))))
 
 ;; Page heading
 

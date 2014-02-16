@@ -1,7 +1,52 @@
 ;; A set of useful utility functions, the purpose of which is to
 ;; provide generic helpers for tasks.
 (ns pip-db.util
-  (:use [pip-db.resources :only (resource)]))
+  (:use [pip-db.resources :only (resource)])
+  (:require [clojure.string :as str]))
+
+;; --------------
+;; ## Environment
+
+;; If we are in a debugging environment, then `(= debug? true)`.
+(def debug? (not (str/blank? (System/getenv "DEBUG"))))
+
+;; The port which we are serving over.
+(def port (Integer/parseInt (or (System/getenv "PORT") "5000")))
+
+;; -------------
+;; HTTP Requests
+
+;; We can get the current host either from the request-map, or we just
+;; generate the expected value.
+(defn host
+  ([] (if debug?
+        (str "localhost:" (Integer/parseInt (or (System/getenv "PORT") "5000")))
+        "www.pip-db.org"))
+  ([request] (let [host-header ((request :headers) "host")]
+               (if (str/blank? host-header) (host) host-header))))
+
+;; The host as a URL.
+(defn host-url
+  ([] (str "http://" (host)))
+  ([request] (str "http://" (host request))))
+
+;; We can get the HTTP referrer either from the request-map, or we
+;; just default to the host.
+(defn referer
+  ([]        (host-url))
+  ([request] (let [referer ((request :headers) "referer")]
+               (if (str/blank? referer) (host-url request) referer))))
+
+;; Fetch the username of the signed in user, else return an empty
+;; string.
+(defn username [request]
+  (try (let [user (((request :cookies) "pip-db") :value)]
+         (if (not (= user "expired")) user ""))
+       (catch Exception e "")))
+
+;; Returns whether the user is currently signed in.
+(defn signed-in? [request]
+  (not (str/blank? (username request))))
 
 ;; -------------------
 ;; ## Type conversions

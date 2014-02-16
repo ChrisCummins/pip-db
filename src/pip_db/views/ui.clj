@@ -178,10 +178,10 @@
 ;; This is the main search bar which is embedded into the home page
 ;; and navbar. It provides the ability to search by name, and to go
 ;; the advanced search page.
-(defn search-bar [data]
+(defn search-bar [request]
   [:form {:method "GET" :action "/s" :role "search"}
    [:div.input-group
-    (search-bar-input (data :search-text))
+    (search-bar-input ((request :params) "q"))
     [:div.input-group-btn submit-button advanced-button]]])
 
 ;; ### Page heading

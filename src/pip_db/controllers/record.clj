@@ -5,11 +5,11 @@
             [pip-db.views.record :as view]
             [pip-db.views.error :as error]))
 
-(defn record [id]
+(defn do-record [id request]
   (let [data (model/record id)]
     (if data
-      (view/record data)
+      (view/record (merge data request))
       (error/status-404))))
 
-(defroutes routes
-  (GET "/record/:id" [id] (record id)))
+(defn handler [request]
+  (do-record ((request :params) :id) request))

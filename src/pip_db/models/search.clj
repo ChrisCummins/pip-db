@@ -60,5 +60,4 @@
   (sql/with-connection (System/getenv "DATABASE_URL")
     (sql/with-query-results results [(query params)]
       (let [data (apply vector (doall results))]
-        {:results data
-         :results-count (count data)}))))
+        {:results data :results-count (count data)}))))
