@@ -62,6 +62,8 @@
 ;; -----------------
 ;; ## Date utilities
 
+(def seconds-in-a-week 604800)
+
 ;; Return the current year as a number, as set by the system clock.
 (defn current-year []
   (+ 1900 (.getYear (new java.util.Date))))

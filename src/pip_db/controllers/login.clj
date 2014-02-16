@@ -9,7 +9,7 @@
 (defn do-login [user pass]
   (if (model/attempt-login user pass)
     {:status 200 :headers {"Location" (util/referer)}
-     :cookies {"pip-db" {:value user}}} ; Correct login details
+     :cookies (model/user-cookie user)} ; Correct login details
     {:status 401}))                     ; Invalid login details
 
 (defn do-register [user pass]
@@ -43,5 +43,4 @@
 
 (defn logout-handler [request]
   {:status 302 :headers {"Location" (util/referer)}
-   :cookies {"pip-db" {:value "expired"
-                       :expires "Thu, 01 Jan 1970 00:00:01 GMT"}}})
+   :cookies (model/logout-cookie)})
