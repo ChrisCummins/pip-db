@@ -8,7 +8,8 @@
     (str/split (str/trim words) #" +")))
 
 (defn conditionals [params]
-  (let [q       (split-args (get params "q"))
+  (let [id      (str (get params "id"))
+        q       (split-args (get params "q"))
         q_eq    (get params "q_eq")
         q_any   (split-args (get params "q_any"))
         q_ne    (split-args (get params "q_ne"))
@@ -17,6 +18,7 @@
         m       (get params "m")]
 
     (AND
+     (EQ {:field "id" :value id :numeric true}) ; Match specific record ID
      (AND                               ; Match all keywords
       (for [word q]
         (OR

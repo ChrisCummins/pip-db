@@ -59,6 +59,9 @@
     (Integer/parseInt string)
     (catch NumberFormatException e nil)))
 
+(defn is-number? [n]
+  (if (nil? (string->int n)) false true))
+
 ;; -----------------
 ;; ## Date utilities
 
