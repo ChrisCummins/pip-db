@@ -56,6 +56,11 @@
     var $ff = $('select[name="ff"]');
     var $ih = $('input[name="ih"]');
 
+    // Add 'available_at' attributes to text
+    for (var id in data)
+        data[id]['available_at'] = 'http://' + location.host + '/r/' + id;
+
+    // Generate text formatted data
     var textFormats = {
         'json': JSON.stringify(data, null, '\t'),
         'xml': json2xml(data)
