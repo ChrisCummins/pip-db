@@ -1,13 +1,16 @@
 $(document).ready(function () {
     'use strict';
 
+    // The base URL component for results
+    var resultsUrlPrefix = '/record/'
+
     /*
      * SEARCH RESULTS:
      *
      * Link each result to its corresponding record page.
      */
     $('.sresults table tbody tr').click(function () {
-        window.location = '/record/' + $(this).attr('data-id');
+        window.location = resultsUrlPrefix + $(this).attr('data-id');
     });
 
     /*
