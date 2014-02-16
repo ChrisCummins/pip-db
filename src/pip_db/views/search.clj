@@ -73,20 +73,21 @@
    [:a.close {:href "#" :data-dismiss "alert"
               :aria-hidden "true"} "&times;"]])
 
-(defn search [query data]
-  (page {:title query
-         :navbar {:search true :search-text query}
+(defn search [request]
+  (page request
+        {:title ((request :params) "q")
+         :navbar {:search true}
          :heading {:meta true
-                   :meta-results-count (data :results-count)
+                   :meta-results-count (request :results-count)
                    :download "/"}
          :body [:div.sresults
-                (if (> (data :results-count) 0)
+                (if (> (request :results-count) 0)
                   (list
-                   (if (data :limited-results)
+                   (if (request :limited-results)
                      (beta-warning))
-                   (tablify-results (data :results))
-                   (pagination-links (data :current-page) (data :pages)
-                                     (data :results-per-page)
-                                     (data :pages-count)))
+                   (tablify-results (request :results))
+                   (pagination-links (request :current-page) (request :pages)
+                                     (request :results-per-page)
+                                     (request :pages-count)))
                   [:p.lead "No results found."])]
          :javascript (util/inline-js "/js/search.inline.js")}))

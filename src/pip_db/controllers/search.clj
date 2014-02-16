@@ -9,9 +9,6 @@
 (def max-page-links 10)
 (def max-results 20)
 
-(defn search [query results]
-  (view/search query results))
-
 (defn start-at [start results-count]
   (if (< start results-count)
     (if (pos? start) (- start (mod start results-per-page)) 0)
@@ -26,52 +23,52 @@
           (start-at start results-count)
           (end-at end results-count)))
 
-(defn paginate [data start]
+(defn paginate [request start]
   (if (nil? start)
-    (paginate data 0)
-    (let [results         (data :results)
-          results-count   (if (> (data :results-count) max-results)
-                            max-results (data :results-count))
+    (paginate request 0)
+    (let [results         (request :results)
+          results-count   (if (> (request :results-count) max-results)
+                            max-results (request :results-count))
           start-at        (start-at start results-count)
           end-at          (end-at (+ start-at results-per-page) results-count)
           pages-count     (math/ceil (/ results-count results-per-page))
           current-page    (inc (/ start-at results-per-page))
           start-page      (max 1 (- current-page (/ max-page-links 2)))
           end-page        (min (inc pages-count) (+ start-page max-page-links))]
-      (assoc data
+      (assoc request
         :results          (visible-results results results-count
                                            start-at end-at)
         :current-page     current-page
         :results-per-page results-per-page
         :pages-count      pages-count
-        :limited-results  (> (data :results-count) max-results)
+        :limited-results  (> (request :results-count) max-results)
         :pages            (range start-page end-page)))))
 
-(defn start-param [params]
+(defn start-param [request]
   (try (Integer/parseInt
-        (get params "start"))
+        ((request :params) "start"))
        (catch Exception e 0)))
 
+(defn search-results [request]
+  (merge request
+         (paginate (model/search (request :params)) (start-param request))))
+
 ;; Serve a search request.
-(defn do-search [params]
-  (search (get params "q")
-          (paginate (model/search params)
-                    (start-param params))))
+(defn search-handler [request]
+    (view/search (search-results request)))
 
 ;; Serve an advanced search page.
-(defn do-advanced [params]
-  (advanced/advanced {:search-text (get params "q")}))
+(defn advanced-handler [request] (advanced/advanced request))
+
+(defn request-action [request]
+  ((request :params) "a"))
 
 ;; Return the handler to be used for a specific search action. If the
 ;; action `a` is used, then we use the advanced handler, else we use
 ;; the normal search.
-(defn response-function [action]
-  (if (= "a" action)
-    do-advanced
-    do-search))
+(defn response-function [request]
+  (if (= "a" (request-action request)) advanced-handler search-handler))
 
-(defroutes routes
-  (GET "/advanced" {params :params}
-       (do-advanced params))
-  (GET "/s" {params :params}
-       ((response-function (get params "a")) params)))
+;; Search page ring handler.
+(defn handler [request]
+  ((response-function request) request))

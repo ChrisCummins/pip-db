@@ -3,13 +3,13 @@
   (:use [pip-db.views.page :only (page)]))
 
 ;; The "above the fold" content, i.e. the main logo and search bar.
-(defn search-block [data]
+(defn search-block [request]
   [:div.search.search-block.text-center
-   ui/big-logo (ui/search-bar data)])
+   ui/big-logo (ui/search-bar request)])
 
 ;; The "below the fold" main body of text, containing a description of
 ;; what the site is, it's purpose, and how to use it.
-(defn text-body [data]
+(defn text-body [request]
   [:div.col-md-12
    [:p.lead
     (str "Lorem ipsum dolor sit amet, consectetur "
@@ -50,7 +50,8 @@
          "volutpat congue velit, vel feugiat quam "
          "condimentum in.")]])
 
-(defn index [data]
-  (page {:navbar {:login-only true}
-         :body (list [:div.row (search-block data)]
-                     [:div.row (text-body data)])}))
+(defn index [request]
+  (page request
+        {:navbar {:login-only true}
+         :body (list [:div.row (search-block request)]
+                     [:div.row (text-body request)])}))

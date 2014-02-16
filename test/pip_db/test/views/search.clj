@@ -100,5 +100,6 @@
 
 (deftest search
   (testing "No results"
-    (is (= (class (dut/search "foo" {:results-count 0}))
+    (is (= (class (dut/search {:params {"q" "foo"}
+                               :results-count 0}))
            java.lang.String))))

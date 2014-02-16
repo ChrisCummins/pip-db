@@ -6,10 +6,11 @@
 (defn upload []
   (view/upload))
 
-(defroutes routes
-  (GET "/upload" [] (upload))
-  (POST "/upload" {params :params}
-        (let [file (get params "f")]
-          (if file
-            (model/parse-csv-file (model/upload-file file))
-            "No file found"))))
+(defn get-handler [request]
+  (view/upload request))
+
+(defn post-handler [request]
+  (let [file ((request :params) "f")]
+    (if file
+      (model/parse-csv-file (model/upload-file file))
+      "No file found")))

@@ -142,7 +142,7 @@
 (defn search-form-pi-row [data]
   (search-form-widget-row (label-widget "isoelectric point (pH):")
                           (search-form-pi-input-widget data)
-                          (info-widget (str "Enter an exact or range of "
+                          (info-widget (str "Select from a range of "
                                             "isoelectric points."))))
 
 ;; An experimental method selection search form row.
@@ -178,10 +178,10 @@
 ;; This is the main search bar which is embedded into the home page
 ;; and navbar. It provides the ability to search by name, and to go
 ;; the advanced search page.
-(defn search-bar [data]
+(defn search-bar [request]
   [:form {:method "GET" :action "/s" :role "search"}
    [:div.input-group
-    (search-bar-input (data :search-text))
+    (search-bar-input ((request :params) "q"))
     [:div.input-group-btn submit-button advanced-button]]])
 
 ;; ### Page heading

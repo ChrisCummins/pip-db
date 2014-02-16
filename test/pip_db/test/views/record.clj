@@ -62,5 +62,5 @@
 
 (deftest record
   (testing "Page title and heading"
-    (is (= (class (dut/record {:name "foo"}))
+    (is (= (class (dut/record {:name "foo" :params {}}))
            java.lang.String))))

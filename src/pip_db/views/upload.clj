@@ -1,11 +1,9 @@
 (ns pip-db.views.upload
   (:use [pip-db.views.page :only (page)]))
 
-(defn upload []
-  (page {
-         :title "Upload"
-         :navbar {}
-         :heading {:title "Add new data"}
+(defn upload [request]
+  (page request
+        {:title "Upload" :navbar {} :heading {:title "Add new data"}
          :body [:div.advsearch
                 [:form {:method "POST" :action "/upload"
                         :enctype "multipart/form-data"}
