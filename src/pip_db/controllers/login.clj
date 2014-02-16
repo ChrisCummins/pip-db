@@ -40,3 +40,7 @@
     (login user pass action)))
 
 (defn get-handler [request] (login))
+
+(defn logout-handler [request]
+  {:status 302 :headers {"Location" (util/referer)}
+   :cookies {"pip-db" {:value "expired" :max-age 1}}})

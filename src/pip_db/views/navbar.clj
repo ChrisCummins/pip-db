@@ -1,19 +1,21 @@
 (ns pip-db.views.navbar
-  (:require [pip-db.views.ui :as ui]))
+  (:require [pip-db.util :as util]
+            [pip-db.views.ui :as ui]))
 
 (defn navbar-search [request]
   [:div.search.navbar-search (ui/search-bar request)])
 
-(defn navbar-user [navbar]
+;; Generate the user menu for the navbar.
+(defn navbar-user [request]
   [:ul.nav.navbar-nav.navbar-right
-   (if (navbar :session)
+   (if (util/signed-in? request)
      [:li.dropdown
       [:a#themes.dropdown-toggle {:href "#" :data-toggle "dropdown"}
-       ((navbar :session) :user) [:span.caret]]
+       (util/username request) [:span.caret]]
       [:ul.dropdown-menu
-       [:li [:a {:href "/admin/setup" :tabindex "-1"} "Run initial setup"]]
+       [:li [:a {:href "/" :tabindex "-1"} "Run initial setup"]]
        [:li [:a {:href "/upload" :tabindex "-1"} "Upload new data"]]
-       [:li [:a {:href "/logout" :tabindex "-1"} "Preferences"]]
+       [:li [:a {:href "/" :tabindex "-1"} "Preferences"]]
        [:li.divider]
        [:li [:a {:href "/logout" :tabindex "-1"} "Log out"]]]]
      [:li [:a {:href "/login"} "Login"]])])
@@ -38,4 +40,4 @@
 
       [:div.navbar-collapse.collapse
        (if (navbar :search) (navbar-search request))
-       (if (not (navbar :hide-user)) (navbar-user navbar))]]]))
+       (if (not (navbar :hide-user)) (navbar-user request))]]]))

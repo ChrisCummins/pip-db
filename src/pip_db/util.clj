@@ -13,8 +13,8 @@
 ;; The port which we are serving over.
 (def port (Integer/parseInt (or (System/getenv "PORT") "5000")))
 
-;; ------------
-;; HTTP Headers
+;; -------------
+;; HTTP Requests
 
 ;; We can get the current host either from the request-map, or we just
 ;; generate the expected value.
@@ -36,6 +36,17 @@
   ([]        (host-url))
   ([request] (let [referer ((request :headers) "referer")]
                (if (str/blank? referer) (host-url request) referer))))
+
+;; Fetch the username of the signed in user, else return an empty
+;; string.
+(defn username [request]
+  (try (let [user (((request :cookies) "pip-db") :value)]
+         (if (not (= user "expired")) user ""))
+       (catch Exception e "")))
+
+;; Returns whether the user is currently signed in.
+(defn signed-in? [request]
+  (not (str/blank? (username request))))
 
 ;; -------------------
 ;; ## Type conversions

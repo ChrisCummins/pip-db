@@ -27,6 +27,7 @@
   (GET  "/s"                  [:as request] (search/handler            request))
   (GET  "/login"              [:as request] (login/get-handler         request))
   (POST "/login"              [:as request] (login/post-handler        request))
+  (GET  "/logout"             [:as request] (login/logout-handler      request))
   (GET  "/upload"             [:as request] (upload/get-handler        request))
   (POST "/upload"             [:as request] (upload/post-handler       request))
   (route/resources "/")
