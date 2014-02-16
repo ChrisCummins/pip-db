@@ -203,6 +203,17 @@
                     " result..." " results..."))]]])]
    [:hr]])
 
+;; ### Page footer
+
+(defn footer []
+  [:div.footer
+   [:div.container.text-center
+    [:hr]
+    [:ul.footer-nav
+     [:li "© " [:a.muted {:href "http://chriscummins.cc"
+                          :target "_blank" :title "Link opens in new window"}
+                "Chris Cummins"] " " (util/current-year)]]]])
+
 ;; ---------
 ;; ## Images
 
