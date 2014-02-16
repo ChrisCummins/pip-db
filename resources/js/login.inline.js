@@ -60,10 +60,10 @@
   };
 
   $submit.click(function (e) {
-    e.preventDefault();         // Don't submit form
+    e.preventDefault();               // Don't submit form
+    $('#messages').children().hide(); // Hide existing messages
 
     if (formIsValid()) {
-      $('#messages').children().hide(); // Hide existing messages
 
       $.ajax({
         type: 'POST',
@@ -92,6 +92,8 @@
           }
         }
       });
+    } else {
+      $('#invalid').show();
     }
   });
 

@@ -39,10 +39,11 @@
                   [:button.btn.btn-lg.btn-block.btn-success
                    {:name "action" :value "login"}
                    "Sign in"]]]
-                (success-alert "200" "Log in successful. Redirecting...")
                 [:div#messages
+                 (success-alert "200" "Log in successful. Redirecting...")
                  (error-alert "403" "Incorrect details")
                  (error-alert "500" "Unknown Error")
+                 (error-alert "invalid" "Please fill in the form")
                  [:div#registration
                   {:style "display:none;"}
                   "Unfortunately at this time account registration is by "
