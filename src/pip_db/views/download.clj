@@ -39,6 +39,13 @@
 (def results-row
   [:div.row [:div.col-md-12 results-table [:pre#text]]])
 
+;; It's necessary to extend the SQL Timetsamp type in order to
+;; JSON-ify it. See: http://stackoverflow.com/a/19164491
+(extend-type java.sql.Timestamp
+  json/JSONWriter
+  (-write [date out]
+    (json/-write (str date) out)))
+
 (defn results-json [results]
   (str "var data = " (json/write-str results)))
 
