@@ -56,14 +56,56 @@
     var $ff = $('select[name="ff"]');
     var $ih = $('input[name="ih"]');
 
+    var textFormats = {
+        'json': JSON.stringify(data, null, '\t'),
+        'xml': json2xml(data)
+    };
+
+    var showTable = function () {
+        $table.show();
+        $text.hide();
+        $ih.prop('disabled', false);
+    };
+
+    var showText = function () {
+        $table.hide();
+        $text.show();
+        $ih.prop('disabled', true);
+    };
+
+    var setVisibleFormat = function(format) {
+        switch (format) {
+        case 'json':
+            $text.text(textFormats['json']);
+            showText();
+            break;
+        case 'xml':
+            $text.text(textFormats['xml']);
+            showText();
+            break;
+        default:
+            showTable();
+            break;
+        }
+    }
+
+    $ff.change(function () {
+        var format = $(' option:selected', this).val().toLowerCase();
+
+        setVisibleFormat(format);
+    });
+
     $(document).ready(function () {
         var tablify = function() {
             var headerRow = function() {
+                var humanReadable = function(text) {
+                    return key.toUpperCase().replace('_', ' ');
+                };
                 var header = '<tr>';
 
                 for (var key in data[0])
                     if (key !== 'id')
-                        header += '<td>' + key + '</td>';
+                        header += '<td>' + humanReadable(key) + '</td>';
 
                 $(' thead', $table).append(header + '</tr>');
             };
@@ -88,34 +130,7 @@
             body();
         };
 
-        $text.text(JSON.stringify(data, null, '\t'));
         tablify();
     });
-
-    var showTable = function () {
-        $table.show();
-        $text.hide();
-        $ih.prop('disabled', false);
-    };
-
-    var showText = function () {
-        $table.hide();
-        $text.show();
-        $ih.prop('disabled', true);
-    };
-
-    $ff.change(function () {
-        var format = $(' option:selected', this).val().toLowerCase();
-
-        switch (format) {
-        case 'json':
-            showText();
-            break;
-        default:
-            showTable();
-            break;
-        }
-    });
-
 
 }());
