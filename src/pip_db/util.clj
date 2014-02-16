@@ -40,8 +40,7 @@
 ;; Fetch the username of the signed in user, else return an empty
 ;; string.
 (defn username [request]
-  (try (let [user (((request :cookies) "pip-db") :value)]
-         (if (not (= user "expired")) user ""))
+  (try (((request :cookies) "pip-db") :value)
        (catch Exception e "")))
 
 ;; Returns whether the user is currently signed in.
@@ -62,6 +61,8 @@
 
 ;; -----------------
 ;; ## Date utilities
+
+(def seconds-in-a-week 604800)
 
 ;; Return the current year as a number, as set by the system clock.
 (defn current-year []

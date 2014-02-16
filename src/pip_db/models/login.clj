@@ -1,7 +1,8 @@
 (ns pip-db.models.login
   (:require [clojure.string :as str]
             [crypto.password.bcrypt :as crypto]
-            [clojure.java.jdbc :as sql]))
+            [clojure.java.jdbc :as sql]
+            [pip-db.util :as util]))
 
 (defn get-user [user]
   (sql/with-connection (System/getenv "DATABASE_URL")
@@ -34,3 +35,9 @@
   (if (and (get-user user)
            (credentials-are-valid? user password))
     true false))
+
+(defn user-cookie [user]
+  {"pip-db" {:value user :max-age util/seconds-in-a-week}})
+
+(defn logout-cookie []
+  {"pip-db" {:value "expired" :expires "Thu, 01 Jan 1970 00:00:01 GMT"}})

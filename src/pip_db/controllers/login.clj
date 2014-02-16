@@ -9,7 +9,7 @@
 (defn do-login [user pass]
   (if (model/attempt-login user pass)
     {:status 200 :headers {"Location" (util/referer)}
-     :cookies {"pip-db" {:value user}}} ; Correct login details
+     :cookies (model/user-cookie user)} ; Correct login details
     {:status 401}))                     ; Invalid login details
 
 (defn do-register [user pass]
@@ -20,9 +20,6 @@
 (defn form-is-filled [user pass]
   (and (not (str/blank? user)) (not (str/blank? pass))))
 
-;; TODO: Accept an optional argument which displays an error message
-;; to show, i.e. login credentials were invalid, username already
-;; taken etc.
 (defn login
   ([] (view/login))
   ([user pass action]
@@ -43,4 +40,4 @@
 
 (defn logout-handler [request]
   {:status 302 :headers {"Location" (util/referer)}
-   :cookies {"pip-db" {:value "expired" :max-age 1}}})
+   :cookies (model/logout-cookie)})
