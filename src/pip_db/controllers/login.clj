@@ -20,9 +20,6 @@
 (defn form-is-filled [user pass]
   (and (not (str/blank? user)) (not (str/blank? pass))))
 
-;; TODO: Accept an optional argument which displays an error message
-;; to show, i.e. login credentials were invalid, username already
-;; taken etc.
 (defn login
   ([] (view/login))
   ([user pass action]
