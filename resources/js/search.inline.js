@@ -2,7 +2,7 @@ $(document).ready(function () {
     'use strict';
 
     // The base URL component for results
-    var resultsUrlPrefix = '/record/'
+    var resultsUrlPrefix = '/r/'
 
     /*
      * SEARCH RESULTS:
