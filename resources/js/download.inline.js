@@ -99,15 +99,22 @@
 
     var $ff = $('select[name="ff"]');
     var $ih = $('input[name="ih"]');
+    var $download = $('#download');
 
-    // Add 'available_at' attributes to text
-    for (var id in data)
-        data[id]['available_at'] = 'http://' + location.host + '/r/' + id;
+    var format = 'csv';
+    var mime = 'text/csv';
+
+    // Add 'available_at' attributes and filter out 'id'
+    for (var record in data) {
+        data[record]['available_at'] = 'http://' + location.host + '/r/' + data[record]['id'];
+        delete data[record]['id'];
+    }
 
     // Generate text formatted data
     var textFormats = {
-        'json': JSON.stringify(data, null, '\t'),
-        'xml': json2xml(data)
+        'json': JSON.stringify(data, null, '\t') + '\n',
+        'xml': json2xml(data),
+        'csv': json2csv(data)
     };
 
     var showTable = function () {
@@ -122,29 +129,34 @@
         $ih.prop('disabled', true);
     };
 
-    var setVisibleFormat = function(format) {
+    var updateActiveFormat = function() {
+        $text.text(textFormats[format]);
+
         switch (format) {
         case 'json':
-            $text.text(textFormats['json']);
+            mime = 'application/json';
             showText();
             break;
         case 'xml':
-            $text.text(textFormats['xml']);
+            mime = 'application/xml';
             showText();
             break;
-        default:
+        case 'csv':
+            mime = 'text/csv';
             showTable();
             break;
         }
     }
 
     $ff.change(function () {
-        var format = $(' option:selected', this).val().toLowerCase();
+        format = $(' option:selected', this).val().toLowerCase();
 
-        setVisibleFormat(format);
+        updateActiveFormat();
     });
 
     $(document).ready(function () {
+        updateActiveFormat();
+
         /*
          * Generate a human readable version of a table field.
          */
@@ -171,30 +183,33 @@
             var $row = $(' tr:nth-child(' + i + ')', $tbody);
             var j = 1;
 
-            for (var key in record) {
-                if (key !== 'id')
-                    $(' td:nth-child(' + ++j + ')', $row).html(record[key]);
-            }
+            for (var key in record)
+                $(' td:nth-child(' + ++j + ')', $row).html(record[key]);
         };
 
         // Generate the header row:
         var header = '<tr><td>0</td>';
 
-        for (var key in data[0]) {
-            if (key !== 'id')
-                header += '<td>' + humanReadable(key) + '</td>';
-        }
+        for (var key in data[0])
+            header += '<td>' + humanReadable(key) + '</td>';
 
         $(' thead', $table).append(header + '</tr>');
 
-        var dataLength = $(' thead tr td', $table).length;
-
         // Populate table contents:
-        for (var i = 0; i < data.length + 10; i++) {
-            addEmptyRow(i);
+        var dataLength = $(' thead tr td', $table).length;
+        var noRows = Math.max(20, data.length + 5);
+
+        for (var i = 0; i < noRows; i++) {
+            addEmptyRow(i + 1);
             if (i < data.length)
-                populateRow(i, data[i]);
+                populateRow((i + 1), data[i]);
         }
+    });
+
+    $download.click(function () {
+        var blob = new Blob([textFormats[format]], {type: mime + ';charset=utf-8'});
+
+        saveAs(blob, 'results.' + format);
     });
 
 }());
