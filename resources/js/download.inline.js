@@ -22,7 +22,8 @@
             }
             else if (typeof(v) == "object") {
                 var hasChild = false;
-                xml += ind + "<" + name;
+                xml += ind + "<";
+                xml += Number(name) > -1 ? 'record' : name; // Default
                 for (var m in v) {
                     if (m.charAt(0) == "@")
                         xml += " " + m.substr(1) + "=\"" + v[m].toString() + "\"";
@@ -39,7 +40,9 @@
                         else if (m.charAt(0) != "@")
                             xml += toXml(v[m], m, ind + "\t") + '\n';
                     }
-                    xml += (xml.charAt(xml.length-1)=="\n"?ind:"") + "</" + name + ">";
+                    xml += (xml.charAt(xml.length-1)=="\n"?ind:"") + "</";
+                    xml += Number(name) > -1 ? 'record' : name; // Default
+                    xml += ">";
                 }
             }
             else {
