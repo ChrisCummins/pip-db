@@ -10,6 +10,11 @@
     */
     function json2xml(o) {
         var toXml = function(v, name, ind) {
+            // Escape a string
+            var escape = function (text) {
+                return String(text).replace(/&/g, '&amp;');
+            };
+
             var xml = "";
             if (v instanceof Array) {
                 for (var i=0, n=v.length; i<n; i++)
@@ -38,7 +43,7 @@
                 }
             }
             else {
-                xml += ind + "<" + name + ">" + v.toString() +  "</" + name + ">";
+                xml += ind + "<" + name + ">" + escape(v) +  "</" + name + ">";
             }
             return xml;
         }, xml="";
