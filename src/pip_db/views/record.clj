@@ -54,7 +54,7 @@
    {:title (get request :name)
     :navbar {:search true}
     :heading {:title (get request :name)
-              :download "/"}
+              :download (str "/d?id=" ((request :params) :id))}
     :body [:div.record
            [:div.row
             [:div.col-md-8

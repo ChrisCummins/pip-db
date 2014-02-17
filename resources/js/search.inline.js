@@ -4,6 +4,16 @@ $(document).ready(function () {
     // The base URL component for results
     var resultsUrlPrefix = '/r/'
 
+    var $download = $('#download');
+
+    $download.attr('href', (function () {
+        var downloadPageUrl = '/d'
+        var href = window.location.href;
+        var queryString = href.slice(href.indexOf('?') + 1);
+
+        return downloadPageUrl + '?' + queryString;
+    })());
+
     /*
      * SEARCH RESULTS:
      *
