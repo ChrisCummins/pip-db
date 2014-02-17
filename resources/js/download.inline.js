@@ -17,7 +17,7 @@
 
             var xml = "";
             if (v instanceof Array) {
-                for (var i=0, n=v.length; i<n; i++)
+                for (var i = 0, n = v.length; i < n; i++)
                     xml += ind + toXml(v[i], name, ind + "\t") + '\n';
             }
             else if (typeof(v) == "object") {
