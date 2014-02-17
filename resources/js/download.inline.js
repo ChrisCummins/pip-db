@@ -48,6 +48,49 @@
     }
 
     /*
+     * Convert a JSON object into a CSV encoded string.
+     */
+    var json2csv = function(o, separator) {
+        separator = separator || '\t';
+        var re = new RegExp(separator, 'g');
+        var csv = '';
+        var EOL = '\r\n';
+
+        // Add an item to a line
+        var appendItemToLine = function(item, line) {
+
+            // Escape a string
+            var escape = function (text) {
+                return '"' + String(text).replace(re, '\\' + separator) + '"';
+            }
+
+            if (line !== '')
+                line += separator;
+
+            return line + escape(item);
+        };
+
+        // Header row
+        for (var j in data[0])
+            csv = appendItemToLine(j, csv);
+
+        csv += EOL;
+
+        // JSON contents
+        for (var i = 0; i < o.length; i++) {
+            var line = '', item = o[i];
+
+            for (var j in item)
+                line = appendItemToLine(item[j], line);
+
+            csv += line + EOL;
+        }
+
+        return csv;
+    };
+
+
+    /*
      * PIP-DB DOWNLOADS PAGE
      */
     var $table = $('#table');
