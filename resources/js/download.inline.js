@@ -104,7 +104,7 @@
         var tablify = function() {
             var headerRow = function() {
                 var humanReadable = function(text) {
-                    return key.toUpperCase().replace('_', ' ');
+                    return key.toUpperCase().replace(/_/g, ' ');
                 };
                 var header = '<tr>';
 
