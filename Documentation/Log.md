@@ -2323,3 +2323,37 @@ Notes from meeting with Darren:
       3. Point the BLAST program to this database and post-process the
          outputs so as to link back to the records with the records
          table.
+
+### Sunday 16th
+
+I've been putting some thought into the URL design of the site, as I
+think this will heavily influence the design of the data backend. The
+definitive site routes I've planned for are:
+
+Page     | URL
+-------  | -------
+Index    | http://www.pip-db.org/
+Search   | http://www.pip-db.org/s
+Download | http://www.pip-db.org/d
+Record   | http://www.pip-db.org/r/:id
+Log in   | http://www.pip-db.org/login
+Log out  | http://www.pip-db.org/logout
+Upload   | http://www.pip-db.org/upload
+
+The format of the resulting data for the search, record, and download
+pages can be supplied in two forms: either by append the file format
+to the URL (e.g. adding ".json" to the end of a URL to return JSON
+data), or by setting the "format" variable in the request. The default
+format will always be HTML. Examples:
+
+Page     | Format | URL
+-------  | ------ | -------
+Search   | HTML   | http://www.pip-db.org/s?q=alkaline
+Search   | XML    | http://www.pip-db.org/s.xml?q=alkaline
+Search   | JSON   | http://www.pip-db.org/s?q=alkaline&format=json
+Record   | HTML   | http://www.pip-db.org/r/100
+Record   | XML    | http://www.pip-db.org/r/100.xml
+Record   | JSON   | http://www.pip-db.org/r/100?format=json
+Download | HTML   | http://www.pip-db.org/d?q=alkaline
+Download | XML    | http://www.pip-db.org/d.xml?q=alkaline
+Download | JSON   | http://www.pip-db.org/d?q=alkaline&format=json
