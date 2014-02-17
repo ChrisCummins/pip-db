@@ -106,7 +106,7 @@
                 var humanReadable = function(text) {
                     return key.toUpperCase().replace(/_/g, ' ');
                 };
-                var header = '<tr>';
+                var header = '<tr><td>0</td>';
 
                 for (var key in data[0])
                     if (key !== 'id')
@@ -116,8 +116,10 @@
             };
 
             var body = function() {
+                var rowId = 1; // Column numbers
+
                 var row = function(record) {
-                    var html = '<tr>';
+                    var html = '<tr><td>' + rowId++ + '</td>';
 
                     for (var key in record) {
                         if (key !== 'id')

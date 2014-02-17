@@ -1,21 +1,58 @@
+@text-color: #000;
+@text-size: 14px;
+
 #preview-frame {
-  max-height: 40em;
+  border: 1px solid #000;
+  height: 40em;
   overflow: auto;
 }
+
+// Table
 
 #table {
   margin-bottom: 0;
 }
-#table thead {
-  font-weight: bold;
+#table,
+#table:focus {
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+          outline-style: none;
 }
 #table td {
   white-space: nowrap;
+  border: 1px solid #999;
+  padding: .3em .8em;
+  color: @text-color;
+  background-color: #fcfcfc;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: @text-size;
+  cursor: default;
 }
+#table thead td, // Table headers
+#table td:first-child {
+  font-weight: bold;
+  background-color: #ccc;
+}
+#table td:first-child { // Line number column
+  text-align: center;
+}
+#table tbody td:not(:first-child):hover { // Table entry hover
+  background-color: #eee;
+}
+
+// Text output
 
 #text {
   display: none;
   width: 100%;
   word-wrap: normal;
   white-space: pre;
+  background: none;
+  border: none;
+  color: @text-color;
+  font-size: @text-size;
 }

@@ -33,7 +33,7 @@
    [:div.col-md-4 [:div.pull-right file-format download-button]]])
 
 (def results-table
-  [:table#table.table.table-striped.table-hover.table-bordered
+  [:table#table
    [:thead][:tbody]])
 
 (def results-row
