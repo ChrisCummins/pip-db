@@ -2357,3 +2357,16 @@ Record   | JSON   | http://www.pip-db.org/r/100?format=json
 Download | HTML   | http://www.pip-db.org/d?q=alkaline
 Download | XML    | http://www.pip-db.org/d.xml?q=alkaline
 Download | JSON   | http://www.pip-db.org/d?q=alkaline&format=json
+
+### Monday 17th
+
+I've started work on mining the FASTA sequences for blast searching,
+and I've noticed that not all of the records within the dataset
+contain a link to a UniProt sequence, but instead they link to a
+UniProt search result page which lists multiple different
+sequences. I've contacted Darren for advice on what to do in those
+circumstances.
+
+In the mean time I can begin implementing a web crawler which can mine
+a set of URLs and build a set of FASTA sequences. This would be a good
+candidate for later abstracting into a separate project.
