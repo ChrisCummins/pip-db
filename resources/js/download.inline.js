@@ -51,6 +51,7 @@
      * PIP-DB DOWNLOADS PAGE
      */
     var $table = $('#table');
+    var $tbody = $(' tbody', $table);
     var $text = $('#text');
 
     var $ff = $('select[name="ff"]');
@@ -101,43 +102,56 @@
     });
 
     $(document).ready(function () {
-        var tablify = function() {
-            var headerRow = function() {
-                var humanReadable = function(text) {
-                    return key.toUpperCase().replace(/_/g, ' ');
-                };
-                var header = '<tr><td>0</td>';
-
-                for (var key in data[0])
-                    if (key !== 'id')
-                        header += '<td>' + humanReadable(key) + '</td>';
-
-                $(' thead', $table).append(header + '</tr>');
-            };
-
-            var body = function() {
-                var rowId = 1; // Column numbers
-
-                var row = function(record) {
-                    var html = '<tr><td>' + rowId++ + '</td>';
-
-                    for (var key in record) {
-                        if (key !== 'id')
-                            html += '<td>' + record[key] + '</td>';
-                    }
-
-                    return html + '</tr>';
-                };
-
-                for (var record in data)
-                    $(' tbody', $table).append(row(data[record]));
-            };
-
-            headerRow();
-            body();
+        /*
+         * Generate a human readable version of a table field.
+         */
+        var humanReadable = function(text) {
+            return key.toUpperCase().replace(/_/g, ' ');
         };
 
-        tablify();
+        /*
+         * Add an empty row.
+         */
+        var addEmptyRow = function (i) {
+            var html = '<tr><td>' + i + '</td>';
+
+            for (var j = 0; j < dataLength; j++)
+                html += '<td></td>';
+
+            $tbody.append(html + '</tr>');
+        };
+
+        /*
+         * Populate a table row with data from a record.
+         */
+        var populateRow = function(i, record) {
+            var $row = $(' tr:nth-child(' + i + ')', $tbody);
+            var j = 1;
+
+            for (var key in record) {
+                if (key !== 'id')
+                    $(' td:nth-child(' + ++j + ')', $row).html(record[key]);
+            }
+        };
+
+        // Generate the header row:
+        var header = '<tr><td>0</td>';
+
+        for (var key in data[0]) {
+            if (key !== 'id')
+                header += '<td>' + humanReadable(key) + '</td>';
+        }
+
+        $(' thead', $table).append(header + '</tr>');
+
+        var dataLength = $(' thead tr td', $table).length;
+
+        // Populate table contents:
+        for (var i = 0; i < data.length + 10; i++) {
+            addEmptyRow(i);
+            if (i < data.length)
+                populateRow(i, data[i]);
+        }
     });
 
 }());
