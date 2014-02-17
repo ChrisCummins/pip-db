@@ -23,7 +23,8 @@
 (defroutes routes
   (GET  "/"                   [:as request] (index/handler             request))
   (GET  "/advanced"           [:as request] (search/advanced-handler   request))
-  (GET  "/record/:id"         [:as request] (record/handler            request))
+  (GET  "/r/:id"              [:as request] (record/handler            request))
+  (GET  "/d"                  [:as request] (search/download-handler   request))
   (GET  "/s"                  [:as request] (search/handler            request))
   (GET  "/login"              [:as request] (login/get-handler         request))
   (POST "/login"              [:as request] (login/post-handler        request))

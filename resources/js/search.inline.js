@@ -1,13 +1,26 @@
 $(document).ready(function () {
     'use strict';
 
+    // The base URL component for results
+    var resultsUrlPrefix = '/r/'
+
+    var $download = $('#download');
+
+    $download.attr('href', (function () {
+        var downloadPageUrl = '/d'
+        var href = window.location.href;
+        var queryString = href.slice(href.indexOf('?') + 1);
+
+        return downloadPageUrl + '?' + queryString;
+    })());
+
     /*
      * SEARCH RESULTS:
      *
      * Link each result to its corresponding record page.
      */
     $('.sresults table tbody tr').click(function () {
-        window.location = '/record/' + $(this).attr('data-id');
+        window.location = resultsUrlPrefix + $(this).attr('data-id');
     });
 
     /*

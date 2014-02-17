@@ -54,7 +54,7 @@
    {:title (get request :name)
     :navbar {:search true}
     :heading {:title (get request :name)
-              :download "/"}
+              :download (str "/d?id=" ((request :params) :id))}
     :body [:div.record
            [:div.row
             [:div.col-md-8
@@ -81,7 +81,7 @@
             [:div.col-md-4
              (extern-links
               (extern "Full Text" (request :citations))
-              (extern "Abstract" (request :abstract))
+              (extern "Publisher's Abstract" (request :abstract))
               (extern "PubMed" (request :pubmed))
               (extern "Species Taxonomy" (request :species))
               (extern "Protein Sequence" (request :sequence)))

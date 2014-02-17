@@ -79,7 +79,7 @@
          :navbar {:search true}
          :heading {:meta true
                    :meta-results-count (request :results-count)
-                   :download "/"}
+                   :download true}
          :body [:div.sresults
                 (if (> (request :results-count) 0)
                   (list

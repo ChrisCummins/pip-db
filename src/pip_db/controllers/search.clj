@@ -3,6 +3,7 @@
   (:require [clojure.contrib.math :as math]
             [pip-db.models.search :as model]
             [pip-db.views.advanced :as advanced]
+            [pip-db.views.download :as download]
             [pip-db.views.search :as view]))
 
 (def results-per-page 10)
@@ -72,3 +73,6 @@
 ;; Search page ring handler.
 (defn handler [request]
   ((response-function request) request))
+
+(defn download-handler [request]
+  (download/download (search-results request)))

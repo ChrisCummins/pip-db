@@ -12,7 +12,8 @@
 ;; Each node within the tree can either be a **match** condition or a
 ;; **compound** condition.
 (ns pip-db.query
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [pip-db.util :as util]))
 
 ;; The regular expression literal to match empty conditions. There can
 ;; be two types of empty conditions: empty text conditions and empty
@@ -27,21 +28,31 @@
 ;; ## Matching conditions
 ;;
 ;; A match condition is used to test some kind of equality within a
-;; field, for example, to test if "foo" == "bar". A compound condition
-;; is used to
-(defn match-condition [condition]
-  (if-not (str/blank? (condition :value))
-    (str "(LOWER(" (condition :field) ") "
-         (if (condition :not) "NOT ") "LIKE "
-         "LOWER('%" (condition :value) "%'))") ""))
+;; field.
+;;
+;; The most basic kind is a `string-condition` which can be used to
+;; test if a field name matches a value "foo" == "bar".
+(defn string-condition [condition]
+  (str "(LOWER(" (condition :field) ") "
+       (if (condition :not) "NOT ") "LIKE "
+       "LOWER('%" (condition :value) "%'))"))
+;;
+;; A `numeric-condition` tests a field for a precise integer field,
+;; e.g. "foo" == 5.
+(defn numeric-condition [condition]
+  (if (util/is-number? (condition :value))
+    (str "(" (condition :field) ") = " (condition :value)) ""))
 
 ;; ### Field is equals
 (defn EQ [condition]
-  (match-condition condition))
+  (cond
+   (condition :numeric)              (numeric-condition condition)
+   (str/blank? (condition :value))   ""
+   :else                             (string-condition condition)))
 
 ;; ### Field is not equals
 (defn NE [condition]
-  (match-condition (assoc condition :not true)))
+  (EQ (assoc condition :not true)))
 
 ;; ## Compound Conditions
 ;;

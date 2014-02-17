@@ -8,7 +8,8 @@
     (str/split (str/trim words) #" +")))
 
 (defn conditionals [params]
-  (let [q       (split-args (get params "q"))
+  (let [id      (str (get params "id"))
+        q       (split-args (get params "q"))
         q_eq    (get params "q_eq")
         q_any   (split-args (get params "q_any"))
         q_ne    (split-args (get params "q_ne"))
@@ -17,6 +18,7 @@
         m       (get params "m")]
 
     (AND
+     (EQ {:field "id" :value id :numeric true}) ; Match specific record ID
      (AND                               ; Match all keywords
       (for [word q]
         (OR
@@ -44,15 +46,10 @@
 ;; First off, we must define the table within which we are performing
 ;; look-ups.
 (def query-table "records")
-;; Then we specify a vector of field names from within this table to
-;; query.
-(def query-fields ["id" "name" "source" "organ"
-                   "pi" "pi_major" "pi_range_min" "pi_range_max"])
 
 (defn query [params]
   (let [conditions (conditionals params)]
-    (str "SELECT " (str/join "," query-fields)
-         " FROM " query-table
+    (str "SELECT * FROM " query-table
          (if-not (str/blank? conditions)
            (str " WHERE " (conditionals params))))))
 

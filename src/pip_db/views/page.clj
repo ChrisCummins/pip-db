@@ -3,8 +3,7 @@
         [hiccup.page :only (html5 include-css include-js)])
   (:require [pip-db.util :as util]
             [pip-db.views.ui :as ui]
-            [pip-db.views.navbar :as navbar]
-            [pip-db.views.footer :as footer]))
+            [pip-db.views.navbar :as navbar]))
 
 (def empty-request {:params {}})
 
@@ -30,7 +29,7 @@
           [:div#wrap [:div.container
                       (if (request :heading) (ui/heading (request :heading)))
                       (request :body)]]
-          (if (not (request :hide-footer)) (footer/html))
+          (if (not (request :hide-footer)) (ui/footer))
 
           (include-js
            "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
