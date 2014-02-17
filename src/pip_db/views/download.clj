@@ -1,5 +1,6 @@
 (ns pip-db.views.download
-  (:use [pip-db.views.page :only (page)])
+  (:use [pip-db.views.page :only (page)]
+        [hiccup.page :only (include-js)])
   (:require [pip-db.util :as util]
             [clojure.string :as str]
             [clojure.data.json :as json]))
@@ -59,5 +60,6 @@
            (if (> (request :results-count) 0)
              (list results-row actions-row)
              [:p.lead "No results found."])]
-    :javascript (list [:script (results-json (request :results))]
+    :javascript (list (include-js "/js/FileSaver.js")
+                      [:script (results-json (request :results))]
                       (util/inline-js "/js/download.inline.js"))}))
