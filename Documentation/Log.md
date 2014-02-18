@@ -2418,9 +2418,50 @@ cat sequence-urls.txt  0.00s user 0.00s system 0% cpu 0.064 total
 
 Over 5 minutes faster than a single threaded implementation:
 
-```$ time cat ~/src/pip-db-priv/sequence-urls.txt | ./fetch-fasta.py 2>report.error >report.json
+```
+$ time cat ~/src/pip-db-priv/sequence-urls.txt | ./fetch-fasta.py 2>report.error >report.json
 cat ~/src/pip-db-priv/sequence-urls.txt  0.00s user 0.00s system 0% cpu 0.063 total
-./fetch-fasta.py 2> report.error > report.json  2.48s user 3.89s system 0% cpu 12:42.85 total```
+./fetch-fasta.py 2> report.error > report.json  2.48s user 3.89s system 0% cpu 12:42.85 total
+```
 
 I should consider implementing a compilation watcher so as to be able
 to automatically rebuild the project when necessary.
+
+Notes for weekly FYP meeting with Ian:
+
+ * Review of meeting with Darren:
+
+    * All very positive, Darren seems happy with the work done so far.
+
+    * Commitments from Darren:
+       * Text for the front page
+       * 5 volunteers for user testing (probably week 23)
+       * Help in simplifying the dataset
+
+    * Covered both insecurities about current progress: data integrity
+      and BLAST.
+
+ * Three steps to "BLAST off":
+
+    1. Crawl the FASTA sequences
+    2. Setup a BLAST instance and create database
+    3. Implement communication between pip-db and BLAST instance
+
+ * Revised Gantt chart
+
+    * Now with bug tracker links
+    * No iteration labels
+
+ * Step one of BLAST is done: multithreaded web crawler in Python:
+
+    * Multithreaded (IO bound, minimise execution time)
+    * Set based (minimise duplication)
+    * Sockets level (minimise bandwidth)
+    * Package and release in "Project segmentation" phase
+    * As a service?
+
+ * Tooling: `pipbot watch`.
+
+ * Download page.
+
+ * NEXT: numerical pI, MW and EC fields
