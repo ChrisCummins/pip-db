@@ -4,7 +4,7 @@ noinst_SCRIPTS = \
 	png \
 	$(NULL)
 
-dist_bin_SCRIPTS = pipbot
+dist_bin_SCRIPTS = fetch-fasta pipbot
 
 CLEANFILES = $(noinst_SCRIPTS) $(dist_bin_SCRIPTS)
 
