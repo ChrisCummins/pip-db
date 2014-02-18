@@ -19,11 +19,11 @@
 
 (def download-button
   [:div.input-group-btn
-   [:button#download.btn.btn-block.btn-warning "Download"]])
+   [:button#download.btn.btn-block.btn-warning "Download results.csv"]])
 
 (def actions-row
   [:div.row
-   [:div.col-md-4.col-md-offset-8
+   [:div.col-md-5.col-md-offset-7
     [:div.input-group file-format-button download-button]]])
 
 (def results-table
