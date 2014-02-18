@@ -6,8 +6,6 @@
 
 set -e
 
-export DEBUG=1
-
 # Export the datbase env, if not set
 [ -n "$DATABASE_URL" ] || export DATABASE_URL=postgresql://localhost:5432/pip-db
 
@@ -38,6 +36,7 @@ done
 # Run the test suite
 lein test
 
+export DEBUG=1
 
 # Run the server
 lein run
