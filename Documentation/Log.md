@@ -2370,3 +2370,46 @@ circumstances.
 In the mean time I can begin implementing a web crawler which can mine
 a set of URLs and build a set of FASTA sequences. This would be a good
 candidate for later abstracting into a separate project.
+
+Notes on implementing web crawling of FASTA sequences:
+
+For UniProt records, simple append ".fasta" to the URL. Example:
+
+URL: http://www.uniprot.org/uniprot/A0A9I9
+FASTA: http://www.uniprot.org/uniprot/A0A9I9.fasta
+
+The process for NCBI records is more involved. Example:
+
+1. Go to the URL: http://www.ncbi.nlm.nih.gov/protein/AAA40744.1
+2. Look for the "VERSION string: `VERSION     P02630.1  GI:131104`
+3. Grab the number after the "GI:" attribute: `131104`
+4. Append this to the base URL http://www.ncbi.nlm.nih.gov/protein/,
+   and set the `report=fasta` GET variable:
+   http://www.ncbi.nlm.nih.gov/protein/131104?report=fasta
+
+In order to perform this pragmatically, we can fetch the HTML contents
+from the URL and grep for the FASTA URL within it. See:
+
+```
+<a class="dblinks" href="/protein/131104?report=fasta" name="EntrezSystem2.PEntrez.Protein.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerTitle.ReportShortCut" sid="15" id="ReportShortCut15">FASTA</a>
+```
+
+Further investigation has revealed an alternative approach to crawling
+NCBI records:
+
+1. Fetch the URL: http://www.ncbi.nlm.nih.gov/protein/P02630.1
+2. Grep for the meta "ncbi_uidlist" tag content: `<meta name="ncbi_uidlist" content="131104" />`
+3. Parse the value and insert it into this URL:
+   http://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?tool=portal&sendto=on&log$=seqview&db=protein&dopt=fasta&sort=&val=131104&from=begin&to=end
+
+That will produce a plaintext file.
+
+### Tuesday 18th
+
+Ran a first instance of my crawler implementation `fetch-fast`, processing 5,773 records and fetching 1736 FASTA records:
+
+```
+$ time cat sequence-urls.txt| ./fetch-fasta.py 2>report.error >report.json
+cat sequence-urls.txt  0.00s user 0.00s system 0% cpu 0.064 total
+./fetch-fasta.py 2> report.error > report.json  4.00s user 4.12s system 1% cpu 7:23.99 total
+```
