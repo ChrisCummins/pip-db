@@ -105,7 +105,7 @@
     var $tbody = $(' tbody', $table);
     var $text = $('#text');
 
-    var $ff = $('select[name="ff"]');
+    var $ff = $('ul#ff');
     var $ih = $('input[name="ih"]');
     var $download = $('#download');
 
@@ -156,8 +156,15 @@
         }
     }
 
-    $ff.change(function () {
-        format = $(' option:selected', this).val().toLowerCase();
+    /*
+     * Set new active file format
+     */
+    $(' li a', $ff).click(function () {
+        format = $(this).attr('data-format').toLowerCase();
+
+        // Disable the selected format
+        $(' li', $ff).removeClass('disabled');
+        $(this).parent().addClass('disabled');
 
         updateActiveFormat();
     });
