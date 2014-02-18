@@ -2398,7 +2398,8 @@ Further investigation has revealed an alternative approach to crawling
 NCBI records:
 
 1. Fetch the URL: http://www.ncbi.nlm.nih.gov/protein/P02630.1
-2. Grep for the meta "ncbi_uidlist" tag content: `<meta name="ncbi_uidlist" content="131104" />`
+2. Grep for the meta "ncbi_uidlist" tag content:
+   `<meta name="ncbi_uidlist" content="131104" />`
 3. Parse the value and insert it into this URL:
    http://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?tool=portal&sendto=on&log$=seqview&db=protein&dopt=fasta&sort=&val=131104&from=begin&to=end
 
@@ -2406,10 +2407,14 @@ That will produce a plaintext file.
 
 ### Tuesday 18th
 
-Ran a first instance of my crawler implementation `fetch-fast`, processing 5,773 records and fetching 1736 FASTA records:
+Ran a first instance of my crawler implementation `fetch-fast`,
+processing 5,773 records and fetching 1736 FASTA records:
 
 ```
 $ time cat sequence-urls.txt| ./fetch-fasta.py 2>report.error >report.json
 cat sequence-urls.txt  0.00s user 0.00s system 0% cpu 0.064 total
 ./fetch-fasta.py 2> report.error > report.json  4.00s user 4.12s system 1% cpu 7:23.99 total
 ```
+
+I should consider implementing a compilation watcher so as to be able
+to automatically rebuild the project when necessary.
