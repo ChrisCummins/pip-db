@@ -163,6 +163,8 @@
         $(' li', $ff).removeClass('disabled');
         $(this).parent().addClass('disabled');
 
+        $download.text('Download results.' + format);
+
         updateActiveFormat();
     });
 
