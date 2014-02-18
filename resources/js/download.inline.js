@@ -106,7 +106,6 @@
     var $text = $('#text');
 
     var $ff = $('ul#ff');
-    var $ih = $('input[name="ih"]');
     var $download = $('#download');
 
     var format = 'csv';
@@ -128,13 +127,11 @@
     var showTable = function () {
         $table.show();
         $text.hide();
-        $ih.prop('disabled', false);
     };
 
     var showText = function () {
         $table.hide();
         $text.show();
-        $ih.prop('disabled', true);
     };
 
     var updateActiveFormat = function() {
