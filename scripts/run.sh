@@ -7,6 +7,7 @@
 set -e
 
 export DEBUG=1
+export PID_FILE=/tmp/pip-db.pid
 
 # Export the datbase env, if not set
 [ -n "$DATABASE_URL" ] || export DATABASE_URL=postgresql://localhost:5432/pip-db
@@ -14,11 +15,19 @@ export DEBUG=1
 # Launch a user database, if required
 pgrep postgres >/dev/null 2>&1 || ./scripts/launch-db.sh &
 
-# Build resources
-make -s
+# Kill existing java instances if server is running
+test -f $PID_FILE && {
+    # TODO: We should tidy this up, as it is extremely reckless to
+    # just kill all Java instances like this.
+    pkill java || echo "Failed to terminate old process"
+    rm -f $PID_FILE
+}
 
 # Run the test suite
 lein test
 
 # Run the server
-lein run
+lein run &
+
+# Create PID file
+echo $! > $PID_FILE
