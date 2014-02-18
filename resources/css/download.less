@@ -1,10 +1,30 @@
 @text-color: #000;
 @text-size: 14px;
 
+.download .row {
+  margin-bottom: 1.5em;
+}
+
 #preview-frame {
   border: 1px solid #000;
-  height: 40em;
   overflow: auto;
+  height: 20em;
+  .transition(height .3s ease-in-out); // Animate changes in height
+}
+@media (min-height: 600px) {
+  #preview-frame {
+    height: 260px;
+  }
+}
+@media (min-height: 600px) {
+  #preview-frame {
+    height: 360px;
+  }
+}
+@media (min-height: 710px) {
+  #preview-frame {
+    height: 500px;
+  }
 }
 
 // Table
@@ -55,4 +75,12 @@
   border: none;
   color: @text-color;
   font-size: @text-size;
+}
+
+.download .input-group {
+  width: 100%;
+}
+
+.download .input-group-btn {
+  width: 50%;
 }

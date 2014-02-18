@@ -4,16 +4,9 @@ noinst_SCRIPTS = \
 	png \
 	$(NULL)
 
-dist_bin_SCRIPTS = pipbot
+dist_bin_SCRIPTS = fetch-fasta pipbot
 
 CLEANFILES = $(noinst_SCRIPTS) $(dist_bin_SCRIPTS)
-
-EXTRA_DIST = \
-	dsa.sh.in \
-	png-payload.js \
-	png.js \
-	README.md \
-	$(NULL)
 
 # Generating executables from Node.js scripts
 %: %.js

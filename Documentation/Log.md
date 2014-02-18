@@ -2324,3 +2324,145 @@ Notes from meeting with Darren:
       3. Point the BLAST program to this database and post-process the
          outputs so as to link back to the records with the records
          table.
+
+### Sunday 16th
+
+I've been putting some thought into the URL design of the site, as I
+think this will heavily influence the design of the data backend. The
+definitive site routes I've planned for are:
+
+Page     | URL
+-------  | -------
+Index    | http://www.pip-db.org/
+Search   | http://www.pip-db.org/s
+Download | http://www.pip-db.org/d
+Record   | http://www.pip-db.org/r/:id
+Log in   | http://www.pip-db.org/login
+Log out  | http://www.pip-db.org/logout
+Upload   | http://www.pip-db.org/upload
+
+The format of the resulting data for the search, record, and download
+pages can be supplied in two forms: either by append the file format
+to the URL (e.g. adding ".json" to the end of a URL to return JSON
+data), or by setting the "format" variable in the request. The default
+format will always be HTML. Examples:
+
+Page     | Format | URL
+-------  | ------ | -------
+Search   | HTML   | http://www.pip-db.org/s?q=alkaline
+Search   | XML    | http://www.pip-db.org/s.xml?q=alkaline
+Search   | JSON   | http://www.pip-db.org/s?q=alkaline&format=json
+Record   | HTML   | http://www.pip-db.org/r/100
+Record   | XML    | http://www.pip-db.org/r/100.xml
+Record   | JSON   | http://www.pip-db.org/r/100?format=json
+Download | HTML   | http://www.pip-db.org/d?q=alkaline
+Download | XML    | http://www.pip-db.org/d.xml?q=alkaline
+Download | JSON   | http://www.pip-db.org/d?q=alkaline&format=json
+
+### Monday 17th
+
+I've started work on mining the FASTA sequences for blast searching,
+and I've noticed that not all of the records within the dataset
+contain a link to a UniProt sequence, but instead they link to a
+UniProt search result page which lists multiple different
+sequences. I've contacted Darren for advice on what to do in those
+circumstances.
+
+In the mean time I can begin implementing a web crawler which can mine
+a set of URLs and build a set of FASTA sequences. This would be a good
+candidate for later abstracting into a separate project.
+
+Notes on implementing web crawling of FASTA sequences:
+
+For UniProt records, simple append ".fasta" to the URL. Example:
+
+URL: http://www.uniprot.org/uniprot/A0A9I9
+FASTA: http://www.uniprot.org/uniprot/A0A9I9.fasta
+
+The process for NCBI records is more involved. Example:
+
+1. Go to the URL: http://www.ncbi.nlm.nih.gov/protein/AAA40744.1
+2. Look for the "VERSION string: `VERSION     P02630.1  GI:131104`
+3. Grab the number after the "GI:" attribute: `131104`
+4. Append this to the base URL http://www.ncbi.nlm.nih.gov/protein/,
+   and set the `report=fasta` GET variable:
+   http://www.ncbi.nlm.nih.gov/protein/131104?report=fasta
+
+In order to perform this pragmatically, we can fetch the HTML contents
+from the URL and grep for the FASTA URL within it. See:
+
+```
+<a class="dblinks" href="/protein/131104?report=fasta" name="EntrezSystem2.PEntrez.Protein.Sequence_ResultsPanel.SequenceViewer.Sequence_ViewerTitle.ReportShortCut" sid="15" id="ReportShortCut15">FASTA</a>
+```
+
+Further investigation has revealed an alternative approach to crawling
+NCBI records:
+
+1. Fetch the URL: http://www.ncbi.nlm.nih.gov/protein/P02630.1
+2. Grep for the meta "ncbi_uidlist" tag content:
+   `<meta name="ncbi_uidlist" content="131104" />`
+3. Parse the value and insert it into this URL:
+   http://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?tool=portal&sendto=on&log$=seqview&db=protein&dopt=fasta&sort=&val=131104&from=begin&to=end
+
+That will produce a plaintext file.
+
+### Tuesday 18th
+
+Ran a first instance of my crawler implementation `fetch-fast`,
+processing 5,773 records and fetching 1736 FASTA records:
+
+```
+$ time cat sequence-urls.txt| ./fetch-fasta.py 2>report.error >report.json
+cat sequence-urls.txt  0.00s user 0.00s system 0% cpu 0.064 total
+./fetch-fasta.py 2> report.error > report.json  4.00s user 4.12s system 1% cpu 7:23.99 total
+```
+
+Over 5 minutes faster than a single threaded implementation:
+
+```
+$ time cat ~/src/pip-db-priv/sequence-urls.txt | ./fetch-fasta.py 2>report.error >report.json
+cat ~/src/pip-db-priv/sequence-urls.txt  0.00s user 0.00s system 0% cpu 0.063 total
+./fetch-fasta.py 2> report.error > report.json  2.48s user 3.89s system 0% cpu 12:42.85 total
+```
+
+I should consider implementing a compilation watcher so as to be able
+to automatically rebuild the project when necessary.
+
+Notes for weekly FYP meeting with Ian:
+
+ * Review of meeting with Darren:
+
+    * All very positive, Darren seems happy with the work done so far.
+
+    * Commitments from Darren:
+       * Text for the front page
+       * 5 volunteers for user testing (probably week 23)
+       * Help in simplifying the dataset
+
+    * Covered both insecurities about current progress: data integrity
+      and BLAST.
+
+ * Three steps to "BLAST off":
+
+    1. Crawl the FASTA sequences
+    2. Setup a BLAST instance and create database
+    3. Implement communication between pip-db and BLAST instance
+
+ * Revised Gantt chart
+
+    * Now with bug tracker links
+    * No iteration labels
+
+ * Step one of BLAST is done: multithreaded web crawler in Python:
+
+    * Multithreaded (IO bound, minimise execution time)
+    * Set based (minimise duplication)
+    * Sockets level (minimise bandwidth)
+    * Package and release in "Project segmentation" phase
+    * As a service?
+
+ * Tooling: `pipbot watch`.
+
+ * Download page.
+
+ * NEXT: numerical pI, MW and EC fields

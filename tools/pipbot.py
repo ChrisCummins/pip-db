@@ -70,6 +70,9 @@ def get_help_text():
             "    pipbot build summary\n"
             "        Show the current project configuration\n"
             "\n"
+            "    pipbot watch\n"
+            "        Run a continuous development server\n"
+            "\n"
             "    pipbot burndown\n"
             "        Show the changes made on a feature branch\n"
             "\n"
@@ -282,6 +285,9 @@ def build(args):
     else:
         return print_usage_and_return()
 
+def watch(args):
+    run("./tools/watchr/watchr.js", False)
+    return 0
 
 def deploy(args):
 
@@ -806,6 +812,9 @@ def process_command(command, args):
 
     elif command == "build":
         return build(args)
+
+    elif command == "watch":
+        return watch(args)
 
     elif command == "burndown":
         return burndown(args)

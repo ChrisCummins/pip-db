@@ -5,40 +5,34 @@
             [clojure.string :as str]
             [clojure.data.json :as json]))
 
-(def include-headers-checkbox
-  [:input#ih {:name "ih" :type "checkbox" :checked true}])
+(def file-format-dropdown
+  [:ul#ff.dropdown-menu
+   [:li [:a {:href "#preview" :data-format "xml"}  "XML"]]
+   [:li.disabled [:a {:href "#preview" :data-format "csv"}  "CSV"]]
+   [:li [:a {:href "#preview" :data-format "json"} "JSON"]]])
 
-(def include-headers-label
-  [:label {:for "ih"} "Include headers"])
+(def file-format-button
+  [:div.input-group-btn.dropup
+   [:button.btn.btn-block.btn-success.dropdown-toggle {:data-toggle "dropdown"}
+    "Select File Format"]
+   file-format-dropdown])
 
-(def include-headers
-  (list include-headers-checkbox include-headers-label))
-
-(def file-format-label
-  [:label {:for "ff"} "File format: "])
-
-(def file-format-selector
-  [:select#ff {:name "ff"}
-   [:option {:value "csv"}  "CSV"]
-   [:option {:value "xml"}  "XML"]
-   [:option {:value "json"} "JSON"]])
-
-(def file-format
-  (list file-format-label file-format-selector))
-
-(def download-button [:button#download.btn.btn-warning "Download"])
+(def download-button
+  [:div.input-group-btn
+   [:button#download.btn.btn-block.btn-warning "Download results.csv"]])
 
 (def actions-row
   [:div.row
-   [:div.col-md-8 include-headers]
-   [:div.col-md-4 [:div.pull-right file-format download-button]]])
+   [:div.col-md-5.col-md-offset-7
+    [:div.input-group file-format-button download-button]]])
 
 (def results-table
   [:table#table
    [:thead][:tbody]])
 
 (def results-row
-  [:div.row [:div.col-md-12 [:div#preview-frame results-table [:pre#text]]]])
+  [:div#preview.row
+   [:div.col-md-12 [:div#preview-frame results-table [:pre#text]]]])
 
 ;; It's necessary to extend the SQL Timetsamp type in order to
 ;; JSON-ify it. See: http://stackoverflow.com/a/19164491
