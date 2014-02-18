@@ -2416,5 +2416,11 @@ cat sequence-urls.txt  0.00s user 0.00s system 0% cpu 0.064 total
 ./fetch-fasta.py 2> report.error > report.json  4.00s user 4.12s system 1% cpu 7:23.99 total
 ```
 
+Over 5 minutes faster than a single threaded implementation:
+
+```$ time cat ~/src/pip-db-priv/sequence-urls.txt | ./fetch-fasta.py 2>report.error >report.json
+cat ~/src/pip-db-priv/sequence-urls.txt  0.00s user 0.00s system 0% cpu 0.063 total
+./fetch-fasta.py 2> report.error > report.json  2.48s user 3.89s system 0% cpu 12:42.85 total```
+
 I should consider implementing a compilation watcher so as to be able
 to automatically rebuild the project when necessary.
