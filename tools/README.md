@@ -9,6 +9,7 @@ required for the production system.
 * [fetch-fasta - Web crawler for protein sequences](#fetch-fasta)
 * [pipbot - Your friendly neighbourhood robot](#pipbot)
 * [png - Plausible Nonsense Generator](#png)
+* [watchr - Continuous development server](#watchr)
 
 ## dsa
     Usage: ./dsa <csv-dataset>
@@ -158,3 +159,12 @@ A program for generating nonsense datasets for testing purposes.
     debug: output file format: CSV
     $ wc -l test.csv
     17 test.csv
+
+## watchr
+
+```
+./watchr
+```
+
+Runs a continuous development server for fluid hacking. Note that
+recommended invocation is using `pipbot watch`.
