@@ -5,15 +5,6 @@
             [clojure.string :as str]
             [clojure.data.json :as json]))
 
-(def include-headers-checkbox
-  [:input#ih {:name "ih" :type "checkbox" :checked true}])
-
-(def include-headers-label
-  [:label {:for "ih"} "Include headers"])
-
-(def include-headers
-  (list include-headers-checkbox include-headers-label))
-
 (def file-format-label
   [:label {:for "ff"} "File format: "])
 
@@ -30,8 +21,7 @@
 
 (def actions-row
   [:div.row
-   [:div.col-md-8 include-headers]
-   [:div.col-md-4 [:div.pull-right file-format download-button]]])
+   [:div.col-md-12 [:div.pull-right file-format download-button]]])
 
 (def results-table
   [:table#table
