@@ -13,7 +13,7 @@
 
 ;; Serve a search request.
 (defn search-handler [request]
-    (view/search (search-results request)))
+  (view/search (search-results request)))
 
 ;; Serve an advanced search page.
 (defn advanced-handler [request] (advanced/advanced request))
