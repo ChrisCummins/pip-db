@@ -3,6 +3,8 @@
   (:require [clojure.java.jdbc :as sql]
             [clojure.string :as str]))
 
+(def max-no-of-returned-records 20)
+
 (defn split-args [words]
   (when (and words (not (str/blank? words)))
     (str/split (str/trim words) #" +")))
@@ -47,14 +49,39 @@
 ;; look-ups.
 (def query-table "records")
 
+;; We can now take a query map and use this to generate a SQL query.
 (defn query [params]
   (let [conditions (conditionals params)]
     (str "SELECT * FROM " query-table
          (if-not (str/blank? conditions)
            (str " WHERE " (conditionals params))))))
 
-(defn search [params]
+;; This SQL query counts the number of records in the database.
+(def no-of-records-query
+  (str "SELECT count(*) AS exact_count FROM " query-table))
+
+;; Construct a search results map from a set of search parameters and
+;; a list of matching records.
+(defn search-response [params matching-records no-of-records]
+  (let [returned-records (take max-no-of-returned-records matching-records)]
+    {:query                      params
+     :no_of_records              no-of-records
+     :no_of_matches              (count matching-records)
+     :no_of_returned_records     (count returned-records)
+     :max_no_of_returned_records max-no-of-returned-records
+     :records                    returned-records}))
+
+;; Fetch a vector of records for a given query map.
+(defn search-results [params]
   (sql/with-connection (System/getenv "DATABASE_URL")
     (sql/with-query-results results [(query params)]
-      (let [data (apply vector (doall results))]
-        {:results data :results-count (count data)}))))
+      (apply vector (doall results)))))
+
+;; Fetch the number of records within the database.
+(defn no-of-records []
+  (sql/with-connection (System/getenv "DATABASE_URL")
+    (sql/with-query-results result [no-of-records-query]
+      (((apply vector (doall result)) 0) :exact_count))))
+
+(defn search [params]
+  (search-response params (search-results params) (no-of-records)))

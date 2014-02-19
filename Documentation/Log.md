@@ -2465,3 +2465,43 @@ Notes for weekly FYP meeting with Ian:
  * Download page.
 
  * NEXT: numerical pI, MW and EC fields
+
+### Wednesday 19th
+
+Different kinds of search results:
+
+ * **Matching results** - the number of results which matched a query.
+ * **Returned results** - the number of results returned to the
+   user. If *returned_results > max_returned_results*, then
+   *returned_results < matching_results*.
+ * **Visible results** - in case of results pagination, this shows the
+   number of results currently visible.
+   *visible_results < returned_results*.
+
+Plan for search results data structure:
+
+```
+{
+  "query": {
+    "q": <q query string>
+    "q_any": <q_any query string>
+    ...
+  }
+  "no_of_records": <no of records in database>
+  "no_of_matches": <no of records which matched query>
+  "no_of_returned_records": <no of records returned to the user>
+  "max_no_of_returned_records": <max number of records returned for a query>
+  "records:" [
+    {
+      <record fields>
+    },
+    {
+      <record fields>
+    },
+    ...
+  ]
+}
+```
+
+The `model/search` namespace should contain a function `(search
+[params])` which returns a data structure of that type.
