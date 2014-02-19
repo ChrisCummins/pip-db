@@ -92,6 +92,8 @@
 
         // Add link handlers to record page
         attachTableListeners();
+
+        $download.show(); // Show the download button
     } else {
         // Show the "no results" message
         $noResultsMessage.show();
