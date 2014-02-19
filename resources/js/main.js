@@ -321,7 +321,7 @@
         range: true,
         min: 0,
         max: 14,
-        step: 1,
+        step: 0.1,
         values: [ 6, 8 ],
         tickInterval: 1,
         slide: function (event, ui) {
