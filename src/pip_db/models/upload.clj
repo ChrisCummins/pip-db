@@ -3,6 +3,7 @@
         [clojure.java.io :only (copy)]
         [clojure-csv.core :only (parse-csv)])
   (:require [clojure.java.jdbc :as sql]
+            [clojure.string :as str]
             [pip-db.db :as db])
   (:import [java.io File]))
 
@@ -13,7 +14,7 @@
 
 ;; Generate a unique ID for a line.
 (defn id [line]
-  (db/minihash (apply str line)))
+  (db/minihash (str/join line)))
 
 (defn store-line-record [fields]
   (sql/with-connection (System/getenv "DATABASE_URL")
