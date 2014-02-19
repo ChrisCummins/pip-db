@@ -5,6 +5,21 @@
 (ns pip-db.db
   (:require [clojure.java.jdbc :as sql]))
 
+;; SHA1 implementation
+;;
+;; See: https://gist.github.com/hozumi/1472865
+(defn sha1 [s]
+  (->> (-> "sha1" java.security.MessageDigest/getInstance
+           (.digest (.getBytes s)))
+       (map #(.substring
+              (Integer/toString
+               (+ (bit-and % 0xff) 0x100) 16) 1))
+       (apply str)))
+
+;; We generated truncated hashes when creating our record IDs.
+(defn minihash [s]
+  (subs (sha1 s) 0 11))
+
 (defn migrated? []
   (not (zero?
         (sql/with-connection (System/getenv "DATABASE_URL")
@@ -16,7 +31,7 @@
 (defn create-tables []
   (sql/with-connection (System/getenv "DATABASE_URL")
     (sql/create-table :records
-                      [:id :serial "PRIMARY KEY"]
+                      [:id "varchar(11)" "NOT NULL"]
                       [:dataset :varchar]
                       [:ec :varchar]
                       [:name :varchar]

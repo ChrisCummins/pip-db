@@ -8,12 +8,8 @@
   (str "SELECT * FROM records WHERE id='" id "'"))
 
 ;; Fetch the record data for the given ID.
-(defn record-data [id]
+(defn record [id]
   (sql/with-connection (System/getenv "DATABASE_URL")
     (sql/with-query-results results
       [(query-string id)]
       (when results (first (doall results))))))
-
-(defn record [id]
-  (if (integer? (util/string->int id))
-    (record-data id)))
