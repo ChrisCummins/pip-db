@@ -13,8 +13,8 @@
 ;; The port which we are serving over.
 (def port (Integer/parseInt (or (System/getenv "PORT") "5000")))
 
-;; -------------
-;; HTTP Requests
+;; ----------------
+;; ## HTTP Requests
 
 ;; We can get the current host either from the request-map, or we just
 ;; generate the expected value.
