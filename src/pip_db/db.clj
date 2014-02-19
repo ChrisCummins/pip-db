@@ -1,5 +1,24 @@
-(ns pip-db.models.migration
+;; # Database Interface
+;;
+;; This namespace defines the interface and API for the database
+;; back-end of pip-db.
+(ns pip-db.db
   (:require [clojure.java.jdbc :as sql]))
+
+;; SHA1 implementation
+;;
+;; See: https://gist.github.com/hozumi/1472865
+(defn sha1 [s]
+  (->> (-> "sha1" java.security.MessageDigest/getInstance
+           (.digest (.getBytes s)))
+       (map #(.substring
+              (Integer/toString
+               (+ (bit-and % 0xff) 0x100) 16) 1))
+       (apply str)))
+
+;; We generated truncated hashes when creating our record IDs.
+(defn minihash [s]
+  (subs (sha1 s) 0 11))
 
 (defn migrated? []
   (not (zero?
@@ -12,7 +31,7 @@
 (defn create-tables []
   (sql/with-connection (System/getenv "DATABASE_URL")
     (sql/create-table :records
-                      [:id :serial "PRIMARY KEY"]
+                      [:id "varchar(11)" "NOT NULL"]
                       [:dataset :varchar]
                       [:ec :varchar]
                       [:name :varchar]
@@ -40,26 +59,13 @@
                       [:created_at :timestamp "NOT NULL"
                        "DEFAULT CURRENT_TIMESTAMP"])
 
-    (sql/create-table :user_types
-                      [:id :serial "PRIMARY KEY"]
-                      [:type_name :varchar "NOT NULL"])
-
     (sql/create-table :users
                       [:id :serial "PRIMARY KEY"]
                       [:email :varchar "NOT NULL"]
-                      [:pass :varchar "NOT NULL"]
-                      [:user_type_id :serial "NOT NULL"])))
-
-(defn create-user-type [user-type]
-  (sql/with-connection (System/getenv "DATABASE_URL")
-    (sql/insert-values :user_types [:type_name] [user-type])))
+                      [:pass :varchar "NOT NULL"])))
 
 (defn migrate []
   (when-not (migrated?)
     (print "Creating database structure...") (flush)
     (create-tables)
-    (println " done")
-
-    (print "Creating admin user type...") (flush)
-    (create-user-type "admin")
     (println " done")))

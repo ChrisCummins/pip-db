@@ -104,6 +104,23 @@
 
     // JSON data response map
     var records = data['records'];
+    var strippedRecords = (function () { // Blank properties removed
+        var s = [], record, r;
+
+        for (var i in records) {
+            record = records[i];
+            r = {};
+
+            for (var j in record) {
+                if (record[j])
+                    r[j] = record[j];
+            }
+
+            s.push(r);
+        };
+
+        return s;
+    })();
 
     // UI components
     var $table = $('#table');
@@ -128,8 +145,8 @@
     // Generate text formatted data
     var textFormats = {
         'json': JSON.stringify(records, null, '\t') + '\n',
-        'xml': json2xml(records),
-        'csv': json2csv(records)
+        'xml': json2xml(strippedRecords),
+        'csv': json2csv(strippedRecords)
     };
 
     var showTable = function () {

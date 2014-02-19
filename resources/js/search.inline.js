@@ -57,6 +57,7 @@
             if (piMin)          return '> ' + piMin;
             if (piMax)          return '< ' + piMax;
             if (piMajor)        return piMajor + 'm';
+            return '' // Fallback, in case record has no value
         }
 
         var html = '<tr data-id="' + record['id'] + '">';
@@ -92,6 +93,8 @@
 
         // Add link handlers to record page
         attachTableListeners();
+
+        $download.show(); // Show the download button
     } else {
         // Show the "no results" message
         $noResultsMessage.show();

@@ -86,8 +86,7 @@
 
 (deftest query
   (testing "A query with no conditions"
-    (is (= (dut/query {})
-           (str "SELECT * FROM records"))))
+    (is (= (dut/query {}) "")))
 
   (testing "A query with a condition"
     (is (= (dut/query {"q" "foo"})

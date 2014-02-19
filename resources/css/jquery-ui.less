@@ -29,6 +29,7 @@
 }
 .ui-slider-wrapper .ui-slider-horizontal {
     width: 100%;
+    top: .5em;
 }
 
 .ui-slider-labels {
@@ -51,7 +52,7 @@
 .horizontal .ui-slider-labels {
     left: 0;
     right: 0;
-    top: 0.5em;
+    top: 1em;
 }
 .horizontal .ui-slider-label-ticks {
     width: 1.2em;
@@ -63,5 +64,41 @@
     position: relative;
     display: inline-block;
     margin-left: -1.2em;
-    top: .5em;
+    top: .6em;
+}
+
+// Slider tooltips
+.slider-tooltip {
+    position: absolute;
+    z-index: 1020;
+    display: block;
+    padding: 5px;
+    font-size: 11px;
+    visibility: visible;
+    margin-top: -2px;
+    bottom: 120%;
+    margin-left: -1.2em; // Center align
+    width: 4em;
+}
+.slider-tooltip .slider-tooltip-arrow {
+    bottom: 0;
+    left: 50%;
+    margin-left: -5px;
+    border-top: 5px solid @brand-primary;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+.slider-tooltip-inner {
+    max-width: 200px;
+    padding: 3px 8px;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    background-color: @brand-primary;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
 }

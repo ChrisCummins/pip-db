@@ -49,12 +49,13 @@
 ;; look-ups.
 (def query-table "records")
 
-;; We can now take a query map and use this to generate a SQL query.
+;; We can now take a query map and use this to generate a SQL
+;; query. If the query map is empty, then we return an empty string.
 (defn query [params]
   (let [conditions (conditionals params)]
-    (str "SELECT * FROM " query-table
-         (if-not (str/blank? conditions)
-           (str " WHERE " (conditionals params))))))
+    (if (str/blank? conditions)
+      ""
+      (str "SELECT * FROM " query-table " WHERE " conditions))))
 
 ;; This SQL query counts the number of records in the database.
 (def no-of-records-query
@@ -71,11 +72,15 @@
      :max_no_of_returned_records max-no-of-returned-records
      :records                    returned-records}))
 
-;; Fetch a vector of records for a given query map.
+;; Fetch a vector of records for a given query map. We wrap the entire
+;; query in a try/catch block in order to catch an SQL exception when
+;; the query returns no results: "org.postgresql.util.PSQLException:
+;; No results were returned by the query."
 (defn search-results [params]
   (sql/with-connection (System/getenv "DATABASE_URL")
-    (sql/with-query-results results [(query params)]
-      (apply vector (doall results)))))
+    (try (sql/with-query-results results [(query params)]
+           (apply vector (doall results)))
+         (catch Exception e []))))
 
 ;; Fetch the number of records within the database.
 (defn no-of-records []

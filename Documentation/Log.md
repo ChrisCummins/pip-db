@@ -2506,3 +2506,20 @@ Plan for search results data structure:
 
 The `model/search` namespace should contain a function `(search
 [params])` which returns a data structure of that type.
+
+Notes on connecting to local Postgres instance:
+
+```
+$ psql pip-db                 # Start prompt
+> \c pip-db                   # Connect to database
+> \dt                         # Describe tables
+> \d+ records                 # Describe table
+> SELECT * from users;        # Show table contents
+> DROP TABLE IF EXISTS users; # Delete table
+```
+
+To connect to remote Heroku database:
+
+```
+$ psql -h ec2-54-197-249-167.compute-1.amazonaws.com -U wvihkhkcwenphx -d dcmcfqgrb9iovm
+```

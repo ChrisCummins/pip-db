@@ -315,17 +315,38 @@
 
     var $slider = $('#pi-slider');
 
+    // Slider update callback
+    var updateSliderTooltip = function (event, ui) {
+
+        // Create tooltip HTML
+        var tooltipHTML = function (value) {
+            return '<div class="slider-tooltip">' +
+                '<div class="slider-tooltip-inner">' +
+                value + '</div>' + '<div class="slider-tooltip-arrow">' +
+                '</div></div>';
+        };
+
+        var values = ui.values || [6, 8];
+
+        $('.ui-slider-handle:first-of-type').html(tooltipHTML(values[0]));
+        $('.ui-slider-handle:last-of-type').html(tooltipHTML(values[1]));
+    }
+
+    $(' .ui-slider-handle', $slider).html(updateSliderTooltip)
+
     // Create our slider
     $slider.labeledslider({
         disabled: true,
         range: true,
         min: 0,
         max: 14,
-        step: 1,
+        step: 0.1,
         values: [ 6, 8 ],
         tickInterval: 1,
+        create: updateSliderTooltip,
         slide: function (event, ui) {
             setFormValuesFromSlider();
+            updateSliderTooltip(event, ui);
         }
     });
 
