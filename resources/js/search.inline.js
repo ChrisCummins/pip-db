@@ -57,6 +57,7 @@
             if (piMin)          return '> ' + piMin;
             if (piMax)          return '< ' + piMax;
             if (piMajor)        return piMajor + 'm';
+            return '' // Fallback, in case record has no value
         }
 
         var html = '<tr data-id="' + record['id'] + '">';
