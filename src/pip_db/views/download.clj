@@ -40,10 +40,10 @@
    {:title (get request :name)
     :navbar {}
     :heading {:title "Download results"}
-    :body [:div.download
-           results-row
-           actions-row
-           ui/no-results-found-message]
+    :body (list [:div.download {:style "display:none;"}
+                 results-row
+                 actions-row]
+                ui/no-results-found-message)
     :javascript (list (include-js "/js/FileSaver.js")
                       (util/inline-data-js "data" (request :results))
                       (util/inline-js "/js/download.inline.js"))}))

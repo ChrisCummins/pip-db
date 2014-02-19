@@ -105,13 +105,16 @@
     // JSON data response map
     var records = data['records'];
 
+    // UI components
     var $table = $('#table');
     var $tbody = $(' tbody', $table);
     var $text = $('#text');
 
     var $ff = $('ul#ff');
     var $download = $('#download');
+    var $noResultsMessage = $('#no-results');
 
+    // Global state
     var format = 'csv';
     var mime = 'text/csv';
 
@@ -206,22 +209,29 @@
                 $(' td:nth-child(' + ++j + ')', $row).html(record[key]);
         };
 
-        // Generate the header row:
-        var header = '<tr><td>0</td>';
+        if (data['no_of_matches']) {
+            // Generate the header row:
+            var header = '<tr><td>0</td>';
 
-        for (var key in records[0])
-            header += '<td>' + humanReadable(key) + '</td>';
+            for (var key in records[0])
+                header += '<td>' + humanReadable(key) + '</td>';
 
-        $(' thead', $table).append(header + '</tr>');
+            $(' thead', $table).append(header + '</tr>');
 
-        // Populate table contents:
-        var dataLength = $(' thead tr td', $table).length;
-        var noRows = Math.max(20, records.length + 5);
+            // Populate table contents:
+            var dataLength = $(' thead tr td', $table).length;
+            var noRows = Math.max(20, records.length + 5);
 
-        for (var i = 0; i < noRows; i++) {
-            addEmptyRow(i + 1);
-            if (i < records.length)
-                populateRow((i + 1), records[i]);
+            for (var i = 0; i < noRows; i++) {
+                addEmptyRow(i + 1);
+                if (i < records.length)
+                    populateRow((i + 1), records[i]);
+            }
+
+            $('.download').show();
+        } else {
+            // Show the "no results message"
+            $noResultsMessage.show();
         }
     });
 
