@@ -2,7 +2,8 @@
 ;; provide generic helpers for tasks.
 (ns pip-db.util
   (:use [pip-db.resources :only (resource)])
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [clojure.data.json :as json]))
 
 ;; --------------
 ;; ## Environment
@@ -62,6 +63,18 @@
 (defn is-number? [n]
   (if (nil? (string->int n)) false true))
 
+;; It's necessary to extend the SQL Timetsamp type in order to be able
+;; to JSON-ify them. See: http://stackoverflow.com/a/19164491
+(extend-type java.sql.Timestamp
+  json/JSONWriter
+  (-write [date out]
+    (json/-write (str date) out)))
+
+;; Here we can reliably transform an arbitrary data structure into
+;; JSON format.
+(defn data->json [data]
+  (json/write-str data))
+
 ;; -----------------
 ;; ## Date utilities
 
@@ -95,3 +108,14 @@
 ;; are included using the `src` attribute.
 (defn inline-js [path]
   [:script (resource path)])
+
+;; We can conveniently assign arbitrary data structures to a
+;; JavaScript variable in JSON notation using
+;; `(json-data-var "data" {:foo "bar"})`.
+(defn json-data-var [name data]
+  (str "var " name " = " (data->json data)))
+
+;; Create an inline script which assigns an arbitrary data structure
+;; to a globally accessible variable in window scope.
+(defn inline-data-js [name data]
+  [:script (json-data-var name data)])
