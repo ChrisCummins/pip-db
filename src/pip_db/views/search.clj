@@ -7,6 +7,7 @@
 ;; The empty table in which results can be shown
 (def results-table
   [:table.table.table-striped.table-hover.table-bordered
+   {:style "display:none;"}
    [:thead [:tr
             [:td.name     "Protein"]
             [:td.source   "Source"]
@@ -49,9 +50,7 @@
   (page request
         {:title ((request :params) "q")
          :navbar {:search true}
-         :heading {:meta true
-                   :meta-results-count (request :results-count)
-                   :download true}
+         :heading {:meta true :download true}
          :body [:div.sresults
                 beta-warning
                 results-table

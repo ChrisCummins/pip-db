@@ -7,10 +7,14 @@
     // The base URL component for results
     var resultsUrlPrefix = '/r/'
 
+    // UI components
     var $download = $('#download');
     var $table = $('.sresults table');
     var $tbody = $(' tbody', $table);
     var $pagination = $('#pagination');
+    var $meta = $('.meta-tags');
+    var $resultsCount = $(' .results-count', $meta);
+    var $noResultsMessage = $('#no-results');
 
     /*
      * SEARCH RESULTS:
@@ -65,12 +69,33 @@
         $tbody.append(html + '</tr>');
     };
 
-    // Populate the table
-    for (var i in records)
-        addRecordRow(records[i]);
+    if (data['no_of_matches']) {
+        // Populate the meta header if we have results
+        $resultsCount.text((function () {
+            var resultsText = data['no_of_matches'] === 1 ?
+                '1 result ' : data['no_of_matches'] + ' results';
 
-    // Add link handlers to record page
-    attachTableListeners();
+            var returnedText =
+                data['no_of_returned_records'] < data['no_of_matches'] ?
+                ' and returned the first ' + data['no_of_returned_records'] : '';
+
+            return 'Found ' + resultsText + ' of a possible ' +
+                data['no_of_records'] + returnedText + '...';
+        })());
+
+        // Populate the table
+        for (var i in records)
+            addRecordRow(records[i]);
+
+        // Show the table
+        $table.show();
+
+        // Add link handlers to record page
+        attachTableListeners();
+    } else {
+        // Show the "no results" message
+        $noResultsMessage.show();
+    }
 
     /*
      * PAGINATION:

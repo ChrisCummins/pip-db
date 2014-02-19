@@ -203,11 +203,7 @@
       (if (data :title) [:h3 (data :title)])
       ;; Meta tags for displaying information about search results.
       (if (data :meta)
-        [:div.info
-         [:ul.meta-tags
-          [:li (str "Found " (data :meta-results-count)
-                    (if (= (data :meta-results-count) 1)
-                      " result..." " results..."))]]])]
+        [:div.info [:ul.meta-tags [:li.results-count]]])]
      [:hr]]))
 
 ;; ### Page footer
