@@ -1,7 +1,8 @@
 (ns pip-db.views.search
   (:use [pip-db.views.page :only (page)])
   (:require [clojure.string :as str]
-            [pip-db.util :as util]))
+            [pip-db.util :as util]
+            [pip-db.views.ui :as ui]))
 
 ;; The empty table in which results can be shown
 (def results-table
@@ -37,8 +38,8 @@
                                    :data-pages-count pages-count}
         (page-links current-page pages pages-count)]]]]))
 
-(defn beta-warning []
-  [:div.alert.alert-info
+(def beta-warning
+  [:div#limited-results.alert.alert-info {:style "display:none;"}
    [:strong "Limited Results "]
    "The number of results has been limited for the beta version of the website."
    [:a.close {:href "#" :data-dismiss "alert"
@@ -52,14 +53,8 @@
                    :meta-results-count (request :results-count)
                    :download true}
          :body [:div.sresults
-                (if (> (request :results-count) 0)
-                  (list
-                   (if (request :limited-results)
-                     (beta-warning))
-                   results-table
-                   (pagination-links (request :current-page) (request :pages)
-                                     (request :results-per-page)
-                                     (request :pages-count)))
-                  [:p.lead "No results found."])]
+                beta-warning
+                results-table
+                ui/no-results-found-message]
          :javascript (list (util/inline-data-js "data" (request :results))
                            (util/inline-js "/js/search.inline.js"))}))

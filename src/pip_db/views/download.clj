@@ -2,6 +2,7 @@
   (:use [pip-db.views.page :only (page)]
         [hiccup.page :only (include-js)])
   (:require [pip-db.util :as util]
+            [pip-db.views.ui :as ui]
             [clojure.string :as str]))
 
 (def file-format-dropdown
@@ -40,9 +41,9 @@
     :navbar {}
     :heading {:title "Download results"}
     :body [:div.download
-           (if (> (request :results-count) 0)
-             (list results-row actions-row)
-             [:p.lead "No results found."])]
+           results-row
+           actions-row
+           ui/no-results-found-message]
     :javascript (list (include-js "/js/FileSaver.js")
                       (util/inline-data-js "data" (request :results))
                       (util/inline-js "/js/download.inline.js"))}))

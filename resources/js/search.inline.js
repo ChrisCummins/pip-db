@@ -1,6 +1,9 @@
 (function () {
     'use strict';
 
+    // JSON data response map
+    var records = data['records'];
+
     // The base URL component for results
     var resultsUrlPrefix = '/r/'
 
@@ -63,8 +66,8 @@
     };
 
     // Populate the table
-    for (var i in data)
-        addRecordRow(data[i]);
+    for (var i in records)
+        addRecordRow(records[i]);
 
     // Add link handlers to record page
     attachTableListeners();

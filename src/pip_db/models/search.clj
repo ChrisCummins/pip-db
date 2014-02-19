@@ -3,6 +3,8 @@
   (:require [clojure.java.jdbc :as sql]
             [clojure.string :as str]))
 
+(def max-no-of-returned-records 20)
+
 (defn split-args [words]
   (when (and words (not (str/blank? words)))
     (str/split (str/trim words) #" +")))
@@ -53,8 +55,18 @@
          (if-not (str/blank? conditions)
            (str " WHERE " (conditionals params))))))
 
+;; Construct a search results map from a set of search parameters and
+;; a list of matching records.
+(defn search-response [params matching-records]
+  (let [returned-records (take max-no-of-returned-records matching-records)]
+    {:query                      params
+     :no_of_records              5000
+     :no_of_matches              (count matching-records)
+     :no_of_returned_records     (count returned-records)
+     :max_no_of_returned_records max-no-of-returned-records
+     :records                    returned-records}))
+
 (defn search [params]
   (sql/with-connection (System/getenv "DATABASE_URL")
     (sql/with-query-results results [(query params)]
-      (let [data (apply vector (doall results))]
-        {:results data :results-count (count data)}))))
+      (search-response params (apply vector (doall results))))))

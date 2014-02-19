@@ -10,6 +10,10 @@
 (defn google-analytics []
   (util/inline-js "/js/google-analytics.inline.js"))
 
+;; The hidden "No results found" message for search results pages.
+(def no-results-found-message
+  [:p#no-results.lead {:style "display:none;"} "No results found."])
+
 ;; ----------
 ;; ## Widgets
 ;;
