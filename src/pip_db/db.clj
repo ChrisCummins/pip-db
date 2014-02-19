@@ -44,26 +44,13 @@
                       [:created_at :timestamp "NOT NULL"
                        "DEFAULT CURRENT_TIMESTAMP"])
 
-    (sql/create-table :user_types
-                      [:id :serial "PRIMARY KEY"]
-                      [:type_name :varchar "NOT NULL"])
-
     (sql/create-table :users
                       [:id :serial "PRIMARY KEY"]
                       [:email :varchar "NOT NULL"]
-                      [:pass :varchar "NOT NULL"]
-                      [:user_type_id :serial "NOT NULL"])))
-
-(defn create-user-type [user-type]
-  (sql/with-connection (System/getenv "DATABASE_URL")
-    (sql/insert-values :user_types [:type_name] [user-type])))
+                      [:pass :varchar "NOT NULL"])))
 
 (defn migrate []
   (when-not (migrated?)
     (print "Creating database structure...") (flush)
     (create-tables)
-    (println " done")
-
-    (print "Creating admin user type...") (flush)
-    (create-user-type "admin")
     (println " done")))
