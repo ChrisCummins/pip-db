@@ -79,7 +79,7 @@
         };
 
         // Header row
-        for (var j in data[0])
+        for (var j in records[0])
             csv = appendItemToLine(j, csv);
 
         csv += EOL;
@@ -101,27 +101,35 @@
     /*
      * PIP-DB DOWNLOADS PAGE
      */
+
+    // JSON data response map
+    var records = data['records'];
+
+    // UI components
     var $table = $('#table');
     var $tbody = $(' tbody', $table);
     var $text = $('#text');
 
     var $ff = $('ul#ff');
     var $download = $('#download');
+    var $noResultsMessage = $('#no-results');
 
+    // Global state
     var format = 'csv';
     var mime = 'text/csv';
 
     // Add 'available_at' attributes and filter out 'id'
-    for (var record in data) {
-        data[record]['available_at'] = 'http://' + location.host + '/r/' + data[record]['id'];
-        delete data[record]['id'];
+    for (var i in records) {
+        var record = records[i];
+        record['available_at'] = 'http://' + location.host + '/r/' + record['id'];
+        delete record['id'];
     }
 
     // Generate text formatted data
     var textFormats = {
-        'json': JSON.stringify(data, null, '\t') + '\n',
-        'xml': json2xml(data),
-        'csv': json2csv(data)
+        'json': JSON.stringify(records, null, '\t') + '\n',
+        'xml': json2xml(records),
+        'csv': json2csv(records)
     };
 
     var showTable = function () {
@@ -201,22 +209,29 @@
                 $(' td:nth-child(' + ++j + ')', $row).html(record[key]);
         };
 
-        // Generate the header row:
-        var header = '<tr><td>0</td>';
+        if (data['no_of_matches']) {
+            // Generate the header row:
+            var header = '<tr><td>0</td>';
 
-        for (var key in data[0])
-            header += '<td>' + humanReadable(key) + '</td>';
+            for (var key in records[0])
+                header += '<td>' + humanReadable(key) + '</td>';
 
-        $(' thead', $table).append(header + '</tr>');
+            $(' thead', $table).append(header + '</tr>');
 
-        // Populate table contents:
-        var dataLength = $(' thead tr td', $table).length;
-        var noRows = Math.max(20, data.length + 5);
+            // Populate table contents:
+            var dataLength = $(' thead tr td', $table).length;
+            var noRows = Math.max(20, records.length + 5);
 
-        for (var i = 0; i < noRows; i++) {
-            addEmptyRow(i + 1);
-            if (i < data.length)
-                populateRow((i + 1), data[i]);
+            for (var i = 0; i < noRows; i++) {
+                addEmptyRow(i + 1);
+                if (i < records.length)
+                    populateRow((i + 1), records[i]);
+            }
+
+            $('.download').show();
+        } else {
+            // Show the "no results message"
+            $noResultsMessage.show();
         }
     });
 

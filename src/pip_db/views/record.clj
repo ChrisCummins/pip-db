@@ -28,7 +28,7 @@
 
 ;; External links are presented inside of a panel.
 (defn extern-links [& links]
-  (if (not (empty? links))
+  (if (seq links)
     [:div.panel.panel-primary.panel-extern
      [:div.panel-heading
       [:h3.panel-title "External Links"]]
