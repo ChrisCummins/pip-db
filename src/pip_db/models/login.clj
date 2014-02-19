@@ -27,7 +27,7 @@
   (str "Add user accound - user: " user " pass: " (get-hash password)))
 
 (defn attempt-register [user password]
-  (if (not (get-user user))
+  (if-not (get-user user)
     (do (add-account user password) true)
     false))
 
