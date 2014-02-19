@@ -1,4 +1,8 @@
-(ns pip-db.models.migration
+;; # Database Interface
+;;
+;; This namespace defines the interface and API for the database
+;; back-end of pip-db.
+(ns pip-db.db
   (:require [clojure.java.jdbc :as sql]))
 
 (defn migrated? []
