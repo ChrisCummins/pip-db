@@ -20,7 +20,7 @@
         m       (get params "m")]
 
     (AND
-     (EQ {:field "id" :value id :numeric true}) ; Match specific record ID
+     (EQ {:field "id" :value id})       ; Match specific record ID
      (AND                               ; Match all keywords
       (for [word q]
         (OR
