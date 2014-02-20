@@ -5,17 +5,11 @@
             [pip-db.views.ui :as ui]
             [clojure.string :as str]))
 
-(def file-format-dropdown
-  [:ul#ff.dropdown-menu
-   [:li [:a {:href "#preview" :data-format "xml"}  "XML"]]
-   [:li.disabled [:a {:href "#preview" :data-format "csv"}  "CSV"]]
-   [:li [:a {:href "#preview" :data-format "json"} "JSON"]]])
-
 (def file-format-button
   [:div.input-group-btn.dropup
-   [:button.btn.btn-block.btn-success.dropdown-toggle {:data-toggle "dropdown"}
-    "Select File Format"]
-   file-format-dropdown])
+   [:button.btn.btn-block.btn-success.dropdown-toggle
+    {:data-toggle "dropdown"} "Select File Format"]
+   [:ul#ff.dropdown-menu]])
 
 (def download-button
   [:div.input-group-btn
