@@ -49,19 +49,21 @@
      [:div.panel-body text]]))
 
 (def reference-style-dropdown
-  [:ul.reference-dropdown.dropdown-menu
-   [:li.disabled [:a {:href "#vancouver" :data-format "vancouver"} "Vancouver"]]
-   [:li          [:a {:href "#acs"       :data-format "acs"}       "ACS Style"]]])
+  [:ul.reference-dropdown.dropdown-menu])
 
 (def reference-style-button
   [:button.reference-style.btn.btn-success.dropdown-toggle.pull-right
    {:data-toggle "dropdown"} "Citation Style " [:span.caret]])
 
+(def reference-heading
+  [:h3.panel-title.pull-left "Reference this page"])
+
+(def reference-style
+  [:div.btn-group.pull-right reference-style-button reference-style-dropdown])
+
 (def reference-this-page-panel
   [:div.panel.panel-primary.panel-reference
-   [:div.panel-heading
-    [:h3.panel-title "Reference this page"
-     reference-style-button reference-style-dropdown]]
+   [:div.panel-heading reference-heading reference-style [:div.clearfix]]
    [:div.panel-body [:blockquote.reference-text]]])
 
 (defn record [request]
