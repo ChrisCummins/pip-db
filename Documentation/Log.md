@@ -2522,3 +2522,60 @@ To connect to remote Heroku database:
 ```
 $ psql -h ec2-54-197-249-167.compute-1.amazonaws.com -U wvihkhkcwenphx -d dcmcfqgrb9iovm
 ```
+
+### Thursday 20th
+
+Notes from meeting with Ian:
+
+ * The advantage of iteration labels is that it gives you specific
+   dates by which you can expect a set of actions to be completed. In
+   may case, that feature is handled by GitHub milestones.
+
+ * When writing up the report, split into two sections: system
+   construction, and system construction tooling (wording?). i.e. make
+   the distinction between the two parts of the project - build an
+   application, and building the supporting tools.
+
+Yet Another Protein Schema format:
+
+```
+{
+  "names": [<name1>,<name2>...],
+  "ec": [<ec1>,<ec2>,<ec3>,<ec4>],
+  "source": {
+    "binomial": <latin binomial>,
+    "common": <common name>
+  },
+  "location": <location>,
+  "mw": {
+    "min": <mw min>,
+    "max": <mw max>
+  },
+  "sequence": <fasta>,
+  "subunit": {
+    "no": <subunit no>,
+    "mw": <subunit mw>
+  },
+  "iso_enzymes": <no of iso-enzymes>,
+  "pi": {
+    "min:" <min>,
+    "max:" <max>,
+    "maxjor": <pi of major component>
+  },
+  "temp": {
+    "min": <min temp>,
+    "max": <max temp>
+  },
+  "method": <experimental method>,
+  "references": {
+    "original_text": {
+      "full": <url>,
+      "abstract": <url>
+    },
+    "pubmed": <url>,
+    "taxonomy": <url>,
+    "sequence": <url>
+  },
+  "notes": <string>
+}
+```
