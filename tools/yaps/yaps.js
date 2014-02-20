@@ -9,7 +9,7 @@ var fs  = require('fs');
 
 // Print a message
 var message = function (msg) {
-  process.stderr.write(csv + ':' + lineCount + ' ' + msg + '\n');
+  process.stderr.write('At line ' + lineCount + ':\t' + msg + '\n');
 };
 
 // Print a warning message
@@ -44,8 +44,19 @@ var schema = [
 // The dataset delimiter
 var delim = '\t';
 
+var nullValueRe = new RegExp([
+  '^(',
+  '(n[.]?g[.]?)',
+  '|(not available)',
+  '|(no entry)',
+  '|(n[./]?a[.]?)',
+  '|(not applicable)',
+  '|(unavailable)',
+  ')$'
+].join(''), 'i');
+
 // Determines and sets the indexes of schema values
-var setSchemaIndexes = function(tokens) {
+var setSchemaIndexes = function (tokens) {
 
   var schemaIndex, getSchemaIndex = function (value) {
     for (var j in schema) {
@@ -79,6 +90,46 @@ var setSchemaIndexes = function(tokens) {
   }
 };
 
+// Formalise a set of tokens
+var tokens2Schema = function (tokens) {
+
+  var yaps = {};
+
+  for (var i in schema) {
+
+    // Compute the values from the row
+    var values = (function () {
+      var values = [];
+      var schemaProp = schema[i];
+      var prop = yaps[schemaProp.name];
+
+      for (var j in schemaProp.indexes) {
+        var str = tokens[schemaProp.indexes[j]].trim();
+
+        if (str) { // Process value
+          if (str.match(nullValueRe)) // Warn if we're ignoring the value
+            warning('Ignoring value "' + str + '" for property "' +
+                    schemaProp.name + '"');
+          else
+            values.push(str);
+        }
+      }
+
+      return values.length ? values : undefined;
+    })();
+
+    if (values)
+      yaps[schema[i].name] = values; // TODO: convert to YAPS format
+  }
+
+  return yaps;
+};
+
+// TODO: parse schema and populate a YAPS object
+var schema2Yaps = function (schema) {
+  return schema;
+};
+
 // Process arguments
 var argv = process.argv, argc = argv.length;
 
@@ -99,11 +150,12 @@ readStream.on('error', function (error) {
 new lazy(readStream).lines.forEach(function (buffer) {
   // Per-line callback
   var row = buffer.toString().replace(/\r/, ''); // Strip carriage return
+  var tokens = row.split(delim);
 
   if (schema[0].indexes) // Body
-    process.exit(0)
+    console.log(schema2Yaps(tokens2Schema(tokens)));
   else // Header row
-    setSchemaIndexes(row.split(delim));
+    setSchemaIndexes(tokens);
 
   lineCount++;
 });
