@@ -17,6 +17,11 @@ var warning = function (msg) {
   message('WARNING: ' + msg);
 };
 
+// Print an error message
+var error = function (msg) {
+  message('ERROR: ' + msg);
+};
+
 // The dataset schema
 var schema = [
   {name: 'names',         regex: '(?:protein(?: name[s]?)?)|(?:alternative name ?(?:[(]?s[)]?)?)'},
