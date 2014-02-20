@@ -19,5 +19,6 @@
     "url": "https://github.com/ChrisCummins/pip-db"
   },
   "dependencies": {
+    "lazy": "~1.0.11"
   }
 }
