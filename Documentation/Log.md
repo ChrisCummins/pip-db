@@ -2558,9 +2558,9 @@ Yet Another Protein Schema format:
   },
   "iso_enzymes": <no of iso-enzymes>,
   "pi": {
-    "min:" <min>,
-    "max:" <max>,
-    "maxjor": <pi of major component>
+    "min": <min>,
+    "max": <max>,
+    "major": <pi of major component>
   },
   "temp": {
     "min": <min temp>,
@@ -2578,4 +2578,39 @@ Yet Another Protein Schema format:
   },
   "notes": <string>
 }
+```
+
+Preparing and exporting dataset from Excel:
+
+1. Ensure that header line is a *single line*.
+2. Save as -> "Unicode text".
+3. Run `iconv -f UTF-16 -t UTF-8 dataset.txt > dataset-utf8.txt`
+
+The Authoritative list of dataset headers:
+
+```
+Sheet
+EC
+Protein
+Alternative name(s)
+Source
+Organ and/or Subcellular locaction
+M.W
+Subunit No.
+Subunit M.W
+No. of Iso-enzymes
+pI maximum value
+pi Min Value
+pi Max Value
+pI value of major component
+pI
+Temperature (ºC)
+Method
+Valid sequence(s) available
+UniportKB/ Swiss-Prot/ Protein sequence
+Species Taxonomy
+Full text
+(Paid article) Only abstract available
+Pubmed Link
+Notes
 ```
