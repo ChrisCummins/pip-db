@@ -2614,3 +2614,28 @@ Full text
 Pubmed Link
 Notes
 ```
+
+A sensitive 3-layered approach to data integrity:
+
+1. **Pre-processing** - Applied to existing dataset
+    * Destructive
+    * DO AS LITTLE AS POSSIBLE
+        * Remove "Not given" values
+        * Trim trailing/leading whitespace
+        * Standardise capitalisation
+
+
+2. **Storage-processing** - Upload time
+    * Non-destructive
+    * Adding data, not modifying or taking it away
+        * Adding numerical pI fields
+        * Symbolically linking similar results
+
+3. **Post-processing** - Applied
+    * Non-destructive
+    * Applied lazily (on demand, each time a user requests it)
+        * So we don't want to be doing too much, that's time consuming/wasted
+        * Focuses on things that are likely to change
+            * Relative timestamps [seconds-since-epoch] -> "8 minutes ago"
+        * OR focuses on things that are easier to compute than to store
+            * Switching between JSON/XML
