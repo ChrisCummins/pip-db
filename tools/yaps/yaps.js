@@ -139,9 +139,122 @@ var tokens2Row = function (tokens) {
   return yaps;
 };
 
-// TODO: parse schema and populate a YAPS object
-var schema2Yaps = function (schema) {
-  return schema;
+// Convert a row object into a Yaps object
+var row2Yaps = function (row) {
+
+  var yaps = {};
+
+  // Protein names
+  if (row.names) {
+    yaps.names = (function (arr) {
+      var n = [];
+
+      for (var i in arr)
+        n.push.apply(n, arr[i].split('/'));
+
+      for (var i in n)
+        n[i] = n[i].trim().replace(/\.$/, '');
+
+      return n;
+    })(row.names);
+  }
+
+  // Enzyme commission number
+  if (row.ec)
+    yaps.ec = row.ec[0].split('.');
+
+  // Source
+  if (row.source)
+    yaps.source = row.source[0];
+
+  // Location
+  if (row.location)
+    yaps.location = row.location[0];
+
+  // MW
+  if (row.mw)
+    yaps.mw = (function (str) {
+      var c = str.split(/ ?[-\/] ?/);
+
+      return {min: c[0], max: c.length > 1 ? c[1] : c[0]};
+    })(row.mw[0]);
+
+  // Subunit
+  if (row.sub_no || row.sub_mw) {
+    yaps.subunit = {};
+
+    if (row.sub_no)
+      yaps.subunit.no = row.sub_no[0];
+
+    if (row.sub_mw)
+      yaps.subunit.mw = row.sub_mw[0];
+  }
+
+  // No of Iso-Enzymes
+  if (row.iso_enzymes)
+    yaps.iso_enzymes = row.iso_enzymes[0];
+
+  // PI
+  if (row.pi_exact || row.pi_min || row.pi_max || row.pi_major) {
+    yaps.pi = {};
+
+    if (row.pi_major)
+      yaps.pi.major = row.pi_major[0];
+
+    if (row.pi_exact) {
+      yaps.pi.min = row.pi_exact[0];
+      yaps.pi.max = row.pi_exact[0];
+    } else {
+      if (row.pi_min)
+        yaps.pi.min = row.pi_min[0];
+      if (row.pi_max)
+        yaps.pi.max = row.pi_max[0];
+    }
+  };
+
+  // Temperature
+  if (row.temp)
+    yaps.temp = (function (str) {
+      var c = str.replace(/[ºْ]/, '').split(/ ?[-\/] ?/);
+
+      return {min: c[0], max: c.length > 1 ? c[1] : c[0]};
+    })(row.temp[0]);
+
+  if (row.method)
+    yaps.method = row.method[0];
+
+  // References
+  if (row.full_text || row.abstract_only || row.pubmed ||
+      row.taxonomy || row.sequence)
+    yaps.references = (function () {
+      var ref = {};
+
+      if (row.full_text || row.abstract_only) {
+        ref.original_text = {};
+
+        if (row.full_text)
+          ref.original_text.full = row.full_text[0];
+
+        if (row.abstract_only)
+          ref.original_text.abstract = row.abstract_only[0];
+      }
+
+      if (row.pubmed)
+        ref.pubmed = row.pubmed[0];
+
+      if (row.taxonomy)
+        ref.taxonomy = row.taxonomy[0];
+
+      if (row.sequence)
+        ref.sequence = row.sequence[0];
+
+      return ref;
+    })();
+
+  if (row.notes)
+    yaps.notes = row.notes[0];
+
+  return yaps;
 };
 
 // Process arguments
@@ -156,19 +269,23 @@ if (argc !== 3) {
 var csv = argv[2];
 var lineCount = 1;
 var readStream = fs.createReadStream(csv);
+var yaps = [];
 
 readStream.on('error', function (error) {
   process.stderr.write('Unable to read file "' + csv + '"!\n');
 });
 
-new lazy(readStream).lines.forEach(function (buffer) {
+new lazy(readStream).on('end', function () {
+  // End of processing callback
+  console.log(JSON.stringify(yaps));
+}).lines.forEach(function (buffer) {
   // Per-line callback
-  var row = buffer.toString().replace(/\r/, ''); // Strip carriage return
-  var tokens = row.split(delim);
+  var line = buffer.toString().replace(/\r/, ''); // Strip carriage return
+  var tokens = line.split(delim);
 
   if (schema[0].indexes) // Body
-    console.log(schema2Yaps(tokens2Schema(tokens)));
-  else // Header row
+    yaps.push(row2Yaps(tokens2Row(tokens)));
+  else // Header line
     setSchemaIndexes(tokens);
 
   lineCount++;
