@@ -142,60 +142,96 @@
         delete record['id'];
     }
 
-    // Generate text formatted data
-        'json': JSON.stringify(records, null, '\t') + '\n',
-        'xml': json2xml(strippedRecords),
-        'csv': json2csv(strippedRecords)
-    var downloadFormats = {
-    };
+    /*
+     * File format selection
+     */
+    var transitionDuration = 300;
+
 
     var showTable = function () {
-        $table.show();
+        $table.fadeIn(transitionDuration);
         $text.hide();
     };
 
     var showText = function () {
         $table.hide();
-        $text.show();
+        $text.fadeIn(transitionDuration);
     };
 
-    var updateActiveFormat = function() {
-        $text.text(downloadFormats[format]);
-
-        switch (format) {
-        case 'json':
-            mime = 'application/json';
-            showText();
-            break;
-        case 'xml':
-            mime = 'application/xml';
-            showText();
-            break;
-        case 'csv':
-            mime = 'text/csv';
-            showTable();
-            break;
+    // Generate text formatted data
+    var downloadFormats = {
+        'CSV': {
+            blob: json2csv(strippedRecords),
+            mime: 'text/csv',
+            extension: '.csv',
+            select: showTable
+        },
+        'JSON': {
+            blob: JSON.stringify(records, null, '\t') + '\n',
+            mime: 'application/json',
+            extension: '.json',
+            select: showText
+        },
+        'XML': {
+            blob: json2xml(strippedRecords),
+            mime: 'application/xml',
+            extension: '.xml',
+            select: showText
         }
-    }
+    };
 
-    /*
-     * Set new active file format
-     */
+    // Instantiate the list of formats
+    for (var format in downloadFormats) {
+        var a = '<a href="#' + format.split(' ')[0].toLowerCase() +
+            '">' + format + '</a>';
+
+        $ff.append('<li>' + a + '</li>');
+    };
+
+    // Set a new download file format
+    var setActiveDownloadFormat = function (newFormat) {
+        var select = downloadFormats[newFormat].select;
+
+        // Transition fade controls
+        if ($text.is(':visible')) {
+            $text.fadeOut(transitionDuration, function () {
+                if (select === showText) {
+                    $text.text(downloadFormats[newFormat].blob);
+                    showText();
+                } else {
+                    showTable();
+                }
+            });
+        } else if (select !== showTable) {
+            $table.fadeOut(transitionDuration, function () {
+                $text.text(downloadFormats[newFormat].blob);
+                showText();
+            });
+        }
+    };
+
+    // Respond to user selecting new download format
     $(' li a', $ff).click(function () {
-        format = $(this).attr('data-format').toLowerCase();
+        var format = $(this).text();
 
-        // Disable the selected format
-        $(' li', $ff).removeClass('disabled');
-        $(this).parent().addClass('disabled');
+        // Highlight the selected format
+        $(' li', $ff).removeClass('active');
+        $(this).parent().addClass('active');
 
-        $download.text('Download results.' + format);
+        // Set new download button text
+        $download.text('Download results.' + downloadFormats[format].extension);
 
-        updateActiveFormat();
+        // Update download preview
+        setActiveDownloadFormat(format);
     });
 
-    $(document).ready(function () {
-        updateActiveFormat();
+    // Set the first format as active
+    setActiveDownloadFormat((function () {
+        for (var format in downloadFormats)
+            return format;
+    })());
 
+    $(document).ready(function () {
         /*
          * Generate a human readable version of a table field.
          */
@@ -253,9 +289,13 @@
     });
 
     $download.click(function () {
-        var blob = new Blob([downloadFormats[format]], {type: mime + ';charset=utf-8'});
+        var format = $(' li.active a', $ff).text(); // Active file format
 
-        saveAs(blob, 'results.' + format);
+        var blob = new Blob([downloadFormats[format].blob], {
+            type: downloadFormats[format].mime + ';charset=utf-8'
+        });
+
+        saveAs(blob, 'results.' + downloadFormats[format].extension);
     });
 
 }());
