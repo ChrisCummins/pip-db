@@ -14,12 +14,12 @@ var message = function (msg) {
 
 // Print a warning message
 var warning = function (msg) {
-  message('WARNING: ' + msg);
+  message('[WARNING]\t' + msg);
 };
 
 // Print an error message
 var error = function (msg) {
-  message('ERROR: ' + msg);
+  message('[ERROR!!]\t' + msg);
 };
 
 // The dataset schema
@@ -97,7 +97,7 @@ var setSchemaIndexes = function (tokens) {
 };
 
 // Formalise a set of tokens
-var tokens2Schema = function (tokens) {
+var tokens2Row = function (tokens) {
 
   var yaps = {};
 
