@@ -48,6 +48,22 @@
      [:div.panel-heading [:h3.panel-title "Notes"]]
      [:div.panel-body text]]))
 
+(def reference-style-dropdown
+  [:ul.reference-dropdown.dropdown-menu
+   [:li.disabled [:a {:href "#vancouver" :data-format "vancouver"} "Vancouver"]]
+   [:li          [:a {:href "#acs"       :data-format "acs"}       "ACS Style"]]])
+
+(def reference-style-button
+  [:button.reference-style.btn.btn-success.dropdown-toggle.pull-right
+   {:data-toggle "dropdown"} "Citation Style " [:span.caret]])
+
+(def reference-this-page-panel
+  [:div.panel.panel-primary.panel-reference
+   [:div.panel-heading
+    [:h3.panel-title "Reference this page"
+     reference-style-button reference-style-dropdown]]
+   [:div.panel-body [:blockquote.reference-text]]])
+
 (defn record [request]
   (page
    request
@@ -86,9 +102,5 @@
               (extern "Species Taxonomy" (request :species))
               (extern "Protein Sequence" (request :sequence)))
              (notes-panel (request :notes))
-             [:div.panel.panel-primary.panel-reference
-              [:div.panel-heading
-               [:h3.panel-title "Reference this page"]]
-              [:div.panel-body
-               [:blockquote#reference]]]]]]
+             reference-this-page-panel]]]
     :javascript (util/inline-js "/js/record.inline.js")}))
