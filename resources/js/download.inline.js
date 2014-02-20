@@ -143,10 +143,10 @@
     }
 
     // Generate text formatted data
-    var textFormats = {
         'json': JSON.stringify(records, null, '\t') + '\n',
         'xml': json2xml(strippedRecords),
         'csv': json2csv(strippedRecords)
+    var downloadFormats = {
     };
 
     var showTable = function () {
@@ -160,7 +160,7 @@
     };
 
     var updateActiveFormat = function() {
-        $text.text(textFormats[format]);
+        $text.text(downloadFormats[format]);
 
         switch (format) {
         case 'json':
@@ -253,7 +253,7 @@
     });
 
     $download.click(function () {
-        var blob = new Blob([textFormats[format]], {type: mime + ';charset=utf-8'});
+        var blob = new Blob([downloadFormats[format]], {type: mime + ';charset=utf-8'});
 
         saveAs(blob, 'results.' + format);
     });
