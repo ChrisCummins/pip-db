@@ -1,6 +1,6 @@
 {
-  "name": "yaps",
-  "description": "Yet Another Protein Schema",
+  "name": "csv2yaps",
+  "description": "Converts data in CSV format into Yet Another Protein Schema",
   "version": "0.0.1",
   "author": {
     "name": "Chris Cummins",
@@ -12,7 +12,7 @@
   },
   "private": true,
   "bin": {
-    "yaps": "yaps.js"
+    "csv2yaps": "csv2yaps.js"
   },
   "repository": {
     "type": "git",
