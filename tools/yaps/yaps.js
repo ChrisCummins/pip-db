@@ -108,9 +108,17 @@ var tokens2Row = function (tokens) {
       var values = [];
       var schemaProp = schema[i];
       var prop = yaps[schemaProp.name];
+      var str;
 
       for (var j in schemaProp.indexes) {
-        var str = tokens[schemaProp.indexes[j]].trim();
+        str = tokens[schemaProp.indexes[j]];
+
+        if (str !== undefined)
+          str.trim();
+        else {
+          error('Line is too short. No column for property "' +
+                schemaProp.name + '". Results may be corrupted.');
+        }
 
         if (str) { // Process value
           if (str.match(nullValueRe)) // Warn if we're ignoring the value
