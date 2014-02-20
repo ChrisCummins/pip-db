@@ -48,6 +48,24 @@
      [:div.panel-heading [:h3.panel-title "Notes"]]
      [:div.panel-body text]]))
 
+(def reference-style-dropdown
+  [:ul.reference-dropdown.dropdown-menu])
+
+(def reference-style-button
+  [:button.reference-style.btn.btn-success.dropdown-toggle.pull-right
+   {:data-toggle "dropdown"} "Citation Style " [:span.caret]])
+
+(def reference-heading
+  [:h3.panel-title.pull-left "Reference this page"])
+
+(def reference-style
+  [:div.btn-group.pull-right reference-style-button reference-style-dropdown])
+
+(def reference-this-page-panel
+  [:div.panel.panel-primary.panel-reference
+   [:div.panel-heading reference-heading reference-style [:div.clearfix]]
+   [:div.panel-body [:blockquote.reference-text]]])
+
 (defn record [request]
   (page
    request
@@ -86,9 +104,5 @@
               (extern "Species Taxonomy" (request :species))
               (extern "Protein Sequence" (request :sequence)))
              (notes-panel (request :notes))
-             [:div.panel.panel-primary.panel-reference
-              [:div.panel-heading
-               [:h3.panel-title "Reference this page"]]
-              [:div.panel-body
-               [:blockquote#reference]]]]]]
+             reference-this-page-panel]]]
     :javascript (util/inline-js "/js/record.inline.js")}))
