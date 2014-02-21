@@ -51,7 +51,7 @@ var delim = '\t';
 
 var nullValueRe = new RegExp([
   '^(',
-  '|(not given( \\(N[.]?G\\))?)',
+  '|(not given( \\(N[.]?G[.]?\\))?)',
   '|(n[.]?g[.]?)',
   '|(not available)',
   '|(no entry)',
