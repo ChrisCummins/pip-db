@@ -58,7 +58,7 @@
 (defn str->int [string]
   (try
     (Integer/parseInt string)
-    (catch NumberFormatException e nil)))
+    (catch Exception e nil)))
 
 (defn is-number? [n]
   (if (nil? (str->num n)) false true))
