@@ -1,5 +1,4 @@
 (ns pip-db.controllers.record
-  (:use [compojure.core :only (defroutes GET)])
   (:require [pip-db.models.record :as model]
             [pip-db.views.advanced :as advanced]
             [pip-db.views.record :as view]
@@ -7,6 +6,6 @@
 
 (defn handler [request]
   (let [data (model/record ((request :params) :id))]
-    (if data
+    (if (> (data :no_of_matches) 0)
       (view/record (assoc request :results data))
       (error/status-404))))
