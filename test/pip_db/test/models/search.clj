@@ -38,45 +38,36 @@
 
   (testing "Single 'q' parameter"
     (is (= (dut/conditionals {"q" "foo"})
-           (str "((((LOWER(name) LIKE LOWER('%foo%')) OR "
-                "(LOWER(alt_name) LIKE LOWER('%foo%')))))"))))
+           "((LOWER(names) LIKE LOWER('%foo%')))")))
 
   (testing "Multiple 'q' parameters"
     (is (= (dut/conditionals {"q" "foo bar"})
-           (str "((((LOWER(name) LIKE LOWER('%foo%')) OR "
-                "(LOWER(alt_name) LIKE LOWER('%foo%'))) AND "
-                "((LOWER(name) LIKE LOWER('%bar%')) OR "
-                "(LOWER(alt_name) LIKE LOWER('%bar%')))))"))))
+           (str "((LOWER(names) LIKE LOWER('%foo%')) AND "
+                "(LOWER(names) LIKE LOWER('%bar%')))"))))
 
   (testing "Single 'q_any' parameter"
     (is (= (dut/conditionals {"q_any" "foo"})
-           (str "((((LOWER(name) LIKE LOWER('%foo%')) OR "
-                "(LOWER(alt_name) LIKE LOWER('%foo%')))))"))))
+           "((LOWER(names) LIKE LOWER('%foo%')))")))
 
   (testing "Multiple 'q_any' parameters"
     (is (= (dut/conditionals {"q_any" "foo bar"})
-           (str "((((LOWER(name) LIKE LOWER('%foo%')) OR "
-                "(LOWER(alt_name) LIKE LOWER('%foo%'))) OR "
-                "((LOWER(name) LIKE LOWER('%bar%')) OR "
-                "(LOWER(alt_name) LIKE LOWER('%bar%')))))"))))
+           (str "((LOWER(names) LIKE LOWER('%foo%')) AND "
+                "(LOWER(names) LIKE LOWER('%bar%')))"))))
 
   (testing "Single 'q_ne' parameter"
     (is (= (dut/conditionals {"q_ne" "foo"})
-           (str "((((LOWER(name) NOT LIKE LOWER('%foo%')) AND "
-                "(LOWER(alt_name) NOT LIKE LOWER('%foo%')))))"))))
+           "((LOWER(names) NOT LIKE LOWER('%foo%')))")))
 
   (testing "Multiple 'q_ne' parameters"
     (is (= (dut/conditionals {"q_ne" "foo bar"})
-           (str "((((LOWER(name) NOT LIKE LOWER('%foo%')) AND "
-                "(LOWER(alt_name) NOT LIKE LOWER('%foo%'))) AND "
-                "((LOWER(name) NOT LIKE LOWER('%bar%')) AND "
-                "(LOWER(alt_name) NOT LIKE LOWER('%bar%')))))"))))
+           (str "((LOWER(names) NOT LIKE LOWER('%foo%')) AND "
+                "(LOWER(names) NOT LIKE LOWER('%bar%')))"))))
 
   (testing "Location paramater"
     (is (= (dut/conditionals {"q_l" "foo bar"})
-           "((LOWER(organ) LIKE LOWER('%foo bar%')))")))
+           "((LOWER(location) LIKE LOWER('%foo bar%')))")))
 
-  (testing "Organ paramater"
+  (testing "Source paramater"
     (is (= (dut/conditionals {"q_s" "foo bar"})
            "((LOWER(source) LIKE LOWER('%foo bar%')))")))
 
@@ -90,6 +81,8 @@
 
   (testing "A query with a condition"
     (is (= (dut/query {"q" "foo"})
-           (str "SELECT * FROM records "
-                "WHERE ((((LOWER(name) LIKE LOWER('%foo%')) OR "
-                "(LOWER(alt_name) LIKE LOWER('%foo%')))))")))))
+           (str "SELECT id,names,ec,source,location,mw_min,mw_max,sub_no,"
+                "sub_mw,iso_enzymes,pi_min,pi_max,pi_major,temp_min,temp_max,"
+                "method,ref_full,ref_abstract,ref_pubmed,ref_taxonomy,"
+                "ref_sequence,notes,created_at FROM records WHERE ((LOWER(names) "
+                "LIKE LOWER('%foo%')))")))))
