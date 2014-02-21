@@ -38,11 +38,11 @@ var schema = [
   {name: 'pi_major',      regex: 'pi (?:value of)? major component'},
   {name: 'temp',          regex: 'temperature(?: [(]?[ºo]?C[)]?)?'},
   {name: 'method',        regex: '(?:experimental )?method'},
-  {name: 'full_text',     regex: 'full text'},
-  {name: 'abstract_only', regex: '.*abstract(?: available)?'},
-  {name: 'pubmed',        regex: 'pubmed(?: link)?'},
-  {name: 'taxonomy',      regex: '(?:species )?taxonomy'},
-  {name: 'sequence',      regex: '.*sequence'},
+  {name: 'ref_full',      regex: 'full text'},
+  {name: 'ref_abstract',  regex: '.*abstract(?: available)?'},
+  {name: 'ref_pubmed',    regex: 'pubmed(?: link)?'},
+  {name: 'ref_taxonomy',  regex: '(?:species )?taxonomy'},
+  {name: 'ref_sequence',  regex: '.*sequence'},
   {name: 'notes',         regex: 'notes'}
 ];
 
@@ -172,85 +172,71 @@ var row2Yaps = function (row) {
     yaps.location = row.location[0];
 
   // MW
-  if (row.mw)
-    yaps.mw = (function (str) {
-      var c = str.split(/ ?[-\/] ?/);
+  if (row.mw) {
+    var c = row.mw[0].split(/ ?[-\/] ?/);
 
-      return {min: c[0], max: c.length > 1 ? c[1] : c[0]};
-    })(row.mw[0]);
-
-  // Subunit
-  if (row.sub_no || row.sub_mw) {
-    yaps.subunit = {};
-
-    if (row.sub_no)
-      yaps.subunit.no = row.sub_no[0];
-
-    if (row.sub_mw)
-      yaps.subunit.mw = row.sub_mw[0];
+    yaps.mw_min = c[0];
+    yaps.mw_max = c.length > 1 ? c[1] : c[0];
   }
+
+  // Subunit No.
+  if (row.sub_no)
+    yaps.sub_no = row.sub_no[0];
+
+  // Subunit M.W
+  if (row.sub_mw)
+    yaps.sub_mw = row.sub_mw[0];
 
   // No of Iso-Enzymes
   if (row.iso_enzymes)
     yaps.iso_enzymes = row.iso_enzymes[0];
 
-  // PI
-  if (row.pi_exact || row.pi_min || row.pi_max || row.pi_major) {
-    yaps.pi = {};
+  // pI min & pI Max
+  if (row.pi_exact) {
+    yaps.pi_min = row.pi_exact[0];
+    yaps.pi_max = row.pi_exact[0];
+  } else {
 
-    if (row.pi_major)
-      yaps.pi.major = row.pi_major[0];
+    if (row.pi_min)
+      yaps.pi_min = row.pi_min[0];
 
-    if (row.pi_exact) {
-      yaps.pi.min = row.pi_exact[0];
-      yaps.pi.max = row.pi_exact[0];
-    } else {
-      if (row.pi_min)
-        yaps.pi.min = row.pi_min[0];
-      if (row.pi_max)
-        yaps.pi.max = row.pi_max[0];
-    }
-  };
+    if (row.pi_max)
+      yaps.pi_max = row.pi_max[0];
+  }
+
+  // pI major
+  if (row.pi_major)
+    yaps.pi_major = row.pi_major[0];
 
   // Temperature
-  if (row.temp)
-    yaps.temp = (function (str) {
-      var c = str.replace(/[ºْ]/, '').split(/ ?[-\/] ?/);
+  if (row.temp) {
+    var c = row.temp[0].replace(/[ºْ]/, '').split(/ ?[-\/] ?/);
 
-      return {min: c[0], max: c.length > 1 ? c[1] : c[0]};
-    })(row.temp[0]);
+    yaps.temp_min = c[0];
+    yaps.temp_max = c.length > 1 ? c[1] : c[0];
+  }
 
+  // Experimental method
   if (row.method)
     yaps.method = row.method[0];
 
   // References
-  if (row.full_text || row.abstract_only || row.pubmed ||
-      row.taxonomy || row.sequence)
-    yaps.references = (function () {
-      var ref = {};
+  if (row.ref_full)
+    yaps.ref_full = row.ref_full[0];
 
-      if (row.full_text || row.abstract_only) {
-        ref.original_text = {};
+  if (row.ref_abstract)
+    yaps.ref_abstract = row.ref_abstract[0];
 
-        if (row.full_text)
-          ref.original_text.full = row.full_text[0];
+  if (row.ref_pubmed)
+    yaps.ref_pubmed = row.ref_pubmed[0];
 
-        if (row.abstract_only)
-          ref.original_text.abstract = row.abstract_only[0];
-      }
+  if (row.ref_taxonomy)
+    yaps.ref_taxonomy = row.ref_taxonomy[0];
 
-      if (row.pubmed)
-        ref.pubmed = row.pubmed[0];
+  if (row.ref_sequence)
+    yaps.ref_sequence = row.ref_sequence[0];
 
-      if (row.taxonomy)
-        ref.taxonomy = row.taxonomy[0];
-
-      if (row.sequence)
-        ref.sequence = row.sequence[0];
-
-      return ref;
-    })();
-
+  // Notes
   if (row.notes)
     yaps.notes = row.notes[0];
 
