@@ -2640,3 +2640,14 @@ A sensitive 3-layered approach to data integrity:
             * Relative timestamps [seconds-since-epoch] -> "8 minutes ago"
         * OR focuses on things that are easier to compute than to store
             * Switching between JSON/XML
+
+### Friday 21st
+
+TODO:
+
+ * #298 YAPS: Use a flat JSON schema
+ * #266 Add the ability to return data in XML/JSON formats
+ * #297 models/search: Use exact matches for record ID query
+ * #285 download: Table preview contains mis-aligned cells
+ * #283 Name request handlers after the HTTP method they handle
+ * #294 record: Add a "See other records like this" hover button
