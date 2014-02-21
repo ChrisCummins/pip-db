@@ -4,7 +4,8 @@
             [pip-db.models.search :as model]
             [pip-db.views.advanced :as advanced]
             [pip-db.views.download :as download]
-            [pip-db.views.search :as view]))
+            [pip-db.views.search :as view]
+            [pip-db.views.json :as json]))
 
 ;; Perform a search from the given request map and wrap the results
 ;; into a `:results` key.
@@ -30,6 +31,10 @@
 ;; Search page ring handler.
 (defn handler [request]
   ((response-function request) request))
+
+;; Search page ring handler.
+(defn json-handler [request]
+  (json/response (model/search (request :params))))
 
 (defn download-handler [request]
   (download/download (search-results request)))
