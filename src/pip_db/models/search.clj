@@ -1,5 +1,5 @@
 (ns pip-db.models.search
-  (:use [pip-db.query :only (AND OR EQ NE)])
+  (:use [pip-db.query :only (AND OR EQ NE GTE LTE)])
   (:require [clojure.java.jdbc :as sql]
             [clojure.string :as str]
             [pip-db.db :as db]))
@@ -16,7 +16,9 @@
         q_ne    (split-args (get params "q_ne"))
         q_s     (get params "q_s")
         q_l     (get params "q_l")
-        m       (get params "m")]
+        m       (get params "m")
+        pi_l    (get params "pi_l")
+        pi_h    (get params "pi_h")]
 
     (AND
      (EQ {:field "id" :value id})       ; Match specific record ID
@@ -29,7 +31,9 @@
        (NE {:field "names" :value word}))
      (EQ {:field "source" :value q_s})
      (EQ {:field "location" :value q_l})
-     (EQ {:field "method" :value m}))))
+     (EQ {:field "method" :value m})
+     (GTE {:field "real_pi_min" :value pi_l})
+     (LTE {:field "real_pi_max" :value pi_h}))))
 
 ;; ### Query components
 
