@@ -53,15 +53,15 @@
 
 ;; A robust string to integer parser, without any gotchas. Under
 ;; normal circumstances, it behaves as you would expect, e.g.
-;; `(= (string->int "5") 5)`. In case of error, it returns nil, e.g.
-;; `(= (string->int "abcd") nil)`.
-(defn string->int [string]
+;; `(= (str->int "5") 5)`. In case of error, it returns nil, e.g.
+;; `(= (str->int "abcd") nil)`, or `(= (str->int nil) nil)`.
+(defn str->int [string]
   (try
     (Integer/parseInt string)
     (catch NumberFormatException e nil)))
 
 (defn is-number? [n]
-  (if (nil? (string->int n)) false true))
+  (if (nil? (str->num n)) false true))
 
 ;; It's necessary to extend the SQL Timetsamp type in order to be able
 ;; to JSON-ify them. See: http://stackoverflow.com/a/19164491
