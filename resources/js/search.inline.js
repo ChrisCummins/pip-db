@@ -40,31 +40,37 @@
             return getCell(property, record[property]);
         };
 
-        // Get the HTML for a pI table cell from a record
+        // Get the text for a pI table cell from a record
         var getPiText = function () {
             /*
              * We allow for some flexibility in displaying isoelectric points. We
              * will try first to show an exact value, else a range of values, or
              * just an individual result within that range.
              */
-            var pi      = record['pi'];
-            var piMin   = record['pi_range_min'];
-            var piMax   = record['pi_range_max'];
+            var piMin   = record['pi_min'];
+            var piMax   = record['pi_max'];
             var piMajor = record['pi_major'];
 
-            if (pi)             return pi;
-            if (piMin && piMax) return piMin + ' - ' + piMax;
-            if (piMin)          return '> ' + piMin;
-            if (piMax)          return '< ' + piMax;
-            if (piMajor)        return piMajor + 'm';
-            return '' // Fallback, in case record has no value
+            if (piMin && piMax) {
+                if (piMin === piMax)
+                    return piMin;
+                else
+                    return piMin + ' - ' + piMax;
+            } else if (piMin)
+                return '> ' + piMin;
+            else if (piMax)
+                return '< ' + piMax;
+            else if (piMajor)
+                return piMajor + 'm';
+            else // Fallback, in case record has no value
+                return ''
         }
 
         var html = '<tr data-id="' + record['id'] + '">';
 
-        html += getRecordCell('name');
+        html += getRecordCell('names');
         html += getRecordCell('source');
-        html += getRecordCell('organ');
+        html += getRecordCell('location');
         html += getCell('pi', getPiText());
 
         $tbody.append(html + '</tr>');
