@@ -21,7 +21,9 @@
         pi_l    (get params "pi_l")
         pi_h    (get params "pi_h")
         mw_l    (str (util/str->num (get params "mw_l")))
-        mw_h    (str (util/str->num (get params "mw_h")))]
+        mw_h    (str (util/str->num (get params "mw_h")))
+        t_l    (str (util/str->num (get params "t_l")))
+        t_h    (str (util/str->num (get params "t_h")))]
 
     (AND
      (EQ {:field "id" :value id})       ; Match specific record ID
@@ -38,7 +40,9 @@
      (GTE {:field "real_pi_min" :value pi_l})
      (LTE {:field "real_pi_max" :value pi_h})
      (GTE {:field "real_mw_min" :value mw_l})
-     (LTE {:field "real_mw_max" :value mw_h}))))
+     (LTE {:field "real_mw_max" :value mw_h})
+     (GTE {:field "real_temp_min" :value t_l})
+     (LTE {:field "real_temp_max" :value t_h}))))
 
 ;; ### Query components
 
