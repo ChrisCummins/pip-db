@@ -53,7 +53,7 @@ var nullValueRe = new RegExp([
   '^(',
   '|(not given( \\(N[.]?G[.]?\\))?)',
   '|(n[.]?g[.]?)',
-  '|(not available)',
+  '|(not available( \\(N[./]?A[.]?\\))?)',
   '|(no entry)',
   '|(n[./]?a[.]?)',
   '|(not applicable)',
