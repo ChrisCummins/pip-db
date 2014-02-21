@@ -4,6 +4,7 @@
 ;; back-end of pip-db.
 (ns pip-db.db
   (:require [clojure.java.jdbc :as sql]
+            [clojure.string :as str]
             [pip-db.util :as util]))
 
 ;; SHA1 implementation
@@ -33,6 +34,7 @@
   (sql/with-connection (System/getenv "DATABASE_URL")
     (sql/create-table :records
                       [:id            "varchar(11)" "NOT NULL"]
+                      [:names         :varchar]
                       [:ec            :varchar]
                       [:source        :varchar]
                       [:location      :varchar]
@@ -66,10 +68,6 @@
                       [:created_at    :timestamp
                        "NOT NULL" "DEFAULT CURRENT_TIMESTAMP"])
 
-    (sql/create-table :protein_names
-                      [:name :varchar]
-                      [:records_id "varchar(11)" "NOT NULL"])
-
     (sql/create-table :users
                       [:id :serial "PRIMARY KEY"]
                       [:email :varchar "NOT NULL"]
@@ -83,7 +81,7 @@
 
 (defn add-record [r]
   (let [id              (record-hash r)
-        names           (r "names")
+        names           (str/join " / " (r "names"))
         ec_arr          (if (r "ec") (r "ec") {})
         ec0             (ec_arr 0)
         ec1             (ec_arr 1)
@@ -131,20 +129,16 @@
       ;; Insert records
       (sql/insert-values
        :records
-       [:id :ec :source :location :mw_min :mw_max :sub_no :sub_mw :iso_enzymes
+       [:id :names :ec :source :location :mw_min :mw_max :sub_no :sub_mw :iso_enzymes
         :pi_min :pi_max :pi_major :temp_min :temp_max :method :ref_full
         :ref_abstract :ref_pubmed :ref_taxonomy :ref_sequence :notes :real_ec1
         :real_ec2 :real_ec3 :real_ec4 :real_mw_min :real_mw_max :real_pi_min
         :real_pi_max :real_temp_min :real_temp_max]
-       [id ec source location mw_min mw_max sub_no sub_mw iso_enzymes
+       [id names ec source location mw_min mw_max sub_no sub_mw iso_enzymes
         pi_min pi_max pi_major temp_min temp_max method ref_full
         ref_abstract ref_pubmed ref_taxonomy ref_sequence notes real_ec1
         real_ec2 real_ec3 real_ec4 real_mw_min real_mw_max real_pi_min
-        real_pi_max real_temp_min real_temp_max])
-
-      ;; Insert names
-      (doseq [name names]
-        (sql/insert-values :protein_names [:name :records_id] [name id])))))
+        real_pi_max real_temp_min real_temp_max]))))
 
 (defn migrate []
   (when-not (migrated?)
