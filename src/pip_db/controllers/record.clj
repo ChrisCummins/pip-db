@@ -6,6 +6,6 @@
 
 (defn handler [request]
   (let [data (model/record ((request :params) :id))]
-    (if (> (data :no_of_matches) 0)
+    (if (pos? (data :no_of_matches))
       (view/record (assoc request :results data))
       (error/status-404))))
