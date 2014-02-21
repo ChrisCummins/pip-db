@@ -2650,3 +2650,32 @@ TODO:
  * #285 download: Table preview contains mis-aligned cells
  * #283 Name request handlers after the HTTP method they handle
  * #294 record: Add a "See other records like this" hover button
+
+New YAPS format:
+
+```
+{
+  "names": [<name1>,<name2>...],
+  "ec": <ec>,
+  "source": <source>,
+  "location": <location>,
+  "mw_min": <mw min>,
+  "mw_max": <mw max>,
+  "sequence": <fasta>,
+  "sub_no": <subunit no>,
+  "sub_mw": <subunit mw>,
+  "iso_enzymes": <no of iso-enzymes>,
+  "pi_min": <min>,
+  "pi_max": <max>,
+  "pi_major": <pi of major component>,
+  "temp_min": <min temp>,
+  "temp_max": <max temp>,
+  "method": <experimental method>,
+  "ref_full": <url>,
+  "ref_abstract": <url>,
+  "ref_pubmed": <url>,
+  "ref_taxonomy": <url>,
+  "ref_sequence": <url>,
+  "notes": <string>
+}
+```
