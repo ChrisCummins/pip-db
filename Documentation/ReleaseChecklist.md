@@ -16,6 +16,7 @@ release.
 * Run `./scripts/test-coverage.sh` and check the generated test
   coverage report. Is new code fully tested?
 * Run the test suite. Do any tests unexpectedly fail?
+* Check the state of the latest Travis CI builds. Is everything OK?
 * Run the application. Does everything behave properly?
 * Run `./scripts/indent.sh` and fix and commit any changes.
 * Run the linter scripts in `./scripts/linter` and fix and commit any

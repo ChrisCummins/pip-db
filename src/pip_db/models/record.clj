@@ -1,15 +1,12 @@
 (ns pip-db.models.record
   (:use [pip-db.query :only (AND OR EQ NE)])
-  (:require [clojure.java.jdbc :as sql]
-            [clojure.string :as str]
+  (:require [pip-db.db :as db]
             [pip-db.util :as util]))
 
-(defn query-string [id]
-  (str "SELECT * FROM records WHERE id='" id "'"))
+(defn query [id]
+  (str "SELECT " db/records-columns " FROM " db/records-table
+       " WHERE id='" id "'"))
 
 ;; Fetch the record data for the given ID.
 (defn record [id]
-  (sql/with-connection (System/getenv "DATABASE_URL")
-    (sql/with-query-results results
-      [(query-string id)]
-      (when results (first (doall results))))))
+  (db/search (query id) {"id" id}))

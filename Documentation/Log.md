@@ -2523,3 +2523,120 @@ To connect to remote Heroku database:
 ```
 $ psql -h ec2-54-197-249-167.compute-1.amazonaws.com -U wvihkhkcwenphx -d dcmcfqgrb9iovm
 ```
+
+### Thursday 20th
+
+Notes from meeting with Ian:
+
+ * The advantage of iteration labels is that it gives you specific
+   dates by which you can expect a set of actions to be completed. In
+   may case, that feature is handled by GitHub milestones.
+
+ * When writing up the report, split into two sections: system
+   construction, and system construction tooling (wording?). i.e. make
+   the distinction between the two parts of the project - build an
+   application, and building the supporting tools.
+
+Yet Another Protein Schema format:
+
+```
+{
+  "names": [<name1>,<name2>...],
+  "ec": [<ec1>,<ec2>,<ec3>,<ec4>],
+  "source": {
+    "binomial": <latin binomial>,
+    "common": <common name>
+  },
+  "location": <location>,
+  "mw": {
+    "min": <mw min>,
+    "max": <mw max>
+  },
+  "sequence": <fasta>,
+  "subunit": {
+    "no": <subunit no>,
+    "mw": <subunit mw>
+  },
+  "iso_enzymes": <no of iso-enzymes>,
+  "pi": {
+    "min": <min>,
+    "max": <max>,
+    "major": <pi of major component>
+  },
+  "temp": {
+    "min": <min temp>,
+    "max": <max temp>
+  },
+  "method": <experimental method>,
+  "references": {
+    "original_text": {
+      "full": <url>,
+      "abstract": <url>
+    },
+    "pubmed": <url>,
+    "taxonomy": <url>,
+    "sequence": <url>
+  },
+  "notes": <string>
+}
+```
+
+Preparing and exporting dataset from Excel:
+
+1. Ensure that header line is a *single line*.
+2. Save as -> "Unicode text".
+3. Run `iconv -f UTF-16 -t UTF-8 dataset.txt > dataset-utf8.txt`
+
+The Authoritative list of dataset headers:
+
+```
+Sheet
+EC
+Protein
+Alternative name(s)
+Source
+Organ and/or Subcellular locaction
+M.W
+Subunit No.
+Subunit M.W
+No. of Iso-enzymes
+pI maximum value
+pi Min Value
+pi Max Value
+pI value of major component
+pI
+Temperature (ºC)
+Method
+Valid sequence(s) available
+UniportKB/ Swiss-Prot/ Protein sequence
+Species Taxonomy
+Full text
+(Paid article) Only abstract available
+Pubmed Link
+Notes
+```
+
+A sensitive 3-layered approach to data integrity:
+
+1. **Pre-processing** - Applied to existing dataset
+    * Destructive
+    * DO AS LITTLE AS POSSIBLE
+        * Remove "Not given" values
+        * Trim trailing/leading whitespace
+        * Standardise capitalisation
+
+
+2. **Storage-processing** - Upload time
+    * Non-destructive
+    * Adding data, not modifying or taking it away
+        * Adding numerical pI fields
+        * Symbolically linking similar results
+
+3. **Post-processing** - Applied
+    * Non-destructive
+    * Applied lazily (on demand, each time a user requests it)
+        * So we don't want to be doing too much, that's time consuming/wasted
+        * Focuses on things that are likely to change
+            * Relative timestamps [seconds-since-epoch] -> "8 minutes ago"
+        * OR focuses on things that are easier to compute than to store
+            * Switching between JSON/XML

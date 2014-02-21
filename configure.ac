@@ -39,6 +39,7 @@ dnl   7.5.     Do we have python?
 dnl   7.6.     Do we have the python git module?
 dnl   7.7.     Do we have the python dateutil module?
 dnl   7.8.     Install watchr requirements
+dnl   7.9.     Install csv2yaps dependencies
 dnl
 dnl   8.     Documentation
 dnl   8.1.     Are we build the documentation?
@@ -62,8 +63,8 @@ dnl ================================================================
 dnl 1. Project versions (i.e. the package version)
 dnl ================================================================
 m4_define([pipdb_major_version],[0])
-m4_define([pipdb_minor_version],[3])
-m4_define([pipdb_micro_version],[12])
+m4_define([pipdb_minor_version],[4])
+m4_define([pipdb_micro_version],[0])
 m4_define([pipdb_version],[pipdb_major_version.pipdb_minor_version.pipdb_micro_version])
 
 
@@ -308,6 +309,14 @@ dnl         ========================================================
 AS_IF([test "x$enable_tools" = xyes],
       [AC_CHECK_FILE([tools/watchr/node_modules],,
                      [cd tools/watchr && npm install])])
+
+
+dnl         ========================================================
+dnl         7.9. Install csv2yaps dependencies
+dnl         ========================================================
+AS_IF([test "x$enable_tools" = xyes],
+      [AC_CHECK_FILE([tools/csv2yaps/node_modules],,
+                     [cd tools/csv2yaps && npm install])])
 
 
 dnl ================================================================

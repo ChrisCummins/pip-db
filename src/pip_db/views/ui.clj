@@ -196,8 +196,9 @@
      [:div.page-title-inner
       ;; Download link for search results.
       (if download
-        [:div.download [:a#download.btn.btn-warning {:style "display:none;"}
-                        (if (string? download) {:href download})
+        [:div.download [:a#download.btn.btn-warning
+                        {:style "display:none;"
+                         :href (if (string? download) download "#")}
                         "Download"]])
       ;; The page title.
       (if (data :title) [:h3 (data :title)])

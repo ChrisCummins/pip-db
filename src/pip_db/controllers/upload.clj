@@ -12,5 +12,5 @@
 (defn post-handler [request]
   (let [file ((request :params) "f")]
     (if file
-      (model/parse-csv-file (model/upload-file file))
+      (model/parse-json-file (model/upload-file file))
       "No file found")))
