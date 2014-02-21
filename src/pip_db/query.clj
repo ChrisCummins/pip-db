@@ -41,18 +41,28 @@
 ;; e.g. "foo" == 5.
 (defn numeric-condition [condition]
   (if (util/is-number? (condition :value))
-    (str "(" (condition :field) ") = " (condition :value)) ""))
+    (str (condition :field) (condition :operator) (condition :value))))
 
 ;; ### Field is equals
 (defn EQ [condition]
   (cond
-   (condition :numeric)              (numeric-condition condition)
-   (str/blank? (condition :value))   ""
-   :else                             (string-condition condition)))
+   (condition :numeric) (numeric-condition (assoc condition :operator "="))
+   (str/blank? (condition :value)) ""
+   :else (string-condition condition)))
 
 ;; ### Field is not equals
 (defn NE [condition]
   (EQ (assoc condition :not true)))
+
+;; ### Field is great than or equals to
+(defn GTE [condition]
+  (if (str/blank? (condition :value)) ""
+      (numeric-condition (assoc condition :numeric true :operator ">="))))
+
+;; ### Field is less than or equals to
+(defn LTE [condition]
+  (if (str/blank? (condition :value)) ""
+      (numeric-condition (assoc condition :numeric true :operator "<="))))
 
 ;; ## Compound Conditions
 ;;
