@@ -2,7 +2,8 @@
   (:use [pip-db.query :only (AND OR EQ NE GTE LTE)])
   (:require [clojure.java.jdbc :as sql]
             [clojure.string :as str]
-            [pip-db.db :as db]))
+            [pip-db.db :as db]
+            [pip-db.util :as util]))
 
 (defn split-args [words]
   (when (and words (not (str/blank? words)))
@@ -18,7 +19,9 @@
         q_l     (get params "q_l")
         m       (get params "m")
         pi_l    (get params "pi_l")
-        pi_h    (get params "pi_h")]
+        pi_h    (get params "pi_h")
+        mw_l    (str (util/str->num (get params "mw_l")))
+        mw_h    (str (util/str->num (get params "mw_h")))]
 
     (AND
      (EQ {:field "id" :value id})       ; Match specific record ID
@@ -33,7 +36,9 @@
      (EQ {:field "location" :value q_l})
      (EQ {:field "method" :value m})
      (GTE {:field "real_pi_min" :value pi_l})
-     (LTE {:field "real_pi_max" :value pi_h}))))
+     (LTE {:field "real_pi_max" :value pi_h})
+     (GTE {:field "real_mw_min" :value mw_l})
+     (LTE {:field "real_mw_max" :value mw_h}))))
 
 ;; ### Query components
 
