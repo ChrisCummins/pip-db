@@ -161,7 +161,7 @@ var row2Yaps = function (row) {
 
   // Enzyme commission number
   if (row.ec)
-    yaps.ec = row.ec[0].split('.');
+    yaps.ec = row.ec[0];
 
   // Source
   if (row.source)
