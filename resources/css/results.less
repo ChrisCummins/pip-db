@@ -2,6 +2,9 @@
 // RESULTS PAGE
 // --------------------------------------------------
 
+.sresults table {
+  table-layout: fixed;
+}
 .sresults table tbody tr:hover {
   cursor: pointer;
 }
@@ -13,12 +16,15 @@
 }
 
 // Table widths
-.sresults table td.source,
+.sresults table td.source {
+  width: 25%;
+}
 .sresults table td.location {
   width: 20%;
 }
 .sresults table td.pi {
-  width: 8%;
+  text-align: center;
+  width: 6%;
 }
 
 .sresults table thead td {
