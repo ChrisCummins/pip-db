@@ -37,7 +37,7 @@
 
         // Get the HTML for a table cell from a record property
         var getRecordCell = function (property) {
-            return getCell(property, record[property]);
+            return getCell(property, record[property] || '');
         };
 
         // Get the text for a pI table cell from a record
