@@ -84,5 +84,5 @@
            (str "SELECT id,names,ec,source,location,mw_min,mw_max,sub_no,"
                 "sub_mw,iso_enzymes,pi_min,pi_max,pi_major,temp_min,temp_max,"
                 "method,ref_full,ref_abstract,ref_pubmed,ref_taxonomy,"
-                "ref_sequence,notes FROM records WHERE ((LOWER(names) LIKE "
-                "LOWER('%foo%')))")))))
+                "ref_sequence,notes,created_at FROM records WHERE ((LOWER(names) "
+                "LIKE LOWER('%foo%')))")))))
