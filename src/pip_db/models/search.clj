@@ -21,26 +21,15 @@
 
     (AND
      (EQ {:field "id" :value id})       ; Match specific record ID
-     (AND                               ; Match all keywords
-      (for [word q]
-        (OR
-         (EQ {:field "name" :value word})
-         (EQ {:field "alt_name" :value word}))))
-     (OR                                ; Match exact phrase
-      (EQ {:field "name" :value q_eq})
-      (EQ {:field "alt_name" :value q_eq}))
-     (OR                                ; Match any keywords
-      (for [word q_any]
-        (OR
-         (EQ {:field "name" :value word})
-         (EQ {:field "alt_name" :value word}))))
-     (AND                               ; Exclude keywords
-      (for [word q_ne]
-        (AND
-         (NE {:field "name" :value word})
-         (NE {:field "alt_name" :value word}))))
+     (for [word q]                      ; Match all keywords
+       (EQ {:field "names" :value word}))
+     (EQ {:field "names" :value q_eq})  ; Match exact phrase
+     (for [word q_any]                  ; Match any keywords
+       (EQ {:field "names" :value word}))
+     (for [word q_ne]                   ; Exclude keywords
+       (NE {:field "names" :value word}))
      (EQ {:field "source" :value q_s})
-     (EQ {:field "organ" :value q_l})
+     (EQ {:field "location" :value q_l})
      (EQ {:field "method" :value m}))))
 
 ;; ### Query components
