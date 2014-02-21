@@ -140,6 +140,30 @@
         real_ec2 real_ec3 real_ec4 real_mw_min real_mw_max real_pi_min
         real_pi_max real_temp_min real_temp_max]))))
 
+;; Remove the null values from a map.
+(defn filter-null [map]
+  (into {} (filter second map)))
+
+;; Fetch a vector of records for a given query map. We wrap the entire
+;; query in a try/catch block in order to catch an SQL exception when
+;; the query returns no results: "org.postgresql.util.PSQLException:
+;; No results were returned by the query."
+(defn search [query]
+  (sql/with-connection (System/getenv "DATABASE_URL")
+    (try (sql/with-query-results results [query]
+           (apply vector (map filter-null (doall results))))
+         (catch Exception e []))))
+
+;; This SQL query counts the number of records in the database.
+(def no-of-records-query
+  (str "SELECT count(*) AS exact_count FROM records"))
+
+;; Fetch the number of records within the database.
+(defn no-of-records []
+  (sql/with-connection (System/getenv "DATABASE_URL")
+    (sql/with-query-results result [no-of-records-query]
+      (((apply vector (doall result)) 0) :exact_count))))
+
 (defn migrate []
   (when-not (migrated?)
     (print "Creating database structure...") (flush)

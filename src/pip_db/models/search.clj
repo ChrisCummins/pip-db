@@ -1,7 +1,8 @@
 (ns pip-db.models.search
   (:use [pip-db.query :only (AND OR EQ NE)])
   (:require [clojure.java.jdbc :as sql]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [pip-db.db :as db]))
 
 (def max-no-of-returned-records 20)
 
@@ -49,10 +50,6 @@
            "ref_full,ref_abstract,ref_pubmed,ref_taxonomy,ref_sequence,notes "
            "FROM " query-table " WHERE " conditions))))
 
-;; This SQL query counts the number of records in the database.
-(def no-of-records-query
-  (str "SELECT count(*) AS exact_count FROM " query-table))
-
 ;; Construct a search results map from a set of search parameters and
 ;; a list of matching records.
 (defn search-response [params matching-records no-of-records]
@@ -64,21 +61,5 @@
      :max_no_of_returned_records max-no-of-returned-records
      :records                    returned-records}))
 
-;; Fetch a vector of records for a given query map. We wrap the entire
-;; query in a try/catch block in order to catch an SQL exception when
-;; the query returns no results: "org.postgresql.util.PSQLException:
-;; No results were returned by the query."
-(defn search-results [params]
-  (sql/with-connection (System/getenv "DATABASE_URL")
-    (try (sql/with-query-results results [(query params)]
-           (apply vector (doall results)))
-         (catch Exception e []))))
-
-;; Fetch the number of records within the database.
-(defn no-of-records []
-  (sql/with-connection (System/getenv "DATABASE_URL")
-    (sql/with-query-results result [no-of-records-query]
-      (((apply vector (doall result)) 0) :exact_count))))
-
 (defn search [params]
-  (search-response params (search-results params) (no-of-records)))
+  (search-response params (db/search (query params)) (db/no-of-records)))
