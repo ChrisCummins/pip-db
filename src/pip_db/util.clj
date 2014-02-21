@@ -60,6 +60,15 @@
     (Integer/parseInt string)
     (catch Exception e nil)))
 
+;; A robust string to number parser, without any gotchas. Under
+;; normal circumstances, it behaves as you would expect, e.g.
+;; `(= (str->int "5.5") 5.5)`. In case of error, it returns nil, e.g.
+;; `(= (str->int "abcd") nil)`, or `(= (str->int nil) nil)`.
+(defn str->num [string]
+  (try
+    (Double/parseDouble string)
+    (catch Exception e nil)))
+
 (defn is-number? [n]
   (if (nil? (str->num n)) false true))
 
