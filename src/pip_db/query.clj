@@ -46,8 +46,8 @@
 ;; ### Field is equals
 (defn EQ [condition]
   (cond
-   (condition :numeric) (numeric-condition (assoc condition :operator "="))
    (str/blank? (condition :value)) ""
+   (condition :numeric) (numeric-condition (assoc condition :operator "="))
    :else (string-condition condition)))
 
 ;; ### Field is not equals
