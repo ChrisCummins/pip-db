@@ -2,7 +2,7 @@ $(document).ready(function () {
     'use strict';
 
     // JSON data response map
-    var record = data['records'][0];
+    var record = data['Records'][0];
     var names = record['Protein-Names'].split(' / ');
 
 

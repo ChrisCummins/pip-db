@@ -103,7 +103,7 @@
      */
 
     // JSON data response map
-    var records = data['records'];
+    var records = data['Records'];
     var strippedRecords = (function () { // Blank properties removed
         var s = [], record, r;
 
@@ -262,7 +262,7 @@
                 $(' td:nth-child(' + ++j + ')', $row).html(record[key]);
         };
 
-        if (data['no_of_matches']) {
+        if (data['No-Of-Records-Matched']) {
             // Generate the header row:
             var header = '<tr><td>0</td>';
 

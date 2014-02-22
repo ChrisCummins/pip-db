@@ -149,12 +149,12 @@
 ;; a list of matching records.
 (defn search-response [matching-records params]
   (let [returned-records (take max-no-of-returned-records matching-records)]
-    {:query                      params
-     :no_of_records              (no-of-records)
-     :no_of_matches              (count matching-records)
-     :no_of_returned_records     (count returned-records)
-     :max_no_of_returned_records max-no-of-returned-records
-     :records                    returned-records}))
+    {:Query-Terms                params
+     :No-Of-Records-Searched     (no-of-records)
+     :No-Of-Records-Matched      (count matching-records)
+     :No-Of-Records-Returned     (count returned-records)
+     :Max-No-of-Returned-Records max-no-of-returned-records
+     :Records                    returned-records}))
 
 ;; The `with-query-results` function returns a response map of field
 ;; names to values, with the field names all lower-cased for some
