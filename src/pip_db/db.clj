@@ -21,7 +21,7 @@
 
 ;; We generated truncated hashes when creating our record IDs.
 (defn minihash [s]
-  (subs (sha1 s) 0 11))
+  (subs (util/str->b64 (sha1 s)) 0 11))
 
 (defn migrated? []
   (pos?

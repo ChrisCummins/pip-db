@@ -3,6 +3,7 @@
 (ns pip-db.util
   (:use [pip-db.resources :only (resource)])
   (:require [clojure.string :as str]
+            [clojure.data.codec.base64 :as b64]
             [clojure.data.json :as json]))
 
 ;; --------------
@@ -83,6 +84,10 @@
 ;; JSON format.
 (defn data->json [data]
   (json/write-str data))
+
+;; Convert a string into a base64 encoded string.
+(defn str->b64 [original]
+  (String. (b64/encode (.getBytes original)) "UTF-8"))
 
 ;; -----------------
 ;; ## Date utilities

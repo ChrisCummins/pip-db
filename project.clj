@@ -8,6 +8,7 @@
                  [hiccup "1.0.4"]
                  [org.clojure/clojure "1.4.0"]
                  [org.clojure/clojure-contrib "1.2.0"]
+                 [org.clojure/data.codec "0.1.0"]
                  [org.clojure/data.json "0.2.4"]
                  [org.clojure/java.jdbc "0.2.3"]
                  [postgresql "9.1-901.jdbc4"]
