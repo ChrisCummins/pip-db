@@ -1,5 +1,4 @@
 (ns pip-db.controllers.search
-  (:use [compojure.core :only (defroutes GET)])
   (:require [clojure.contrib.math :as math]
             [pip-db.models.search :as model]
             [pip-db.views.advanced :as advanced]
@@ -29,12 +28,9 @@
   (if (= "a" (request-action request)) advanced-handler search-handler))
 
 ;; Search page ring handler.
-(defn handler [request]
+(defn GET [request]
   ((response-function request) request))
 
 ;; Search page ring handler.
-(defn json-handler [request]
+(defn GET-json [request]
   (json/response (model/search (request :params))))
-
-(defn download-handler [request]
-  (download/download (search-results request)))
