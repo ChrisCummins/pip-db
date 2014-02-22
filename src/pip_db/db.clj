@@ -183,12 +183,12 @@
 ;; the query returns no results: "org.postgresql.util.PSQLException:
 ;; No results were returned by the query."
 (defn search [query params]
- (search-response
-  (sql/with-connection (System/getenv "DATABASE_URL")
-    (try (sql/with-query-results results [query]
-           (apply vector (map remap-yaps-keys
-                              (map filter-null (doall results)))))
-         (catch Exception e []))) params))
+  (search-response
+   (sql/with-connection (System/getenv "DATABASE_URL")
+     (try (sql/with-query-results results [query]
+            (apply vector (map remap-yaps-keys
+                               (map filter-null (doall results)))))
+          (catch Exception e []))) params))
 
 (defn migrate []
   (when-not (migrated?)
