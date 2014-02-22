@@ -30,7 +30,7 @@
      (sql/with-query-results results
        [(str "SELECT count(*) FROM information_schema.tables "
              "WHERE table_name='records'")]
-       (:count (first results))))))
+       ((first results) :count)))))
 
 (defn create-tables []
   (sql/with-connection (System/getenv "DATABASE_URL")
