@@ -14,6 +14,6 @@
     file))
 
 (defn parse-json-file [file]
-  (doseq [line (json/read-str (slurp file))]
-    (db/add-record line))
+  (doseq [record ((json/read-str (slurp file)) "Records")]
+    (db/add-record record))
   "WOO")
