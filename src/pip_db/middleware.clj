@@ -6,9 +6,12 @@
         [compojure.core :only (defroutes GET POST)])
   (:require [pip-db.views.error :as error]
             [pip-db.controllers.index :as index]
+            [pip-db.controllers.advanced :as advanced]
+            [pip-db.controllers.download :as download]
             [pip-db.controllers.search :as search]
             [pip-db.controllers.record :as record]
             [pip-db.controllers.login :as login]
+            [pip-db.controllers.logout :as logout]
             [pip-db.controllers.upload :as upload]
             [clojure.string :as str]
             [compojure.route :as route]))
@@ -21,18 +24,18 @@
 ;; > map.
 ;;
 (defroutes routes
-  (GET  "/"                   [:as request] (index/handler             request))
-  (GET  "/advanced"           [:as request] (search/advanced-handler   request))
-  (GET  "/r/:id.json"         [:as request] (record/json-handler       request))
-  (GET  "/r/:id"              [:as request] (record/handler            request))
-  (GET  "/d"                  [:as request] (search/download-handler   request))
-  (GET  "/s"                  [:as request] (search/handler            request))
-  (GET  "/s.json"             [:as request] (search/json-handler       request))
-  (GET  "/login"              [:as request] (login/get-handler         request))
-  (POST "/login"              [:as request] (login/post-handler        request))
-  (GET  "/logout"             [:as request] (login/logout-handler      request))
-  (GET  "/upload"             [:as request] (upload/get-handler        request))
-  (POST "/upload"             [:as request] (upload/post-handler       request))
+  (GET  "/"                   [:as request] (index/GET       request))
+  (GET  "/advanced"           [:as request] (advanced/GET    request))
+  (GET  "/r/:id.json"         [:as request] (record/GET-json request))
+  (GET  "/r/:id"              [:as request] (record/GET      request))
+  (GET  "/d"                  [:as request] (download/GET    request))
+  (GET  "/s"                  [:as request] (search/GET      request))
+  (GET  "/s.json"             [:as request] (search/GET-json request))
+  (GET  "/login"              [:as request] (login/GET       request))
+  (POST "/login"              [:as request] (login/POST      request))
+  (GET  "/logout"             [:as request] (logout/GET      request))
+  (GET  "/upload"             [:as request] (upload/GET      request))
+  (POST "/upload"             [:as request] (upload/POST     request))
   (route/resources "/")
   (route/not-found (error/status-404)))
 

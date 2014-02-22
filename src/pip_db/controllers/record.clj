@@ -5,11 +5,11 @@
             [pip-db.views.error :as error]
             [pip-db.views.json :as json]))
 
-(defn handler [request]
+(defn GET [request]
   (let [data (model/record ((request :params) :id))]
     (if (pos? (data :no_of_matches))
       (view/record (assoc request :results data))
       (error/status-404))))
 
-(defn json-handler [request]
+(defn GET-json [request]
   (json/response (model/record ((request :params) :id))))
