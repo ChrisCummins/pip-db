@@ -114,7 +114,7 @@ var tokens2Row = function (tokens) {
         str = tokens[schemaProp.indexes[j]];
 
         if (str !== undefined)
-          str = str.trim();
+          str = str.trim().replace(/^"([^"]+)"$/, "$2");
         else {
           error('Line is too short. No column for property "' +
                 schemaProp.name + '". Results may be corrupted.');
