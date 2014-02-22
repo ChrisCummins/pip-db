@@ -32,15 +32,15 @@
     (AND
      (EQ {:field "id" :value id})       ; Match specific record ID
      (for [word q]                      ; Match all keywords
-       (EQ {:field "names" :value word}))
-     (EQ {:field "names" :value q_eq})  ; Match exact phrase
+       (EQ {:field "Protein-Names" :value word}))
+     (EQ {:field "Protein-Names" :value q_eq})  ; Match exact phrase
      (for [word q_any]                  ; Match any keywords
-       (EQ {:field "names" :value word}))
+       (EQ {:field "Protein-Names" :value word}))
      (for [word q_ne]                   ; Exclude keywords
-       (NE {:field "names" :value word}))
-     (EQ {:field "source" :value q_s})
-     (EQ {:field "location" :value q_l})
-     (EQ {:field "method" :value m})
+       (NE {:field "Protein-Names" :value word}))
+     (EQ {:field "Source" :value q_s})
+     (EQ {:field "Location" :value q_l})
+     (EQ {:field "Method" :value m})
      (GTE {:field "real_pi_min" :value pi_l})
      (LTE {:field "real_pi_max" :value pi_h})
      (GTE {:field "real_mw_min" :value mw_l})

@@ -47,9 +47,9 @@
              * will try first to show an exact value, else a range of values, or
              * just an individual result within that range.
              */
-            var piMin   = record['pi_min'];
-            var piMax   = record['pi_max'];
-            var piMajor = record['pi_major'];
+            var piMin   = record['pI-Min'];
+            var piMax   = record['pI-Max'];
+            var piMajor = record['pI-Major-Component'];
 
             if (piMin && piMax) {
                 if (piMin === piMax)
@@ -68,10 +68,10 @@
 
         var html = '<tr data-id="' + record['id'] + '">';
 
-        html += getRecordCell('names');
-        html += getRecordCell('source');
-        html += getRecordCell('location');
-        html += getCell('pi', getPiText());
+        html += getRecordCell('Protein-Names');
+        html += getRecordCell('Source');
+        html += getRecordCell('Location');
+        html += getCell('pI', getPiText());
 
         $tbody.append(html + '</tr>');
     };

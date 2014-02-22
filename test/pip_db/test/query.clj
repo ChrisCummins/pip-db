@@ -3,10 +3,10 @@
   (:require [pip-db.query :as dut]))
 
 (def test-eq {:query  (dut/EQ {:field "foo" :value "bar"})
-              :string "(LOWER(foo) LIKE LOWER('%bar%'))"})
+              :string "(LOWER(\"foo\") LIKE LOWER('%bar%'))"})
 
 (def test-ne {:query  (dut/NE {:field "foo" :value "bar"})
-              :string "(LOWER(foo) NOT LIKE LOWER('%bar%'))"})
+              :string "(LOWER(\"foo\") NOT LIKE LOWER('%bar%'))"})
 
 (deftest EQ
   (testing "Standard query"
