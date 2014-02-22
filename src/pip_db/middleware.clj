@@ -16,6 +16,9 @@
             [clojure.string :as str]
             [compojure.route :as route]))
 
+;; The regular expression to match a record ID.
+(def id-re #"[a-f0-9]{11}")
+
 ;; ## Ring handlers
 ;;
 ;; > Ring handlers constitute the core logic of the web
@@ -24,18 +27,18 @@
 ;; > map.
 ;;
 (defroutes routes
-  (GET  "/"                   [:as request] (index/GET       request))
-  (GET  "/advanced"           [:as request] (advanced/GET    request))
-  (GET  "/r/:id.json"         [:as request] (record/GET-json request))
-  (GET  "/r/:id"              [:as request] (record/GET      request))
-  (GET  "/d"                  [:as request] (download/GET    request))
-  (GET  "/s"                  [:as request] (search/GET      request))
-  (GET  "/s.json"             [:as request] (search/GET-json request))
-  (GET  "/login"              [:as request] (login/GET       request))
-  (POST "/login"              [:as request] (login/POST      request))
-  (GET  "/logout"             [:as request] (logout/GET      request))
-  (GET  "/upload"             [:as request] (upload/GET      request))
-  (POST "/upload"             [:as request] (upload/POST     request))
+  (GET  ["/"]                      [:as request] (index/GET       request))
+  (GET  ["/advanced"]              [:as request] (advanced/GET    request))
+  (GET  ["/r/:id.json", :id id-re] [:as request] (record/GET-json request))
+  (GET  ["/r/:id",      :id id-re] [:as request] (record/GET      request))
+  (GET  ["/d"]                     [:as request] (download/GET    request))
+  (GET  ["/s"]                     [:as request] (search/GET      request))
+  (GET  ["/s.json"]                [:as request] (search/GET-json request))
+  (GET  ["/login"]                 [:as request] (login/GET       request))
+  (POST ["/login"]                 [:as request] (login/POST      request))
+  (GET  ["/logout"]                [:as request] (logout/GET      request))
+  (GET  ["/upload"]                [:as request] (upload/GET      request))
+  (POST ["/upload"]                [:as request] (upload/POST     request))
   (route/resources "/")
   (route/not-found (error/status-404)))
 
