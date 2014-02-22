@@ -25,12 +25,12 @@
   (subs (sha1 s) 0 11))
 
 (defn migrated? []
-  (not (zero?
-        (sql/with-connection (System/getenv "DATABASE_URL")
-          (sql/with-query-results results
-            [(str "SELECT count(*) FROM information_schema.tables "
-                  "WHERE table_name='records'")]
-            (:count (first results)))))))
+  (pos?
+   (sql/with-connection (System/getenv "DATABASE_URL")
+     (sql/with-query-results results
+       [(str "SELECT count(*) FROM information_schema.tables "
+             "WHERE table_name='records'")]
+       (:count (first results))))))
 
 (defn create-tables []
   (sql/with-connection (System/getenv "DATABASE_URL")
