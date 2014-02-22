@@ -1,7 +1,5 @@
 (ns pip-db.controllers.login
-  (:use [compojure.core :only (defroutes GET POST)])
   (:require [clojure.string :as str]
-            [ring.util.response :as ring]
             [pip-db.util :as util]
             [pip-db.views.login :as view]
             [pip-db.models.login :as model]))
@@ -29,15 +27,11 @@
          (do-login user pass))
        {:status 400})))                 ; Missing form details
 
-(defn post-handler [request]
+(defn POST [request]
   (let [params (request :params)
         user   (params "user")
         pass   (params "pass")
         action (params "action")]
     (login user pass action)))
 
-(defn get-handler [request] (login))
-
-(defn logout-handler [request]
-  {:status 302 :headers {"Location" (util/referer)}
-   :cookies (model/logout-cookie)})
+(defn GET [request] (login))

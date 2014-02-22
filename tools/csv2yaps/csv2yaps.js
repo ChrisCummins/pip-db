@@ -99,7 +99,7 @@ var setSchemaIndexes = function (tokens) {
 // Formalise a set of tokens
 var tokens2Row = function (tokens) {
 
-  var yaps = {};
+  var row = {};
 
   for (var i in schema) {
 
@@ -114,7 +114,7 @@ var tokens2Row = function (tokens) {
         str = tokens[schemaProp.indexes[j]];
 
         if (str !== undefined)
-          str.trim();
+          str = str.trim().replace(/^"([^"]+)"$/, "$2");
         else {
           error('Line is too short. No column for property "' +
                 schemaProp.name + '". Results may be corrupted.');
@@ -133,10 +133,10 @@ var tokens2Row = function (tokens) {
     })();
 
     if (values)
-      yaps[schema[i].name] = values; // TODO: convert to YAPS format
+      row[schema[i].name] = values;
   }
 
-  return yaps;
+  return row;
 };
 
 // Convert a row object into a Yaps object
