@@ -2,8 +2,8 @@ $(document).ready(function () {
     'use strict';
 
     // JSON data response map
-    var record = data['records'][0];
-    var names = record['names'].split(' / ');
+    var record = data['Records'][0];
+    var names = record['Protein-Names'].split(' / ');
 
 
     // UI elements
@@ -55,9 +55,9 @@ $(document).ready(function () {
          * will try first to show an exact value, else a range of values, or
          * just an individual result within that range.
          */
-        var piMin   = record['pi_min'];
-        var piMax   = record['pi_max'];
-        var piMajor = record['pi_major'];
+        var piMin   = record['pI-Min'];
+        var piMax   = record['pI-Max'];
+        var piMajor = record['pI-Major'];
 
         if (piMin && piMax) {
             if (piMin === piMax)
@@ -88,31 +88,31 @@ $(document).ready(function () {
     $title.text(names[0]);
 
     // Properties
-    addPropertyRow('name', 'Protein Name', names[0]);
+    addPropertyRow('Protein-Name', 'Protein Name', names[0]);
     for (var i = 1; i < names.length; i++)
-        addPropertyRow('name', 'Alternative Protein Name', names[i]);
-    addPropertyRow('ec', 'E.C.');
-    addPropertyRow('source', 'Source');
-    addPropertyRow('location', 'Organ and/or Subcellular location');
-    addPropertyRow('mw', 'M.W', getRangeText(record.mw_min, record.mw_max));
-    addPropertyRow('sub_no', 'Subunit No.');
-    addPropertyRow('sub_mw', 'Subunit M.W');
-    addPropertyRow('iso_enzymes', 'No. of Iso-enzymes');
-    addPropertyRow('pi', 'pI', getPiText());
-    addPropertyRow('temp', 'Temperature (ºC)',
-                   getRangeText(record.temp_min, record.temp_max));
-    addPropertyRow('method', 'Experimental Method');
+        addPropertyRow('Protein-Name', 'Alternative Protein Name', names[i]);
+    addPropertyRow('EC', 'E.C.');
+    addPropertyRow('Source', 'Source');
+    addPropertyRow('Location', 'Organ and/or Subcellular location');
+    addPropertyRow('MW', 'M.W', getRangeText(record['MW-Min'], record['MW-Max']));
+    addPropertyRow('Subunit-No', 'Subunit No.');
+    addPropertyRow('Subunit-MW', 'Subunit M.W');
+    addPropertyRow('No-of-Iso-Enzymes', 'No. of Iso-enzymes');
+    addPropertyRow('pI', 'pI', getPiText());
+    addPropertyRow('Temperature', 'Temperature (ºC)',
+                   getRangeText(record['Temperature-Min'], record['Temperature-Max']));
+    addPropertyRow('Method', 'Experimental Method');
 
     // Extern links
-    addExternLink('ref_full', 'Full Text');
-    addExternLink('ref_abstract', 'Publisher\'s Abstract');
-    addExternLink('ref_pubmed', 'PubMed');
-    addExternLink('ref_taxonomy', 'Species Taxonomy');
-    addExternLink('ref_sequence', 'Protein Sequence');
+    addExternLink('Full-Text', 'Full Text');
+    addExternLink('Abstract-Only', 'Publisher\'s Abstract');
+    addExternLink('PubMed', 'PubMed');
+    addExternLink('Species-Taxonomy', 'Species Taxonomy');
+    addExternLink('Protein-Sequence', 'Protein Sequence');
 
     // Add notes
-    if (record.notes) {
-        $notesPanelBody.text(record.notes);
+    if (record['Notes']) {
+        $notesPanelBody.text(record['Notes']);
     };
 
 
@@ -120,7 +120,7 @@ $(document).ready(function () {
      * "Reference this page" citation styles
      */
 
-    var pageName = record.names;
+    var pageName = record['Protein-Names'];
     var pageUrl = window.location.href.replace(window.location.hash, '');
     var pageUrlHtml = '<a class="url" href="' + pageUrl + '">' +
         pageUrl + '</a>';
@@ -130,13 +130,13 @@ $(document).ready(function () {
     var refStyles = {
         'Vancouver': (function () {
             return 'pip-db.org [' + pageName + ']. Aston University; ' +
-                moment(record.created_at).format('YYYY') +
+                moment(record['Created-At']).format('YYYY') +
                 ' [cited ' + moment().format('Do MMMM YYYY') +
                 ']. Available from: ' + pageUrlHtml + '.'
         })(),
         'ACS Style': (function () {
             return 'Aston University. ' +
-                moment(record.created_at).format('YYYY') +
+                moment(record['Created-At']).format('YYYY') +
                 '. "' + pageName +
                 '" pip-db.org. Website accessed ' +
                 moment().format('MMMM Do, YYYY') + '. ' +
@@ -144,7 +144,7 @@ $(document).ready(function () {
         })(),
         'Harvard': (function () {
             return 'Aston University. (' +
-                moment(record.created_at).format('YYYY') +
+                moment(record['Created-At']).format('YYYY') +
                 '). <i>' + pageName + '</i>. Available: ' +
                 pageUrlHtml + '. Last accessed ' +
                 moment().format('Do MMMM YYYY') + '.';
@@ -191,7 +191,7 @@ $(document).ready(function () {
     })());
 
     // Record added footer
-    $('#date-added').html('Added ' + moment(record.created_at).fromNow() + '.');
+    $('#date-added').html('Added ' + moment(record['Created-At']).fromNow() + '.');
 
     // Show the UI elements which have content
     $(document).ready(function () {

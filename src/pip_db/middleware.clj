@@ -17,7 +17,7 @@
             [compojure.route :as route]))
 
 ;; The regular expression to match a record ID.
-(def id-re #"[a-f0-9]{11}")
+(def id-re #"\w{11}")
 
 ;; ## Ring handlers
 ;;

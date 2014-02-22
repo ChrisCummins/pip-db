@@ -38,51 +38,43 @@
 
   (testing "Single 'q' parameter"
     (is (= (dut/conditionals {"q" "foo"})
-           "((LOWER(names) LIKE LOWER('%foo%')))")))
+           "((LOWER(\"Protein-Names\") LIKE LOWER('%foo%')))")))
 
   (testing "Multiple 'q' parameters"
     (is (= (dut/conditionals {"q" "foo bar"})
-           (str "((LOWER(names) LIKE LOWER('%foo%')) AND "
-                "(LOWER(names) LIKE LOWER('%bar%')))"))))
+           (str "((LOWER(\"Protein-Names\") LIKE LOWER('%foo%')) AND "
+                "(LOWER(\"Protein-Names\") LIKE LOWER('%bar%')))"))))
 
   (testing "Single 'q_any' parameter"
     (is (= (dut/conditionals {"q_any" "foo"})
-           "((LOWER(names) LIKE LOWER('%foo%')))")))
+           "((LOWER(\"Protein-Names\") LIKE LOWER('%foo%')))")))
 
   (testing "Multiple 'q_any' parameters"
     (is (= (dut/conditionals {"q_any" "foo bar"})
-           (str "((LOWER(names) LIKE LOWER('%foo%')) AND "
-                "(LOWER(names) LIKE LOWER('%bar%')))"))))
+           (str "((LOWER(\"Protein-Names\") LIKE LOWER('%foo%')) AND "
+                "(LOWER(\"Protein-Names\") LIKE LOWER('%bar%')))"))))
 
   (testing "Single 'q_ne' parameter"
     (is (= (dut/conditionals {"q_ne" "foo"})
-           "((LOWER(names) NOT LIKE LOWER('%foo%')))")))
+           "((LOWER(\"Protein-Names\") NOT LIKE LOWER('%foo%')))")))
 
   (testing "Multiple 'q_ne' parameters"
     (is (= (dut/conditionals {"q_ne" "foo bar"})
-           (str "((LOWER(names) NOT LIKE LOWER('%foo%')) AND "
-                "(LOWER(names) NOT LIKE LOWER('%bar%')))"))))
+           (str "((LOWER(\"Protein-Names\") NOT LIKE LOWER('%foo%')) AND "
+                "(LOWER(\"Protein-Names\") NOT LIKE LOWER('%bar%')))"))))
 
   (testing "Location paramater"
     (is (= (dut/conditionals {"q_l" "foo bar"})
-           "((LOWER(location) LIKE LOWER('%foo bar%')))")))
+           "((LOWER(\"Location\") LIKE LOWER('%foo bar%')))")))
 
   (testing "Source paramater"
     (is (= (dut/conditionals {"q_s" "foo bar"})
-           "((LOWER(source) LIKE LOWER('%foo bar%')))")))
+           "((LOWER(\"Source\") LIKE LOWER('%foo bar%')))")))
 
   (testing "Method paramater"
     (is (= (dut/conditionals {"m" "foo bar"})
-           "((LOWER(method) LIKE LOWER('%foo bar%')))"))))
+           "((LOWER(\"Method\") LIKE LOWER('%foo bar%')))"))))
 
 (deftest query
   (testing "A query with no conditions"
-    (is (= (dut/query {}) "")))
-
-  (testing "A query with a condition"
-    (is (= (dut/query {"q" "foo"})
-           (str "SELECT id,names,ec,source,location,mw_min,mw_max,sub_no,"
-                "sub_mw,iso_enzymes,pi_min,pi_max,pi_major,temp_min,temp_max,"
-                "method,ref_full,ref_abstract,ref_pubmed,ref_taxonomy,"
-                "ref_sequence,notes,created_at FROM records WHERE ((LOWER(names) "
-                "LIKE LOWER('%foo%')))")))))
+    (is (= (dut/query {}) ""))))

@@ -103,7 +103,7 @@
      */
 
     // JSON data response map
-    var records = data['records'];
+    var records = data['Records'];
     var strippedRecords = (function () { // Blank properties removed
         var s = [], record, r;
 
@@ -135,10 +135,10 @@
     var format = 'csv';
     var mime = 'text/csv';
 
-    // Add 'available_at' attributes and filter out 'id'
+    // Add 'Available-At' attributes and filter out 'id'
     for (var i in records) {
         var record = records[i];
-        record['available_at'] = 'http://' + location.host + '/r/' + record['id'];
+        record['Available-At'] = 'http://' + location.host + '/r/' + record['id'];
         delete record['id'];
     }
 
@@ -236,7 +236,7 @@
          * Generate a human readable version of a table field.
          */
         var humanReadable = function(text) {
-            return key.toUpperCase().replace(/_/g, ' ');
+            return key.replace(/-/g, ' ');
         };
 
         /*
@@ -262,7 +262,7 @@
                 $(' td:nth-child(' + ++j + ')', $row).html(record[key]);
         };
 
-        if (data['no_of_matches']) {
+        if (data['No-Of-Records-Matched']) {
             // Generate the header row:
             var header = '<tr><td>0</td>';
 

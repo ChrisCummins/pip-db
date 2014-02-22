@@ -7,7 +7,7 @@
 
 (defn GET [request]
   (let [data (model/record ((request :params) :id))]
-    (if (pos? (data :no_of_matches))
+    (if (pos? (data :No-Of-Records-Matched))
       (view/record (assoc request :results data))
       (error/status-404))))
 

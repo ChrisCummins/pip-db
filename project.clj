@@ -1,4 +1,4 @@
-(defproject pip-db "0.4.4"
+(defproject pip-db "0.4.5"
   :description "Protein Isoelectric Point Database"
   :url "https://github.com/ChrisCummins/pip-db"
   :license {:name "GNU General Public License v3"
@@ -8,6 +8,7 @@
                  [hiccup "1.0.4"]
                  [org.clojure/clojure "1.4.0"]
                  [org.clojure/clojure-contrib "1.2.0"]
+                 [org.clojure/data.codec "0.1.0"]
                  [org.clojure/data.json "0.2.4"]
                  [org.clojure/java.jdbc "0.2.3"]
                  [postgresql "9.1-901.jdbc4"]

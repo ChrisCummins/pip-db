@@ -9,5 +9,5 @@
 
 (deftest minihash
   (testing "Short hash implementation"
-    (is (= (dut/minihash "foo") "0beec7b5ea3"))
-    (is (= (dut/minihash "bar") "62cdb7020ff"))))
+    (is (= (dut/minihash "foo") "MGJlZWM3YjV"))
+    (is (= (dut/minihash "bar") "NjJjZGI3MDI"))))
