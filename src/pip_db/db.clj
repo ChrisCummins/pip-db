@@ -134,15 +134,11 @@
           real_ec2 real_ec3 real_ec4 real_mw_min real_mw_max real_pi_min
           real_pi_max real_temp_min real_temp_max])))))
 
-;; This SQL query counts the number of records in the database.
-(def no-of-records-query
-  (str "SELECT count(*) AS exact_count FROM records"))
-
 ;; Fetch the number of records within the database.
 (defn no-of-records []
   (sql/with-connection (System/getenv "DATABASE_URL")
-    (sql/with-query-results result [no-of-records-query]
-      (((apply vector (doall result)) 0) :exact_count))))
+    (sql/with-query-results results ["SELECT count(*) FROM records"]
+      ((first results) :count))))
 
 ;; Remove the null values from a map.
 (defn filter-null [map]
