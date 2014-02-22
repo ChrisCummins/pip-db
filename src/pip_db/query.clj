@@ -33,7 +33,7 @@
 ;; The most basic kind is a `string-condition` which can be used to
 ;; test if a field name matches a value "foo" == "bar".
 (defn string-condition [condition]
-  (str "(LOWER(" (condition :field) ") "
+  (str "(LOWER(\"" (condition :field) "\") "
        (if (condition :not) "NOT ") "LIKE "
        "LOWER('%" (condition :value) "%'))"))
 ;;
@@ -41,7 +41,7 @@
 ;; e.g. "foo" == 5.
 (defn numeric-condition [condition]
   (if (util/is-number? (condition :value))
-    (str (condition :field) (condition :operator) (condition :value))))
+    (str "\"" (condition :field) "\"" (condition :operator) (condition :value))))
 
 ;; ### Field is equals
 (defn EQ [condition]

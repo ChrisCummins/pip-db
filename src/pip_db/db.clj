@@ -34,41 +34,41 @@
 
 (defn create-tables []
   (sql/with-connection (System/getenv "DATABASE_URL")
-    (sql/create-table :records
-                      [:id            "varchar(11)" "NOT NULL"]
-                      [:names         :varchar]
-                      [:ec            :varchar]
-                      [:source        :varchar]
-                      [:location      :varchar]
-                      [:mw_min        :varchar]
-                      [:mw_max        :varchar]
-                      [:sub_no        :varchar]
-                      [:sub_mw        :varchar]
-                      [:iso_enzymes   :varchar]
-                      [:pi_min        :varchar]
-                      [:pi_max        :varchar]
-                      [:pi_major      :varchar]
-                      [:temp_min      :varchar]
-                      [:temp_max      :varchar]
-                      [:method        :varchar]
-                      [:ref_full      :varchar]
-                      [:ref_abstract  :varchar]
-                      [:ref_pubmed    :varchar]
-                      [:ref_taxonomy  :varchar]
-                      [:ref_sequence  :varchar]
-                      [:notes         :varchar]
-                      [:real_ec1      :integer]
-                      [:real_ec2      :integer]
-                      [:real_ec3      :integer]
-                      [:real_ec4      :integer]
-                      [:real_mw_min   :real]
-                      [:real_mw_max   :real]
-                      [:real_pi_min   :real]
-                      [:real_pi_max   :real]
-                      [:real_temp_min :real]
-                      [:real_temp_max :real]
-                      [:created_at    :timestamp
-                       "NOT NULL" "DEFAULT CURRENT_TIMESTAMP"])
+    (sql/with-quoted-identifiers \"
+      (sql/create-table :records
+                        [:id                 "varchar(11) NOT NULL"]
+                        [:Protein-Names      "varchar"]
+                        [:EC                 "varchar"]
+                        [:Source             "varchar"]
+                        [:Location           "varchar"]
+                        [:MW-Min             "varchar"]
+                        [:MW-Max             "varchar"]
+                        [:Subunit-No         "varchar"]
+                        [:Subunit-MW         "varchar"]
+                        [:No-Of-Iso-Enzymes  "varchar"]
+                        [:pI-Min             "varchar"]
+                        [:pI-Max             "varchar"]
+                        [:pI-Major-Component "varchar"]
+                        [:Temperature-Min    "varchar"]
+                        [:Temperature-Max    "varchar"]
+                        [:Method             "varchar"]
+                        [:Full-Text          "varchar"]
+                        [:Abstract-Only      "varchar"]
+                        [:PubMed             "varchar"]
+                        [:Species-Taxonomy   "varchar"]
+                        [:Protein-Sequence   "varchar"]
+                        [:Notes              "varchar"]
+                        [:real_ec1           "integer"]
+                        [:real_ec2           "integer"]
+                        [:real_ec3           "integer"]
+                        [:real_ec4           "integer"]
+                        [:real_mw_min        "real"]
+                        [:real_mw_max        "real"]
+                        [:real_pi_min        "real"]
+                        [:real_pi_max        "real"]
+                        [:real_temp_min      "real"]
+                        [:real_temp_max      "real"]
+                        [:Created-At         "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP"]))
 
     (sql/create-table :users
                       [:id :serial "PRIMARY KEY"]
@@ -83,7 +83,7 @@
 
 (defn add-record [r]
   (let [id              (record-hash r)
-        names           (str/join " / " (r "Names"))
+        names           (str/join " / " (r "Protein-Names"))
         ec              (r "EC")
         source          (r "Source")
         location        (r "Location")
@@ -117,20 +117,22 @@
         real_temp_max   (util/str->int temp_max)]
 
     (sql/with-connection (System/getenv "DATABASE_URL")
+      (sql/with-quoted-identifiers \"
 
-      ;; Insert records
-      (sql/insert-values
-       :records
-       [:id :names :ec :source :location :mw_min :mw_max :sub_no :sub_mw :iso_enzymes
-        :pi_min :pi_max :pi_major :temp_min :temp_max :method :ref_full
-        :ref_abstract :ref_pubmed :ref_taxonomy :ref_sequence :notes :real_ec1
-        :real_ec2 :real_ec3 :real_ec4 :real_mw_min :real_mw_max :real_pi_min
-        :real_pi_max :real_temp_min :real_temp_max]
-       [id names ec source location mw_min mw_max sub_no sub_mw iso_enzymes
-        pi_min pi_max pi_major temp_min temp_max method ref_full
-        ref_abstract ref_pubmed ref_taxonomy ref_sequence notes real_ec1
-        real_ec2 real_ec3 real_ec4 real_mw_min real_mw_max real_pi_min
-        real_pi_max real_temp_min real_temp_max]))))
+        ;; Insert records
+        (sql/insert-values
+         :records
+         [:id :Protein-Names :EC :Source :Location :MW-Min :MW-Max :Subunit-No
+          :Subunit-MW :No-Of-Iso-Enzymes :pI-Min :pI-Max :pI-Major-Component
+          :Temperature-Min :Temperature-Max :Method :Full-Text :Abstract-Only
+          :PubMed :Species-Taxonomy :Protein-Sequence :Notes :real_ec1
+          :real_ec2 :real_ec3 :real_ec4 :real_mw_min :real_mw_max :real_pi_min
+          :real_pi_max :real_temp_min :real_temp_max]
+         [id names ec source location mw_min mw_max sub_no sub_mw iso_enzymes
+          pi_min pi_max pi_major temp_min temp_max method ref_full
+          ref_abstract ref_pubmed ref_taxonomy ref_sequence notes real_ec1
+          real_ec2 real_ec3 real_ec4 real_mw_min real_mw_max real_pi_min
+          real_pi_max real_temp_min real_temp_max])))))
 
 ;; This SQL query counts the number of records in the database.
 (def no-of-records-query
@@ -162,11 +164,11 @@
 ;; the query returns no results: "org.postgresql.util.PSQLException:
 ;; No results were returned by the query."
 (defn search [query params]
-  (search-response
-   (sql/with-connection (System/getenv "DATABASE_URL")
-     (try (sql/with-query-results results [query]
-            (apply vector (map filter-null (doall results))))
-          (catch Exception e []))) params))
+ (search-response
+  (sql/with-connection (System/getenv "DATABASE_URL")
+    (try (sql/with-query-results results [query]
+           (apply vector (map filter-null (doall results))))
+         (catch Exception e []))) params))
 
 (defn migrate []
   (when-not (migrated?)
@@ -177,7 +179,9 @@
 (def records-table "records")
 
 (def records-columns
-  (str "id,names,ec,source,location,mw_min,mw_max,sub_no,sub_mw,"
-       "iso_enzymes,pi_min,pi_max,pi_major,temp_min,temp_max,method,"
-       "ref_full,ref_abstract,ref_pubmed,ref_taxonomy,ref_sequence,notes,"
-       "created_at"))
+  (str "id,\"Protein-Names\",\"EC\",\"Source\",\"Location\",\"MW-Min\","
+       "\"MW-Max\",\"Subunit-No\",\"Subunit-MW\",\"No-Of-Iso-Enzymes\","
+       "\"pI-Min\",\"pI-Max\",\"pI-Major-Component\",\"Temperature-Min\","
+       "\"Temperature-Max\",\"Method\",\"Full-Text\",\"Abstract-Only\","
+       "\"PubMed\",\"Species-Taxonomy\",\"Protein-Sequence\",\"Notes\","
+       "\"Created-At\""))
