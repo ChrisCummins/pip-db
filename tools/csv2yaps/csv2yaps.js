@@ -139,6 +139,11 @@ var tokens2Row = function (tokens) {
   return row;
 };
 
+// Capitalise the first letter of a string
+var capitalise = function (txt) {
+  return txt.charAt(0).toUpperCase() + txt.substr(1);
+}
+
 // Convert a row object into a Yaps object
 var row2Yaps = function (row) {
 
@@ -152,8 +157,8 @@ var row2Yaps = function (row) {
       for (var i in arr)
         n.push.apply(n, arr[i].split('/'));
 
-      for (var i in n)
-        n[i] = n[i].trim().replace(/\.$/, '');
+      for (var i in n) // Format individual names
+        n[i] = capitalise(n[i].trim()).replace(/\.$/, ''); // Strip trailing '.'
 
       return n;
     })(row.names);
@@ -165,11 +170,11 @@ var row2Yaps = function (row) {
 
   // Source
   if (row.source)
-    yaps.source = row.source[0];
+    yaps.source = capitalise(row.source[0]);
 
   // Location
   if (row.location)
-    yaps.location = row.location[0];
+    yaps.location = capitalise(row.location[0]);
 
   // MW
   if (row.mw) {
