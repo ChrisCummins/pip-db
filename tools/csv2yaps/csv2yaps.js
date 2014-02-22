@@ -263,7 +263,7 @@ readStream.on('error', function (error) {
 
 new lazy(readStream).on('end', function () {
   // End of processing callback
-  console.log(JSON.stringify(yaps));
+  console.log(JSON.stringify(yaps, undefined, 2)); // Pretty-print JSON
 }).lines.forEach(function (buffer) {
   // Per-line callback
   var line = buffer.toString().replace(/\r/, ''); // Strip carriage return
