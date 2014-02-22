@@ -3,9 +3,11 @@
 /*
  * yaps.js - (Yet Another Protein Schema) CSV to YAPS conversion
  */
+var VERSION = "0.4.4";
 
 var lazy = require('lazy');
 var fs  = require('fs');
+var os = require("os");
 
 // Print a message
 var message = function (msg) {
@@ -257,10 +259,18 @@ if (argc !== 3) {
 }
 
 // Global state objects
-var csv = argv[2];
+var csv = fs.realpathSync(argv[2]);
 var lineCount = 1;
 var readStream = fs.createReadStream(csv);
-var yaps = [];
+var yaps = {
+  "Encoding": "yaps " + VERSION,
+  "Date": new Date().toISOString().slice(0, 19).replace('T', ' '),
+  "Author": process.env['USER'] + "@" + os.hostname(),
+  "Agent": __filename,
+  "Source": csv,
+  "No-Of-Records": 0,
+  "Records": []
+};
 
 readStream.on('error', function (error) {
   process.stderr.write('Unable to read file "' + csv + '"!\n');
@@ -268,6 +278,7 @@ readStream.on('error', function (error) {
 
 new lazy(readStream).on('end', function () {
   // End of processing callback
+  yaps['No-Of-Records'] = yaps['Records'].length;
   console.log(JSON.stringify(yaps, undefined, 2)); // Pretty-print JSON
 }).lines.forEach(function (buffer) {
   // Per-line callback
@@ -275,7 +286,7 @@ new lazy(readStream).on('end', function () {
   var tokens = line.split(delim);
 
   if (schema[0].indexes) // Body
-    yaps.push(row2Yaps(tokens2Row(tokens)));
+    yaps['Records'].push(row2Yaps(tokens2Row(tokens)));
   else // Header line
     setSchemaIndexes(tokens);
 
