@@ -16,9 +16,7 @@
 (defn sha1 [s]
   (->> (-> "sha1" java.security.MessageDigest/getInstance
            (.digest (.getBytes s)))
-       (map #(.substring
-              (Integer/toString
-               (+ (bit-and % 0xff) 0x100) 16) 1))
+       (map #(.substring (Integer/toString (+ (bit-and % 0xff) 0x100) 16) 1))
        (apply str)))
 
 ;; We generated truncated hashes when creating our record IDs.
@@ -76,14 +74,10 @@
                       [:email :varchar "NOT NULL"]
                       [:pass :varchar "NOT NULL"])))
 
-;; Generate a unique ID for a line.
-(defn record-hash [record]
-  (minihash (str record)))
-
 ;; YAPS map
 
 (defn add-record [r]
-  (let [id              (record-hash r)
+  (let [id              (minihash (str r))
         names           (str/join " / " (r "Protein-Names"))
         ec              (r "EC")
         source          (r "Source")
@@ -119,8 +113,6 @@
 
     (sql/with-connection (System/getenv "DATABASE_URL")
       (sql/with-quoted-identifiers \"
-
-        ;; Insert records
         (sql/insert-values
          :records
          [:id :Protein-Names :EC :Source :Location :MW-Min :MW-Max :Subunit-No
