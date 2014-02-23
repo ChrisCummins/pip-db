@@ -1,7 +1,7 @@
 (ns pip-db.views.record
-  (:use [pip-db.views.page :only (page)])
-  (:require [pip-db.util :as util]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [pip-db.ui :as ui]
+            [pip-db.util :as util]))
 
 (def properties-table
   [:table#properties.table.table-striped.table-bordered
@@ -40,7 +40,7 @@
 
 (defn record [request]
   (let [results (request :results)]
-    (page
+    (ui/page
      request
      {:navbar {:search true}
       :heading {:title " " ; Blank title

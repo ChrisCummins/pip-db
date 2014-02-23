@@ -2,8 +2,10 @@
 ;;
 ;; Define a set of common user interface components.
 (ns pip-db.ui
+  (:use [hiccup.page :only (html5 include-css include-js)])
   (:require [pip-db.util :as util]
-            [pip-db.resources :as res]))
+            [pip-db.resources :as res]
+            [pip-db.views.navbar :as navbar]))
 
 ;; The Google analytics tracking snippet, as an inline embedded
 ;; script. Include this on every page to enable analytics tracking.
@@ -235,3 +237,142 @@
                        :style "width:32px;height:32px"}])
 
 (def favicon [:link {:rel "icon" :type "image/png" :href "/favicon.png"}])
+
+;; ---------
+;; ## Navbar
+
+(defn navbar-search [request]
+  [:div.search.navbar-search (search-bar request)])
+
+;; Generate the user menu for the navbar.
+(defn navbar-user [request]
+  [:ul.nav.navbar-nav.navbar-right
+   (if (util/signed-in? request)
+     [:li.dropdown
+      [:a#themes.dropdown-toggle {:href "#" :data-toggle "dropdown"}
+       (util/username request) [:span.caret]]
+      [:ul.dropdown-menu
+       [:li [:a {:href "/" :tabindex "-1"} "Run initial setup"]]
+       [:li [:a {:href "/upload" :tabindex "-1"} "Upload new data"]]
+       [:li [:a {:href "/" :tabindex "-1"} "Preferences"]]
+       [:li.divider]
+       [:li [:a {:href "/logout" :tabindex "-1"} "Log out"]]]]
+     [:li [:a {:href "/login"} "Login"]])])
+
+(defn navbar [request]
+  (let [navbar (request :navbar)]
+    [:div.navbar.navbar-fixed-top
+
+     {:class (if (navbar :login-only)
+               "navbar-invisible"
+               "navbar-default")}
+
+     [:div.container
+      [:div.navbar-header
+       [:button.navbar-toggle {:type "button"
+                               :data-toggle "collapse"
+                               :data-target "navbar-collapse"}
+        [:span.icon-bar]
+        [:span.icon-bar]
+        [:span.icon-bar]]
+       [:a.navbar-brand {:href "/"} small-logo "pip-db"]]
+
+      [:div.navbar-collapse.collapse
+       (if (navbar :search) (navbar-search request))
+       (if (not (navbar :hide-user)) (navbar-user request))]]]))
+
+;; ------------------
+;; ## Page Templating
+
+(def meta-tags
+  (list [:meta {:charset "utf-8"}]
+        [:meta {:http-equiv "X-UA-Compatible"
+                :content "IE=edge,chrome=1"}]
+        [:meta {:name "viewport"
+                :content "width=device-width, initial-scale=1"}]
+        [:meta {:name "msapplication-tooltip"
+                :content "Protein Isoelectric Point Database."}]))
+
+(defn page-head [request]
+  [:head
+   meta-tags
+   [:title (str "pip-db " (request :title))]
+   favicon
+
+   (include-css "/css/styles.css"
+                "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css")
+   (request :header)
+   (include-js "/js/modernizr-2.7.0.min.js")
+   (google-analytics)])
+
+(defn page-body [request]
+  [:body
+   (if (request :navbar) (navbar request))
+   [:div#wrap [:div.container
+               (if (request :heading) (heading (request :heading)))
+               (request :body)]]
+   (if (not (request :hide-footer)) (footer))
+
+   (include-js
+    "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
+   [:script "window.jQuery || document.write('"
+    "<script src=\"/js/jquery-1.10.2.min.js\"><\\/script>');"]
+   (include-js "/js/bootstrap-3.0.1.min.js"
+               "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"
+               "/js/main.js"
+               "/js/moment.min.js")
+   (request :javascript)])
+
+(defn page
+  ([contents]         (page {:params {}} contents))
+  ([request contents] (let [data (merge request contents)]
+                        (html5 {:lang "en" :class "no-js"}
+                               (page-head data) (page-body data)))))
+
+;; ---------
+;; ## Errors
+
+;; ### 404 - File Not Found
+;; The bog standard invalid URL response.
+(defn page-404 []
+  {:status 404
+   :body (page {:title "Page Not Found",
+                :navbar {:search false}
+                :body [:div.row
+                       [:div.col-lg-12.text-center
+                        [:div.jumbotron.errortron
+                         [:h1 "404 :("]
+                         [:p "Sorry, I couldn't find the page you're after."]
+                         [:p
+                          [:a.btn.btn-lg.btn-danger {:href "/"}
+                           "I want to complain!"] " "
+                          [:a.btn.btn-lg.btn-success {:href "/"}
+                           "Just take me home"]]]]]})})
+
+;; ### 500 - Internal Server Error.
+;;
+;; Our "oops" page. An exception can optionally be passed as an
+;; argument to it, otherwise, a generic apology message is created.
+(defn page-500 [exception]
+  {:status 500
+   :body (page {:title "Woops!",
+                :navbar {:search false}
+                :body (list [:div.row
+                             [:div.col-lg-12.text-center
+                              [:div.jumbotron.errortron
+                               [:h1 "500 :("]
+                               [:p (if util/debug?
+                                     (.toString exception)
+                                     "Sorry, I couldn't show the page you're after!")]
+                               (if (not util/debug?)
+                                 [:p
+                                  [:a.btn.btn-lg.btn-danger {:href "/"}
+                                   "I want to complain!"] " "
+                                  [:a.btn.btn-lg.btn-success {:href "/"}
+                                   "Just take me home"]])]]]
+                            (if util/debug?
+                              [:div.row
+                               [:div.col-lg-12
+                                [:pre.stack-trace
+                                 (map (fn [line] (str line "\n"))
+                                      (.getStackTrace exception))]]]))})})
