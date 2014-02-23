@@ -18,6 +18,8 @@
           [:meta {:name "msapplication-tooltip"
                   :content "Protein Isoelectric Point Database."}]
           [:title (str "pip-db " (request :title))]
+          ui/favicon
+
           (include-css "/css/styles.css"
                        "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css")
           (request :header)
