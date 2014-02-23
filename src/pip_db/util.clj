@@ -89,6 +89,11 @@
 (defn str->b64 [original]
   (String. (b64/encode (.getBytes original)) "UTF-8"))
 
+;; Converts a set of keys into a quoted, comma separated list. E.g.
+;; `(= (keys->quoted-str :a :b) "\"a\",\"b\"")`.
+(defn keys->quoted-str [& keys]
+  (str "\"" (str/join "\",\"" (map name keys)) "\""))
+
 ;; -------------------------
 ;; ## Hashing & Cryptography
 
