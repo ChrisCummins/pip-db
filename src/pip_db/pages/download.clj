@@ -49,7 +49,7 @@
 ;; Perform a search from the given request map and wrap the results
 ;; into a `:results` key.
 (defn search-results [request]
-  (assoc request :results (db/query (request :params))))
+  (assoc request :results (db/search (request :params))))
 
 (defn GET [request] (view request)
   (view (search-results request)))
