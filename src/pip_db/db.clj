@@ -8,6 +8,15 @@
             [clojure.set :as set]
             [pip-db.util :as util]))
 
+;; Our database spec.
+(def db-spec (System/getenv "DATABASE_URL"))
+
+;; Evaluates body in the context of a new connection to a database
+;; then closes the connection. Identifiers are quoted.
+(defmacro with-connection [& body]
+  `(sql/with-connection db-spec
+     (sql/with-quoted-identifiers \" ~@body)))
+
 (def max-no-of-returned-records 20)
 
 ;; SHA1 implementation
