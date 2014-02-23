@@ -193,14 +193,18 @@
 ;; query in a try/catch block in order to catch an SQL exception when
 ;; the query returns no results: "org.postgresql.util.PSQLException:
 ;; No results were returned by the query."
-(defn search [query params]
-  (search-response
-   (with-connection
+(defn search-results [query]
+  (with-connection
      (try (sql/with-query-results results [query]
-            (apply vector (map remap-yaps-keys
-                               (map filter-null (doall results)))))
-          (catch Exception e []))) params))
+            (apply vector (map #(remap-yaps-keys (filter-null %)) results)))
+          (catch Exception e []))))
 
+;; Perform a database search and wrap the results in a search response
+;; map.
+(defn search [query params]
+  (search-response (search-results query) params))
+
+;; Perform necessary database migration.
 (defn migrate []
   (when-not (migrated?)
     (print "Creating database structure...") (flush)
