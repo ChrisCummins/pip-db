@@ -79,6 +79,20 @@
   (with-connection
     (doseq [t tables] (apply sql/create-table (t 0) (t 1)))))
 
+;; The subset of fields within the records table that are considered
+;; private, i.e. those which should be returned to users when
+;; performing queries.
+(def private-record-fields
+  (map keyword (filter #(re-matches #"real_.*" %)
+                       (map #(name (first %)) (tables :records)))))
+
+;; The subset of fields within the records table that are considered
+;; public and should be returned to users when performing queries,
+;; i.e. the inverse of the private-record-fields list.
+(def public-record-fields
+  (filter #(not (some #{%} private-record-fields))
+          (map first (tables :records))))
+
 ;; Add a given record encoded as a YAPS map to the database.
 (defn add-record [r]
   (let [id              (util/minihash (str r))
