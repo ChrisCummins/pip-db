@@ -1,6 +1,5 @@
 ;; ## The Advanced Search page
 (ns pip-db.views.advanced
-  (:use [pip-db.views.page :only (page)])
   (:require [pip-db.util :as util]
             [pip-db.ui :as ui]))
 
@@ -38,82 +37,82 @@
 
 ;; ## Page Layout
 (defn advanced [request]
-  request
-  (page {
-         :title "Advanced Search"
-         :navbar {}
-         :heading {:title "Advanced Search"}
-         :body [:div.advsearch
-                [:form#as {:method "GET" :action "/s"}
+  (ui/page
+   request
+   {:title "Advanced Search"
+    :navbar {}
+    :heading {:title "Advanced Search"}
+    :body [:div.advsearch
+           [:form#as {:method "GET" :action "/s"}
 
-                 (ui/search-form-heading-row "Find proteins with...")
-                 (search-keywords-all-widget request)
-                 (search-keywords-exact-widget request)
-                 (search-keywords-any-widget request)
-                 (search-keywords-exclude-widget request)
-                 (search-source-widget request)
-                 (search-location-widget request)
+            (ui/search-form-heading-row "Find proteins with...")
+            (search-keywords-all-widget request)
+            (search-keywords-exact-widget request)
+            (search-keywords-any-widget request)
+            (search-keywords-exclude-widget request)
+            (search-source-widget request)
+            (search-location-widget request)
 
-                 (ui/search-form-heading-row "Then narrow results by...")
-                 (ui/search-form-method-row request)
-                 (ui/search-form-pi-row request)
-                 [:div.row
-                  [:div.col-md-2
-                   [:label {:for "ec1"} "enzyme commission number:"]]
-                  [:div.col-md-6
-                   [:div {:style "display: table; width: 100%;"}
-                    [:div {:style "display: table-cell; padding-right: 16px;"}
-                     [:input {:name "ec1" :type "text"
-                              :autocomplete "off"}]]
-                    [:div {:style "display: table-cell; padding-right: 16px;"}
-                     [:input {:name "ec2" :type "text"
-                              :autocomplete "off"}]]
-                    [:div {:style "display: table-cell; padding-right: 16px;"}
-                     [:input {:name "ec3" :type "text"
-                              :autocomplete "off"}]]
-                    [:div {:style "display: table-cell;"}
-                     [:input {:name "ec4" :type "text"
-                              :autocomplete "off"}]]]]
-                  [:div.col-md-4
-                   [:div.info "Enter one or more categories for the EC."]]]
-                 [:div.row
-                  [:div.col-md-2
-                   [:label {:for "location"} "molecular weight:"]]
-                  [:div.col-md-6
-                   [:div {:style "display: table; width: 100%;"}
-                    [:div {:style "display: table-cell;"}
-                     [:input {:name "mw_l" :type "text"
-                              :autocomplete "off"}]]
-                    [:div {:style (str "display: table-cell; width:40px; "
-                                       "padding-right: 6px; padding-left: 6px;"
-                                       "text-align: center;")} "to"]
-                    [:div {:style "display: table-cell;"}
-                     [:input {:name "mw_h" :type "text"
-                              :autocomplete "off"}]]]]
-                  [:div.col-md-4
-                   [:div.info
-                    "Enter an exact or range of molecular weights."]]]
-                 [:div.row
-                  [:div.col-md-2
-                   [:label {:for "t_l"} "temperature:"]]
-                  [:div.col-md-6
-                   [:div {:style "display: table; width: 100%;"}
-                    [:div {:style "display: table-cell;"}
-                     [:input {:name "t_l" :type "text"
-                              :autocomplete "off"}]]
-                    [:div {:style (str "display: table-cell; width:40px; "
-                                       "padding-right: 6px;"
-                                       "padding-left: 6px;"
-                                       "text-align: center;")} "to"]
-                    [:div {:style "display: table-cell;"}
-                     [:input {:name "t_h" :type "text"
-                              :autocomplete "off"}]]]]
-                  [:div.col-md-4
-                   [:div.info
-                    "Enter an exact or range of temperatures."]]]
+            (ui/search-form-heading-row "Then narrow results by...")
+            (ui/search-form-method-row request)
+            (ui/search-form-pi-row request)
+            [:div.row
+             [:div.col-md-2
+              [:label {:for "ec1"} "enzyme commission number:"]]
+             [:div.col-md-6
+              [:div {:style "display: table; width: 100%;"}
+               [:div {:style "display: table-cell; padding-right: 16px;"}
+                [:input {:name "ec1" :type "text"
+                         :autocomplete "off"}]]
+               [:div {:style "display: table-cell; padding-right: 16px;"}
+                [:input {:name "ec2" :type "text"
+                         :autocomplete "off"}]]
+               [:div {:style "display: table-cell; padding-right: 16px;"}
+                [:input {:name "ec3" :type "text"
+                         :autocomplete "off"}]]
+               [:div {:style "display: table-cell;"}
+                [:input {:name "ec4" :type "text"
+                         :autocomplete "off"}]]]]
+             [:div.col-md-4
+              [:div.info "Enter one or more categories for the EC."]]]
+            [:div.row
+             [:div.col-md-2
+              [:label {:for "location"} "molecular weight:"]]
+             [:div.col-md-6
+              [:div {:style "display: table; width: 100%;"}
+               [:div {:style "display: table-cell;"}
+                [:input {:name "mw_l" :type "text"
+                         :autocomplete "off"}]]
+               [:div {:style (str "display: table-cell; width:40px; "
+                                  "padding-right: 6px; padding-left: 6px;"
+                                  "text-align: center;")} "to"]
+               [:div {:style "display: table-cell;"}
+                [:input {:name "mw_h" :type "text"
+                         :autocomplete "off"}]]]]
+             [:div.col-md-4
+              [:div.info
+               "Enter an exact or range of molecular weights."]]]
+            [:div.row
+             [:div.col-md-2
+              [:label {:for "t_l"} "temperature:"]]
+             [:div.col-md-6
+              [:div {:style "display: table; width: 100%;"}
+               [:div {:style "display: table-cell;"}
+                [:input {:name "t_l" :type "text"
+                         :autocomplete "off"}]]
+               [:div {:style (str "display: table-cell; width:40px; "
+                                  "padding-right: 6px;"
+                                  "padding-left: 6px;"
+                                  "text-align: center;")} "to"]
+               [:div {:style "display: table-cell;"}
+                [:input {:name "t_h" :type "text"
+                         :autocomplete "off"}]]]]
+             [:div.col-md-4
+              [:div.info
+               "Enter an exact or range of temperatures."]]]
 
-                 [:div.row
-                  [:div.col-md-2.col-md-offset-6
-                   [:button.btn.btn-success.disabled.pull-right
-                    {:type "submit" :name "a" :value "s"}
-                    "Advanced Search"]]]]]}))
+            [:div.row
+             [:div.col-md-2.col-md-offset-6
+              [:button.btn.btn-success.disabled.pull-right
+               {:type "submit" :name "a" :value "s"}
+               "Advanced Search"]]]]]}))

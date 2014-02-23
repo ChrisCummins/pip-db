@@ -1,5 +1,4 @@
 (ns pip-db.views.search
-  (:use [pip-db.views.page :only (page)])
   (:require [clojure.string :as str]
             [pip-db.util :as util]
             [pip-db.ui :as ui]))
@@ -15,12 +14,13 @@
             [:td.pi       "pI"]]] [:tbody]])
 
 (defn search [request]
-  (page request
-        {:title ((request :params) "q")
-         :navbar {:search true}
-         :heading {:meta true :download true}
-         :body [:div.sresults
-                results-table
-                ui/no-results-found-message]
-         :javascript (list (util/inline-data-js "data" (request :results))
-                           (util/inline-js "/js/search.inline.js"))}))
+  (ui/page
+   request
+   {:title ((request :params) "q")
+    :navbar {:search true}
+    :heading {:meta true :download true}
+    :body [:div.sresults
+           results-table
+           ui/no-results-found-message]
+    :javascript (list (util/inline-data-js "data" (request :results))
+                      (util/inline-js "/js/search.inline.js"))}))

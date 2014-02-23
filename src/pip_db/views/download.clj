@@ -1,6 +1,5 @@
 (ns pip-db.views.download
-  (:use [pip-db.views.page :only (page)]
-        [hiccup.page :only (include-js)])
+  (:use [hiccup.page :only (include-js)])
   (:require [pip-db.util :as util]
             [pip-db.ui :as ui]
             [clojure.string :as str]))
@@ -29,7 +28,7 @@
    [:div.col-md-12 [:div#preview-frame results-table [:pre#text]]]])
 
 (defn download [request]
-  (page
+  (ui/page
    request
    {:title (get request :name)
     :navbar {}
