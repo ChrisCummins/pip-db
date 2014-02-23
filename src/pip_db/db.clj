@@ -162,32 +162,12 @@
 ;; The `with-query-results` function returns a response map of field
 ;; names to values, with the field names all lower-cased for some
 ;; bizarre reason. As a result, we have to remap each key to it's
-;; properly cased equivalent. This is a fucking disgrace of bad code,
-;; so we *need* to come up with an actual solution, not a hack.
-(defn remap-yaps-keys [map]
-  (set/rename-keys map
-                   {:protein-names      :Protein-Names,
-                    :ec                 :EC,
-                    :source             :Source,
-                    :location           :Location,
-                    :mw-min             :MW-Min,
-                    :mw-max             :MW-Max,
-                    :subunit-no         :Subunit-No,
-                    :subunit-mw         :Subunit-MW,
-                    :no-of-iso-enzymes  :No-Of-Iso-Enzymes,
-                    :pi-min             :pI-Min,
-                    :pi-max             :pI-Max,
-                    :pi-major-component :pI-Major-Component,
-                    :temperature-min    :Temperature-Min,
-                    :temperature-max    :Temperature-Max,
-                    :method             :Method,
-                    :full-text          :Full-Text,
-                    :abstract-only      :Abstract-Only,
-                    :pubmed             :PubMed,
-                    :species-taxonomy   :Species-Taxonomy,
-                    :protein-sequence   :Protein-Sequence,
-                    :notes              :Notes,
-                    :created-at         :Created-At}))
+;; properly cased equivalent. To do this, we use a renaming table
+;; which maps lower-case public record fields onto properly cased
+;; equivalents.
+(def renaming-table
+  (zipmap (map #(keyword (str/lower-case (name %))) public-record-fields)
+          public-record-fields))
 
 ;; Fetch a vector of records for a given query map. We wrap the entire
 ;; query in a try/catch block in order to catch an SQL exception when
@@ -196,7 +176,8 @@
 (defn search-results [query]
   (with-connection
      (try (sql/with-query-results results [query]
-            (apply vector (map #(remap-yaps-keys (filter-null %)) results)))
+            (apply vector (map #(set/rename-keys (filter-null %) renaming-table)
+                               results)))
           (catch Exception e []))))
 
 ;; Perform a database search and wrap the results in a search response
