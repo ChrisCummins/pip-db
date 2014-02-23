@@ -34,8 +34,8 @@
 ;; test if a field name matches a value "foo" == "bar".
 (defn string-condition [condition]
   (str "(LOWER(\"" (condition :field) "\") "
-       (if (condition :not) "NOT ") "LIKE "
-       "LOWER('%" (condition :value) "%'))"))
+       (if (condition :not) "NOT ")
+       "LIKE LOWER('%" (condition :value) "%'))"))
 ;;
 ;; A `numeric-condition` tests a field for a precise integer field,
 ;; e.g. "foo" == 5.
@@ -46,13 +46,12 @@
 ;; ### Field is equals
 (defn EQ [condition]
   (cond
-   (str/blank? (condition :value)) ""
-   (condition :numeric) (numeric-condition (assoc condition :operator "="))
-   :else (string-condition condition)))
+   (str/blank?           (condition :value)) ""
+   (condition :numeric)  (numeric-condition (assoc condition :operator "="))
+   :else                 (string-condition condition)))
 
 ;; ### Field is not equals
-(defn NE [condition]
-  (EQ (assoc condition :not true)))
+(defn NE [condition]     (EQ (assoc condition :not true)))
 
 ;; ### Field is great than or equals to
 (defn GTE [condition]
@@ -71,13 +70,11 @@
 ;; "car". If only one condition is provided, this has no effect.
 (defn compound-condition [join conditions]
   (let [stripped (strip-conditions conditions)]
-    (if-not (zero? (count stripped))
+    (if (pos? (count stripped))
       (str "(" (str/join join stripped) ")") "")))
 
 ;; ### All conditions must match
-(defn AND [& conditions]
-  (compound-condition " AND " (flatten conditions)))
+(defn AND [& conditions] (compound-condition " AND " (flatten conditions)))
 
 ;; ### One or more conditions must match
-(defn OR [& conditions]
-  (compound-condition " OR " (flatten conditions)))
+(defn OR [& conditions]  (compound-condition " OR " (flatten conditions)))
