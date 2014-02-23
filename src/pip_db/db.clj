@@ -6,6 +6,7 @@
   (:require [clojure.java.jdbc :as sql]
             [clojure.string :as str]
             [clojure.set :as set]
+            [pip-db.query :as query]
             [pip-db.util :as util]))
 
 ;; Our database spec.
@@ -173,22 +174,35 @@
 (defn row->record [row]
   (-> (into {} (filter second row)) (set/rename-keys renaming-table)))
 
-;; Perform a database search and wrap the results in a search response
-;; map.
-(defn search [query params]
-  (let [matching-rows    (search-results query)
-        returned-rows    (take max-no-of-returned-records matching-rows)
-        returned-records (map row->record returned-rows)]
-    {:Query-Terms                params
-     :No-Of-Records-Searched     (count-rows :records)
-     :No-Of-Records-Matched      (count matching-rows)
-     :No-Of-Records-Returned     (count returned-records)
-     :Max-No-of-Returned-Records max-no-of-returned-records
-     :Records                    returned-records}))
-
 ;; Perform necessary database migration.
 (defn migrate []
   (when-not (migrated?)
     (print "Creating database structure...") (flush)
     (apply create-tables tables)
     (println " done")))
+
+;; ### Query components
+
+;; We can now take a query map and use this to generate a SQL
+;; query. If the query map is empty, then we return an empty string.
+(defn params->str [params]
+  (let [query  (query/params->query params)
+        fields (apply util/keys->quoted-str public-record-fields)]
+    (if (str/blank? query)
+      ""
+      (str "SELECT " fields " FROM records WHERE " query))))
+
+;; Perform a database search and wrap the results in a search response
+;; map.
+(defn search
+  ([params] (search (params->str params) params))
+  ([query params]
+     (let [matching-rows    (search-results query)
+           returned-rows    (take max-no-of-returned-records matching-rows)
+           returned-records (map row->record returned-rows)]
+       {:Query-Terms                params
+        :No-Of-Records-Searched     (count-rows :records)
+        :No-Of-Records-Matched      (count matching-rows)
+        :No-Of-Records-Returned     (count returned-records)
+        :Max-No-of-Returned-Records max-no-of-returned-records
+        :Records                    returned-records})))

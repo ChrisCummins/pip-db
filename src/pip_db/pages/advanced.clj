@@ -1,9 +1,8 @@
-;; ## The Advanced Search page
-(ns pip-db.views.advanced
+(ns pip-db.pages.advanced
   (:require [pip-db.util :as util]
             [pip-db.ui :as ui]))
 
-;; ## Search form widgets
+;; ## View
 
 (defn search-keywords-all-widget [request]
   (ui/search-form-text-row "q" "all of these words"
@@ -36,7 +35,7 @@
                            ((request :params) "q_l")))
 
 ;; ## Page Layout
-(defn advanced [request]
+(defn view [request]
   (ui/page
    request
    {:title "Advanced Search"
@@ -116,3 +115,8 @@
               [:button.btn.btn-success.disabled.pull-right
                {:type "submit" :name "a" :value "s"}
                "Advanced Search"]]]]]}))
+
+;; ## Controller
+
+;; Serve an advanced search page.
+(defn GET [request] (view request))

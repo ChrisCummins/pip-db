@@ -1,5 +1,7 @@
-(ns pip-db.views.index
+(ns pip-db.pages.index
   (:require [pip-db.ui :as ui]))
+
+;; ## View
 
 ;; The "above the fold" content, i.e. the main logo and search bar.
 (defn search-block [request]
@@ -49,8 +51,12 @@
          "volutpat congue velit, vel feugiat quam "
          "condimentum in.")]])
 
-(defn index [request]
+(defn view [request]
   (ui/page request
            {:navbar {:login-only true}
             :body (list [:div.row (search-block request)]
                         [:div.row (text-body request)])}))
+
+;; ## Controller
+
+(defn GET [request] (view request))

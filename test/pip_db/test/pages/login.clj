@@ -1,6 +1,15 @@
-(ns pip-db.test.models.login
+(ns pip-db.test.pages.login
   (:use clojure.test)
-  (:require [pip-db.models.login :as dut]))
+  (:require [pip-db.pages.login :as dut]))
+
+;; View
+
+(deftest view
+  (testing "Page returns string"
+    (is (= (class (dut/view))
+           java.lang.String))))
+
+;; Model
 
 (def test-data
   {:plaintext "foobar"

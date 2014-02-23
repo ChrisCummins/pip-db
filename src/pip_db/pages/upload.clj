@@ -1,7 +1,16 @@
-(ns pip-db.views.upload
-  (:require [pip-db.ui :as ui]))
+(ns pip-db.pages.upload
+  (:use [clojure.core :only (slurp)]
+        [clojure.java.io :only (copy)]
+        [clojure-csv.core :only (parse-csv)])
+  (:require [clojure.string :as str]
+            [clojure.data.json :as json]
+            [pip-db.db :as db]
+            [pip-db.ui :as ui])
+  (:import [java.io File]))
 
-(defn upload [request]
+;; ## View
+
+(defn view [request]
   (ui/page
    request
    {:title "Upload" :navbar {} :heading {:title "Add new data"}
@@ -142,3 +151,27 @@
               [:button.btn.btn-primary.pull-right
                {:type "submit" :name "action" :value "upload"}
                "Submit"]]]]]}))
+
+;; ## Model
+
+(defn upload-file [tempfile]
+  (let [file (format "/tmp/%s" (tempfile :filename))]
+    (copy (tempfile :tempfile) (File. file))
+    file))
+
+(defn parse-json-file [file]
+  (let [json    (json/read-str (slurp file))
+        records (json "Records")]
+    (apply db/add-records records)
+    "Done."))
+
+;; ## Controller
+
+(defn GET [request]
+  (view request))
+
+(defn POST [request]
+  (let [file ((request :params) "f")]
+    (if file
+      (parse-json-file (upload-file file))
+      "No file found")))
