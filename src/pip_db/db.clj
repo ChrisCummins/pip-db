@@ -206,8 +206,3 @@
     (print "Creating database structure...") (flush)
     (apply create-tables tables)
     (println " done")))
-
-(def records-table "records")
-
-(def records-columns
-  (str "\"" (str/join "\",\"" (map #(name (% 0)) (tables :records))) "\""))
