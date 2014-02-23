@@ -3,7 +3,7 @@
             [pip-db.views.advanced :as advanced]
             [pip-db.views.record :as view]
             [pip-db.views.error :as error]
-            [pip-db.views.json :as json]))
+            [pip-db.util :as util]))
 
 (defn GET [request]
   (let [data (model/record ((request :params) :id))]
@@ -12,4 +12,4 @@
       (error/status-404))))
 
 (defn GET-json [request]
-  (json/response (model/record ((request :params) :id))))
+  (util/json-response (model/record ((request :params) :id))))

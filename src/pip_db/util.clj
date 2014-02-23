@@ -172,3 +172,8 @@
 ;; to a globally accessible variable in window scope.
 (defn inline-data-js [name data]
   [:script (json-data-var name data)])
+
+;; Generate a JSON response
+(defn json-response [data]
+  {:status 200 :headers {"Content-Type" "application/json"}
+   :body (with-out-str (json/pprint data))})
