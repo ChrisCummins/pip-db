@@ -57,11 +57,11 @@
 ;; We can now take a query map and use this to generate a SQL
 ;; query. If the query map is empty, then we return an empty string.
 (defn query [params]
-  (let [conditions (conditionals params)]
+  (let [conditions (conditionals params)
+        fields (apply util/keys->quoted-str db/public-record-fields)]
     (if (str/blank? conditions)
       ""
-      (str "SELECT " db/records-columns " FROM "
-           db/records-table " WHERE " conditions))))
+      (str "SELECT " fields " FROM records WHERE " conditions))))
 
 (defn search [params]
   (db/search (query params) params))

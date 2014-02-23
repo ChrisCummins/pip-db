@@ -4,8 +4,8 @@
             [pip-db.util :as util]))
 
 (defn query [id]
-  (str "SELECT " db/records-columns " FROM " db/records-table
-       " WHERE id='" id "'"))
+  (let [fields (apply util/keys->quoted-str db/public-record-fields)]
+    (str "SELECT " fields " FROM records WHERE id='" id "'")))
 
 ;; Fetch the record data for the given ID.
 (defn record [id]
