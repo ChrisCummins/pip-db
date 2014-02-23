@@ -170,10 +170,10 @@
 ;; No results were returned by the query."
 (defn search-results [query]
   (with-connection
-     (try (sql/with-query-results results [query]
-            (apply vector (map #(set/rename-keys (filter-null %) renaming-table)
-                               results)))
-          (catch Exception e []))))
+    (try (sql/with-query-results results [query]
+           (apply vector (map #(set/rename-keys (filter-null %) renaming-table)
+                              results)))
+         (catch Exception e []))))
 
 ;; Perform a database search and wrap the results in a search response
 ;; map.
