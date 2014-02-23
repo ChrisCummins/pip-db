@@ -11,6 +11,45 @@
 ;; Our database spec.
 (def db-spec (System/getenv "DATABASE_URL"))
 
+;; Out database tables.
+(def tables
+  {:records [[:id                 "varchar(11) NOT NULL"]
+             [:Protein-Names      "varchar"]
+             [:EC                 "varchar"]
+             [:Source             "varchar"]
+             [:Location           "varchar"]
+             [:MW-Min             "varchar"]
+             [:MW-Max             "varchar"]
+             [:Subunit-No         "varchar"]
+             [:Subunit-MW         "varchar"]
+             [:No-Of-Iso-Enzymes  "varchar"]
+             [:pI-Min             "varchar"]
+             [:pI-Max             "varchar"]
+             [:pI-Major-Component "varchar"]
+             [:Temperature-Min    "varchar"]
+             [:Temperature-Max    "varchar"]
+             [:Method             "varchar"]
+             [:Full-Text          "varchar"]
+             [:Abstract-Only      "varchar"]
+             [:PubMed             "varchar"]
+             [:Species-Taxonomy   "varchar"]
+             [:Protein-Sequence   "varchar"]
+             [:Notes              "varchar"]
+             [:real_ec1           "integer"]
+             [:real_ec2           "integer"]
+             [:real_ec3           "integer"]
+             [:real_ec4           "integer"]
+             [:real_mw_min        "real"]
+             [:real_mw_max        "real"]
+             [:real_pi_min        "real"]
+             [:real_pi_max        "real"]
+             [:real_temp_min      "real"]
+             [:real_temp_max      "real"]
+             [:Created-At         "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP"]]
+   :users   [[:id                 "serial    PRIMARY KEY"]
+             [:email              "varchar   NOT NULL"]
+             [:pass               "varchar   NOT NULL"]]})
+
 ;; Evaluates body in the context of a new connection to a database
 ;; then closes the connection. Identifiers are quoted.
 (defmacro with-connection [& body]
