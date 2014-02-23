@@ -74,51 +74,12 @@
   (pos? (count-rows "information_schema.tables"
                     (str "table_name='" (name ((first tables) 0)) "'"))))
 
-(defn create-tables []
-  (sql/with-connection (System/getenv "DATABASE_URL")
-    (sql/with-quoted-identifiers \"
-      (sql/create-table :records
-                        [:id                 "varchar(11) NOT NULL"]
-                        [:Protein-Names      "varchar"]
-                        [:EC                 "varchar"]
-                        [:Source             "varchar"]
-                        [:Location           "varchar"]
-                        [:MW-Min             "varchar"]
-                        [:MW-Max             "varchar"]
-                        [:Subunit-No         "varchar"]
-                        [:Subunit-MW         "varchar"]
-                        [:No-Of-Iso-Enzymes  "varchar"]
-                        [:pI-Min             "varchar"]
-                        [:pI-Max             "varchar"]
-                        [:pI-Major-Component "varchar"]
-                        [:Temperature-Min    "varchar"]
-                        [:Temperature-Max    "varchar"]
-                        [:Method             "varchar"]
-                        [:Full-Text          "varchar"]
-                        [:Abstract-Only      "varchar"]
-                        [:PubMed             "varchar"]
-                        [:Species-Taxonomy   "varchar"]
-                        [:Protein-Sequence   "varchar"]
-                        [:Notes              "varchar"]
-                        [:real_ec1           "integer"]
-                        [:real_ec2           "integer"]
-                        [:real_ec3           "integer"]
-                        [:real_ec4           "integer"]
-                        [:real_mw_min        "real"]
-                        [:real_mw_max        "real"]
-                        [:real_pi_min        "real"]
-                        [:real_pi_max        "real"]
-                        [:real_temp_min      "real"]
-                        [:real_temp_max      "real"]
-                        [:Created-At         "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP"]))
+;; Create a set of tables.
+(defn create-tables [& tables]
+  (with-connection
+    (doseq [t tables] (apply sql/create-table (t 0) (t 1)))))
 
-    (sql/create-table :users
-                      [:id :serial "PRIMARY KEY"]
-                      [:email :varchar "NOT NULL"]
-                      [:pass :varchar "NOT NULL"])))
-
-;; YAPS map
-
+;; Add a given record encoded as a YAPS map to the database.
 (defn add-record [r]
   (let [id              (util/minihash (str r))
         names           (str/join " / " (r "Protein-Names"))
@@ -236,7 +197,7 @@
 (defn migrate []
   (when-not (migrated?)
     (print "Creating database structure...") (flush)
-    (create-tables)
+    (apply create-tables tables)
     (println " done")))
 
 (def records-table "records")
