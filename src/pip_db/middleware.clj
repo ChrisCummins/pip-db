@@ -1,20 +1,20 @@
 ;; # Application middleware
 (ns pip-db.middleware
-  (:use [ring.middleware.cookies :only (wrap-cookies)]
-        [ring.middleware.params :only (wrap-params)]
+  (:use [compojure.core :only (defroutes GET POST)]
+        [ring.middleware.cookies :only (wrap-cookies)]
         [ring.middleware.multipart-params :only (wrap-multipart-params)]
-        [compojure.core :only (defroutes GET POST)])
-  (:require [pip-db.controllers.index :as index]
-            [pip-db.controllers.advanced :as advanced]
-            [pip-db.controllers.download :as download]
-            [pip-db.controllers.search :as search]
-            [pip-db.controllers.record :as record]
-            [pip-db.controllers.login :as login]
-            [pip-db.controllers.logout :as logout]
-            [pip-db.controllers.upload :as upload]
-            [pip-db.ui :as ui]
-            [clojure.string :as str]
-            [compojure.route :as route]))
+        [ring.middleware.params :only (wrap-params)])
+  (:require [clojure.string :as str]
+            [compojure.route :as route]
+            [pip-db.pages.advanced :as advanced]
+            [pip-db.pages.download :as download]
+            [pip-db.pages.index :as index]
+            [pip-db.pages.login :as login]
+            [pip-db.pages.logout :as logout]
+            [pip-db.pages.record :as record]
+            [pip-db.pages.search :as search]
+            [pip-db.pages.upload :as upload]
+            [pip-db.ui :as ui]))
 
 ;; The regular expression to match a record ID.
 (def id-re #"\w{11}")

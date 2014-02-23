@@ -3,6 +3,7 @@
 ;; This namespace defines the interface and API for the database
 ;; back-end of pip-db.
 (ns pip-db.db
+  (:use [pip-db.query :only (AND OR EQ NE GTE LTE)])
   (:require [clojure.java.jdbc :as sql]
             [clojure.string :as str]
             [clojure.set :as set]
@@ -192,3 +193,66 @@
     (print "Creating database structure...") (flush)
     (apply create-tables tables)
     (println " done")))
+
+;; ## Structured queries
+
+(defn split-args [words]
+  (when (and words (not (str/blank? words)))
+    (str/split (str/trim words) #" +")))
+
+(defn conditionals [params]
+  (let [id      (str (get params "id"))
+        q       (split-args (get params "q"))
+        q_eq    (get params "q_eq")
+        q_any   (split-args (get params "q_any"))
+        q_ne    (split-args (get params "q_ne"))
+        q_s     (get params "q_s")
+        q_l     (get params "q_l")
+        m       (get params "m")
+        pi_l    (get params "pi_l")
+        pi_h    (get params "pi_h")
+        mw_l    (str (util/str->num (get params "mw_l")))
+        mw_h    (str (util/str->num (get params "mw_h")))
+        t_l     (str (util/str->num (get params "t_l")))
+        t_h     (str (util/str->num (get params "t_h")))
+        ec1     (str (util/str->int (get params "ec1")))
+        ec2     (str (util/str->int (get params "ec2")))
+        ec3     (str (util/str->int (get params "ec3")))
+        ec4     (str (util/str->int (get params "ec4")))]
+
+    (AND
+     (EQ {:field "id" :value id})       ; Match specific record ID
+     (for [word q]                      ; Match all keywords
+       (EQ {:field "Protein-Names" :value word}))
+     (EQ {:field "Protein-Names" :value q_eq})  ; Match exact phrase
+     (for [word q_any]                  ; Match any keywords
+       (EQ {:field "Protein-Names" :value word}))
+     (for [word q_ne]                   ; Exclude keywords
+       (NE {:field "Protein-Names" :value word}))
+     (EQ {:field "Source" :value q_s})
+     (EQ {:field "Location" :value q_l})
+     (EQ {:field "Method" :value m})
+     (GTE {:field "real_pi_min" :value pi_l})
+     (LTE {:field "real_pi_max" :value pi_h})
+     (GTE {:field "real_mw_min" :value mw_l})
+     (LTE {:field "real_mw_max" :value mw_h})
+     (GTE {:field "real_temp_min" :value t_l})
+     (LTE {:field "real_temp_max" :value t_h})
+     (EQ {:field "real_ec1" :value ec1 :numeric true})
+     (EQ {:field "real_ec2" :value ec2 :numeric true})
+     (EQ {:field "real_ec3" :value ec3 :numeric true})
+     (EQ {:field "real_ec4" :value ec4 :numeric true}))))
+
+;; ### Query components
+
+;; We can now take a query map and use this to generate a SQL
+;; query. If the query map is empty, then we return an empty string.
+(defn params->str [params]
+  (let [conditions (conditionals params)
+        fields (apply util/keys->quoted-str public-record-fields)]
+    (if (str/blank? conditions)
+      ""
+      (str "SELECT " fields " FROM records WHERE " conditions))))
+
+(defn query [params]
+  (search (params->str params) params))

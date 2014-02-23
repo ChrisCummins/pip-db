@@ -1,7 +1,10 @@
-(ns pip-db.views.record
+(ns pip-db.pages.record
   (:require [clojure.string :as str]
+            [pip-db.db :as db]
             [pip-db.ui :as ui]
             [pip-db.util :as util]))
+
+;; ## View
 
 (def properties-table
   [:table#properties.table.table-striped.table-bordered
@@ -38,7 +41,7 @@
    [:div.panel-heading reference-heading reference-style [:div.clearfix]]
    [:div.panel-body [:blockquote.reference-text]]])
 
-(defn record [request]
+(defn view [request]
   (let [results (request :results)]
     (ui/page
      request
@@ -56,3 +59,25 @@
                reference-this-page-panel]]]
       :javascript (list (util/inline-data-js "data" results)
                         (util/inline-js "/js/record.inline.js"))})))
+
+;; ## Model
+
+(defn query [id]
+  (let [fields (apply util/keys->quoted-str db/public-record-fields)]
+    (str "SELECT " fields " FROM records WHERE id='" id "'")))
+
+;; Fetch the record data for the given ID.
+(defn record [id]
+  (db/search (query id) {"id" id}))
+
+
+;; ## Controller
+
+(defn GET [request]
+  (let [data (record ((request :params) :id))]
+    (if (pos? (data :No-Of-Records-Matched))
+      (view (assoc request :results data))
+      (ui/page-404))))
+
+(defn GET-json [request]
+  (util/json-response (record ((request :params) :id))))
