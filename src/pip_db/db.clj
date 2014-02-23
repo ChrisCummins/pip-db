@@ -115,27 +115,20 @@
         real_temp_min   (util/str->int temp_min)
         real_temp_max   (util/str->int temp_max)]
 
-    (sql/with-connection (System/getenv "DATABASE_URL")
-      (sql/with-quoted-identifiers \"
-        (sql/insert-values
-         :records
-         [:id :Protein-Names :EC :Source :Location :MW-Min :MW-Max :Subunit-No
-          :Subunit-MW :No-Of-Iso-Enzymes :pI-Min :pI-Max :pI-Major-Component
-          :Temperature-Min :Temperature-Max :Method :Full-Text :Abstract-Only
-          :PubMed :Species-Taxonomy :Protein-Sequence :Notes :real_ec1
-          :real_ec2 :real_ec3 :real_ec4 :real_mw_min :real_mw_max :real_pi_min
-          :real_pi_max :real_temp_min :real_temp_max]
-         [id names ec source location mw_min mw_max sub_no sub_mw iso_enzymes
-          pi_min pi_max pi_major temp_min temp_max method ref_full
-          ref_abstract ref_pubmed ref_taxonomy ref_sequence notes real_ec1
-          real_ec2 real_ec3 real_ec4 real_mw_min real_mw_max real_pi_min
-          real_pi_max real_temp_min real_temp_max])))))
-
-;; Fetch the number of records within the database.
-(defn no-of-records []
-  (sql/with-connection (System/getenv "DATABASE_URL")
-    (sql/with-query-results results ["SELECT count(*) FROM records"]
-      ((first results) :count))))
+    (with-connection
+      (sql/insert-values
+       :records
+       [:id :Protein-Names :EC :Source :Location :MW-Min :MW-Max :Subunit-No
+        :Subunit-MW :No-Of-Iso-Enzymes :pI-Min :pI-Max :pI-Major-Component
+        :Temperature-Min :Temperature-Max :Method :Full-Text :Abstract-Only
+        :PubMed :Species-Taxonomy :Protein-Sequence :Notes :real_ec1
+        :real_ec2 :real_ec3 :real_ec4 :real_mw_min :real_mw_max :real_pi_min
+        :real_pi_max :real_temp_min :real_temp_max]
+       [id names ec source location mw_min mw_max sub_no sub_mw iso_enzymes
+        pi_min pi_max pi_major temp_min temp_max method ref_full
+        ref_abstract ref_pubmed ref_taxonomy ref_sequence notes real_ec1
+        real_ec2 real_ec3 real_ec4 real_mw_min real_mw_max real_pi_min
+        real_pi_max real_temp_min real_temp_max]))))
 
 ;; Remove the null values from a map.
 (defn filter-null [map]
@@ -188,7 +181,7 @@
 ;; No results were returned by the query."
 (defn search [query params]
   (search-response
-   (sql/with-connection (System/getenv "DATABASE_URL")
+   (with-connection
      (try (sql/with-query-results results [query]
             (apply vector (map remap-yaps-keys
                                (map filter-null (doall results)))))
@@ -203,9 +196,4 @@
 (def records-table "records")
 
 (def records-columns
-  (str "id,\"Protein-Names\",\"EC\",\"Source\",\"Location\",\"MW-Min\","
-       "\"MW-Max\",\"Subunit-No\",\"Subunit-MW\",\"No-Of-Iso-Enzymes\","
-       "\"pI-Min\",\"pI-Max\",\"pI-Major-Component\",\"Temperature-Min\","
-       "\"Temperature-Max\",\"Method\",\"Full-Text\",\"Abstract-Only\","
-       "\"PubMed\",\"Species-Taxonomy\",\"Protein-Sequence\",\"Notes\","
-       "\"Created-At\""))
+  (str "\"" (str/join "\",\"" (map #(name (% 0)) (tables :records))) "\""))
