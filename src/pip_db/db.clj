@@ -93,8 +93,9 @@
   (filter #(not (some #{%} private-record-fields))
           (map first (tables :records))))
 
-;; Add a given record encoded as a YAPS map to the database.
-(defn add-record [r]
+;; Convert a YAPS encoded record into a vector of values, using the
+;; schema defined in the records table.
+(defn record->vector [r]
   (let [id              (util/minihash (str r))
         names           (str/join " / " (r "Protein-Names"))
         ec              (r "EC")
@@ -129,20 +130,25 @@
         real_temp_min   (util/str->int temp_min)
         real_temp_max   (util/str->int temp_max)]
 
-    (with-connection
-      (sql/insert-values
-       :records
-       [:id :Protein-Names :EC :Source :Location :MW-Min :MW-Max :Subunit-No
-        :Subunit-MW :No-Of-Iso-Enzymes :pI-Min :pI-Max :pI-Major-Component
-        :Temperature-Min :Temperature-Max :Method :Full-Text :Abstract-Only
-        :PubMed :Species-Taxonomy :Protein-Sequence :Notes :real_ec1
-        :real_ec2 :real_ec3 :real_ec4 :real_mw_min :real_mw_max :real_pi_min
-        :real_pi_max :real_temp_min :real_temp_max]
-       [id names ec source location mw_min mw_max sub_no sub_mw iso_enzymes
-        pi_min pi_max pi_major temp_min temp_max method ref_full
-        ref_abstract ref_pubmed ref_taxonomy ref_sequence notes real_ec1
-        real_ec2 real_ec3 real_ec4 real_mw_min real_mw_max real_pi_min
-        real_pi_max real_temp_min real_temp_max]))))
+    [id names ec source location mw_min mw_max sub_no sub_mw iso_enzymes
+     pi_min pi_max pi_major temp_min temp_max method ref_full
+     ref_abstract ref_pubmed ref_taxonomy ref_sequence notes real_ec1
+     real_ec2 real_ec3 real_ec4 real_mw_min real_mw_max real_pi_min
+     real_pi_max real_temp_min real_temp_max]))
+
+;; Add a set of YAPS encoded records to the database.
+(defn add-records [& records]
+  (with-connection
+    (apply
+     sql/insert-values
+     :records
+     [:id :Protein-Names :EC :Source :Location :MW-Min :MW-Max :Subunit-No
+      :Subunit-MW :No-Of-Iso-Enzymes :pI-Min :pI-Max :pI-Major-Component
+      :Temperature-Min :Temperature-Max :Method :Full-Text :Abstract-Only
+      :PubMed :Species-Taxonomy :Protein-Sequence :Notes :real_ec1
+      :real_ec2 :real_ec3 :real_ec4 :real_mw_min :real_mw_max :real_pi_min
+      :real_pi_max :real_temp_min :real_temp_max]
+     (map record->vector records))))
 
 ;; Remove the null values from a map.
 (defn filter-null [map]
