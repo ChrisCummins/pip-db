@@ -89,6 +89,22 @@
 (defn str->b64 [original]
   (String. (b64/encode (.getBytes original)) "UTF-8"))
 
+;; -------------------------
+;; ## Hashing & Cryptography
+
+;; SHA1 implementation
+;;
+;; See: https://gist.github.com/hozumi/1472865
+(defn sha1 [s]
+  (->> (-> "sha1" java.security.MessageDigest/getInstance
+           (.digest (.getBytes s)))
+       (map #(.substring (Integer/toString (+ (bit-and % 0xff) 0x100) 16) 1))
+       (apply str)))
+
+;; We generated truncated hashes when creating our record IDs.
+(defn minihash [s]
+  (subs (str->b64 (sha1 s)) 0 11))
+
 ;; -----------------
 ;; ## Date utilities
 
