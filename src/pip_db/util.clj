@@ -1,7 +1,6 @@
 ;; A set of useful utility functions, the purpose of which is to
 ;; provide generic helpers for tasks.
 (ns pip-db.util
-  (:use [pip-db.resources :only (resource)])
   (:require [clojure.string :as str]
             [clojure.data.codec.base64 :as b64]
             [clojure.data.json :as json]))
@@ -118,6 +117,25 @@
 ;; Return the current year as a number, as set by the system clock.
 (defn current-year []
   (+ 1900 (.getYear (new java.util.Date))))
+
+;; ------------
+;; ## Resources
+
+(def resource-root "resources/public/")
+
+(defn resource-path [path]
+  (str resource-root path))
+
+(defn resource [path]
+  (slurp (resource-path path)))
+
+;; ### Public assets
+
+;; Images are served from a base directory relative to
+;; `resource-root`.
+(defn image-path
+  ([] "/img/")
+  ([filename] (str (image-path) filename)))
 
 ;; --------------------
 ;; ## Working with HTML
