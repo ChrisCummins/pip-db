@@ -171,12 +171,5 @@
   (let [page (dut/page-500 (Exception. "Test page"))]
 
     (testing "Response type"
-      (is (map? page)))
-
-    (testing "Response status"
-      (is (= 500 (page :status))))
-
-    (testing "Content Body"
-      (is (contains? page :body))
-      (is (= (class (page :body))
+      (is (= (class page)
              java.lang.String)))))
