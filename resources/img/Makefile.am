@@ -1,4 +1,4 @@
-IMG_REGEXP = \.(bmp|gif|jpg|png)$
+IMG_REGEXP = \.(bmp|gif|jpg|png|ico)$
 
 # Generate lists of source files and targets
 DEST = $(PUBLIC_RESOURCES)/img

@@ -233,3 +233,5 @@
 (def small-logo [:img {:src (logo-path "32x32")
                        :alt-text "pip-db"
                        :style "width:32px;height:32px"}])
+
+(def favicon [:link {:rel "icon" :type "image/png" :href "/favicon.png"}])
