@@ -2,7 +2,7 @@
   (:use [pip-db.views.page :only (page)])
   (:require [clojure.string :as str]
             [pip-db.util :as util]
-            [pip-db.views.ui :as ui]))
+            [pip-db.ui :as ui]))
 
 ;; The empty table in which results can be shown
 (def results-table

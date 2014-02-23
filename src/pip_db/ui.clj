@@ -1,7 +1,7 @@
 ;; # User Interface Components
 ;;
 ;; Define a set of common user interface components.
-(ns pip-db.views.ui
+(ns pip-db.ui
   (:require [pip-db.util :as util]
             [pip-db.resources :as res]))
 

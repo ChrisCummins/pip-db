@@ -2,7 +2,7 @@
   (:use [pip-db.views.page :only (page)]
         [hiccup.page :only (include-js)])
   (:require [pip-db.util :as util]
-            [pip-db.views.ui :as ui]
+            [pip-db.ui :as ui]
             [clojure.string :as str]))
 
 (def file-format-button

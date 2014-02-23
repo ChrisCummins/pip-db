@@ -2,7 +2,7 @@
 (ns pip-db.views.advanced
   (:use [pip-db.views.page :only (page)])
   (:require [pip-db.util :as util]
-            [pip-db.views.ui :as ui]))
+            [pip-db.ui :as ui]))
 
 ;; ## Search form widgets
 

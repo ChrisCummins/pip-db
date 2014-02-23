@@ -2,7 +2,7 @@
   (:use [hiccup.core :only (html)]
         [hiccup.page :only (html5 include-css include-js)])
   (:require [pip-db.util :as util]
-            [pip-db.views.ui :as ui]
+            [pip-db.ui :as ui]
             [pip-db.views.navbar :as navbar]))
 
 (def empty-request {:params {}})

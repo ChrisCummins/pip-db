@@ -1,6 +1,6 @@
 (ns pip-db.views.navbar
   (:require [pip-db.util :as util]
-            [pip-db.views.ui :as ui]))
+            [pip-db.ui :as ui]))
 
 (defn navbar-search [request]
   [:div.search.navbar-search (ui/search-bar request)])
