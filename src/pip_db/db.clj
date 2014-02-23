@@ -53,14 +53,12 @@
 ;; Evaluates body in the context of a new connection to a database
 ;; then closes the connection. Identifiers are quoted.
 (defmacro with-connection [& body]
-  `(sql/with-connection db-spec
-     (sql/with-quoted-identifiers \" ~@body)))
+  `(sql/with-connection db-spec (sql/with-quoted-identifiers \" ~@body)))
 
 ;; Creates a new connection and executes a query, then evaluates body
 ;; with results bound to a seq of the results.
 (defmacro with-connection-results-query [results sql-params & body]
-  `(with-connection
-     (sql/with-query-results ~results ~sql-params ~@body)))
+  `(with-connection (sql/with-query-results ~results ~sql-params ~@body)))
 
 (def max-no-of-returned-records 20)
 
@@ -68,11 +66,10 @@
 ;; provided with a set of conditions.
 (defn count-rows [table & conditions]
   (let [condition?           (not (nil? conditions))
-        query                (str "SELECT count(*) FROM " (name table))
-        query-with-condition (apply str query " WHERE " conditions)]
-    (with-connection-results-query results
-      [(if condition? query-with-condition query)]
-      ((first results) :count))))
+        base-query           (str "SELECT count(*) FROM " (name table))
+        query-with-condition (apply str base-query " WHERE " conditions)
+        query                (if condition? query-with-condition base-query)]
+    (with-connection-results-query results [query] ((first results) :count))))
 
 ;; Determine whether the required tables exist.
 (defn migrated? []
@@ -81,8 +78,7 @@
 
 ;; Create a set of tables.
 (defn create-tables [& tables]
-  (with-connection
-    (doseq [t tables] (apply sql/create-table (t 0) (t 1)))))
+  (with-connection (doseq [t tables] (apply sql/create-table (t 0) (t 1)))))
 
 ;; The subset of fields within the records table that are considered
 ;; private, i.e. those which should be returned to users when
@@ -95,8 +91,7 @@
 ;; public and should be returned to users when performing queries,
 ;; i.e. the inverse of the private-record-fields list.
 (def public-record-fields
-  (filter #(not (some #{%} private-record-fields))
-          (map first (tables :records))))
+  (filter #(not (some #{%} private-record-fields)) (map first (tables :records))))
 
 ;; The subset of fields within the records table that derived at
 ;; insertion time.
@@ -105,8 +100,7 @@
 ;; The subset of fields within the records table that are explicitly
 ;; provided at insertion time.
 (def created-record-fields
-  (filter #(not (some #{%} derived-record-fields))
-          (map first (tables :records))))
+  (filter #(not (some #{%} derived-record-fields)) (map first (tables :records))))
 
 ;; Convert a YAPS encoded record into a vector of values, using the
 ;; schema defined in the records table.
@@ -144,12 +138,11 @@
         real_pi_max     (util/str->num pi_max)
         real_temp_min   (util/str->int temp_min)
         real_temp_max   (util/str->int temp_max)]
-
-    [id names ec source location mw_min mw_max sub_no sub_mw iso_enzymes
-     pi_min pi_max pi_major temp_min temp_max method ref_full
-     ref_abstract ref_pubmed ref_taxonomy ref_sequence notes real_ec1
-     real_ec2 real_ec3 real_ec4 real_mw_min real_mw_max real_pi_min
-     real_pi_max real_temp_min real_temp_max]))
+    [id names ec source location mw_min mw_max sub_no sub_mw iso_enzymes pi_min
+     pi_max pi_major temp_min temp_max method ref_full ref_abstract ref_pubmed
+     ref_taxonomy ref_sequence notes real_ec1 real_ec2 real_ec3 real_ec4
+     real_mw_min real_mw_max real_pi_min real_pi_max real_temp_min
+     real_temp_max]))
 
 ;; Add a set of YAPS encoded records to the database.
 (defn add-records [& records]
@@ -172,20 +165,19 @@
 ;; the query returns no results: "org.postgresql.util.PSQLException:
 ;; No results were returned by the query."
 (defn search-results [query]
-  (try
-    (with-connection-results-query results [query] (apply vector results))
-    (catch Exception e [])))
+  (try (with-connection-results-query results [query] (apply vector results))
+       (catch Exception e [])))
 
 ;; Convert a record row (as returned by a query of the records table)
 ;; into a YAPS encoded map.
 (defn row->record [row]
-  (set/rename-keys (into {} (filter second row)) renaming-table))
+  (-> (into {} (filter second row)) (set/rename-keys renaming-table)))
 
 ;; Perform a database search and wrap the results in a search response
 ;; map.
 (defn search [query params]
-  (let [matching-rows (search-results query)
-        returned-rows (take max-no-of-returned-records matching-rows)
+  (let [matching-rows    (search-results query)
+        returned-rows    (take max-no-of-returned-records matching-rows)
         returned-records (map row->record returned-rows)]
     {:Query-Terms                params
      :No-Of-Records-Searched     (count-rows :records)
