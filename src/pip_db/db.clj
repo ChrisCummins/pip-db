@@ -148,17 +148,6 @@
 (defn filter-null [map]
   (into {} (filter second map)))
 
-;; Construct a search results map from a set of search parameters and
-;; a list of matching records.
-(defn search-response [matching-records params]
-  (let [returned-records (take max-no-of-returned-records matching-records)]
-    {:Query-Terms                params
-     :No-Of-Records-Searched     (count-rows :records)
-     :No-Of-Records-Matched      (count matching-records)
-     :No-Of-Records-Returned     (count returned-records)
-     :Max-No-of-Returned-Records max-no-of-returned-records
-     :Records                    returned-records}))
-
 ;; The `with-query-results` function returns a response map of field
 ;; names to values, with the field names all lower-cased for some
 ;; bizarre reason. As a result, we have to remap each key to it's
@@ -183,7 +172,14 @@
 ;; Perform a database search and wrap the results in a search response
 ;; map.
 (defn search [query params]
-  (search-response (search-results query) params))
+  (let [matching-records (search-results query)
+        returned-records (take max-no-of-returned-records matching-records)]
+    {:Query-Terms                params
+     :No-Of-Records-Searched     (count-rows :records)
+     :No-Of-Records-Matched      (count matching-records)
+     :No-Of-Records-Returned     (count returned-records)
+     :Max-No-of-Returned-Records max-no-of-returned-records
+     :Records                    returned-records}))
 
 ;; Perform necessary database migration.
 (defn migrate []
