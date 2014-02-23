@@ -56,6 +56,12 @@
   `(sql/with-connection db-spec
      (sql/with-quoted-identifiers \" ~@body)))
 
+;; Creates a new connection and executes a query, then evaluates body
+;; with results bound to a seq of the results.
+(defmacro with-connection-results-query [results sql-params & body]
+  `(with-connection
+     (sql/with-query-results ~results ~sql-params ~@body)))
+
 (def max-no-of-returned-records 20)
 
 ;; Count the number of rows in a given table. May optionally be
@@ -64,10 +70,9 @@
   (let [condition?           (not (nil? conditions))
         query                (str "SELECT count(*) FROM " (name table))
         query-with-condition (apply str query " WHERE " conditions)]
-    (with-connection
-      (sql/with-query-results results
-        [(if condition? query-with-condition query)]
-        ((first results) :count)))))
+    (with-connection-results-query results
+      [(if condition? query-with-condition query)]
+      ((first results) :count))))
 
 ;; Determine whether the required tables exist.
 (defn migrated? []
@@ -169,11 +174,11 @@
 ;; the query returns no results: "org.postgresql.util.PSQLException:
 ;; No results were returned by the query."
 (defn search-results [query]
-  (with-connection
-    (try (sql/with-query-results results [query]
-           (apply vector (map #(set/rename-keys (filter-null %) renaming-table)
-                              results)))
-         (catch Exception e []))))
+  (try
+    (with-connection-results-query results [query]
+      (apply vector
+             (map #(set/rename-keys (filter-null %) renaming-table) results)))
+    (catch Exception e [])))
 
 ;; Perform a database search and wrap the results in a search response
 ;; map.
