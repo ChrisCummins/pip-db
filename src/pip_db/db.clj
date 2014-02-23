@@ -155,10 +155,6 @@
       :real_pi_max :real_temp_min :real_temp_max]
      (map record->vector records))))
 
-;; Remove the null values from a map.
-(defn filter-null [map]
-  (into {} (filter second map)))
-
 ;; The `with-query-results` function returns a response map of field
 ;; names to values, with the field names all lower-cased for some
 ;; bizarre reason. As a result, we have to remap each key to it's
@@ -175,19 +171,23 @@
 ;; No results were returned by the query."
 (defn search-results [query]
   (try
-    (with-connection-results-query results [query]
-      (apply vector
-             (map #(set/rename-keys (filter-null %) renaming-table) results)))
+    (with-connection-results-query results [query] (apply vector results))
     (catch Exception e [])))
+
+;; Convert a record row (as returned by a query of the records table)
+;; into a YAPS encoded map.
+(defn row->record [row]
+  (set/rename-keys (into {} (filter second row)) renaming-table))
 
 ;; Perform a database search and wrap the results in a search response
 ;; map.
 (defn search [query params]
-  (let [matching-records (search-results query)
-        returned-records (take max-no-of-returned-records matching-records)]
+  (let [matching-rows (search-results query)
+        returned-rows (take max-no-of-returned-records matching-rows)
+        returned-records (map row->record returned-rows)]
     {:Query-Terms                params
      :No-Of-Records-Searched     (count-rows :records)
-     :No-Of-Records-Matched      (count matching-records)
+     :No-Of-Records-Matched      (count matching-rows)
      :No-Of-Records-Returned     (count returned-records)
      :Max-No-of-Returned-Records max-no-of-returned-records
      :Records                    returned-records}))
