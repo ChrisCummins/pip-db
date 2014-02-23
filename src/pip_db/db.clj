@@ -98,6 +98,16 @@
   (filter #(not (some #{%} private-record-fields))
           (map first (tables :records))))
 
+;; The subset of fields within the records table that derived at
+;; insertion time.
+(def derived-record-fields '(:Created-At))
+
+;; The subset of fields within the records table that are explicitly
+;; provided at insertion time.
+(def created-record-fields
+  (filter #(not (some #{%} derived-record-fields))
+          (map first (tables :records))))
+
 ;; Convert a YAPS encoded record into a vector of values, using the
 ;; schema defined in the records table.
 (defn record->vector [r]
@@ -144,16 +154,8 @@
 ;; Add a set of YAPS encoded records to the database.
 (defn add-records [& records]
   (with-connection
-    (apply
-     sql/insert-values
-     :records
-     [:id :Protein-Names :EC :Source :Location :MW-Min :MW-Max :Subunit-No
-      :Subunit-MW :No-Of-Iso-Enzymes :pI-Min :pI-Max :pI-Major-Component
-      :Temperature-Min :Temperature-Max :Method :Full-Text :Abstract-Only
-      :PubMed :Species-Taxonomy :Protein-Sequence :Notes :real_ec1
-      :real_ec2 :real_ec3 :real_ec4 :real_mw_min :real_mw_max :real_pi_min
-      :real_pi_max :real_temp_min :real_temp_max]
-     (map record->vector records))))
+    (apply sql/insert-values
+           :records (vec created-record-fields) (map record->vector records))))
 
 ;; The `with-query-results` function returns a response map of field
 ;; names to values, with the field names all lower-cased for some
