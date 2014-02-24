@@ -60,24 +60,10 @@
       :javascript (list (util/inline-data-js "data" results)
                         (util/inline-js "/js/record.inline.js"))})))
 
-;; ## Model
-
-(defn query [id]
-  (let [fields (apply util/keys->quoted-str db/public-record-fields)]
-    (str "SELECT " fields " FROM records WHERE id='" id "'")))
-
-;; Fetch the record data for the given ID.
-(defn record [id]
-  (db/search (query id) {"id" id}))
-
-
 ;; ## Controller
 
 (defn GET [request]
-  (let [data (record ((request :params) :id))]
+  (let [data (db/search (util/remap-id-param request))]
     (if (pos? (data :No-Of-Records-Matched))
       (view (assoc request :results data))
       (ui/page-404))))
-
-(defn GET-json [request]
-  (util/json-response (record ((request :params) :id))))

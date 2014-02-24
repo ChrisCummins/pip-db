@@ -65,12 +65,15 @@
 
 ;; Count the number of rows in a given table. May optionally be
 ;; provided with a set of conditions.
-(defn count-rows [table & conditions]
-  (let [condition?           (not (nil? conditions))
-        base-query           (str "SELECT count(*) FROM " (name table))
-        query-with-condition (apply str base-query " WHERE " conditions)
-        query                (if condition? query-with-condition base-query)]
-    (with-connection-results-query results [query] ((first results) :count))))
+(defn count-rows
+  ([table] (count-rows table ""))
+  ([table condition]
+     (let [condition?           (not (str/blank? condition))
+           base-query           (str "SELECT count(*) FROM " (name table))
+           query-with-condition (str base-query " WHERE " condition)
+           query                (if condition? query-with-condition base-query)]
+       (with-connection-results-query results [query]
+         ((first results) :count)))))
 
 ;; Determine whether the required tables exist.
 (defn migrated? []
@@ -193,16 +196,26 @@
       (str "SELECT " fields " FROM records WHERE " query))))
 
 ;; Perform a database search and wrap the results in a search response
-;; map.
-(defn search
-  ([params] (search (params->str params) params))
-  ([query params]
-     (let [matching-rows    (search-results query)
-           returned-rows    (take max-no-of-returned-records matching-rows)
-           returned-records (map row->record returned-rows)]
-       {:Query-Terms                params
-        :No-Of-Records-Searched     (count-rows :records)
-        :No-Of-Records-Matched      (count matching-rows)
-        :No-Of-Records-Returned     (count returned-records)
-        :Max-No-of-Returned-Records max-no-of-returned-records
-        :Records                    returned-records})))
+;; map. Accepts a request map contains a :params map. Note as an
+;; implementation detail, the `merge` function means that properties
+;; are returned in the reverse order to as included here.
+(defn search [request]
+  (let [params                (request :params)
+        headers               (request :headers)
+        query-str             (params->str params)
+        include-query-terms?  (not (= (headers "x-pip-db-query-terms") "None"))
+        include-records?      (not (= (headers "x-pip-db-records")     "None"))]
+    (merge
+     (if include-records?
+       (let [matching-rows    (search-results query-str)
+             returned-rows    (take max-no-of-returned-records matching-rows)
+             returned-records (map row->record returned-rows)]
+         {:No-Of-Records-Returned     (count returned-records)
+          :No-Of-Records-Matched      (count matching-rows)
+          :Records                    returned-records})
+       (let [conditions        (query/params->query params)]
+         {:No-Of-Records-Matched      (count-rows :records conditions)}))
+     {:Max-No-of-Returned-Records     max-no-of-returned-records}
+     {:No-Of-Records-Searched         (count-rows :records)}
+     (if include-query-terms?
+       {:Query-Terms                  params}))))

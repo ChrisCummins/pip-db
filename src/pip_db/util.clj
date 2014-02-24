@@ -48,6 +48,14 @@
 (defn signed-in? [request]
   (not (str/blank? (username request))))
 
+;; Accepts a request map and returns a copy of the map with the :id
+;; query parameter removed and replaced with an "id" parameter.
+(defn remap-id-param [request]
+  (let [params          (request :params)
+        url-id          (params  :id)
+        remapped-params (dissoc (assoc params "id" url-id) :id)]
+    (assoc request :params remapped-params)))
+
 ;; -------------------
 ;; ## Type conversions
 

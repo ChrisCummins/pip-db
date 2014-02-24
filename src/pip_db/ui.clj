@@ -299,8 +299,8 @@
    [:title (str "pip-db " (request :title))]
    favicon
 
-   (include-css "/css/styles.css"
-                "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css")
+   (include-css "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css"
+                "/css/styles.css")
    (request :header)
    (include-js "/js/modernizr-2.7.0.min.js")
    (google-analytics)])

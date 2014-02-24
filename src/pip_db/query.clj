@@ -33,9 +33,11 @@
 ;; The most basic kind is a `string-condition` which can be used to
 ;; test if a field name matches a value "foo" == "bar".
 (defn string-condition [condition]
-  (str "(LOWER(\"" (condition :field) "\") "
-       (if (condition :not) "NOT ")
-       "LIKE LOWER('%" (condition :value) "%'))"))
+  (if (condition :exact)
+    (str "\"" (condition :field) "\"='" (condition :value) "'")
+    (str "(LOWER(\"" (condition :field) "\") "
+         (if (condition :not) "NOT ")
+         "LIKE LOWER('%" (condition :value) "%'))")))
 ;;
 ;; A `numeric-condition` tests a field for a precise integer field,
 ;; e.g. "foo" == 5.
@@ -106,7 +108,7 @@
         ec4     (str (util/str->int (get params "ec4")))]
 
     (AND
-     (EQ {:field "id" :value id})       ; Match specific record ID
+     (EQ {:field "id" :value id :exact true}) ; Match specific record ID
      (for [word q]                      ; Match all keywords
        (EQ {:field "Protein-Names" :value word}))
      (EQ {:field "Protein-Names" :value q_eq})  ; Match exact phrase

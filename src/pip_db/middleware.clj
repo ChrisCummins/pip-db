@@ -14,6 +14,7 @@
             [pip-db.pages.record :as record]
             [pip-db.pages.search :as search]
             [pip-db.pages.upload :as upload]
+            [pip-db.api :as api]
             [pip-db.ui :as ui]))
 
 ;; The regular expression to match a record ID.
@@ -29,16 +30,18 @@
 (defroutes routes
   (GET  ["/"]                      [:as request] (index/GET       request))
   (GET  ["/advanced"]              [:as request] (advanced/GET    request))
-  (GET  ["/r/:id.json", :id id-re] [:as request] (record/GET-json request))
+  (GET  ["/r/:id.json", :id id-re] [:as request] (api/r           request))
   (GET  ["/r/:id",      :id id-re] [:as request] (record/GET      request))
   (GET  ["/d"]                     [:as request] (download/GET    request))
   (GET  ["/s"]                     [:as request] (search/GET      request))
-  (GET  ["/s.json"]                [:as request] (search/GET-json request))
+  (GET  ["/s.json"]                [:as request] (api/s           request))
   (GET  ["/login"]                 [:as request] (login/GET       request))
   (POST ["/login"]                 [:as request] (login/POST      request))
   (GET  ["/logout"]                [:as request] (logout/GET      request))
   (GET  ["/upload"]                [:as request] (upload/GET      request))
   (POST ["/upload"]                [:as request] (upload/POST     request))
+  (GET  ["/api/s"]                 [:as request] (api/s           request))
+  (GET  ["/api/r/:id",  :id id-re] [:as request] (api/r           request))
   (route/resources "/")
   (route/not-found (ui/page-404)))
 
