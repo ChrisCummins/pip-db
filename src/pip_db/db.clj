@@ -209,3 +209,11 @@
         :No-Of-Records-Returned     (count returned-records)
         :Max-No-of-Returned-Records max-no-of-returned-records
         :Records                    returned-records})))
+
+;; Perform a database search and return only the number of results.
+(defn search-with-no-of-records-matched [params]
+  (let [query               (query/params->query params)
+        no-of-matching-rows (count-rows :records query)]
+    {:No-Of-Records-Searched     (count-rows :records)
+     :No-Of-Records-Matched      no-of-matching-rows
+     :Max-No-of-Returned-Records max-no-of-returned-records}))
