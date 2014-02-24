@@ -62,22 +62,21 @@
 
 ;; ## Model
 
-(defn query [id]
-  (let [fields (apply util/keys->quoted-str db/public-record-fields)]
-    (str "SELECT " fields " FROM records WHERE id='" id "'")))
-
-;; Fetch the record data for the given ID.
-(defn record [id]
-  (db/search (query id) {"id" id}))
-
+;; Accepts a request map and returns a copy of the map with the :id
+;; query parameter removed and replaced with an "id" parameter.
+(defn remap-id-param [request]
+  (let [params          (request :params)
+        url-id          (params  :id)
+        remapped-params (dissoc (assoc params "id" url-id) :id)]
+    (assoc request :params remapped-params)))
 
 ;; ## Controller
 
 (defn GET [request]
-  (let [data (record ((request :params) :id))]
+  (let [data (db/search ((remap-id-param request) :params))]
     (if (pos? (data :No-Of-Records-Matched))
       (view (assoc request :results data))
       (ui/page-404))))
 
 (defn GET-json [request]
-  (util/json-response (record ((request :params) :id))))
+  (util/json-response (db/search ((remap-id-param request) :params))))
