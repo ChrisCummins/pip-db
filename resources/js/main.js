@@ -314,6 +314,7 @@
      */
 
     var $slider = $('#pi-slider');
+    var defaultSliderValues = [4, 10]; // Starting points for slider
 
     // Slider update callback
     var updateSliderTooltip = function (event, ui) {
@@ -326,7 +327,7 @@
                 '</div></div>';
         };
 
-        var values = ui.values || [6, 8];
+        var values = ui.values || defaultSliderValues;
 
         $('.ui-slider-handle:first-of-type').html(tooltipHTML(values[0]));
         $('.ui-slider-handle:last-of-type').html(tooltipHTML(values[1]));
@@ -341,7 +342,7 @@
         min: 0,
         max: 14,
         step: 0.1,
-        values: [ 6, 8 ],
+        values: defaultSliderValues,
         tickInterval: 1,
         create: updateSliderTooltip,
         slide: function (event, ui) {
