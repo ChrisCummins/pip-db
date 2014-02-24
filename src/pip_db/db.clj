@@ -197,18 +197,17 @@
 
 ;; Perform a database search and wrap the results in a search response
 ;; map.
-(defn search
-  ([params] (search (params->str params) params))
-  ([query params]
-     (let [matching-rows    (search-results query)
-           returned-rows    (take max-no-of-returned-records matching-rows)
-           returned-records (map row->record returned-rows)]
-       {:Query-Terms                params
-        :No-Of-Records-Searched     (count-rows :records)
-        :No-Of-Records-Matched      (count matching-rows)
-        :No-Of-Records-Returned     (count returned-records)
-        :Max-No-of-Returned-Records max-no-of-returned-records
-        :Records                    returned-records})))
+(defn search [params]
+  (let [query            (params->str params)
+        matching-rows    (search-results query)
+        returned-rows    (take max-no-of-returned-records matching-rows)
+        returned-records (map row->record returned-rows)]
+    {:Query-Terms                params
+     :No-Of-Records-Searched     (count-rows :records)
+     :No-Of-Records-Matched      (count matching-rows)
+     :No-Of-Records-Returned     (count returned-records)
+     :Max-No-of-Returned-Records max-no-of-returned-records
+     :Records                    returned-records}))
 
 ;; Perform a database search and return only the number of results.
 (defn search-with-no-of-records-matched [params]
