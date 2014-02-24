@@ -34,7 +34,7 @@
 ;; Perform a search from the given request map and wrap the results
 ;; into a `:results` key.
 (defn search-results [request]
-  (assoc request :results (db/search (request :params))))
+  (assoc request :results (db/search request)))
 
 ;; Serve a search request.
 (defn search-handler [request]

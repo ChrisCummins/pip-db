@@ -73,7 +73,7 @@
 ;; ## Controller
 
 (defn GET [request]
-  (let [data (db/search ((remap-id-param request) :params))]
+  (let [data (db/search (util/remap-id-param request))]
     (if (pos? (data :No-Of-Records-Matched))
       (view (assoc request :results data))
       (ui/page-404))))

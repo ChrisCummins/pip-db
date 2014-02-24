@@ -196,23 +196,26 @@
       (str "SELECT " fields " FROM records WHERE " query))))
 
 ;; Perform a database search and wrap the results in a search response
-;; map.
-(defn search [params]
-  (let [query            (params->str params)
-        matching-rows    (search-results query)
-        returned-rows    (take max-no-of-returned-records matching-rows)
-        returned-records (map row->record returned-rows)]
-    {:Query-Terms                params
-     :No-Of-Records-Searched     (count-rows :records)
-     :No-Of-Records-Matched      (count matching-rows)
-     :No-Of-Records-Returned     (count returned-records)
-     :Max-No-of-Returned-Records max-no-of-returned-records
-     :Records                    returned-records}))
-
-;; Perform a database search and return only the number of results.
-(defn search-with-no-of-records-matched [params]
-  (let [query               (query/params->query params)
-        no-of-matching-rows (count-rows :records query)]
-    {:No-Of-Records-Searched     (count-rows :records)
-     :No-Of-Records-Matched      no-of-matching-rows
-     :Max-No-of-Returned-Records max-no-of-returned-records}))
+;; map. Accepts a request map contains a :params map. Note as an
+;; implementation detail, the `merge` function means that properties
+;; are returned in the reverse order to as included here.
+(defn search [request]
+  (let [params                (request :params)
+        headers               (request :headers)
+        query-str             (params->str params)
+        include-query-terms?  (not (= (headers "x-pip-db-query-terms") "None"))
+        include-records?      (not (= (headers "x-pip-db-records")     "None"))]
+    (merge
+     (if include-records?
+       (let [matching-rows    (search-results query-str)
+             returned-rows    (take max-no-of-returned-records matching-rows)
+             returned-records (map row->record returned-rows)]
+         {:No-Of-Records-Returned     (count returned-records)
+          :No-Of-Records-Matched      (count matching-rows)
+          :Records                    returned-records})
+       (let [conditions        (query/params->query params)]
+         {:No-Of-Records-Matched      (count-rows :records conditions)}))
+     {:Max-No-of-Returned-Records     max-no-of-returned-records}
+     {:No-Of-Records-Searched         (count-rows :records)}
+     (if include-query-terms?
+       {:Query-Terms                  params}))))
