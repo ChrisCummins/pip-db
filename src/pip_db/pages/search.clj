@@ -55,7 +55,3 @@
 ;; Search page ring handler.
 (defn GET [request]
   ((response-function request) request))
-
-;; Search page ring handler.
-(defn GET-json [request]
-  (util/json-response (db/search (request :params))))

@@ -60,16 +60,6 @@
       :javascript (list (util/inline-data-js "data" results)
                         (util/inline-js "/js/record.inline.js"))})))
 
-;; ## Model
-
-;; Accepts a request map and returns a copy of the map with the :id
-;; query parameter removed and replaced with an "id" parameter.
-(defn remap-id-param [request]
-  (let [params          (request :params)
-        url-id          (params  :id)
-        remapped-params (dissoc (assoc params "id" url-id) :id)]
-    (assoc request :params remapped-params)))
-
 ;; ## Controller
 
 (defn GET [request]
@@ -77,6 +67,3 @@
     (if (pos? (data :No-Of-Records-Matched))
       (view (assoc request :results data))
       (ui/page-404))))
-
-(defn GET-json [request]
-  (util/json-response (db/search ((remap-id-param request) :params))))
