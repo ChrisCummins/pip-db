@@ -65,12 +65,15 @@
 
 ;; Count the number of rows in a given table. May optionally be
 ;; provided with a set of conditions.
-(defn count-rows [table & conditions]
-  (let [condition?           (not (nil? conditions))
-        base-query           (str "SELECT count(*) FROM " (name table))
-        query-with-condition (apply str base-query " WHERE " conditions)
-        query                (if condition? query-with-condition base-query)]
-    (with-connection-results-query results [query] ((first results) :count))))
+(defn count-rows
+  ([table] (count-rows table ""))
+  ([table condition]
+     (let [condition?           (not (str/blank? condition))
+           base-query           (str "SELECT count(*) FROM " (name table))
+           query-with-condition (str base-query " WHERE " condition)
+           query                (if condition? query-with-condition base-query)]
+       (with-connection-results-query results [query]
+         ((first results) :count)))))
 
 ;; Determine whether the required tables exist.
 (defn migrated? []
