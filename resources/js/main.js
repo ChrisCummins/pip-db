@@ -169,6 +169,11 @@
 (function () {
     'use strict';
 
+    // UI Elements
+
+    var $resultsCountProgressBar = $('#results-count');
+    var $resultsLabel = $(' .ui-progressbar-label', $resultsCountProgressBar);
+
     /*
      * Avoid `console` errors in browsers that lack a console.
      */
@@ -299,11 +304,13 @@
     // Bind form validation to text input keystrokes
     $($searchForms).bind('input propertychange', function (e) {
         activateSubmitIfFormFilled($(this).closest('form'));
+        updateNoOfResults($(this).closest('form'));
     });
 
     // Bind form validation to dropdown selections
     $(' select', $searchForms).change(function (e) {
         activateSubmitIfFormFilled($(this).closest('form'));
+        updateNoOfResults($(this).closest('form'));
     });
 
     // Validate form on load (in case of preloaded criteria)
@@ -348,6 +355,7 @@
         slide: function (event, ui) {
             setFormValuesFromSlider();
             updateSliderTooltip(event, ui);
+            updateNoOfResults($(this).closest('form'));
         }
     });
 
@@ -383,7 +391,49 @@
         // Update form
         setFormValuesFromSlider();
         activateSubmitIfFormFilled($(this).closest('form'));
+        updateNoOfResults($(this).closest('form'));
     });
+
+    /*
+     * "No of results" progress bar
+     */
+
+    // Initialise jQuery UI component
+    $($resultsCountProgressBar).progressbar({
+        value: 100
+    });
+
+    /*
+     * Updates the number of results returned for query value.
+     */
+    var updateNoOfResults = function ($form) {
+        var items = stripDefaultValues($form.serializeArray(),
+                                       searchFormDefaults);
+        var url = '/api/s?' + $.param(items.values);
+
+        $.ajax({
+            url: url,
+            beforeSend: function(xhr) {
+                // Set API headers
+                xhr.setRequestHeader('X-pip-db-Query-Terms', 'None');
+                xhr.setRequestHeader('X-pip-db-Records', 'None');
+            },
+            success: function (response, textStatus, jqXHR) {
+                var noOfRecordsSearched = response['No-Of-Records-Searched'];
+                var noOfRecordsMatched  = response['No-Of-Records-Matched'];
+                var percentage = (Math.log(noOfRecordsMatched + 1) /
+                                  Math.log(noOfRecordsSearched + 1)) * 100;
+                var label = noOfRecordsMatched === 1 ?
+                    '1 record' : noOfRecordsMatched + ' records';
+
+                $resultsCountProgressBar.progressbar("value", percentage);
+                $resultsLabel.text(label);
+            }
+        });
+    }
+
+    // Get initial value on load
+    updateNoOfResults($searchForms);
 
     /*
      * EXPERIMENTAL METHOD COMBO
@@ -420,6 +470,7 @@
         // Update form
         setFormValuesFromMethod();
         activateSubmitIfFormFilled($(this).closest('form'));
+        updateNoOfResults($(this).closest('form'));
     });
 
     $methodSelector.change(function (e) {

@@ -102,3 +102,26 @@
        -moz-border-radius: 4px;
             border-radius: 4px;
 }
+
+// Progress bar
+
+.ui-progressbar {
+    min-height: 32px;
+}
+.ui-progressbar.ui-widget-content {
+    background: #fff;
+}
+.ui-progressbar .ui-widget-header {
+    background: lighten(@brand-primary, 25%);
+    height: 110%;
+}
+.ui-progressbar-value {
+  .transition(width .5s); // Smooth sliding of bar
+}
+.ui-progressbar-label {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 6px;
+    font-weight: bold;
+}

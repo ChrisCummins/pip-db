@@ -111,8 +111,13 @@
                "Enter an exact or range of temperatures."]]]
 
             [:div.row
-             [:div.col-md-2.col-md-offset-6
-              [:button.btn.btn-success.disabled.pull-right
+             [:div.col-md-offset-2.col-md-4
+              {:style "padding-right:0;"
+               :title "The number of matching records"}
+              [:div#results-count
+               [:div.ui-progressbar-label]]]
+             [:div.col-md-2
+              [:button.btn.btn-block.btn-success.disabled
                {:type "submit" :name "a" :value "s"}
                "Advanced Search"]]]]]}))
 
