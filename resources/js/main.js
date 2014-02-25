@@ -557,4 +557,21 @@
         }
     });
 
+  /*
+   * Provide method suggestions.
+   */
+  $('input[name="m"]').autocomplete({
+    source: function(request, response) {
+      $.ajax({
+        url: getAutocompleteUrl('methods', request.term),
+        success: function (data, textStatus, jqXHR) {
+          response(data);
+        },
+        error: function (jqXHR, textStatus, err) {
+          response([]);
+        }
+      });
+    }
+  });
+
 }());

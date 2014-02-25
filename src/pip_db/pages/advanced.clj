@@ -34,6 +34,15 @@
                            "Enter the location or organ"
                            ((request :params) "q_l")))
 
+(defn search-method-widget [request]
+  (ui/search-form-text-row "m" "experimental method"
+                           "Enter the experimental method used to determine the result."
+                           ((request :params) "m")))
+
+(defn search-form-heading-row
+  ([text]    [:div.row [:div.col-md-12 [:h4          text]]])
+  ([id text] [:div.row [:div.col-md-12 [:h4 {:id id} text]]]))
+
 ;; ## Page Layout
 (defn view [request]
   (ui/page
@@ -53,8 +62,8 @@
             (search-location-widget request)
 
             (ui/search-form-heading-row "Then narrow results by...")
-            (ui/search-form-method-row request)
             (ui/search-form-pi-row request)
+            (search-method-widget request)
             [:div.row
              [:div.col-md-2
               [:label {:for "ec1"} "enzyme commission number:"]]

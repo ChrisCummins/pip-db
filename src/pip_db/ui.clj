@@ -81,47 +81,6 @@
         [:div.col-md-5 {:style "padding-left:0;"}
          (range-slider-input-widget "pi-slider" "pi_l" "pi_h")]))
 
-;; The search form experiment method input selector.
-(defn search-form-method-input-widget [data]
-  (list [:div.col-md-1
-         (off-on-button-input-widget "m-active")]
-        [:div.col-md-5 {:style "padding-left:0;"}
-         [:select {:id "m-select" :disabled true}
-          [:option "Analytical gel isoelectric focusing"]
-          [:option "Analytical isoelectric focusing"]
-          [:option "Carrier-free isoelectric focusing"]
-          [:option "Column isoelectric focusing"]
-          [:option "Density gradient isoelectric focusing"]
-          [:option "Disc electrophoresis"]
-          [:option "Disc gel electrophoresis"]
-          [:option "Electrofocusing"]
-          [:option "Electrophoresis"]
-          [:option "Electrostatic Focusing"]
-          [:option "Gel electrophoresis"]
-          [:option "Gel isoelectric focusing"]
-          [:option "Isoelectric density gradient electrophoresis"]
-          [:option "Isoelectric focusing in polyacrylamide gel"]
-          [:option "Isoelectric focusing in polyacrylamide gels"]
-          [:option "Isoelectric focusing on acrylamide gel"]
-          [:option "Isoelectric Focusing with a Carrier Ampholyte"]
-          [:option "Isoelectric focusing"]
-          [:option "Isoelectric fractionation"]
-          [:option "Isoelectrofocusing"]
-          [:option "LKB apparatus"]
-          [:option "LKB electrofocusing apparatus"]
-          [:option "Measurement with an antimony microelectrode"]
-          [:option "Microisoelectric focusing on polyacrylamide gel"]
-          [:option "Polyacrylamide disc electrophoresis"]
-          [:option "Polyacrylamide gel electrofucusing"]
-          [:option "Polyacrylamide gel isoelectric focusing"]
-          [:option "Preparative isoelectric focusing"]
-          [:option "SDS disc electrophoresis"]
-          [:option "SDS gel electrophoresis"]
-          [:option "Stationary electrolysis"]
-          [:option "Thin-layer isoelectric focusing"]
-          [:option "Vesterberg and Svensson method"]]]
-        (hidden-input-widget "m")))
-
 (defn search-form-heading-row
   ([text]    [:div.row [:div.col-md-12 [:h4          text]]])
   ([id text] [:div.row [:div.col-md-12 [:h4 {:id id} text]]]))
@@ -148,13 +107,6 @@
                           (search-form-pi-input-widget data)
                           (info-widget (str "Select from a range of "
                                             "isoelectric points."))))
-
-;; An experimental method selection search form row.
-(defn search-form-method-row [data]
-  (search-form-widget-row (label-widget "m" "experimental method:")
-                          (search-form-method-input-widget data)
-                          (info-widget (str "Select the method which was used "
-                                            "to determine the result."))))
 
 ;; ### Main search bar
 ;;
