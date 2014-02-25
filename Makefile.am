@@ -11,6 +11,10 @@ if ENABLE_TOOLS
 SUBDIRS += tools
 endif
 
+clean-local:
+	@echo '  LEIN   clean'
+	@lein clean
+
 EXTRA_DIST = \
 	autogen.sh \
 	LICENSE \
