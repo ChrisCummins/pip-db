@@ -162,8 +162,7 @@
 (defn parse-json-file [file]
   (let [json    (json/read-str (slurp file))
         records (json "Records")]
-    (apply db/add-records records)
-    "Done."))
+    (str (apply db/add-records records))))
 
 ;; ## Controller
 
