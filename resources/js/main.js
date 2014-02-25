@@ -486,7 +486,7 @@
      * 'value'.
      */
     var getAutocompleteUrl = function (src, value) {
-        return '/api/ac?s=' + src + '&t=' + encodeURIComponent(value);
+        return '/api/ac?s=' + src + '&t=' + encodeURIComponent(value.trim());
     };
 
     /*
@@ -556,5 +556,22 @@
             });
         }
     });
+
+  /*
+   * Provide method suggestions.
+   */
+  $('input[name="m"]').autocomplete({
+    source: function(request, response) {
+      $.ajax({
+        url: getAutocompleteUrl('methods', request.term),
+        success: function (data, textStatus, jqXHR) {
+          response(data);
+        },
+        error: function (jqXHR, textStatus, err) {
+          response([]);
+        }
+      });
+    }
+  });
 
 }());

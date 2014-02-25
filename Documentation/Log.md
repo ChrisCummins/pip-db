@@ -2715,3 +2715,27 @@ address this:
 On the Heroku instance, the same operation requires 10.785 s, so we
 should aim to factor in an ~ 300 % drop in performance between the
 development server and deployment.
+
+### Monday 24th
+
+Got an email from Heroku, warning about the excessive amount of rows
+used in my implementation of autocomplete:
+
+> The database HEROKU_POSTGRESQL_RED_URL on Heroku app pip-db has
+> exceeded its allocated storage capacity. Immediate action is
+> required.
+
+> The database contains 18,230 rows, exceeding the Dev plan limit of
+> 10,000. INSERT privileges to the database will be automatically
+> revoked in 7 days. This will cause service failures in most
+> applications dependent on this database.
+
+For now, I will re-implement autocomplete so as to not require so many
+table entries, but in the long run I should consider an alternative
+hosting strategy for the application.
+
+### Tuesday 25th
+
+Noticed a deadline coming up soon (7th March) for "Joint assessment of
+interim review and oral presentation by supervisor and
+moderator". Should ask Ian about this at next meeting.

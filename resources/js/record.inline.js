@@ -26,15 +26,21 @@ $(document).ready(function () {
      * Properties table
      */
 
-    var addPropertyRow = function (prop, description, value) {
-        var getRow = function (prop, name, val) {
-            return '<tr class="' + prop + '"><td class="description">' + name +
-                '</td><td class="value">' + val + '</td></tr>';
+    var addPropertyRow = function (query, prop, description, value) {
+        var getRow = function (query,  prop, name, val) {
+            var s = '<tr class="property ' + prop + '"><td class="description">'
+                + name + '</td><td class="value">' + val;
+
+            if (query)
+                s += '<div class="pull-right"><a class="similar" href="' + '/s?' + query +
+                    '">See other records like this &gt;&gt;</a></div>';
+
+            return s + '</td></tr>';
         };
 
         value = value || record[prop];
         if (value)
-            $tbody.append(getRow(prop, description, value));
+            $tbody.append(getRow(query, prop, description, value));
     };
 
     var getRangeText = function (low, high) {
@@ -47,29 +53,6 @@ $(document).ready(function () {
             return low;
         else if (high)
             return high;
-    };
-
-    var getPiText = function () {
-        /*
-         * We allow for some flexibility in displaying isoelectric points. We
-         * will try first to show an exact value, else a range of values, or
-         * just an individual result within that range.
-         */
-        var piMin   = record['pI-Min'];
-        var piMax   = record['pI-Max'];
-        var piMajor = record['pI-Major'];
-
-        if (piMin && piMax) {
-            if (piMin === piMax)
-                return piMin;
-            else
-                return piMin + ' - ' + piMax;
-        } else if (piMin)
-            return '> ' + piMin;
-        else if (piMax)
-            return '< ' + piMax;
-        else if (piMajor)
-            return piMajor + 'm';
     };
 
     var addExternLink = function (prop, name, url) {
@@ -88,20 +71,44 @@ $(document).ready(function () {
     $title.text(names[0]);
 
     // Properties
-    addPropertyRow('Protein-Name', 'Protein Name', names[0]);
-    for (var i = 1; i < names.length; i++)
-        addPropertyRow('Protein-Name', 'Alternative Protein Name', names[i]);
-    addPropertyRow('EC', 'E.C.');
-    addPropertyRow('Source', 'Source');
-    addPropertyRow('Location', 'Organ and/or Subcellular location');
-    addPropertyRow('MW', 'M.W', getRangeText(record['MW-Min'], record['MW-Max']));
-    addPropertyRow('Subunit-No', 'Subunit No.');
-    addPropertyRow('Subunit-MW', 'Subunit M.W');
-    addPropertyRow('No-of-Iso-Enzymes', 'No. of Iso-enzymes');
-    addPropertyRow('pI', 'pI', getPiText());
-    addPropertyRow('Temperature', 'Temperature (ºC)',
+    addPropertyRow('q=' + encodeURIComponent(names[0]),
+                   'Protein-Name', 'Protein Name', names[0]);
+
+    for (var i = 1; i < names.length; i++) {
+        addPropertyRow('q=' + encodeURIComponent(names[i]),
+                       'Protein-Name', 'Alternative Protein Name', names[i]);
+    }
+
+    addPropertyRow((function () {
+        var ec_arr = record['EC'] ? record['EC'].split('.') : [];
+        var s = '';
+
+        for (var i = 0; i < ec_arr.length; i++)
+            s += 'ec' + (i + 1) + '=' + encodeURIComponent(ec_arr[i]) + '&';
+
+        return s.substring(0, s.length - 1);
+    })(), 'EC', 'E.C.');
+
+    addPropertyRow('q_s=' + encodeURIComponent(record['Source']),
+                   'Source', 'Source');
+    addPropertyRow('q_l=' + encodeURIComponent(record['Location']),
+                   'Location', 'Organ and/or Subcellular location');
+    addPropertyRow('mw_l=' + encodeURIComponent(record['MW-Min']) + '&mw_h=' +
+                   encodeURIComponent(record['MW-Max']), 'MW', 'M.W',
+                   getRangeText(record['MW-Min'], record['MW-Max']));
+    addPropertyRow(null, 'Subunit-No', 'Subunit No.');
+    addPropertyRow(null, 'Subunit-MW', 'Subunit M.W');
+    addPropertyRow(null, 'No-of-Iso-Enzymes', 'No. of Iso-enzymes');
+    addPropertyRow('pi_l=' + encodeURIComponent(record['pI-Min']) + '&pi_h=' +
+                   encodeURIComponent(record['pI-Max']), 'pI', 'pI',
+                   getRangeText(record['pI-Min'], record['pI-Max']));
+    addPropertyRow(null, 'pI-Major-Component', 'pI of Major Component');
+    addPropertyRow('t_l=' + encodeURIComponent(record['Temperature-Min']) +
+                   '&t_h=' + encodeURIComponent(record['Temperature-Max']),
+                   'Temperature', 'Temperature (ºC)',
                    getRangeText(record['Temperature-Min'], record['Temperature-Max']));
-    addPropertyRow('Method', 'Experimental Method');
+    addPropertyRow('m=' + encodeURIComponent(record['Method']),
+                   'Method', 'Experimental Method');
 
     // Extern links
     addExternLink('Full-Text', 'Full Text');
@@ -115,6 +122,12 @@ $(document).ready(function () {
         $notesPanelBody.text(record['Notes']);
     };
 
+    // "Show similar to this" callback
+    $('.property').hover(function (e) {
+        $(' .similar', this).show();
+    }, function (e) {
+        $(' .similar', this).hide();
+    })
 
     /*
      * "Reference this page" citation styles

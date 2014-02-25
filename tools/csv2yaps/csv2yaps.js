@@ -3,7 +3,7 @@
 /*
  * yaps.js - (Yet Another Protein Schema) CSV to YAPS conversion
  */
-var VERSION = "0.4.4";
+var VERSION = 2;
 
 var lazy = require('lazy');
 var fs  = require('fs');
@@ -141,9 +141,12 @@ var tokens2Row = function (tokens) {
   return row;
 };
 
-// Capitalise the first letter of a string
+// Capitalise the first letter of a string, IF and ONLY IF the first
+// letter is a standard ASCII letter. We don't capitalise Greek
+// letters.
 var capitalise = function (txt) {
-  return txt.charAt(0).toUpperCase() + txt.substr(1);
+  return /^[\000-\177]*$/.test(txt) ?
+        txt.charAt(0).toUpperCase() + txt.substr(1) : txt;
 }
 
 // Convert a row object into a Yaps object
@@ -263,7 +266,8 @@ var csv = fs.realpathSync(argv[2]);
 var lineCount = 1;
 var readStream = fs.createReadStream(csv);
 var yaps = {
-  "Encoding": "yaps " + VERSION,
+  "Encoding": "yaps",
+  "Version": VERSION,
   "Date": new Date().toISOString().slice(0, 19).replace('T', ' '),
   "Author": process.env['USER'] + "@" + os.hostname(),
   "Agent": __filename,
