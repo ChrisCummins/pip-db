@@ -53,7 +53,7 @@
     :body [:div.advsearch
            [:form#as {:method "GET" :action "/s"}
 
-            (ui/search-form-heading-row "Find proteins with...")
+            (search-form-heading-row "Find proteins with...")
             (search-keywords-all-widget request)
             (search-keywords-exact-widget request)
             (search-keywords-any-widget request)
@@ -61,7 +61,7 @@
             (search-source-widget request)
             (search-location-widget request)
 
-            (ui/search-form-heading-row "Then narrow results by...")
+            (search-form-heading-row "Then narrow results by...")
             (ui/search-form-pi-row request)
             (search-method-widget request)
             [:div.row

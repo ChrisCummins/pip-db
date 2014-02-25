@@ -81,10 +81,6 @@
         [:div.col-md-5 {:style "padding-left:0;"}
          (range-slider-input-widget "pi-slider" "pi_l" "pi_h")]))
 
-(defn search-form-heading-row
-  ([text]    [:div.row [:div.col-md-12 [:h4          text]]])
-  ([id text] [:div.row [:div.col-md-12 [:h4 {:id id} text]]]))
-
 ;; A row within a search form consists of three elements, the label,
 ;; widget and description.
 (defn search-form-widget-row [label widget description]
