@@ -14,43 +14,47 @@
 
 ;; Out database tables.
 (def tables
-  {:records [[:id                 "varchar(11) NOT NULL"]
-             [:Protein-Names      "varchar"]
-             [:EC                 "varchar"]
-             [:Source             "varchar"]
-             [:Location           "varchar"]
-             [:MW-Min             "varchar"]
-             [:MW-Max             "varchar"]
-             [:Subunit-No         "varchar"]
-             [:Subunit-MW         "varchar"]
-             [:No-Of-Iso-Enzymes  "varchar"]
-             [:pI-Min             "varchar"]
-             [:pI-Max             "varchar"]
-             [:pI-Major-Component "varchar"]
-             [:Temperature-Min    "varchar"]
-             [:Temperature-Max    "varchar"]
-             [:Method             "varchar"]
-             [:Full-Text          "varchar"]
-             [:Abstract-Only      "varchar"]
-             [:PubMed             "varchar"]
-             [:Species-Taxonomy   "varchar"]
-             [:Protein-Sequence   "varchar"]
-             [:Notes              "varchar"]
-             [:real_ec1           "integer"]
-             [:real_ec2           "integer"]
-             [:real_ec3           "integer"]
-             [:real_ec4           "integer"]
-             [:real_mw_min        "real"]
-             [:real_mw_max        "real"]
-             [:real_pi_min        "real"]
-             [:real_pi_max        "real"]
-             [:real_temp_min      "real"]
-             [:real_temp_max      "real"]
-             [:Created-At         "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP"]]
-   :users   [[:id                 "serial    PRIMARY KEY"]
-             [:email              "varchar   NOT NULL"]
-             [:pass               "varchar   NOT NULL"]]
-   :names   [[:name               "varchar   NOT NULL"]]})
+  {:records     [[:id                 "varchar(11) NOT NULL"]
+                 [:Protein-Names      "varchar"]
+                 [:EC                 "varchar"]
+                 [:Source             "varchar"]
+                 [:Location           "varchar"]
+                 [:MW-Min             "varchar"]
+                 [:MW-Max             "varchar"]
+                 [:Subunit-No         "varchar"]
+                 [:Subunit-MW         "varchar"]
+                 [:No-Of-Iso-Enzymes  "varchar"]
+                 [:pI-Min             "varchar"]
+                 [:pI-Max             "varchar"]
+                 [:pI-Major-Component "varchar"]
+                 [:Temperature-Min    "varchar"]
+                 [:Temperature-Max    "varchar"]
+                 [:Method             "varchar"]
+                 [:Full-Text          "varchar"]
+                 [:Abstract-Only      "varchar"]
+                 [:PubMed             "varchar"]
+                 [:Species-Taxonomy   "varchar"]
+                 [:Protein-Sequence   "varchar"]
+                 [:Notes              "varchar"]
+                 [:real_ec1           "integer"]
+                 [:real_ec2           "integer"]
+                 [:real_ec3           "integer"]
+                 [:real_ec4           "integer"]
+                 [:real_mw_min        "real"]
+                 [:real_mw_max        "real"]
+                 [:real_pi_min        "real"]
+                 [:real_pi_max        "real"]
+                 [:real_temp_min      "real"]
+                 [:real_temp_max      "real"]
+                 [:Created-At         "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP"]]
+   :users       [[:id                 "serial    PRIMARY KEY"]
+                 [:email              "varchar   NOT NULL"]
+                 [:pass               "varchar   NOT NULL"]]
+   :ac_names     [[:text              "varchar   NOT NULL"]]
+   :ac_words     [[:text              "varchar   NOT NULL"]]
+   :ac_sources   [[:text              "varchar   NOT NULL"]]
+   :ac_locations [[:text              "varchar   NOT NULL"]]
+   :ac_methods   [[:text              "varchar   NOT NULL"]]})
 
 ;; Evaluates body in the context of a new connection to a database
 ;; then closes the connection. Identifiers are quoted.
@@ -148,12 +152,22 @@
      real_mw_min real_mw_max real_pi_min real_pi_max real_temp_min
      real_temp_max]))
 
+(defn records->unique-properties [property records]
+  (map vector (disj (set (flatten (map #(get % property) records))) nil)))
+
 ;; Add a set of YAPS encoded records to the database.
 (defn add-records [& records]
-  (let [names        (flatten (map #(get % "Protein-Names") records))
-        unique-names (map vector (disj (set names) nil))]
+  (let [names     (records->unique-properties "Protein-Names" records)
+        words     (map vector (set (flatten (map #(str/split (first %) #"\s+") names))))
+        sources   (records->unique-properties "Source" records)
+        locations (records->unique-properties "Location" records)
+        methods   (records->unique-properties "Method" records)]
     (with-connection
-      (apply sql/insert-values :names [:name] unique-names)
+      (if names     (apply sql/insert-values :ac_names     [:text] names))
+      (if words     (apply sql/insert-values :ac_words     [:text] words))
+      (if sources   (apply sql/insert-values :ac_sources   [:text] sources))
+      (if locations (apply sql/insert-values :ac_locations [:text] locations))
+      (if methods   (apply sql/insert-values :ac_methods   [:text] methods))
 
       (apply sql/insert-values :records
              (vec created-record-fields) (map record->vector records)))))
