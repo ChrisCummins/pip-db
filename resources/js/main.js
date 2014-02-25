@@ -486,7 +486,7 @@
      * 'value'.
      */
     var getAutocompleteUrl = function (src, value) {
-        return '/api/ac?s=' + src + '&t=' + encodeURIComponent(value);
+        return '/api/ac?s=' + src + '&t=' + encodeURIComponent(value.trim());
     };
 
     /*
