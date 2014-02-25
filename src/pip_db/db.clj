@@ -88,7 +88,7 @@
 ;; performing queries.
 (def private-record-fields
   (map keyword (filter #(re-matches #"real_.*" %)
-                       (map #(name (first %)) (tables :records)))))
+                       (map (comp name first) (tables :records)))))
 
 ;; The subset of fields within the records table that are considered
 ;; public and should be returned to users when performing queries,
