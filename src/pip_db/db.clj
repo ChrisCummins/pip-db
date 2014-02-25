@@ -68,6 +68,8 @@
 
 (def max-no-of-returned-records 20)
 
+(def autocomplete-suggestion-table-size 1000)
+
 ;; Count the number of rows in a given table. May optionally be
 ;; provided with a set of conditions.
 (defn count-rows
@@ -155,13 +157,21 @@
 (defn records->unique-properties [property records]
   (map vector (disj (set (flatten (map #(get % property) records))) nil)))
 
+(defn autocomplete-suggestions [property records]
+  (take autocomplete-suggestion-table-size
+        (records->unique-properties property records)))
+
+(defn names->words [names]
+  (take autocomplete-suggestion-table-size
+        (map vector (set (flatten (map #(str/split (first %) #"\s+") names))))))
+
 ;; Add a set of YAPS encoded records to the database.
 (defn add-records [& records]
-  (let [names     (records->unique-properties "Protein-Names" records)
-        words     (map vector (set (flatten (map #(str/split (first %) #"\s+") names))))
-        sources   (records->unique-properties "Source" records)
-        locations (records->unique-properties "Location" records)
-        methods   (records->unique-properties "Method" records)]
+  (let [names     (autocomplete-suggestions "Protein-Names" records)
+        words     (names->words names)
+        sources   (autocomplete-suggestions "Source" records)
+        locations (autocomplete-suggestions "Location" records)
+        methods   (autocomplete-suggestions "Method" records)]
     (with-connection
       (if names     (apply sql/insert-values :ac_names     [:text] names))
       (if words     (apply sql/insert-values :ac_words     [:text] words))
