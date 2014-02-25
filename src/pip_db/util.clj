@@ -2,6 +2,7 @@
 ;; provide generic helpers for tasks.
 (ns pip-db.util
   (:require [clojure.string :as str]
+            [clojure.set :as set]
             [clojure.data.codec.base64 :as b64]
             [clojure.data.json :as json]))
 
@@ -51,10 +52,7 @@
 ;; Accepts a request map and returns a copy of the map with the :id
 ;; query parameter removed and replaced with an "id" parameter.
 (defn remap-id-param [request]
-  (let [params          (request :params)
-        url-id          (params  :id)
-        remapped-params (dissoc (assoc params "id" url-id) :id)]
-    (assoc request :params remapped-params)))
+  (assoc request :params (set/rename-keys (request :params) {:id "id"})))
 
 ;; -------------------
 ;; ## Type conversions
