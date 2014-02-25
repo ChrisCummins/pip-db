@@ -12,6 +12,10 @@
 ;; Our database spec.
 (def db-spec (System/getenv "DATABASE_URL"))
 
+(def ac-table-keys
+  [[:text              "varchar   NOT NULL"]
+   [:frequency         "integer   NOT NULL"]])
+
 ;; Out database tables.
 (def tables
   {:records     [[:id                 "varchar(11) NOT NULL"]
@@ -50,11 +54,11 @@
    :users       [[:id                 "serial    PRIMARY KEY"]
                  [:email              "varchar   NOT NULL"]
                  [:pass               "varchar   NOT NULL"]]
-   :ac_names     [[:text              "varchar   NOT NULL"]]
-   :ac_words     [[:text              "varchar   NOT NULL"]]
-   :ac_sources   [[:text              "varchar   NOT NULL"]]
-   :ac_locations [[:text              "varchar   NOT NULL"]]
-   :ac_methods   [[:text              "varchar   NOT NULL"]]})
+   :ac_names      ac-table-keys
+   :ac_words      ac-table-keys
+   :ac_sources    ac-table-keys
+   :ac_locations  ac-table-keys
+   :ac_methods    ac-table-keys})
 
 ;; Evaluates body in the context of a new connection to a database
 ;; then closes the connection. Identifiers are quoted.
@@ -154,30 +158,37 @@
      real_mw_min real_mw_max real_pi_min real_pi_max real_temp_min
      real_temp_max]))
 
-(defn records->unique-properties [property records]
-  (map vector (disj (set (flatten (map #(get % property) records))) nil)))
+(defn records->properties [property-name records]
+  (remove nil? (flatten (map #(get % property-name) records))))
 
-(defn autocomplete-suggestions [property records]
-  (take autocomplete-suggestion-table-size
-        (records->unique-properties property records)))
+(defn records->freq-table [property records]
+  (frequencies (records->properties property records)))
 
-(defn names->words [names]
-  (take autocomplete-suggestion-table-size
-        (map vector (set (flatten (map #(str/split (first %) #"\s+") names))))))
+(defn freq-table->autocomplete-table [table]
+  (take autocomplete-suggestion-table-size (reverse (sort-by second table))))
+
+(defn autocomplete-table [property records]
+  (freq-table->autocomplete-table (records->freq-table property records)))
+
+(defn autocomplete-words-table [records]
+  (let [names (records->properties "Protein-Names" records)
+        words (flatten (map #(str/split % #"\s+") names))]
+    (freq-table->autocomplete-table (frequencies words))))
 
 ;; Add a set of YAPS encoded records to the database.
 (defn add-records [& records]
-  (let [names     (autocomplete-suggestions "Protein-Names" records)
-        words     (names->words names)
-        sources   (autocomplete-suggestions "Source" records)
-        locations (autocomplete-suggestions "Location" records)
-        methods   (autocomplete-suggestions "Method" records)]
+  (let [names     (autocomplete-table "Protein-Names" records)
+        words     (autocomplete-words-table           records)
+        sources   (autocomplete-table "Source"        records)
+        locations (autocomplete-table "Location"      records)
+        methods   (autocomplete-table "Method"        records)
+        ac-keys   (map first ac-table-keys)]
     (with-connection
-      (if names     (apply sql/insert-values :ac_names     [:text] names))
-      (if words     (apply sql/insert-values :ac_words     [:text] words))
-      (if sources   (apply sql/insert-values :ac_sources   [:text] sources))
-      (if locations (apply sql/insert-values :ac_locations [:text] locations))
-      (if methods   (apply sql/insert-values :ac_methods   [:text] methods))
+      (if names     (apply sql/insert-values :ac_names     ac-keys names))
+      (if words     (apply sql/insert-values :ac_words     ac-keys words))
+      (if sources   (apply sql/insert-values :ac_sources   ac-keys sources))
+      (if locations (apply sql/insert-values :ac_locations ac-keys locations))
+      (if methods   (apply sql/insert-values :ac_methods   ac-keys methods))
 
       (apply sql/insert-values :records
              (vec created-record-fields) (map record->vector records)))))
@@ -260,7 +271,7 @@
   (let [params    (request :params)
         table     (str "ac_" (params "s"))
         text      (params "t")
-        query-str (str "SELECT text FROM " table " WHERE LOWER(text) "
-                       "LIKE '%" text "%' LIMIT 10")]
+        query-str (str "SELECT text FROM " table " WHERE LOWER(text) LIKE '%"
+                       text "%' ORDER BY frequency DESC LIMIT 10")]
     (with-connection-results-query results [query-str]
       (apply vector (map #(get % :text) results)))))
