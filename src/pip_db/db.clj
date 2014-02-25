@@ -49,7 +49,8 @@
              [:Created-At         "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP"]]
    :users   [[:id                 "serial    PRIMARY KEY"]
              [:email              "varchar   NOT NULL"]
-             [:pass               "varchar   NOT NULL"]]})
+             [:pass               "varchar   NOT NULL"]]
+   :names   [[:name               "varchar   NOT NULL"]]})
 
 ;; Evaluates body in the context of a new connection to a database
 ;; then closes the connection. Identifiers are quoted.
@@ -149,9 +150,13 @@
 
 ;; Add a set of YAPS encoded records to the database.
 (defn add-records [& records]
-  (with-connection
-    (apply sql/insert-values
-           :records (vec created-record-fields) (map record->vector records))))
+  (let [names        (flatten (map #(get % "Protein-Names") records))
+        unique-names (map vector (disj (set names) nil))]
+    (with-connection
+      (apply sql/insert-values :names [:name] unique-names)
+
+      (apply sql/insert-values :records
+             (vec created-record-fields) (map record->vector records)))))
 
 ;; The `with-query-results` function returns a response map of field
 ;; names to values, with the field names all lower-cased for some
