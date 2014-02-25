@@ -1,9 +1,11 @@
-(ns pip-db.views.download
-  (:use [pip-db.views.page :only (page)]
-        [hiccup.page :only (include-js)])
-  (:require [pip-db.util :as util]
-            [pip-db.views.ui :as ui]
-            [clojure.string :as str]))
+(ns pip-db.pages.download
+  (:use [hiccup.page :only (include-js)])
+  (:require [clojure.string :as str]
+            [pip-db.db :as db]
+            [pip-db.ui :as ui]
+            [pip-db.util :as util]))
+
+;; ## View
 
 (def file-format-button
   [:div.input-group-btn.dropup
@@ -28,8 +30,8 @@
   [:div#preview.row
    [:div.col-md-12 [:div#preview-frame results-table [:pre#text]]]])
 
-(defn download [request]
-  (page
+(defn view [request]
+  (ui/page
    request
    {:title (get request :name)
     :navbar {}
@@ -41,3 +43,13 @@
     :javascript (list (include-js "/js/FileSaver.js")
                       (util/inline-data-js "data" (request :results))
                       (util/inline-js "/js/download.inline.js"))}))
+
+;; ## Controller
+
+;; Perform a search from the given request map and wrap the results
+;; into a `:results` key.
+(defn search-results [request]
+  (assoc request :results (db/search request)))
+
+(defn GET [request] (view request)
+  (view (search-results request)))

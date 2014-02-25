@@ -1,7 +1,7 @@
-(ns pip-db.test.views.ui
+(ns pip-db.test.ui
   (:use [clojure.test]
         [clojure.java.shell :only (sh)])
-  (:require [pip-db.views.ui :as dut]))
+  (:require [pip-db.ui :as dut]))
 
 ;; Our Google Analytics tracking snippet. See:
 ;; resources/public/js/google-analytics.inline.js.
@@ -129,3 +129,47 @@
   (testing "Logos"
     (is (not (= dut/big-logo
                 dut/small-logo)))))
+
+;; Navbar
+
+(deftest navbar-search
+  (testing "Search text"
+    (is (not (= (dut/navbar-search {:params {}})
+                (dut/navbar-search {:params {"q" "foo"}}))))))
+
+(deftest navbar
+  (testing "Content types"
+    (is (not (= (dut/navbar {:params {} :navbar {}})
+                (dut/navbar {:params {} :navbar {:login-only true}})
+                (dut/navbar {:params {} :navbar {:search true}})
+                (dut/navbar {:params {} :navbar {:session {:user "foo"}}}))))))
+
+;; Page
+
+(deftest page
+  (testing "No data"
+    (is (= (class (dut/page {}))
+           java.lang.String))))
+
+;; Errors
+
+(deftest page-404
+  (let [page (dut/page-404)]
+
+    (testing "Response type"
+      (is (map? page)))
+
+    (testing "Response status"
+      (is (= 404 (page :status))))
+
+    (testing "Content Body"
+      (is (contains? page :body))
+      (is (= (class (page :body))
+             java.lang.String)))))
+
+(deftest page-500
+  (let [page (dut/page-500 (Exception. "Test page"))]
+
+    (testing "Response type"
+      (is (= (class page)
+             java.lang.String)))))

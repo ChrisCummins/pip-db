@@ -1,7 +1,6 @@
 ;; A set of useful utility functions, the purpose of which is to
 ;; provide generic helpers for tasks.
 (ns pip-db.util
-  (:use [pip-db.resources :only (resource)])
   (:require [clojure.string :as str]
             [clojure.data.codec.base64 :as b64]
             [clojure.data.json :as json]))
@@ -48,6 +47,14 @@
 ;; Returns whether the user is currently signed in.
 (defn signed-in? [request]
   (not (str/blank? (username request))))
+
+;; Accepts a request map and returns a copy of the map with the :id
+;; query parameter removed and replaced with an "id" parameter.
+(defn remap-id-param [request]
+  (let [params          (request :params)
+        url-id          (params  :id)
+        remapped-params (dissoc (assoc params "id" url-id) :id)]
+    (assoc request :params remapped-params)))
 
 ;; -------------------
 ;; ## Type conversions
@@ -119,6 +126,25 @@
 (defn current-year []
   (+ 1900 (.getYear (new java.util.Date))))
 
+;; ------------
+;; ## Resources
+
+(def resource-root "resources/public/")
+
+(defn resource-path [path]
+  (str resource-root path))
+
+(defn resource [path]
+  (slurp (resource-path path)))
+
+;; ### Public assets
+
+;; Images are served from a base directory relative to
+;; `resource-root`.
+(defn image-path
+  ([] "/img/")
+  ([filename] (str (image-path) filename)))
+
 ;; --------------------
 ;; ## Working with HTML
 
@@ -154,3 +180,8 @@
 ;; to a globally accessible variable in window scope.
 (defn inline-data-js [name data]
   [:script (json-data-var name data)])
+
+;; Generate a JSON response
+(defn json-response [data]
+  {:status 200 :headers {"Content-Type" "application/json"}
+   :body (with-out-str (json/pprint data))})

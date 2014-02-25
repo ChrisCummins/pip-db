@@ -33,9 +33,11 @@
 ;; The most basic kind is a `string-condition` which can be used to
 ;; test if a field name matches a value "foo" == "bar".
 (defn string-condition [condition]
-  (str "(LOWER(\"" (condition :field) "\") "
-       (if (condition :not) "NOT ") "LIKE "
-       "LOWER('%" (condition :value) "%'))"))
+  (if (condition :exact)
+    (str "\"" (condition :field) "\"='" (condition :value) "'")
+    (str "(LOWER(\"" (condition :field) "\") "
+         (if (condition :not) "NOT ")
+         "LIKE LOWER('%" (condition :value) "%'))")))
 ;;
 ;; A `numeric-condition` tests a field for a precise integer field,
 ;; e.g. "foo" == 5.
@@ -46,13 +48,12 @@
 ;; ### Field is equals
 (defn EQ [condition]
   (cond
-   (str/blank? (condition :value)) ""
-   (condition :numeric) (numeric-condition (assoc condition :operator "="))
-   :else (string-condition condition)))
+   (str/blank?           (condition :value)) ""
+   (condition :numeric)  (numeric-condition (assoc condition :operator "="))
+   :else                 (string-condition condition)))
 
 ;; ### Field is not equals
-(defn NE [condition]
-  (EQ (assoc condition :not true)))
+(defn NE [condition]     (EQ (assoc condition :not true)))
 
 ;; ### Field is great than or equals to
 (defn GTE [condition]
@@ -71,13 +72,60 @@
 ;; "car". If only one condition is provided, this has no effect.
 (defn compound-condition [join conditions]
   (let [stripped (strip-conditions conditions)]
-    (if-not (zero? (count stripped))
+    (if (pos? (count stripped))
       (str "(" (str/join join stripped) ")") "")))
 
 ;; ### All conditions must match
-(defn AND [& conditions]
-  (compound-condition " AND " (flatten conditions)))
+(defn AND [& conditions] (compound-condition " AND " (flatten conditions)))
 
 ;; ### One or more conditions must match
-(defn OR [& conditions]
-  (compound-condition " OR " (flatten conditions)))
+(defn OR [& conditions]  (compound-condition " OR " (flatten conditions)))
+
+;; ## Structured queries
+
+(defn split-args [words]
+  (when (and words (not (str/blank? words)))
+    (str/split (str/trim words) #" +")))
+
+(defn params->query [params]
+  (let [id      (str (get params "id"))
+        q       (split-args (get params "q"))
+        q_eq    (get params "q_eq")
+        q_any   (split-args (get params "q_any"))
+        q_ne    (split-args (get params "q_ne"))
+        q_s     (get params "q_s")
+        q_l     (get params "q_l")
+        m       (get params "m")
+        pi_l    (get params "pi_l")
+        pi_h    (get params "pi_h")
+        mw_l    (str (util/str->num (get params "mw_l")))
+        mw_h    (str (util/str->num (get params "mw_h")))
+        t_l     (str (util/str->num (get params "t_l")))
+        t_h     (str (util/str->num (get params "t_h")))
+        ec1     (str (util/str->int (get params "ec1")))
+        ec2     (str (util/str->int (get params "ec2")))
+        ec3     (str (util/str->int (get params "ec3")))
+        ec4     (str (util/str->int (get params "ec4")))]
+
+    (AND
+     (EQ {:field "id" :value id :exact true}) ; Match specific record ID
+     (for [word q]                      ; Match all keywords
+       (EQ {:field "Protein-Names" :value word}))
+     (EQ {:field "Protein-Names" :value q_eq})  ; Match exact phrase
+     (for [word q_any]                  ; Match any keywords
+       (EQ {:field "Protein-Names" :value word}))
+     (for [word q_ne]                   ; Exclude keywords
+       (NE {:field "Protein-Names" :value word}))
+     (EQ {:field "Source" :value q_s})
+     (EQ {:field "Location" :value q_l})
+     (EQ {:field "Method" :value m})
+     (GTE {:field "real_pi_min" :value pi_l})
+     (LTE {:field "real_pi_max" :value pi_h})
+     (GTE {:field "real_mw_min" :value mw_l})
+     (LTE {:field "real_mw_max" :value mw_h})
+     (GTE {:field "real_temp_min" :value t_l})
+     (LTE {:field "real_temp_max" :value t_h})
+     (EQ {:field "real_ec1" :value ec1 :numeric true})
+     (EQ {:field "real_ec2" :value ec2 :numeric true})
+     (EQ {:field "real_ec3" :value ec3 :numeric true})
+     (EQ {:field "real_ec4" :value ec4 :numeric true}))))

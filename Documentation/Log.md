@@ -2681,3 +2681,37 @@ New YAPS format:
   "notes": <string>
 }
 ```
+
+### Saturday 22nd
+
+While refactoring the database back-end I noticed a massive bottleneck
+in the data upload performance caused by the need to create a new
+database connection for every record inserted into the database,
+instead of globbing all new record data into a single database
+transaction. Below is the commit message for the patch I wrote to
+address this:
+
+```
+    db: Implement multiple row insertion per connection
+
+    This modifies the implementation of the back-end's "add-record" function
+    so that it instead accepts a variable number of records, and retains a
+    single database connection to insert all of the values. This in effect
+    requires a O(1) time complexity overhead for establishing and closing
+    database connections, instead of the O(n) complexity required in order
+    to add individual row's one at a time.
+
+    The result of this change is a staggering decrease in data upload
+    times. For a dataset of 5773 records, the record insertion time is as
+    follows:
+
+         Single row insertion per connection:      42.608 s
+         Multiple row insertion per connection:    03.512 s
+
+    This demonstrates an approximate ~1200 % increase in performance as a
+    result of this patch.
+```
+
+On the Heroku instance, the same operation requires 10.785 s, so we
+should aim to factor in an ~ 300 % drop in performance between the
+development server and deployment.

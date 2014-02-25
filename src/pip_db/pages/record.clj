@@ -1,7 +1,10 @@
-(ns pip-db.views.record
-  (:use [pip-db.views.page :only (page)])
-  (:require [pip-db.util :as util]
-            [clojure.string :as str]))
+(ns pip-db.pages.record
+  (:require [clojure.string :as str]
+            [pip-db.db :as db]
+            [pip-db.ui :as ui]
+            [pip-db.util :as util]))
+
+;; ## View
 
 (def properties-table
   [:table#properties.table.table-striped.table-bordered
@@ -38,9 +41,9 @@
    [:div.panel-heading reference-heading reference-style [:div.clearfix]]
    [:div.panel-body [:blockquote.reference-text]]])
 
-(defn record [request]
+(defn view [request]
   (let [results (request :results)]
-    (page
+    (ui/page
      request
      {:navbar {:search true}
       :heading {:title " " ; Blank title
@@ -56,3 +59,11 @@
                reference-this-page-panel]]]
       :javascript (list (util/inline-data-js "data" results)
                         (util/inline-js "/js/record.inline.js"))})))
+
+;; ## Controller
+
+(defn GET [request]
+  (let [data (db/search (util/remap-id-param request))]
+    (if (pos? (data :No-Of-Records-Matched))
+      (view (assoc request :results data))
+      (ui/page-404))))

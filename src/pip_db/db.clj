@@ -6,6 +6,7 @@
   (:require [clojure.java.jdbc :as sql]
             [clojure.string :as str]
             [clojure.set :as set]
+            [pip-db.query :as query]
             [pip-db.util :as util]))
 
 ;; Our database spec.
@@ -53,21 +54,26 @@
 ;; Evaluates body in the context of a new connection to a database
 ;; then closes the connection. Identifiers are quoted.
 (defmacro with-connection [& body]
-  `(sql/with-connection db-spec
-     (sql/with-quoted-identifiers \" ~@body)))
+  `(sql/with-connection db-spec (sql/with-quoted-identifiers \" ~@body)))
+
+;; Creates a new connection and executes a query, then evaluates body
+;; with results bound to a seq of the results.
+(defmacro with-connection-results-query [results sql-params & body]
+  `(with-connection (sql/with-query-results ~results ~sql-params ~@body)))
 
 (def max-no-of-returned-records 20)
 
 ;; Count the number of rows in a given table. May optionally be
 ;; provided with a set of conditions.
-(defn count-rows [table & conditions]
-  (let [condition?           (not (nil? conditions))
-        query                (str "SELECT count(*) FROM " (name table))
-        query-with-condition (apply str query " WHERE " conditions)]
-    (with-connection
-      (sql/with-query-results results
-        [(if condition? query-with-condition query)]
-        ((first results) :count)))))
+(defn count-rows
+  ([table] (count-rows table ""))
+  ([table condition]
+     (let [condition?           (not (str/blank? condition))
+           base-query           (str "SELECT count(*) FROM " (name table))
+           query-with-condition (str base-query " WHERE " condition)
+           query                (if condition? query-with-condition base-query)]
+       (with-connection-results-query results [query]
+         ((first results) :count)))))
 
 ;; Determine whether the required tables exist.
 (defn migrated? []
@@ -76,8 +82,7 @@
 
 ;; Create a set of tables.
 (defn create-tables [& tables]
-  (with-connection
-    (doseq [t tables] (apply sql/create-table (t 0) (t 1)))))
+  (with-connection (doseq [t tables] (apply sql/create-table (t 0) (t 1)))))
 
 ;; The subset of fields within the records table that are considered
 ;; private, i.e. those which should be returned to users when
@@ -90,8 +95,16 @@
 ;; public and should be returned to users when performing queries,
 ;; i.e. the inverse of the private-record-fields list.
 (def public-record-fields
-  (filter #(not (some #{%} private-record-fields))
-          (map first (tables :records))))
+  (filter #(not (some #{%} private-record-fields)) (map first (tables :records))))
+
+;; The subset of fields within the records table that derived at
+;; insertion time.
+(def derived-record-fields '(:Created-At))
+
+;; The subset of fields within the records table that are explicitly
+;; provided at insertion time.
+(def created-record-fields
+  (filter #(not (some #{%} derived-record-fields)) (map first (tables :records))))
 
 ;; Convert a YAPS encoded record into a vector of values, using the
 ;; schema defined in the records table.
@@ -129,30 +142,17 @@
         real_pi_max     (util/str->num pi_max)
         real_temp_min   (util/str->int temp_min)
         real_temp_max   (util/str->int temp_max)]
-
-    [id names ec source location mw_min mw_max sub_no sub_mw iso_enzymes
-     pi_min pi_max pi_major temp_min temp_max method ref_full
-     ref_abstract ref_pubmed ref_taxonomy ref_sequence notes real_ec1
-     real_ec2 real_ec3 real_ec4 real_mw_min real_mw_max real_pi_min
-     real_pi_max real_temp_min real_temp_max]))
+    [id names ec source location mw_min mw_max sub_no sub_mw iso_enzymes pi_min
+     pi_max pi_major temp_min temp_max method ref_full ref_abstract ref_pubmed
+     ref_taxonomy ref_sequence notes real_ec1 real_ec2 real_ec3 real_ec4
+     real_mw_min real_mw_max real_pi_min real_pi_max real_temp_min
+     real_temp_max]))
 
 ;; Add a set of YAPS encoded records to the database.
 (defn add-records [& records]
   (with-connection
-    (apply
-     sql/insert-values
-     :records
-     [:id :Protein-Names :EC :Source :Location :MW-Min :MW-Max :Subunit-No
-      :Subunit-MW :No-Of-Iso-Enzymes :pI-Min :pI-Max :pI-Major-Component
-      :Temperature-Min :Temperature-Max :Method :Full-Text :Abstract-Only
-      :PubMed :Species-Taxonomy :Protein-Sequence :Notes :real_ec1
-      :real_ec2 :real_ec3 :real_ec4 :real_mw_min :real_mw_max :real_pi_min
-      :real_pi_max :real_temp_min :real_temp_max]
-     (map record->vector records))))
-
-;; Remove the null values from a map.
-(defn filter-null [map]
-  (into {} (filter second map)))
+    (apply sql/insert-values
+           :records (vec created-record-fields) (map record->vector records))))
 
 ;; The `with-query-results` function returns a response map of field
 ;; names to values, with the field names all lower-cased for some
@@ -169,23 +169,13 @@
 ;; the query returns no results: "org.postgresql.util.PSQLException:
 ;; No results were returned by the query."
 (defn search-results [query]
-  (with-connection
-    (try (sql/with-query-results results [query]
-           (apply vector (map #(set/rename-keys (filter-null %) renaming-table)
-                              results)))
-         (catch Exception e []))))
+  (try (with-connection-results-query results [query] (apply vector results))
+       (catch Exception e [])))
 
-;; Perform a database search and wrap the results in a search response
-;; map.
-(defn search [query params]
-  (let [matching-records (search-results query)
-        returned-records (take max-no-of-returned-records matching-records)]
-    {:Query-Terms                params
-     :No-Of-Records-Searched     (count-rows :records)
-     :No-Of-Records-Matched      (count matching-records)
-     :No-Of-Records-Returned     (count returned-records)
-     :Max-No-of-Returned-Records max-no-of-returned-records
-     :Records                    returned-records}))
+;; Convert a record row (as returned by a query of the records table)
+;; into a YAPS encoded map.
+(defn row->record [row]
+  (-> (into {} (filter second row)) (set/rename-keys renaming-table)))
 
 ;; Perform necessary database migration.
 (defn migrate []
@@ -193,3 +183,39 @@
     (print "Creating database structure...") (flush)
     (apply create-tables tables)
     (println " done")))
+
+;; ### Query components
+
+;; We can now take a query map and use this to generate a SQL
+;; query. If the query map is empty, then we return an empty string.
+(defn params->str [params]
+  (let [query  (query/params->query params)
+        fields (apply util/keys->quoted-str public-record-fields)]
+    (if (str/blank? query)
+      ""
+      (str "SELECT " fields " FROM records WHERE " query))))
+
+;; Perform a database search and wrap the results in a search response
+;; map. Accepts a request map contains a :params map. Note as an
+;; implementation detail, the `merge` function means that properties
+;; are returned in the reverse order to as included here.
+(defn search [request]
+  (let [params                (request :params)
+        headers               (request :headers)
+        query-str             (params->str params)
+        include-query-terms?  (not (= (headers "x-pip-db-query-terms") "None"))
+        include-records?      (not (= (headers "x-pip-db-records")     "None"))]
+    (merge
+     (if include-records?
+       (let [matching-rows    (search-results query-str)
+             returned-rows    (take max-no-of-returned-records matching-rows)
+             returned-records (map row->record returned-rows)]
+         {:No-Of-Records-Returned     (count returned-records)
+          :No-Of-Records-Matched      (count matching-rows)
+          :Records                    returned-records})
+       (let [conditions        (query/params->query params)]
+         {:No-Of-Records-Matched      (count-rows :records conditions)}))
+     {:Max-No-of-Returned-Records     max-no-of-returned-records}
+     {:No-Of-Records-Searched         (count-rows :records)}
+     (if include-query-terms?
+       {:Query-Terms                  params}))))
