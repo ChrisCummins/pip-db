@@ -165,10 +165,14 @@
   (remove nil? (flatten (map #(get % property) records))))
 
 ;; Return a vector of individual words contained within the given
-;; properties of a set of records.
+;; properties of a set of records. Words list is filtered to remove
+;; single or double character words, words with only numbers, words
+;; with unbalanced parenthesis etc.
 (defn records->property-words [property records]
-  (let [properties (records->properties property records)]
-    (flatten (map #(str/split % #"\s+") properties))))
+  (let [properties (records->properties property records)
+        words      (flatten (map #(str/split % #"\s+") properties))]
+    (filter #(not (re-matches #"(\w\w?)|(\d+)|(\([^\)]*)|([^\(]*\))" %))
+            (map (comp str/capitalize str/lower-case) words))))
 
 ;; Accepts a vector of property values and constructs an autocomplete
 ;; frequency table.
