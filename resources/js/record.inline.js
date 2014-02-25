@@ -49,29 +49,6 @@ $(document).ready(function () {
             return high;
     };
 
-    var getPiText = function () {
-        /*
-         * We allow for some flexibility in displaying isoelectric points. We
-         * will try first to show an exact value, else a range of values, or
-         * just an individual result within that range.
-         */
-        var piMin   = record['pI-Min'];
-        var piMax   = record['pI-Max'];
-        var piMajor = record['pI-Major-Component'];
-
-        if (piMin && piMax) {
-            if (piMin === piMax)
-                return piMin;
-            else
-                return piMin + ' - ' + piMax;
-        } else if (piMin)
-            return '> ' + piMin;
-        else if (piMax)
-            return '< ' + piMax;
-        else if (piMajor)
-            return piMajor + 'm';
-    };
-
     var addExternLink = function (prop, name, url) {
         var getButton = function (prop, name, url) {
             return '<li><a class="btn btn-success btn-block ' + prop +
@@ -98,7 +75,8 @@ $(document).ready(function () {
     addPropertyRow('Subunit-No', 'Subunit No.');
     addPropertyRow('Subunit-MW', 'Subunit M.W');
     addPropertyRow('No-of-Iso-Enzymes', 'No. of Iso-enzymes');
-    addPropertyRow('pI', 'pI', getPiText());
+    addPropertyRow('pI', 'pI', getRangeText(record['pI-Min'], record['pI-Max']));
+    addPropertyRow('pI-Major-Component', 'pI of Major Component');
     addPropertyRow('Temperature', 'Temperature (ºC)',
                    getRangeText(record['Temperature-Min'], record['Temperature-Max']));
     addPropertyRow('Method', 'Experimental Method');
