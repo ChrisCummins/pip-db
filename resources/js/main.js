@@ -1178,14 +1178,27 @@
     ];
 
     /*
+     * Return the autocomplete API URL for table 'src' and with text
+     * 'value'.
+     */
+    var getAutocompleteUrl = function (src, value) {
+        return '/api/ac?s=' + src + '&t=' + encodeURIComponent(value);
+    };
+
+    /*
      * Provide protein name suggestions.
      */
     $('#q, input[name="q_eq"]').autocomplete({
         source: function(request, response) {
-            var results = $.ui.autocomplete.filter(proteinNames,
-                                                   request.term);
-
-            response(results.slice(0, 10));
+            $.ajax({
+                url: getAutocompleteUrl('names', request.term),
+                success: function (data, textStatus, jqXHR) {
+                    response(data);
+                },
+                error: function (jqXHR, textStatus, err) {
+                    response([]);
+                }
+            });
         }
     });
 
@@ -1194,10 +1207,15 @@
      */
     $('input[name="q_any"], input[name="q_ne"]').autocomplete({
         source: function(request, response) {
-            var results = $.ui.autocomplete.filter(proteinNameWords,
-                                                   request.term);
-
-            response(results.slice(0, 10));
+            $.ajax({
+                url: getAutocompleteUrl('words', request.term),
+                success: function (data, textStatus, jqXHR) {
+                    response(data);
+                },
+                error: function (jqXHR, textStatus, err) {
+                    response([]);
+                }
+            });
         }
     });
 
@@ -1206,10 +1224,15 @@
      */
     $('input[name="q_s"]').autocomplete({
         source: function(request, response) {
-            var results = $.ui.autocomplete.filter(sources,
-                                                   request.term);
-
-            response(results.slice(0, 10));
+            $.ajax({
+                url: getAutocompleteUrl('sources', request.term),
+                success: function (data, textStatus, jqXHR) {
+                    response(data);
+                },
+                error: function (jqXHR, textStatus, err) {
+                    response([]);
+                }
+            });
         }
     });
 
@@ -1218,10 +1241,15 @@
      */
     $('input[name="q_l"]').autocomplete({
         source: function(request, response) {
-            var results = $.ui.autocomplete.filter(locations,
-                                                   request.term);
-
-            response(results.slice(0, 10));
+            $.ajax({
+                url: getAutocompleteUrl('locations', request.term),
+                success: function (data, textStatus, jqXHR) {
+                    response(data);
+                },
+                error: function (jqXHR, textStatus, err) {
+                    response([]);
+                }
+            });
         }
     });
 
