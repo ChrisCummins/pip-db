@@ -79,6 +79,10 @@
 (defn create-tables [& tables]
   (with-connection (doseq [t tables] (apply sql/create-table (t 0) (t 1)))))
 
+;; Delete a set of tables.
+(defn drop-tables [& tables]
+  (with-connection (doseq [t tables] (sql/drop-table t))))
+
 ;; The subset of fields within the records table that are considered
 ;; private, i.e. those which should be returned to users when
 ;; performing queries.
