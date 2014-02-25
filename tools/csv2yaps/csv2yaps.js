@@ -141,9 +141,12 @@ var tokens2Row = function (tokens) {
   return row;
 };
 
-// Capitalise the first letter of a string
+// Capitalise the first letter of a string, IF and ONLY IF the first
+// letter is a standard ASCII letter. We don't capitalise Greek
+// letters.
 var capitalise = function (txt) {
-  return txt.charAt(0).toUpperCase() + txt.substr(1);
+  return /^[\000-\177]*$/.test(txt) ?
+        txt.charAt(0).toUpperCase() + txt.substr(1) : txt;
 }
 
 // Convert a row object into a Yaps object
