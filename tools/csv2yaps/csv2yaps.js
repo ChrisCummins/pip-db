@@ -266,7 +266,8 @@ var csv = fs.realpathSync(argv[2]);
 var lineCount = 1;
 var readStream = fs.createReadStream(csv);
 var yaps = {
-  "Encoding": "yaps " + VERSION,
+  "Encoding": "yaps",
+  "Version": VERSION,
   "Date": new Date().toISOString().slice(0, 19).replace('T', ' '),
   "Author": process.env['USER'] + "@" + os.hostname(),
   "Agent": __filename,
