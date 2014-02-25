@@ -16,6 +16,9 @@
   [[:text              "varchar   NOT NULL"]
    [:frequency         "integer   NOT NULL"]])
 
+;; The maximum number of rows within an auto-complete table.
+(def ac-table-size 1000)
+
 ;; Out database tables.
 (def tables
   {:records     [[:id                 "varchar(11) NOT NULL"]
@@ -71,8 +74,6 @@
   `(with-connection (sql/with-query-results ~results ~sql-params ~@body)))
 
 (def max-no-of-returned-records 20)
-
-(def autocomplete-suggestion-table-size 1000)
 
 ;; Count the number of rows in a given table. May optionally be
 ;; provided with a set of conditions.
@@ -158,30 +159,29 @@
      real_mw_min real_mw_max real_pi_min real_pi_max real_temp_min
      real_temp_max]))
 
-(defn records->properties [property-name records]
-  (remove nil? (flatten (map #(get % property-name) records))))
+;; Return a vector of non-nil values for the given property from
+;; within a set of records.
+(defn records->properties [property records]
+  (remove nil? (flatten (map #(get % property) records))))
 
-(defn records->freq-table [property records]
-  (frequencies (records->properties property records)))
+;; Return a vector of individual words contained within the given
+;; properties of a set of records.
+(defn records->property-words [property records]
+  (let [properties (records->properties property records)]
+    (flatten (map #(str/split % #"\s+") properties))))
 
-(defn freq-table->autocomplete-table [table]
-  (take autocomplete-suggestion-table-size (reverse (sort-by second table))))
-
-(defn autocomplete-table [property records]
-  (freq-table->autocomplete-table (records->freq-table property records)))
-
-(defn autocomplete-words-table [records]
-  (let [names (records->properties "Protein-Names" records)
-        words (flatten (map #(str/split % #"\s+") names))]
-    (freq-table->autocomplete-table (frequencies words))))
+;; Accepts a vector of property values and constructs an autocomplete
+;; frequency table.
+(defn ac-table [properties]
+  (take ac-table-size (reverse (sort-by second (frequencies properties)))))
 
 ;; Add a set of YAPS encoded records to the database.
 (defn add-records [& records]
-  (let [names     (autocomplete-table "Protein-Names" records)
-        words     (autocomplete-words-table           records)
-        sources   (autocomplete-table "Source"        records)
-        locations (autocomplete-table "Location"      records)
-        methods   (autocomplete-table "Method"        records)
+  (let [names     (ac-table (records->properties     "Protein-Names" records))
+        words     (ac-table (records->property-words "Protein-Names" records))
+        sources   (ac-table (records->properties     "Source"        records))
+        locations (ac-table (records->properties     "Location"      records))
+        methods   (ac-table (records->properties     "Method"        records))
         ac-keys   (map first ac-table-keys)]
     (with-connection
       (if names     (apply sql/insert-values :ac_names     ac-keys names))
