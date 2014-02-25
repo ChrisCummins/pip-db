@@ -242,3 +242,15 @@
      {:No-Of-Records-Searched         (count-rows :records)}
      (if include-query-terms?
        {:Query-Terms                  params}))))
+
+;; Accepts a request map containing a :params map, and returns
+;; autocomplete suggestions for the text paramter "t" from
+;; autocomplete table "s".
+(defn autocomplete [request]
+  (let [params    (request :params)
+        table     (str "ac_" (params "s"))
+        text      (params "t")
+        query-str (str "SELECT text FROM " table " WHERE LOWER(text) "
+                       "LIKE '%" text "%' LIMIT 10")]
+    (with-connection-results-query results [query-str]
+      (apply vector (map #(get % :text) results)))))
