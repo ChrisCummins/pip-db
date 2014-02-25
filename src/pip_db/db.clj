@@ -75,11 +75,6 @@
        (with-connection-results-query results [query]
          ((first results) :count)))))
 
-;; Determine whether the required tables exist.
-(defn migrated? []
-  (pos? (count-rows "information_schema.tables"
-                    (str "table_name='" (name ((first tables) 0)) "'"))))
-
 ;; Create a set of tables.
 (defn create-tables [& tables]
   (with-connection (doseq [t tables] (apply sql/create-table (t 0) (t 1)))))
@@ -176,6 +171,11 @@
 ;; into a YAPS encoded map.
 (defn row->record [row]
   (-> (into {} (filter second row)) (set/rename-keys renaming-table)))
+
+;; Determine whether the required tables exist.
+(defn migrated? []
+  (pos? (count-rows "information_schema.tables"
+                    (str "table_name='" (name ((first tables) 0)) "'"))))
 
 ;; Perform necessary database migration.
 (defn migrate []
