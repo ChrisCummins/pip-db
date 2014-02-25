@@ -57,7 +57,7 @@ $(document).ready(function () {
          */
         var piMin   = record['pI-Min'];
         var piMax   = record['pI-Max'];
-        var piMajor = record['pI-Major'];
+        var piMajor = record['pI-Major-Component'];
 
         if (piMin && piMax) {
             if (piMin === piMax)
