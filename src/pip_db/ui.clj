@@ -3,9 +3,7 @@
 ;; Define a set of common user interface components.
 (ns pip-db.ui
   (:use [hiccup.page :only (html5 include-css include-js)])
-  (:require [pip-db.util :as util]
-            [pip-db.resources :as res]
-            [pip-db.views.navbar :as navbar]))
+  (:require [pip-db.util :as util]))
 
 ;; The Google analytics tracking snippet, as an inline embedded
 ;; script. Include this on every page to enable analytics tracking.
@@ -225,7 +223,7 @@
 
 ;; Returns the path to the logo file of the given dimensions.
 (defn logo-path [dimensions]
-  (res/image-path (str "logo-" dimensions ".png")))
+  (util/image-path (str "logo-" dimensions ".png")))
 
 ;; The largest logo image, used for the homepage.
 (def big-logo   [:img {:src (logo-path "640x226")
