@@ -12,6 +12,13 @@
 ;; Our database spec.
 (def db-spec (System/getenv "DATABASE_URL"))
 
+(def ac-table-keys
+  [[:text              "varchar   NOT NULL"]
+   [:frequency         "integer   NOT NULL"]])
+
+;; The maximum number of rows within an auto-complete table.
+(def ac-table-size 1000)
+
 ;; Out database tables.
 (def tables
   {:records     [[:id                 "varchar(11) NOT NULL"]
@@ -50,11 +57,11 @@
    :users       [[:id                 "serial    PRIMARY KEY"]
                  [:email              "varchar   NOT NULL"]
                  [:pass               "varchar   NOT NULL"]]
-   :ac_names     [[:text              "varchar   NOT NULL"]]
-   :ac_words     [[:text              "varchar   NOT NULL"]]
-   :ac_sources   [[:text              "varchar   NOT NULL"]]
-   :ac_locations [[:text              "varchar   NOT NULL"]]
-   :ac_methods   [[:text              "varchar   NOT NULL"]]})
+   :ac_names      ac-table-keys
+   :ac_words      ac-table-keys
+   :ac_sources    ac-table-keys
+   :ac_locations  ac-table-keys
+   :ac_methods    ac-table-keys})
 
 ;; Evaluates body in the context of a new connection to a database
 ;; then closes the connection. Identifiers are quoted.
@@ -152,22 +159,36 @@
      real_mw_min real_mw_max real_pi_min real_pi_max real_temp_min
      real_temp_max]))
 
-(defn records->unique-properties [property records]
-  (map vector (disj (set (flatten (map #(get % property) records))) nil)))
+;; Return a vector of non-nil values for the given property from
+;; within a set of records.
+(defn records->properties [property records]
+  (remove nil? (flatten (map #(get % property) records))))
+
+;; Return a vector of individual words contained within the given
+;; properties of a set of records.
+(defn records->property-words [property records]
+  (let [properties (records->properties property records)]
+    (flatten (map #(str/split % #"\s+") properties))))
+
+;; Accepts a vector of property values and constructs an autocomplete
+;; frequency table.
+(defn ac-table [properties]
+  (take ac-table-size (reverse (sort-by second (frequencies properties)))))
 
 ;; Add a set of YAPS encoded records to the database.
 (defn add-records [& records]
-  (let [names     (records->unique-properties "Protein-Names" records)
-        words     (map vector (set (flatten (map #(str/split (first %) #"\s+") names))))
-        sources   (records->unique-properties "Source" records)
-        locations (records->unique-properties "Location" records)
-        methods   (records->unique-properties "Method" records)]
+  (let [names     (ac-table (records->properties     "Protein-Names" records))
+        words     (ac-table (records->property-words "Protein-Names" records))
+        sources   (ac-table (records->properties     "Source"        records))
+        locations (ac-table (records->properties     "Location"      records))
+        methods   (ac-table (records->properties     "Method"        records))
+        ac-keys   (map first ac-table-keys)]
     (with-connection
-      (if names     (apply sql/insert-values :ac_names     [:text] names))
-      (if words     (apply sql/insert-values :ac_words     [:text] words))
-      (if sources   (apply sql/insert-values :ac_sources   [:text] sources))
-      (if locations (apply sql/insert-values :ac_locations [:text] locations))
-      (if methods   (apply sql/insert-values :ac_methods   [:text] methods))
+      (if names     (apply sql/insert-values :ac_names     ac-keys names))
+      (if words     (apply sql/insert-values :ac_words     ac-keys words))
+      (if sources   (apply sql/insert-values :ac_sources   ac-keys sources))
+      (if locations (apply sql/insert-values :ac_locations ac-keys locations))
+      (if methods   (apply sql/insert-values :ac_methods   ac-keys methods))
 
       (apply sql/insert-values :records
              (vec created-record-fields) (map record->vector records)))))
@@ -250,7 +271,7 @@
   (let [params    (request :params)
         table     (str "ac_" (params "s"))
         text      (params "t")
-        query-str (str "SELECT text FROM " table " WHERE LOWER(text) "
-                       "LIKE '%" text "%' LIMIT 10")]
+        query-str (str "SELECT text FROM " table " WHERE LOWER(text) LIKE '%"
+                       text "%' ORDER BY frequency DESC LIMIT 10")]
     (with-connection-results-query results [query-str]
       (apply vector (map #(get % :text) results)))))
