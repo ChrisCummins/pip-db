@@ -42,6 +42,7 @@
   (POST ["/upload"]                [:as request] (upload/POST     request))
   (GET  ["/api/s"]                 [:as request] (api/s           request))
   (GET  ["/api/r/:id",  :id id-re] [:as request] (api/r           request))
+  (GET  ["/api/ac"]                [:as request] (api/ac          request))
   (route/resources "/")
   (route/not-found (ui/page-404)))
 

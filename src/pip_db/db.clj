@@ -14,42 +14,47 @@
 
 ;; Out database tables.
 (def tables
-  {:records [[:id                 "varchar(11) NOT NULL"]
-             [:Protein-Names      "varchar"]
-             [:EC                 "varchar"]
-             [:Source             "varchar"]
-             [:Location           "varchar"]
-             [:MW-Min             "varchar"]
-             [:MW-Max             "varchar"]
-             [:Subunit-No         "varchar"]
-             [:Subunit-MW         "varchar"]
-             [:No-Of-Iso-Enzymes  "varchar"]
-             [:pI-Min             "varchar"]
-             [:pI-Max             "varchar"]
-             [:pI-Major-Component "varchar"]
-             [:Temperature-Min    "varchar"]
-             [:Temperature-Max    "varchar"]
-             [:Method             "varchar"]
-             [:Full-Text          "varchar"]
-             [:Abstract-Only      "varchar"]
-             [:PubMed             "varchar"]
-             [:Species-Taxonomy   "varchar"]
-             [:Protein-Sequence   "varchar"]
-             [:Notes              "varchar"]
-             [:real_ec1           "integer"]
-             [:real_ec2           "integer"]
-             [:real_ec3           "integer"]
-             [:real_ec4           "integer"]
-             [:real_mw_min        "real"]
-             [:real_mw_max        "real"]
-             [:real_pi_min        "real"]
-             [:real_pi_max        "real"]
-             [:real_temp_min      "real"]
-             [:real_temp_max      "real"]
-             [:Created-At         "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP"]]
-   :users   [[:id                 "serial    PRIMARY KEY"]
-             [:email              "varchar   NOT NULL"]
-             [:pass               "varchar   NOT NULL"]]})
+  {:records     [[:id                 "varchar(11) NOT NULL"]
+                 [:Protein-Names      "varchar"]
+                 [:EC                 "varchar"]
+                 [:Source             "varchar"]
+                 [:Location           "varchar"]
+                 [:MW-Min             "varchar"]
+                 [:MW-Max             "varchar"]
+                 [:Subunit-No         "varchar"]
+                 [:Subunit-MW         "varchar"]
+                 [:No-Of-Iso-Enzymes  "varchar"]
+                 [:pI-Min             "varchar"]
+                 [:pI-Max             "varchar"]
+                 [:pI-Major-Component "varchar"]
+                 [:Temperature-Min    "varchar"]
+                 [:Temperature-Max    "varchar"]
+                 [:Method             "varchar"]
+                 [:Full-Text          "varchar"]
+                 [:Abstract-Only      "varchar"]
+                 [:PubMed             "varchar"]
+                 [:Species-Taxonomy   "varchar"]
+                 [:Protein-Sequence   "varchar"]
+                 [:Notes              "varchar"]
+                 [:real_ec1           "integer"]
+                 [:real_ec2           "integer"]
+                 [:real_ec3           "integer"]
+                 [:real_ec4           "integer"]
+                 [:real_mw_min        "real"]
+                 [:real_mw_max        "real"]
+                 [:real_pi_min        "real"]
+                 [:real_pi_max        "real"]
+                 [:real_temp_min      "real"]
+                 [:real_temp_max      "real"]
+                 [:Created-At         "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP"]]
+   :users       [[:id                 "serial    PRIMARY KEY"]
+                 [:email              "varchar   NOT NULL"]
+                 [:pass               "varchar   NOT NULL"]]
+   :ac_names     [[:text              "varchar   NOT NULL"]]
+   :ac_words     [[:text              "varchar   NOT NULL"]]
+   :ac_sources   [[:text              "varchar   NOT NULL"]]
+   :ac_locations [[:text              "varchar   NOT NULL"]]
+   :ac_methods   [[:text              "varchar   NOT NULL"]]})
 
 ;; Evaluates body in the context of a new connection to a database
 ;; then closes the connection. Identifiers are quoted.
@@ -75,21 +80,20 @@
        (with-connection-results-query results [query]
          ((first results) :count)))))
 
-;; Determine whether the required tables exist.
-(defn migrated? []
-  (pos? (count-rows "information_schema.tables"
-                    (str "table_name='" (name ((first tables) 0)) "'"))))
-
 ;; Create a set of tables.
 (defn create-tables [& tables]
   (with-connection (doseq [t tables] (apply sql/create-table (t 0) (t 1)))))
+
+;; Delete a set of tables.
+(defn drop-tables [& tables]
+  (with-connection (doseq [t tables] (sql/drop-table t))))
 
 ;; The subset of fields within the records table that are considered
 ;; private, i.e. those which should be returned to users when
 ;; performing queries.
 (def private-record-fields
   (map keyword (filter #(re-matches #"real_.*" %)
-                       (map #(name (first %)) (tables :records)))))
+                       (map (comp name first) (tables :records)))))
 
 ;; The subset of fields within the records table that are considered
 ;; public and should be returned to users when performing queries,
@@ -148,11 +152,25 @@
      real_mw_min real_mw_max real_pi_min real_pi_max real_temp_min
      real_temp_max]))
 
+(defn records->unique-properties [property records]
+  (map vector (disj (set (flatten (map #(get % property) records))) nil)))
+
 ;; Add a set of YAPS encoded records to the database.
 (defn add-records [& records]
-  (with-connection
-    (apply sql/insert-values
-           :records (vec created-record-fields) (map record->vector records))))
+  (let [names     (records->unique-properties "Protein-Names" records)
+        words     (map vector (set (flatten (map #(str/split (first %) #"\s+") names))))
+        sources   (records->unique-properties "Source" records)
+        locations (records->unique-properties "Location" records)
+        methods   (records->unique-properties "Method" records)]
+    (with-connection
+      (if names     (apply sql/insert-values :ac_names     [:text] names))
+      (if words     (apply sql/insert-values :ac_words     [:text] words))
+      (if sources   (apply sql/insert-values :ac_sources   [:text] sources))
+      (if locations (apply sql/insert-values :ac_locations [:text] locations))
+      (if methods   (apply sql/insert-values :ac_methods   [:text] methods))
+
+      (apply sql/insert-values :records
+             (vec created-record-fields) (map record->vector records)))))
 
 ;; The `with-query-results` function returns a response map of field
 ;; names to values, with the field names all lower-cased for some
@@ -176,6 +194,11 @@
 ;; into a YAPS encoded map.
 (defn row->record [row]
   (-> (into {} (filter second row)) (set/rename-keys renaming-table)))
+
+;; Determine whether the required tables exist.
+(defn migrated? []
+  (pos? (count-rows "information_schema.tables"
+                    (str "table_name='" (name ((first tables) 0)) "'"))))
 
 ;; Perform necessary database migration.
 (defn migrate []
@@ -219,3 +242,15 @@
      {:No-Of-Records-Searched         (count-rows :records)}
      (if include-query-terms?
        {:Query-Terms                  params}))))
+
+;; Accepts a request map containing a :params map, and returns
+;; autocomplete suggestions for the text paramter "t" from
+;; autocomplete table "s".
+(defn autocomplete [request]
+  (let [params    (request :params)
+        table     (str "ac_" (params "s"))
+        text      (params "t")
+        query-str (str "SELECT text FROM " table " WHERE LOWER(text) "
+                       "LIKE '%" text "%' LIMIT 10")]
+    (with-connection-results-query results [query-str]
+      (apply vector (map #(get % :text) results)))))
