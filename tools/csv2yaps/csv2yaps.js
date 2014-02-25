@@ -3,7 +3,7 @@
 /*
  * yaps.js - (Yet Another Protein Schema) CSV to YAPS conversion
  */
-var VERSION = "0.4.4";
+var VERSION = 2;
 
 var lazy = require('lazy');
 var fs  = require('fs');
