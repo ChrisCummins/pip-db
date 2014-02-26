@@ -2738,3 +2738,27 @@ hosting strategy for the application.
 Noticed a deadline coming up soon (7th March) for "Joint assessment of
 interim review and oral presentation by supervisor and
 moderator". Should ask Ian about this at next meeting.
+
+### Wednesday 26th
+
+I've refactored and reimplemented the autocomplete logic so that
+completion table sizes are limited to 1000 rows each. This has brought
+me under the 10,000 row limit, but only just:
+
+> The database HEROKU_POSTGRESQL_RED_URL on Heroku app pip-db is
+> approaching its allocated storage capacity.
+
+> The database contains 9,801 rows. The Dev plan allows a maximum of
+> 10,000 rows. If the databases exceeds 10,000 rows then INSERT
+> privileges will be revoked, preventing more data from being
+> written. INSERT privileges are automatically reinstated if rows are
+> removed and the database once again complies with the plan limit.
+
+I think I'll bump the limit down to ~800 to give myself a bit of row
+overhead when implementing sessions etc.
+
+Implemented FASTA crawling functionality to `csv2yaps`. New run time:
+
+```
+./tools/csv2yaps/csv2yaps.js ../pip-db-priv/dataset.txt >   6.18s user 4.39s system 2% cpu 7:31.20 total
+```
