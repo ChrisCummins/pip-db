@@ -3,11 +3,12 @@
 /*
  * yaps.js - (Yet Another Protein Schema) CSV to YAPS conversion
  */
-var VERSION = 2;
+var VERSION = 3;
 
 var lazy = require('lazy');
 var fs  = require('fs');
 var os = require("os");
+var spawn = require('child_process').spawn;
 
 // Print a message
 var message = function (msg) {
@@ -253,6 +254,65 @@ var row2Yaps = function (row) {
   return yaps;
 };
 
+// Invoke fetch-fasta on the supplied sequences and assign them to the
+// yaps object.
+var setFastaSequences = function() {
+  var ff = spawn('fetch-fasta'), out = '';
+
+  // Write in the sequence URLs
+  ff.stdin.write((function () {
+    var s = [], r;
+
+    for (var i in yaps['Records']) {
+      r = yaps['Records'][i], url = r['Protein-Sequence'];
+
+      if (url)
+        s.push(url);
+    }
+
+    return s.join('\n');
+  })());
+  ff.stdin.end();
+
+  ff.stdout.on('data', function (data) {
+    out += data.toString();
+  });
+
+  ff.stderr.on('data', function (data) {
+    process.stderr.write(data.toString());
+  });
+
+  ff.on('close', function (code) {
+    var records = out.split('\n'), data = [], r, seq, url, fasta;
+
+    if (code)
+      error('fetch-fasta failed with exit code ' + code);
+
+    // Assemble list of sequences
+    for (var i in records)
+      if (records[i])
+        data.push(JSON.parse(records[i]));
+
+    // Iterate over every record
+    for (var i in yaps['Records']) {
+      r = yaps['Records'][i];
+
+      for (var j in data) {
+        seq = data[j];
+
+        // Match URL with sequence
+        if (r['Protein-Sequence'] === seq['url']) {
+          r['Sequence'] = seq['fasta'];
+          break;
+        }
+      }
+    };
+
+    // Pretty-print JSON
+    console.log(JSON.stringify(yaps, undefined, 2));
+  });
+}
+
 // Process arguments
 var argv = process.argv, argc = argv.length;
 
@@ -283,7 +343,7 @@ readStream.on('error', function (error) {
 new lazy(readStream).on('end', function () {
   // End of processing callback
   yaps['No-Of-Records'] = yaps['Records'].length;
-  console.log(JSON.stringify(yaps, undefined, 2)); // Pretty-print JSON
+  setFastaSequences(); // Crawl the FASTA sequences
 }).lines.forEach(function (buffer) {
   // Per-line callback
   var line = buffer.toString().replace(/\r/, ''); // Strip carriage return
