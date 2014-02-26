@@ -1,10 +1,6 @@
 (ns pip-db.pages.upload
-  (:use [clojure.core :only (slurp)]
-        [clojure.java.io :only (copy)]
-        [clojure-csv.core :only (parse-csv)])
   (:require [clojure.string :as str]
-            [clojure.data.json :as json]
-            [pip-db.db :as db]
+            [pip-db.yaps :as yaps]
             [pip-db.ui :as ui])
   (:import [java.io File]))
 
@@ -118,17 +114,14 @@
                {:type "submit" :name "action" :value "upload"}
                "Submit"]]]]]}))
 
-;; ## Model
-
-(defn upload-file [tempfile]
-  (let [file (format "/tmp/%s" (tempfile :filename))]
-    (copy (tempfile :tempfile) (File. file))
-    file))
-
-(defn parse-json-file [file]
-  (let [json    (json/read-str (slurp file))
-        records (json "Records")]
-    (str (apply db/add-records records))))
+;; Evaluate the expressions contained in body with file bound to a
+;; File object pointed to by req. Upon completion, the file is
+;; deleted.
+(defmacro with-tmp-file [file req & body]
+  `(let [~file (File. (str (~req :tempfile)))
+         output# ~@body]
+     (.delete ~file)
+     output#))
 
 ;; ## Controller
 
@@ -136,7 +129,4 @@
   (view request))
 
 (defn POST [request]
-  (let [file ((request :params) "f")]
-    (if file
-      (parse-json-file (upload-file file))
-      "No file found")))
+  (with-tmp-file file ((request :params) "f") (yaps/parse file)))
