@@ -17,7 +17,7 @@
    [:frequency         "integer   NOT NULL"]])
 
 ;; The maximum number of rows within an auto-complete table.
-(def ac-table-size 1000)
+(def ac-table-size 900)
 
 ;; Out database tables.
 (def tables
