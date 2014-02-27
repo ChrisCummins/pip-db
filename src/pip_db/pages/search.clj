@@ -12,10 +12,10 @@
   [:table.table.table-striped.table-hover.table-bordered
    {:style "display:none;"}
    [:thead [:tr
-            [:td.name     "Protein"]
-            [:td.source   "Source"]
-            [:td.location "Location"]
-            [:td.pi       "pI"]]] [:tbody]])
+            [:td.Protein-Names "Protein"]
+            [:td.Source        "Source"]
+            [:td.Location      "Location"]
+            [:td.pI            "pI"]]] [:tbody]])
 
 (defn view [request]
   (ui/page
