@@ -21,7 +21,7 @@ def warning(msg):
     sys.stderr.write("warning: " + str(msg) + '\n')
 
 def print_result(url, fasta):
-    print json.dumps({"url": url, "fasta": fasta}) + ","
+    print json.dumps({"url": url, "fasta": fasta})
 
 def line_to_urls(line):
     return url_re.findall(line)
@@ -102,8 +102,6 @@ def run():
     # Spawn worker threads
     threads = []
 
-    print "["
-
     for url in uniprot_urls:
          spider = Spider(url, fetch_fasta_uniprot)
          spider.start()
@@ -113,11 +111,6 @@ def run():
          spider = Spider(url, fetch_fasta_ncbi)
          spider.start()
          threads.append(spider)
-
-    for spider in threads:
-        spider.join()
-
-    print "]"
 
 if __name__ == "__main__":
     try:

@@ -2739,3 +2739,295 @@ hosting strategy for the application.
 Noticed a deadline coming up soon (7th March) for "Joint assessment of
 interim review and oral presentation by supervisor and
 moderator". Should ask Ian about this at next meeting.
+
+### Wednesday 26th
+
+I've refactored and reimplemented the autocomplete logic so that
+completion table sizes are limited to 1000 rows each. This has brought
+me under the 10,000 row limit, but only just:
+
+> The database HEROKU_POSTGRESQL_RED_URL on Heroku app pip-db is
+> approaching its allocated storage capacity.
+
+> The database contains 9,801 rows. The Dev plan allows a maximum of
+> 10,000 rows. If the databases exceeds 10,000 rows then INSERT
+> privileges will be revoked, preventing more data from being
+> written. INSERT privileges are automatically reinstated if rows are
+> removed and the database once again complies with the plan limit.
+
+I think I'll bump the limit down to ~800 to give myself a bit of row
+overhead when implementing sessions etc.
+
+Implemented FASTA crawling functionality to `csv2yaps`. New run time:
+
+```
+./tools/csv2yaps/csv2yaps.js ../pip-db-priv/dataset.txt >   6.18s user 4.39s system 2% cpu 7:31.20 total
+```
+
+Notes for meeting with Ian:
+
+ * YAPS - *Yet Another Protein Schema* - Flat JSON encoded, designed
+   to closely match dataset format. Example YAPS file:
+
+```
+{
+  "Encoding": "yaps",
+  "Version": 3,
+  "Date": "2014-02-26 23:28:09",
+  "Author": "chris@vm-ubuntu",
+  "Agent": "/home/chris/src/pip-db/tools/csv2yaps/csv2yaps.js",
+  "Source": "/home/chris/src/pip-db-priv/dataset-test.txt",
+  "No-Of-Records": 1,
+  "Records": [
+    {
+      "Protein-Names": [
+        "Acetoacetyl-CoA thiolase",
+        "Acetyl-CoA acetyltransferase"
+      ],
+      "EC": "2.3.1.9",
+      "Source": "Saccharomyces cerevisiae (Yeast)",
+      "Location": "Cytosol",
+      "MW-Min": "140000",
+      "MW-Max": "140000",
+      "No-Of-Iso-Enzymes": "1",
+      "pI-Min": "5.3",
+      "pI-Max": "5.3",
+      "Temperature-Min": "4",
+      "Temperature-Max": "4",
+      "Method": "Isoelectric focusing",
+      "Full-Text": "http://www.jbc.org/content/246/14/4424.full.pdf",
+      "PubMed": "http://www.ncbi.nlm.nih.gov/pubmed/5571830",
+      "Species-Taxonomy": "http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=4932",
+      "Protein-Sequence": "http://www.uniprot.org/uniprot/P41338",
+      "Sequence": ">sp|P41338|THIL_YEAST Acetyl-CoA acetyltransferase OS=Saccharomyces cerevisiae (strain ATCC 204508 / S288c) GN=ERG10 PE=1 SV=3\nMSQNVYIVSTARTPIGSFQGSLSSKTAVELGAVALKGALAKVPELDASKDFDEIIFGNVL\nSANLGQAPARQVALAAGLSNHIVASTVNKVCASAMKAIILGAQSIKCGNADVVVAGGCES\nMTNAPYYMPAARAGAKFGQTVLVDGVERDGLNDAYDGLAMGVHAEKCARDWDITREQQDN\nFAIESYQKSQKSQKEGKFDNEIVPVTIKGFRGKPDTQVTKDEEPARLHVEKLRSARTVFQ\nKENGTVTAANASPINDGAAAVILVSEKVLKEKNLKPLAIIKGWGEAAHQPADFTWAPSLA\nVPKALKHAGIEDINSVDYFEFNEAFSVVGLVNTKILKLDPSKVNVYGGAVALGHPLGCSG\nARVVVTLLSILQQEGGKIGVAAICNGGGGASSIVIEKI"
+    }
+}
+```
+
+ * Tool `csv2yaps` performs 1st stage (destructive) data
+   modifications, and mines FASTA sequences. Detects header types and
+   assigns them to properties, offering flexibility of incoming data
+   formatting. Example session:
+
+```
+$ ./tools/csv2yaps/csv2yaps.js ../pip-db-priv/dataset-test.txt >../pip-db-priv/dataset-test.json
+At line 1:	[WARNING]	Ignoring unrecognised column "Sheet"
+At line 1:	[WARNING]	Ignoring unrecognised column "Valid sequence(s) available"
+At line 2:	[WARNING]	Ignoring value "Not Given (N.G.)" for property "pI-Min"
+At line 2:	[WARNING]	Ignoring value "Not Given (N.G.)" for property "pI-Max"
+At line 2:	[WARNING]	Ignoring value "Not Given (N.G.)" for property "pI-Max"
+At line 2:	[WARNING]	Ignoring value "Not Given (N.G.)" for property "pI-Major-Component"
+At line 3:	[WARNING]	Ignoring value "Not available (N.A.)" for property "Protein-Names"
+At line 3:	[WARNING]	Ignoring value "N.G." for property "pI-Min"
+At line 3:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 3:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 3:	[WARNING]	Ignoring value "N.G." for property "pI-Major-Component"
+At line 3:	[WARNING]	Ignoring value "No entry" for property "Protein-Sequence"
+At line 4:	[WARNING]	Ignoring value "N.G." for property "pI-Min"
+At line 4:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 4:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 4:	[WARNING]	Ignoring value "N.G." for property "pI-Major-Component"
+At line 4:	[WARNING]	Ignoring value "Not Given (N.G)" for property "Temperature"
+At line 5:	[WARNING]	Ignoring value "N.A." for property "Protein-Names"
+At line 5:	[WARNING]	Ignoring value "N/a" for property "EC"
+At line 5:	[WARNING]	Ignoring value "N.G" for property "pI-Min"
+At line 5:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 5:	[WARNING]	Ignoring value "N.G" for property "pI-Max"
+At line 5:	[WARNING]	Ignoring value "N.G" for property "pI-Major-Component"
+At line 5:	[WARNING]	Ignoring value "N.G" for property "Temperature"
+At line 5:	[WARNING]	Ignoring value "Unavailable" for property "Full-Text"
+At line 6:	[WARNING]	Ignoring value "N.A." for property "Protein-Names"
+At line 6:	[WARNING]	Ignoring value "N/a" for property "EC"
+At line 6:	[WARNING]	Ignoring value "N.G" for property "pI-Min"
+At line 6:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 6:	[WARNING]	Ignoring value "N.G" for property "pI-Max"
+At line 6:	[WARNING]	Ignoring value "N.G" for property "pI-Major-Component"
+At line 6:	[WARNING]	Ignoring value "N.G" for property "Temperature"
+At line 6:	[WARNING]	Ignoring value "Unavailable" for property "Full-Text"
+At line 7:	[WARNING]	Ignoring value "N.A." for property "Protein-Names"
+At line 7:	[WARNING]	Ignoring value "N/a" for property "EC"
+At line 7:	[WARNING]	Ignoring value "N.G." for property "pI-Min"
+At line 7:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 7:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 7:	[WARNING]	Ignoring value "N.G." for property "pI-Major-Component"
+At line 7:	[WARNING]	Ignoring value "No entry" for property "Protein-Sequence"
+At line 8:	[WARNING]	Ignoring value "N.A." for property "Protein-Names"
+At line 8:	[WARNING]	Ignoring value "N/a" for property "EC"
+At line 8:	[WARNING]	Ignoring value "N.G." for property "pI-Min"
+At line 8:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 8:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 8:	[WARNING]	Ignoring value "N.G." for property "pI-Major-Component"
+At line 8:	[WARNING]	Ignoring value "No entry" for property "Protein-Sequence"
+At line 9:	[WARNING]	Ignoring value "N.A." for property "Protein-Names"
+At line 9:	[WARNING]	Ignoring value "N/a" for property "EC"
+At line 9:	[WARNING]	Ignoring value "N.G." for property "pI-Min"
+At line 9:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 9:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 9:	[WARNING]	Ignoring value "N.G." for property "pI-Major-Component"
+At line 9:	[WARNING]	Ignoring value "Not available" for property "Method"
+At line 9:	[WARNING]	Ignoring value "Unavailable" for property "Full-Text"
+At line 9:	[WARNING]	Ignoring value "No entry" for property "Species-Taxonomy"
+At line 9:	[WARNING]	Ignoring value "No entry" for property "Protein-Sequence"
+At line 10:	[WARNING]	Ignoring value "N.A." for property "Protein-Names"
+At line 10:	[WARNING]	Ignoring value "N/a" for property "EC"
+At line 10:	[WARNING]	Ignoring value "N.G." for property "pI-Min"
+At line 10:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 10:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 10:	[WARNING]	Ignoring value "Not available" for property "Method"
+At line 10:	[WARNING]	Ignoring value "Unavailable" for property "Full-Text"
+At line 10:	[WARNING]	Ignoring value "No entry" for property "Species-Taxonomy"
+At line 10:	[WARNING]	Ignoring value "No entry" for property "Protein-Sequence"
+At line 11:	[WARNING]	Ignoring value "N.A." for property "Protein-Names"
+At line 11:	[WARNING]	Ignoring value "N/a" for property "EC"
+At line 11:	[WARNING]	Ignoring value "N.G." for property "pI-Min"
+At line 11:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 11:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 11:	[WARNING]	Ignoring value "Not available" for property "Method"
+At line 11:	[WARNING]	Ignoring value "Unavailable" for property "Full-Text"
+At line 11:	[WARNING]	Ignoring value "No entry" for property "Species-Taxonomy"
+At line 11:	[WARNING]	Ignoring value "No entry" for property "Protein-Sequence"
+At line 12:	[WARNING]	Ignoring value "N.A." for property "Protein-Names"
+At line 12:	[WARNING]	Ignoring value "N.G." for property "pI-Min"
+At line 12:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 12:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 12:	[WARNING]	Ignoring value "N.G." for property "pI-Major-Component"
+At line 12:	[WARNING]	Ignoring value "N.G." for property "Temperature"
+At line 12:	[WARNING]	Ignoring value "Not available" for property "Protein-Sequence"
+At line 13:	[WARNING]	Ignoring value "N.G." for property "No-Of-Iso-Enzymes"
+At line 13:	[WARNING]	Ignoring value "N.G." for property "pI-Min"
+At line 13:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 13:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 13:	[WARNING]	Ignoring value "N.G." for property "pI-Major-Component"
+At line 13:	[WARNING]	Ignoring value "N.G." for property "Temperature"
+At line 14:	[WARNING]	Ignoring value "N.A." for property "Protein-Names"
+At line 14:	[WARNING]	Ignoring value "N/a" for property "EC"
+At line 14:	[WARNING]	Ignoring value "N.G." for property "No-Of-Iso-Enzymes"
+At line 14:	[WARNING]	Ignoring value "N.G." for property "pI-Min"
+At line 14:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 14:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 14:	[WARNING]	Ignoring value "N.G." for property "pI-Major-Component"
+At line 14:	[WARNING]	Ignoring value "N.G." for property "Temperature"
+At line 14:	[WARNING]	Ignoring value "Not available" for property "Protein-Sequence"
+At line 15:	[WARNING]	Ignoring value "N.A." for property "Protein-Names"
+At line 15:	[WARNING]	Ignoring value "N/a" for property "EC"
+At line 15:	[WARNING]	Ignoring value "N.G." for property "No-Of-Iso-Enzymes"
+At line 15:	[WARNING]	Ignoring value "N.G." for property "pI-Min"
+At line 15:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 15:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 15:	[WARNING]	Ignoring value "N.G." for property "pI-Major-Component"
+At line 15:	[WARNING]	Ignoring value "N.G." for property "Temperature"
+At line 15:	[WARNING]	Ignoring value "Not Available" for property "Full-Text"
+At line 16:	[WARNING]	Ignoring value "n/a" for property "Temperature"
+At line 17:	[WARNING]	Ignoring value "n/a" for property "Temperature"
+At line 17:	[ERROR!!]	Line is too short. No column for property "Notes". Results may be corrupted.
+At line 18:	[WARNING]	Ignoring value "N.G." for property "pI-Min"
+At line 18:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 18:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 18:	[WARNING]	Ignoring value "N.G." for property "pI-Major-Component"
+At line 18:	[WARNING]	Ignoring value "N.G" for property "Temperature"
+At line 18:	[WARNING]	Ignoring value "Unavailable" for property "Full-Text"
+At line 19:	[WARNING]	Ignoring value "N.A." for property "Protein-Names"
+At line 19:	[WARNING]	Ignoring value "N/a" for property "EC"
+At line 19:	[WARNING]	Ignoring value "N.G." for property "MW"
+At line 19:	[WARNING]	Ignoring value "N.G." for property "Subunit-No"
+At line 19:	[WARNING]	Ignoring value "N.G." for property "Subunit-MW"
+At line 19:	[WARNING]	Ignoring value "N.G." for property "No-Of-Iso-Enzymes"
+At line 19:	[WARNING]	Ignoring value "N.G." for property "pI-Min"
+At line 19:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 19:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 19:	[WARNING]	Ignoring value "N.G." for property "pI-Major-Component"
+At line 19:	[WARNING]	Ignoring value "Not available" for property "Method"
+At line 19:	[WARNING]	Ignoring value "Unavailable" for property "Full-Text"
+At line 19:	[WARNING]	Ignoring value "No entry" for property "PubMed"
+At line 20:	[WARNING]	Ignoring value "N.G." for property "Subunit-No"
+At line 20:	[WARNING]	Ignoring value "N.G." for property "pI-Min"
+At line 20:	[WARNING]	Ignoring value "N.G." for property "pI-Max"
+At line 20:	[WARNING]	Ignoring value "N.G." for property "pI-Major-Component"
+At line 20:	[WARNING]	Ignoring value "N.G." for property "Temperature"
+At line 21:	[WARNING]	Ignoring value "n/a" for property "MW"
+warning: cannot process URL 'http://www.uniprot.org/uniprot/?query=Cupiennius+salei+Haemocyanin&sort=score'. Ignoring.
+warning: cannot process URL 'http://www.uniprot.org/uniprot/?query=Eurypelma+californicum+Haemocyanin&sort=score'. Ignoring.
+```
+
+ * In keeping with the JSON-centric approach to data handling,
+   implemented a set of APIs for querying pip-db. Example:
+
+     http://www.pip-db.org/s?q=alkaline -> http://www.pip-db.org/api/s?q=alkaline
+     http://www.pip-db.org/r/Njk5NWJkMWQ -> http://www.pip-db.org/api/r/Njk5NWJkMWQ
+
+   The browser-friendly website is now almost entirely static HTML
+   wrapped around this JSON API.
+
+ * Record IDs are truncated b64 encoded SHA-1s of the YAPS
+   record. Allows for verification (data integrity), deters data
+   mining.
+
+ * Implemented autocomplete using frequency tables. Limited to 850
+   rows /table so as not to bust the 10,000 row Heroku limit. Created
+   at upload time, and implemented using AJAX calls. Example:
+
+     http://www.pip-db.org/api/ac?s=locations&t=h
+     http://www.pip-db.org/api/ac?s=locations&t=he
+     http://www.pip-db.org/api/ac?s=locations&t=hear
+
+ * Getting more comfortable with Clojure - found some massive
+   bottlenecks:
+
+```
+db: Implement multiple row insertion per connection
+This modifies the implementation of the back-end's "add-record" function
+so that it instead accepts a variable number of records, and retains a
+single database connection to insert all of the values. This in effect
+requires a O(1) time complexity overhead for establishing and closing
+database connections, instead of the O(n) complexity required in order
+to add individual row's one at a time.
+
+The result of this change is a staggering decrease in data upload
+times. For a dataset of 5773 records, the record insertion time is as
+follows:
+
+     Single row insertion per connection:      42.608 s
+     Multiple row insertion per connection:    03.512 s
+
+This demonstrates an approximate ~1200 % increase in performance as a
+result of this patch.
+```
+
+And SLOC count is falling (1:1 client/server side code):
+
+```
+$ ./scripts/sloccount.sh
+Commit: 779d79f56e42b68c8ffe83c2e08c0aad59c925c2
+Date:   Wed Feb 26 17:43:34 2014 +0000
+Rel:    pip-db 0.5.3
+
+Build system: 1003
+   486  configure.ac       (48.45%)
+   344  Makefile.am        (34.30%)
+   173  autogen.sh         (17.25%)
+
+Resources: 9497
+  7882  Less CSS           (82.99%)
+  1615  JavaScript         (17.01%)
+
+Sources: 2190
+  1673  Clojure            (76.39%)
+   517  Clojure (tests)    (23.61%)
+
+Documentation: 29886
+ 29010  Markdown           (97.07%)
+   876  LaTeX              (2.93%)
+
+Tools: 11146
+  6123  JavaScript         (54.93%)
+  3848  Ruby               (34.52%)
+  1049  Python             (9.41%)
+   126  Shell              (1.13%)
+```
+
+ * AJAX search results indicator. Show HTTP headers used to implement.
+
+ * Focus shifting towards release: for the first time there's no of
+   bug reports > no of feature requests.
+
+ * Next: BLAST searching.

@@ -106,9 +106,15 @@ $(document).ready(function () {
     addPropertyRow('t_l=' + encodeURIComponent(record['Temperature-Min']) +
                    '&t_h=' + encodeURIComponent(record['Temperature-Max']),
                    'Temperature', 'Temperature (ºC)',
-                   getRangeText(record['Temperature-Min'], record['Temperature-Max']));
+                   getRangeText(record['Temperature-Min'],
+                                record['Temperature-Max']));
     addPropertyRow('m=' + encodeURIComponent(record['Method']),
                    'Method', 'Experimental Method');
+    if (record['Sequence'])
+        addPropertyRow(null, 'Sequence', 'FASTA Sequence',
+                       '<textarea class="fasta" readonly>' +
+                       record['Sequence'] + '</textarea>' +
+                       '<a id="fasta" href="#">Show &gt;&gt;</a>');
 
     // Extern links
     addExternLink('Full-Text', 'Full Text');
@@ -121,6 +127,19 @@ $(document).ready(function () {
     if (record['Notes']) {
         $notesPanelBody.text(record['Notes']);
     };
+
+    // Show and hide FASTA sequence
+    $fastaContainer = $('.record table td textarea.fasta');
+    $('#fasta').click(function () {
+        if ($fastaContainer.is(':visible')) {
+            $(this).text('Show >>');
+            $fastaContainer.hide();
+        } else {
+            $(this).text('Hide <<');
+            $fastaContainer.show();
+            $fastaContainer.select();
+        }
+    });
 
     // "Show similar to this" callback
     $('.property').hover(function (e) {
