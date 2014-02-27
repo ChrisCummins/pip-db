@@ -42,7 +42,7 @@
 (defn ec-input-cell
   ([name] (ec-input-cell name ""))
   ([name value]
-     [:div {:style "display:table-cell;padding-right:16px;"}
+     [:div.ec
       [:input {:name name :value value :type "text" :autocomplete "off"}]]))
 
 (defn search-ec-widget [request]
