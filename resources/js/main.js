@@ -503,6 +503,9 @@
                     response([]);
                 }
             });
+        },
+        close: function () {
+            updateNoOfResults($(this).closest('form'));
         }
     });
 
@@ -520,6 +523,9 @@
                     response([]);
                 }
             });
+        },
+        close: function () {
+            updateNoOfResults($(this).closest('form'));
         }
     });
 
@@ -537,6 +543,9 @@
                     response([]);
                 }
             });
+        },
+        close: function () {
+            updateNoOfResults($(this).closest('form'));
         }
     });
 
@@ -554,6 +563,9 @@
                     response([]);
                 }
             });
+        },
+        close: function () {
+            updateNoOfResults($(this).closest('form'));
         }
     });
 
@@ -571,6 +583,9 @@
           response([]);
         }
       });
+    },
+    close: function () {
+      updateNoOfResults($(this).closest('form'));
     }
   });
 
