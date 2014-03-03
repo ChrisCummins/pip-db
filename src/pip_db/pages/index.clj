@@ -21,14 +21,17 @@
 
 ;; The "below the fold" main body of text, containing a description of
 ;; what the site is, it's purpose, and how to use it.
-(defn text-body [request]
-  [:div.col-md-12 (map #(vector :p.lead (apply str %)) body-text)])
+(defn body [request]
+  [:div.body
+   [:div.col-md-6.col-md-offset-1 (map #(vector :p.lead (apply str %)) body-text)]
+   [:div.col-md-4                 [:img {:src "/img/gel.jpg"}]]])
 
 (defn view [request]
   (ui/page request
            {:navbar {:login-only true}
-            :body (list [:div.row (search-block request)]
-                        [:div.row (text-body request)])}))
+            :body [:div.index
+                   [:div.row (search-block request)]
+                   [:div.row (body request)]]}))
 
 ;; ## Controller
 
