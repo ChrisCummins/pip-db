@@ -102,25 +102,36 @@
      * PIP-DB DOWNLOADS PAGE
      */
 
+    // YAPS schema
+    var properties = [
+        'Protein-Names',
+        'EC',
+        'Source',
+        'Location',
+        'MW-Min',
+        'MW-Max',
+        'Subunit-No',
+        'Subunit-MW',
+        'No-Of-Iso-Enzymes',
+        'pI-Min',
+        'pI-Max',
+        'pI-Major-Component',
+        'Temperature-Min',
+        'Temperature-Max',
+        'Method',
+        'Full-Text',
+        'Abstract-Only',
+        'PubMed',
+        'Species-Taxonomy',
+        'Protein-Sequence',
+        'Notes',
+        'Sequence',
+        'Created-At',
+        'Available-At'
+    ];
+
     // JSON data response map
     var records = data['Records'];
-    var strippedRecords = (function () { // Blank properties removed
-        var s = [], record, r;
-
-        for (var i in records) {
-            record = records[i];
-            r = {};
-
-            for (var j in record) {
-                if (record[j])
-                    r[j] = record[j];
-            }
-
-            s.push(r);
-        };
-
-        return s;
-    })();
 
     // UI components
     var $table = $('#table');
@@ -137,6 +148,7 @@
 
     // Add 'Available-At' attributes and filter out 'id'
     for (var i in records) {
+        // TODO: Perform this on the server-side.
         var record = records[i];
         record['Available-At'] = 'http://' + location.host + '/r/' + record['id'];
         delete record['id'];
@@ -161,7 +173,7 @@
     // Generate text formatted data
     var downloadFormats = {
         'CSV': {
-            blob: json2csv(strippedRecords),
+            blob: json2csv(records),
             mime: 'text/csv',
             extension: '.csv',
             select: showTable
@@ -173,7 +185,7 @@
             select: showText
         },
         'XML': {
-            blob: json2xml(strippedRecords),
+            blob: json2xml(records),
             mime: 'application/xml',
             extension: '.xml',
             select: showText
@@ -236,7 +248,7 @@
          * Generate a human readable version of a table field.
          */
         var humanReadable = function(text) {
-            return key.replace(/-/g, ' ');
+            return text.replace(/-/g, ' ');
         };
 
         /*
@@ -245,7 +257,7 @@
         var addEmptyRow = function (i) {
             var html = '<tr><td>' + i + '</td>';
 
-            for (var j = 0; j < dataLength; j++)
+            for (var j in properties)
                 html += '<td></td>';
 
             $tbody.append(html + '</tr>');
@@ -255,24 +267,27 @@
          * Populate a table row with data from a record.
          */
         var populateRow = function(i, record) {
-            var $row = $(' tr:nth-child(' + i + ')', $tbody);
-            var j = 1;
+            var setCell = function($row, index, value) {
+                if (value)
+                    $(' td:nth-child(' + index + ')', $row).text(value);
+            };
 
-            for (var key in record)
-                $(' td:nth-child(' + ++j + ')', $row).html(record[key]);
+            var $row = $(' tr:nth-child(' + i + ')', $tbody);
+
+            for (var j in properties)
+                setCell($row, parseInt(j) + 2, record[properties[j]]);
         };
 
         if (data['No-Of-Records-Matched']) {
             // Generate the header row:
             var header = '<tr><td>0</td>';
 
-            for (var key in records[0])
-                header += '<td>' + humanReadable(key) + '</td>';
+            for (var i in properties)
+                header += '<td>' + humanReadable(properties[i]) + '</td>';
 
             $(' thead', $table).append(header + '</tr>');
 
             // Populate table contents:
-            var dataLength = $(' thead tr td', $table).length;
             var noRows = Math.max(20, records.length + 5);
 
             for (var i = 0; i < noRows; i++) {

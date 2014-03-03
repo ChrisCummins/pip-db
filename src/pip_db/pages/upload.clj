@@ -1,6 +1,7 @@
 (ns pip-db.pages.upload
   (:require [clojure.string :as str]
             [pip-db.yaps :as yaps]
+            [pip-db.db :as db]
             [pip-db.ui :as ui])
   (:import [java.io File]))
 
@@ -129,4 +130,6 @@
   (view request))
 
 (defn POST [request]
-  (with-tmp-file file ((request :params) "f") (yaps/parse file)))
+  (with-tmp-file file ((request :params) "f")
+    (apply db/add-records (-> (yaps/file->yaps file)
+                              (yaps/yaps->records)))))

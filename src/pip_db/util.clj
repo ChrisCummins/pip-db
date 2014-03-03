@@ -182,4 +182,4 @@
 ;; Generate a JSON response
 (defn json-response [data]
   {:status 200 :headers {"Content-Type" "application/json"}
-   :body (with-out-str (json/pprint data))})
+   :body (with-out-str (json/pprint data :escape-slash false))})

@@ -148,6 +148,20 @@ get_tools_sloccounts() {
   print_sloccount "$rb"        "$total" "Ruby             "
 }
 
+# Returns a list of sloccounts for the scripts.
+get_scripts_sloccounts() {
+    local sh=$(get_lc_of_files "$(find_files_with_extension sh scripts/)")
+    local js=$(get_lc_of_files "$(find_files_with_extension js scripts/)")
+    local py=$(get_lc_of_files "$(find_files_with_extension py scripts/)")
+    local rb=$(get_lc_of_files "$(find_files_with_extension rb scripts/)")
+    local total=$((sh+js+py+rb))
+
+    print_sloccount "$sh"        "$total" "Shell            "
+    print_sloccount "$js"        "$total" "JavaScript       "
+    print_sloccount "$py"        "$total" "Python           "
+    print_sloccount "$rb"        "$total" "Ruby             "
+}
+
 # Returns the sum of a list of integers
 #
 #     $1 A list of integers, one per line
@@ -161,7 +175,8 @@ main() {
   local src=$(sum_rows "$(get_src_sloccounts)")
   local docs=$(sum_rows "$(get_doc_sloccounts)")
   local tools=$(sum_rows "$(get_tools_sloccounts)")
-  local total=$((build+resources+src+docs+tools))
+  local scripts=$(sum_rows "$(get_scripts_sloccounts)")
+  local total=$((build+resources+src+docs+tools+scripts))
 
   echo -n 'Commit: '; git show HEAD | head -n1 | awk '{print $2}'
   git show HEAD | grep --color=never '^Date:'
@@ -186,6 +201,10 @@ main() {
   echo ""
   echo "Tools: $tools"
   get_tools_sloccounts | sort -rn | column -t -s $'\t'
+
+  echo ""
+  echo "Scripts: $scripts"
+  get_scripts_sloccounts | sort -rn | column -t -s $'\t'
 
   echo ""
   echo "Total physical source lines of code: $total"

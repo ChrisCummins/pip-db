@@ -1,4 +1,4 @@
-(defproject pip-db "0.5.3"
+(defproject pip-db "0.5.4"
   :description "Protein Isoelectric Point Database"
   :url "https://github.com/ChrisCummins/pip-db"
   :license {:name "GNU General Public License v3"
