@@ -1,15 +1,35 @@
-# EE4FYP Midterm Report
+\documentclass[12pt,a4paper]{article}
 
-Chris Cummins, March 5, 2014.
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage[title]{appendix}
+\usepackage[dotinlabels]{titletoc}
+\usepackage[nottoc,numbib]{tocbibind}
+\usepackage{mathtools}
+\usepackage[margin=0.5in]{geometry}
+\renewcommand{\thefootnote}{\arabic{footnote}}
 
-### Contents
+\newcommand*\wrapletters[1]{\wr@pletters#1\@nil}
+\def\wr@pletters#1#2\@nil{#1\allowbreak\if&#2&\else\wr@pletters#2\@nil\fi}
 
-- [Project Aims](#project-aims)
-- [Development Methodology](#development-methodology)
-- [Development Progress](#development-progress)
-- [Outstanding Tasks](#outstanding-tasks)
+\usepackage{enumitem}
+\setenumerate{itemsep=0pt}
 
-# Project Aims
+% Add support for multi-page tables.
+\usepackage{longtable}
+
+\pagenumbering{arabic}
+
+\title{EE4FYP Midterm Report}
+\author{Chris Cummins}
+
+\begin{document}
+\maketitle
+
+\section{Project Aims}
 
 The purpose of the project is to develop an online database of
 biochemical research data, under the supervision of Professor Ian
@@ -28,11 +48,13 @@ publicly available application. This document provides a brief
 overview of some of the work undertaken in this period, and outlines
 the work which has yet to be done. The two primary project
 deliverables identified in the initial
-[project plan](https://github.com/ChrisCummins/pip-db/blob/master/Documentation/ProjectPlan.md)
-were:
+\href{https://github.com/ChrisCummins/pip-db/blob/master/Documentation/ProjectPlan.md}{project
+  plan} were:
 
-1. An updatable relational database warehousing the provided dataset.
-2. A web-accessible GUI with searching and downloading functionality.
+\begin{enumerate}
+\item An updatable relational database warehousing the provided dataset.
+\item A web-accessible GUI with searching and downloading functionality.
+\end{enumerate}
 
 Since the project's inception, the nature of the first deliverables
 has changed subtly. The emphasis on \textit{relational} databases is
@@ -45,26 +67,28 @@ rather than a functional requirement. In retrospect this shows that
 technical and implementation details should be avoided in the project
 requirements if at all possible, since they are a result of
 development, and may change throughout the project's lifetime. The 10
-[project objectives](https://github.com/ChrisCummins/pip-db/blob/master/Documentation/ProjectPlan.md#objectives)
-identified in the project plan are still relevant and remain primary
-goals.
+\href{https://github.com/ChrisCummins/pip-db/blob/master/Documentation/ProjectPlan.md#objectives}{project
+  objectives} identified in the project plan are still relevant and
+remain primary goals.
 
-# Development Methodology
+\section{Development Methodology}
 
 From the outset, the development methodology has focused around weekly
 meetings with Professor Nabney, and regular communication with
 Dr. Flower; coupled with a transparent
-["bazaar" style](http://www.catb.org/esr/writings/cathedral-bazaar/)
-development process. The git version control system has been used to
-track all project materials (excluding, at his request, the dataset
-provided by Dr. Flower) such as source code and design documents, and
-the GitHub website is used to host a copy of the repository. Key
-project resources available from the outset include:
+\href{http://www.catb.org/esr/writings/cathedral-bazaar/}{``bazaar''
+  style} development process. The git version control system has been
+used to track all project materials (excluding, at his request, the
+dataset provided by Dr. Flower) such as source code and design
+documents, and the GitHub website is used to host a copy of the
+repository. Key project resources available from the outset include:
 
- * Public project: http://www.pip-db.org/
- * Repository: https://github.com/ChrisCummins/pip-db
- * Log: https://github.com/ChrisCummins/pip-db/blob/master/Documentation/Log.md
- * Issue tracker: https://github.com/ChrisCummins/pip-db/issues
+\begin{quote}
+Public project: \url{http://www.pip-db.org/}\\*
+Repository: \url{https://github.com/ChrisCummins/pip-db}\\*
+Log: \url{https://github.com/ChrisCummins/pip-db/blob/master/Documentation/Log.md}\\*
+Issue tracker: \url{https://github.com/ChrisCummins/pip-db/issues}
+\end{quote}
 
 This open source-centric approach to development also extends to the
 tools and software used, with the desire that where possible, effort
@@ -72,20 +96,23 @@ should be made to make a positive improvement to the tools used and to
 contribute back to the open source community. Currently, I have
 contributed to four public projects as a result of this project:
 
- * watch-less
- * gitstats
- * clojure-koans
- * sqlkorma
+\begin{quote}
+watch-less\\*
+gitstats\\*
+clojure-koans\\*
+sqlkorma
+\end{quote}
 
 Additionally, a number of the tools that have been developed have been
 marked as possible candidates for releasing as standalone open source
 projects, allowing for re-use outside of this specific project.
 
-# Development Progress
+\section{Development Progress}
 
-Using the [OpenUP](http://epf.eclipse.org/wikis/openup/) process as a
-framework, the first iteration of development was focused upon risk
-mitigation. [Risks](https://github.com/ChrisCummins/pip-db/blob/master/Documentation/ProjectPlan.md#risk-assessment)
+Using the \href{http://epf.eclipse.org/wikis/openup/}{OpenUP} process
+as a framework, the first iteration of development was focused upon
+risk
+mitigation. \href{https://github.com/ChrisCummins/pip-db/blob/master/Documentation/ProjectPlan.md#risk-assessment}{Risks}
 identified in the elaboration phase were categorised and prioritised,
 and the scheduled tasks and activities were focused on mitigating the
 most severe of these at an early stage. This meant that the objectives
@@ -116,9 +143,13 @@ prototype implementation began, and the sharp decline in the number of
 lines of code after the Christmas holiday re-write when the website
 was re-implemented in the (much more concise) LISP language.
 
-![Repository activity](midterm/assets/activity.png)
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=7.2in]{assets/activity.png}
+\end{figure}
 
-# Outstanding Tasks
+\newpage
+\section{Outstanding Tasks}
 
 With the deliverable website already online and fully functional, the
 majority of the remaining development time is dedicated to ironing out
@@ -137,4 +168,9 @@ requests, and core application stability is the primary goal of
 development up until user trials in week 23. After which, the focus
 will shift towards optimising and future proofing the stack.
 
-![Gantt chart](midterm/assets/gantt.png)
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=7.4in]{assets/gantt.png}
+\end{figure}
+
+\end{document}
