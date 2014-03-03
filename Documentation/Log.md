@@ -3030,3 +3030,24 @@ Tools: 11146
    bug reports > no of feature requests.
 
  * Next: BLAST searching.
+
+## March 2014
+
+### Sunday 2nd
+
+Deploying to heroku failed with 0.5.4 release branch. Checking the
+logs revealed a stack trace dump while running the app caused by a
+missing inline JavaScript source. JavaScript scripts are generated at
+build time and it seemed like the slug compilation phase skipped
+executing `./bin/build`. Note that remote shells can be invoked with:
+
+```
+$ heroku run bash
+```
+
+Log output showing that incorrect build command is being run:
+
+```
+2014-03-03T04:14:46.213270+00:00 heroku[web.1]: State changed from crashed to starting
+2014-03-03T04:14:53.811177+00:00 heroku[web.1]: Starting process with command `lein trampoline run`
+```
