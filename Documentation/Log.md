@@ -3030,3 +3030,12 @@ Tools: 11146
    bug reports > no of feature requests.
 
  * Next: BLAST searching.
+
+
+### Monday 3rd
+
+To convert UNIX timestamps to date cells in Excel:
+
+```
+=(A1/86400)+25569
+```
