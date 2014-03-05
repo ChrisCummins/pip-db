@@ -3051,3 +3051,8 @@ Feedback from Gareth Bunch (1st person to work on the data):
 > be used in the years to come.
 
 Darren has also asked Fraser and Ben to take a look at it.
+
+Idea for further development of plausible nonsense generator - develop
+a tool which uses Markov chains to generate plausible yet nonsensical
+datasets, when trained with an input dataset. Inputs and outputs would
+both be CSV.
