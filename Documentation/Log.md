@@ -3031,7 +3031,9 @@ Tools: 11146
 
  * Next: BLAST searching.
 
+
 ## March 2014
+
 
 ### Sunday 2nd
 
@@ -3051,3 +3053,29 @@ Log output showing that incorrect build command is being run:
 2014-03-03T04:14:46.213270+00:00 heroku[web.1]: State changed from crashed to starting
 2014-03-03T04:14:53.811177+00:00 heroku[web.1]: Starting process with command `lein trampoline run`
 ```
+
+
+### Monday 3rd
+
+To convert UNIX timestamps to date cells in Excel:
+
+```
+=(A1/86400)+25569
+```
+
+
+### Tuesday 4th
+
+Feedback from Gareth Bunch (1st person to work on the data):
+
+> Ive had a look at the website, its a lot different to the excel
+> sheet. It seems easy to navigate and looks very
+> professional. Hopefully it is a successful and useful tool that can
+> be used in the years to come.
+
+Darren has also asked Fraser and Ben to take a look at it.
+
+Idea for further development of plausible nonsense generator - develop
+a tool which uses Markov chains to generate plausible yet nonsensical
+datasets, when trained with an input dataset. Inputs and outputs would
+both be CSV.
