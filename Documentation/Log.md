@@ -3079,3 +3079,39 @@ Idea for further development of plausible nonsense generator - develop
 a tool which uses Markov chains to generate plausible yet nonsensical
 datasets, when trained with an input dataset. Inputs and outputs would
 both be CSV.
+
+
+### Wednesday 5th
+
+Notes from Midterm project review:
+
+ * Again, re-iterating the point that the *structure* of the submitted
+   report is going to be absolutely critical. I need to ensure that
+   the report is structured so as to emphasise and give appropriate
+   levels of details to the right sections.
+
+ * I need to make sure that I have a firm and convincing justification
+   for the LISP re-write. Perhaps it would be reasonable to contain a
+   discussion of the differences/benefits.
+
+Found a nice basic guide to formatting a thesis in LaTeX:
+https://www.sharelatex.com/blog/2013/08/02/thesis-series-pt1.html
+
+Notes for tomorrow's meeting with Ian:
+
+ * Report: latex report format OK (typeface and line spacing)?
+
+ * What assumptions should I make about the reader's knowledge of the
+   tools/languages? (especially the esoteric ones)
+
+> The report should be targeted at a competent graduate engineer.
+> Also, it should contain enough context information to be readily
+> understood by a project manager or an investment manager
+> specialising in your field of work.
+
+ * What does this mean?
+
+> Project specification: As drawn up at the start of the project, and
+> signed. This is mandatory.
+
+ * Usage instructions? + Executables?
