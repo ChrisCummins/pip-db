@@ -3115,3 +3115,44 @@ Notes for tomorrow's meeting with Ian:
 > signed. This is mandatory.
 
  * Usage instructions? + Executables?
+
+### Thursday 6th
+
+Notes from weekly meeting with Ian:
+
+ * Presentation was poor, didn't have coherent message or communicate
+   exactly what I'd been doing.
+
+ * For report: put the *big picture* list of achievements right up
+   front and centre, don't make the examiner waffle through 80 pages
+   of report in order to figure out whether the project is any good or
+   not.
+
+ * Report formatting - LaTeX is OK.
+
+ * Report structure needs to have more top-level chapters.
+
+ * Consider putting the process and tooling section before the website
+   section.
+
+ * Always consider second examiner when writing report - don't
+   underestimate the amount of context required, and assume that
+   they're electronic engineers, not computer scientists. Every new
+   tool/language needs an explanation.
+
+ * I can use footnotes to introduce new concepts and technologies (for
+   example: "version control is maintained using a git*", footnote:
+   "git is a blah blah blah...").
+
+ * "User" means website users (so usage instructions cover how to use
+   the website). Also, usage instructions means documentation on how
+   to upload and manage the dataset (for Darren).
+
+ * Add "uploading new data" to list of tasks for test cases.
+
+ * For next time: Build up the *big picture list* of 6 or so main
+   successes of the project.
+
+ * For next time: Revise proposed structure of report and for each
+   section add a short paragraph explaining the desired contents and
+   message of the section.
