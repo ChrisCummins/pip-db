@@ -3165,3 +3165,65 @@ real, empirical evidence for measuring the effectiveness of page
 optimisations:
 
 http://httparchive.org/trends.php?s=All&minlabel=Nov+15+2010&maxlabel=Mar+1+2014
+
+
+### Sunday 9th
+
+Auditing the size of the project:
+
+```
+$ du -d1
+376    ./autom4te.cache
+932    ./tools
+112    ./src
+48016  ./Documentation
+200    ./scripts
+76     ./test
+8      ./bin
+27124  ./build
+12572  ./node_modules
+61852  ./pg
+78444  ./.git
+5700   ./target
+1680   ./resources
+237492 .
+```
+
+And ranked by size:
+
+```
+$ du -d1 | sort -n
+8      ./bin
+76     ./test
+112    ./src
+200    ./scripts
+376    ./autom4te.cache
+932    ./tools
+1680   ./resources
+5700   ./target
+12572  ./node_modules
+27124  ./build
+48016  ./Documentation
+61852  ./pg
+78444  ./.git
+237492 .
+```
+
+By using conditional Makefile generation in autoconf and by
+destructively removing build files upon completion of `bin/build`,
+slug size is reduced to 188M:
+
+```
+$ du -d1 | sort -n
+8      ./bin
+76     ./test
+112    ./src
+200    ./scripts
+376    ./autom4te.cache
+768    ./tools
+1796   ./resources
+47764  ./Documentation
+61852  ./pg
+78468  ./.git
+191820 .
+```
