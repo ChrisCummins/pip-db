@@ -3156,3 +3156,12 @@ Notes from weekly meeting with Ian:
  * For next time: Revise proposed structure of report and for each
    section add a short paragraph explaining the desired contents and
    message of the section.
+
+
+### Saturday 8th
+
+Found out about the HTTP archive, which will be useful for providing
+real, empirical evidence for measuring the effectiveness of page
+optimisations:
+
+http://httparchive.org/trends.php?s=All&minlabel=Nov+15+2010&maxlabel=Mar+1+2014
