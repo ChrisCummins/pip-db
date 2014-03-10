@@ -8,7 +8,8 @@
 set -e
 
 # Temporary build files
-BUILD_FILES="build/
+BUILD_FILES="autom4te.cache/
+build/
 node_modules/"
 
 indent() {
