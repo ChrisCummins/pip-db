@@ -3228,6 +3228,7 @@ $ du -d1 | sort -n
 191820 .
 ```
 
+
 ### Wednesday 12th
 
 Major steps in pip-db life cycle:
@@ -3249,3 +3250,17 @@ Major steps in pip-db life cycle:
 1. Working with HOFs and immutable data structures
 1. RESTful API design
 1. D2 user interface refinements
+
+Feedback from Ben Stone, via Darren:
+
+> I haven't encountered any problems running searches.  The only minor
+> issue I have found is that the CSV file download produces tab
+> delimited rather than comma delimited data and the file name has an
+> extra '.' character before the extension.
+
+> The presentation of data is clear. The only suggestion that I would
+> make is that it might be helpful to include a glossary of terms or
+> to annotate the search results to display explanations of
+> abbreviations e.g. when the mouse hovers over them.  Examples might
+> be to explain what s.p.c. means for subunit molecular weight or what
+> the 'm' means as a suffix to pI values.
