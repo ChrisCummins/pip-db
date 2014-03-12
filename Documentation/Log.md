@@ -3227,3 +3227,25 @@ $ du -d1 | sort -n
 78468  ./.git
 191820 .
 ```
+
+### Wednesday 12th
+
+Major steps in pip-db life cycle:
+
+1. Mockups first design (inspired by Google's aesthetic)
+1. Prototype in PHP & MySQL
+1. Autotooled build system, content hashing and minification
+1. PHP templating (and differences from previous FYP)
+1. MySQL schema (and differences from previous FYP)
+    * Tools: dsa - Dataset Analaysis
+1. Data integrity
+    * Tools: png - Plausible Nonsense Generator
+1. Branching model + Issue tracker workflow
+    * Tools: pipbot
+1. END OF M1 (user testing & review)
+1. Clojure research & intro
+1. Clojure port of M1 prototype
+1. Heroku deployment
+1. Working with HOFs and immutable data structures
+1. RESTful API design
+1. D2 user interface refinements
