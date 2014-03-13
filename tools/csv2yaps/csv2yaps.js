@@ -302,7 +302,8 @@ var setFastaSequences = function() {
 
         // Match URL with sequence
         if (r['Protein-Sequence'] === seq['url']) {
-          r['Sequence'] = seq['fasta'];
+          r['Sequence-Name'] = seq['name'];
+          r['Sequence-Data'] = seq['data'];
           break;
         }
       }
