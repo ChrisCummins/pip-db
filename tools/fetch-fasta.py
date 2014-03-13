@@ -20,8 +20,8 @@ ncbi_meta_re = re.compile('<meta name="ncbi_uidlist" content="([0-9]+)" />', re.
 def warning(msg):
     sys.stderr.write("warning: " + str(msg) + '\n')
 
-def print_result(url, fasta):
-    print json.dumps({"url": url, "fasta": fasta})
+def print_result(url, name, data):
+    print json.dumps({"url": url, "name": name, "data": data})
 
 def line_to_urls(line):
     return url_re.findall(line)
@@ -56,12 +56,22 @@ class Spider(threading.Thread):
         self.url = url
         self.fetch = fetch
 
+    def str2fasta(self, string):
+        lines = string.split("\n")
+        name = lines[0]
+        data = "\n".join(lines[1:]).replace("\n", "")
+
+        if not name.startswith(">"):
+            warning("sequence '" + self.url + "' name does not begin with '>'")
+
+        return {"name": name, "data": data}
+
     def run(self):
-        fasta = self.fetch(self.url).strip()
+        fasta = self.str2fasta(self.fetch(self.url).strip())
 
         if len(fasta):
             with self.output_lock:
-                print_result(self.url, fasta)
+                print_result(self.url, fasta["name"], fasta["data"])
 
 def fetch_fasta_uniprot(url):
     return fetch(url + '.fasta').read()
