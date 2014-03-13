@@ -35,7 +35,8 @@
         ref_taxonomy    (r "Species-Taxonomy")
         ref_sequence    (r "Protein-Sequence")
         notes           (r "Notes")
-        sequence        (r "Sequence")
+        sequence_name   (r "Sequence-Name")
+        sequence_data   (r "Sequence-Data")
         real_ec         (if ec (str/split ec #"\.") [])
         real_ec1        (util/str->int (nth real_ec 0 nil))
         real_ec2        (util/str->int (nth real_ec 1 nil))
@@ -49,9 +50,9 @@
         real_temp_max   (util/str->int temp_max)]
     [id names ec source location mw_min mw_max sub_no sub_mw iso_enzymes pi_min
      pi_max pi_major temp_min temp_max method ref_full ref_abstract ref_pubmed
-     ref_taxonomy ref_sequence notes sequence real_ec1 real_ec2 real_ec3
-     real_ec4 real_mw_min real_mw_max real_pi_min real_pi_max real_temp_min
-     real_temp_max]))
+     ref_taxonomy ref_sequence notes sequence_name sequence_data real_ec1
+     real_ec2 real_ec3 real_ec4 real_mw_min real_mw_max real_pi_min real_pi_max
+     real_temp_min real_temp_max]))
 
 ;; Return a vector of non-nil values for the given property from
 ;; within a set of records.
