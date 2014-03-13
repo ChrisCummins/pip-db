@@ -3369,3 +3369,6 @@ From the blastp help pages:
     10 = Comma-separated values,
     11 = BLAST archive format (ASN.1)
 ```
+
+Requested a meeting with Darren to discuss BLAST+ query results, and
+how to best display the resulting data to the user.
