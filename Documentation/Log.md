@@ -3372,3 +3372,6 @@ From the blastp help pages:
 
 Requested a meeting with Darren to discuss BLAST+ query results, and
 how to best display the resulting data to the user.
+
+Note that the BLAST+ database path is configured in environment
+variable `$BLASTDB`.
