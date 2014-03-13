@@ -10,7 +10,11 @@ set -e
 # Temporary build files
 BUILD_FILES="autom4te.cache/
 build/
-node_modules/"
+Documentation/
+node_modules/
+scripts/
+test/
+tools/"
 
 indent() {
     sed -u 's/^/        /'
