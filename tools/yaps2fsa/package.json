@@ -1,0 +1,22 @@
+{
+  "name": "yaps2fsa",
+  "description": "Creates a FASTA database file from a YAPS encoded dataset",
+  "version": "0.0.1",
+  "author": {
+    "name": "Chris Cummins",
+    "email": "chrisc.101@gmail.com"
+  },
+  "license": "GPL v3",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "private": true,
+  "bin": {
+    "csv2yaps": "yaps2csv.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChrisCummins/pip-db"
+  },
+  "dependencies": {}
+}

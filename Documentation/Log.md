@@ -3315,3 +3315,57 @@ the client side (`csv2yaps` or `fetch-fasta`). My preference would be
 client side, since this helps keep a minimal server implementation,
 and allows for catching formatting errors at an early stage, giving
 the user the option to correct the error.
+
+**Generating BLAST+ protein database**
+
+Wrote another tool `yaps2fsa` which converts a YAPS data set into a
+FASTA file which can be used to generate BLAST+ databases.
+
+```
+$ ./makeblastdb -in ~/src/pip-db-priv/dataset.fsa -dbtype 'prot' -out pip-db
+
+
+Building a new DB, current time: 03/13/2014 11:40:26
+New DB name:   pip-db
+New DB title:  /home/chris/src/pip-db-priv/dataset.fsa
+Sequence type: Protein
+Keep Linkouts: T
+Keep MBits: T
+Maximum file size: 1000000000B
+Adding sequences from FASTA; added 2822 sequences in 0.11529 seconds.
+```
+
+Example XML query:
+
+```
+$ ./blastp -db pip-db -query ~/example-query.fas -outfmt 5
+```
+
+where:
+
+```
+$ cat ~/example-query.fas
+DKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYFLT
+DGTGTVTPANASGMNDGAAAVVLMKKTEAESRMLKPLAQVVSWSQAGVEPSVMGVGPIPA
+IKQAVAKAGWSLEDVDVFEINEAFAAVSAAIAKELGLSPEKVNIDGGAIALGHPLGASGC
+RILVTLLHTLERVGGTRGVAALCIGGGMGIAMCVQRG
+```
+
+From the blastp help pages:
+
+```
+ -outfmt <String>
+   alignment view options:
+     0 = pairwise,
+     1 = query-anchored showing identities,
+     2 = query-anchored no identities,
+     3 = flat query-anchored, show identities,
+     4 = flat query-anchored, no identities,
+     5 = XML Blast output,
+     6 = tabular,
+     7 = tabular with comment lines,
+     8 = Text ASN.1,
+     9 = Binary ASN.1,
+    10 = Comma-separated values,
+    11 = BLAST archive format (ASN.1)
+```
