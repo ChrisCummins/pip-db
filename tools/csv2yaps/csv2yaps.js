@@ -3,7 +3,7 @@
 /*
  * yaps.js - (Yet Another Protein Schema) CSV to YAPS conversion
  */
-var VERSION = 3;
+var VERSION = 4;
 
 var lazy = require('lazy');
 var fs  = require('fs');
@@ -302,7 +302,8 @@ var setFastaSequences = function() {
 
         // Match URL with sequence
         if (r['Protein-Sequence'] === seq['url']) {
-          r['Sequence'] = seq['fasta'];
+          r['Sequence-Name'] = seq['name'];
+          r['Sequence-Data'] = seq['data'];
           break;
         }
       }

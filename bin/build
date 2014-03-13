@@ -1,8 +1,20 @@
 #!/usr/bin/env bash
 #
-# Build pip-db. Arguments to this script are passed to ./configure.
+# Builds a pip-db server. Designed for producing a minimal pip-db
+# server, with no extra features. Note that this destructively removes
+# files not needed for building after compilation. To preserve these,
+# pass an argument, e.g. `./bin/build foo'.
 #
 set -e
+
+# Temporary build files
+BUILD_FILES="autom4te.cache/
+build/
+Documentation/
+node_modules/
+scripts/
+test/
+tools/"
 
 indent() {
     sed -u 's/^/        /'
@@ -20,7 +32,15 @@ status "Running configure"
     --disable-git-hooks \
     --disable-tools \
     --enable-minify-css \
-    --enable-minify-js $@ 2>&1 | indent
+    --enable-minify-js 2>&1 | indent
 
 status "Running make"
 make all 2>&1 | indent
+
+test -n "$1" || {
+    status "Minimising";
+    for f in $BUILD_FILES; do
+        echo "Removing \`$f'..." | indent;
+        rm -rf $f;
+    done;
+}

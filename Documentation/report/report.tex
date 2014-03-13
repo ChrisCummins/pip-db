@@ -1,0 +1,50 @@
+\documentclass[12pt,twoside]{report}
+
+\input{preamble}
+
+\begin{document}
+
+\pagenumbering{roman}
+
+\input{cover}
+\input{inside-cover}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\newpage
+
+\pagenumbering{arabic}
+
+\input{chapters/introduction}
+\input{chapters/implementation}
+
+\chapter{Tooling and process}
+
+\section{PHP to Clojure}
+\subsection{Imperative vs. Functional}
+\subsection{REPL Development}
+\subsection{Deployment}
+
+\section{Build systems}
+\subsection{Autotools}
+\subsection{pipbot}
+
+\section{Version control}
+\subsection{Branching model}
+\subsection{pipbot}
+\subsection{Issue tracking}
+
+\section{Dataset analysis}
+\subsection{png}
+\subsection{yaps}
+\subsection{csv2yaps}
+
+\input{chapters/conclusion}
+
+\appendix
+
+\printbibliography
+
+\end{document}

@@ -3032,7 +3032,9 @@ Tools: 11146
 
  * Next: BLAST searching.
 
+
 ## March 2014
+
 
 ### Sunday 2nd
 
@@ -3052,3 +3054,265 @@ Log output showing that incorrect build command is being run:
 2014-03-03T04:14:46.213270+00:00 heroku[web.1]: State changed from crashed to starting
 2014-03-03T04:14:53.811177+00:00 heroku[web.1]: Starting process with command `lein trampoline run`
 ```
+
+
+### Monday 3rd
+
+To convert UNIX timestamps to date cells in Excel:
+
+```
+=(A1/86400)+25569
+```
+
+
+### Tuesday 4th
+
+Feedback from Gareth Bunch (1st person to work on the data):
+
+> Ive had a look at the website, its a lot different to the excel
+> sheet. It seems easy to navigate and looks very
+> professional. Hopefully it is a successful and useful tool that can
+> be used in the years to come.
+
+Darren has also asked Fraser and Ben to take a look at it.
+
+Idea for further development of plausible nonsense generator - develop
+a tool which uses Markov chains to generate plausible yet nonsensical
+datasets, when trained with an input dataset. Inputs and outputs would
+both be CSV.
+
+
+### Wednesday 5th
+
+Notes from Midterm project review:
+
+ * Again, re-iterating the point that the *structure* of the submitted
+   report is going to be absolutely critical. I need to ensure that
+   the report is structured so as to emphasise and give appropriate
+   levels of details to the right sections.
+
+ * I need to make sure that I have a firm and convincing justification
+   for the LISP re-write. Perhaps it would be reasonable to contain a
+   discussion of the differences/benefits.
+
+Found a nice basic guide to formatting a thesis in LaTeX:
+https://www.sharelatex.com/blog/2013/08/02/thesis-series-pt1.html
+
+Notes for tomorrow's meeting with Ian:
+
+ * Report: latex report format OK (typeface and line spacing)?
+
+ * What assumptions should I make about the reader's knowledge of the
+   tools/languages? (especially the esoteric ones)
+
+> The report should be targeted at a competent graduate engineer.
+> Also, it should contain enough context information to be readily
+> understood by a project manager or an investment manager
+> specialising in your field of work.
+
+ * What does this mean?
+
+> Project specification: As drawn up at the start of the project, and
+> signed. This is mandatory.
+
+ * Usage instructions? + Executables?
+
+### Thursday 6th
+
+Notes from weekly meeting with Ian:
+
+ * Presentation was poor, didn't have coherent message or communicate
+   exactly what I'd been doing.
+
+ * For report: put the *big picture* list of achievements right up
+   front and centre, don't make the examiner waffle through 80 pages
+   of report in order to figure out whether the project is any good or
+   not.
+
+ * Report formatting - LaTeX is OK.
+
+ * Report structure needs to have more top-level chapters.
+
+ * Consider putting the process and tooling section before the website
+   section.
+
+ * Always consider second examiner when writing report - don't
+   underestimate the amount of context required, and assume that
+   they're electronic engineers, not computer scientists. Every new
+   tool/language needs an explanation.
+
+ * I can use footnotes to introduce new concepts and technologies (for
+   example: "version control is maintained using a git*", footnote:
+   "git is a blah blah blah...").
+
+ * "User" means website users (so usage instructions cover how to use
+   the website). Also, usage instructions means documentation on how
+   to upload and manage the dataset (for Darren).
+
+ * Add "uploading new data" to list of tasks for test cases.
+
+ * For next time: Build up the *big picture list* of 6 or so main
+   successes of the project.
+
+ * For next time: Revise proposed structure of report and for each
+   section add a short paragraph explaining the desired contents and
+   message of the section.
+
+
+### Saturday 8th
+
+Found out about the HTTP archive, which will be useful for providing
+real, empirical evidence for measuring the effectiveness of page
+optimisations:
+
+http://httparchive.org/trends.php?s=All&minlabel=Nov+15+2010&maxlabel=Mar+1+2014
+
+
+### Sunday 9th
+
+Auditing the size of the project:
+
+```
+$ du -d1
+376    ./autom4te.cache
+932    ./tools
+112    ./src
+48016  ./Documentation
+200    ./scripts
+76     ./test
+8      ./bin
+27124  ./build
+12572  ./node_modules
+61852  ./pg
+78444  ./.git
+5700   ./target
+1680   ./resources
+237492 .
+```
+
+And ranked by size:
+
+```
+$ du -d1 | sort -n
+8      ./bin
+76     ./test
+112    ./src
+200    ./scripts
+376    ./autom4te.cache
+932    ./tools
+1680   ./resources
+5700   ./target
+12572  ./node_modules
+27124  ./build
+48016  ./Documentation
+61852  ./pg
+78444  ./.git
+237492 .
+```
+
+By using conditional Makefile generation in autoconf and by
+destructively removing build files upon completion of `bin/build`,
+slug size is reduced to 188M:
+
+```
+$ du -d1 | sort -n
+8      ./bin
+76     ./test
+112    ./src
+200    ./scripts
+376    ./autom4te.cache
+768    ./tools
+1796   ./resources
+47764  ./Documentation
+61852  ./pg
+78468  ./.git
+191820 .
+```
+
+
+### Wednesday 12th
+
+Major steps in pip-db life cycle:
+
+1. Mockups first design (inspired by Google's aesthetic)
+1. Prototype in PHP & MySQL
+1. Autotooled build system, content hashing and minification
+1. PHP templating (and differences from previous FYP)
+1. MySQL schema (and differences from previous FYP)
+    * Tools: dsa - Dataset Analaysis
+1. Data integrity
+    * Tools: png - Plausible Nonsense Generator
+1. Branching model + Issue tracker workflow
+    * Tools: pipbot
+1. END OF M1 (user testing & review)
+1. Clojure research & intro
+1. Clojure port of M1 prototype
+1. Heroku deployment
+1. Working with HOFs and immutable data structures
+1. RESTful API design
+1. D2 user interface refinements
+
+Feedback from Ben Stone, via Darren:
+
+> I haven't encountered any problems running searches.  The only minor
+> issue I have found is that the CSV file download produces tab
+> delimited rather than comma delimited data and the file name has an
+> extra '.' character before the extension.
+
+> The presentation of data is clear. The only suggestion that I would
+> make is that it might be helpful to include a glossary of terms or
+> to annotate the search results to display explanations of
+> abbreviations e.g. when the mouse hovers over them.  Examples might
+> be to explain what s.p.c. means for subunit molecular weight or what
+> the 'm' means as a suffix to pI values.
+
+
+### Thursday 13th
+
+A recap on the output format of my `fetch-fasta` tool:
+
+```
+$ echo http://www.uniprot.org/uniprot/Q5XI22 | fetch-fasta
+{"url": "http://www.uniprot.org/uniprot/Q5XI22", "fasta": ">sp|Q5XI22|THIC_RAT Acetyl-CoA acetyltransferase, cytosolic OS=Rattus norvegicus GN=Acat2 PE=1 SV=1\nMNAGSDPVVIISAARTAIGSFNGALSTVPVHNLGTTVIKEVLQRAKVAPEEVSEVIFGHV\nLTAGCGQNPTRQASVGAGIPYSVPAWSCQMICGSGLKAVCLAAQSIAMGDSTIVVAGGME\nNMSKAPHLAHLRSGVKMGEVPLADSILCDGLTDAFHNYHMGITAENVAKKWQVSREAQDK\nVAVVSQNRAEHAQKAGHFDKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYFLT\nDGTGTVTPANASGMNDGAAAVVLMKKTEAESRMLKPLAQVVSWSQAGVEPSVMGVGPIPA\nIKQAVAKAGWSLEDVDVFEINEAFAAVSAAIAKELGLSPEKVNIDGGAIALGHPLGASGC\nRILVTLLHTLERVGGTRGVAALCIGGGMGIAMCVQRG"}
+```
+
+Which generates the plain text FASTA sequence:
+
+```
+>sp|Q5XI22|THIC_RAT Acetyl-CoA acetyltransferase, cytosolic OS=Rattus norvegicus GN=Acat2 PE=1 SV=1
+MNAGSDPVVIISAARTAIGSFNGALSTVPVHNLGTTVIKEVLQRAKVAPEEVSEVIFGHV
+LTAGCGQNPTRQASVGAGIPYSVPAWSCQMICGSGLKAVCLAAQSIAMGDSTIVVAGGME
+NMSKAPHLAHLRSGVKMGEVPLADSILCDGLTDAFHNYHMGITAENVAKKWQVSREAQDK
+VAVVSQNRAEHAQKAGHFDKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYFLT
+DGTGTVTPANASGMNDGAAAVVLMKKTEAESRMLKPLAQVVSWSQAGVEPSVMGVGPIPA
+IKQAVAKAGWSLEDVDVFEINEAFAAVSAAIAKELGLSPEKVNIDGGAIALGHPLGASGC
+RILVTLLHTLERVGGTRGVAALCIGGGMGIAMCVQRG
+```
+
+As explained
+[here](http://prodata.swmed.edu/pcma/info/fasta_format_file_example.htm),
+FASTA sequences only actually contain two components:
+
+> FASTA format: A sequence record in a FASTA format consists of a
+> single-line description (sequence name), followed by line(s) of
+> sequence data. The first character of the description line is a
+> greater-than (">") symbol.
+
+So, in order to save space, we should remove the hard line-wrapping of
+the of the sequence data, so the FASTA output would be:
+
+```
+>sp|Q5XI22|THIC_RAT Acetyl-CoA acetyltransferase, cytosolic OS=Rattus norvegicus GN=Acat2 PE=1 SV=1
+MNAGSDPVVIISAARTAIGSFNGALSTVPVHNLGTTVIKEVLQRAKVAPEEVSEVIFGHVLTAGCGQNPTRQASVGAGIPYSVPAWSCQMICGSGLKAVCLAAQSIAMGDSTIVVAGGMENMSKAPHLAHLRSGVKMGEVPLADSILCDGLTDAFHNYHMGITAENVAKKWQVSREAQDKVAVVSQNRAEHAQKAGHFDKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYFLTDGTGTVTPANASGMNDGAAAVVLMKKTEAESRMLKPLAQVVSWSQAGVEPSVMGVGPIPAIKQAVAKAGWSLEDVDVFEINEAFAAVSAAIAKELGLSPEKVNIDGGAIALGHPLGASGCRILVTLLHTLERVGGTRGVAALCIGGGMGIAMCVQRG
+```
+
+This also enables us to validate the FASTA sequence by ensuring that:
+
+1. It is *exactly* two lines long.
+2. The first line begins with a '>' symbol.
+
+We could do this verification on the server side at upload time or on
+the client side (`csv2yaps` or `fetch-fasta`). My preference would be
+client side, since this helps keep a minimal server implementation,
+and allows for catching formatting errors at an early stage, giving
+the user the option to correct the error.

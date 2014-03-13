@@ -110,11 +110,11 @@ $(document).ready(function () {
                                 record['Temperature-Max']));
     addPropertyRow('m=' + encodeURIComponent(record['Method']),
                    'Method', 'Experimental Method');
-    if (record['Sequence'])
+    if (record['Sequence-Name'])
         addPropertyRow(null, 'Sequence', 'FASTA Sequence',
                        '<textarea class="fasta" readonly>' +
-                       record['Sequence'] + '</textarea>' +
-                       '<a id="fasta" href="#">Show &gt;&gt;</a>');
+                       record['Sequence-Name'] + '\n' + record['Sequence-Data'] +
+                       '</textarea><a id="fasta" href="#">Show &gt;&gt;</a>');
 
     // Extern links
     addExternLink('Full-Text', 'Full Text');
