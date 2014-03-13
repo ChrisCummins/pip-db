@@ -38,7 +38,7 @@ status "Running make"
 make all 2>&1 | indent
 
 test -n "$1" || {
-    status "Tidying up build tools";
+    status "Minimising";
     for f in $BUILD_FILES; do
         echo "Removing \`$f'..." | indent;
         rm -rf $f;
