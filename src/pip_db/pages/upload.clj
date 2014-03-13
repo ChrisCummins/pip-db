@@ -115,6 +115,13 @@
                {:type "submit" :name "action" :value "upload"}
                "Submit"]]]]]}))
 
+;; Process a user uploaded dataset file.
+(defn process-file [file]
+  (apply db/add-records (-> (yaps/file->yaps file)
+                            (yaps/yaps->records))))
+
+;; ## Controller
+
 ;; Evaluate the expressions contained in body with file bound to a
 ;; File object pointed to by req. Upon completion, the file is
 ;; deleted.
@@ -124,12 +131,9 @@
      (.delete ~file)
      output#))
 
-;; ## Controller
-
 (defn GET [request]
   (view request))
 
 (defn POST [request]
   (with-tmp-file file ((request :params) "f")
-    (apply db/add-records (-> (yaps/file->yaps file)
-                              (yaps/yaps->records)))))
+    (process-file file)))
