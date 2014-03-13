@@ -3264,3 +3264,54 @@ Feedback from Ben Stone, via Darren:
 > abbreviations e.g. when the mouse hovers over them.  Examples might
 > be to explain what s.p.c. means for subunit molecular weight or what
 > the 'm' means as a suffix to pI values.
+
+
+### Thursday 13th
+
+A recap on the output format of my `fetch-fasta` tool:
+
+```
+$ echo http://www.uniprot.org/uniprot/Q5XI22 | fetch-fasta
+{"url": "http://www.uniprot.org/uniprot/Q5XI22", "fasta": ">sp|Q5XI22|THIC_RAT Acetyl-CoA acetyltransferase, cytosolic OS=Rattus norvegicus GN=Acat2 PE=1 SV=1\nMNAGSDPVVIISAARTAIGSFNGALSTVPVHNLGTTVIKEVLQRAKVAPEEVSEVIFGHV\nLTAGCGQNPTRQASVGAGIPYSVPAWSCQMICGSGLKAVCLAAQSIAMGDSTIVVAGGME\nNMSKAPHLAHLRSGVKMGEVPLADSILCDGLTDAFHNYHMGITAENVAKKWQVSREAQDK\nVAVVSQNRAEHAQKAGHFDKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYFLT\nDGTGTVTPANASGMNDGAAAVVLMKKTEAESRMLKPLAQVVSWSQAGVEPSVMGVGPIPA\nIKQAVAKAGWSLEDVDVFEINEAFAAVSAAIAKELGLSPEKVNIDGGAIALGHPLGASGC\nRILVTLLHTLERVGGTRGVAALCIGGGMGIAMCVQRG"}
+```
+
+Which generates the plain text FASTA sequence:
+
+```
+>sp|Q5XI22|THIC_RAT Acetyl-CoA acetyltransferase, cytosolic OS=Rattus norvegicus GN=Acat2 PE=1 SV=1
+MNAGSDPVVIISAARTAIGSFNGALSTVPVHNLGTTVIKEVLQRAKVAPEEVSEVIFGHV
+LTAGCGQNPTRQASVGAGIPYSVPAWSCQMICGSGLKAVCLAAQSIAMGDSTIVVAGGME
+NMSKAPHLAHLRSGVKMGEVPLADSILCDGLTDAFHNYHMGITAENVAKKWQVSREAQDK
+VAVVSQNRAEHAQKAGHFDKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYFLT
+DGTGTVTPANASGMNDGAAAVVLMKKTEAESRMLKPLAQVVSWSQAGVEPSVMGVGPIPA
+IKQAVAKAGWSLEDVDVFEINEAFAAVSAAIAKELGLSPEKVNIDGGAIALGHPLGASGC
+RILVTLLHTLERVGGTRGVAALCIGGGMGIAMCVQRG
+```
+
+As explained
+[here](http://prodata.swmed.edu/pcma/info/fasta_format_file_example.htm),
+FASTA sequences only actually contain two components:
+
+> FASTA format: A sequence record in a FASTA format consists of a
+> single-line description (sequence name), followed by line(s) of
+> sequence data. The first character of the description line is a
+> greater-than (">") symbol.
+
+So, in order to save space, we should remove the hard line-wrapping of
+the of the sequence data, so the FASTA output would be:
+
+```
+>sp|Q5XI22|THIC_RAT Acetyl-CoA acetyltransferase, cytosolic OS=Rattus norvegicus GN=Acat2 PE=1 SV=1
+MNAGSDPVVIISAARTAIGSFNGALSTVPVHNLGTTVIKEVLQRAKVAPEEVSEVIFGHVLTAGCGQNPTRQASVGAGIPYSVPAWSCQMICGSGLKAVCLAAQSIAMGDSTIVVAGGMENMSKAPHLAHLRSGVKMGEVPLADSILCDGLTDAFHNYHMGITAENVAKKWQVSREAQDKVAVVSQNRAEHAQKAGHFDKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYFLTDGTGTVTPANASGMNDGAAAVVLMKKTEAESRMLKPLAQVVSWSQAGVEPSVMGVGPIPAIKQAVAKAGWSLEDVDVFEINEAFAAVSAAIAKELGLSPEKVNIDGGAIALGHPLGASGCRILVTLLHTLERVGGTRGVAALCIGGGMGIAMCVQRG
+```
+
+This also enables us to validate the FASTA sequence by ensuring that:
+
+1. It is *exactly* two lines long.
+2. The first line begins with a '>' symbol.
+
+We could do this verification on the server side at upload time or on
+the client side (`csv2yaps` or `fetch-fasta`). My preference would be
+client side, since this helps keep a minimal server implementation,
+and allows for catching formatting errors at an early stage, giving
+the user the option to correct the error.
