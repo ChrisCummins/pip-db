@@ -86,8 +86,6 @@
             record[i] = r[i];
         });
 
-        record['Available-At'] = 'http://' + location.host + '/r/' + r['id'];
-
         records.push(record);
     });
 

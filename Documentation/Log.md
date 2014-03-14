@@ -3489,3 +3489,9 @@ Each "hit" is represented by a top-level node:
 7. Run example tests to pipe BLAST+ output to user.
 8. Implement wrapper around BLAST+ search output.
 9. Tie-in blast database generation to data upload process.
+
+Changes to notify Darren about:
+
+ * Remove unwanted columns from Download page output.
+ * Fixed double dot '..' issue with downloaded file name.
+ * CSV downloads are now comma separated, not tab.
