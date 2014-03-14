@@ -15,7 +15,10 @@
 
             // Escape a string
             var escape = function (text) {
-                return '"' + String(text).replace(re, '\\' + separator) + '"';
+                if (text !== undefined)
+                    return '"' + String(text).replace(re, '\\' + separator) + '"';
+                else // Don't return "undefined".
+                    return '""';
             }
 
             if (line !== '')
