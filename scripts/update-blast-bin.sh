@@ -5,6 +5,8 @@
 
 echo "Checking latest BLAST+ release version..."
 
+cd extern
+
 # Get the path of the latest release
 ftp -n ftp.ncbi.nlm.nih.gov >index.tmp <<END_SCRIPT
 quote USER anonymous

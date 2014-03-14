@@ -6,7 +6,7 @@
 (def output (sh "blastp" "-db" "pip-db" "-evalue" "10"
                 "-outfmt" "6 stitle score evalue qseq sseq"
                 :in "DKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYFLT"
-                :env {"PATH" "blast/bin" "BLASTDB" "blast/db"}))
+                :env {"PATH" "extern/bin" "BLASTDB" "db"}))
 
 (defn row->result [row]
   (let [c (str/split row #"\t")]

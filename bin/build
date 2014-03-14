@@ -49,7 +49,7 @@ test -n "$1" || {
 }
 
 # Add BLAST+ binaries to this script's PATH
-PATH=`$pwd`/blast/bin:$PATH
+PATH=extern/bin:$PATH
 
 status "Creating BLAST+ database"
 mkdir -p db

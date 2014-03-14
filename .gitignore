@@ -96,5 +96,4 @@ Thumbs.db
 /.lein-failures
 /.lein-repl-history
 /.nrepl-port
-/ncbi-blast-*
 /node_modules
