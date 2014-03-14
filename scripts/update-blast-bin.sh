@@ -3,6 +3,27 @@
 # Update the BLAST+ binaries located in bin/. This fetches the latest
 # NCBI release for x64 linux systems.
 
+# Lookup the root directory for the project. If unable to locate root,
+# exit script.
+#
+#     @return The absolute path to the project root directory
+get_project_root() {
+    while [[ "$(pwd)" != "/" ]]; do
+        if test -f configure.ac; then
+            pwd
+            return
+        fi
+        cd ..
+    done
+
+    echo "fatal: Unable to locate project base directory." >&2
+    exit 3
+}
+
+set -e
+
+cd "$(get_project_root)"
+
 echo "Checking latest BLAST+ release version..."
 
 cd extern
