@@ -1,7 +1,7 @@
 (ns pip-db.pages.search
   (:require [clojure.string :as str]
             [pip-db.pages.advanced :as advanced]
-            [pip-db.db :as db]
+            [pip-db.search :as search]
             [pip-db.ui :as ui]
             [pip-db.util :as util]))
 
@@ -34,7 +34,7 @@
 ;; Perform a search from the given request map and wrap the results
 ;; into a `:results` key.
 (defn search-results [request]
-  (assoc request :results (db/search request)))
+  (assoc request :results (search/search request)))
 
 ;; Serve a search request.
 (defn search-handler [request]

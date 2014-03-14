@@ -44,3 +44,7 @@
 (defn search [request]
   (let [results (blast-results ((request :params) "seq"))]
     (flatten (map #(result->records request %) results))))
+
+;; TODO: Implement
+(defn no-of-records []
+  2000)
