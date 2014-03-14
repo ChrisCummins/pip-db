@@ -122,13 +122,13 @@
         'CSV': {
             blob: json2csv(records),
             mime: 'text/csv',
-            extension: '.csv',
+            extension: 'csv',
             select: showTable
         },
         'JSON': {
             blob: JSON.stringify(records, null, '\t') + '\n',
             mime: 'application/json',
-            extension: '.json',
+            extension: 'json',
             select: showText
         }
     };
