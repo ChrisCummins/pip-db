@@ -58,7 +58,7 @@ if [ ! -d "$DIR" ]; then
     tar zxvf "$FILE" | indent
 fi
 
-mv -v "$DIR/bin/blastp" "$DIR/bin/makeblastdb" bin/
+cp -v "$DIR/bin/blastp" "$DIR/bin/makeblastdb" bin/
 
 if [ -z "$1" ]; then
     echo "Tidying up...";
