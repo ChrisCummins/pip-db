@@ -43,7 +43,6 @@
   (GET  ["/api/s"]                 [:as request] (api/s           request))
   (GET  ["/api/r/:id",  :id id-re] [:as request] (api/r           request))
   (GET  ["/api/ac"]                [:as request] (api/ac          request))
-  (GET  ["/api/blast"]             [:as request] (api/blast       request))
   (route/resources "/")
   (route/not-found (ui/page-404)))
 

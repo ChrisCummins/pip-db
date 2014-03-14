@@ -13,6 +13,3 @@
 
 (defn ac [request]
   (util/json-response (db/autocomplete request)))
-
-(defn blast [request]
-  (util/json-response (blast/search request)))
