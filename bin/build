@@ -49,11 +49,8 @@ test -n "$1" || {
     done;
 }
 
-# Add BLAST+ binaries to this script's PATH
-PATH=extern/bin:$PATH
-
 status "Creating BLAST+ database"
 mkdir -p db
 cd db
-makeblastdb -in ../dataset.fsa -dbtype 'prot' -out pip-db | indent
+../extern/bin/makeblastdb -in ../dataset.fsa -dbtype 'prot' -out pip-db | indent
 cd ..
