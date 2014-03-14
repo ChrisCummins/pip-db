@@ -47,3 +47,60 @@ test -n "$1" || {
         rm -rf $f;
     done;
 }
+
+status "Checking latest BLAST+ release version"
+
+# Get the path of the latest release
+ftp -n ftp.ncbi.nlm.nih.gov >index.tmp <<END_SCRIPT
+quote USER anonymous
+quote PASS
+cd blast/executables/blast+/LATEST
+ls
+quit
+END_SCRIPT
+
+FILE=`grep "x64-linux.tar.gz" index.tmp | awk '{print $NF}'`
+rm -f index.tmp
+
+test -n "$FILE" || { echo "Failed to retrieve path!"; exit 1; }
+
+if [ -f "$FILE" ]; then
+    echo "Using cached file '$FILE'" | indent
+else
+    echo "Downloading '$FILE'..." | indent
+    wget "ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/$FILE" | indent
+fi
+
+DIR=`echo "$FILE" | sed 's/-x64-linux\.tar\.gz//'`
+
+status "Installing BLAST+ binaries"
+
+if [ ! -d "$DIR" ]; then
+    echo "Unpacking '$FILE'..." | indent
+    tar zxvf "$FILE" | indent
+fi
+
+if [ -d blast ]; then
+    rm -rf blast
+fi
+
+mv -v "$DIR" blast
+
+echo "Removing unneeded BLAST+ binaries..." | indent
+find blast/bin -type f | grep -E -v "(blastp|makeblastdb)" | xargs rm -fv | indent
+
+echo "Installed BLAST+ in 'blast/'" | indent
+
+# Add BLAST+ binaries to this script's PATH
+PATH=`$pwd`/blast/bin:$PATH
+
+status "Creating BLAST+ database"
+mkdir -p blast/db
+cd blast/db
+makeblastdb -in ../../dataset.fsa -dbtype 'prot' -out pip-db | indent
+cd ../..
+
+test -n "$1" || {
+    status "Tidying up"
+    rm -v "$FILE" | indent;
+}

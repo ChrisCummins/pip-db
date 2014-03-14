@@ -89,6 +89,8 @@ Thumbs.db
 #
 # Project-specific ignore patterns
 #
+/blast
+/ncbi-blast-*
 /config.summary
 /pg
 /target

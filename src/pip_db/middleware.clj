@@ -14,6 +14,7 @@
             [pip-db.pages.record :as record]
             [pip-db.pages.search :as search]
             [pip-db.pages.upload :as upload]
+            [pip-db.blast :as blast]
             [pip-db.api :as api]
             [pip-db.ui :as ui]))
 
@@ -43,6 +44,7 @@
   (GET  ["/api/s"]                 [:as request] (api/s           request))
   (GET  ["/api/r/:id",  :id id-re] [:as request] (api/r           request))
   (GET  ["/api/ac"]                [:as request] (api/ac          request))
+  (GET  ["/test"]                  [:as request] (blast/run-test  request))
   (route/resources "/")
   (route/not-found (ui/page-404)))
 
