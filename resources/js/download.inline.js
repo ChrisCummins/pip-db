@@ -5,7 +5,7 @@
      * Convert a JSON object into a CSV encoded string.
      */
     var json2csv = function(o, separator) {
-        separator = separator || '\t';
+        separator = separator || ',';
         var re = new RegExp(separator, 'g');
         var csv = '';
         var EOL = '\r\n';
