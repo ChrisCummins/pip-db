@@ -119,13 +119,9 @@
         'Temperature-Min',
         'Temperature-Max',
         'Method',
-        'Full-Text',
-        'Abstract-Only',
         'PubMed',
         'Species-Taxonomy',
         'Protein-Sequence',
-        'Notes',
-        'Sequence',
         'Created-At',
         'Available-At'
     ];
