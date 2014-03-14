@@ -89,12 +89,12 @@ Thumbs.db
 #
 # Project-specific ignore patterns
 #
-/blast
-/ncbi-blast-*
 /config.summary
+/db
 /pg
 /target
 /.lein-failures
 /.lein-repl-history
 /.nrepl-port
+/ncbi-blast-*
 /node_modules
