@@ -126,8 +126,21 @@
         'Available-At'
     ];
 
-    // JSON data response map
-    var records = data['Records'];
+    /*
+     * Generate our records data from the results map.
+     */
+    var records = [];
+    data['Records'].forEach(function (r) {
+        var record = {};
+
+        properties.forEach(function (i) {
+            record[i] = r[i];
+        });
+
+        record['Available-At'] = 'http://' + location.host + '/r/' + r['id'];
+
+        records.push(record);
+    });
 
     // UI components
     var $table = $('#table');
@@ -141,14 +154,6 @@
     // Global state
     var format = 'csv';
     var mime = 'text/csv';
-
-    // Add 'Available-At' attributes and filter out 'id'
-    for (var i in records) {
-        // TODO: Perform this on the server-side.
-        var record = records[i];
-        record['Available-At'] = 'http://' + location.host + '/r/' + record['id'];
-        delete record['id'];
-    }
 
     /*
      * File format selection
