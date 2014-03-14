@@ -245,7 +245,7 @@
     });
 
     $download.click(function () {
-        var format = $(' li.active a', $ff).text(); // Active file format
+        var format = $(' li.active a', $ff).text() || 'CSV'; // Active file format
 
         var blob = new Blob([downloadFormats[format].blob], {
             type: downloadFormats[format].mime + ';charset=utf-8'
