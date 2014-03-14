@@ -3316,3 +3316,183 @@ the client side (`csv2yaps` or `fetch-fasta`). My preference would be
 client side, since this helps keep a minimal server implementation,
 and allows for catching formatting errors at an early stage, giving
 the user the option to correct the error.
+
+**Generating BLAST+ protein database**
+
+Wrote another tool `yaps2fsa` which converts a YAPS data set into a
+FASTA file which can be used to generate BLAST+ databases.
+
+```
+$ ./makeblastdb -in ~/src/pip-db-priv/dataset.fsa -dbtype 'prot' -out pip-db
+
+
+Building a new DB, current time: 03/13/2014 11:40:26
+New DB name:   pip-db
+New DB title:  /home/chris/src/pip-db-priv/dataset.fsa
+Sequence type: Protein
+Keep Linkouts: T
+Keep MBits: T
+Maximum file size: 1000000000B
+Adding sequences from FASTA; added 2822 sequences in 0.11529 seconds.
+```
+
+Example XML query:
+
+```
+$ ./blastp -db pip-db -query ~/example-query.fas -outfmt 5
+```
+
+where:
+
+```
+$ cat ~/example-query.fas
+DKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYFLT
+DGTGTVTPANASGMNDGAAAVVLMKKTEAESRMLKPLAQVVSWSQAGVEPSVMGVGPIPA
+IKQAVAKAGWSLEDVDVFEINEAFAAVSAAIAKELGLSPEKVNIDGGAIALGHPLGASGC
+RILVTLLHTLERVGGTRGVAALCIGGGMGIAMCVQRG
+```
+
+From the blastp help pages:
+
+```
+ -outfmt <String>
+   alignment view options:
+     0 = pairwise,
+     1 = query-anchored showing identities,
+     2 = query-anchored no identities,
+     3 = flat query-anchored, show identities,
+     4 = flat query-anchored, no identities,
+     5 = XML Blast output,
+     6 = tabular,
+     7 = tabular with comment lines,
+     8 = Text ASN.1,
+     9 = Binary ASN.1,
+    10 = Comma-separated values,
+    11 = BLAST archive format (ASN.1)
+```
+
+Requested a meeting with Darren to discuss BLAST+ query results, and
+how to best display the resulting data to the user.
+
+Note that the BLAST+ database path is configured in environment
+variable `$BLASTDB`.
+
+
+### Friday 14th
+
+Notes from meeting with Darren:
+
+3 tasks, 5 users
+
+ * Darren's very happy with overall progress of the project.
+
+ * Download results should omit:
+
+    1. Full text + Abstract only links
+    2. Species Taxonomy link
+    3. FASTA sequence
+    4. Notes
+
+ * I should look into guaranteeing availability of service if the
+   website is going to be mentioned in research papers. Does Heroku
+   guarantee uptime? Is the Uni going to re-register pip-db.org?
+   Should we use a redirect from the Aston server?
+
+ * For BLAST+ searches, the useful output is:
+
+```
+                                                                      Score     E
+Sequences producing significant alignments:                          (Bits)  Value
+
+  sp|Q5XI22|THIC_RAT Acetyl-CoA acetyltransferase, cytosolic OS=R...    402   1e-141
+  sp|Q3T0R7|THIM_BOVIN 3-ketoacyl-CoA thiolase, mitochondrial OS=...    190   6e-59
+  sp|Q3T0R7|THIM_BOVIN 3-ketoacyl-CoA thiolase, mitochondrial OS=...    190   6e-59
+  sp|Q3T0R7|THIM_BOVIN 3-ketoacyl-CoA thiolase, mitochondrial OS=...    190   6e-59
+  sp|P13437|THIM_RAT 3-ketoacyl-CoA thiolase, mitochondrial OS=Ra...    184   7e-57
+  sp|P13437|THIM_RAT 3-ketoacyl-CoA thiolase, mitochondrial OS=Ra...    184   7e-57
+  sp|P41338|THIL_YEAST Acetyl-CoA acetyltransferase OS=Saccharomy...    145   3e-42
+  sp|Q29RZ0|THIL_BOVIN Acetyl-CoA acetyltransferase, mitochondria...    137   9e-39
+  sp|Q29RZ0|THIL_BOVIN Acetyl-CoA acetyltransferase, mitochondria...    137   9e-39
+  sp|Q29RZ0|THIL_BOVIN Acetyl-CoA acetyltransferase, mitochondria...    137   9e-39
+  sp|Q29RZ0|THIL_BOVIN Acetyl-CoA acetyltransferase, mitochondria...    137   9e-39
+  sp|P17764|THIL_RAT Acetyl-CoA acetyltransferase, mitochondrial ...    128   8e-36
+  sp|P07738|PMGE_HUMAN Bisphosphoglycerate mutase OS=Homo sapiens...  25.0    3.0
+  sp|P07738|PMGE_HUMAN Bisphosphoglycerate mutase OS=Homo sapiens...  25.0    3.0
+  sp|P07738|PMGE_HUMAN Bisphosphoglycerate mutase OS=Homo sapiens...  25.0    3.0
+  sp|P07738|PMGE_HUMAN Bisphosphoglycerate mutase OS=Homo sapiens...  25.0    3.0
+  sp|P07738|PMGE_HUMAN Bisphosphoglycerate mutase OS=Homo sapiens...  25.0    3.0
+  sp|Q71EW5|AHY_PELAE Acetylene hydratase OS=Pelobacter acetyleni...  25.4    3.2
+  sp|Q29387|EF1G_PIG Elongation factor 1-gamma (Fragment) OS=Sus ...  24.3    6.0
+```
+
+And then for each result, the alignment string:
+
+```
+Query  61   AAVVLMKKTEAESRMLKPLAQVVSWSQAGVEPSVMGVGPIPAIKQAVAKAGWSLEDVDVF  120
+             AV++  +   +     PLA++V +  +G +P++MG+GP+PAI  A+ K G SL+D+D+
+Sbjct  258  GAVIIASEDAVKKHNFTPLARIVGYFVSGCDPTIMGIGPVPAISGALKKTGLSLKDMDLV  317
+```
+
+So the BLAST+ results page should include columns for score and E
+value, and a "click to reveal" alignment string output.
+
+**Deciphering BLAST+ search output**
+
+Query used for tests (XML formatted):
+
+```
+BLASTDB=~/src/pip-db-priv/blast-db blastp -db pip-db -query ~/example-query.fas -outfmt 5 | less
+```
+
+Each "hit" is represented by a top-level node:
+
+```
+<Hit>
+  <Hit_num>1</Hit_num>
+  <Hit_id>gnl|BL_ORD_ID|1</Hit_id>
+  <Hit_def>sp|Q5XI22|THIC_RAT Acetyl-CoA acetyltransferase, cytosolic OS=Rattus norvegicus GN=Acat2 PE=1 SV=1</Hit_def>
+  <Hit_accession>1</Hit_accession>
+  <Hit_len>397</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>402.519</Hsp_bit-score>
+      <Hsp_score>1033</Hsp_score>
+      <Hsp_evalue>1.15272e-141</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>199</Hsp_query-to>
+      <Hsp_hit-from>199</Hsp_hit-from>
+      <Hsp_hit-to>397</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>199</Hsp_identity>
+      <Hsp_positive>199</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>199</Hsp_align-len>
+      <Hsp_qseq>DKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYFLTDGTGTVTPANASGMNDGAAAVVLMKKTEAESRMLKPLAQVVSWSQAGVEPSVMGVGPIPAIKQAVAKAGWSLEDVDVFEINEAFAAVSAAIAKELGLSPEKVNIDGGAIALGHPLGASGCRILVTLLHTLERVGGTRGVAALCIGGGMGIAMCVQ
+      <Hsp_hseq>DKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYFLTDGTGTVTPANASGMNDGAAAVVLMKKTEAESRMLKPLAQVVSWSQAGVEPSVMGVGPIPAIKQAVAKAGWSLEDVDVFEINEAFAAVSAAIAKELGLSPEKVNIDGGAIALGHPLGASGCRILVTLLHTLERVGGTRGVAALCIGGGMGIAMCVQ
+      <Hsp_midline>DKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYFLTDGTGTVTPANASGMNDGAAAVVLMKKTEAESRMLKPLAQVVSWSQAGVEPSVMGVGPIPAIKQAVAKAGWSLEDVDVFEINEAFAAVSAAIAKELGLSPEKVNIDGGAIALGHPLGASGCRILVTLLHTLERVGGTRGVAALCIGGGMGIAM
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+```
+
+**BLAST TODO**
+
+1. Read up on `blastp` flags and determine the *exact* command we'll
+   use to run queries from the web.
+2. Read up on Clojure
+   [subprocess execution](http://clojuredocs.org/clojure_core/1.2.0/clojure.java.shell/sh).
+3. Mockup the FASTA sequence input form for search queries.
+4. Mockup the BLAST+ search results page.
+5. Incorporate `pip-db-blast` BLAST+ script to `pip-db`.
+6. Implement FASTA sequence input form.
+7. Run example tests to pipe BLAST+ output to user.
+8. Implement wrapper around BLAST+ search output.
+9. Tie-in blast database generation to data upload process.
+
+Changes to notify Darren about:
+
+ * Remove unwanted columns from Download page output.
+ * Fixed double dot '..' issue with downloaded file name.
+ * CSV downloads are now comma separated, not tab.

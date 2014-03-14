@@ -161,10 +161,21 @@
   (try (with-connection-results-query results [query] (apply vector results))
        (catch Exception e [])))
 
+;; Wraps an "Available-At: [URL]" property to a record.
+(defn wrap-available-at [record]
+  (assoc record :Available-At (util/record-url record)))
+
+;; Removes the "id: [ID] property of a record."
+(defn unwrap-id [record]
+  (dissoc record :id))
+
 ;; Convert a record row (as returned by a query of the records table)
 ;; into a YAPS encoded map.
 (defn row->record [row]
-  (-> (into {} (filter second row)) (set/rename-keys renaming-table)))
+  (-> (into {} (filter second row))
+      (set/rename-keys renaming-table)
+      (wrap-available-at)
+      (unwrap-id)))
 
 ;; Determine whether the required tables exist.
 (defn migrated? []

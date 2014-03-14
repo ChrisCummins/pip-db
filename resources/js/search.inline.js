@@ -4,9 +4,6 @@
     // JSON data response map
     var records = data['Records'];
 
-    // The base URL component for results
-    var resultsUrlPrefix = '/r/'
-
     // UI components
     var $download = $('#download');
     var $table = $('.sresults table');
@@ -23,7 +20,7 @@
      */
     var attachTableListeners = function () {
         $(' tr', $tbody).click(function () {
-            window.location = resultsUrlPrefix + $(this).attr('data-id');
+            window.location = $(this).attr('data-url');
         });
     };
 
@@ -66,7 +63,7 @@
                 return ''
         }
 
-        var html = '<tr data-id="' + record['id'] + '">';
+        var html = '<tr data-url="' + record['Available-At'] + '">';
 
         html += getRecordCell('Protein-Names');
         html += getRecordCell('Source');

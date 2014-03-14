@@ -143,6 +143,12 @@
   ([] "/img/")
   ([filename] (str (image-path) filename)))
 
+;; ### URLs
+
+;; Generate a "permalink" URL for a record.
+(defn record-url [record]
+  (str "http://www.pip-db.org/r/" (record :id)))
+
 ;; --------------------
 ;; ## Working with HTML
 

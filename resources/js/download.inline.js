@@ -1,65 +1,11 @@
 (function () {
     'use strict';
 
-    /*  This work is licensed under Creative Commons GNU LGPL License.
-
-        License: http://creativecommons.org/licenses/LGPL/2.1/
-        Version: 0.9
-        Author:  Stefan Goessner/2006
-        Web:     http://goessner.net/
-    */
-    function json2xml(o) {
-        var toXml = function(v, name, ind) {
-            // Escape a string
-            var escape = function (text) {
-                return String(text).replace(/&/g, '&amp;');
-            };
-
-            var xml = "";
-            if (v instanceof Array) {
-                for (var i = 0, n = v.length; i < n; i++)
-                    xml += ind + toXml(v[i], name, ind + "\t") + '\n';
-            }
-            else if (typeof(v) == "object") {
-                var hasChild = false;
-                xml += ind + "<";
-                xml += Number(name) > -1 ? 'record' : name; // Default
-                for (var m in v) {
-                    if (m.charAt(0) == "@")
-                        xml += " " + m.substr(1) + "=\"" + v[m].toString() + "\"";
-                    else
-                        hasChild = true;
-                }
-                xml += hasChild ? ">\n" : "/>";
-                if (hasChild) {
-                    for (var m in v) {
-                        if (m == "#text")
-                            xml += v[m];
-                        else if (m == "#cdata")
-                            xml += "<![CDATA[" + v[m] + "]]>";
-                        else if (m.charAt(0) != "@")
-                            xml += toXml(v[m], m, ind + "\t") + '\n';
-                    }
-                    xml += (xml.charAt(xml.length-1)=="\n"?ind:"") + "</";
-                    xml += Number(name) > -1 ? 'record' : name; // Default
-                    xml += ">";
-                }
-            }
-            else {
-                xml += ind + "<" + name + ">" + escape(v) +  "</" + name + ">";
-            }
-            return xml;
-        }, xml="";
-        for (var m in o)
-            xml += toXml(o[m], m, "") + '\n';
-        return xml;
-    }
-
     /*
      * Convert a JSON object into a CSV encoded string.
      */
     var json2csv = function(o, separator) {
-        separator = separator || '\t';
+        separator = separator || ',';
         var re = new RegExp(separator, 'g');
         var csv = '';
         var EOL = '\r\n';
@@ -69,7 +15,10 @@
 
             // Escape a string
             var escape = function (text) {
-                return '"' + String(text).replace(re, '\\' + separator) + '"';
+                if (text !== undefined)
+                    return '"' + String(text).replace(re, '\\' + separator) + '"';
+                else // Don't return "undefined".
+                    return '""';
             }
 
             if (line !== '')
@@ -119,19 +68,26 @@
         'Temperature-Min',
         'Temperature-Max',
         'Method',
-        'Full-Text',
-        'Abstract-Only',
         'PubMed',
         'Species-Taxonomy',
         'Protein-Sequence',
-        'Notes',
-        'Sequence',
         'Created-At',
         'Available-At'
     ];
 
-    // JSON data response map
-    var records = data['Records'];
+    /*
+     * Generate our records data from the results map.
+     */
+    var records = [];
+    data['Records'].forEach(function (r) {
+        var record = {};
+
+        properties.forEach(function (i) {
+            record[i] = r[i];
+        });
+
+        records.push(record);
+    });
 
     // UI components
     var $table = $('#table');
@@ -145,14 +101,6 @@
     // Global state
     var format = 'csv';
     var mime = 'text/csv';
-
-    // Add 'Available-At' attributes and filter out 'id'
-    for (var i in records) {
-        // TODO: Perform this on the server-side.
-        var record = records[i];
-        record['Available-At'] = 'http://' + location.host + '/r/' + record['id'];
-        delete record['id'];
-    }
 
     /*
      * File format selection
@@ -175,19 +123,13 @@
         'CSV': {
             blob: json2csv(records),
             mime: 'text/csv',
-            extension: '.csv',
+            extension: 'csv',
             select: showTable
         },
         'JSON': {
             blob: JSON.stringify(records, null, '\t') + '\n',
             mime: 'application/json',
-            extension: '.json',
-            select: showText
-        },
-        'XML': {
-            blob: json2xml(records),
-            mime: 'application/xml',
-            extension: '.xml',
+            extension: 'json',
             select: showText
         }
     };
@@ -304,7 +246,7 @@
     });
 
     $download.click(function () {
-        var format = $(' li.active a', $ff).text(); // Active file format
+        var format = $(' li.active a', $ff).text() || 'CSV'; // Active file format
 
         var blob = new Blob([downloadFormats[format].blob], {
             type: downloadFormats[format].mime + ';charset=utf-8'

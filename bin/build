@@ -37,6 +37,9 @@ status "Running configure"
 status "Running make"
 make all 2>&1 | indent
 
+status "Installing lein dependencies"
+lein deps
+
 test -n "$1" || {
     status "Minimising";
     for f in $BUILD_FILES; do
