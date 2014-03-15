@@ -1,6 +1,8 @@
 SUBDIRS =
 	design \
+	midterm \
 	plan \
+	report \
 	$(NULL)
 
 EXTRA_DIST = \
