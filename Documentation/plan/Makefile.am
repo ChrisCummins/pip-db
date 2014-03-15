@@ -21,12 +21,6 @@ CLEANFILES = \
 	\#* \
 	$(NULL)
 
-EXTRA_DIST = \
-	proposal.docx \
-	proposal.pdf \
-	README.md \
-	$(NULL)
-
 PDFLATEX_ARGS = -output-format pdf \
 	-progname pdflatex \
 	-file-line-error \
