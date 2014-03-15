@@ -430,7 +430,9 @@ AS_IF([test "x$enable_documentation" = xyes],
                 Documentation/design/d1/previous/renders/Makefile
                 Documentation/design/d1/tasks/Makefile
                 Documentation/design/d1/tasks/renders/Makefile
-                Documentation/plan/Makefile])],)
+                Documentation/midterm/Makefile
+                Documentation/plan/Makefile
+                Documentation/report/Makefile])],)
 
 AS_IF([test "x$enable_tools" = xyes],
       [AC_CONFIG_FILES([
