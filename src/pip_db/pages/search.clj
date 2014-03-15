@@ -19,28 +19,33 @@
     :javascript (list (util/inline-data-js "data" (request :results))
                       (util/inline-js "/js/search.inline.js"))}))
 
-;; ## Controller
+;; Generate a HTTP 302 redirect response pointing to the given
+;; record's URL.
+(defn record-redirect [record]
+  {:status 302 :headers {"Location" (record :Available-At)}})
 
-;; Perform a search from the given request map and wrap the results
-;; into a `:results` key.
-(defn search-results [request]
-  (assoc request :results (search/search request)))
+;; Accepts a search results map and dispatches a record redirect to
+;; the first record.
+(defn single-record-view [results-map]
+  (record-redirect (first ((results-map :results) :Records))))
+
+;; ## Controller
 
 ;; Serve a search request.
 (defn search-handler [request]
-  (view (search-results request)))
+  (let [results           (assoc request :results (search/search request))
+        no-of-results     ((results :results) :No-Of-Records-Returned)
+        view-handler      (if (> no-of-results 1) view single-record-view)]
+    (view-handler results)))
 
 ;; Serve an advanced search page.
 (defn advanced-handler [request] (advanced/GET request))
-
-(defn request-action [request]
-  ((request :params) "a"))
 
 ;; Return the handler to be used for a specific search action. If the
 ;; action `a` is used, then we use the advanced handler, else we use
 ;; the normal search.
 (defn response-function [request]
-  (if (= "a" (request-action request)) advanced-handler search-handler))
+  (if (= "a" ((request :params) "a")) advanced-handler search-handler))
 
 ;; Search page ring handler.
 (defn GET [request]
