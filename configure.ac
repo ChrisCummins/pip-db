@@ -422,14 +422,6 @@ dnl ================================================================
 AS_IF([test "x$enable_documentation" = xyes],
       [AC_CONFIG_FILES([
                 Documentation/Makefile
-                Documentation/design/Makefile
-                Documentation/design/d1/Makefile
-                Documentation/design/d1/pages/Makefile
-                Documentation/design/d1/pages/renders/Makefile
-                Documentation/design/d1/previous/Makefile
-                Documentation/design/d1/previous/renders/Makefile
-                Documentation/design/d1/tasks/Makefile
-                Documentation/design/d1/tasks/renders/Makefile
                 Documentation/midterm/Makefile
                 Documentation/plan/Makefile
                 Documentation/report/Makefile])],)
