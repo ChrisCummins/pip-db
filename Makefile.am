@@ -15,11 +15,6 @@ clean-local:
 	@echo '  LEIN   clean'
 	@lein clean
 
-EXTRA_DIST = \
-	autogen.sh \
-	LICENSE \
-	$(NULL)
-
 .PHONY: test run-server run-db
 
 test:

@@ -5,10 +5,6 @@ SUBDIRS =
 	report \
 	$(NULL)
 
-EXTRA_DIST = \
-	Log.md \
-	$(NULL)
-
 HTML_DOCS = code.html
 
 doc_DATA = $(HTML_DOCS)
