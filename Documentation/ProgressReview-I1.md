@@ -119,19 +119,19 @@ Below is a series of comparison screenshots between the initial D1
 designs and the M1 implementation:
 
 #### Homepage
-![Comparison](assets/m1-comparison-homepage.png)
+![Comparison](https://raw.github.com/ChrisCummins/pip-db/master/Documentation/assets/m1-comparison-homepage.png)
 
 #### Search Results
-![Comparison](assets/m1-comparison-results.png)
+![Comparison](https://raw.github.com/ChrisCummins/pip-db/master/Documentation/assets/m1-comparison-results.png)
 
 #### Details Page
-![Comparison](assets/m1-comparison-details.png)
+![Comparison](https://raw.github.com/ChrisCummins/pip-db/master/Documentation/assets/m1-comparison-details.png)
 
 #### Advanced Search
-![Comparison](assets/m1-comparison-advanced.png)
+![Comparison](https://raw.github.com/ChrisCummins/pip-db/master/Documentation/assets/m1-comparison-advanced.png)
 
 #### Login
-![Comparison](assets/m1-comparison-login.png)
+![Comparison](https://raw.github.com/ChrisCummins/pip-db/master/Documentation/assets/m1-comparison-login.png)
 
 #### Upload New Data
-![Comparison](assets/m1-comparison-upload.png)
+![Comparison](https://raw.github.com/ChrisCummins/pip-db/master/Documentation/assets/m1-comparison-upload.png)

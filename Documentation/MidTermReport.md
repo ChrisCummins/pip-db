@@ -116,7 +116,7 @@ prototype implementation began, and the sharp decline in the number of
 lines of code after the Christmas holiday re-write when the website
 was re-implemented in the (much more concise) LISP language.
 
-![Repository activity](midterm/assets/activity.png)
+![Repository activity](https://raw.github.com/ChrisCummins/pip-db/master/Documentation/midterm/assets/activity.png)
 
 # Outstanding Tasks
 
@@ -137,4 +137,4 @@ requests, and core application stability is the primary goal of
 development up until user trials in week 23. After which, the focus
 will shift towards optimising and future proofing the stack.
 
-![Gantt chart](midterm/assets/gantt.png)
+![Gantt chart](https://raw.github.com/ChrisCummins/pip-db/master/Documentation/midterm/assets/gantt.png)
