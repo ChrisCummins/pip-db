@@ -109,7 +109,7 @@
             };
 
             var getBlastText = function () {
-                return isBlastSearch ? '<b>BLAST+ sequence alignment</b><div class="alignment">' +
+                return isBlastSearch ? '<h5>BLAST+ sequence alignment:</h5><div class="alignment">' +
                     '<table><tbody><tr>' +
                     '<td class="type">Query:</td><td class="sequence">' + record['Query-Sequence'] + '</td></tr>' +
                     '<tr><td class="type">Subject:</td><td class="sequence">' + record['Subject-Sequence'] +

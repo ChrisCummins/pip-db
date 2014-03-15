@@ -2,6 +2,10 @@
 // RESULTS PAGE
 // --------------------------------------------------
 
+.sresults {
+  margin-bottom: 2em;
+}
+
 // Accordion
 
 .sresults .accordion .ui-accordion-header {
@@ -9,7 +13,7 @@
   color: @gray-darker;
   border-radius: 0;
   font-size: 1.05em;
-  margin-top: 5px;
+  margin: -1px;
 }
 
 .sresults .accordion .ui-accordion-header:nth-of-type(even) {
@@ -23,14 +27,22 @@
   font-size: 1.05em;
 }
 
-.sresults .accordion .head .blast {
+.sresults .accordion .head .blast,
+.sresults .accordion h5 {
   color: @brand-danger;
+  font-weight: 700;
 }
 
 .sresults .accordion .ui-accordion-header table,
 .sresults .accordion .head table {
   table-layout: fixed;
   width: 100%;
+}
+
+.sresults .accordion .ui-accordion-header table td {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .sresults .accordion .ui-accordion-header table .numerical,
@@ -82,4 +94,11 @@
 
 .sresults .accordion .more > a {
   color: @brand-success;
+  padding: .7em 0 .7em .7em;
+}
+
+.sresults .accordion .ui-accordion-content {
+  border: none;//1px solid #aaaaaa;
+  padding: .7em 2em;
+  border-radius: 0;
 }
