@@ -90,6 +90,7 @@ Thumbs.db
 # Project-specific ignore patterns
 #
 /config.summary
+/db
 /pg
 /target
 /.lein-failures

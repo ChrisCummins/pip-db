@@ -76,8 +76,6 @@
 (defmacro with-connection-results-query [results sql-params & body]
   `(with-connection (sql/with-query-results ~results ~sql-params ~@body)))
 
-(def max-no-of-returned-records 20)
-
 ;; Count the number of rows in a given table. May optionally be
 ;; provided with a set of conditions.
 (defn count-rows
@@ -200,30 +198,11 @@
       ""
       (str "SELECT " fields " FROM records WHERE " query))))
 
-;; Perform a database search and wrap the results in a search response
-;; map. Accepts a request map contains a :params map. Note as an
-;; implementation detail, the `merge` function means that properties
-;; are returned in the reverse order to as included here.
+;; Perform a database search. Accepts a request map containing a
+;; :params map.
 (defn search [request]
-  (let [params                (request :params)
-        headers               (request :headers)
-        query-str             (params->str params)
-        include-query-terms?  (not (= (headers "x-pip-db-query-terms") "None"))
-        include-records?      (not (= (headers "x-pip-db-records")     "None"))]
-    (merge
-     (if include-records?
-       (let [matching-rows    (search-results query-str)
-             returned-rows    (take max-no-of-returned-records matching-rows)
-             returned-records (map row->record returned-rows)]
-         {:No-Of-Records-Returned     (count returned-records)
-          :No-Of-Records-Matched      (count matching-rows)
-          :Records                    returned-records})
-       (let [conditions        (query/params->query params)]
-         {:No-Of-Records-Matched      (count-rows :records conditions)}))
-     {:Max-No-of-Returned-Records     max-no-of-returned-records}
-     {:No-Of-Records-Searched         (count-rows :records)}
-     (if include-query-terms?
-       {:Query-Terms                  params}))))
+  (let [query-str (params->str (request :params))]
+    (map row->record (search-results query-str))))
 
 ;; Accepts a request map containing a :params map, and returns
 ;; autocomplete suggestions for the text paramter "t" from
@@ -236,3 +215,7 @@
                        text "%' ORDER BY frequency DESC LIMIT 10")]
     (with-connection-results-query results [query-str]
       (apply vector (map #(get % :text) results)))))
+
+;; Returns the number of records within the database.
+(defn no-of-records []
+  (count-rows :records))

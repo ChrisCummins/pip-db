@@ -37,8 +37,9 @@ status "Running configure"
 status "Running make"
 make all 2>&1 | indent
 
-status "Installing lein dependencies"
-lein deps
+status "Building project with lein"
+lein deps | indent
+lein compile | indent
 
 test -n "$1" || {
     status "Minimising";
@@ -47,3 +48,9 @@ test -n "$1" || {
         rm -rf $f;
     done;
 }
+
+status "Creating BLAST+ database"
+mkdir -p db
+cd db
+../extern/bin/makeblastdb -in ../dataset.fsa -dbtype 'prot' -out pip-db | indent
+cd ..
