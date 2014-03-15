@@ -7,16 +7,6 @@
 
 ;; ## View
 
-;; The empty table in which results can be shown
-(def results-table
-  [:table.table.table-striped.table-hover.table-bordered
-   {:style "display:none;"}
-   [:thead [:tr
-            [:td.Protein-Names "Protein"]
-            [:td.Source        "Source"]
-            [:td.Location      "Location"]
-            [:td.pI            "pI"]]] [:tbody]])
-
 (defn view [request]
   (ui/page
    request
@@ -24,7 +14,7 @@
     :navbar {:search true}
     :heading {:meta true :download true}
     :body [:div.sresults
-           results-table
+           [:div.accordion]
            ui/no-results-found-message]
     :javascript (list (util/inline-data-js "data" (request :results))
                       (util/inline-js "/js/search.inline.js"))}))

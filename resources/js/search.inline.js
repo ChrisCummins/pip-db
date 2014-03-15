@@ -3,38 +3,31 @@
 
     // JSON data response map
     var records = data['Records'];
+    var isBlastSearch= data['Query-Terms']['seq'] !== undefined;
 
     // UI components
     var $download = $('#download');
-    var $table = $('.sresults table');
-    var $tbody = $(' tbody', $table);
+    var $results = $('.sresults .accordion');
     var $pagination = $('#pagination');
     var $meta = $('.meta-tags');
     var $resultsCount = $(' .results-count', $meta);
     var $noResultsMessage = $('#no-results');
 
-    /*
-     * SEARCH RESULTS:
-     *
-     * Link each result to its corresponding record page.
-     */
-    var attachTableListeners = function () {
-        $(' tr', $tbody).click(function () {
-            window.location = $(this).attr('data-url');
-        });
-    };
-
     // Add a new record entry to the results table
-    var addRecordRow = function (record) {
+    var showRecord = function (record) {
 
-        // Get the HTML for a table cell
-        var getCell = function (name, value) {
-            return '<td class="' + name + '">' + value + '</td>';
-        };
+        var getRangeText = function (minProp, maxProp) {
+            var min = record[minProp], max = record[maxProp];
 
-        // Get the HTML for a table cell from a record property
-        var getRecordCell = function (property) {
-            return getCell(property, record[property] || '');
+            if (min !== undefined && max !== undefined) {
+                if (min === max)
+                    return min;
+                else
+                    return min + ' - ' + max;
+            } else if (min !== undefined)
+                return '> ' + min;
+            else if (max !== undefined)
+                return '< ' + max;
         };
 
         // Get the text for a pI table cell from a record
@@ -63,14 +56,74 @@
                 return ''
         }
 
-        var html = '<tr data-url="' + record['Available-At'] + '">';
+        var getRecordHeader = function() {
+            var html = '<h3><table><tbody><tr><td>' + record['Protein-Names'] +
+                '</td>';
 
-        html += getRecordCell('Protein-Names');
-        html += getRecordCell('Source');
-        html += getRecordCell('Location');
-        html += getCell('pI', getPiText());
+            if (isBlastSearch) {
+                html += '<td class="numerical blast">' + record['Raw-Score'] + '</td>';
+                html += '<td class="numerical blast">' + record['Expect-Value'] + '</td>';
+            }
 
-        $tbody.append(html + '</tr>');
+            return html += '<td class="numerical">' + getPiText() +
+                '</td></tr></tbody></table></h3>'
+        };
+
+        var getTemperatureText = function() {
+            var t = getRangeText('Temperature-Min', 'Temperature-Max');
+
+            if (t !== undefined)
+                return t + '&deg;C';
+        };
+
+        var getRecordBody = function () {
+            var getRecordText = function () {
+                var r = function (value, label) {
+                    return value !== undefined ?
+                        '<span class="property">' + label + ':</span> ' +
+                        '<span class="value">' + value + '</span>. '
+                        : '';
+                };
+
+                var p = function (property, label) {
+                    return r(record[property], label);
+                };
+
+                return '<p>' +
+                    p('Source', 'Source') +
+                    p('Location', 'Organ and/or Subcellular location') +
+                    p('EC', 'Enzyme Commission Number') +
+                    p('No-Of-Iso-Enzymes', 'Number of Iso Enzymes') +
+                    p('Method', 'Experimental Method') +
+                    r(getTemperatureText(), 'Temperature') +
+                    r(getRangeText('MW-Min', 'MW-Max'), 'Molecular Weight') +
+                    p('Subunit-No', 'Subunit Number') +
+                    p('Subunit-Mw', 'Subunit Molecular Weight') +
+                    p('Notes', 'Notes') +
+                    '</p>';
+            };
+
+            var getRecordLink = function () {
+                return '<div class="more pull-right"><a href="' + record['Available-At'] +
+                    '">See more information &gt;&gt;</a></div>'
+            };
+
+            var getBlastText = function () {
+                return isBlastSearch ? '<b>BLAST+ sequence alignment</b><div class="alignment">' +
+                    '<table><tbody><tr>' +
+                    '<td class="type">Query:</td><td class="sequence">' + record['Query-Sequence'] + '</td></tr>' +
+                    '<tr><td class="type">Subject:</td><td class="sequence">' + record['Subject-Sequence'] +
+                    '</td></tr></tbody></table></div>' : '';
+            };
+
+            return '<div>' +
+                getBlastText() +
+                getRecordText() +
+                getRecordLink() +
+                '</div>';
+        };
+
+        $results.append(getRecordHeader() + getRecordBody());
     };
 
     if (data['No-Of-Records-Matched']) {
@@ -89,15 +142,29 @@
 
         // Populate the table
         for (var i in records)
-            addRecordRow(records[i]);
+            showRecord(records[i]);
 
-        // Show the table
-        $table.show();
+        $results.accordion({
+            collapsible: true,
+            active: false,
+            animate: 150,
+            heightStyle: 'content'
+        });
 
-        // Add link handlers to record page
-        attachTableListeners();
+        // Table header
+        var html = '<div class="head"><table><thead><tr><td>Protein Names</td>';
+
+        if (isBlastSearch) {
+            html += '<td class="numerical blast">Score</td>';
+            html += '<td class="numerical blast">Evalue</td>';
+        }
+
+        html += '<td class="numerical">pI</td></tr></thead></table></div>';
+
+        $results.prepend(html);
 
         $download.show(); // Show the download button
+
     } else {
         // Show the "no results" message
         $noResultsMessage.show();
