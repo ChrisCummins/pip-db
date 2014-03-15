@@ -3,7 +3,7 @@
 
     // JSON data response map
     var records = data['Records'];
-    var isBlastSearch= data['Query-Terms']['seq'] !== undefined;
+    var isBlastSearch= data['Query-Terms']['seq'];
 
     // UI components
     var $download = $('#download');
