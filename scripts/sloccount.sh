@@ -187,11 +187,11 @@ main() {
   get_build_sloccounts | sort -rn | column -t -s $'\t'
 
   echo ""
-  echo "Resources: $resources"
+  echo "Client side: $resources"
   get_resources_sloccounts | sort -rn | column -t -s $'\t'
 
   echo ""
-  echo "Sources: $src"
+  echo "Server side: $src"
   get_src_sloccounts | sort -rn | column -t -s $'\t'
 
   echo ""
