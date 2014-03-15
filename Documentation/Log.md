@@ -3658,3 +3658,10 @@ user=> (clojure.pprint/write (apply vector records))
   :qseq "DKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYFLT",
   :sseq "DESPFPLDVPEDCHITFVQV--LARHGARSPTHSKTKAYAAT"}]
 ```
+
+### Saturday 15th
+
+Completed BLAST+ back-end implementation:
+
+[Example search](http://www.pip-db.org/s?a=a&q=alkaline)
+[Example search with sequence](http://www.pip-db.org/s?a=a&q=alkaline&seq=GVKANEGTVGVSAATERSRCNTTQGNEVTSILRWAKDAGKSVGIVTTTRVNHATPSAAYAHSADRDWYSDNEMPPEALSQGCK)
