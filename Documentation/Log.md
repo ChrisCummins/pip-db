@@ -3496,3 +3496,173 @@ Changes to notify Darren about:
  * Remove unwanted columns from Download page output.
  * Fixed double dot '..' issue with downloaded file name.
  * CSV downloads are now comma separated, not tab.
+
+Notes on `blastp` invocation:
+
+ * Queries can be fed in through `stdin` or file:
+
+```
+# this:
+$ blastp -query ~/foo.fsa
+# is equvalient to:
+$ echo ~/foo.fsa | blastp
+```
+
+ * Maximum evalue can be set with `-evalue 5.0`.
+
+```
+BLASTDB=~/src/pip-db-priv/blast-db blastp -db pip-db -outfmt 5 -evalue 10
+```
+
+ * Managed to get blastp invocation working in a Clojure REPL by using
+   a relative address for the BLAST+ db. XML output:
+
+```
+user=> (use '[clojure.java.shell :only [sh]])
+
+user => (require '[clojure.xml :as xml]
+                 '[clojure.zip :as zip])
+
+user => (defn zip-str [s]
+          (zip/xml-zip (xml/parse (java.io.ByteArrayInputStream. (.getBytes s)))))
+
+user=> (def r (sh "blastp" "-db" "pip-db" "-outfmt" "5"
+                  "-evalue" "10"
+                  :in "DKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYFLT"
+                  :env {"BLASTDB" "../pip-db-priv/blast-db"}))
+
+user => (def a ((zip-str (r :out)) 0))
+```
+
+And for tabular output:
+
+```
+user=> (def r (sh "blastp" "-db" "pip-db"
+                  "-outfmt" "6 stitle score evalue qseq sseq"
+                  "-evalue" "10"
+                  :in "DKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYFLT"
+                  :env {"BLASTDB" "../pip-db-priv/blast-db"}))
+
+user=> (def a (str/split (r :out) #"\n"))
+
+user=> (defn str->result [a]
+         (let [c (str/split a #"\t")]
+           {:title (c 0)
+            :score (c 1)
+            :evalue (c 2)
+            :qseq (c 3)
+            :sseq (c 4)}))
+
+user=> (def records (map str->result (str/split (r :out) #"\n")))
+
+user=> (clojure.pprint/write (apply vector records))
+[{:title
+  "sp|Q5XI22|THIC_RAT Acetyl-CoA acetyltransferase, cytosolic OS=Rattus norvegicus GN=Acat2 PE=1 SV=1",
+  :score "229",
+  :evalue "2e-25",
+  :qseq "DKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYFLT",
+  :sseq "DKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYFLT"}
+ {:title
+  "sp|Q3T0R7|THIM_BOVIN 3-ketoacyl-CoA thiolase, mitochondrial OS=Bos taurus GN=ACAA2 PE=2 SV=1",
+  :score "99",
+  :evalue "2e-07",
+  :qseq "DKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYF",
+  :sseq "DNEMAPVEVKTRKGKQTMQVDEHPRPQTTMEQLNKLPPVF"}
+ {:title
+  "sp|Q3T0R7|THIM_BOVIN 3-ketoacyl-CoA thiolase, mitochondrial OS=Bos taurus GN=ACAA2 PE=2 SV=1",
+  :score "99",
+  :evalue "2e-07",
+  :qseq "DKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYF",
+  :sseq "DNEMAPVEVKTRKGKQTMQVDEHPRPQTTMEQLNKLPPVF"}
+ {:title
+  "sp|Q3T0R7|THIM_BOVIN 3-ketoacyl-CoA thiolase, mitochondrial OS=Bos taurus GN=ACAA2 PE=2 SV=1",
+  :score "99",
+  :evalue "2e-07",
+  :qseq "DKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYF",
+  :sseq "DNEMAPVEVKTRKGKQTMQVDEHPRPQTTMEQLNKLPPVF"}
+ {:title
+  "sp|P13437|THIM_RAT 3-ketoacyl-CoA thiolase, mitochondrial OS=Rattus norvegicus GN=Acaa2 PE=2 SV=1",
+  :score "78",
+  :evalue "1e-04",
+  :qseq "DKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYF",
+  :sseq "NEEMAPIEVKTKKGKQTMQVDEHARPQTTLEQLQNLPPVF"}
+ {:title
+  "sp|P13437|THIM_RAT 3-ketoacyl-CoA thiolase, mitochondrial OS=Rattus norvegicus GN=Acaa2 PE=2 SV=1",
+  :score "78",
+  :evalue "1e-04",
+  :qseq "DKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYF",
+  :sseq "NEEMAPIEVKTKKGKQTMQVDEHARPQTTLEQLQNLPPVF"}
+ {:title
+  "sp|Q29387|EF1G_PIG Elongation factor 1-gamma (Fragment) OS=Sus scrofa GN=EEF1G PE=2 SV=2",
+  :score "49",
+  :evalue "0.62",
+  :qseq "IDEFPRHGSNLEAMSKLKPYF",
+  :sseq "LDEFKRKYSNEDTLSVALPYF"}
+ {:title
+  "sp|P07738|PMGE_HUMAN Bisphosphoglycerate mutase OS=Homo sapiens GN=BPGM PE=1 SV=2",
+  :score "48",
+  :evalue "0.84",
+  :qseq "VHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYF",
+  :sseq "IYNDRRYKVCDVPLDQLPRSESLKDVLERLLPYW"}
+ {:title
+  "sp|P07738|PMGE_HUMAN Bisphosphoglycerate mutase OS=Homo sapiens GN=BPGM PE=1 SV=2",
+  :score "48",
+  :evalue "0.84",
+  :qseq "VHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYF",
+  :sseq "IYNDRRYKVCDVPLDQLPRSESLKDVLERLLPYW"}
+ {:title
+  "sp|P07738|PMGE_HUMAN Bisphosphoglycerate mutase OS=Homo sapiens GN=BPGM PE=1 SV=2",
+  :score "48",
+  :evalue "0.84",
+  :qseq "VHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYF",
+  :sseq "IYNDRRYKVCDVPLDQLPRSESLKDVLERLLPYW"}
+ {:title
+  "sp|P07738|PMGE_HUMAN Bisphosphoglycerate mutase OS=Homo sapiens GN=BPGM PE=1 SV=2",
+  :score "48",
+  :evalue "0.84",
+  :qseq "VHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYF",
+  :sseq "IYNDRRYKVCDVPLDQLPRSESLKDVLERLLPYW"}
+ {:title
+  "sp|P07738|PMGE_HUMAN Bisphosphoglycerate mutase OS=Homo sapiens GN=BPGM PE=1 SV=2",
+  :score "48",
+  :evalue "0.84",
+  :qseq "VHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYF",
+  :sseq "IYNDRRYKVCDVPLDQLPRSESLKDVLERLLPYW"}
+ {:title
+  "sp|P41338|THIL_YEAST Acetyl-CoA acetyltransferase OS=Saccharomyces cerevisiae (strain ATCC 204508 / S288c) GN=ERG10 PE=1 SV=3",
+  :score "46",
+  :evalue "1.4",
+  :qseq "DKEIVPVHVSSRKGL--TEVKIDEFP",
+  :sseq "DNEIVPVTIKGFRGKPDTQVTKDEEP"}
+ {:title
+  "sp|Q4KM73|KCY_RAT UMP-CMP kinase OS=Rattus norvegicus GN=Cmpk1 PE=1 SV=2",
+  :score "42",
+  :evalue "4.3",
+  :qseq "IDEFPRHGSNLEAMSK",
+  :sseq "IDGFPRNQDNLQGWNK"}
+ {:title
+  "sp|P11766|ADHX_HUMAN Alcohol dehydrogenase class-3 OS=Homo sapiens GN=ADH5 PE=1 SV=4",
+  :score "41",
+  :evalue "7.0",
+  :qseq "EIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSK",
+  :sseq "ESVPKLVSEYMS-KKIKVDEFVTHNLSFDEINK"}
+ {:title
+  "tr|O44028|O44028_TETPY Glyceraldehyde-3-phosphate dehydrogenase (NAD-dependent) OS=Tetrahymena pyriformis GN=gapC PE=3 SV=1",
+  :score "40",
+  :evalue "8.2",
+  :qseq "DKEIVPVHVSSRKGLTEVKID-EFPRHGSNLEAMSK",
+  :sseq "NESIIPTSTGARKALKEVLPEVEGKLHGMALRVPTK"}
+ {:title
+  "sp|O00085|PHYA1_ASPTE 3-phytase A OS=Aspergillus terreus GN=phyA PE=1 SV=1",
+  :score "40",
+  :evalue "9.8",
+  :qseq "DKEIVPVHVSSRKGLTEVKIDEFPRHGSNLEAMSKLKPYFLT",
+  :sseq "DESPFPLDVPEDCHITFVQV--LARHGARSPTHSKTKAYAAT"}]
+```
+
+### Saturday 15th
+
+Completed BLAST+ back-end implementation:
+
+[Example search](http://www.pip-db.org/s?a=a&q=alkaline)
+[Example search with sequence](http://www.pip-db.org/s?a=a&q=alkaline&seq=GVKANEGTVGVSAATERSRCNTTQGNEVTSILRWAKDAGKSVGIVTTTRVNHATPSAAYAHSADRDWYSDNEMPPEALSQGCK)

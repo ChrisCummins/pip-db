@@ -2,35 +2,103 @@
 // RESULTS PAGE
 // --------------------------------------------------
 
-.sresults table {
+.sresults {
+  margin-bottom: 2em;
+}
+
+// Accordion
+
+.sresults .accordion .ui-accordion-header {
+  background: none;
+  color: @gray-darker;
+  border-radius: 0;
+  font-size: 1.05em;
+  margin: -1px;
+}
+
+.sresults .accordion .ui-accordion-header:nth-of-type(even) {
+  background: @table-bg-accent;
+}
+
+.sresults .accordion .head {
+  margin: 10px 1px;
+  padding: 0 .5em 0 2.2em;
+  font-weight: 700;
+  font-size: 1.05em;
+}
+
+.sresults .accordion .head .blast,
+.sresults .accordion h5 {
+  color: @brand-danger;
+  font-weight: 700;
+}
+
+.sresults .accordion .ui-accordion-header table,
+.sresults .accordion .head table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.sresults .accordion .ui-accordion-header table td {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sresults .accordion .ui-accordion-header table .numerical,
+.sresults .accordion .head table .numerical {
+  width: 6em;
+  text-align: center;
+}
+
+.sresults .accordion .ui-corner-all {
+  border-radius: 0;
+}
+
+.sresults .accordion .alignment {
+  overflow-x: auto;
+  white-space: nowrap;
+  margin: 0 0 10px 0;
+  border: 1px solid #ddd;
+}
+
+.sresults .accordion .alignment table {
+  width: 100%;
   table-layout: fixed;
 }
-.sresults table tbody tr:hover {
-  cursor: pointer;
+
+.sresults .accordion .alignment table td {
+  padding: .2em .5em;
 }
 
-.sresults table td {
-  font-size: floor(@font-size-base * 1.15);
-  font-weight: 200;
-
-  // Ellipsise overflow:
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+.sresults .accordion .alignment table td.type {
+  text-align: right;
+  width: 6em;
 }
 
-// Table widths
-.sresults table td.Source {
-  width: 25%;
-}
-.sresults table td.Location {
-  width: 20%;
-}
-.sresults table td.pI {
-  text-align: center;
-  width: 6%;
+.sresults .accordion .alignment table td.sequence {
+  font-family: @font-family-monospace;
 }
 
-.sresults table thead td {
-  font-weight: bold;
+.sresults .accordion p {
+  margin: 0;
+}
+
+.sresults .accordion p .property {
+  color: #555;
+}
+
+.sresults .accordion p .value {
+  font-style: italic;
+}
+
+.sresults .accordion .more > a {
+  color: @brand-success;
+  padding: .7em 0 .7em .7em;
+}
+
+.sresults .accordion .ui-accordion-content {
+  border: none;//1px solid #aaaaaa;
+  padding: .7em 2em;
+  border-radius: 0;
 }

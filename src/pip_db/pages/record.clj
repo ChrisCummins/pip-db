@@ -1,6 +1,6 @@
 (ns pip-db.pages.record
   (:require [clojure.string :as str]
-            [pip-db.db :as db]
+            [pip-db.search :as search]
             [pip-db.ui :as ui]
             [pip-db.util :as util]))
 
@@ -63,7 +63,7 @@
 ;; ## Controller
 
 (defn GET [request]
-  (let [data (db/search (util/remap-id-param request))]
+  (let [data (search/search (util/remap-id-param request))]
     (if (pos? (data :No-Of-Records-Matched))
       (view (assoc request :results data))
       (ui/page-404))))

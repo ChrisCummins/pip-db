@@ -1,21 +1,11 @@
 (ns pip-db.pages.search
   (:require [clojure.string :as str]
             [pip-db.pages.advanced :as advanced]
-            [pip-db.db :as db]
+            [pip-db.search :as search]
             [pip-db.ui :as ui]
             [pip-db.util :as util]))
 
 ;; ## View
-
-;; The empty table in which results can be shown
-(def results-table
-  [:table.table.table-striped.table-hover.table-bordered
-   {:style "display:none;"}
-   [:thead [:tr
-            [:td.Protein-Names "Protein"]
-            [:td.Source        "Source"]
-            [:td.Location      "Location"]
-            [:td.pI            "pI"]]] [:tbody]])
 
 (defn view [request]
   (ui/page
@@ -24,7 +14,7 @@
     :navbar {:search true}
     :heading {:meta true :download true}
     :body [:div.sresults
-           results-table
+           [:div.accordion]
            ui/no-results-found-message]
     :javascript (list (util/inline-data-js "data" (request :results))
                       (util/inline-js "/js/search.inline.js"))}))
@@ -34,7 +24,7 @@
 ;; Perform a search from the given request map and wrap the results
 ;; into a `:results` key.
 (defn search-results [request]
-  (assoc request :results (db/search request)))
+  (assoc request :results (search/search request)))
 
 ;; Serve a search request.
 (defn search-handler [request]
