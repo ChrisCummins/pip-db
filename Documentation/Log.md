@@ -3699,3 +3699,4 @@ Notes for meeting with Ian:
 1. Working with HOFs and immutable data structures
 1. RESTful API design
 1. D2 user interface refinements
+1. BLAST+ searching
