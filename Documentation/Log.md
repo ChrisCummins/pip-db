@@ -3663,5 +3663,39 @@ user=> (clojure.pprint/write (apply vector records))
 
 Completed BLAST+ back-end implementation:
 
-[Example search](http://www.pip-db.org/s?a=a&q=alkaline)
-[Example search with sequence](http://www.pip-db.org/s?a=a&q=alkaline&seq=GVKANEGTVGVSAATERSRCNTTQGNEVTSILRWAKDAGKSVGIVTTTRVNHATPSAAYAHSADRDWYSDNEMPPEALSQGCK)
+ * [Example search](http://www.pip-db.org/s?a=a&q=alkaline)
+ * [Example search with sequence](http://www.pip-db.org/s?a=a&q=alkaline&seq=GVKANEGTVGVSAATERSRCNTTQGNEVTSILRWAKDAGKSVGIVTTTRVNHATPSAAYAHSADRDWYSDNEMPPEALSQGCK)
+
+
+### Monday 18th
+
+Notes for meeting with Ian:
+
+ * Meeting with Darren:
+
+    * For testing: 3 tasks, 5 users
+    * BLAST+ searching
+
+ * BLAST+ searching:
+
+    * Reducing hosted Heroku size
+
+ * Big picture list:
+
+1. Mockups first design (inspired by Google's aesthetic)
+1. Prototype in PHP & MySQL
+1. Autotooled build system, content hashing and minification
+1. PHP templating (and differences from previous FYP)
+1. MySQL schema (and differences from previous FYP)
+    * Tools: dsa - Dataset Analaysis
+1. Data integrity
+    * Tools: png - Plausible Nonsense Generator
+1. Branching model + Issue tracker workflow
+    * Tools: pipbot
+1. END OF M1 (user testing & review)
+1. Clojure research & intro
+1. Clojure port of M1 prototype
+1. Heroku deployment
+1. Working with HOFs and immutable data structures
+1. RESTful API design
+1. D2 user interface refinements
