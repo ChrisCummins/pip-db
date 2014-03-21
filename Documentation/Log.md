@@ -3700,3 +3700,20 @@ Notes for meeting with Ian:
 1. RESTful API design
 1. D2 user interface refinements
 1. BLAST+ searching
+
+
+### Tuesday 18th
+
+Notes from meeting with Ian:
+
+ * BLAST+ searching:
+    * Are we handling errors?
+    * Mock `blastp` for testing
+    * Just parse the XML, stoopid.
+ * Report
+    * Perhaps consider mind-mapping the thematic elements of the
+      report
+    * Three main chapters from big picture list:
+       1. User oriented design (mockups, prototyping)
+       2. Infrastructure (tooling, process)
+       3. Product (UI, API etc)
