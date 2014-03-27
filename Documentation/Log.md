@@ -3717,3 +3717,34 @@ Notes from meeting with Ian:
        1. User oriented design (mockups, prototyping)
        2. Infrastructure (tooling, process)
        3. Product (UI, API etc)
+
+
+### Saturday 22rd
+
+I'm entering the fourth week allocated to report writing, which is
+half of the allocated total time. Since the report is not even close
+to being half way completed, I need to pick up the effort a bit or
+else risk falling behind.
+
+
+### Sunday 23rd
+
+* Process
+  * Development process
+    * Open Source
+    * Version Control
+    * Branching model
+  * Project Plan Recap
+  * User oriented design
+    * Mockups
+    * PHP Prototype
+
+* Infrastructure
+  * Git / GitHub workflow
+  * Build systems
+
+* Product
+  * LISP rewrite
+    * PHP vs Clojure
+  * Web programming with HOFs
+  * Usage
