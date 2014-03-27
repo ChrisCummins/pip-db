@@ -3737,14 +3737,30 @@ else risk falling behind.
   * Project Plan Recap
   * User oriented design
     * Mockups
-    * PHP Prototype
+    * Prototype & it's purpose / role in process
 
 * Infrastructure
   * Git / GitHub workflow
   * Build systems
 
 * Product
+  * PHP prototype (technical overview)
   * LISP rewrite
     * PHP vs Clojure
   * Web programming with HOFs
   * Usage
+
+### Thursday 27th
+
+Notes from weekly meeting with Ian:
+
+ * Need to start planning evaluation
+   * Two aspects: project evaluation and system evaluation
+     * Project: Did we stick to the plan (no), did we stick to deadlines etc.
+     * System: Have non-functional & functional requirements been met, etc.
+
+ * TODO: Chase up project plan / report question with Kate.
+
+ * TODO: Chase up dates for testing & task list with Darren.
+
+ * TODO: Create table of contents for report.
