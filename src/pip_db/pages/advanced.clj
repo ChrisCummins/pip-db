@@ -35,11 +35,6 @@
                            "Enter the location or organ"
                            ((request :params) "q_l")))
 
-(defn search-fasta-widget [request]
-  (ui/search-form-text-row "seq" "FASTA sequence"
-                           "Enter a FASTA sequence for BLAST+ searches"
-                           ((request :params) "seq")))
-
 (defn search-method-widget [request]
   (ui/search-form-text-row "m" "experimental method"
                            "Enter the experimental method used to determine the result."
@@ -98,7 +93,7 @@
    (search-keywords-exclude-widget request)
    (search-source-widget request)
    (search-location-widget request)
-   (search-fasta-widget request)))
+   (ui/search-form-fasta-row request)))
 
 (defn secondary-search-fields [request]
   (list
