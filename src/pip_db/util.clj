@@ -4,7 +4,8 @@
   (:require [clojure.string :as str]
             [clojure.set :as set]
             [clojure.data.codec.base64 :as b64]
-            [clojure.data.json :as json]))
+            [clojure.data.json :as json])
+  (:import [java.io File]))
 
 ;; --------------
 ;; ## Environment
@@ -134,6 +135,15 @@
 
 (defn resource [path]
   (slurp (resource-path path)))
+
+;; Evaluate the expressions contained in body with file bound to a
+;; File object pointed to by req. Upon completion, the file is
+;; deleted.
+(defmacro with-tmp-file [file req & body]
+  `(let [~file (File. (str (~req :tempfile)))
+         output# ~@body]
+     (.delete ~file)
+     output#))
 
 ;; ### Public assets
 
