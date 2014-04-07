@@ -92,16 +92,17 @@ output {
   vertical-align: middle;
 }
 
-// Commoon textbox styling
+// Common textbox styling
 
-input[type="text"] {
+input[type="text"],
+textarea {
   display: inline; // Inline all textboxes
-  border: 1px solid @gray-light;
+  border: 2px solid @gray-light;
   text-indent: 4px;
   padding: 3px;
 }
-
-input[type="text"]:focus {
+input[type="text"]:focus,
+textarea:focus {
   border-color: @brand-success;
 }
 
