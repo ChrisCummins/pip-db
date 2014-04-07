@@ -3,6 +3,7 @@
             [pip-db.ui :as ui]))
 
 ;; ## View
+(def page-title "Advanced Search")
 
 (defn search-keywords-all-widget [request]
   (ui/search-form-text-row "q" "all of these words"
@@ -33,11 +34,6 @@
   (ui/search-form-text-row "q_l" "location"
                            "Enter the location or organ"
                            ((request :params) "q_l")))
-
-(defn search-fasta-widget [request]
-  (ui/search-form-text-row "seq" "FASTA sequence"
-                           "Enter a FASTA sequence for BLAST+ searches"
-                           ((request :params) "seq")))
 
 (defn search-method-widget [request]
   (ui/search-form-text-row "m" "experimental method"
@@ -97,7 +93,7 @@
    (search-keywords-exclude-widget request)
    (search-source-widget request)
    (search-location-widget request)
-   (search-fasta-widget request)))
+   (ui/search-form-fasta-row request)))
 
 (defn secondary-search-fields [request]
   (list
@@ -126,13 +122,13 @@
    (secondary-search-fields request)
    submit-row])
 
-;; ## Page Layout
+;; ### Page Layout
 (defn view [request]
   (ui/page
    request
-   {:title "Advanced Search"
+   {:title page-title
     :navbar {}
-    :heading {:title "Advanced Search"}
+    :heading {:title page-title}
     :body [:div.advsearch (advs-form request)]}))
 
 ;; ## Controller

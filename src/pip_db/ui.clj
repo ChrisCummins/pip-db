@@ -40,6 +40,10 @@
   [:input {:id name :name name :type "text"
            :autocomplete "off" :value value}])
 
+;; A multi-line textarea input
+(defn textarea-widget [name no-rows value]
+  [:textarea {:id name :name name :rows no-rows} value])
+
 ;; A hidden text input widget.
 (defn hidden-input-widget
   ([name]
@@ -70,6 +74,10 @@
 ;; A search form is a full-page width entry form for looking up data,
 ;; and consists of a number of elements aligned into rows.
 
+(defn search-form-heading-row
+  ([text]    [:div.row [:div.col-md-12 [:h4          text]]])
+  ([id text] [:div.row [:div.col-md-12 [:h4 {:id id} text]]]))
+
 ;; A search form text input widget.
 (defn search-form-text-input-widget [name value]
   [:div.col-md-6 (text-input-widget name value)])
@@ -80,6 +88,10 @@
          (off-on-button-input-widget "pi-active")]
         [:div.col-md-5 {:style "padding-left:0;"}
          (range-slider-input-widget "pi-slider" "pi_l" "pi_h")]))
+
+;; The search form FASTA input widget.
+(defn search-form-fasta-input-widget [data]
+  [:div.col-md-6 (textarea-widget "seq" 1 data)])
 
 ;; A row within a search form consists of three elements, the label,
 ;; widget and description.
@@ -103,6 +115,25 @@
                           (search-form-pi-input-widget data)
                           (info-widget (str "Select from a range of "
                                             "isoelectric points."))))
+
+;; A FASTA sequence search form widget.
+(defn search-form-fasta-row [request]
+  (search-form-widget-row (label-widget "seq" "FASTA sequence:")
+                          (search-form-fasta-input-widget ((request :params) "seq"))
+                          (info-widget "Enter a FASTA sequence for BLAST+ searches.")))
+
+(defn search-form-submit-button [label]
+  [:button.btn.btn-block.btn-success.disabled
+   {:type "submit" :name "a" :value "s"} label])
+
+(defn search-form-submit-row [submit-label]
+  [:div.row
+   [:div.col-md-offset-2.col-md-4
+    {:style "padding-right:0;"
+     :title "The number of matching records"}
+    [:div#results-count
+     [:div.ui-progressbar-label]]]
+   [:div.col-md-2 (search-form-submit-button submit-label)]])
 
 ;; ### Main search bar
 ;;

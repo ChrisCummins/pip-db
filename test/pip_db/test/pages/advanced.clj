@@ -2,16 +2,6 @@
   (:use [clojure.test])
   (:require [pip-db.pages.advanced :as dut]))
 
-(deftest search-form-heading-row
-  (testing "Heading text"
-    (is (not (= (dut/search-form-heading-row "foo")
-                (dut/search-form-heading-row "bar")))))
-
-  (testing "Heading ID"
-    (is (not (= (dut/search-form-heading-row "foo")
-                (dut/search-form-heading-row "bar" "foo")
-                (dut/search-form-heading-row "baz" "foo"))))))
-
 ;; View
 
 (deftest view
