@@ -74,6 +74,10 @@
 ;; A search form is a full-page width entry form for looking up data,
 ;; and consists of a number of elements aligned into rows.
 
+(defn search-form-heading-row
+  ([text]    [:div.row [:div.col-md-12 [:h4          text]]])
+  ([id text] [:div.row [:div.col-md-12 [:h4 {:id id} text]]]))
+
 ;; A search form text input widget.
 (defn search-form-text-input-widget [name value]
   [:div.col-md-6 (text-input-widget name value)])
@@ -117,6 +121,19 @@
   (search-form-widget-row (label-widget "seq" "FASTA sequence:")
                           (search-form-fasta-input-widget ((request :params) "seq"))
                           (info-widget "Enter a FASTA sequence for BLAST+ searches.")))
+
+(defn search-form-submit-button [label]
+  [:button.btn.btn-block.btn-success.disabled
+   {:type "submit" :name "a" :value "s"} label])
+
+(defn search-form-submit-row [submit-label]
+  [:div.row
+   [:div.col-md-offset-2.col-md-4
+    {:style "padding-right:0;"
+     :title "The number of matching records"}
+    [:div#results-count
+     [:div.ui-progressbar-label]]]
+   [:div.col-md-2 (search-form-submit-button submit-label)]])
 
 ;; ### Main search bar
 ;;
