@@ -35,7 +35,7 @@
 (defn search-handler [request]
   (let [results           (assoc request :results (search/search request))
         no-of-results     ((results :results) :No-Of-Records-Returned)
-        view-handler      (if (> no-of-results 1) view single-record-view)]
+        view-handler      (if (= no-of-results 1) single-record-view view)]
     (view-handler results)))
 
 ;; Serve an advanced search page.
