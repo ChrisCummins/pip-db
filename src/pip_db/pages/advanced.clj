@@ -3,6 +3,7 @@
             [pip-db.ui :as ui]))
 
 ;; ## View
+(def page-title "Advanced Search")
 
 (defn search-keywords-all-widget [request]
   (ui/search-form-text-row "q" "all of these words"
@@ -126,13 +127,13 @@
    (secondary-search-fields request)
    submit-row])
 
-;; ## Page Layout
+;; ### Page Layout
 (defn view [request]
   (ui/page
    request
-   {:title "Advanced Search"
+   {:title page-title
     :navbar {}
-    :heading {:title "Advanced Search"}
+    :heading {:title page-title}
     :body [:div.advsearch (advs-form request)]}))
 
 ;; ## Controller
