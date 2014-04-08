@@ -1,6 +1,8 @@
 (ns pip-db.pages.search
+  (:use [clojure.core :only (slurp)])
   (:require [clojure.string :as str]
             [pip-db.pages.advanced :as advanced]
+            [pip-db.pages.blast :as blast]
             [pip-db.search :as search]
             [pip-db.ui :as ui]
             [pip-db.util :as util]))
@@ -41,12 +43,30 @@
 ;; Serve an advanced search page.
 (defn advanced-handler [request] (advanced/GET request))
 
+;; Serve a BLAST search page.
+(defn blast-handler    [request] (blast/GET request))
+
 ;; Return the handler to be used for a specific search action. If the
 ;; action `a` is used, then we use the advanced handler, else we use
 ;; the normal search.
 (defn response-function [request]
-  (if (= "a" ((request :params) "a")) advanced-handler search-handler))
+  (let [action ((request :params) "a")]
+    (cond
+     (= action "a") advanced-handler
+     (= action "b") blast-handler
+     :else          search-handler)))
 
 ;; Search page ring handler.
 (defn GET [request]
   ((response-function request) request))
+
+;; Search page ring handler with support for sequence upload from file.
+(defn POST [request]
+  (util/with-tmp-file file ((request :params) "f")
+    (let [params      (dissoc (request :params) "f")
+          sequence    (slurp file)
+          sequence?   (not (str/blank? sequence))
+          sequence    (if sequence? sequence (params "seq"))
+          params      (assoc params "seq" sequence)
+          request     (assoc request :params params)]
+      ((response-function request) request))))

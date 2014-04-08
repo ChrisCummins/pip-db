@@ -137,7 +137,7 @@
 
 ;; ### Main search bar
 ;;
-;; The search bar consists of three elements:
+;; The search bar consists of four elements:
 
 ;; ### 1. The input text field
 ;;
@@ -158,6 +158,12 @@
 (def advanced-button
   [:button.btn.btn-primary          {:name "a" :value "a"} "Advanced"])
 
+;; ### 4. BLAST+ button
+;;
+;; This takes the user to the BLAST+ search page.
+(def blast-button
+  [:button.btn.btn-warning          {:name "a" :value "b"} "BLAST"])
+
 ;; This is the main search bar which is embedded into the home page
 ;; and navbar. It provides the ability to search by name, and to go
 ;; the advanced search page.
@@ -165,7 +171,7 @@
   [:form {:method "GET" :action "/s" :role "search"}
    [:div.input-group
     (search-bar-input ((request :params) "q"))
-    [:div.input-group-btn submit-button advanced-button]]])
+    [:div.input-group-btn submit-button advanced-button blast-button]]])
 
 ;; ### Page heading
 

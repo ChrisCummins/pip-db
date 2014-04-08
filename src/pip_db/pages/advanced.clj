@@ -80,13 +80,9 @@
    "temperature" "Enter an exact or range of temperatures."
    "t_l" ((request :params) "t_l") "t_h" ((request :params) "t_h")))
 
-(defn search-form-heading-row
-  ([text]    [:div.row [:div.col-md-12 [:h4          text]]])
-  ([id text] [:div.row [:div.col-md-12 [:h4 {:id id} text]]]))
-
 (defn primary-search-fields [request]
   (list
-   (search-form-heading-row "Find proteins with...")
+   (ui/search-form-heading-row "Find proteins with...")
    (search-keywords-all-widget request)
    (search-keywords-exact-widget request)
    (search-keywords-any-widget request)
@@ -97,30 +93,18 @@
 
 (defn secondary-search-fields [request]
   (list
-   (search-form-heading-row "Then narrow results by...")
+   (ui/search-form-heading-row "Then narrow results by...")
    (ui/search-form-pi-row request)
    (search-method-widget request)
    (search-ec-widget request)
    (search-form-mw-widget request)
    (search-form-temp-widget request)))
 
-(def submit-row
-  [:div.row
-   [:div.col-md-offset-2.col-md-4
-    {:style "padding-right:0;"
-     :title "The number of matching records"}
-    [:div#results-count
-     [:div.ui-progressbar-label]]]
-   [:div.col-md-2
-    [:button.btn.btn-block.btn-success.disabled
-     {:type "submit" :name "a" :value "s"}
-     "Advanced Search"]]])
-
 (defn advs-form [request]
   [:form#as {:method "GET" :action "/s"}
    (primary-search-fields request)
    (secondary-search-fields request)
-   submit-row])
+   (ui/search-form-submit-row "Advanced Search")])
 
 ;; ### Page Layout
 (defn view [request]
