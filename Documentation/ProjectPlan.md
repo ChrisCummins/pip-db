@@ -142,7 +142,7 @@ decision is free to change over the course of the project, providing there is a
 realistic justification for this change and adequate time to re-implement any
 existing functionality.
 
-![image](plan/assets/flow-tech-choices.png)
+![image](https://raw.github.com/ChrisCummins/pip-db/master/Documentation/plan/assets/flow-tech-choices.png)
 Figure 1: A diagrammatic view of the process of adopting technologies
 
 ## Required Skills
@@ -227,10 +227,10 @@ dataset file and extracts and derives key information about its properties, and
 this information can be used to help determine the best method to use when
 storing this data.
 
-![image](plan/assets/chart-dataset-origin.png)
+![image](https://raw.github.com/ChrisCummins/pip-db/master/Documentation/plan/assets/chart-dataset-origin.png)
 Figure 3: A breakdown of the tuple origins within the dataset
 
-![image](plan/assets/chart-dataset-populated.png)
+![image](https://raw.github.com/ChrisCummins/pip-db/master/Documentation/plan/assets/chart-dataset-populated.png)
 Figure 4: The number of populated keys for each tuple within the dataset
 
 This early dataset analysis highlighted a number of properties which will
@@ -243,7 +243,7 @@ to gain maximum size efficiency of the stored database (Maier, 1983), and so
 adequate time should be allocated in the project plan to allow for database
 design decisions to be investigated and tested.
 
-![image](plan/assets/chart-dataset-unique.png)
+![image](https://raw.github.com/ChrisCummins/pip-db/master/Documentation/plan/assets/chart-dataset-unique.png)
 Figure 5: The number of unique keys for each tuple within the dataset
 
 ## Related Bioinformatics Databases
@@ -406,7 +406,7 @@ OpenUP offers an open source process framework which is targeted at agile
 development in small teams and provides a number of development phases and
 activities which can be used when designing the project plan (Figure 6).
 
-![image](plan/assets/sequence-openup.png)
+![image](https://raw.github.com/ChrisCummins/pip-db/master/Documentation/plan/assets/sequence-openup.png)
 Figure 6: A sequence diagram showing a single full iteration of the OpenUP
 process
 
@@ -489,7 +489,7 @@ undertaken is relevant to the project and directly affects progress, minimising
 the amount of time wastage and increasing the stability of the codebase by
 ensuring adequate test coverage (Martin, 2011).
 
-![image](plan/assets/flow-tdd.png)
+![image](https://raw.github.com/ChrisCummins/pip-db/master/Documentation/plan/assets/flow-tdd.png)
 Figure 7: A single iteration of the project’s test-driven development workflow
 
 # Project Schedule
@@ -705,8 +705,8 @@ Practices. Pearson, 2011.
 
 # B. Project Gantt Chart
 
-![image](plan/assets/gantt-plan.png)
+![image](https://raw.github.com/ChrisCummins/pip-db/master/Documentation/plan/assets/gantt-plan.png)
 
 # C. Previous Final Year Project Database Design
 
-![image](plan/assets/uml-previous-fyp-database.png)
+![image](https://raw.github.com/ChrisCummins/pip-db/master/Documentation/plan/assets/uml-previous-fyp-database.png)

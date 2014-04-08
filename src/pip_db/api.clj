@@ -14,3 +14,6 @@
 
 (defn ac [request]
   (util/json-response (db/autocomplete request)))
+
+(defn ping [request]
+  {:status 200 :headers {"x-pip-db-records" (str (db/no-of-records))}})

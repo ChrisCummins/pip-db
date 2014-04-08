@@ -163,6 +163,68 @@
 }(jQuery));
 
 
+/**
+ * Auto-growing textareas; technique ripped from Facebook
+ *
+ * http://github.com/jaz303/jquery-grab-bag/tree/master/javascripts/jquery.autogrow-textarea.js
+ */
+$.fn.autogrow = function(options) {
+  return this.filter('textarea').each(function() {
+    var self = this;
+    var $self = $(self);
+    var minHeight = $self.height();
+    var noFlickerPad = $self.hasClass('autogrow-short') ? 0 :
+      parseInt($self.css('lineHeight')) || 0;
+
+    var shadow = $('<div></div>').css({
+      position: 'absolute',
+      top: -10000,
+      left: -10000,
+      width: $self.width(),
+      fontSize: $self.css('fontSize'),
+      fontFamily: $self.css('fontFamily'),
+      fontWeight: $self.css('fontWeight'),
+      lineHeight: $self.css('lineHeight'),
+      resize: 'none',
+      'word-wrap': 'break-word'
+    }).appendTo(document.body);
+
+    var update = function(event) {
+      var times = function(string, number) {
+        for (var i = 0, r = ''; i < number; i++) r += string;
+        return r;
+      };
+
+      var val = self.value.replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/&/g, '&amp;')
+        .replace(/\n$/, '<br/>&nbsp;')
+        .replace(/\n/g, '<br/>')
+        .replace(/ {2,}/g, function(space) {
+          return times('&nbsp;', space.length - 1) + ' ';
+        });
+
+      // Did enter get pressed?  Resize in this keydown event so that the
+      // flicker doesn't occur.
+      if (event && event.data && event.data.event === 'keydown' &&
+          event.keyCode === 13) {
+        val += '<br />';
+      }
+
+      shadow.css('width', $self.width());
+      // Append '...' to resize pre-emptively.
+      shadow.html(val + (noFlickerPad === 0 ? '...' : ''));
+      $self.height(Math.max(shadow.height() + noFlickerPad, minHeight));
+    };
+
+    $self.change(update).keyup(update).keydown({event: 'keydown'},update);
+    $(window).resize(update);
+
+    update();
+  });
+};
+
+
 /*
  * CUSTOM PIP-DB JAVASCRIPT
  */
@@ -258,7 +320,9 @@
         'mw_h': '',
         'm': '',
         't_l': '',
-        't_h': ''
+        't_h': '',
+        'seq': '',
+        'f-name': ''
     };
 
     /*
@@ -267,7 +331,7 @@
     $(':submit', $searchForms).click(function () {
         var $form = $(this).closest('form');
 
-        if ($(this).attr('value') === 'a') {
+        if ($(this).attr('value') !== 's') {
             $form.append($("<input type='hidden'>").attr({
                 name: $(this).attr('name'),
                 value: $(this).attr('value')
@@ -275,15 +339,31 @@
         }
     });
 
+    /*
+     * Form submission callback.
+     */
     $searchForms.submit(function (e) {
-        e.preventDefault();
 
-        var items = stripDefaultValues($(this).serializeArray(),
-                                       searchFormDefaults);
+        // GET requests:
+        if ($(this).attr('method').toLowerCase() === 'get') {
+            e.preventDefault();
 
-        if (items.length) { // Only submit form if we have some unique values
-            window.location = $(this).attr('action') +
-                '?' + $.param(items.values);
+            var items = stripDefaultValues($(this).serializeArray(),
+                                           searchFormDefaults);
+
+            // Only submit form if we have unique values:
+            if (items.length) {
+                window.location = $(this).attr('action') +
+                    '?' + $.param(items.values);
+            }
+        // POST requests:
+        } else {
+            var text = $('#seq').val();
+            var file = $('#f').val();
+
+            // Only submit form if we have unique values:
+            if (!text && !file)
+                e.preventDefault();
         }
     });
 
@@ -311,6 +391,14 @@
     $(' select', $searchForms).change(function (e) {
         activateSubmitIfFormFilled($(this).closest('form'));
         updateNoOfResults($(this).closest('form'));
+    });
+
+    // BLAST+ FASTA sequence file select callback:
+    $('#f').change(function (e) {
+        var newFile = $(this).val();
+
+        $('#f-name').val(newFile);
+        activateSubmitIfFormFilled($(this).closest('form'));
     });
 
     // Validate form on load (in case of preloaded criteria)
@@ -436,48 +524,6 @@
     updateNoOfResults($searchForms);
 
     /*
-     * EXPERIMENTAL METHOD COMBO
-     */
-
-    var methodActive = false; // Keep track of whether method select is active
-    var $methodSelector = $('#m-select');
-
-    // Update hidden form inputs
-    var setFormValuesFromMethod = function () {
-        if (methodActive) {
-            $('#m').val($(' option:selected', $methodSelector).text());
-        } else {
-            $('#m').val('');
-        }
-    };
-
-    // Experimental method button press
-    $('#m-active').click(function (e) {
-        methodActive = !methodActive;
-
-        if (methodActive) {
-            $(this).text('On');
-            $(this).addClass('btn-warning');
-            $(this).removeClass('btn-primary');
-            $methodSelector.removeAttr('disabled');
-        } else {
-            $(this).text('Off');
-            $(this).addClass('btn-primary');
-            $(this).removeClass('btn-warning');
-            $methodSelector.attr('disabled', true);
-        }
-
-        // Update form
-        setFormValuesFromMethod();
-        activateSubmitIfFormFilled($(this).closest('form'));
-        updateNoOfResults($(this).closest('form'));
-    });
-
-    $methodSelector.change(function (e) {
-        setFormValuesFromMethod();
-    });
-
-    /*
      * AUTO-COMPLETE
      */
 
@@ -588,5 +634,10 @@
       updateNoOfResults($(this).closest('form'));
     }
   });
+
+  /*
+   * FASTA input form growing.
+   */
+  $('#seq').autogrow();
 
 }());

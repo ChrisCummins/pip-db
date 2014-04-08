@@ -64,7 +64,7 @@ dnl 1. Project versions (i.e. the package version)
 dnl ================================================================
 m4_define([pipdb_major_version],[0])
 m4_define([pipdb_minor_version],[6])
-m4_define([pipdb_micro_version],[0])
+m4_define([pipdb_micro_version],[1])
 m4_define([pipdb_version],[pipdb_major_version.pipdb_minor_version.pipdb_micro_version])
 
 
@@ -422,15 +422,9 @@ dnl ================================================================
 AS_IF([test "x$enable_documentation" = xyes],
       [AC_CONFIG_FILES([
                 Documentation/Makefile
-                Documentation/design/Makefile
-                Documentation/design/d1/Makefile
-                Documentation/design/d1/pages/Makefile
-                Documentation/design/d1/pages/renders/Makefile
-                Documentation/design/d1/previous/Makefile
-                Documentation/design/d1/previous/renders/Makefile
-                Documentation/design/d1/tasks/Makefile
-                Documentation/design/d1/tasks/renders/Makefile
-                Documentation/plan/Makefile])],)
+                Documentation/midterm/Makefile
+                Documentation/plan/Makefile
+                Documentation/report/Makefile])],)
 
 AS_IF([test "x$enable_tools" = xyes],
       [AC_CONFIG_FILES([

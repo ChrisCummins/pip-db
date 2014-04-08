@@ -97,11 +97,13 @@ get_build_sloccounts() {
   local autogen=$(get_lc_of_files "./autogen.sh")
   local configure=$(get_lc_of_files "./configure.ac")
   local makefile=$(get_lc_of_files "$(find_files_with_extension am)")
+  local build=$(get_lc_of_files "./bin/build")
   local total=$((autogen+configure+makefile))
 
   print_sloccount "$autogen"   "$total" "autogen.sh       "
   print_sloccount "$configure" "$total" "configure.ac     "
   print_sloccount "$makefile"  "$total" "Makefile.am      "
+  print_sloccount "$build"     "$total" "bin/build        "
 }
 
 # Returns a list of sloccounts for the resources.
@@ -187,11 +189,11 @@ main() {
   get_build_sloccounts | sort -rn | column -t -s $'\t'
 
   echo ""
-  echo "Resources: $resources"
+  echo "Client side: $resources"
   get_resources_sloccounts | sort -rn | column -t -s $'\t'
 
   echo ""
-  echo "Sources: $src"
+  echo "Server side: $src"
   get_src_sloccounts | sort -rn | column -t -s $'\t'
 
   echo ""

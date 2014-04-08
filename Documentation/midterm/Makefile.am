@@ -1,5 +1,5 @@
 # Our target document:
-DOC = ProjectPlan
+DOC = report
 
 DOCPDF = $(DOC).pdf
 DOCTEX = $(DOC).tex

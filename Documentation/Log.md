@@ -3664,5 +3664,104 @@ user=> (clojure.pprint/write (apply vector records))
 
 Completed BLAST+ back-end implementation:
 
-[Example search](http://www.pip-db.org/s?a=a&q=alkaline)
-[Example search with sequence](http://www.pip-db.org/s?a=a&q=alkaline&seq=GVKANEGTVGVSAATERSRCNTTQGNEVTSILRWAKDAGKSVGIVTTTRVNHATPSAAYAHSADRDWYSDNEMPPEALSQGCK)
+ * [Example search](http://www.pip-db.org/s?a=a&q=alkaline)
+ * [Example search with sequence](http://www.pip-db.org/s?a=a&q=alkaline&seq=GVKANEGTVGVSAATERSRCNTTQGNEVTSILRWAKDAGKSVGIVTTTRVNHATPSAAYAHSADRDWYSDNEMPPEALSQGCK)
+
+
+### Monday 18th
+
+Notes for meeting with Ian:
+
+ * Meeting with Darren:
+
+    * For testing: 3 tasks, 5 users
+    * BLAST+ searching
+
+ * BLAST+ searching:
+
+    * Reducing hosted Heroku size
+
+ * Big picture list:
+
+1. Mockups first design (inspired by Google's aesthetic)
+1. Prototype in PHP & MySQL
+1. Autotooled build system, content hashing and minification
+1. PHP templating (and differences from previous FYP)
+1. MySQL schema (and differences from previous FYP)
+    * Tools: dsa - Dataset Analaysis
+1. Data integrity
+    * Tools: png - Plausible Nonsense Generator
+1. Branching model + Issue tracker workflow
+    * Tools: pipbot
+1. END OF M1 (user testing & review)
+1. Clojure research & intro
+1. Clojure port of M1 prototype
+1. Heroku deployment
+1. Working with HOFs and immutable data structures
+1. RESTful API design
+1. D2 user interface refinements
+1. BLAST+ searching
+
+
+### Tuesday 18th
+
+Notes from meeting with Ian:
+
+ * BLAST+ searching:
+    * Are we handling errors?
+    * Mock `blastp` for testing
+    * Just parse the XML, stoopid.
+ * Report
+    * Perhaps consider mind-mapping the thematic elements of the
+      report
+    * Three main chapters from big picture list:
+       1. User oriented design (mockups, prototyping)
+       2. Infrastructure (tooling, process)
+       3. Product (UI, API etc)
+
+
+### Saturday 22rd
+
+I'm entering the fourth week allocated to report writing, which is
+half of the allocated total time. Since the report is not even close
+to being half way completed, I need to pick up the effort a bit or
+else risk falling behind.
+
+
+### Sunday 23rd
+
+* Process
+  * Development process
+    * Open Source
+    * Version Control
+    * Branching model
+  * Project Plan Recap
+  * User oriented design
+    * Mockups
+    * Prototype & it's purpose / role in process
+
+* Infrastructure
+  * Git / GitHub workflow
+  * Build systems
+
+* Product
+  * PHP prototype (technical overview)
+  * LISP rewrite
+    * PHP vs Clojure
+  * Web programming with HOFs
+  * Usage
+
+### Thursday 27th
+
+Notes from weekly meeting with Ian:
+
+ * Need to start planning evaluation
+   * Two aspects: project evaluation and system evaluation
+     * Project: Did we stick to the plan (no), did we stick to deadlines etc.
+     * System: Have non-functional & functional requirements been met, etc.
+
+ * TODO: Chase up project plan / report question with Kate.
+
+ * TODO: Chase up dates for testing & task list with Darren.
+
+ * TODO: Create table of contents for report.

@@ -20,6 +20,10 @@
 \def\wr@pletters#1#2\@nil{#1\allowbreak\if&#2&\else\wr@pletters#2\@nil\fi}
 \setenumerate{itemsep=0pt}
 
+% Increase table of contents depth from standard 3 (subsection) to 4
+% (subsubseciton):
+\setcounter{tocdepth}{4}
+
 % Sort references by the order in which they are cited
 \usepackage[style=authoryear,sorting=none]{biblatex}
 \addbibresource{ref.bib}

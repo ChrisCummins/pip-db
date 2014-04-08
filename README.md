@@ -1,4 +1,4 @@
-![pip-db](Documentation/assets/logo.png)
+![pip-db](https://raw.github.com/ChrisCummins/pip-db/master/Documentation/assets/logo.png)
 
 [![Build Status](https://api.travis-ci.org/ChrisCummins/pip-db.png)](https://travis-ci.org/ChrisCummins/pip-db)
 

@@ -67,6 +67,16 @@
 
 ;; Search form widgets
 
+(deftest search-form-heading-row
+  (testing "Heading text"
+    (is (not (= (dut/search-form-heading-row "foo")
+                (dut/search-form-heading-row "bar")))))
+
+  (testing "Heading ID"
+    (is (not (= (dut/search-form-heading-row "foo")
+                (dut/search-form-heading-row "bar" "foo")
+                (dut/search-form-heading-row "baz" "foo"))))))
+
 (deftest search-form-text-input-widget
   (testing "Widget contents"
     (is (not (= (dut/search-form-text-input-widget "foo" "bar")

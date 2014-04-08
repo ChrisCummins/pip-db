@@ -1,10 +1,7 @@
 SUBDIRS =
-	design \
+	midterm \
 	plan \
-	$(NULL)
-
-EXTRA_DIST = \
-	Log.md \
+	report \
 	$(NULL)
 
 HTML_DOCS = code.html

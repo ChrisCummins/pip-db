@@ -2,8 +2,8 @@
   (:require [clojure.string :as str]
             [pip-db.yaps :as yaps]
             [pip-db.db :as db]
-            [pip-db.ui :as ui])
-  (:import [java.io File]))
+            [pip-db.ui :as ui]
+            [pip-db.util :as util]))
 
 ;; ## View
 
@@ -122,18 +122,9 @@
 
 ;; ## Controller
 
-;; Evaluate the expressions contained in body with file bound to a
-;; File object pointed to by req. Upon completion, the file is
-;; deleted.
-(defmacro with-tmp-file [file req & body]
-  `(let [~file (File. (str (~req :tempfile)))
-         output# ~@body]
-     (.delete ~file)
-     output#))
-
 (defn GET [request]
   (view request))
 
 (defn POST [request]
-  (with-tmp-file file ((request :params) "f")
+  (util/with-tmp-file file ((request :params) "f")
     (process-file file)))
