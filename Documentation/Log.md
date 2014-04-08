@@ -3787,3 +3787,11 @@ Notes from weekly meeting with Ian:
    one place.
  * TODO: *Evaluation plan* is the priority for now, since it relies on
    other people's timetable. The report writing can wait.
+
+
+### Sunday 6th
+
+Tried implementing AJAX file upload to no avail. I should look into
+using one of the many off-the-shelf jQuery
+plugins. [This one](http://malsup.com/jquery/form/#getting-started)
+looks promising.
