@@ -3846,3 +3846,137 @@ FCMENSAEPEQSLACQCLVRTPEVDDEALEKFDKALKALPMHIRLSFNPTQLEEQCHI
 
   2. Make a copy of the sequence alignment strings for the result with
      the highest Score.
+
+
+### Tuesday 8th
+
+Read up on the differences between
+[Usability testing](http://en.wikipedia.org/wiki/Usability_testing)
+and
+[Qualitative research](http://en.wikipedia.org/wiki/Qualitative_research). Ideally,
+the product evaluation should include both.
+
+Notes from meeting with Darren:
+
+ * Overall impressions of the project is glowing. He's very happy with
+   look and feel and behaviour.
+
+ * Will get in touch over the next few weeks to discuss administration
+   and how to add new data.
+
+ * We *don't* want the ability to modify data in-place, or add
+   individual records. That will make for awkward version control
+   issues with having to synchronize the offline/online copies of the
+   data. Instead, there should be a simple 1-click upload which wipes
+   the existing tables and replaces them with entirely new
+   ones. Perhaps the site should save a copy of the dataset file so
+   that users can download it and modify later?
+
+ * For BLAST+ search results, alignment and position information would
+   be useful.
+
+ * Darren has emailed half a dozen potential volunteers:
+
+> Hi
+>
+> A final year CS student Chris Cummins has been implementing a web
+> version of some data that my placement students have previously
+> compiled. As the final step in the process, he needs to show this to
+> a few people unfamiliar with the database and ask them to undertake
+> a few tasks and thus assess the ease-of-use of his database
+> implementation. I was wondering if you could spare him 10-15 minutes
+> of your time, at some point in the coming days, to enable him to
+> undertake this exercise. Please reply to Chris, who I have copied
+> in.
+>
+> Thank you for your time. I appreciate it.
+>
+> BW
+>
+> DRF
+
+ * I should contact Frasier directly with regards to user testing.
+
+ * I *need* to come up with a much more rigorous script for the
+   usability tests. The usability tests with Darren went very well,
+   but largely only because of the help from him and his prior
+   knowledge of the project. If he were coming to this cold, there
+   would be have been a lot less value to the exercise.
+
+ * Not sure if Aston branding is required / a good idea, but the
+   homepage should definitely have Darren's contact details, and
+   mistakes that are uncovered should be report to him. Perhaps the
+   record page should include a "Is there a mistake? Get in touch"
+   link.
+
+Modifications needed for usability tests round 2:
+
+ * Add a test which requires entering a Greek character.
+
+ * Tests must cover download functionality, and maybe import into
+   spreadsheet application.
+
+ * Tests should be introduced with a short outline, then given a
+   *specific* set of activities, with a definite end point.
+
+ * List of tests should be printed.
+
+ * State upfront the desire to record the session and specify what
+   you'll do with the recording (evidence of testing).
+
+ * Don't explain anything during the tests. Instead, let the user get
+   confused and then hold a Q&A at the end to discuss anything.
+
+ * Encourage the user to think out load and talk me through their
+   thought processes and reactions.
+
+ * Tests need a definite "END OF TEST".
+
+Organised usability testing with Shahzad Mumtaz tomorrow at
+1:30. Shazad is a computer science PhD student under Ian's
+supervision, so should chat with him about his Aston PhD experience
+while I have the opportunity.
+
+**Notes from usability testing with Darren:**
+
+TASK 1
+
+ * User noticed an error in dataset.
+   [Dolichyl monophosphatase](http://www.pip-db.org/r/YjBmZmMyOGU) had
+   been entered incorrectly during the data entry phase. In this case,
+   Darren would need to correct the error in the Excel sheet and
+   re-upload the dataset.
+ * User noticed there's no contact details for report factual errors
+   in dataset.
+
+TASK 2
+
+ * Some confusion over the EC number entry form. Should the user type
+   all digits into the first box? It isn't immediately obvious.
+ * User didn't enter all fields initially, so clicked back button to
+   add in the missing form. At this point, the inputs had lost their
+   state and the user had to re-enter every single form input again.
+ * To select a temperature range of >4C, the user entered 4C for the
+   lower bound and 20000C for the upper bound. It is not obvious that
+   leaving the upper bound blank is equivalent to > lower bound.
+
+TASK 3
+
+ * On several occasions, the indicator to show many results will be
+   returned by a given search is out-of-sync with current form state.
+
+TASK 4
+
+ * Copy and pasting text into the FASTA sequence field does not cause
+   it to immediately auto-grow.
+ * User was mislead by the number of results indicator, expecting more
+   results than were actually returned.
+
+Things to change as a result of usability test:
+
+ * No of results indicator needs to show when it's state does not
+   match that of the current form.
+ * Advanced search form should return state when pressing back
+   button. A workaround for this would be to add a "Modify search
+   parameters" button to the results page, which would load the
+   advanced page with all input fields populated.
