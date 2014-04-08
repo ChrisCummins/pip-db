@@ -1,4 +1,5 @@
 (ns pip-db.pages.search
+  (:use [clojure.core :only (slurp)])
   (:require [clojure.string :as str]
             [pip-db.pages.advanced :as advanced]
             [pip-db.search :as search]
@@ -50,3 +51,14 @@
 ;; Search page ring handler.
 (defn GET [request]
   ((response-function request) request))
+
+;; Search page ring handler with support for sequence upload from file.
+(defn POST [request]
+  (util/with-tmp-file file ((request :params) "f")
+    (let [params      (dissoc (request :params) "f")
+          sequence    (slurp file)
+          sequence?   (not (str/blank? sequence))
+          sequence    (if sequence? sequence (params "seq"))
+          params      (assoc params "seq" sequence)
+          request     (assoc request :params params)]
+      ((response-function request) request))))

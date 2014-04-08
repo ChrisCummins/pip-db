@@ -321,7 +321,8 @@ $.fn.autogrow = function(options) {
         'm': '',
         't_l': '',
         't_h': '',
-        'seq': ''
+        'seq': '',
+        'f-name': ''
     };
 
     /*
@@ -338,15 +339,31 @@ $.fn.autogrow = function(options) {
         }
     });
 
+    /*
+     * Form submission callback.
+     */
     $searchForms.submit(function (e) {
-        e.preventDefault();
 
-        var items = stripDefaultValues($(this).serializeArray(),
-                                       searchFormDefaults);
+        // GET requests:
+        if ($(this).attr('method').toLowerCase() === 'get') {
+            e.preventDefault();
 
-        if (items.length) { // Only submit form if we have some unique values
-            window.location = $(this).attr('action') +
-                '?' + $.param(items.values);
+            var items = stripDefaultValues($(this).serializeArray(),
+                                           searchFormDefaults);
+
+            // Only submit form if we have unique values:
+            if (items.length) {
+                window.location = $(this).attr('action') +
+                    '?' + $.param(items.values);
+            }
+        // POST requests:
+        } else {
+            var text = $('#seq').val();
+            var file = $('#f').val();
+
+            // Only submit form if we have unique values:
+            if (!text && !file)
+                e.preventDefault();
         }
     });
 
@@ -374,6 +391,14 @@ $.fn.autogrow = function(options) {
     $(' select', $searchForms).change(function (e) {
         activateSubmitIfFormFilled($(this).closest('form'));
         updateNoOfResults($(this).closest('form'));
+    });
+
+    // BLAST+ FASTA sequence file select callback:
+    $('#f').change(function (e) {
+        var newFile = $(this).val();
+
+        $('#f-name').val(newFile);
+        activateSubmitIfFormFilled($(this).closest('form'));
     });
 
     // Validate form on load (in case of preloaded criteria)
