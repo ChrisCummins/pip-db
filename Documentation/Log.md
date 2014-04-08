@@ -3764,3 +3764,26 @@ Notes from weekly meeting with Ian:
  * TODO: Chase up dates for testing & task list with Darren.
 
  * TODO: Create table of contents for report.
+
+
+## April 2014
+
+
+### Thursday 3rd
+
+Notes from weekly meeting with Ian:
+
+ * Introduction chapter should be numbered.
+ * Introduction chapter is *really* high-level, so include
+   objectives/aims, not requirements.
+ * Requirements and requirements analysis is easily a 10 page section,
+   and should be a top-level chapter before 'Process'.
+ * There should be a top-level 'Evaluation' chapter before Conclusions.
+ * Second year SE module covered requirements analysis.
+ * Infrastructure - for each tool, make sure to *justify* the purpose:
+   provide citations to studies, and where possible provide evidence
+   of quantitative results.
+ * Evaluation - evaluate Process, Infrastructure and Product all in
+   one place.
+ * TODO: *Evaluation plan* is the priority for now, since it relies on
+   other people's timetable. The report writing can wait.
