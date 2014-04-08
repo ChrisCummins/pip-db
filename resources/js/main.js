@@ -331,7 +331,7 @@ $.fn.autogrow = function(options) {
     $(':submit', $searchForms).click(function () {
         var $form = $(this).closest('form');
 
-        if ($(this).attr('value') === 'a') {
+        if ($(this).attr('value') !== 's') {
             $form.append($("<input type='hidden'>").attr({
                 name: $(this).attr('name'),
                 value: $(this).attr('value')

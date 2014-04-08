@@ -2,6 +2,7 @@
   (:use [clojure.core :only (slurp)])
   (:require [clojure.string :as str]
             [pip-db.pages.advanced :as advanced]
+            [pip-db.pages.blast :as blast]
             [pip-db.search :as search]
             [pip-db.ui :as ui]
             [pip-db.util :as util]))
@@ -42,11 +43,18 @@
 ;; Serve an advanced search page.
 (defn advanced-handler [request] (advanced/GET request))
 
+;; Serve a BLAST search page.
+(defn blast-handler    [request] (blast/GET request))
+
 ;; Return the handler to be used for a specific search action. If the
 ;; action `a` is used, then we use the advanced handler, else we use
 ;; the normal search.
 (defn response-function [request]
-  (if (= "a" ((request :params) "a")) advanced-handler search-handler))
+  (let [action ((request :params) "a")]
+    (cond
+     (= action "a") advanced-handler
+     (= action "b") blast-handler
+     :else          search-handler)))
 
 ;; Search page ring handler.
 (defn GET [request]
