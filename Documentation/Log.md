@@ -3795,3 +3795,54 @@ Tried implementing AJAX file upload to no avail. I should look into
 using one of the many off-the-shelf jQuery
 plugins. [This one](http://malsup.com/jquery/form/#getting-started)
 looks promising.
+
+
+### Monday 7th
+
+Emailed Darren regarding user testing and list of searches. Got
+response:
+
+> 1. Specific search: “lactoferrin”
+>
+> 2. Broad search: “kinase”
+>
+> 3. Fasta:
+>
+> >sp|P02754|LACB_BOVIN Beta-lactoglobulin OS=Bos taurus GN=LGB PE=1 SV=3
+> MKCLLLALALTCGAQALIVTQTMKGLDIQKVAGTWYSLAMAASDISLLDAQSAPLRVYVE
+> ELKPTPEGDLEILLQKWENGECAQKKIIAEKTKIPAVFKIDALNENKVLVLDTDYKKYLL
+> FCMENSAEPEQSLACQCLVRTPEVDDEALEKFDKALKALPMHIRLSFNPTQLEEQCHI
+
+I need to use those to flesh out an evaluation plan.
+
+**User Testing Tasks List:**
+
+1.
+  1. Search for record with protein name *Lactoferrin*.
+  2. Look up other records from the same *source*.
+
+2.
+  1. Search for all records containing the word *Kinase*, from *Human*
+     source and with enzyme commission number *2.7.1.-*, and
+     temperature greater than or equal to *4C*.
+
+3.
+  1. Search for all records with pI of less than *3* which don't
+     contain the word *Kinase*.
+
+  2. Find the result with the lowest *pI* and make a note of all of
+     the protein's names.
+
+4.
+  1. Search for all records with a pI between *6-8* using the BLAST+
+     sequence:
+
+```
+>sp|P02754|LACB_BOVIN Beta-lactoglobulin OS=Bos taurus GN=LGB PE=1 SV=3
+MKCLLLALALTCGAQALIVTQTMKGLDIQKVAGTWYSLAMAASDISLLDAQSAPLRVYVE
+ELKPTPEGDLEILLQKWENGECAQKKIIAEKTKIPAVFKIDALNENKVLVLDTDYKKYLL
+FCMENSAEPEQSLACQCLVRTPEVDDEALEKFDKALKALPMHIRLSFNPTQLEEQCHI
+```
+
+  2. Make a copy of the sequence alignment strings for the result with
+     the highest Score.
