@@ -3983,3 +3983,106 @@ Things to change as a result of usability test:
    button. A workaround for this would be to add a "Modify search
    parameters" button to the results page, which would load the
    advanced page with all input fields populated.
+
+
+### Wednesday 9th
+
+**Notes from usability testing with Shahzad:**
+
+Shahzad is a PhD student in his third year, having recently submitted
+his thesis. His specialisation is computer science, although he is
+familiar with the biological background and terminology. Shahzad had
+never seen the project before so was coming to the evaluation "cold".
+
+TASK 1
+
+ * Participant was unsure what the main search bar does. Initially, he
+   entered "Isoelectric point of Lactoferrin", expecting the search to
+   have a semantic understanding, beyond just being a name look-up.
+ * On records page, participant notes that the pI range using a dash
+   ("8.8 - 9") is not explicitly obvious, and that the data could be
+   annotated to state that it is a minimum to maximum range value.
+
+TASK 2
+
+ * Participant attempted to narrow results by source by entering
+   "Lactoferrin + Human" into the search box. Again, there's
+   uncertainty over the function of the text box. This may be in-part
+   due to an inadequate introduction to the project at the start of
+   the evaluation. Participant showed the PDB website as an example of
+   a search box which is self-explanatory. Key differences included
+   the placeholder text, and the tabs to indicate the specific field
+   being searched.
+
+ * Participant was observed pressing the "Show >>" link next to the
+   FASTA sequence entry on the record page repeatedly. This may be
+   because of the slightly misleading location of the text at the
+   bottom of the details table, implying that pressing the link will
+   reveal more information about the record, as on the results page.
+ * Participant was unable to locate the Download button after several
+   visual sweeps of the page. On the record page, the participant
+   suggested that the download button be placed beneath the details
+   table. For the results page, the participant commented that the
+   location was OK, but the text should be annotated explicitly
+   "Download all".
+ * Participant incorrectly entered "2.1.7" into the first text box for
+   the EC field. This search parameter is silently ignored by the
+   search engine, with no visual feedback to indicate the parameter is
+   unused.
+
+TASK 3
+
+ * Participant commented on the effectiveness of the results count
+   indicator on the advanced search page, but was confused when the
+   counter became out of sync with the current search state.
+
+TASK 4
+
+ * The participant used the browser back button to return to the
+   search form, which caused the form state to reload from the URL.
+
+Things to change as a result of usability test:
+
+ * Search forms should have informative placeholder text to indicate
+   the kind of values expected in them.
+ * The advanced search form shouldn't be setting the state of the
+   form, the browser should.
+ * I should go back over the site and do a ground-up re-evaluation of
+   the usability, from the perspective of a someone who's coming to
+   the site cold.
+ * I should consider adding tabs for performing different category
+   searches from the homepage.
+
+**Notes from usability testing with Darren:**
+
+Darren is an Undergraduate business and psychology student in his
+final year. As someone with no background in biology or computer
+science, their purpose is to provide feedback on the immediate
+usability and intuitiveness of the site. As a result, a longer
+introduction to the project was given, which explained some of the
+background terminology, and provided a minimum of information required
+to complete the tasks.
+
+TASKS 2
+
+ * Participant attempted to negate Kinase search term by entering "NOT
+   Kinase" into the protein name field.
+
+TASK 3
+
+ * Participant successfully identified external links section but
+   didn't identify the PubMed article until prompted. This may have
+   been due to a lack of understanding of what PubMed is.
+
+TASK 4
+
+ * Participant attempted to enter the FASTA sequence into the primary
+   search box.
+
+Things to change as a result of usability test:
+
+ * Improve the quality of the input descriptions on the advanced
+   page. Make it more apparent the types of input expeceted.
+ * Change the wording of usability scenarios to remove direct
+   references to CSV format, and instead describe that the participant
+   would like to import the search results into a spreadsheet program.
