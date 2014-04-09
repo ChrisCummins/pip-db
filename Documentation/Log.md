@@ -3933,7 +3933,7 @@ Modifications needed for usability tests round 2:
  * Tests need a definite "END OF TEST".
 
 Organised usability testing with Shahzad Mumtaz tomorrow at
-1:30. Shazad is a computer science PhD student under Ian's
+1:30. Shahzad is a computer science PhD student under Ian's
 supervision, so should chat with him about his Aston PhD experience
 while I have the opportunity.
 
