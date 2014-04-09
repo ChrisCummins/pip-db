@@ -3941,24 +3941,27 @@ while I have the opportunity.
 
 TASK 1
 
- * User noticed an error in dataset.
+ * Participant noticed an error in dataset.
    [Dolichyl monophosphatase](http://www.pip-db.org/r/YjBmZmMyOGU) had
    been entered incorrectly during the data entry phase. In this case,
    Darren would need to correct the error in the Excel sheet and
    re-upload the dataset.
- * User noticed there's no contact details for report factual errors
-   in dataset.
+ * Participant noticed there's no contact details for report factual
+   errors in dataset.
 
 TASK 2
 
- * Some confusion over the EC number entry form. Should the user type
-   all digits into the first box? It isn't immediately obvious.
- * User didn't enter all fields initially, so clicked back button to
-   add in the missing form. At this point, the inputs had lost their
-   state and the user had to re-enter every single form input again.
- * To select a temperature range of >4C, the user entered 4C for the
-   lower bound and 20000C for the upper bound. It is not obvious that
-   leaving the upper bound blank is equivalent to > lower bound.
+ * Some confusion over the EC number entry form. Should the
+   participant type all digits into the first box? It isn't
+   immediately obvious.
+ * Participant didn't enter all fields initially, so clicked back
+   button to add in the missing form. At this point, the inputs had
+   lost their state and the participant had to re-enter every single
+   form input again.
+ * To select a temperature range of >4C, the participant entered 4C
+   for the lower bound and 20000C for the upper bound. It is not
+   obvious that leaving the upper bound blank is equivalent to > lower
+   bound.
 
 TASK 3
 
@@ -3969,8 +3972,8 @@ TASK 4
 
  * Copy and pasting text into the FASTA sequence field does not cause
    it to immediately auto-grow.
- * User was mislead by the number of results indicator, expecting more
-   results than were actually returned.
+ * The participant was mislead by the number of results indicator,
+   expecting more results than were actually returned.
 
 Things to change as a result of usability test:
 
