@@ -422,6 +422,7 @@ dnl ================================================================
 AS_IF([test "x$enable_documentation" = xyes],
       [AC_CONFIG_FILES([
                 Documentation/Makefile
+                Documentation/evaluation/Makefile
                 Documentation/midterm/Makefile
                 Documentation/plan/Makefile
                 Documentation/report/Makefile])],)

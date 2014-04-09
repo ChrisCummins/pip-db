@@ -1,0 +1,39 @@
+% Document dimensions and margins:
+\usepackage[a4paper,width=170mm,left=25mm,right=25mm,top=25mm,bottom=25mm,bindingoffset=6mm]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage[title]{appendix}
+\usepackage[dotinlabels]{titletoc}
+\usepackage[nottoc,numbib]{tocbibind}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{longtable}
+
+\restylefloat{figure}
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\newcommand*\wrapletters[1]{\wr@pletters#1\@nil}
+\def\wr@pletters#1#2\@nil{#1\allowbreak\if&#2&\else\wr@pletters#2\@nil\fi}
+\setenumerate{itemsep=0pt}
+
+% Increase table of contents depth from standard 3 (subsection) to 4
+% (subsubseciton):
+\setcounter{tocdepth}{4}
+
+% Sort references by the order in which they are cited
+\usepackage[style=authoryear,sorting=none]{biblatex}
+\addbibresource{ref.bib}
+
+% Fancy headers
+\usepackage{fancyhdr}
+\fancyhead{}
+\fancyhead[RO,LE]{Protein Isoelectric Point Database}
+\fancyfoot{}
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{Chapter \thechapter}
+\fancyfoot[CO,RE]{Chris Cummins}
+\pagestyle{fancy}
