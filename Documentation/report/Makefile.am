@@ -30,7 +30,7 @@ PDFLATEX_ARGS = -output-format pdf \
 # is an error, we re-run the compilation without the pipe so as to print the
 # failure messages.
 define compile
-$(PDFLATEX) $(PDFLATEX_ARGS) $1 >/dev/null || $(PDFLATEX) $(PDFLATEX_ARGS) $1
+$(PDFLATEX) $(PDFLATEX_ARGS) $1 >/dev/null 2>&1 || $(PDFLATEX) $(PDFLATEX_ARGS) $1
 endef
 
 define bibtex
