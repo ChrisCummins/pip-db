@@ -44,10 +44,11 @@ dnl
 dnl   8.     Documentation
 dnl   8.1.     Are we build the documentation?
 dnl   8.2.     Do we have pdflatex installed?
-dnl   8.3.     Do we have pandoc installed?
-dnl   8.4.     Do we have doctoc installed?
-dnl   8.5.     Should xdg-open be used to open PDFs?
-dnl   8.6.     Should emacsclient be used for editing files?
+dnl   8.3.     Do we have bibtex installed?
+dnl   8.4.     Do we have pandoc installed?
+dnl   8.5.     Do we have doctoc installed?
+dnl   8.6.     Should xdg-open be used to open PDFs?
+dnl   8.7.     Should emacsclient be used for editing files?
 dnl
 dnl   9.     Git
 dnl   9.1.     Are we installing the project git hooks?
@@ -341,15 +342,28 @@ AS_IF([test "x$enable_documentation" = xyes],
       [AC_CHECK_PROG([PDFLATEX],[pdflatex],[pdflatex])
        AS_IF([test "x$PDFLATEX" != x],
              [HAVE_PDFLATEX=yes],
-             [HAVE_PDFLATEX=no
-              AC_MSG_WARN([Unable to create PDF documentation.])])],
+             [HAVE_PDFLATEX=no])],
       [HAVE_PDFLATEX=no])
 AC_SUBST([HAVE_PDFLATEX],[$HAVE_PDFLATEX])
 AM_CONDITIONAL([HAVE_PDFLATEX],[test "x$HAVE_PDFLATEX" = xyes])
 
 
 dnl     ============================================================
-dnl     8.3. Do we have pandoc installed?
+dnl     8.3. Do we have bibtex installed?
+dnl     ============================================================
+AS_IF([test "x$enable_documentation" = xyes],
+      [AC_CHECK_PROG([BIBTEX],[bibtex],[bibtex])
+       AS_IF([test "x$BIBTEX" != x],
+             [HAVE_BIBTEX=yes],
+             [HAVE_PDFLATEX=no
+              AC_MSG_WARN([Unable to create PDF documentation.])])],
+      [HAVE_BIBTEX=no])
+AC_SUBST([HAVE_BIBTEX],[$HAVE_BIBTEX])
+AM_CONDITIONAL([HAVE_BIBTEX],[test "x$HAVE_BIBTEX" = xyes])
+
+
+dnl     ============================================================
+dnl     8.4. Do we have pandoc installed?
 dnl     ============================================================
 AS_IF([test "x$enable_documentation" = xyes],
       [AC_CHECK_PROG([PANDOC],[pandoc],[pandoc])
@@ -363,7 +377,7 @@ AM_CONDITIONAL([HAVE_PANDOC],[test "x$HAVE_PANDOC" = xyes])
 
 
 dnl     ============================================================
-dnl     8.4. Do we have doctoc installed?
+dnl     8.5. Do we have doctoc installed?
 dnl     ============================================================
 AS_IF([test "x$enable_documentation" = xyes],
       [AC_CHECK_PROG([DOCTOC],[doctoc],[doctoc])
@@ -377,7 +391,7 @@ AM_CONDITIONAL([HAVE_DOCTOC],[test "x$HAVE_DOCTOC" = xyes])
 
 
 dnl     ============================================================
-dnl     8.5. Should xdg-open be used to open PDFs?
+dnl     8.6. Should xdg-open be used to open PDFs?
 dnl     ============================================================
 AC_CHECK_PROG([XDG_OPEN],[xdg-open],[xdg-open])
 AS_IF([test "x$XDG_OPEN" != x],
@@ -389,7 +403,7 @@ AM_CONDITIONAL([HAVE_XDG_OPEN],[test "x$HAVE_XDG_OPEN" = xyes])
 
 
 dnl     ============================================================
-dnl     8.6. Should emacsclient be used for editing files?
+dnl     8.7. Should emacsclient be used for editing files?
 dnl     ============================================================
 AC_CHECK_PROG([EMACSCLIENT],[emacsclient],[emacsclient])
 AS_IF([test "x$EMACSCLIENT" != x],
