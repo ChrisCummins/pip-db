@@ -33,10 +33,17 @@ define compile
 $(PDFLATEX) $(PDFLATEX_ARGS) $1 >/dev/null || $(PDFLATEX) $(PDFLATEX_ARGS) $1
 endef
 
+define bibtex
+$(BIBTEX) $1 >/dev/null 2>&1 || $(BIBTEX) $1
+endef
+
 # Compile twice to refresh cross-references
 $(DOCPDF): $(DOCSRC)
 	@echo '  LATEX  $(DOCPDF)'
 	@$(call compile,$(DOCTEX))
+	@echo '  BIBTEX $(DOC)'
+	@$(call bibtex,$(DOC))
+	@echo '  LATEX  $(DOCPDF)'
 	@$(call compile,$(DOCTEX))
 
 # If we have xdg-open then we can open the PDF
