@@ -26,9 +26,9 @@ PDFLATEX_ARGS = -output-format pdf \
 	-file-line-error \
 	-interaction=nonstopmode
 
-# Compile command. We pipe the output to /dev/null to silence it, and if there
-# is an error, we re-run the compilation without the pipe so as to print the
-# failure messages.
+# Compile commands. We pipe the output to /dev/null to silence it, and
+# if there is an error, we re-run the compilation without the pipe so
+# as to print the failure messages.
 define pdflatex
 $(PDFLATEX) $(PDFLATEX_ARGS) $1 >/dev/null 2>&1 || $(PDFLATEX) $(PDFLATEX_ARGS) $1
 endef
