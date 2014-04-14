@@ -4085,3 +4085,16 @@ Things to change as a result of usability test:
  * Change the wording of usability scenarios to remove direct
    references to CSV format, and instead describe that the participant
    would like to import the search results into a spreadsheet program.
+
+
+### Sunday 13th
+
+TODO:
+
+ * Turn the list of changes to make as a result of the usability tests
+   into a set of actionable issues, with issue tracker entries for
+   each.
+
+ * Write up usability test report.
+
+ * Research parallelism techniques for Clojure server back-end.
