@@ -4055,13 +4055,12 @@ Things to change as a result of usability test:
 
 **Notes from usability testing with Darren:**
 
-Darren is an Undergraduate business and psychology student in his
-final year. As someone with no background in biology or computer
-science, their purpose is to provide feedback on the immediate
-usability and intuitiveness of the site. As a result, a longer
-introduction to the project was given, which explained some of the
-background terminology, and provided a minimum of information required
-to complete the tasks.
+Dan is an Undergraduate business and psychology student in his final
+year. As someone with no background in biology or computer science,
+their purpose is to provide feedback on the immediate usability and
+intuitiveness of the site. As a result, a longer introduction to the
+project was given, which explained some of the background terminology,
+and provided a minimum of information required to complete the tasks.
 
 TASKS 2
 
