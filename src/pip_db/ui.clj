@@ -147,8 +147,8 @@
 ;;
 ;; This can be loaded with a value already typed in.
 (defn search-bar-input [text]
-  [:input#q.form-control {:name "q" :type "text" :value text
-                          :autocomplete "off"}])
+  [:input#q.form-control {:name "q" :type "text" :value text :autocomplete "off"
+                          :placeholder (util/placeholder "kinase, phosphatase")}])
 
 ;; ### 2. Submit button
 ;;
