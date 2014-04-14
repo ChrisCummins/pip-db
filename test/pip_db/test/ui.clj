@@ -36,8 +36,11 @@
 
 (deftest text-input-widget
   (testing "Widget contents"
-    (is (not (= (dut/text-input-widget "foo" "bar")
-                (dut/text-input-widget "bar" "foo"))))))
+    (is (not (= (dut/text-input-widget "foo" "" "bar")
+                (dut/text-input-widget "bar" "" "foo")))))
+  (testing "Placeholder text"
+    (is (not (= (dut/text-input-widget "foo" "bar" "")
+                (dut/text-input-widget "bar" "foo" ""))))))
 
 (deftest hidden-input-widget
   (testing "Widget contents"
@@ -79,8 +82,11 @@
 
 (deftest search-form-text-input-widget
   (testing "Widget contents"
-    (is (not (= (dut/search-form-text-input-widget "foo" "bar")
-                (dut/search-form-text-input-widget "bar" "foo"))))))
+    (is (not (= (dut/search-form-text-input-widget "foo" "" "bar")
+                (dut/search-form-text-input-widget "bar" "" "foo")))))
+  (testing "Placeholder text"
+    (is (not (= (dut/search-form-text-input-widget "foo" "bar" "")
+                (dut/search-form-text-input-widget "bar" "foo" ""))))))
 
 (deftest search-form-widget-row
   (testing "Row contents"
