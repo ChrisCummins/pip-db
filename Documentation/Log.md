@@ -4054,7 +4054,7 @@ Things to change as a result of usability test:
  * I should consider adding tabs for performing different category
    searches from the homepage.
 
-**Notes from usability testing with Darren:**
+**Notes from usability testing with Dan:**
 
 Dan is an Undergraduate business and psychology student in his final
 year. As someone with no background in biology or computer science,
