@@ -4105,3 +4105,9 @@ TODO:
  * Write up usability test report.
 
  * Research parallelism techniques for Clojure server back-end.
+
+
+## Monday 14th
+
+Arranged usability tests with Mahmood and Ben for Wednesday and
+Thursday, respectively.
