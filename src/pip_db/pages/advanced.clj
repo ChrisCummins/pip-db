@@ -48,18 +48,20 @@
                            ((request :params) "m")))
 
 (defn ec-input-cell
-  ([name] (ec-input-cell name ""))
-  ([name value]
+  ([name]       (ec-input-cell name "" ""))
+  ([name value] (ec-input-cell name "" value))
+  ([name example value]
      [:div.ec
-      [:input {:name name :value value :type "text" :autocomplete "off"}]]))
+      [:input {:name name :value value :type "text" :autocomplete "off"
+               :placeholder (util/placeholder example)}]]))
 
 (defn search-ec-widget [request]
   (ui/search-form-widget-row
    (ui/label-widget "enzyme commission number:")
    [:div.col-md-6
     [:div {:style "display:table;width:100%;"}
-     (ec-input-cell "ec1" ((request :params) "ec1"))
-     (ec-input-cell "ec2" ((request :params) "ec2"))
+     (ec-input-cell "ec1" "2" ((request :params) "ec1"))
+     (ec-input-cell "ec2" "7" ((request :params) "ec2"))
      (ec-input-cell "ec3" ((request :params) "ec3"))
      (ec-input-cell "ec4" ((request :params) "ec4"))]]
    (ui/info-widget "Enter one or more categories for the EC.")))
