@@ -4013,7 +4013,6 @@ TASK 2
    a search box which is self-explanatory. Key differences included
    the placeholder text, and the tabs to indicate the specific field
    being searched.
-
  * Participant was observed pressing the "Show >>" link next to the
    FASTA sequence entry on the record page repeatedly. This may be
    because of the slightly misleading location of the text at the
@@ -4035,6 +4034,8 @@ TASK 3
  * Participant commented on the effectiveness of the results count
    indicator on the advanced search page, but was confused when the
    counter became out of sync with the current search state.
+ * Participant was unsure of what the bar on the no of results counter
+   indicator showed since the bar is non-linear.
 
 TASK 4
 
