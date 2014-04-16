@@ -3,7 +3,8 @@
 ;; Define a set of common user interface components.
 (ns pip-db.ui
   (:use [hiccup.page :only (html5 include-css include-js)])
-  (:require [pip-db.util :as util]))
+  (:require [clojure.string :as str]
+            [pip-db.util :as util]))
 
 ;; The Google analytics tracking snippet, as an inline embedded
 ;; script. Include this on every page to enable analytics tracking.
@@ -36,13 +37,13 @@
   [:div.info text])
 
 ;; A standard text input widget.
-(defn text-input-widget [name value]
-  [:input {:id name :name name :type "text"
-           :autocomplete "off" :value value}])
+(defn text-input-widget [name placeholder value]
+  [:input {:id name :name name :type "text" :autocomplete "off"
+           :placeholder placeholder :value value}])
 
 ;; A multi-line textarea input
-(defn textarea-widget [name no-rows value]
-  [:textarea {:id name :name name :rows no-rows} value])
+(defn textarea-widget [name no-rows placeholder value]
+  [:textarea {:id name :name name :rows no-rows :placeholder placeholder} value])
 
 ;; A hidden text input widget.
 (defn hidden-input-widget
@@ -79,8 +80,8 @@
   ([id text] [:div.row [:div.col-md-12 [:h4 {:id id} text]]]))
 
 ;; A search form text input widget.
-(defn search-form-text-input-widget [name value]
-  [:div.col-md-6 (text-input-widget name value)])
+(defn search-form-text-input-widget [name placeholder value]
+  [:div.col-md-6 (text-input-widget name placeholder value)])
 
 ;; The search form pI input slider.
 (defn search-form-pi-input-widget [data]
@@ -91,7 +92,11 @@
 
 ;; The search form FASTA input widget.
 (defn search-form-fasta-input-widget [data]
-  [:div.col-md-6 (textarea-widget "seq" 1 data)])
+  [:div.col-md-6
+   (textarea-widget
+    "seq" 1
+    (util/placeholder "AQALIVTQTMKGLDIQKVAGTWYSLAMAASDISLLDAQSAPLRVYVE")
+    data)])
 
 ;; A row within a search form consists of three elements, the label,
 ;; widget and description.
@@ -103,10 +108,13 @@
 ;; provide a value to set the text box to.
 (defn search-form-text-row
   ([name label-text desc-text]
-     (search-form-text-row name label-text desc-text ""))
-  ([name label-text desc-text input-value]
+     (search-form-text-row name label-text desc-text "" ""))
+  ([name label-text desc-text examples]
+     (search-form-text-row name label-text desc-text examples ""))
+  ([name label-text desc-text examples input-value]
      (search-form-widget-row (label-widget name (str label-text ":"))
-                             (search-form-text-input-widget name input-value)
+                             (search-form-text-input-widget
+                              name (util/placeholder examples) input-value)
                              (info-widget (str desc-text ".")))))
 
 ;; An isoelectric point input search form widget.
@@ -143,8 +151,8 @@
 ;;
 ;; This can be loaded with a value already typed in.
 (defn search-bar-input [text]
-  [:input#q.form-control {:name "q" :type "text" :value text
-                          :autocomplete "off"}])
+  [:input#q.form-control {:name "q" :type "text" :value text :autocomplete "off"
+                          :placeholder (util/placeholder "kinase, phosphatase")}])
 
 ;; ### 2. Submit button
 ;;

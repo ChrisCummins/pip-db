@@ -4067,6 +4067,10 @@ TASKS 2
  * Participant attempted to negate Kinase search term by entering "NOT
    Kinase" into the protein name field.
 
+ * Participant tried to set the pI search range without first turning
+   the slider widget on, and was unsure why the slider grab handles
+   weren't responding to user input.
+
 TASK 3
 
  * Participant successfully identified external links section but
@@ -4085,6 +4089,8 @@ Things to change as a result of usability test:
  * Change the wording of usability scenarios to remove direct
    references to CSV format, and instead describe that the participant
    would like to import the search results into a spreadsheet program.
+ * Clicking on the pI slider grab handles should turn the widget on,
+   if not already activated.
 
 
 ### Sunday 13th

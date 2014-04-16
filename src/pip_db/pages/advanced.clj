@@ -8,51 +8,60 @@
 (defn search-keywords-all-widget [request]
   (ui/search-form-text-row "q" "all of these words"
                            "Find proteins with names that contain these keywords"
+                           "kinase, phosphatase"
                            ((request :params) "q")))
 
 (defn search-keywords-exact-widget [request]
   (ui/search-form-text-row "q_eq" "this exact word or phrase"
                            "Type exact phrases to match in protein names"
+                           "pectic acid, alkaline phosphatase"
                            ((request :params) "q_eq")))
 
 (defn search-keywords-any-widget [request]
   (ui/search-form-text-row "q_any" "any of these words"
                            "Select proteins from a range of keywords"
+                           "kinase, phosphatase"
                            ((request :params) "q_any")))
 
 (defn search-keywords-exclude-widget [request]
   (ui/search-form-text-row "q_ne" "none of these words"
                            "Exclude proteins which contain these keywords"
+                           "kinase, phosphatase"
                            ((request :params) "q_ne")))
 
 (defn search-source-widget [request]
   (ui/search-form-text-row "q_s" "source"
                            "Enter the Latin binomial or common names"
+                           "sus scrofa, human"
                            ((request :params) "q_s")))
 
 (defn search-location-widget [request]
   (ui/search-form-text-row "q_l" "location"
                            "Enter the location or organ"
+                           "kidney, placenta"
                            ((request :params) "q_l")))
 
 (defn search-method-widget [request]
   (ui/search-form-text-row "m" "experimental method"
                            "Enter the experimental method used to determine the result."
+                           "isoelectric focusing, gel electrophoresis"
                            ((request :params) "m")))
 
 (defn ec-input-cell
-  ([name] (ec-input-cell name ""))
-  ([name value]
+  ([name]       (ec-input-cell name "" ""))
+  ([name value] (ec-input-cell name "" value))
+  ([name example value]
      [:div.ec
-      [:input {:name name :value value :type "text" :autocomplete "off"}]]))
+      [:input {:name name :value value :type "text" :autocomplete "off"
+               :placeholder (util/placeholder example)}]]))
 
 (defn search-ec-widget [request]
   (ui/search-form-widget-row
    (ui/label-widget "enzyme commission number:")
    [:div.col-md-6
     [:div {:style "display:table;width:100%;"}
-     (ec-input-cell "ec1" ((request :params) "ec1"))
-     (ec-input-cell "ec2" ((request :params) "ec2"))
+     (ec-input-cell "ec1" "2" ((request :params) "ec1"))
+     (ec-input-cell "ec2" "7" ((request :params) "ec2"))
      (ec-input-cell "ec3" ((request :params) "ec3"))
      (ec-input-cell "ec4" ((request :params) "ec4"))]]
    (ui/info-widget "Enter one or more categories for the EC.")))
