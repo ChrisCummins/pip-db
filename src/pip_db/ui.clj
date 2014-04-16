@@ -42,8 +42,8 @@
            :placeholder placeholder :value value}])
 
 ;; A multi-line textarea input
-(defn textarea-widget [name no-rows value]
-  [:textarea {:id name :name name :rows no-rows} value])
+(defn textarea-widget [name no-rows placeholder value]
+  [:textarea {:id name :name name :rows no-rows :placeholder placeholder} value])
 
 ;; A hidden text input widget.
 (defn hidden-input-widget
@@ -92,7 +92,11 @@
 
 ;; The search form FASTA input widget.
 (defn search-form-fasta-input-widget [data]
-  [:div.col-md-6 (textarea-widget "seq" 1 data)])
+  [:div.col-md-6
+   (textarea-widget
+    "seq" 1
+    (util/placeholder "AQALIVTQTMKGLDIQKVAGTWYSLAMAASDISLLDAQSAPLRVYVE")
+    data)])
 
 ;; A row within a search form consists of three elements, the label,
 ;; widget and description.
