@@ -19,7 +19,7 @@
 (defn bsearch-form [request]
   [:form#bs {:method "POST" :action "/s" :enctype "multipart/form-data"}
    (ui/search-form-heading-row "Enter a sequence to perform a search...")
-   [:div.row [:div.col-md-6.col-md-offset-2 (ui/textarea-widget "seq" 6 "")]]
+   [:div.row [:div.col-md-6.col-md-offset-2 (ui/textarea-widget "seq" 6 "" "")]]
    (ui/search-form-heading-row "Or select a sequence file to upload...")
    [:div.row [:div.col-md-6.col-md-offset-2
               [:input {:id "f"      :name "f"      :type "file"}]
