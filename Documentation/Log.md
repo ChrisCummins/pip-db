@@ -4150,3 +4150,27 @@ Notes for meeting with Ian:
      * Placeholders
      * No of results indicator
    * Tests with Ash, Mahmood and Ben this week.
+
+Notes from meeting with Ian:
+
+ * Split testing into 2 halves with different scripts/improvements to
+   website.
+ * At this point in the project, I'll get more marks for your time
+   spent writing the report than improving the product.
+ * I can write up in the evaluation how usability testing should have
+   began earlier in the project life cycle.
+ * I can continue to make adjustments to the site after the last round
+   of usability testing, but it'll be harder to justify those changes
+   (no user feedback). Perhaps instead save those for the further work
+   section.
+
+
+### Wednesday 16th
+
+I've implemented the placeholder fixes for the next round of user
+testing, so the versioning is:
+
+```
+Usability tests 0-2    v0.6.1     7dbcc65dfa0542b7d1f2b9eb1609a90d42ffcdc9
+Usability tests 3+     v0.6.2     0a776f01716ccb3a5c23e97e8aa4320728740cc8
+```
