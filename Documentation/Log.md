@@ -4111,3 +4111,42 @@ TODO:
 
 Arranged usability tests with Mahmood and Ben for Wednesday and
 Thursday, respectively.
+
+
+### Tuesday 15th
+
+Notes for meeting with Ian:
+
+ * Meeting with Darren:
+   * No in-place data modification. Just a single file upload which
+     wipes all previous data.
+     * So we need to add the ability to download the entire dataset.
+   * Usability test:
+     * List of four tasks - Darren came up with two search terms and a
+       FASTA sequence.
+     * Screencapped and recorded audio.
+     * I'm rubbish at it.
+       * Didn't encourage enough thinking out loud from participant.
+       * Too quick to interject with help.
+
+ * Next usability testing:
+   * Turn tasks into scenarios.
+   * Create a script and stick to it.
+   * Testing with Shahzad:
+     * First time I saw someone coming to it "cold".
+     * Many great suggestions, and PDB.
+   * Testing with Dan:
+     * Not in demographic of users, but still useful usability
+       testing.
+
+ * Things I've learned:
+   * It *really* isn't immediately obvious how the site behaves.
+   * There are several small changes which could drastically improve
+     usability.
+
+ * NEXT:
+   * Re-work testing script
+   * Incorporate fixes for:
+     * Placeholders
+     * No of results indicator
+   * Tests with Ash, Mahmood and Ben this week.
