@@ -1,0 +1,179 @@
+\documentclass[12pt,twoside]{report}
+
+\input{preamble}
+
+\begin{document}
+
+\pagenumbering{roman}
+
+%
+% Title page. Original layout by Josh Cassidy. See:
+%
+%   https://www.sharelatex.com/blog/2013/08/09/thesis-series-pt5.html
+%
+\begin{titlepage}
+  \begin{center}
+    \vspace*{1cm}
+
+    \Huge
+    \textbf{Protein Isoelectric Point Database Usability Tests}
+
+    \vspace{0.5cm}
+    \LARGE
+    EE4FYP Final Year Project
+
+    \vspace{1.5cm}
+
+    \textbf{Chris Cummins}
+
+    \vfill
+
+    MEng Electronic Engineering\\
+    \& Computer Science
+
+    \vspace{0.8cm}
+
+    \includegraphics[width=0.4\textwidth]{assets/aston.jpeg}
+
+    \Large
+    Electronic Engineering\\
+    School of Engineering and Applied Science\\
+    Aston University\\
+    April 2014
+
+  \end{center}
+\end{titlepage}
+
+\tableofcontents
+
+\pagenumbering{arabic}
+
+\chapter{Test Script}
+
+\section{Introduction and consent}
+\begin{enumerate}
+\item \textbf{Meet participant} and introduce yourself and project.
+\item Explain the \textbf{purpose of the testing} and it's role within
+  the academic project assessment. The tests are for the product, not
+  of the participant.
+\item Request \textbf{permission to record} audio and screen capture
+  the testing device. The purpose of the recordings are to prevent me
+  from having to transcribe everything that is said as it is
+  happening.
+\item Request permission for recording to be \textbf{distributed as
+  evidence} of usability testing if required.
+\end{enumerate}
+
+\section{Testing introduction}
+\begin{enumerate}
+\item \textbf{Start recording}.
+\item Ask for a brief overview of the \textbf{participant's
+  background}, and what they're studying.
+\item Ascertain the participant's understanding of the relevant
+  \textbf{science background and terminology}.
+\item Ascertain the participant's \textbf{familiarity with the
+  dataset}. Any prior knowledge of the project should be stated here.
+\item \textbf{Demonstrate} to the participant how to use the testing
+  device.
+\item \textbf{Thinking aloud} - provide a hands on demonstration of
+  thinking aloud using the Aston website. Show how you would navigate
+  to find out how to apply for a research degree in CS department.
+\end{enumerate}
+
+\section{Testing}
+\begin{enumerate}
+\item \textbf{First impressions} - bring up the website on the testing
+  device and hand over controls to participant.
+\item \textbf{Present task list} to the participant and explain why it
+  exists. Unlike many websites, pip-db is a specific tool to be used
+  to answer questions and perform specific searches, so it is helpful
+  to have a set of staged questions rather than letting the user
+  browse indiscriminately.
+\item \textbf{Work through tasks} - Give a spoken introduction to each
+  one, and ask that the participant says out loud which step they are
+  working on.
+\end{enumerate}
+
+\section{Post-test}
+\begin{enumerate}
+\item What is your \textbf{overall impression} of the site?
+\item Would you \textbf{use the website} for tasks like those you
+  worked through?
+\item \textbf{How likely} do you see yourself performing a task like
+  those you worked through under normal conditions?
+\item If you were to \textbf{change one thing} about the website, what
+  would it be?
+\item \textbf{Score out of 10}.
+\end{enumerate}
+
+\section{End of session}
+\begin{enumerate}
+\item \textbf{Thank participant} for their time and cooperation.
+\item Any closing \textbf{thoughts or questions}?
+\item \textbf{Stop recording}.
+\end{enumerate}
+
+\chapter{Task Scenarios}
+
+The following four scenarios are to be completed by the testing
+participant.
+
+\section{Researching a specific protein}
+\begin{enumerate}
+\item You are conducting an experiment which requires you to know the
+  isoelectric point (pI) of a protein called \textit{Lactoferrin}.
+\item You would also like to know the range of isoelectric points
+  (lowest and highest) for all proteins obtained from the same
+  \textit{source} as \textit{Lactoferrin}.
+\end{enumerate}
+
+\section{Performing broad searches}
+\begin{enumerate}
+\item In this scenario, you would like to research \textit{Kinase}
+  proteins. You would like to download a CSV file which contains all
+  proteins which match the following criteria:
+  \begin{itemize}
+  \item They must contain \textit{Kinase} in their names.
+  \item They were obtained from a \textit{Human} source.
+  \item Their enzyme commission number begins with the three digits
+    \textit{2.7.1}.
+  \item They were discovered at a temperature greater than or equal to \textit{4\celsius}.
+  \end{itemize}
+\item Once you have downloaded the CSV file, open it in a spreasheet
+  program and identify the one protein with a Molecular Weight of
+  \textit{360,000}.
+\end{enumerate}
+
+\section{Further broad searches}
+\begin{enumerate}
+\item You would like to know the number of entries in the database
+  which contain the word \textit{Kinase} in their names, and compare
+  this to the number of entries which \textit{do not} contain the word
+  \textit{Kinase}.
+\item From the entries which do not contain the word \textit{Kinase},
+  you would like to find the protein with the \textit{lowest}
+  isoelectric point.
+\item You would like to know the names of the authors of the PubMed
+  article for this protein.
+\end{enumerate}
+
+\newpage
+\section{Identifying proteins using FASTA sequence}
+\begin{enumerate}
+\item You have been supplied with the following protein sequence:
+\begin{verbatim}
+>sp|P02754|LACB_BOVIN Beta-lactoglobulin OS=Bos taurus GN=LGB PE=1 SV=3
+MKCLLLALALTCGAQALIVTQTMKGLDIQKVAGTWYSLAMAASDISLLDAQSAPLRVYVE
+ELKPTPEGDLEILLQKWENGECAQKKIIAEKTKIPAVFKIDALNENKVLVLDTDYKKYLL
+FCMENSAEPEQSLACQCLVRTPEVDDEALEKFDKALKALPMHIRLSFNPTQLEEQCHI
+\end{verbatim}
+
+You would like to identify the protein that this sequence came from,
+and download a CSV file containing the details of all protiens which
+match this sequence with an isoelectric point within the range
+\textit{5.1 - 5.2}.
+\end{enumerate}
+
+{\centering END OF SCENARIOS.\par}
+
+\end{document}

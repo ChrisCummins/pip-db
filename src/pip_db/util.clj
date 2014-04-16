@@ -100,6 +100,11 @@
 (defn keys->quoted-str [& keys]
   (str "\"" (str/join "\",\"" (map name keys)) "\""))
 
+;; Accepts a string of examples and returns a placeholder text
+;; containing them.
+(defn placeholder [examples]
+  (if (str/blank? examples) "" (str "e.g. " examples)))
+
 ;; -------------------------
 ;; ## Hashing & Cryptography
 

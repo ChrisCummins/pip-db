@@ -3765,3 +3765,344 @@ Notes from weekly meeting with Ian:
  * TODO: Chase up dates for testing & task list with Darren.
 
  * TODO: Create table of contents for report.
+
+
+## April 2014
+
+
+### Thursday 3rd
+
+Notes from weekly meeting with Ian:
+
+ * Introduction chapter should be numbered.
+ * Introduction chapter is *really* high-level, so include
+   objectives/aims, not requirements.
+ * Requirements and requirements analysis is easily a 10 page section,
+   and should be a top-level chapter before 'Process'.
+ * There should be a top-level 'Evaluation' chapter before Conclusions.
+ * Second year SE module covered requirements analysis.
+ * Infrastructure - for each tool, make sure to *justify* the purpose:
+   provide citations to studies, and where possible provide evidence
+   of quantitative results.
+ * Evaluation - evaluate Process, Infrastructure and Product all in
+   one place.
+ * TODO: *Evaluation plan* is the priority for now, since it relies on
+   other people's timetable. The report writing can wait.
+
+
+### Sunday 6th
+
+Tried implementing AJAX file upload to no avail. I should look into
+using one of the many off-the-shelf jQuery
+plugins. [This one](http://malsup.com/jquery/form/#getting-started)
+looks promising.
+
+
+### Monday 7th
+
+Emailed Darren regarding user testing and list of searches. Got
+response:
+
+> 1. Specific search: “lactoferrin”
+>
+> 2. Broad search: “kinase”
+>
+> 3. Fasta:
+>
+> >sp|P02754|LACB_BOVIN Beta-lactoglobulin OS=Bos taurus GN=LGB PE=1 SV=3
+> MKCLLLALALTCGAQALIVTQTMKGLDIQKVAGTWYSLAMAASDISLLDAQSAPLRVYVE
+> ELKPTPEGDLEILLQKWENGECAQKKIIAEKTKIPAVFKIDALNENKVLVLDTDYKKYLL
+> FCMENSAEPEQSLACQCLVRTPEVDDEALEKFDKALKALPMHIRLSFNPTQLEEQCHI
+
+I need to use those to flesh out an evaluation plan.
+
+**User Testing Tasks List:**
+
+1.
+  1. Search for record with protein name *Lactoferrin*.
+  2. Look up other records from the same *source*.
+
+2.
+  1. Search for all records containing the word *Kinase*, from *Human*
+     source and with enzyme commission number *2.7.1.-*, and
+     temperature greater than or equal to *4C*.
+
+3.
+  1. Search for all records with pI of less than *3* which don't
+     contain the word *Kinase*.
+
+  2. Find the result with the lowest *pI* and make a note of all of
+     the protein's names.
+
+4.
+  1. Search for all records with a pI between *6-8* using the BLAST+
+     sequence:
+
+```
+>sp|P02754|LACB_BOVIN Beta-lactoglobulin OS=Bos taurus GN=LGB PE=1 SV=3
+MKCLLLALALTCGAQALIVTQTMKGLDIQKVAGTWYSLAMAASDISLLDAQSAPLRVYVE
+ELKPTPEGDLEILLQKWENGECAQKKIIAEKTKIPAVFKIDALNENKVLVLDTDYKKYLL
+FCMENSAEPEQSLACQCLVRTPEVDDEALEKFDKALKALPMHIRLSFNPTQLEEQCHI
+```
+
+  2. Make a copy of the sequence alignment strings for the result with
+     the highest Score.
+
+
+### Tuesday 8th
+
+Read up on the differences between
+[Usability testing](http://en.wikipedia.org/wiki/Usability_testing)
+and
+[Qualitative research](http://en.wikipedia.org/wiki/Qualitative_research). Ideally,
+the product evaluation should include both.
+
+Notes from meeting with Darren:
+
+ * Overall impressions of the project is glowing. He's very happy with
+   look and feel and behaviour.
+
+ * Will get in touch over the next few weeks to discuss administration
+   and how to add new data.
+
+ * We *don't* want the ability to modify data in-place, or add
+   individual records. That will make for awkward version control
+   issues with having to synchronize the offline/online copies of the
+   data. Instead, there should be a simple 1-click upload which wipes
+   the existing tables and replaces them with entirely new
+   ones. Perhaps the site should save a copy of the dataset file so
+   that users can download it and modify later?
+
+ * For BLAST+ search results, alignment and position information would
+   be useful.
+
+ * Darren has emailed half a dozen potential volunteers:
+
+> Hi
+>
+> A final year CS student Chris Cummins has been implementing a web
+> version of some data that my placement students have previously
+> compiled. As the final step in the process, he needs to show this to
+> a few people unfamiliar with the database and ask them to undertake
+> a few tasks and thus assess the ease-of-use of his database
+> implementation. I was wondering if you could spare him 10-15 minutes
+> of your time, at some point in the coming days, to enable him to
+> undertake this exercise. Please reply to Chris, who I have copied
+> in.
+>
+> Thank you for your time. I appreciate it.
+>
+> BW
+>
+> DRF
+
+ * I should contact Frasier directly with regards to user testing.
+
+ * I *need* to come up with a much more rigorous script for the
+   usability tests. The usability tests with Darren went very well,
+   but largely only because of the help from him and his prior
+   knowledge of the project. If he were coming to this cold, there
+   would be have been a lot less value to the exercise.
+
+ * Not sure if Aston branding is required / a good idea, but the
+   homepage should definitely have Darren's contact details, and
+   mistakes that are uncovered should be report to him. Perhaps the
+   record page should include a "Is there a mistake? Get in touch"
+   link.
+
+Modifications needed for usability tests round 2:
+
+ * Add a test which requires entering a Greek character.
+
+ * Tests must cover download functionality, and maybe import into
+   spreadsheet application.
+
+ * Tests should be introduced with a short outline, then given a
+   *specific* set of activities, with a definite end point.
+
+ * List of tests should be printed.
+
+ * State upfront the desire to record the session and specify what
+   you'll do with the recording (evidence of testing).
+
+ * Don't explain anything during the tests. Instead, let the user get
+   confused and then hold a Q&A at the end to discuss anything.
+
+ * Encourage the user to think out load and talk me through their
+   thought processes and reactions.
+
+ * Tests need a definite "END OF TEST".
+
+Organised usability testing with Shahzad Mumtaz tomorrow at
+1:30. Shahzad is a computer science PhD student under Ian's
+supervision, so should chat with him about his Aston PhD experience
+while I have the opportunity.
+
+**Notes from usability testing with Darren:**
+
+TASK 1
+
+ * Participant noticed an error in dataset.
+   [Dolichyl monophosphatase](http://www.pip-db.org/r/YjBmZmMyOGU) had
+   been entered incorrectly during the data entry phase. In this case,
+   Darren would need to correct the error in the Excel sheet and
+   re-upload the dataset.
+ * Participant noticed there's no contact details for report factual
+   errors in dataset.
+
+TASK 2
+
+ * Some confusion over the EC number entry form. Should the
+   participant type all digits into the first box? It isn't
+   immediately obvious.
+ * Participant didn't enter all fields initially, so clicked back
+   button to add in the missing form. At this point, the inputs had
+   lost their state and the participant had to re-enter every single
+   form input again.
+ * To select a temperature range of >4C, the participant entered 4C
+   for the lower bound and 20000C for the upper bound. It is not
+   obvious that leaving the upper bound blank is equivalent to > lower
+   bound.
+
+TASK 3
+
+ * On several occasions, the indicator to show many results will be
+   returned by a given search is out-of-sync with current form state.
+
+TASK 4
+
+ * Copy and pasting text into the FASTA sequence field does not cause
+   it to immediately auto-grow.
+ * The participant was mislead by the number of results indicator,
+   expecting more results than were actually returned.
+
+Things to change as a result of usability test:
+
+ * No of results indicator needs to show when it's state does not
+   match that of the current form.
+ * Advanced search form should return state when pressing back
+   button. A workaround for this would be to add a "Modify search
+   parameters" button to the results page, which would load the
+   advanced page with all input fields populated.
+
+
+### Wednesday 9th
+
+**Notes from usability testing with Shahzad:**
+
+Shahzad is a PhD student in his third year, having recently submitted
+his thesis. His specialisation is computer science, although he is
+familiar with the biological background and terminology. Shahzad had
+never seen the project before so was coming to the evaluation "cold".
+
+TASK 1
+
+ * Participant was unsure what the main search bar does. Initially, he
+   entered "Isoelectric point of Lactoferrin", expecting the search to
+   have a semantic understanding, beyond just being a name look-up.
+ * On records page, participant notes that the pI range using a dash
+   ("8.8 - 9") is not explicitly obvious, and that the data could be
+   annotated to state that it is a minimum to maximum range value.
+
+TASK 2
+
+ * Participant attempted to narrow results by source by entering
+   "Lactoferrin + Human" into the search box. Again, there's
+   uncertainty over the function of the text box. This may be in-part
+   due to an inadequate introduction to the project at the start of
+   the evaluation. Participant showed the PDB website as an example of
+   a search box which is self-explanatory. Key differences included
+   the placeholder text, and the tabs to indicate the specific field
+   being searched.
+ * Participant was observed pressing the "Show >>" link next to the
+   FASTA sequence entry on the record page repeatedly. This may be
+   because of the slightly misleading location of the text at the
+   bottom of the details table, implying that pressing the link will
+   reveal more information about the record, as on the results page.
+ * Participant was unable to locate the Download button after several
+   visual sweeps of the page. On the record page, the participant
+   suggested that the download button be placed beneath the details
+   table. For the results page, the participant commented that the
+   location was OK, but the text should be annotated explicitly
+   "Download all".
+ * Participant incorrectly entered "2.1.7" into the first text box for
+   the EC field. This search parameter is silently ignored by the
+   search engine, with no visual feedback to indicate the parameter is
+   unused.
+
+TASK 3
+
+ * Participant commented on the effectiveness of the results count
+   indicator on the advanced search page, but was confused when the
+   counter became out of sync with the current search state.
+ * Participant was unsure of what the bar on the no of results counter
+   indicator showed since the bar is non-linear.
+
+TASK 4
+
+ * The participant used the browser back button to return to the
+   search form, which caused the form state to reload from the URL.
+
+Things to change as a result of usability test:
+
+ * Search forms should have informative placeholder text to indicate
+   the kind of values expected in them.
+ * The advanced search form shouldn't be setting the state of the
+   form, the browser should.
+ * I should go back over the site and do a ground-up re-evaluation of
+   the usability, from the perspective of a someone who's coming to
+   the site cold.
+ * I should consider adding tabs for performing different category
+   searches from the homepage.
+
+**Notes from usability testing with Darren:**
+
+Dan is an Undergraduate business and psychology student in his final
+year. As someone with no background in biology or computer science,
+their purpose is to provide feedback on the immediate usability and
+intuitiveness of the site. As a result, a longer introduction to the
+project was given, which explained some of the background terminology,
+and provided a minimum of information required to complete the tasks.
+
+TASKS 2
+
+ * Participant attempted to negate Kinase search term by entering "NOT
+   Kinase" into the protein name field.
+
+ * Participant tried to set the pI search range without first turning
+   the slider widget on, and was unsure why the slider grab handles
+   weren't responding to user input.
+
+TASK 3
+
+ * Participant successfully identified external links section but
+   didn't identify the PubMed article until prompted. This may have
+   been due to a lack of understanding of what PubMed is.
+
+TASK 4
+
+ * Participant attempted to enter the FASTA sequence into the primary
+   search box.
+
+Things to change as a result of usability test:
+
+ * Improve the quality of the input descriptions on the advanced
+   page. Make it more apparent the types of input expeceted.
+ * Change the wording of usability scenarios to remove direct
+   references to CSV format, and instead describe that the participant
+   would like to import the search results into a spreadsheet program.
+ * Clicking on the pI slider grab handles should turn the widget on,
+   if not already activated.
+
+
+### Sunday 13th
+
+TODO:
+
+ * Turn the list of changes to make as a result of the usability tests
+   into a set of actionable issues, with issue tracker entries for
+   each.
+
+ * Write up usability test report.
+
+ * Research parallelism techniques for Clojure server back-end.

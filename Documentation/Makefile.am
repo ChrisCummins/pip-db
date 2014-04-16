@@ -1,4 +1,5 @@
 SUBDIRS =
+	evaluation \
 	midterm \
 	plan \
 	report \
