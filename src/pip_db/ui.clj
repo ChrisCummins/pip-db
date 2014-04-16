@@ -95,7 +95,7 @@
   [:div.col-md-6
    (textarea-widget
     "seq" 1
-    (util/placeholder "AQALIVTQTMKGLDIQKVAGTWYSLAMAASDISLLDAQSAPLRVYVE")
+    (util/placeholder "AQALIVTQTMKGLDIQKVAGT")
     data)])
 
 ;; A row within a search form consists of three elements, the label,
