@@ -4201,3 +4201,40 @@ TASK 3
 Things to change as a result of usability test:
 
  * Add a back button to the download page.
+
+
+### Thursday 17th
+
+**Notes from usability testing with Ben:**
+
+Ben is a PhD student completing his second year in the Life and Health
+Sciences department.
+
+TASK 1
+
+ * After clicking the "See other records like this", the participant
+   was unsure of what the actual search term that was being used to
+   show the results.
+
+TASK 2
+
+ * Participant was unsure whether it was possible to search for
+   multiple sources simultaneously (it's not).
+ * Participant was unsure whether it was necessary to enter a term
+   into an input field to accept any value - i.e. a wild card.
+
+TASK 3
+
+ * Participant expected there to be an option to sort results by pI.
+
+TASK 4
+
+ * Participant was unsure whether to leave in the header line in the
+   FASTA sequence.
+ * Participant would have liked the ability to type in exact pI values
+   rather than scrubbing the slider.
+
+Things to change as a result of usability test:
+
+ * Re-order the advanced search fields so that the "None" field
+   appears directly after the "Any" field.
