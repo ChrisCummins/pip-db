@@ -4174,3 +4174,30 @@ testing, so the versioning is:
 Usability tests 0-2    v0.6.1     7dbcc65dfa0542b7d1f2b9eb1609a90d42ffcdc9
 Usability tests 3+     v0.6.2     0a776f01716ccb3a5c23e97e8aa4320728740cc8
 ```
+
+**Notes from usability testing with Mahmood:**
+
+Mahmood is a student completing his first year of a PhD in Biology.
+
+TASK 1
+
+ * Participant asked whether we could do the tests on his own PC,
+   which I wasn't prepped for (no screen recording equipment).
+ * Participant had no issue with the first task.
+
+TASK 2
+
+ * Participant commented that the placeholder text was very helpful in
+   understanding how to fill in the form fields. Especially the
+   E.C. field examples.
+ * Participant was confused at how to get back from the Download page.
+
+TASK 3
+
+ * Slow internet connection meant that it the No of results counter
+   was very out-of-sync with form state, especially when scrubbing the
+   pI slider.
+
+Things to change as a result of usability test:
+
+ * Add a back button to the download page.
