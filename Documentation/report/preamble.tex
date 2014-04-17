@@ -9,7 +9,6 @@
 \usepackage{gensymb}
 \usepackage[title]{appendix}
 \usepackage[dotinlabels]{titletoc}
-\usepackage[nottoc,numbib]{tocbibind}
 \usepackage{mathtools}
 \usepackage{enumitem}
 \usepackage{longtable}
@@ -19,6 +18,13 @@
 \newcommand*\wrapletters[1]{\wr@pletters#1\@nil}
 \def\wr@pletters#1#2\@nil{#1\allowbreak\if&#2&\else\wr@pletters#2\@nil\fi}
 \setenumerate{itemsep=0pt}
+
+% The tocbibind package can be used to add document elements like a
+% bibliography or an index to the Table of Contents. Options:
+%
+%  notlof - Don't add List Of Figures to TOC
+%  notlot - Don't add List Of Tables to TOC
+\usepackage[nottoc,numbib,notlof,notlot]{tocbibind}
 
 % Increase table of contents depth from standard 3 (subsection) to 4
 % (subsubseciton):
