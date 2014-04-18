@@ -10,7 +10,11 @@
 %% Packages and configuration %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Document encoding.
+% Make internal macro definitions accessible,
+% e.g. \@title, \@date \@author.
+\makeatletter
+
+% Set document encoding.
 \usepackage[utf8]{inputenc}
 
 % Geometry package configuration. Sets page margins.
