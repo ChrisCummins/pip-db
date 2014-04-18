@@ -1832,7 +1832,7 @@ From
 > documentation, but the shortest path to a useful subset is the
 > commented source code itself.
 
-### The one true way
+**The one true way:**
 
 1. Start by running Marginalia against your code
 2. Cringe at the sad state of your code commentary
@@ -4107,7 +4107,7 @@ TODO:
  * Research parallelism techniques for Clojure server back-end.
 
 
-## Monday 14th
+### Monday 14th
 
 Arranged usability tests with Mahmood and Ben for Wednesday and
 Thursday, respectively.
