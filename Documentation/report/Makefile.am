@@ -52,3 +52,9 @@ open:
 	@test -f $(DOCPDF) || echo "File '$(DOCPDF)' not found, is it compiled?"
 	@test ! -f $(DOCPDF) || $(XDG_OPEN) $(DOCPDF) >/dev/null 2>&1 &
 endif
+
+# If we have texcount then we can perform word counts
+if HAVE_TEXCOUNT
+wc:
+	@$(TEXCOUNT) $(DOCSRC) | $(SED) '1,/TOTAL COUNT/d'
+endif
