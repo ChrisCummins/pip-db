@@ -1,57 +1,41 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Variables and settings %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Document and Layout %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Document margins.
-\newcommand{\DocumentHorizontalMargin}{25mm}
-\newcommand{\DocumentVerticalMargin}{25mm}
+\documentclass[12pt]{report}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Packages and configuration %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
 
 % Make internal macro definitions accessible,
 % e.g. \@title, \@date \@author.
 \makeatletter
 
-% Set document encoding.
-\usepackage[utf8]{inputenc}
+% Define the document margins.
+\newcommand{\DocumentHorizontalMargin}{25mm}
+\newcommand{\DocumentVerticalMargin}{25mm}
 
 % Geometry package configuration. Sets page margins.
 \usepackage[a4paper,
-            left   =\DocumentHorizontalMargin{},
-            right  =\DocumentHorizontalMargin{},
-            top    =\DocumentVerticalMargin{},
-            bottom =\DocumentVerticalMargin{}]{geometry}
+            left   = \DocumentHorizontalMargin{},
+            right  = \DocumentHorizontalMargin{},
+            top    = \DocumentVerticalMargin{},
+            bottom = \DocumentVerticalMargin{}]{geometry}
 
-% Placeholder text generation.
-%
-% Use either \blindtext or \libpsum to generate placeholder text. Also
-% note the macros \blinditemize, \blindenumerate, \blinddescription.
-\usepackage[english]{babel}
-\usepackage{blindtext}
-\usepackage{lipsum}
+% Fancy headers.
+\usepackage{fancyhdr}
+\fancyhead{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\rightmark}
+\fancyfoot{}
+\fancyfoot[C]{\thepage}
+\pagestyle{fancy}
 
-\usepackage{graphicx}
-\usepackage{float}
-\usepackage{hyperref}
-\usepackage{graphicx}
-\usepackage{gensymb}
-\usepackage[title]{appendix}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Table of Contents %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
 \usepackage[dotinlabels]{titletoc}
-\usepackage{mathtools}
-\usepackage{enumitem}
-\usepackage{longtable}
-
-\restylefloat{figure}
-\setenumerate{itemsep=0pt}
-
-% Use arabic numbers for footnote.
-\renewcommand{\thefootnote}{\arabic{footnote}}
-
-% Define a command to allow word breaking.
-\newcommand*\wrapletters[1]{\wr@pletters#1\@nil}
-\def\wr@pletters#1#2\@nil{#1\allowbreak\if&#2&\else\wr@pletters#2\@nil\fi}
 
 % The tocbibind package can be used to add document elements like a
 % bibliography or an index to the Table of Contents. Options:
@@ -64,17 +48,77 @@
 % (subsubseciton):
 \setcounter{tocdepth}{4}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Bibliography and Appendices %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Sort references by the order in which they are cited
-\usepackage[sorting=none]{biblatex}
+\usepackage[style=numeric-comp,sorting=none]{biblatex}
 \addbibresource{ref.bib}
 
-% Fancy headers
-\usepackage{fancyhdr}
-% Header
-\fancyhead{}
-\fancyhead[L]{\leftmark}
-\fancyhead[R]{\rightmark}
-% Footer
-\fancyfoot{}
-\fancyfoot[C]{\thepage}
-\pagestyle{fancy}
+\usepackage[title]{appendix}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figures and footnotes %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{float}
+\restylefloat{figure}
+
+% Use arabic numbers for footnote.
+\renewcommand{\thefootnote}{\arabic{footnote}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% Graphics and maths %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{mathtools}
+\usepackage{graphicx}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%% Tables and lists %%
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{enumitem}
+\setenumerate{itemsep=0pt}
+
+\usepackage{longtable}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Typesetting and symbols %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Define a command to allow word breaking.
+\newcommand*\wrapletters[1]{\wr@pletters#1\@nil}
+\def\wr@pletters#1#2\@nil{#1\allowbreak\if&#2&\else\wr@pletters#2\@nil\fi}
+
+% Support hyperlinks using the \hyperref, \url and \href
+% macros. Usage:
+%
+%    \hyperref[label_name]{''link text''}
+%
+%    \url{<my_url>}
+%
+%    \href{<my_url>}{<description>}
+%
+\usepackage{hyperref}
+
+% Provide generic commands \degree, \celsius, \perthousand, \micro
+% and \ohm which work both in text and maths mode.
+\usepackage{gensymb}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Placeholder text generation %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Use either \blindtext or \libpsum to generate placeholder text. Also
+% note the macros \blinditemize, \blindenumerate, \blinddescription.
+\usepackage[english]{babel}
+\usepackage{blindtext}
+\usepackage{lipsum}
