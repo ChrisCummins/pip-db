@@ -42,7 +42,7 @@
 %
 %  notlof - Don't add List Of Figures to TOC
 %  notlot - Don't add List Of Tables to TOC
-\usepackage[nottoc,numbib,notlof,notlot]{tocbibind}
+\usepackage[nottoc,notlof,notlot]{tocbibind}
 
 % Increase table of contents depth from standard 3 (subsection) to 4
 % (subsubseciton):
@@ -57,7 +57,30 @@
 \usepackage[style=numeric-comp,sorting=none]{biblatex}
 \addbibresource{ref.bib}
 
-\usepackage[title]{appendix}
+% Appendix package. Documentation:
+%
+%  http://mirror.ox.ac.uk/sites/ctan.org/macros/latex/contrib/appendix/appendix.pdf
+%
+% Package options:
+%
+% toc      - Put a header (e.g., `Appendices') into the Table of Contents
+%            (the ToC) before listing the appendices. (This is done by
+%            calling the \addappheadtotoc command.)
+% page     - Puts a title (e.g., `Appendices') into the document at the
+%            point where the appendices environment is begun. (This is
+%            done by calling the \appendixpage command.)
+% title    - Adds a name (e.g., `Appendix') before each appendix title in
+%            the body of the document. The name is given by the value
+%            of \appendixname. Note that this is the default behaviour
+%            for classes that have chapters.
+% titletoc - Adds a name (e.g., `Appendix') before each appendix listed
+%            in the ToC. The name is given by the value
+%            of \appendixname.
+% header   - Adds a name (e.g., `Appendix') before each appendix in page
+%            headers.  The name is given by the value
+%            of \appendixname. Note that this is the default behaviour
+%            for classes that have chapters.
+\usepackage[titletoc]{appendix}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -96,6 +119,14 @@
 % Define a command to allow word breaking.
 \newcommand*\wrapletters[1]{\wr@pletters#1\@nil}
 \def\wr@pletters#1#2\@nil{#1\allowbreak\if&#2&\else\wr@pletters#2\@nil\fi}
+
+% Define a command to create centred page titles.
+\newcommand{\centredtitle}[1]{
+  \begin{center}
+    \large
+    \vspace{0.9cm}
+    \textbf{#1}
+  \end{center}}
 
 % Support hyperlinks using the \hyperref, \url and \href
 % macros. Usage:
