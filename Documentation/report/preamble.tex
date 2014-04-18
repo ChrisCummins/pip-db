@@ -1,7 +1,25 @@
-% Document dimensions and margins:
-\usepackage[a4paper,width=170mm,top=25mm,bottom=25mm,bindingoffset=6mm]{geometry}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Variables and settings %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Document margins.
+\newcommand{\DocumentHorizontalMargin}{25mm}
+\newcommand{\DocumentVerticalMargin}{25mm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Packages and configuration %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Document encoding.
 \usepackage[utf8]{inputenc}
+
+% Geometry package configuration. Sets page margins.
+\usepackage[a4paper,
+            left   =\DocumentHorizontalMargin{},
+            right  =\DocumentHorizontalMargin{},
+            top    =\DocumentVerticalMargin{},
+            bottom =\DocumentVerticalMargin{}]{geometry}
+
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{hyperref}
@@ -14,10 +32,14 @@
 \usepackage{longtable}
 
 \restylefloat{figure}
+\setenumerate{itemsep=0pt}
+
+% Use arabic numbers for footnote.
 \renewcommand{\thefootnote}{\arabic{footnote}}
+
+% Define a command to allow word breaking.
 \newcommand*\wrapletters[1]{\wr@pletters#1\@nil}
 \def\wr@pletters#1#2\@nil{#1\allowbreak\if&#2&\else\wr@pletters#2\@nil\fi}
-\setenumerate{itemsep=0pt}
 
 % The tocbibind package can be used to add document elements like a
 % bibliography or an index to the Table of Contents. Options:
