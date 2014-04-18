@@ -636,7 +636,7 @@ Created side-by-side mockups of common tasks in pidb and my first iteration
 design using Balsamiq.
 
 
-### Wedensday 23rd
+### Wednesday 23rd
 
 Laptop TODO:
 
@@ -2173,7 +2173,7 @@ Notes from weekly meeting with Ian:
 ## February 2014
 
 
-### Sundary 2nd
+### Sunday 2nd
 
 Read up on Heroku's
 [dyno sleeping policy](https://devcenter.heroku.com/articles/dynos#dyno-sleeping),
