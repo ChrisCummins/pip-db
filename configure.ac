@@ -49,6 +49,7 @@ dnl   8.4.     Do we have pandoc installed?
 dnl   8.5.     Do we have doctoc installed?
 dnl   8.6.     Should xdg-open be used to open PDFs?
 dnl   8.7.     Should emacsclient be used for editing files?
+dnl   8.8.     Do we have texcount installed?
 dnl
 dnl   9.     Git
 dnl   9.1.     Are we installing the project git hooks?
@@ -412,6 +413,18 @@ AS_IF([test "x$EMACSCLIENT" != x],
        AC_MSG_WARN([Text editor launching features disabled.])])
 AC_SUBST([HAVE_EMACSCLIENT],[$HAVE_EMACSCLIENT])
 AM_CONDITIONAL([HAVE_EMACSCLIENT],[test "x$HAVE_EMACSCLIENT" = xyes])
+
+
+dnl     ============================================================
+dnl     8.8. Do we have texcount installed?
+dnl     ============================================================
+AC_CHECK_PROG([TEXCOUNT],[texcount],[texcount])
+AS_IF([test "x$TEXCOUNT" != x],
+      [HAVE_TEXCOUNT=yes],
+      [HAVE_TEXCOUNT=no
+       AC_MSG_WARN([LaTeX word counts disabled.])])
+AC_SUBST([HAVE_TEXCOUNT],[$HAVE_TEXCOUNT])
+AM_CONDITIONAL([HAVE_TEXCOUNT],[test "x$HAVE_TEXCOUNT" = xyes])
 
 
 dnl ================================================================
