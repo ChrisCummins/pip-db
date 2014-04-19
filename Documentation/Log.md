@@ -4238,3 +4238,106 @@ Things to change as a result of usability test:
 
  * Re-order the advanced search fields so that the "None" field
    appears directly after the "Any" field.
+
+
+### Saturday 19th
+
+Optimising build times:
+
+```
+Executed command:
+
+    $ make clean && time (./autogen.sh && ./configure && make)
+
+Parallel JavaScript compilation:
+
+  Before:
+    39.169
+    37.001
+    36.344
+    39.740
+    39.276
+
+  After:
+    32.287
+    29.689
+    30.088
+    31.775
+    32.275
+
+Fork Marginalia code generation:
+
+  Before:
+    32.287
+    29.689
+    30.088
+    31.775
+    32.275
+
+  After:
+    8.887
+    8.849
+    9.680
+    9.937
+    10.007
+
+Fork CSS code generation:
+
+  Before:
+    8.887
+    8.849
+    9.680
+    9.937
+    10.007
+
+  After:
+    8.176
+    8.777
+    7.918
+    7.614
+
+Forked fonts and IMG generation:
+
+  Before:
+    8.176
+    8.777
+    7.918
+    7.614
+
+  After:
+    7.761
+    8.788
+    8.222
+    7.960
+
+Parallelizing Less CSS compilation:
+
+  Before:
+    7.761
+    8.788
+    8.222
+    7.960
+
+  After:
+    6.915
+    6.900
+    7.121
+    7.380
+    7.385
+
+Parallelizing Less CSS compilation:
+
+  Before:
+    6.915
+    6.900
+    7.121
+    7.380
+    7.385
+
+  After:
+    6.582
+    7.128
+    7.192
+    7.159
+    7.498
+```

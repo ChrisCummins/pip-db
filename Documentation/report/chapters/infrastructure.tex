@@ -112,6 +112,7 @@ building, testing, deployment, and task automation.
 \label{fig:build-system-flowchart}
 \end{figure}
 
+\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Listing: build-javascript %%
@@ -119,11 +120,13 @@ building, testing, deployment, and task automation.
 \lstset{language=make}
 \begin{center}
 \begin{lstlisting}[label=lst:build-javascript,caption={
-      [Clojure implementation of the query tree]
-      Implementation of the query tree in Clojure, from the file
-      \texttt{query.clj}. Note the flat query hierarchy and the
-      use of the \texttt{for} macro for expanding multivalued
-      queries.}]
+      [Autotools Makefile pattern for JavaScript compilation]
+      Autotools Makefile pattern for JavaScript compilation, taken
+      from \texttt{www/js/Makefile.am}. The conditional variables
+      \texttt{ENABLE\_MINI\_JS} and
+      \texttt{ENABLE\_CONTENT\_HASHING} are used to control the
+      behaviour of the compilation, and are set by passing argument
+      flags to the configuration script.}]
 # Compilation command
 if ENABLE_MINIFY_JS
 define compile
