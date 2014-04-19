@@ -21,6 +21,37 @@
 
 \section{Search engine design}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Table of query components %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[H]
+\centering
+\begin{tabular}{| c | c | l |}
+\hline
+\textbf{Family} & \textbf{Symbol} & \textbf{Definition}\\
+\hline
+& $id$ & Unique identifier\\
+$N$ & $q_0 \ldots q_n$ & Any keywords\\
+$N$ & $a_0 \ldots a_n$ & All keywords\\
+$N$ & $n_0 \ldots n_n$ & Not keywords\\
+$N$ & $eq$ & Exact phrase\\
+$P$ & $p_l$, $p_h$ & Minimum and maximum isoelectric point\\
+$P$ & $m_l$, $m_h$ & Minimum and maximum molecular weight\\
+$P$ & $e_0$, $e_1$, $e_2$, $e_3$ & Enzyme commission number\\
+$P$ & $l_s$ & Source location\\
+$P$ & $l_l$ & Organ or sub-cellular location\\
+$P$ & $f_n$ & FASTA sequence name\\
+$P$ & $f_s$ & FASTA sequence string\\
+$E$ & $m$ & Experimental method\\
+$E$ & $t_l$, $t_h$ & Minimum and maximum experimental temperature\\
+\hline
+\end{tabular}
+\caption[Query component symbols and their definitions]{Query component symbols and their definitions.}
+\label{tab:query-components}
+\end{table}
+
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%
 %% Query tree diagram %%
 %%%%%%%%%%%%%%%%%%%%%%%%
