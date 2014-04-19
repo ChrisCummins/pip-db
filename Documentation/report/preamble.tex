@@ -83,9 +83,9 @@
 \usepackage[titletoc]{appendix}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Figures and footnotes %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figures, footnotes and listings %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{float}
 \restylefloat{figure}
@@ -93,6 +93,16 @@
 % Use arabic numbers for footnote.
 \renewcommand{\thefootnote}{\arabic{footnote}}
 
+% Code listings.
+\usepackage{listings}
+
+\lstset{frame=bt,                 % Add top and bottom frame lines
+        breaklines=true,          % Add line wrap indicator
+        postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}}
+        numbers=left,             % Add left-side line numbers
+        basicstyle=\footnotesize, % Use a small font size
+        numberstyle=\scriptsize,  % Use an even smaller line number size
+        commentstyle=\bfseries}   % Embolden comments
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %% Graphics and maths %%
