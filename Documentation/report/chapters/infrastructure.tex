@@ -71,7 +71,93 @@ building, testing, deployment, and task automation.
 % TODO: placeholder
 \lipsum[40-48]
 
-\subsection{pipbot}
+\newpage
+\subsection{pipbot}\label{sec:pipbot}
 
 % TODO: placeholder
-\lipsum[35-47]
+\lipsum[30]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: pipbot-logo %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\begin{verbatim}
+                              ,--.    ,--.
+                             ((O ))--((O ))
+                           ,'_`--'____`--'_`.
+                          _:  ____________  :_
+                         | | ||::::::::::|| | |
+                         | | ||::::::::::|| | |
+                         | | ||::::::::::|| | |
+                         |_| |/__________\| |_|
+                           |________________|
+                        __..-'            `-..__
+                     .-| : .----------------. : |-.
+                   ,\ || | |\______________/| | || /.
+                  /`.\:| | ||  __  __  __  || | |;/,'\
+                 :`-._\;.| || '--''--''--' || |,:/_.-':
+                 |    :  | || .----------. || |  :    |
+                 |    |  | || '--pipbot--' || |  |    |
+                 |    |  | ||   _   _   _  || |  |    |
+                 :,--.;  | ||  (_) (_) (_) || |  :,--.;
+                 (`-'|)  | ||______________|| |  (|`-')
+                  `--'   | |/______________\| |   `--'
+                         |____________________|
+                          `.________________,'
+                           (_______)(_______)
+                           (_______)(_______)
+                           (_______)(_______)
+                           (_______)(_______)
+                          |        ||        |
+                          '--------''--------'
+                     Hello there. My name is pipbot.
+\end{verbatim}
+\caption[The pipbot welcome message]
+  {The pipbot welcome message, displayed at the start of interactive sessions.}
+\label{fig:pipbot-logo}
+\end{figure}
+
+% TODO: placeholder
+\lipsum[33-37]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: pipbot-session %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\begin{verbatim}
+$ pipbot
+Hello there. My name is pipbot.
+-> burndown 7 days
+Comparing `master' against `master'...
+
+  There are 56 new commits on master
+  The last commit on master was 5 days, 2 hours ago
+-> version
+0.6.2
+-> start 0.6.3
+Summary of actions:
+- A new branch release/0.6.3 was created, based on master.
+- A new remote branch release/0.6.3 was created on origin.
+- Branch release/0.6.3 tracks remote branch release/0.6.3 from origin.
+- You are now on branch release/0.6.3.
+- The version  number has been bumped to 0.6.3 and committed
+
+Now, start performing release fixes. When done, use:
+
+     pipbot finish 0.6.3
+
+-> exit
+Goodbye!
+\end{verbatim}
+\caption[Example pipbot session]
+  {An example pipbot interactive session, in which the user begins a
+   new release. User issued commands begin with the prefix
+   ``\texttt{-> }''. First, the user requests a burndown of the
+   repository activity over the past week; then they request the
+   current version, and begin a new release with the version number
+   \texttt{0.6.3}.}
+\label{fig:pipbot-session}
+\end{figure}
+
+% TODO: placeholder
+\lipsum[40-47]
