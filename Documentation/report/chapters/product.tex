@@ -25,13 +25,13 @@
 %% Query tree diagram %%
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\newpage
-\begin{centering}
-\begin{tikzpicture}[every tree node/.style={}]
-\tikzset{level distance=40pt, sibling distance=3pt}
-  \Tree [.{$\epsilon$}
-    [.{$i$} ]
-    [.{$Q$}
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\tikzset{level distance=50pt, sibling distance=1.5pt}
+  \Tree [.{$Q$}
+    [.{$id$} ]
+    [.{$N$}
       [.{$Q$}
         [. \node(q0){$q_0$}; ]
         [. \node(qn){$q_n$}; ]
@@ -61,10 +61,13 @@
         [.{$e_2$} ]
         [.{$e_3$} ]
       ]
-      [.{$l$} ]
-      [.{$S$}
-        [.{$s_n$} ]
-        [.{$s_s$} ]
+      [.{$L$}
+        [.{$l_s$} ]
+        [.{$l_l$} ]
+      ]
+      [.{$F$}
+        [.{$f_n$} ]
+        [.{$f_s$} ]
       ]
     ]
     [.{$E$}
