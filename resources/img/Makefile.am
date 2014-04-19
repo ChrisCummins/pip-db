@@ -17,4 +17,4 @@ $(DEST)/%: %
 		$(MKDIR_P) $(DEST); \
 	}
 	@echo '  IMAGE  $(notdir $@)'
-	@cp $< $@
+	@cat $< > $@ &

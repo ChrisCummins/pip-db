@@ -9,10 +9,10 @@ CLEANFILES = $(noinst_SCRIPTS)
 
 EXTRA_DIST = $(SRC)
 
-# Export fonts
+# Forked font exporting
 $(DEST)/% : %
 	@test -d $(DEST) || { \
 		$(MKDIR_P) $(DEST); \
 	}
 	@echo '  FONT   $<'
-	@cp $< $@
+	@cat $< > $@ &
