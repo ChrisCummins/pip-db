@@ -1,3 +1,4 @@
+*-blx.bib
 *.acn
 *.acr
 *.alg
@@ -25,6 +26,7 @@
 *.out
 *.pdfsync
 *.ps
+*.run.xml
 *.snm
 *.synctex.gz
 *.tdo
@@ -33,5 +35,3 @@
 *.xdy
 
 /report.pdf
-/report-blx.bib
-/report.run.xml
