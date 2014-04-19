@@ -12,16 +12,9 @@ CSS = $(addprefix $(DEST)/,$(SRC))
 
 EXTRA_DIST = $(SRC) $(shell find . -name '*.less' -exec basename {} \;)
 
-SRC += $(LESS:.less=.css) # Generated CSS
-
-noinst_SCRIPTS = $(CSS) $(LESS:.less=.css)
+noinst_SCRIPTS = $(CSS) $(addprefix $(DEST)/,$(LESS:.less=.css))
 
 CLEANFILES = $(LESS:.less=.css) $(noinst_SCRIPTS)
-
-# Less CSS compilation
-%.css: %.less $(wildcard *.less)
-	@echo '  LESS   $@'
-	@lessc $< $@
 
 # Compilation command
 if ENABLE_MINIFY_CSS
@@ -33,6 +26,16 @@ define compile
 	cat $1 > $2
 endef
 endif
+
+# Parallel Less CSS compilation
+$(DEST)/%.css: %.less $(wildcard *.less)
+	$(eval NAME := $(notdir $@))
+	@echo '  LESS   $(NAME)'
+	@(lessc $< $(NAME); \
+	  test -d $(DEST) || { \
+		  $(MKDIR_P) $(DEST); \
+	  }; \
+	  $(call compile,$(NAME),$(DEST)/$(NAME))) &
 
 # Parallel CSS compilation
 $(DEST)/%.css: %.css
