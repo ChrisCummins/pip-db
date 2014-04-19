@@ -20,8 +20,6 @@ building, testing, deployment, and task automation.
 % TODO: placeholder
 \lipsum[11]
 
-\subsection{Autotools}
-
 % Literate configure.ac
 
 \subsection{Pre-processing and cache busting}
@@ -29,6 +27,91 @@ building, testing, deployment, and task automation.
 % Content hashing case study with autotools
 
 \subsection{On-demand build systems using inotify subsystem}
+
+\subsection{Autotools}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: build-system-flowchart %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[auto, thick,
+                    scale=0.65, every node/.style={scale=0.65},
+                    node distance = 2cm]
+
+  % HTML NODES:
+  \node (start) [block] {\textbf{START}};
+  \node (more-html) [decision, below of=start] {More HTML targets?};
+  \node (html-next) [block, below of=more-html] {Get next HTML target};
+  \node (html-modified) [decision, below of=html-next] {Source modified?};
+  \node (html-compile) [block, below of=html-modified] {Compile HTML};
+  \node (html-update) [block, left of=html-compile] {Update timestamp};
+
+  % HTML EDGES:
+  \draw[->] (start) -- (more-html);
+  \draw[->] (more-html) -- node {YES} (html-next);
+  \draw[->] (html-next) -- (html-modified);
+  \draw[->] (html-modified) -- node {YES} (html-compile);
+  \draw[->] (html-compile) -- (html-update);
+  \draw[->] (html-modified.180) -- node {NO} ++ (-1.65,0);
+  \draw[->] (html-update) |- (more-html.180);
+
+  % CSS NODES:
+  \node (more-css) [decision, right of=more-html,
+                    xshift=6cm] {More CSS targets?};
+  \node (css-next) [block, below of=more-css] {Get next CSS target};
+  \node (css-modified) [decision, below of=css-next] {Source modified?};
+  \node (css-html) [decision, left of=css-modified,
+                    xshift=-0.2cm] {HTML modified?};
+  \node (css-compile) [block, below of=css-modified] {Compile CSS};
+  \node (css-update) [block, left of=css-compile,
+                      xshift=-2.4cm] {Update timestamp};
+  \node (css-ref) [block, above of=css-update,
+                   yshift=3cm] {Update HTML references};
+
+  % CSS EDGES:
+  \draw[->] (more-html.0) -- node {NO} ++ (1, 0) -- (more-css);
+  \draw[->] (more-css) -- node {YES} (css-next);
+  \draw[->] (css-next) -- (css-modified);
+  \draw[->] (css-modified) -- node {YES} (css-compile);
+  \draw[->] (css-modified) -- node {NO} (css-html);
+  \draw[->] (css-compile) -- (css-update);
+  \draw[->] (css-update) -- (css-ref);
+  \draw[->] (css-ref) |- (more-css);
+  \draw[->] (css-html) -- node {NO} ++ (0, 2) |- (more-css);
+  \draw[->] (css-html.180) -- node {YES} ++ (-.85cm, 0);
+
+  % JS NODES:
+  \node (more-js) [decision, right of=more-css,
+                    xshift=6cm] {More JS targets?};
+  \node (js-next) [block, below of=more-js] {Get next JS target};
+  \node (js-modified) [decision, below of=js-next] {Source modified?};
+  \node (js-html) [decision, left of=js-modified,
+                    xshift=-0.2cm] {HTML modified?};
+  \node (js-compile) [block, below of=js-modified] {Compile JS};
+  \node (js-update) [block, left of=js-compile,
+                      xshift=-2.4cm] {Update timestamp};
+  \node (js-ref) [block, above of=js-update,
+                   yshift=3cm] {Update HTML references};
+  \node (finish) [block, above of=more-js] {\textbf{FINISH}};
+
+  % JS EDGES:
+  \draw[->] (more-css.0) -- node {NO} ++ (1, 0) -- (more-js);
+  \draw[->] (more-js) -- (finish);
+  \draw[->] (more-js) -- node {YES} (js-next);
+  \draw[->] (js-next) -- (js-modified);
+  \draw[->] (js-modified) -- node {YES} (js-compile);
+  \draw[->] (js-modified) -- node {NO} (js-html);
+  \draw[->] (js-compile) -- (js-update);
+  \draw[->] (js-update) -- (js-ref);
+  \draw[->] (js-ref) |- (more-js);
+  \draw[->] (js-html) -- node {NO} ++ (0, 2) |- (more-js);
+  \draw[->] (js-html.180) -- node {YES} ++ (-.85cm, 0);
+\end{tikzpicture}
+\caption[Build system flowchart]{Build system flowchart.}
+\label{fig:build-system-flowchart}
+\end{figure}
+
 
 \section{Testing}
 
