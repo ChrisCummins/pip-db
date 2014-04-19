@@ -34,10 +34,10 @@ define compile
 endef
 endif
 
-# CSS compilation
+# Parallel CSS compilation
 $(DEST)/%.css: %.css
 	@test -d $(DEST) || { \
 		$(MKDIR_P) $(DEST); \
 	}
 	@echo '  CSS    $(notdir $@)'
-	@$(call compile,$<,$@)
+	@$(call compile,$<,$@) &
