@@ -21,10 +21,9 @@
 
 \section{Search engine design}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Table of query components %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Table: query-components %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[H]
 \centering
 \begin{tabular}{| c | c | l |}
@@ -51,11 +50,12 @@ $E$ & $t_l$, $t_h$ & Minimum and maximum experimental temperature\\
 \label{tab:query-components}
 \end{table}
 
-\newpage
-%%%%%%%%%%%%%%%%%%%%%%%%
-%% Query tree diagram %%
-%%%%%%%%%%%%%%%%%%%%%%%%
 
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: query-tree %%
+%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}
@@ -122,11 +122,10 @@ $E$ & $t_l$, $t_h$ & Minimum and maximum experimental temperature\\
 \label{fig:query-tree}
 \end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%
-%% Query tree listing %%
-%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Listing: query-tree %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
 \lstset{language=Lisp}
 \begin{center}
 \begin{lstlisting}[label=lst:query-tree,caption={
@@ -160,6 +159,7 @@ $E$ & $t_l$, $t_h$ & Minimum and maximum experimental temperature\\
      (EQ   {:field "real_ec4"      :value ec4 :numeric true}))
 \end{lstlisting}
 \end{center}
+
 
 \subsection{Incorporating BLAST+ searching}
 
