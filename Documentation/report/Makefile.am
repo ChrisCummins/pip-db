@@ -12,11 +12,41 @@ endif
 
 CLEANFILES = \
 	$(DOCPDF) \
+	*-blx.bib \
+	*.acn \
+	*.acr \
+	*.alg \
 	*.aux \
+	*.bbl \
+	*.blg \
+	*.dvi \
+	*.fdb_latexmk \
+	*.glg \
+	*.glo \
+	*.gls \
+	*.idx \
+	*.ilg \
+	*.ind \
+	*.ist \
+	*.lof \
 	*.log \
-	*.log \
+	*.lol \
+	*.lot \
+	*.maf \
+	*.mtc \
+	*.mtc0 \
+	*.nav \
+	*.nlo \
 	*.out \
+	*.pdfsync \
+	*.ps \
+	*.run.xml \
+	*.snm \
+	*.synctex.gz \
+	*.tdo \
 	*.toc \
+	*.vrb \
+	*.xdy \
 	.\#* \
 	\#* \
 	$(NULL)
