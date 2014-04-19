@@ -105,14 +105,23 @@
 % Use arabic numbers for footnote.
 \renewcommand{\thefootnote}{\arabic{footnote}}
 
+% Pre-requisites for rendering upquotes in listings package.
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+
 % Code listings.
 \usepackage{listings}
 
-\lstset{frame=bt,                 % Add top and bottom frame lines
-        numbers=left,             % Add left-side line numbers
-        basicstyle=\footnotesize, % Use a small font size
-        numberstyle=\scriptsize,  % Use an even smaller line number size
-        commentstyle=\bfseries}   % Embolden comments
+\lstset{xleftmargin=0.05\textwidth,  % Don't use the full page width
+        xrightmargin=0.05\textwidth,
+        frame=bt,                    % Add top and bottom frame lines
+        captionpos=b,                % Place caption below listing
+        numbers=left,                % Add left-side line numbers
+        basicstyle=\footnotesize,    % Use a small font size
+        numberstyle=\footnotesize\bfseries,
+        upquote=true,                % Use upright quotes, not curly
+        commentstyle=\bfseries}      % Embolden comments
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %% Graphics and maths %%
