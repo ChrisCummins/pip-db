@@ -35,7 +35,7 @@ $(DEST)/%.js: %.js
 		$(MKDIR_P) $(DEST); \
 	}
 	@echo '  JS     $(notdir $@)'
-	@$(call compile,$<,$@)
+	@$(call compile,$<,$@) &
 
 
 $(MINIFIED): $(DEST)/%.js: %.js
@@ -43,4 +43,4 @@ $(MINIFIED): $(DEST)/%.js: %.js
 		$(MKDIR_P) $(DEST); \
 	}
 	@echo '  JS     $(notdir $@)'
-	@cat $< > $@
+	@cat $< > $@ &
