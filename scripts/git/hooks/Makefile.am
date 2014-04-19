@@ -8,4 +8,4 @@ endif
 
 $(GITDIR)/%: %
 	@echo '  GIT    $<'
-	@$(INSTALL) --mode=755 $< $@
+	@$(INSTALL) --mode=755 $< $@ &
