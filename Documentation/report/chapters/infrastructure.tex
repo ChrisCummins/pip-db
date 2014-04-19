@@ -113,6 +113,53 @@ building, testing, deployment, and task automation.
 \end{figure}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Listing: build-javascript %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstset{language=make}
+\begin{center}
+\begin{lstlisting}[label=lst:build-javascript,caption={
+      [Clojure implementation of the query tree]
+      Implementation of the query tree in Clojure, from the file
+      \texttt{query.clj}. Note the flat query hierarchy and the
+      use of the \texttt{for} macro for expanding multivalued
+      queries.}]
+# Compilation command
+if ENABLE_MINIFY_JS
+define compile
+    $(JAVA) -jar $(JS_JAR) --js=$1 --js_output_file=$2
+endef
+else # Disabled minification
+define compile
+    cat $1 > $2
+endef
+endif
+
+# JavaScript compilation
+$(DEST)/%.js: %.js
+    @test -d $(DEST) || { \
+        $(MKDIR_P) $(DEST); \
+    }
+if ENABLE_CONTENT_HASHING
+    $(eval CHASH := $(shell $(HASH_BIN) $< | cut -c1-$(HASH_LENGTH)))
+    $(eval NAME := $(addsuffix -$(CHASH).js,$(patsubst %.js,%,$@)))
+else
+    $(eval NAME := $@)
+endif
+    @test -f $(NAME) || { \
+        echo '  JS     $(notdir $(NAME))'; \
+        $(call compile,$<,$(NAME)); \
+    }
+if ENABLE_CONTENT_HASHING
+    $(eval TARGET := js\/$(patsubst %.js,%,$<))
+    @for h in $(HTML); do \
+        sed -ri 's/(<script src=\"(\{\{ *(\w|[_.])+ *\}\})*\/?)$(TARGET)(-[0-9a-f]{$(HASH_LENGTH)})?(\.js\")/\1$(TARGET)-$(CHASH)\5/' $$h; \
+    done
+endif
+\end{lstlisting}
+\end{center}
+
+
 \section{Testing}
 
 % TODO: placeholder
