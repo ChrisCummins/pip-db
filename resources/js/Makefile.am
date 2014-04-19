@@ -38,7 +38,7 @@ $(DEST)/%.js: %.js
 	@$(call compile,$<,$@)
 
 
-$(MINIFIED) : $(DEST)/%.js: %.js
+$(MINIFIED): $(DEST)/%.js: %.js
 	@test -d $(DEST) || { \
 		$(MKDIR_P) $(DEST); \
 	}
