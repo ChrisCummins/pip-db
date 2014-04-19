@@ -20,6 +20,122 @@
 \subsection{Yet Another Protein Schema}
 
 \section{Search engine design}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% Query tree diagram %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\begin{centering}
+\begin{tikzpicture}[every tree node/.style={}]
+\tikzset{level distance=40pt, sibling distance=3pt}
+  \Tree [.{$\epsilon$}
+    [.{$i$} ]
+    [.{$Q$}
+      [.{$Q$}
+        [. \node(q0){$q_0$}; ]
+        [. \node(qn){$q_n$}; ]
+      ]
+      [.{$A$}
+        [. \node(a0){$a_0$}; ]
+        [. \node(an){$a_n$}; ]
+      ]
+      [. {$N$}
+        [. \node(n0){$n_0$}; ]
+        [. \node(nn){$n_n$}; ]
+      ]
+      [.{$eq$} ]
+    ]
+    [.{$P$}
+      [.{$P$}
+        [.{$p_l$} ]
+        [.{$p_h$} ]
+      ]
+      [.{$M$}
+        [.{$m_l$} ]
+        [.{$m_h$} ]
+      ]
+      [.{$E$}
+        [.{$e_0$} ]
+        [.{$e_1$} ]
+        [.{$e_2$} ]
+        [.{$e_3$} ]
+      ]
+      [.{$l$} ]
+      [.{$S$}
+        [.{$s_n$} ]
+        [.{$s_s$} ]
+      ]
+    ]
+    [.{$E$}
+      [.{$m$} ]
+      [.{$T$}
+        [. \node(tl){$t_l$}; ]
+        [. \node(th){$t_h$}; ]
+      ]
+    ]
+  ]
+\begin{scope}[dashed]
+\draw (a0)--(an);
+\draw (n0)--(nn);
+\draw (q0)--(qn);
+\end{scope}
+\end{tikzpicture}
+\end{centering}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% Query tree listing %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\lstset{language=Lisp}
+\begin{lstlisting}
+(defn params->query [params]
+  (let [id      (str (get params "id"))
+        q       (split-args (get params "q"))
+        q_any   (split-args (get params "q_any"))
+        q_ne    (split-args (get params "q_ne"))
+        q_eq    (get params "q_eq")
+        q_s     (get params "q_s")
+        q_l     (get params "q_l")
+        m       (get params "m")
+        pi_l    (get params "pi_l")
+        pi_h    (get params "pi_h")
+        seq     (get params "seq_name")
+        mw_l    (str (util/str->num (get params "mw_l")))
+        mw_h    (str (util/str->num (get params "mw_h")))
+        t_l     (str (util/str->num (get params "t_l")))
+        t_h     (str (util/str->num (get params "t_h")))
+        ec1     (str (util/str->int (get params "ec1")))
+        ec2     (str (util/str->int (get params "ec2")))
+        ec3     (str (util/str->int (get params "ec3")))
+        ec4     (str (util/str->int (get params "ec4")))]
+
+    (AND
+     (EQ   {:field "id"            :value id :exact true})
+     (for [word q]
+       (EQ {:field "Protein-Names" :value word}))
+     (for [word q_any]
+       (EQ {:field "Protein-Names" :value word}))
+     (for [word q_ne]
+       (NE {:field "Protein-Names" :value word}))
+     (EQ   {:field "Protein-Names" :value q_eq})
+     (EQ   {:field "Source"        :value q_s})
+     (EQ   {:field "Location"      :value q_l})
+     (EQ   {:field "Method"        :value m})
+     (EQ   {:field "Sequence-Name" :value seq})
+     (GTE  {:field "real_pi_min"   :value pi_l})
+     (LTE  {:field "real_pi_max"   :value pi_h})
+     (GTE  {:field "real_mw_min"   :value mw_l})
+     (LTE  {:field "real_mw_max"   :value mw_h})
+     (GTE  {:field "real_temp_min" :value t_l})
+     (LTE  {:field "real_temp_max" :value t_h})
+     (EQ   {:field "real_ec1"      :value ec1 :numeric true})
+     (EQ   {:field "real_ec2"      :value ec2 :numeric true})
+     (EQ   {:field "real_ec3"      :value ec3 :numeric true})
+     (EQ   {:field "real_ec4"      :value ec4 :numeric true}))))
+\end{lstlisting}
+
+
 \subsection{Incorporating BLAST+ searching}
 
 \subsection{Design of an API for searching services}
