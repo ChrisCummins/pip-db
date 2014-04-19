@@ -160,6 +160,95 @@ if ENABLE_CONTENT_HASHING
 endif
 \end{lstlisting}
 
+\subsubsection*{Build system parallelisation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: build-times %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={Build system optimisations},
+    axis y line*=left,
+    axis x line*=bottom,
+    scale only axis,
+    ymajorgrids,
+    xticklabels={Control,
+                 JavaScript,
+                 Documentation,
+                 CSS,
+                 Images,
+                 Less CSS,
+                 Tools},
+    x tick label style={rotate=90,anchor=east},
+    ylabel={Execution time (seconds)}
+  ]
+% PLOT: Results
+\addplot+[only marks,
+          mark options={color=black},
+          mark=x
+]
+coordinates{
+  (1,39.169)
+  (1,37.001)
+  (1,36.344)
+  (1,39.74)
+  (1,39.276)
+  (2,32.287)
+  (2,29.689)
+  (2,30.088)
+  (2,31.775)
+  (2,32.275)
+  (3,8.887)
+  (3,8.849)
+  (3,9.68)
+  (3,9.937)
+  (3,10.007)
+  (4,8.176)
+  (4,8.777)
+  (4,7.918)
+  (4,7.614)
+  (5,7.761)
+  (5,8.788)
+  (5,8.222)
+  (5,7.96)
+  (6,6.915)
+  (6,6.9)
+  (6,7.121)
+  (6,7.38)
+  (6,7.385)
+  (7,6.582)
+  (7,7.128)
+  (7,7.192)
+  (7,7.159)
+  (7,7.498)
+};
+% PLOT: Best fit line
+\addplot+[mark=none,
+          color=black
+]
+coordinates {
+  (1,38.306)
+  (2,31.2228)
+  (3,9.472)
+  (4,8.1195)
+  (5,8.18275)
+  (6,7.1402)
+  (7,7.1114)
+};
+\end{axis}
+\end{tikzpicture}
+\caption[Graph of build system execution times with optimisations]
+        {Graph of build system execution times after each optimisation
+          iteration. Each value is sequential, with the leftmost
+          control value being the unmodified serial build system. The
+          tests were invoked with the command \texttt{time
+            (./autogen.sh \&\& ./configure \&\& make)}.}
+\label{fig:build-times}
+\end{figure}
+
 
 \section{Testing}
 
