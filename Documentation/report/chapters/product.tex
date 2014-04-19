@@ -84,35 +84,26 @@
 \draw (q0)--(qn);
 \end{scope}
 \end{tikzpicture}
-\end{centering}
+\caption[Structure of the query tree for composing searches]
+        {Structure of the query tree used for composing searches of
+          the PIP-DB dataset. Leaf nodes represent properties. Nodes
+          with an uppercase name denote compound AND conditionals.}
+\label{fig:query-tree}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %% Query tree listing %%
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\lstset{language=Lisp}
-\begin{lstlisting}
-(defn params->query [params]
-  (let [id      (str (get params "id"))
-        q       (split-args (get params "q"))
-        q_any   (split-args (get params "q_any"))
-        q_ne    (split-args (get params "q_ne"))
-        q_eq    (get params "q_eq")
-        q_s     (get params "q_s")
-        q_l     (get params "q_l")
-        m       (get params "m")
-        pi_l    (get params "pi_l")
-        pi_h    (get params "pi_h")
-        seq     (get params "seq_name")
-        mw_l    (str (util/str->num (get params "mw_l")))
-        mw_h    (str (util/str->num (get params "mw_h")))
-        t_l     (str (util/str->num (get params "t_l")))
-        t_h     (str (util/str->num (get params "t_h")))
-        ec1     (str (util/str->int (get params "ec1")))
-        ec2     (str (util/str->int (get params "ec2")))
-        ec3     (str (util/str->int (get params "ec3")))
-        ec4     (str (util/str->int (get params "ec4")))]
 
+\lstset{language=Lisp}
+\begin{center}
+\begin{lstlisting}[label=lst:query-tree,caption={
+      [Clojure implementation of the query tree]
+      Implementation of the query tree in Clojure, from the file
+      \texttt{query.clj}. Note the flat query hierarchy and the
+      use of the \texttt{for} macro for expanding multivalued
+      queries.}]
     (AND
      (EQ   {:field "id"            :value id :exact true})
      (for [word q]
@@ -135,9 +126,9 @@
      (EQ   {:field "real_ec1"      :value ec1 :numeric true})
      (EQ   {:field "real_ec2"      :value ec2 :numeric true})
      (EQ   {:field "real_ec3"      :value ec3 :numeric true})
-     (EQ   {:field "real_ec4"      :value ec4 :numeric true}))))
+     (EQ   {:field "real_ec4"      :value ec4 :numeric true}))
 \end{lstlisting}
-
+\end{center}
 
 \subsection{Incorporating BLAST+ searching}
 
