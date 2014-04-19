@@ -48,11 +48,17 @@
 %
 %  notlof - Don't add List Of Figures to TOC
 %  notlot - Don't add List Of Tables to TOC
+%
 \usepackage[nottoc,notlof,notlot]{tocbibind}
 
-% Increase table of contents depth from standard 3 (subsection) to 4
-% (subsubseciton):
-\setcounter{tocdepth}{4}
+% Control the table of contents nested depth. Levels are:
+%
+%     0 - Chapter
+%     1 - Section
+%     2 - Subsection
+%     3 - Subsubsection
+%
+\setcounter{tocdepth}{2}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
