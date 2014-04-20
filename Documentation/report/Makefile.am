@@ -56,8 +56,8 @@ PDFLATEX_ARGS = -output-format pdf \
 	-file-line-error \
 	-interaction=nonstopmode
 
-# Include lib/*.sty files
-TEXINPUTS = .:lib
+# Import lib/*.sty libraries.
+export TEXINPUTS := .:./lib:$(TEXINPUTS)
 
 # Compile commands. We pipe the output to /dev/null to silence it, and
 # if there is an error, we re-run the compilation without the pipe so
