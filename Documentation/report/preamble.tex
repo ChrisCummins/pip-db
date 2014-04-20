@@ -125,6 +125,10 @@
         upquote=true,                % Use upright quotes, not curly
         commentstyle=\bfseries}      % Embolden comments
 
+% Use (*@ @*) to escape LaTeX commands within listings.
+\lstset{escapeinside={(*@}{@*)}}
+
+
 % Add JavaScript support to listings. See:
 %
 %     http://tex.stackexchange.com/a/89576
