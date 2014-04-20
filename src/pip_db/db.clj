@@ -20,6 +20,9 @@
 ;; The maximum number of rows within an auto-complete table.
 (def ac-table-size 900)
 
+;; The number of results to return for an auto-complete query.
+(def ac-max-results 10)
+
 ;; Out database tables.
 (def tables
   {:records     [[:id                 "varchar(11) NOT NULL"]
@@ -212,7 +215,8 @@
         table     (str "ac_" (params "s"))
         text      (params "t")
         query-str (str "SELECT text FROM " table " WHERE LOWER(text) LIKE '%"
-                       text "%' ORDER BY frequency DESC LIMIT 10")]
+                       text "%' ORDER BY frequency DESC LIMIT "
+                       ac-max-results)]
     (with-connection-results-query results [query-str]
       (apply vector (map #(get % :text) results)))))
 
