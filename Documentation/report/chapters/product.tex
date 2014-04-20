@@ -169,6 +169,61 @@ $E$ & $t_l$, $t_h$ & Minimum and maximum experimental temperature\\
 
 % RESTFUL API
 
+\subsection{Autocomplete}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure: search-sequence %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\centering
+\begin{sequencediagram}
+% Client side
+\newthread[white]{user}{User}
+\newinst[2]{browser}{Browser}
+
+% Server side
+\newinst[3]{api-ac}{/api/ac}
+\newinst{api-s}{/api/s}
+\newinst{s}{/s}
+\newthread[white]{db}{db}
+
+% AUTOCOMPLETION
+\begin{sdblock}{loop}{Autocompletion}
+  \begin{call}{user}{Keystroke}{browser}{Suggestions}
+    \begin{call}{browser}{Field value}{api-ac}{Results map}
+      \begin{call}{api-ac}{Lookup}{db}{Results}
+      \end{call}
+    \end{call}
+  \end{call}
+\end{sdblock}
+
+% RESULTS INDICATOR
+\begin{sdblock}{loop}{Results indicator}
+  \begin{call}{user}{Modify form}{browser}{No of results}
+    \begin{call}{browser}{Form values}{api-s}{Results map}
+      \begin{call}{api-s}{Search}{db}{Results}
+      \end{call}
+    \end{call}
+  \end{call}
+\end{sdblock}
+
+% FORM SUBMISSION
+\begin{call}{user}{Submit form}{browser}{Results page}
+  \begin{call}{browser}{Form values}{s}{Results map}
+    \begin{call}{s}{Search}{db}{Results}
+    \end{call}
+  \end{call}
+\end{call}
+\end{sequencediagram}
+\caption[Search form sequence diagram]{Search form sequence
+  diagram. The instances \texttt{/api/ac}, \texttt{/api/s}, and
+  \texttt{/s}, represent the public web services available at those
+  locations. Communication from the Browser to those services takes
+  the form of HTTP GET requests.}
+\label{fig:search-sequence}
+\end{figure}
+
+
 \section{Performance and security}
 
 \section{Usage instructions}

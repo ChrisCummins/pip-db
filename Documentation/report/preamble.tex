@@ -143,7 +143,7 @@
 \usepackage{pgfplots}
 
 % Tikz flowchart configuration.
-\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{shapes,arrows,shadows}
 \tikzstyle{decision} = [diamond,
                         draw,
                         text width=4.5em,
@@ -158,6 +158,16 @@
                         rounded corners,
                         minimum height=4em]
 \tikzstyle{line}     = [draw, -latex']
+
+% UML sequence diagram macros, see:
+%
+%     https://code.google.com/p/pgf-umlsd/
+%
+% Options:
+%
+%     underline - Underline object names
+%
+\usepackage[underline=false]{pgf-umlsd}
 
 
 %%%%%%%%%%%%%%%%%%%%%%
