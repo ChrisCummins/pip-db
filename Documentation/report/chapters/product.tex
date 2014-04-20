@@ -205,6 +205,107 @@ $E$ & $t_l$, $t_h$ & Minimum and maximum experimental temperature\\
 
 \subsection{Incorporating BLAST+ searching}
 
+\newpage
+\subsubsection*{Dynamic dispatcher}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Listing: search-dispatcher %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstset{language=Clojure}
+\begin{lstlisting}[label=lst:search-dispatcher,caption={
+      [Search handler and dynamic dispatcher]
+      Search handler and dynamic dispatcher. Accepting a request map,
+      the search handler dispatches the appropriate search function
+      (line \ref{lst:search-dispatcher-dispatch}), wrapping the
+      results into a response map.}]
+(defn search [request]
+  (let [sequence     ((request :params) "seq")
+        blast?       (not (str/blank? sequence))
+        params       (request :params)
+        headers      (request :headers)
+        query-terms? (not (= (headers "x-pip-db-query-terms") "None"))
+        records?     (not (= (headers "x-pip-db-records")     "None"))
+(*@\label{lst:search-dispatcher-dispatch}@*)        matching-records    (if blast? (blast/search request)
+                                       (db/search    request))
+        no-records-searched (if blast? (blast/no-of-records)
+                                       (db/no-of-records))]
+    (merge
+     (if records?
+       (let [returned-records (take max-no-of-returned-records
+                                    matching-records)]
+         {:No-Of-Records-Returned  (count returned-records)
+          :Records                  returned-records}))
+     {:No-Of-Records-Matched       (count matching-records)
+      :Max-No-of-Returned-Records   max-no-of-returned-records
+      :No-Of-Records-Searched       no-records-searched}
+     (if query-terms?
+       {:Query-Terms               (dissoc params "seq_name")}))))
+\end{lstlisting}
+
+ The \texttt{params->str} function (line \ref{lst:db-search-str})
+ converts a search parameter map into a structured query tree
+ (figure~\ref{fig:query-tree}) and serialises it into an SQL select
+ statement. This is used to generate a vector of record rows which are
+ mapped over the \texttt{row->record} function (line
+ \ref{lst:db-search-row}), converting them back into structured YAPS
+ records.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% Listing: db-search %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\lstset{language=Clojure}
+\begin{lstlisting}[label=lst:db-search,caption={
+      [The \texttt{db} namespace search function]
+      The \texttt{db} namespace search function.}]
+(defn search [request]
+(*@\label{lst:db-search-str}@*)  (let [query-str (params->str (request :params))]
+(*@\label{lst:db-search-row}@*)    (map row->record (search-results query-str))))
+\end{lstlisting}
+
+
+The blast search function (Listing~\ref{lst:blast-search}) first
+executes the \texttt{blastp} program with an appropriate environment
+and input filtered from the request map (line
+\ref{lst:blast-search-blastp}), and then maps the output of the
+program into the function \texttt{result->records} which performs a
+reverse lookup of the matched sequences and performs repeated database
+searches for the matched records using the parameter map.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Listing: blast-search %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstset{language=Clojure}
+\begin{lstlisting}[label=lst:blast-search,caption={
+      [The \texttt{blast} namespace search function]
+      The \texttt{blast} namespace search function.}]
+(defn search [request]
+(*@\label{lst:blast-search-blastp}@*)  (let [results (blast-results ((request :params) "seq"))]
+(*@\label{lst:blast-search-map}@*)    (flatten (map #(result->records request %) results))))
+\end{lstlisting}
+
+\newpage
+Listing \ref{lst:blast-search-wrapper} shows the implementation of the
+\texttt{results->records} function, proving the functional composition
+of the db search function to produce blast search (line
+\ref{lst:blast-search-wrapper-db}).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Listing: blast-search-wrapper %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstset{language=Clojure}
+\begin{lstlisting}[label=lst:blast-search-wrapper,caption={
+      [The \texttt{blast} namespace search function]
+      The \texttt{blast} namespace search function.}]
+(defn result->records [request result]
+  (let [params  (assoc (request :params) "seq_name" (result :title))
+(*@\label{lst:blast-search-wrapper-db}@*)        records (db/search (assoc request :params params))]
+    (map #(wrap-blast-result % result) records)))
+\end{lstlisting}
+
+
 \subsection{Design of an API for searching services}
 
 % RESTFUL API
