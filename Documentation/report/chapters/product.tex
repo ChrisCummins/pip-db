@@ -19,6 +19,48 @@
 \section{Persistent storage}
 \subsection{Yet Another Protein Schema}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Listing: yaps-example %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstset{language=JavaScript}
+\begin{lstlisting}[label=lst:yaps-example,caption={
+      [Example YAPS encoded dataset]
+      An example YAPS encoded dataset, containing a single record.}]
+{
+  "Encoding": "yaps",
+  "Version": 4,
+  "Date": "2014-04-20 02:29:48",
+  "Author": "chris@vm-ubuntu",
+  "Agent": "/home/chris/src/pip-db/tools/csv2yaps/csv2yaps.js",
+  "Source": "/home/chris/dataset-test.txt",
+  "No-Of-Records": 1,
+  "Records": [
+    {
+      "Protein-Names": [
+        "Acetoacetyl-CoA thiolase",
+        "Acetyl-CoA acetyltransferase"
+      ],
+      "EC": "2.3.1.9",
+      "Source": "Saccharomyces cerevisiae (Yeast)",
+      "Location": "Cytosol",
+      "MW-Min": "140000",
+      "MW-Max": "140000",
+      "No-Of-Iso-Enzymes": "1",
+      "pI-Min": "5.3",
+      "pI-Max": "5.3",
+      "Temperature-Min": "4",
+      "Temperature-Max": "4",
+      "Method": "Isoelectric focusing",
+      "Full-Text": "http://www.jbc.org/content/246/14/4424 ...",
+      "PubMed": "http://www.ncbi.nlm.nih.gov/pubmed/557183 ...",
+      "Species-Taxonomy": "http://www.ncbi.nlm.nih.gov/Tax ...",
+      "Protein-Sequence": "http://www.uniprot.org/uniprot/ ...",
+      "Sequence-Name": ">sp|P41338|THIL_YEAST Acetyl-CoA a ..."
+      "Sequence-Data": "MSQNVYIVSTARTPIGSFQGSLSSKTAVELGAVA ..."
+    }
+}
+\end{lstlisting}
+
 \section{Search engine design}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
