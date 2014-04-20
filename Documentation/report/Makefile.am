@@ -91,3 +91,9 @@ if HAVE_TEXCOUNT
 wc:
 	@$(TEXCOUNT) $(DOCSRC) | $(SED) '1,/TOTAL COUNT/d'
 endif
+
+# If we have checkcites then we can perform citation checks
+if HAVE_CHECKCITES
+cite:
+	@$(CHECKCITES) $(DOC).aux
+endif

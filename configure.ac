@@ -50,6 +50,7 @@ dnl   8.5.     Do we have doctoc installed?
 dnl   8.6.     Should xdg-open be used to open PDFs?
 dnl   8.7.     Should emacsclient be used for editing files?
 dnl   8.8.     Do we have texcount installed?
+dnl   8.9.     Do we have checkcites installed?
 dnl
 dnl   9.     Git
 dnl   9.1.     Are we installing the project git hooks?
@@ -425,6 +426,18 @@ AS_IF([test "x$TEXCOUNT" != x],
        AC_MSG_WARN([LaTeX word counts disabled.])])
 AC_SUBST([HAVE_TEXCOUNT],[$HAVE_TEXCOUNT])
 AM_CONDITIONAL([HAVE_TEXCOUNT],[test "x$HAVE_TEXCOUNT" = xyes])
+
+
+dnl     ============================================================
+dnl     8.9. Do we have checkcites installed?
+dnl     ============================================================
+AC_CHECK_PROG([CHECKCITES],[checkcites],[checkcites])
+AS_IF([test "x$CHECKCITES" != x],
+      [HAVE_CHECKCITES=yes],
+      [HAVE_CHECKCITES=no
+       AC_MSG_WARN([LaTeX citation checks disabled.])])
+AC_SUBST([HAVE_CHECKCITES],[$HAVE_CHECKCITES])
+AM_CONDITIONAL([HAVE_CHECKCITES],[test "x$HAVE_CHECKCITES" = xyes])
 
 
 dnl ================================================================
