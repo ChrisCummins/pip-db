@@ -127,6 +127,48 @@
         upquote=true,                % Use upright quotes, not curly
         commentstyle=\bfseries}      % Embolden comments
 
+% Add JavaScript support to listings. See:
+%
+%     http://tex.stackexchange.com/a/89576
+%
+\lstdefinelanguage{JavaScript}{
+  keywords={
+    break,
+    case,
+    catch,
+    catch,
+    do,
+    else,
+    false,
+    function,
+    if,
+    in,
+    new,
+    null,
+    return,
+    switch,
+    true,
+    typeof,
+    var,
+    while}
+  keywordstyle=\bfseries,
+  ndkeywords={
+    boolean,
+    class,
+    export,
+    implements,
+    import,
+    this,
+    throw}
+  ndkeywordstyle=\bfseries,
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"
+}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%
 %% Graphics and maths %%
 %%%%%%%%%%%%%%%%%%%%%%%%
