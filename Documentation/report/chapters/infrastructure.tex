@@ -125,34 +125,34 @@ building, testing, deployment, and task automation.
 # Compilation command
 if ENABLE_MINIFY_JS
 define compile
-    $(JAVA) -jar $(JS_JAR) --js=$1 --js_output_file=$2
+  $(JAVA) -jar $(JS_JAR) --js=$1 --js_output_file=$2
 endef
 else # Disabled minification
 define compile
-    cat $1 > $2
+  cat $1 > $2
 endef
 endif
 
 # JavaScript compilation
 $(DEST)/%.js: %.js
-    @test -d $(DEST) || { \
-        $(MKDIR_P) $(DEST); \
-    }
+  @test -d $(DEST) || { \
+    $(MKDIR_P) $(DEST); \
+  }
 if ENABLE_CONTENT_HASHING
-    $(eval CHASH := $(shell $(HASH_BIN) $< | cut -c1-$(HASH_LENGTH)))
-    $(eval NAME := $(addsuffix -$(CHASH).js,$(patsubst %.js,%,$@)))
+  $(eval CHASH := $(shell $(HASH_BIN) $< | cut -c1-$(HASH_LENGTH)))
+  $(eval NAME := $(addsuffix -$(CHASH).js,$(patsubst %.js,%,$@)))
 else
-    $(eval NAME := $@)
+  $(eval NAME := $@)
 endif
-    @test -f $(NAME) || { \
-        echo '  JS     $(notdir $(NAME))'; \
-        $(call compile,$<,$(NAME)); \
-    }
+  @test -f $(NAME) || { \
+    echo '  JS     $(notdir $(NAME))'; \
+    $(call compile,$<,$(NAME)); \
+  }
 if ENABLE_CONTENT_HASHING
-    $(eval TARGET := js\/$(patsubst %.js,%,$<))
-    @for h in $(HTML); do \
-        sed -ri 's/(<script src=\"(\{\{ *(\w|[_.])+ *\}\})*\/?)$(TARGET)(-[0-9a-f]{$(HASH_LENGTH)})?(\.js\")/\1$(TARGET)-$(CHASH)\5/' $$h; \
-    done
+  $(eval TARGET := js\/$(patsubst %.js,%,$<))
+  @for h in $(HTML); do \
+    sed -ri 's/(<script src=\"(\{\{ *(\w|[_.])+ *\}\})*\/?)$(TARGET)(-[0-9a-f]{$(HASH_LENGTH)})?(\.js\")/\1$(TARGET)-$(CHASH)\5/' $$h; \
+  done
 endif
 \end{lstlisting}
 
@@ -239,9 +239,9 @@ coordinates {
 \caption[Graph of build system execution times with optimisations]
         {Graph of build system execution times after each optimisation
           iteration. Each value is sequential, with the leftmost
-          control value being the unmodified serial build system. The
-          tests were invoked with the command \texttt{time
-            (./autogen.sh \&\& ./configure \&\& make)}.}
+          control value being the execution time of the unmodified
+          serial build system. The tests were invoked with the command
+          \texttt{time (./autogen.sh \&\& ./configure \&\& make)}.}
 \label{fig:build-times}
 \end{figure}
 
