@@ -4341,3 +4341,12 @@ Parallelizing Less CSS compilation:
     7.159
     7.498
 ```
+
+
+### Sunday 20th
+
+Emailed user testing participants to check whether they are all OK
+with being named and attributed in the report.
+
+Added `make wc` and `make cite` targets to report Makefile to enable
+word counts and citation checks.
