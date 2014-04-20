@@ -17,7 +17,13 @@
 \section{Prototype rewrite in LISP}
 
 \section{Persistent storage}
+
+% TODO: Replicate errors in dataset
+
 \subsection{Yet Another Protein Schema}
+
+% TODO: derived fields (id, Created-At, all integer+real)
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Listing: yaps-example %%
@@ -60,6 +66,26 @@
     }
 }
 \end{lstlisting}
+
+\subsubsection*{Unique hash identification}
+
+% TODO: Add collision probability calculation and entropy
+
+\begin{verbatim}
+(defn minihash [s]
+  (subs (str->b64 (sha1 s)) 0 11))
+\end{verbatim}
+
+
+\subsubsection*{Protein sequence crawling}
+
+% TODO: fetch-fasta
+
+
+\subsubsection*{Version control}
+
+% TODO: CSV
+
 
 \section{Search engine design}
 
