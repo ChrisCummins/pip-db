@@ -270,6 +270,88 @@ coordinates {
 \subsection{dsa}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: dsa-populated %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[%
+    title={Populated fields in dataset},
+    width=\textwidth, height=6cm,
+    axis y line*=left,
+    axis x line*=bottom,
+    ymin=0, ymax=1,
+    xmin=0, xmax=23,
+    extra y tick style={yticklabels={}},
+    extra y ticks={0.1,0.3,0.5,0.7,0.9},
+    ymajorgrids,
+    x tick label style={rotate=90,anchor=east},
+    xtick=data,
+    xticklabels={%
+      EC,
+      Protein,
+      Alternative name(s),
+      Source,
+      Locaction,
+      M.W,
+      Subunit No.,
+      Subunit M.W.,
+      No. of Iso-enzymes,
+      pI maximum value,
+      pI min,
+      pI max,
+      pI of major component,
+      pI,
+      Temperature,
+      Method,
+      Protein sequence,
+      Species Taxonomy,
+      Full text,
+      Abstract only,
+      Pubmed,
+      Notes
+    }
+  ]
+% PLOT: Results
+\addplot+[%
+  ybar,
+  no marks,
+  fill=gray,
+  draw=black
+]
+plot coordinates{
+  (1,0.957402597)
+  (2,0.999134199)
+  (3,0.656277056)
+  (4,0.999307359)
+  (5,0.665108225)
+  (6,0.598961039)
+  (7,0.237056277)
+  (8,0.340952381)
+  (9,0.606060606)
+  (10,0.025281385)
+  (11,0.057142857)
+  (12,0.053333333)
+  (13,0.127965368)
+  (14,0.807965368)
+  (15,0.262683983)
+  (16,0.90025974)
+  (17,0.635844156)
+  (18,0.970909091)
+  (19,0.656796537)
+  (20,0.280692641)
+  (21,0.909437229)
+  (22,0.198614719)
+};
+\end{axis}
+\end{tikzpicture}
+\caption[Populated fields in dataset]
+        {The proportion of populated keys for each field in the dataset.}
+\label{fig:dsa-populated}
+\end{figure}
+
+
 \subsection{png}
 
 
