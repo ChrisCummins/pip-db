@@ -270,6 +270,91 @@ coordinates {
 \subsection{dsa}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: build-times %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[%
+    title={Populated keys},
+    width=\textwidth, height=6cm,
+    axis y line*=left,
+    axis x line*=bottom,
+    ymin=0, ymax=1,
+    xmin=0, xmax=24,
+    ymajorgrids,
+    xticklabels={%
+      EC,
+      Protein,
+      Alternative name(s),
+      Source,
+      Locaction,
+      M.W,
+      No.,
+      M.W2,
+      No. of Iso-enzymes,
+      pI maximum value,
+      Min Value,
+      Max Value,
+      pI value of major component,
+      pI,
+      Temperature (ºC),
+      Method,
+      Valid sequence(s) available,
+      UniportKB/ Swiss-Prot/ Protein sequence,
+      Species Taxonomy,
+      Full text,
+      Abstract only,
+      Pubmed,
+      Notes
+    },
+    x tick label style={rotate=90,anchor=east},
+  ]
+% PLOT: Results
+\addplot+[%
+  ybar,
+  no marks,
+  fill=gray,
+  draw=black
+]
+plot coordinates{
+  (1,0.957402597)
+  (2,0.999134199)
+  (3,0.656277056)
+  (4,0.999307359)
+  (5,0.665108225)
+  (6,0.598961039)
+  (7,0.237056277)
+  (8,0.340952381)
+  (9,0.606060606)
+  (10,0.025281385)
+  (11,0.057142857)
+  (12,0.053333333)
+  (13,0.127965368)
+  (14,0.807965368)
+  (15,0.262683983)
+  (16,0.90025974)
+  (17,0.998614719)
+  (18,0.635844156)
+  (19,0.970909091)
+  (20,0.656796537)
+  (21,0.280692641)
+  (22,0.909437229)
+  (23,0.198614719)
+};
+\end{axis}
+\end{tikzpicture}
+\caption[Graph of build system execution times with optimisations]
+        {Graph of build system execution times after each optimisation
+          iteration. Each value is sequential, with the leftmost
+          control value being the execution time of the unmodified
+          serial build system. The tests were invoked with the command
+          \texttt{time (./autogen.sh \&\& ./configure \&\& make)}.}
+\label{fig:dsa-populated}
+\end{figure}
+
+
 \subsection{png}
 
 
