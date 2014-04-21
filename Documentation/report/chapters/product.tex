@@ -30,6 +30,39 @@
 
 \section{Prototype rewrite in LISP}
 
+
+\subsection{Routing}
+
+% TODO: No more 1-1 mapping of file -> URL.
+
+\lstset{language=Clojure}
+\begin{lstlisting}[label=lst:router,caption={
+      [Application ring handler routes]
+      Application ring handler routes, taken from \texttt{middleware.clj}.}]
+(defroutes routes
+  (GET  ["/"]                      [:as request] (index/GET       request))
+  (GET  ["/advanced"]              [:as request] (advanced/GET    request))
+  (GET  ["/r/:id.json", :id id-re] [:as request] (api/r           request))
+  (GET  ["/r/:id",      :id id-re] [:as request] (record/GET      request))
+  (GET  ["/d"]                     [:as request] (download/GET    request))
+  (GET  ["/s"]                     [:as request] (search/GET      request))
+  (POST ["/s"]                     [:as request] (search/POST     request))
+  (GET  ["/s.json"]                [:as request] (api/s           request))
+  (GET  ["/blast"]                 [:as request] (blast/GET       request))
+  (GET  ["/login"]                 [:as request] (login/GET       request))
+  (POST ["/login"]                 [:as request] (login/POST      request))
+  (GET  ["/logout"]                [:as request] (logout/GET      request))
+  (GET  ["/upload"]                [:as request] (upload/GET      request))
+  (POST ["/upload"]                [:as request] (upload/POST     request))
+  (GET  ["/api/s"]                 [:as request] (api/s           request))
+  (GET  ["/api/r/:id",  :id id-re] [:as request] (api/r           request))
+  (GET  ["/api/ac"]                [:as request] (api/ac          request))
+  (GET  ["/api/ping"]              [:as request] (api/ping        request))
+  (route/resources "/")
+  (route/not-found (ui/page-404)))
+\end{lstlisting}
+
+
 \section{Persistent storage}
 
 % TODO: Replicate errors in dataset
