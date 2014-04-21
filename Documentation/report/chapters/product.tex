@@ -173,10 +173,13 @@
 
 % TODO: Add collision probability calculation and entropy
 
-\begin{verbatim}
+\lstset{language=Clojure}
+\begin{lstlisting}[label=lst:minihash,caption={%
+      [String hashing implementation]
+      String hashing implementation, taken from \texttt{util.clj}.}]
 (defn minihash [s]
   (subs (str->b64 (sha1 s)) 0 11))
-\end{verbatim}
+\end{lstlisting}
 
 
 \subsubsection*{Protein sequence crawling}
