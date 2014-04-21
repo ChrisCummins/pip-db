@@ -89,7 +89,7 @@ endif
 # If we have texcount then we can perform word counts
 if HAVE_TEXCOUNT
 wc:
-	@$(TEXCOUNT) $(DOCSRC) | $(SED) '1,/TOTAL COUNT/d'
+	@$(TEXCOUNT) $(DOCSRC) | $(SED) '1,/total/Id'
 endif
 
 # If we have checkcites then we can perform citation checks
