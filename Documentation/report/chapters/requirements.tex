@@ -1,6 +1,110 @@
 \chapter{Requirements}\label{chap:requirements}
 
+\begin{table}[H]
+\centering
+\begin{tabular}{ | p{1.1cm} | l | l | c | c | }
+\hline
+\textbf{Risk} & \textbf{Description} & \textbf{Category} &
+\textbf{$P$} & \textbf{$I$}\\
+\hline
+R1  & Design is not intuitive                           & Design       & 2 & 3\\
+R2  & Project involves use of new technical skills      & Development  & 5 & 5\\
+R3  & High Level of technical complexity                & Development  & 5 & 3\\
+R4  & Complex deployment of production website          & Development  & 5 & 4\\
+R5  & Project milestones not clearly defined            & Planning     & 1 & 1\\
+R6  & System requirements not adequately identified     & Requirements & 2 & 5\\
+R7  & Change in project requirements during development & Requirements & 1 & 5\\
+R8  & Changes in dataset format during development      & Resources    & 2 & 5\\
+R9  & Unable to obtain required resources               & Resources    & 1 & 1\\
+R10 & Users not committed to the project                & Users        & 2 & 4\\
+R11 & Lack of cooperation from users                    & Users        & 1 & 4\\
+R12 & Users with negative attitudes toward the project  & Users        & 1 & 2\\
+\hline
+\end{tabular}
+\caption[Project risks and their severity]
+        {Project risks and their severity. The values $P$ and $I$
+          indicate the risk's probability and impact respectively,
+          within the range 0-5.}
+\label{tab:risks}
+\end{table}
+
 \section{Design}
 
 
 \section{Analysis}
+
+\begin{longtable}{ | p{1.1cm} | p{5cm} | p{8.2cm} | }
+  \hline
+  \textbf{Risks} & \textbf{Description} & \textbf{Mitigation Strategy}\\
+  \hline
+
+\endfirsthead
+  \hline
+  \textbf{Risks} & \textbf{Description} & \textbf{Mitigation Strategy}\\
+  \hline
+
+\endhead
+  \hline
+  \multicolumn{3}{r}{\emph{Continued on next page\ldots}}
+\endfoot
+
+\endlastfoot
+R1 & Design is not intuitive & The key to mitigation of this risk is in frequent
+and effective user testing and an understanding of typical and common use-cases
+for the product.\\
+
+R2 & Project involves use of new technical skills & In order to prevent this
+risk from having a serious impact on the project, it will be necessary to begin
+studying and reading about the technologies that will be used at a very early
+stage in the project, long before the start of the implementation.\\
+
+R3 & High Level of technical complexity & Avoiding this risk will involve
+ensuring that the scope of the project remains technically feasible, and that
+the software architecture is abstracted into small enough units that it is
+easier to focus on each one separately, as well as keeping small iterative
+development cycles and adequate test coverage to prevent regressions when
+implementing new functionality.\\
+
+R4 & Complex deployment of production website & A website with independent data
+and application logic components can result in an intricate deployment
+process. This is a common problem in the development of complex web application,
+where development and production environments must be synchronised and
+differences between debugging and releases builds must be accounted for. In
+order to mitigate this risk, a suite of tools to configure, build and deploy the
+website should be developed at an early stage, allowing for fast deployment of
+public releases.\\
+
+R5 & Project milestones not clearly defined & A thoroughly described and well
+thought out project plan will help to prevent scheduling issues and delays in
+development that would arise from this risk.\\
+
+R6 & System requirements not adequately identified & A comprehensive
+specification of the finished product before implementation begins will help to
+mitigate this risk.\\
+
+R7 & Change in project requirements during development & An agile approach
+towards accommodating for changes in the requirements should be used so as to
+keep the time between user feedback sessions and input from stakeholders low.\\
+
+R8 & Changes in dataset form at during development & It is not possible to
+entirely avoid this risk due its nature and the dependence on third parties, but
+steps can be taken to prevent any delays that this would cause, chiefly, a well
+abstracted data parsing component which can be switched and modified if
+necessary to accommodate for a new dataset format.\\
+
+R9 & Unable to obtain required resources & Since the project does not require
+many resources, it is important to acquire these as early on in the development
+process as possible, and alternative resources should be planned for, such as
+local test servers.\\
+
+R10, R11, R12 & Users not committed to the project, lack of cooperation from
+users, and users with negative attitudes toward the project & The usefulness of
+the finished project will depend largely on ensuring that the needs of the users
+are considered the primary goals of the design. Violating this principle may
+cause disillusionment from the people who are volunteering their time to assist
+in the project.\\
+
+\hline
+\caption{Risk mitigation strategies}
+\label{tab:risk-mitigation}
+\end{longtable}
