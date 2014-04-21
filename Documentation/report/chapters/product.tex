@@ -36,7 +36,7 @@
 % TODO: No more 1-1 mapping of file -> URL.
 
 \lstset{language=Clojure}
-\begin{lstlisting}[label=lst:router,caption={
+\begin{lstlisting}[label=lst:router,caption={%
       [Application ring handler routes]
       Application ring handler routes, taken from \texttt{middleware.clj}.}]
 (defroutes routes
@@ -131,7 +131,7 @@
 %% Listing: yaps-example %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \lstset{language=JavaScript}
-\begin{lstlisting}[label=lst:yaps-example,caption={
+\begin{lstlisting}[label=lst:yaps-example,caption={%
       [Example YAPS encoded dataset]
       An example YAPS encoded dataset, containing a single record.}]
 {
@@ -299,7 +299,7 @@ $E$ & $t_l$, $t_h$ & Minimum and maximum experimental temperature\\
 %% Listing: query-tree %%
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \lstset{language=Clojure}
-\begin{lstlisting}[label=lst:query-tree,caption={
+\begin{lstlisting}[label=lst:query-tree,caption={%
       [Clojure implementation of the query tree]
       Implementation of the query tree in Clojure, from the file
       \texttt{query.clj}. Note the flat query hierarchy and the
@@ -340,7 +340,7 @@ $E$ & $t_l$, $t_h$ & Minimum and maximum experimental temperature\\
 %% Listing: search-dispatcher %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \lstset{language=Clojure}
-\begin{lstlisting}[label=lst:search-dispatcher,caption={
+\begin{lstlisting}[label=lst:search-dispatcher,caption={%
       [Search handler and dynamic dispatcher]
       Search handler and dynamic dispatcher. Accepting a request map,
       the search handler dispatches the appropriate search function
@@ -383,7 +383,7 @@ $E$ & $t_l$, $t_h$ & Minimum and maximum experimental temperature\\
 %% Listing: db-search %%
 %%%%%%%%%%%%%%%%%%%%%%%%
 \lstset{language=Clojure}
-\begin{lstlisting}[label=lst:db-search,caption={
+\begin{lstlisting}[label=lst:db-search,caption={%
       [The \texttt{db} namespace search function]
       The \texttt{db} namespace search function.}]
 (defn search [request]
@@ -405,7 +405,7 @@ searches for the matched records using the parameter map.
 %% Listing: blast-search %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \lstset{language=Clojure}
-\begin{lstlisting}[label=lst:blast-search,caption={
+\begin{lstlisting}[label=lst:blast-search,caption={%
       [The \texttt{blast} namespace search function]
       The \texttt{blast} namespace search function.}]
 (defn search [request]
@@ -424,7 +424,7 @@ of the db search function to produce blast search (line
 %% Listing: blast-search-wrapper %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \lstset{language=Clojure}
-\begin{lstlisting}[label=lst:blast-search-wrapper,caption={
+\begin{lstlisting}[label=lst:blast-search-wrapper,caption={%
       [The \texttt{blast} namespace search function]
       The \texttt{blast} namespace search function.}]
 (defn result->records [request result]
