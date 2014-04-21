@@ -438,6 +438,20 @@ of the db search function to produce blast search (line
 
 % RESTFUL API
 
+\lstset{language=Clojure}
+\begin{lstlisting}[label=lst:api-handlers,caption={%
+      [API ring handler implementations]
+      API ring handler implementations, taken from \texttt{api.clj}.}]
+(defn s [request]
+  (util/json-response (search/search request)))
+
+(defn r [request]
+  (util/json-response (search/search (util/remap-id-param request))))
+
+(defn ac [request]
+  (util/json-response (db/autocomplete request)))
+\end{lstlisting}
+
 \subsection{Autocomplete}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
