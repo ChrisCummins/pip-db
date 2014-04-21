@@ -22,6 +22,61 @@
 
 \subsection{Yet Another Protein Schema}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% Table: yaps-schema %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{table}[H]
+\centering
+\begin{tabular}{| l | l | l |}
+\hline
+\textbf{Field} & \textbf{Type} & \textbf{Description}\\
+\hline
+\textbf{id} & \textit{varchar(11)*} & Unique record identifier\\
+\textbf{Protein-Names} & \textit{varchar} & Forward slash (``/'') delimited names\\
+\textbf{EC} & \textit{varchar} & Enzyme commission number\\
+\textbf{Source} & \textit{varchar} & Protein source\\
+\textbf{Location} & \textit{varchar} & Organ and/or Subcellular location\\
+\textbf{MW-Min} & \textit{varchar} & Molecular weight minimum\\
+\textbf{MW-Max} & \textit{varchar} & Molecular weight maximum\\
+\textbf{Subunit-No} & \textit{varchar} & Subunit number\\
+\textbf{Subunit-MW} & \textit{varchar} & Subunit molecular weight\\
+\textbf{No-Of-Iso-Enzymes} & \textit{varchar} & Number of iso-enzymes\\
+\textbf{pI-Min} & \textit{varchar} & Isoelectric point minimum\\
+\textbf{pI-Max} & \textit{varchar} & Isoelectric point maximum\\
+\textbf{pI-Major-Component} & \textit{varchar} & Isoelectric point of major component\\
+\textbf{Temperature-Min} & \textit{varchar} & Experimental temperature minimum\\
+\textbf{Temperature-Max} & \textit{varchar} & Experimental temperature maximum\\
+\textbf{Method} & \textit{varchar} & Experimental method\\
+\textbf{Full-Text} & \textit{varchar} & URL of full text citation\\
+\textbf{Abstract-Only} & \textit{varchar} & URL of abstract-only citation\\
+\textbf{PubMed} & \textit{varchar} & URL of PubMed article\\
+\textbf{Species-Taxonomy} & \textit{varchar} & URL of species taxonomy reference\\
+\textbf{Protein-Sequence} & \textit{varchar} & URL of protein sequence reference\\
+\textbf{Notes} & \textit{varchar} & Notes and annotations\\
+\textbf{Sequence-Name} & \textit{varchar} & FASTA sequence description\\
+\textbf{Sequence-Data} & \textit{varchar} & FASTA sequence data\\
+\textbf{real\_ec1} & \textit{integer} & Numerical first component of EC\\
+\textbf{real\_ec2} & \textit{integer} & Numerical second component of EC\\
+\textbf{real\_ec3} & \textit{integer} & Numerical third component of EC\\
+\textbf{real\_ec4} & \textit{integer} & Numerical four component of EC\\
+\textbf{real\_mw\_min} & \textit{real} & Numerical molecular weight minimum\\
+\textbf{real\_mw\_max} & \textit{real} & Numerical molecular weight maximum\\
+\textbf{real\_pi\_min} & \textit{real} & Numerical isoelectric point minimum\\
+\textbf{real\_pi\_max} & \textit{real} & Numerical isoelectric point maximum\\
+\textbf{real\_temp\_min} & \textit{real} & Numerical temperature minimum\\
+\textbf{real\_temp\_max} & \textit{real} & Numerical temperature maximum\\
+\textbf{Created-At} & \textit{timestamp*} & Timestamp of dataset creation\\
+\hline
+\end{tabular}
+\caption[YAPS schema]
+        {YAPS schema definition. Fields with an asterisk (*) are
+         mandatory, other fields may be null.}
+\label{tab:yaps-schema}
+\end{table}
+
+
 % TODO: derived fields (id, Created-At, all integer+real)
 
 
