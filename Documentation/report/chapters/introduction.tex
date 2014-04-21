@@ -38,6 +38,50 @@
 %% the rest of the Report (i.e. when you know what you have to
 %% introduce).
 
+\subsection*{File structure}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: dir-tree %%
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[dirtree]
+\node {/}
+child {node {bin}}
+child {node {build}}
+child {node {Documentation}
+  child {node {assets}}
+  child {node {design}
+    child {node {d1}}
+    child {node {d2}}
+ }
+  child {node {evaluation}}
+  child {node {midterm}}
+  child {node {plan}}
+  child {node {report}}
+}
+child {node {extern}}
+child {node {resources}
+  child {node {css}}
+  child {node {fonts}}
+  child {node {img}}
+  child {node {js}}
+}
+child {node {scripts}}
+child {node {src}}
+child {node {test}}
+child {node {tools}
+  child {node {csv2yaps}}
+  child {node {watchr}}
+  child {node {yaps2fsa}}
+};
+\end{tikzpicture}
+\caption[Project directory structure]
+        {Project directory structure.}
+\label{fig:dir-tree}
+\end{figure}
+
+
 \subsection*{On the use of diagrams}
 
 % UML DIAGRAMS:
