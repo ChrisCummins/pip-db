@@ -15,20 +15,17 @@ building, testing, deployment, and task automation.
 
 \section{Building}
 
-
-% Literate configure.ac
-
-\subsection{Pre-processing and cache busting}
+% TODO: Pre-processing and cache busting
 
 % Content hashing case study with autotools
 \cite{kelly2002optimization}
 
 
-\subsection{On-demand build systems using inotify subsystem}
-
-\cite{love2005kernel, shields2010inotify}
-
 \subsection{Autotools}
+
+% TODO: Novel application of autotols for websites
+
+% Literate configure.ac
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Figure: build-system-flowchart %%
@@ -175,7 +172,6 @@ endif
     axis x line*=bottom,
     scale only axis,
     ymajorgrids,
-    xtick=data,
     xticklabels={Control,
                  JavaScript,
                  Documentation,
@@ -249,6 +245,11 @@ coordinates {
           \texttt{time (./autogen.sh \&\& ./configure \&\& make)}.}
 \label{fig:build-times}
 \end{figure}
+
+
+\subsection{On-demand compilation using inotify subsystem}
+
+\cite{love2005kernel, shields2010inotify}
 
 
 \section{Testing}
