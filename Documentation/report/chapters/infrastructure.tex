@@ -365,7 +365,57 @@ plot coordinates{
 \end{figure}
 
 
+\newpage
 \subsection{png}
+
+% TODO: novel application of Markov text generators for creating
+% plausible scientific data for testing purposes.
+
+\cite{atwood2008markov, page1999pagerank}
+
+
+\lstset{language=JavaScript}
+\begin{lstlisting}[label=lst:build-javascript,caption={
+      [Markov chain implementation]
+      Markov chain implementation in JavaScript.}]
+for (var i = 0; i < list.length; i++) {
+  var sentence = list[i].split(' ');
+
+  terminals.push(sentence[sentence.length - 1]);
+  startwords.push(sentence[0]);
+
+  for (var j = 0; j < sentence.length - 1; j++) {
+    var nextWord = sentence[j + 1];
+
+    if (wordTrees[sentence[j]] !== undefined)
+      wordTrees[sentence[j]].push(nextWord);
+    else
+      wordTrees[sentence[j]] = [nextWord];
+  }
+}
+\end{lstlisting}
+
+\lstset{language=JavaScript}
+\begin{lstlisting}[label=lst:build-javascript,caption={
+      [Markov text generator]
+      Markov text generator implementation.}]
+var next = function() {
+  var word = rand(startwords);
+  var sentence = [word];
+
+  while (wordTrees[word] !== undefined) {
+    var nextWords = wordTrees[word];
+
+    word = rand(nextWords);
+    sentence.push(word);
+
+    if (terminals[word] !== undefined)
+      break;
+  }
+
+  return sentence.join(' ');
+};
+\end{lstlisting}
 
 
 \newpage
