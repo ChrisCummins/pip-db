@@ -281,7 +281,9 @@ coordinates {
 \section{Task automation}
 
 
-\subsection{dsa}
+\subsection{dsa: Dataset analysis}
+
+% TODO: dsa
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -367,16 +369,21 @@ plot coordinates{
 
 
 \newpage
-\subsection{png}
+\subsection{png: Generation of test data}
 
 % TODO: novel application of Markov text generators for creating
 % plausible scientific data for testing purposes.
 
 \cite{atwood2008markov, page1999pagerank}
 
+% TODO: png
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Listing: markov-chain %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \lstset{language=JavaScript}
-\begin{lstlisting}[label=lst:build-javascript,caption={
+\begin{lstlisting}[label=lst:markov-chain,caption={%
       [Markov chain implementation]
       Markov chain implementation in JavaScript.}]
 for (var i = 0; i < list.length; i++) {
@@ -396,8 +403,12 @@ for (var i = 0; i < list.length; i++) {
 }
 \end{lstlisting}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Listing: markov-text-generator %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \lstset{language=JavaScript}
-\begin{lstlisting}[label=lst:build-javascript,caption={
+\begin{lstlisting}[label=lst:markov-text-generator,caption={%
       [Markov text generator]
       Markov text generator implementation.}]
 var next = function() {
@@ -420,7 +431,7 @@ var next = function() {
 
 
 \newpage
-\subsection{pipbot}\label{sec:pipbot}
+\subsection{pipbot: Task automation}\label{sec:pipbot}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
