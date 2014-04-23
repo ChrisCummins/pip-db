@@ -5,6 +5,8 @@ DOCPDF = $(DOC).pdf
 DOCTEX = $(DOC).tex
 DOCSRC = $(shell find . -name '*.tex')
 
+BUILD_LOG = make.log
+
 # Only create PDF we have the compiler
 if HAVE_PDFLATEX
 doc_DATA = $(DOCPDF)
@@ -12,6 +14,7 @@ endif
 
 CLEANFILES = \
 	$(DOCPDF) \
+	$(BUILD_LOG) \
 	*-blx.bib \
 	*.acn \
 	*.acr \
@@ -63,15 +66,18 @@ export TEXINPUTS := .:./lib:$(TEXINPUTS)
 # if there is an error, we re-run the compilation without the pipe so
 # as to print the failure messages.
 define pdflatex
-$(PDFLATEX) $(PDFLATEX_ARGS) $1 >/dev/null 2>&1 || $(PDFLATEX) $(PDFLATEX_ARGS) $1
+echo -e "\nCOMMAND: $(PDFLATEX) $(PDFLATEX_ARGS) $1\n" >>$(BUILD_LOG)
+$(PDFLATEX) $(PDFLATEX_ARGS) $1 >>$(BUILD_LOG) 2>&1 || $(PDFLATEX) $(PDFLATEX_ARGS) $1
 endef
 
 define bibtex
-$(BIBTEX) $1 >/dev/null 2>&1 || $(BIBTEX) $1
+echo -e "\nCOMMAND: $(BIBTEX) $1\n" >>$(BUILD_LOG)
+$(BIBTEX) $1 >>$(BUILD_LOG) 2>&1 || $(BIBTEX) $1
 endef
 
 # Compile twice to refresh cross-references
 $(DOCPDF): $(DOCSRC)
+	@echo -e "Build log for `date`\n\n" >$(BUILD_LOG)
 	@echo '  LATEX  $(DOCPDF)'
 	@$(call pdflatex,$(DOCTEX))
 	@echo '  BIBTEX $(DOC)'
