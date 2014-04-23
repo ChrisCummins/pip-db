@@ -1,7 +1,6 @@
 noinst_SCRIPTS = \
 	dsa \
 	ghi \
-	png \
 	$(NULL)
 
 dist_bin_SCRIPTS = fetch-fasta pipbot
