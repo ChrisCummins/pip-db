@@ -78,6 +78,8 @@ $(DOCPDF): $(DOCSRC)
 	@$(call bibtex,$(DOC))
 	@echo '  LATEX  $(DOCPDF)'
 	@$(call pdflatex,$(DOCTEX))
+	@echo '  LATEX  $(DOCPDF)'
+	@$(call pdflatex,$(DOCTEX))
 
 # If we have xdg-open then we can open the PDF
 if HAVE_XDG_OPEN
