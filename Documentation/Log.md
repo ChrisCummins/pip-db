@@ -4350,3 +4350,60 @@ with being named and attributed in the report.
 
 Added `make wc` and `make cite` targets to report Makefile to enable
 word counts and citation checks.
+
+
+### Tuesday 22nd
+
+**Project report assessment checklist:**
+
+40% RESULTS - Quality of the experiment / design and implementation or
+Quality of survey. Originality.
+
+* There is an end-product characterised by a very high standard of
+  functionality/utility and usability, coupled with originality.
+* Artefacts are of a near-professional standard.
+* It is likely that the work has led to insights allowing the original
+  expectations of the work to be exceeded.
+* Recognised development processes have been proficiently applied.
+* Work leading to the end-product has followed recognised stages,
+  e.g. analysis, design and implementation.
+
+30% REVIEW AND ANALYSIS -
+Format/structure/bibliography/references. Description of the
+background. Tests, critical analysis, evaluation. Conclusions /
+suggestions.
+
+* All the above has been undertaken to a high standard of rigour and
+  thoroughness.
+* Insights gained are substantial and show innovative thought.
+* Evaluation is evidence-based, e.g. includes user or client feedback
+  obtained in a systematic manner, or statistical investigation of
+  reliability or other matters.
+* There is evidence of reflection on project processes and outcomes,
+  including (where applicable) the value of the outcome to a client.
+* The report includes substantial reasoned argument as well as
+  statement of facts.
+
+30% REPORTING - Good English, appropriate style. Structure and
+presentation, including graphics. Referencing.
+
+* Writing is concise (even elegant) as well as thorough and precise.
+* There are essentially no flaws in English, typography or
+  presentation.
+* Examples and diagrams are truly illuminating.
+* The standard of writing is close to professional.
+* Any theoretical material included is well chosen and shows a high
+  standard of relevance to practical work evidenced in the material
+  provided for assessment.
+
+
+### Wednesday 23rd
+
+Current project report word count: 1776. Aim for end of day: 2776.
+
+Deadlines:
+
+1st May - Poster done and sent off to printers
+7th May - Poster presentation
+14th May - Report complete
+17th May - Report submission deadline
