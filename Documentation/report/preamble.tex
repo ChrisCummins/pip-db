@@ -798,6 +798,10 @@
 %% Typesetting and symbols %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% The line spacing can be globally set using \linespread:
+%
+% \linespread{1.2}
+
 % Define a command to allow word breaking.
 \newcommand*\wrapletters[1]{\wr@pletters#1\@nil}
 \def\wr@pletters#1#2\@nil{#1\allowbreak\if&#2&\else\wr@pletters#2\@nil\fi}
