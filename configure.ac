@@ -311,7 +311,9 @@ dnl         7.8. Install watchr requirements
 dnl         ========================================================
 AS_IF([test "x$enable_tools" = xyes],
       [AC_CHECK_FILE([tools/watchr/node_modules],,
-                     [cd tools/watchr && npm install])])
+                     [cd tools/watchr
+                      npm install
+                      cd - >/dev/null])])
 
 
 dnl         ========================================================
@@ -319,7 +321,9 @@ dnl         7.9. Install csv2yaps dependencies
 dnl         ========================================================
 AS_IF([test "x$enable_tools" = xyes],
       [AC_CHECK_FILE([tools/csv2yaps/node_modules],,
-                     [cd tools/csv2yaps && npm install])])
+                     [cd tools/csv2yaps
+                      npm install
+                      cd - >/dev/null])])
 
 
 dnl ================================================================
