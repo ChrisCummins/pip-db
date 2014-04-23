@@ -24,19 +24,28 @@
 %% sections).
 
 
-\subsection*{Submitted files}
+\newpage
+\section*{Submission archive}
+% It was prepared automatically using the \texttt{mksubmission.sh}
+% script written for this purpose.
+The accompanying archive for this report contains a copy of the
+development repository used for this project. While every effort has
+been made to include relevant source code listings in this report, it
+is intended that a curious reader will investigate the contents of the
+archive of their own volition, as the large size of the source code
+has meant that only a small proportion can be reproduced in this
+report. Figure~\ref{fig:dir-tree} identifies the key directories that
+may be of interest to the reader. Each directory name has been
+annotated with numbers corresponding to the sections within this
+report which discusses them.
 
-The submitted archive contains a snapshot of the development
-repository for pip-db.
+This is a polylingual project including source code written in Clojure
+LISP, JavaScript, Less CSS, M4sh, Make, Python, and sh. The
+documentation is formatted in \LaTeX, HTML and Markdown. A reasonably
+competent text editor is all that is required to view the source
+files, which can be identified by the file extensions: ac, am, bib,
+clj, fsa, in, js, json, less, md, py, sh, tex, xml, and yml.
 
-A polylingual project Clojure LISP, JavaScript, Less CSS, M4sh, Make,
-Python, and sh.
-
-Documentation in \LaTeX and Markdown.
-
-Figure~\ref{fig:dir-tree} contains an overview of the file structure.
-
-% TODO: ./bin/build --all
 
 %%%%%%%%%%%%%%%%%%%%%%
 %% Figure: dir-tree %%
@@ -74,13 +83,21 @@ child {node {\texttt{tools} \textit{- Auxiliary tools}}
   child {node {\texttt{yaps2fsa} \textit{- FASTA database encoder}}}
 };
 \end{tikzpicture}
-\caption[Project directory structure]
-        {Project directory structure.}
+\caption[Archive directory structure]
+        {Archive directory structure and report section cross-references.}
 \label{fig:dir-tree}
 \end{figure}
 
+\subsubsection*{Building the project}
+A complete copy of the project can be compiled on a GNU/Linux
+operating system by executing the command \texttt{./bin/build -{}-all}
+from within the project root directory. This will invoke a script that
+will attempt to automatically resolve system dependencies and
+requirements. Failure to meet the system requirements will results in
+an informative error message being displayed.
 
 % TODO: Note on file paths (relative vs absolute)
+
 
 \newpage
 \section*{Nomenclature}\label{sec:nomenclature}
