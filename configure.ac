@@ -40,6 +40,8 @@ dnl   7.6.     Do we have the python git module?
 dnl   7.7.     Do we have the python dateutil module?
 dnl   7.8.     Install watchr requirements
 dnl   7.9.     Install csv2yaps dependencies
+dnl   7.10.    Install yaps2fsa dependencies
+dnl   7.11.    Install png dependencies
 dnl
 dnl   8.     Documentation
 dnl   8.1.     Are we build the documentation?
@@ -322,6 +324,26 @@ dnl         ========================================================
 AS_IF([test "x$enable_tools" = xyes],
       [AC_CHECK_FILE([tools/csv2yaps/node_modules],,
                      [cd tools/csv2yaps
+                      npm install
+                      cd - >/dev/null])])
+
+
+dnl         ========================================================
+dnl         7.10. Install yaps2fsa dependencies
+dnl         ========================================================
+AS_IF([test "x$enable_tools" = xyes],
+      [AC_CHECK_FILE([tools/yaps2fsa/node_modules],,
+                     [cd tools/yaps2fsa
+                      npm install
+                      cd - >/dev/null])])
+
+
+dnl         ========================================================
+dnl         7.11. Install png dependencies
+dnl         ========================================================
+AS_IF([test "x$enable_tools" = xyes],
+      [AC_CHECK_FILE([tools/png/node_modules],,
+                     [cd tools/png
                       npm install
                       cd - >/dev/null])])
 
