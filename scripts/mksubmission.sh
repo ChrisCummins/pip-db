@@ -75,7 +75,7 @@ do_mksubmission() {
 
     # Tidy up
     for f in $CLEANFILES; do
-        rm -rvf $f;
+        rm -rf $f;
     done;
 
     find . -name 'Makefile.in' | xargs rm
