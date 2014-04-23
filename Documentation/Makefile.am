@@ -1,4 +1,4 @@
-SUBDIRS =
+SUBDIRS = \
 	evaluation \
 	midterm \
 	plan \
