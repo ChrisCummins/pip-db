@@ -1,14 +1,14 @@
 \chapter{Product}\label{chap:product}
 
-\section{Implementation of the prototype}
+\section{Implementation of the prototype}\label{sec:prototype-implementation}
 
 \cite{brandt2008opportunistic}
 
-\section{Programming language choice}
+\section{Programming language choice}\label{sec:programming-language-choice}
 
 % TODO: Table of languages
 
-\subsection{Functional programming paradigms}
+\subsection{Functional programming paradigms}\label{subsec:functional-programming-paradigms}
 
 % FUNCTIONAL PROGRAMMING
 
@@ -24,14 +24,14 @@
 
 % PHP vs Clojure
 
-\subsection{Web programming with functional languages}
+\subsection{Web programming with functional languages}\label{subsec:functional-web}
 
 % Similarities to JavaScript (and it's popularity)
 
-\section{Prototype rewrite in LISP}
+\section{Prototype rewrite in LISP}\label{sec:prototype-rewrite}
 
 
-\subsection{Routing}
+\subsection{Routing}\label{subsec:routing}
 
 % TODO: No more 1-1 mapping of file -> URL.
 
@@ -63,11 +63,11 @@
 \end{lstlisting}
 
 
-\section{Persistent storage}
+\section{Persistent storage}\label{sec:persistent-storage}
 
 % TODO: Replicate errors in dataset
 
-\subsection{Yet Another Protein Schema}
+\subsection{Yet Another Protein Schema}\label{subsec:yaps}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -192,7 +192,7 @@
 % TODO: CSV
 
 
-\section{Search engine design}
+\section{Search engine design}\label{sec:search-engine}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Table: query-components %%
@@ -334,7 +334,7 @@ $E$ & $t_l$, $t_h$ & Minimum and maximum experimental temperature\\
 \end{lstlisting}
 
 
-\subsection{Incorporating BLAST+ searching}
+\subsection{Incorporating BLAST+ searching}\label{subsec:blast-searching}
 
 \newpage
 \subsubsection*{Dynamic dispatcher}
@@ -437,7 +437,7 @@ of the db search function to produce blast search (line
 \end{lstlisting}
 
 
-\subsection{Design of an API for searching services}
+\subsection{Design of an API for searching services}\label{subsec:api-design}
 
 % RESTFUL API
 
@@ -455,7 +455,7 @@ of the db search function to produce blast search (line
   (util/json-response (db/autocomplete request)))
 \end{lstlisting}
 
-\subsection{Autocomplete}
+\subsection{Autocomplete}\label{subsec:autocomplete}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Figure: search-sequence %
@@ -512,7 +512,7 @@ of the db search function to produce blast search (line
 
 \section{Performance and security}
 
-\section{Usage instructions}
+\section{Usage instructions}\label{sec:usage-instructions}
 
 
 %%%%%%%%%%%%%%%%%%%%
