@@ -44,6 +44,9 @@ get_current_version() {
 
 # A list of files and directories to remove after mirroring
 CLEANFILES=".git
+.lein-failures
+.lein-repl-history
+.nrepl-port
 aclocal.m4
 autom4te.cache
 build/install-sh
