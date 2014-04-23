@@ -23,29 +23,20 @@
 %% how it is derived, or how it does it, will be dealt with in later
 %% sections).
 
-%% Overview
-
-%% The last part of the introduction outlines the remainder of the
-%% report, explaining what comes in each section.  The introduction is
-%% the second most important section of the document. Everyone who
-%% reads your report will read the introduction; some may read only
-%% the Introduction and the Conclusion. Therefore, you should think
-%% carefully about what you want to say, and in what order you should
-%% say it. The introduction is also the most difficult one to write,
-%% because it is hard to balance the requirements of giving adequate
-%% explanation without entering into too much detail. For these
-%% reasons, you should re-write the introduction when you’ve written
-%% the rest of the Report (i.e. when you know what you have to
-%% introduce).
-
 
 \subsection*{Submitted files}
+
+The submitted archive contains a snapshot of the development
+repository for pip-db.
 
 A polylingual project Clojure LISP, JavaScript, Less CSS, M4sh, Make,
 Python, and sh.
 
 Documentation in \LaTeX and Markdown.
 
+Figure~\ref{fig:dir-tree} contains an overview of the file structure.
+
+% TODO: ./bin/build --all
 
 %%%%%%%%%%%%%%%%%%%%%%
 %% Figure: dir-tree %%
@@ -92,20 +83,11 @@ child {node {\texttt{tools} \textit{- Auxiliary tools}}
 % TODO: Note on file paths (relative vs absolute)
 
 \newpage
-\subsection*{Nomenclature}\label{subsec:nomenclature}
+\section*{Nomenclature}\label{sec:nomenclature}
 Acronyms and initialisms will be used where appropriate in place of
 full terms. When one is to be used, the first use of the term will
 include the full expanded name, followed by the acronym in
 parenthesis. The acronym will then be used from thereon in.
-
-
-\subsubsection*{On the use of UML}
-A subset of the Unified Modelling Language \cite{ibm2003uml} is used a
-basis for many of the technical diagrams. One notable deviation from
-convention is the use of sequence diagrams \cite{ibm2004sequence} to
-describe the behaviour of web services. In such cases, the desired
-effect is to illustrate the behaviour of a system at a high level, not
-to provide a technically accurate description of communication.
 
 
 \subsubsection*{On the project name}
@@ -121,7 +103,28 @@ context. Thus, PIP-DB refers to a set of data, and pip-db refers to
 the presentation logic for this dataset.
 
 
-\subsection*{Overview}\label{subsec:overview}
+\subsubsection*{On the use of UML}
+A subset of the Unified Modelling Language \cite{ibm2003uml} is used a
+basis for many of the technical diagrams. One notable deviation from
+convention is the use of sequence diagrams \cite{ibm2004sequence} to
+describe the behaviour of web services. In such cases, the desired
+effect is to illustrate the behaviour of a system at a high level, not
+to provide a technically accurate description of communication.
+
+
+\section*{Overview}\label{sec:overview}
+%% The last part of the introduction outlines the remainder of the
+%% report, explaining what comes in each section.  The introduction is
+%% the second most important section of the document. Everyone who
+%% reads your report will read the introduction; some may read only
+%% the Introduction and the Conclusion. Therefore, you should think
+%% carefully about what you want to say, and in what order you should
+%% say it. The introduction is also the most difficult one to write,
+%% because it is hard to balance the requirements of giving adequate
+%% explanation without entering into too much detail. For these
+%% reasons, you should re-write the introduction when you’ve written
+%% the rest of the Report (i.e. when you know what you have to
+%% introduce).
 The rest of the text is structured as follows: first a brief overview
 of the requirements analysis phase of the project is given
 (page~\pageref{chap:requirements}), with particular reference to the
