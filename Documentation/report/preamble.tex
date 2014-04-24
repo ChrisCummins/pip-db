@@ -33,8 +33,10 @@
 
 % Multi-column support.
 \usepackage{multicol}
-% We remove any separation between columns:
-\setlength{\columnsep}{0pt}
+
+% Uncomment the following line to remove column separation:
+%
+% \setlength{\columnsep}{0pt}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
@@ -756,8 +758,8 @@
   \global\advance\dirtree@lvl by 1\relax
   \dirtree@clvl=\dirtree@lvl
   \advance\dirtree@clvl by -\csname dirtree@p@\the\dirtree@plvl\endcsname
-  \pgf@xa=0.6cm\relax
-  \pgf@ya=-0.5cm\relax
+  \pgf@xa=0.33cm\relax
+  \pgf@ya=-\baselineskip\relax
   \pgf@ya=\dirtree@clvl\pgf@ya
   \pgftransformshift{\pgfqpoint{\the\pgf@xa}{\the\pgf@ya}}%
   \ifnum\tikznumberofcurrentchild=\tikznumberofchildren
@@ -806,6 +808,11 @@
 % the text.
 %
 \newcommand{\hr}{\noindent\makebox[\linewidth]{\rule{\textwidth}{0.2pt}}}
+
+% Add a command \br{} which will create a horizontal space of exactly
+% one line height.
+%
+\newcommand{\br}{\hspace{\baselineskip}}
 
 % Define a command to allow word breaking.
 \newcommand*\wrapletters[1]{\wr@pletters#1\@nil}

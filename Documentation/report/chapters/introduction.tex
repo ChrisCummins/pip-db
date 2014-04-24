@@ -50,39 +50,76 @@ clj, fsa, in, js, json, less, md, py, sh, tex, xml, and yml.
 %%%%%%%%%%%%%%%%%%%%%%
 %% Figure: dir-tree %%
 %%%%%%%%%%%%%%%%%%%%%%
-% TODO: Add cross references for each section!
 \begin{figure}[H]
+\begin{multicols}{2}
 \centering
+\textbf{Directory}
+
+\raggedleft
+% LEFT COLUMN: Directory tree
 \begin{tikzpicture}[dirtree]
 \node {\texttt{/}}
-child {node {\texttt{bin} \textit{- Deployment build scripts}}}
-child {node {\texttt{build} \textit{- Auxiliary build files and dependencies}}}
-child {node {\texttt{Documentation} \textit{- Project documentation root}}
+child {node {\texttt{bin}}}
+child {node {\texttt{build}}}
+child {node {\texttt{Documentation}}
   child {node {\texttt{design}}
-    child {node {\texttt{d1} \textit{- First iteration design documents}}}
-    child {node {\texttt{d2} \textit{- Second iteration design documents}}}
- }
-  child {node {\texttt{evaluation} \textit{- Usability evaluation documents}}}
-  child {node {\texttt{midterm} \textit{- Mid-term report documents}}}
-  child {node {\texttt{plan} \textit{- Source code for project plan}}}
-  child {node {\texttt{report} \textit{- Source code for this document}}}
+    child {node {\texttt{d1}}}
+    child {node {\texttt{d2}}}
+  }
+  child {node {\texttt{evaluation}}}
+  child {node {\texttt{midterm}}}
+  child {node {\texttt{plan}}}
+  child {node {\texttt{report}}}
 }
-child {node {\texttt{extern} \textit{- External build dependencies}}}
+child {node {\texttt{extern}}}
 child {node {\texttt{resources}}
-  child {node {\texttt{css} \textit{- Less CSS style sheets}}}
-  child {node {\texttt{fonts} \textit{- Font files}}}
-  child {node {\texttt{img} \textit{- Website images}}}
-  child {node {\texttt{js} \textit{- Client-side source code}}}
+  child {node {\texttt{css}}}
+  child {node {\texttt{fonts}}}
+  child {node {\texttt{img}}}
+  child {node {\texttt{js}}}
 }
-child {node {\texttt{scripts} \textit{- Auxiliary help scripts}}}
-child {node {\texttt{src} \textit{- Server-side source code}}}
-child {node {\texttt{test} \textit{- Unit tests for server-side code}}}
-child {node {\texttt{tools} \textit{- Auxiliary tools}}
-  child {node {\texttt{csv2yaps} \textit{- Dataset encoder}}}
-  child {node {\texttt{watchr} \textit{- On-demand build system}}}
-  child {node {\texttt{yaps2fsa} \textit{- FASTA database encoder}}}
+child {node {\texttt{scripts}}}
+child {node {\texttt{src}}}
+child {node {\texttt{test}}}
+child {node {\texttt{tools}}
+  child {node {\texttt{csv2yaps}}}
+  child {node {\texttt{watchr}}}
+  child {node {\texttt{yaps2fsa}}}
 };
 \end{tikzpicture}
+\columnbreak
+
+\raggedright
+\textbf{Sections}
+
+\textit{%
+% RIGHT COLUMN: Section cross-references
+\br{}\\ % /
+\ref{sec:building}\\                       % /bin
+\ref{sec:building}, \ref{sec:deployment}\\ % /build
+\br{}\\                                    % /Documentation
+\br{}\\                                    % /Documentation/design
+\br{}\\                                    % /Documentation/design/d1
+\br{}\\                                    % /Documentation/design/d2
+\br{}\\                                    % /Documentation/evaluation
+\br{}\\                                    % /Documentation/midterm
+\br{}\\                                    % /Documentation/plan
+\br{}\\                                    % /Documentation/report
+\br{}\\                                    % /extern
+\br{}\\                                    % /resources
+\br{}\\                                    % /resources/css
+\br{}\\                                    % /resources/fonts
+\br{}\\                                    % /resources/img
+\br{}\\                                    % /resources/js
+\br{}\\                                    % /scripts
+\br{}\\                                    % /src
+\br{}\\                                    % /test
+\br{}\\                                    % /tools/
+\br{}\\                                    % /tools/csv2yaps
+\br{}\\                                    % /tools/watchr
+\br{}\\                                    % /tools/yaps2fsa
+}
+\end{multicols}
 \caption[Archive directory structure]
         {Archive directory structure and report section cross-references.}
 \label{fig:dir-tree}
