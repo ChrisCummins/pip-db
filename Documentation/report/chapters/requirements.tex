@@ -1,0 +1,57 @@
+\chapter{Requirements Analysis}\label{chap:requirements}
+
+It is expected that 400 hours of work be put into a final year
+project. With such a large body of time dedicated to it, it is
+important to establish a clear direction for development, such that
+the project progress can be assessed at regular intervals along the
+project life cycle. The aim of progress assessments is to ensure that
+time is not wasted on work which does not positively contribute to the
+development of a finished product. In single-developer projects there
+is an even greater priority for regular progress assessments than in a
+large team project, as the single-developer is not accountable to
+anyone, leading to a greater chance of the project losing focus or
+suffering from second-system effect \cite{brooks1995mythical}.
+
+To reduce the chance of this, a set of project risks were identified
+during the planning stage (Table~\ref{tab:risks}), and development was
+focused around the early mitigation of these risks. For each risk, the
+probability of it occurring and the impact that it would have on
+project progress was assigned a numerical value between 0-5, allowing
+the risks to ordered in terms of severity by calculating the geometric
+mean of these two metrics. High level risk mitigation strategies were
+constructed (Appendix~\ref{app:risk-mitigation}), and used as a
+starting point for creating the project life cycle plan.
+
+
+%%%%%%%%%%%%%%%%%%
+%% Table: risks %%
+%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\centering
+\begin{tabular}{c l l c c}
+\textbf{Risk} & \textbf{Description}                              & \textbf{Category}     & \textbf{P} & \textbf{I}\\
+\textbf{R1}   & Design is not intuitive                           & \textit{Design}       & 2          & 3\\
+\textbf{R2}   & Project involves use of new technical skills      & \textit{Development}  & 5          & 5\\
+\textbf{R3}   & High Level of technical complexity                & \textit{Development}  & 5          & 3\\
+\textbf{R4}   & Complex deployment of production website          & \textit{Development}  & 5          & 4\\
+\textbf{R5}   & Project milestones not clearly defined            & \textit{Planning}     & 1          & 1\\
+\textbf{R6}   & System requirements not adequately identified     & \textit{Requirements} & 2          & 5\\
+\textbf{R7}   & Change in project requirements during development & \textit{Requirements} & 1          & 5\\
+\textbf{R8}   & Changes in dataset format during development      & \textit{Resources}    & 2          & 5\\
+\textbf{R9}   & Unable to obtain required resources               & \textit{Resources}    & 1          & 1\\
+\textbf{R10}  & Users not committed to the project                & \textit{Users}        & 2          & 4\\
+\textbf{R11}  & Lack of cooperation from users                    & \textit{Users}        & 1          & 4\\
+\textbf{R12}  & Users with negative attitudes toward the project  & \textit{Users}        & 1          & 2\\
+\end{tabular}
+\caption[Project risks]
+        {Project risks. The \textbf{P} and \textbf{I} columns assign
+         numerical values to the each risk's probability and impact
+         respectively, within the range 0-5.}
+\label{tab:risks}
+\end{table}
+
+\subsubsection*{Identification of stakeholders}
+
+The primary project stakeholder is Dr.\ Darren Flower, a scientist in
+the Life \& Health Sciences department who was responsible for
+overseeing the creation of the PIP-DB dataset.

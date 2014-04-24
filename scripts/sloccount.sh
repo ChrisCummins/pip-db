@@ -129,7 +129,7 @@ get_src_sloccounts() {
 # Returns a list of sloccounts for the Documentation.
 get_doc_sloccounts() {
   local latex=$(get_lc_of_files "$(find_files_with_extension tex)")
-  local md=$(get_lc_of_files "$(find_files_with_extension md)")
+  local md=$(get_lc_of_files "$(find_files_with_extension md | grep -v node_modules)")
   local total=$((latex+md))
 
   print_sloccount "$latex"     "$total" "LaTeX            "

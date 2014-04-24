@@ -15,6 +15,10 @@ clean-local:
 	@echo '  LEIN   clean'
 	@lein clean
 
+# Remove node installations on distclean
+distclean-local:
+	@rm -rvf $(shell find . -name '*node_modules*') build/node config.summary
+
 .PHONY: test run-server run-db
 
 test:

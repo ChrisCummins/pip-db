@@ -40,6 +40,8 @@ dnl   7.6.     Do we have the python git module?
 dnl   7.7.     Do we have the python dateutil module?
 dnl   7.8.     Install watchr requirements
 dnl   7.9.     Install csv2yaps dependencies
+dnl   7.10.    Install yaps2fsa dependencies
+dnl   7.11.    Install png dependencies
 dnl
 dnl   8.     Documentation
 dnl   8.1.     Are we build the documentation?
@@ -49,6 +51,8 @@ dnl   8.4.     Do we have pandoc installed?
 dnl   8.5.     Do we have doctoc installed?
 dnl   8.6.     Should xdg-open be used to open PDFs?
 dnl   8.7.     Should emacsclient be used for editing files?
+dnl   8.8.     Do we have texcount installed?
+dnl   8.9.     Do we have checkcites installed?
 dnl
 dnl   9.     Git
 dnl   9.1.     Are we installing the project git hooks?
@@ -65,7 +69,7 @@ dnl 1. Project versions (i.e. the package version)
 dnl ================================================================
 m4_define([pipdb_major_version],[0])
 m4_define([pipdb_minor_version],[6])
-m4_define([pipdb_micro_version],[2])
+m4_define([pipdb_micro_version],[3])
 m4_define([pipdb_version],[pipdb_major_version.pipdb_minor_version.pipdb_micro_version])
 
 
@@ -309,7 +313,9 @@ dnl         7.8. Install watchr requirements
 dnl         ========================================================
 AS_IF([test "x$enable_tools" = xyes],
       [AC_CHECK_FILE([tools/watchr/node_modules],,
-                     [cd tools/watchr && npm install])])
+                     [cd tools/watchr
+                      npm install
+                      cd - >/dev/null])])
 
 
 dnl         ========================================================
@@ -317,7 +323,29 @@ dnl         7.9. Install csv2yaps dependencies
 dnl         ========================================================
 AS_IF([test "x$enable_tools" = xyes],
       [AC_CHECK_FILE([tools/csv2yaps/node_modules],,
-                     [cd tools/csv2yaps && npm install])])
+                     [cd tools/csv2yaps
+                      npm install
+                      cd - >/dev/null])])
+
+
+dnl         ========================================================
+dnl         7.10. Install yaps2fsa dependencies
+dnl         ========================================================
+AS_IF([test "x$enable_tools" = xyes],
+      [AC_CHECK_FILE([tools/yaps2fsa/node_modules],,
+                     [cd tools/yaps2fsa
+                      npm install
+                      cd - >/dev/null])])
+
+
+dnl         ========================================================
+dnl         7.11. Install png dependencies
+dnl         ========================================================
+AS_IF([test "x$enable_tools" = xyes],
+      [AC_CHECK_FILE([tools/png/node_modules],,
+                     [cd tools/png
+                      npm install
+                      cd - >/dev/null])])
 
 
 dnl ================================================================
@@ -412,6 +440,30 @@ AS_IF([test "x$EMACSCLIENT" != x],
        AC_MSG_WARN([Text editor launching features disabled.])])
 AC_SUBST([HAVE_EMACSCLIENT],[$HAVE_EMACSCLIENT])
 AM_CONDITIONAL([HAVE_EMACSCLIENT],[test "x$HAVE_EMACSCLIENT" = xyes])
+
+
+dnl     ============================================================
+dnl     8.8. Do we have texcount installed?
+dnl     ============================================================
+AC_CHECK_PROG([TEXCOUNT],[texcount],[texcount])
+AS_IF([test "x$TEXCOUNT" != x],
+      [HAVE_TEXCOUNT=yes],
+      [HAVE_TEXCOUNT=no
+       AC_MSG_WARN([LaTeX word counts disabled.])])
+AC_SUBST([HAVE_TEXCOUNT],[$HAVE_TEXCOUNT])
+AM_CONDITIONAL([HAVE_TEXCOUNT],[test "x$HAVE_TEXCOUNT" = xyes])
+
+
+dnl     ============================================================
+dnl     8.9. Do we have checkcites installed?
+dnl     ============================================================
+AC_CHECK_PROG([CHECKCITES],[checkcites],[checkcites])
+AS_IF([test "x$CHECKCITES" != x],
+      [HAVE_CHECKCITES=yes],
+      [HAVE_CHECKCITES=no
+       AC_MSG_WARN([LaTeX citation checks disabled.])])
+AC_SUBST([HAVE_CHECKCITES],[$HAVE_CHECKCITES])
+AM_CONDITIONAL([HAVE_CHECKCITES],[test "x$HAVE_CHECKCITES" = xyes])
 
 
 dnl ================================================================

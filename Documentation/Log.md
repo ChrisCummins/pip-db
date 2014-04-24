@@ -636,7 +636,7 @@ Created side-by-side mockups of common tasks in pidb and my first iteration
 design using Balsamiq.
 
 
-### Wedensday 23rd
+### Wednesday 23rd
 
 Laptop TODO:
 
@@ -1833,7 +1833,7 @@ From
 > documentation, but the shortest path to a useful subset is the
 > commented source code itself.
 
-### The one true way
+**The one true way:**
 
 1. Start by running Marginalia against your code
 2. Cringe at the sad state of your code commentary
@@ -2174,7 +2174,7 @@ Notes from weekly meeting with Ian:
 ## February 2014
 
 
-### Sundary 2nd
+### Sunday 2nd
 
 Read up on Heroku's
 [dyno sleeping policy](https://devcenter.heroku.com/articles/dynos#dyno-sleeping),
@@ -4055,7 +4055,7 @@ Things to change as a result of usability test:
  * I should consider adding tabs for performing different category
    searches from the homepage.
 
-**Notes from usability testing with Darren:**
+**Notes from usability testing with Dan:**
 
 Dan is an Undergraduate business and psychology student in his final
 year. As someone with no background in biology or computer science,
@@ -4106,3 +4106,305 @@ TODO:
  * Write up usability test report.
 
  * Research parallelism techniques for Clojure server back-end.
+
+
+### Monday 14th
+
+Arranged usability tests with Mahmood and Ben for Wednesday and
+Thursday, respectively.
+
+
+### Tuesday 15th
+
+Notes for meeting with Ian:
+
+ * Meeting with Darren:
+   * No in-place data modification. Just a single file upload which
+     wipes all previous data.
+     * So we need to add the ability to download the entire dataset.
+   * Usability test:
+     * List of four tasks - Darren came up with two search terms and a
+       FASTA sequence.
+     * Screencapped and recorded audio.
+     * I'm rubbish at it.
+       * Didn't encourage enough thinking out loud from participant.
+       * Too quick to interject with help.
+
+ * Next usability testing:
+   * Turn tasks into scenarios.
+   * Create a script and stick to it.
+   * Testing with Shahzad:
+     * First time I saw someone coming to it "cold".
+     * Many great suggestions, and PDB.
+   * Testing with Dan:
+     * Not in demographic of users, but still useful usability
+       testing.
+
+ * Things I've learned:
+   * It *really* isn't immediately obvious how the site behaves.
+   * There are several small changes which could drastically improve
+     usability.
+
+ * NEXT:
+   * Re-work testing script
+   * Incorporate fixes for:
+     * Placeholders
+     * No of results indicator
+   * Tests with Ash, Mahmood and Ben this week.
+
+Notes from meeting with Ian:
+
+ * Split testing into 2 halves with different scripts/improvements to
+   website.
+ * At this point in the project, I'll get more marks for your time
+   spent writing the report than improving the product.
+ * I can write up in the evaluation how usability testing should have
+   began earlier in the project life cycle.
+ * I can continue to make adjustments to the site after the last round
+   of usability testing, but it'll be harder to justify those changes
+   (no user feedback). Perhaps instead save those for the further work
+   section.
+
+
+### Wednesday 16th
+
+I've implemented the placeholder fixes for the next round of user
+testing, so the versioning is:
+
+```
+Usability tests 0-2    v0.6.1     7dbcc65dfa0542b7d1f2b9eb1609a90d42ffcdc9
+Usability tests 3+     v0.6.2     0a776f01716ccb3a5c23e97e8aa4320728740cc8
+```
+
+**Notes from usability testing with Mahmood:**
+
+Mahmood is a student completing his first year of a PhD in Biology.
+
+TASK 1
+
+ * Participant asked whether we could do the tests on his own PC,
+   which I wasn't prepped for (no screen recording equipment).
+ * Participant had no issue with the first task.
+
+TASK 2
+
+ * Participant commented that the placeholder text was very helpful in
+   understanding how to fill in the form fields. Especially the
+   E.C. field examples.
+ * Participant was confused at how to get back from the Download page.
+
+TASK 3
+
+ * Slow internet connection meant that it the No of results counter
+   was very out-of-sync with form state, especially when scrubbing the
+   pI slider.
+
+Things to change as a result of usability test:
+
+ * Add a back button to the download page.
+
+
+### Thursday 17th
+
+**Notes from usability testing with Ben:**
+
+Ben is a PhD student completing his second year in the Life and Health
+Sciences department.
+
+TASK 1
+
+ * After clicking the "See other records like this", the participant
+   was unsure of what the actual search term that was being used to
+   show the results.
+
+TASK 2
+
+ * Participant was unsure whether it was possible to search for
+   multiple sources simultaneously (it's not).
+ * Participant was unsure whether it was necessary to enter a term
+   into an input field to accept any value - i.e. a wild card.
+
+TASK 3
+
+ * Participant expected there to be an option to sort results by pI.
+
+TASK 4
+
+ * Participant was unsure whether to leave in the header line in the
+   FASTA sequence.
+ * Participant would have liked the ability to type in exact pI values
+   rather than scrubbing the slider.
+
+Things to change as a result of usability test:
+
+ * Re-order the advanced search fields so that the "None" field
+   appears directly after the "Any" field.
+
+
+### Saturday 19th
+
+Optimising build times:
+
+```
+Executed command:
+
+    $ make clean && time (./autogen.sh && ./configure && make)
+
+Parallel JavaScript compilation:
+
+  Before:
+    39.169
+    37.001
+    36.344
+    39.740
+    39.276
+
+  After:
+    32.287
+    29.689
+    30.088
+    31.775
+    32.275
+
+Fork Marginalia code generation:
+
+  Before:
+    32.287
+    29.689
+    30.088
+    31.775
+    32.275
+
+  After:
+    8.887
+    8.849
+    9.680
+    9.937
+    10.007
+
+Fork CSS code generation:
+
+  Before:
+    8.887
+    8.849
+    9.680
+    9.937
+    10.007
+
+  After:
+    8.176
+    8.777
+    7.918
+    7.614
+
+Forked fonts and IMG generation:
+
+  Before:
+    8.176
+    8.777
+    7.918
+    7.614
+
+  After:
+    7.761
+    8.788
+    8.222
+    7.960
+
+Parallelizing Less CSS compilation:
+
+  Before:
+    7.761
+    8.788
+    8.222
+    7.960
+
+  After:
+    6.915
+    6.900
+    7.121
+    7.380
+    7.385
+
+Parallelizing Less CSS compilation:
+
+  Before:
+    6.915
+    6.900
+    7.121
+    7.380
+    7.385
+
+  After:
+    6.582
+    7.128
+    7.192
+    7.159
+    7.498
+```
+
+
+### Sunday 20th
+
+Emailed user testing participants to check whether they are all OK
+with being named and attributed in the report.
+
+Added `make wc` and `make cite` targets to report Makefile to enable
+word counts and citation checks.
+
+
+### Tuesday 22nd
+
+**Project report assessment checklist:**
+
+40% RESULTS - Quality of the experiment / design and implementation or
+Quality of survey. Originality.
+
+* There is an end-product characterised by a very high standard of
+  functionality/utility and usability, coupled with originality.
+* Artefacts are of a near-professional standard.
+* It is likely that the work has led to insights allowing the original
+  expectations of the work to be exceeded.
+* Recognised development processes have been proficiently applied.
+* Work leading to the end-product has followed recognised stages,
+  e.g. analysis, design and implementation.
+
+30% REVIEW AND ANALYSIS -
+Format/structure/bibliography/references. Description of the
+background. Tests, critical analysis, evaluation. Conclusions /
+suggestions.
+
+* All the above has been undertaken to a high standard of rigour and
+  thoroughness.
+* Insights gained are substantial and show innovative thought.
+* Evaluation is evidence-based, e.g. includes user or client feedback
+  obtained in a systematic manner, or statistical investigation of
+  reliability or other matters.
+* There is evidence of reflection on project processes and outcomes,
+  including (where applicable) the value of the outcome to a client.
+* The report includes substantial reasoned argument as well as
+  statement of facts.
+
+30% REPORTING - Good English, appropriate style. Structure and
+presentation, including graphics. Referencing.
+
+* Writing is concise (even elegant) as well as thorough and precise.
+* There are essentially no flaws in English, typography or
+  presentation.
+* Examples and diagrams are truly illuminating.
+* The standard of writing is close to professional.
+* Any theoretical material included is well chosen and shows a high
+  standard of relevance to practical work evidenced in the material
+  provided for assessment.
+
+
+### Wednesday 23rd
+
+Current project report word count: 1776. Aim for end of day: 2776.
+
+Deadlines:
+
+1st May - Poster done and sent off to printers
+7th May - Poster presentation
+14th May - Report complete
+17th May - Report submission deadline
