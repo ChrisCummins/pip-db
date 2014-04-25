@@ -1,12 +1,46 @@
 \chapter{Product}\label{chap:product}
+This chapter describes the implementation of the final pip-db website,
+including the web server, database, and client side logic. The first
+section describes the implementation of the prototype, in order to
+provide context and justification for the decisions made in the final
+product.
+
 
 \section{Implementation of the prototype}\label{sec:prototype-implementation}
 
-\cite{brandt2008opportunistic}
+The purpose of the prototype as discussed in
+Section~\ref{subsec:high-fidelity-prototype} was that it should offer
+an interactive demonstration of the final product behaviour that can
+be tested by potential users. As such, the primary requirement for any
+technology used is that it should enable the rapid prototyping of an
+interactive website. By using a LAMP \footnote{Linux, Apache, MySQL
+  and PHP} stack, I was able to quickly develop a functioning website,
+built on top of a number of established and tested software
+packages. The pip-db prototype was developed by balancing the traits
+of \textit{opportunistic programming}, which emphasises ``speed and
+ease of development over robustness and maintainability of code''
+\cite{brandt2008opportunistic}, with the needs for a solid and robust
+technical back-end.
 
 \section{Programming language choice}\label{sec:programming-language-choice}
 
-% TODO: Table of languages
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Table: programming-languages %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\centering
+\begin{tabular}{l c p{3cm} p{8cm}}
+                      & Year & Purpose         & Programming style and paradigms\\
+  \textbf{PHP}        & 1995 & Server-side web & Imperative, reflective, dynamically typed with implicit typing\\
+  \textbf{Python}     & 1991 & General purpose & Imperative, object orientated, dynamically typed\\
+  \textbf{JavaScript} & 1995 & Client-side web & Prototype based, imperative, object orientated, functional, dynamically typed\\
+  \textbf{Clojure}    & 2007 & General purpose & Functional, recursive, concurrent, dynamically typed with optional explicit typing\\
+\end{tabular}
+\caption[Server-side programming language comparison]
+        {A comparison of server-side programming languages.}
+\label{tab:programming-languages}
+\end{table}
 
 \subsection{Functional programming paradigms}\label{subsec:functional-programming-paradigms}
 
@@ -24,17 +58,69 @@
 
 % PHP vs Clojure
 
-\subsection{Web programming with functional languages}\label{subsec:functional-web}
-
 % Similarities to JavaScript (and it's popularity)
 
+\subsection{Web programming with functional languages}\label{subsec:functional-web}
+
+In a LAMP stack, a request for a PHP script is handled in the
+following manner:
+
+\begin{enumerate}
+\item A HTTP request arrives and a new thread is spawned by Apache.
+\item The request path is transformed into a file system lookup.
+\item The PHP interpreter is invoked and the matching file is
+  evaluated line by line.
+\item The output of the PHP interpreter is packed into a HTTP
+  response.
+\item The HTTP response is sent back to the client.
+\item The handler thread terminates.
+\end{enumerate}
+
+In the above sequence, the programmer may only affect the behaviour by
+modifying the contents of the PHP file which is evaluated. In Clojure,
+the \textit{Ring}\footnote{https://github.com/ring-clojure/ring} and
+\textit{Compojure}\footnote{https://github.com/weavejester/compojure}
+libraries produce a sequence for handling a HTTP request which is
+simpler, requiring more effort on behalf of the programmer to achieve
+the required behaviour:
+
+\begin{enumerate}
+\item A HTTP request arrives and is transformed into a Clojure map.
+\item This map is funnelled into a \textit{ring handler}, which is a
+  function that accepts a request map and is expected to produce a
+  response map.
+\item The response map is transformed into an actual HTTP response and
+  sent back to the client.
+\end{enumerate}
+
+
+\newpage
 \section{Prototype rewrite in LISP}\label{sec:prototype-rewrite}
+In late December, the decision was made to rewrite the existing PHP
+server-side logic as a Clojure LISP web server. In addition to
+re-implementing any existing server-side behaviour, the rewrite would
+involve development much lower level server logic than when using
+Apache, which automatically handles issues such as request routing and
+threading.
 
 
 \subsection{Routing}\label{subsec:routing}
+In a LAMP stack, the Apache server provides a routing map which
+translates URLs into file paths, such that a request for the path
+\texttt{/foo/bar/index.html} would translate into a filesystem lookup
+for \texttt{index.html} in the subdirectory \texttt{foo/bar/}. In
+Clojure, there is no relationship between source code and request
+paths, and the programmer must define a route map which dispatches
+handler functions for each different path in the website. For this, a
+set of macros are defined which allow the programmer to declare
+specific handler functions for the \texttt{GET}, \texttt{PUT}, and
+\texttt{POST} HTTP methods. Listing~\ref{lst:router} shows the routes
+defined for pip-db.
 
-% TODO: No more 1-1 mapping of file -> URL.
 
+%%%%%%%%%%%%%%%%%%%
+% Listing: router %
+%%%%%%%%%%%%%%%%%%%
 \lstset{language=Clojure}
 \begin{lstlisting}[label=lst:router,caption={%
       [Application ring handler routes]
@@ -61,6 +147,9 @@
   (route/resources "/")
   (route/not-found (ui/page-404)))
 \end{lstlisting}
+
+
+\subsection{Ring handlers}\label{subsec:ring-handler}
 
 
 \section{Persistent storage}\label{sec:persistent-storage}
