@@ -80,7 +80,7 @@
 \hline
 \textbf{Field} & \textbf{Type} & \textbf{Description}\\
 \hline
-\textbf{id} & \textit{varchar(11)*} & Unique record identifier\\
+\textbf{id}* & \textit{varchar(11)} & Unique record identifier\\
 \textbf{Protein-Names} & \textit{varchar} & Forward slash (``/'') delimited names\\
 \textbf{EC} & \textit{varchar} & Enzyme commission number\\
 \textbf{Source} & \textit{varchar} & Protein source\\
@@ -114,12 +114,12 @@
 \textbf{real\_pi\_max} & \textit{real} & Numerical isoelectric point maximum\\
 \textbf{real\_temp\_min} & \textit{real} & Numerical temperature minimum\\
 \textbf{real\_temp\_max} & \textit{real} & Numerical temperature maximum\\
-\textbf{Created-At} & \textit{timestamp*} & Timestamp of dataset creation\\
+\textbf{Created-At}* & \textit{timestamp} & Timestamp of dataset creation\\
 \hline
 \end{tabular}
 \caption[YAPS schema]
-        {YAPS schema definition. Fields with an asterisk (*) are
-         mandatory, other fields may be null.}
+        {YAPS schema definition. Fields marked with an asterisk (*)
+         are mandatory, other fields may be null.}
 \label{tab:yaps-schema}
 \end{table}
 
