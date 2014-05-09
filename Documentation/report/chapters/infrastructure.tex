@@ -390,18 +390,18 @@ plot coordinates{
       [Markov chain implementation]
       Markov chain implementation in JavaScript.}]
 for (var i = 0; i < list.length; i++) {
-  var sentence = list[i].split(' ');
+  var sentence = list[i].split(' ');             // Split line into words
 
-  terminals.push(sentence[sentence.length - 1]);
-  startwords.push(sentence[0]);
+  startwords.push(sentence[0]);                  // Record first word
+  terminals.push(sentence[sentence.length - 1]); // Record last word
 
   for (var j = 0; j < sentence.length - 1; j++) {
-    var nextWord = sentence[j + 1];
+    var current = sentence[j], next = sentence[j + 1];
 
-    if (wordTrees[sentence[j]] !== undefined)
-      wordTrees[sentence[j]].push(nextWord);
+    if (wordTrees[current] === undefined)
+      wordTrees[current] = [next];               // Create a word tree
     else
-      wordTrees[sentence[j]] = [nextWord];
+      wordTrees[current].push(next);             // Add word to tree
   }
 }
 \end{lstlisting}
@@ -415,8 +415,8 @@ for (var i = 0; i < list.length; i++) {
       [Markov text generator]
       Markov text generator implementation.}]
 var next = function() {
-  var word = rand(startwords);
-  var sentence = [word];
+  var word = rand(startwords); // Pick a random starting word
+  var sentence = [word];       // Create a sentence array
 
   while (wordTrees[word] !== undefined) {
     var nextWords = wordTrees[word];
