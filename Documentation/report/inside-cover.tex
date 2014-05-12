@@ -22,10 +22,50 @@
 
 \centredtitle{Abstract}
 
-% Novel feature: BLAST+ searching, combined with other properties
+The isoelectric point or pI of a protein corresponds to the solution
+pH at which the net surface charge is zero. Since the earliest days of
+solution biochemistry, the pI has been recorded and
+reported, and literature reports of pI abound. The protein isoelectric
+point database (PIP-DB) has collected and collated this legacy data to
+provide an increasingly comprehensive database for comparison and
+benchmarking purposes. As part of a collaboration between Aston
+University's Computer Science and Life and Health Sciences
+departments, a web application has been developed to warehouse this
+database and provide public access to this important information.
 
-% TODO: Placeholder
-\lipsum[1-3]
+A schema and file format (YAPS) was designed to house protein
+isoelectric point datasets, with appropriate tooling to convert
+between PIP-DB and the YAPS format. A search engine was developed for
+the dataset, using a domain specific language which allows for
+compound queries to be constructed using tree structures in
+LISP. Support for protein sequence searching was implemented using the
+NCBI BLAST+ search tools.
+
+A user-centred approach to designing web applications was adopted,
+with a heavy focus on interaction design and usability testing. The
+results of usability testing show numerous advantages in the interface
+design, such the design of a widget which dynamically indicates the
+number of results to be returned by a search engine query.
+
+A public API for allowing programmatic communication with the search
+engine has been designed. The website makes extensive use of mobile
+code, implementing a thin presentation layer wrapper around the
+API. The use of mobile code in websites is discussed and a comparison
+is made with server-side rendering of HTML.
+
+A particular emphasis was placed on infrastructure, with the
+development of several tools which can be reused for similar
+projects. Among these is the novel application of Markov text
+generators for creating test payloads from confidential datasets, and
+a project management program (pipbot) which automates version control
+and build configurations.
+
+A parallelised build system has been developed which provides
+homogeneous development and deployment configurations. Tests show how
+shell-level parallelism can reduce compilation time by a factor of
+5. An implementation of checksum based cache busting and on-demand
+build systems using the Linux's inotify subsystem is described.
+
 
 %%%%%%%%%%%%%%%%%%%%%%
 %% Acknoweldgements %%
