@@ -1,26 +1,66 @@
 \chapter{Introduction}\label{chap:introduction}
 
-%% Introduction: This is mandatory. A description of the aims of the
-%% work and an indication of how the work is presented in the report.
-%% Typical target: a Chief Engineer who must have a comprehensive view
-%% of the contents of the report from the introduction. Therefore it
-%% should provide:
+The purpose of the project was to take a set of data collated by
+members of the Life and Health Sciences department and to place it
+online in an accessible form for other people to use. There are many
+existing databases categorising biological information at the
+molecular level, but none for the isoelectric point (pI). The
+isoelectric point is the acidity (pH) at which a molecule carries no
+net charge. Below the isoelectric point, proteins have a net positive
+charge, above it a negative charge. In the denatured state, the pI
+depends solely on a protein’s amino acid composition.
 
-%% Context
+Professor Ian Nabney proposed the project and supervised
+development. Dr Darren Flower of the Life and Health Sciences
+department acted as the principle owner of the PIP-DB dataset,
+providing a copy for use in the website. Additionally, he was
+responsible for helping to understand the necessary the required
+biology theory and acted as a potential user during design feedback
+sessions.
 
-%% Provide motivation for the project. Discuss the background to the
-%% project, provide whatever background the reader will need in order
-%% to understand your contribution, and including relevant previous
-%% work and any appropriate literature. Describe any work needed to
-%% establish detailed project requirements
+The two primary deliverables provided by Professor Nabney in the
+project description were:
+
+\begin{enumerate}
+\item An updatable relational database warehousing the provided dataset.
+\item A web-accessible GUI with searching and downloading functionality.
+\end{enumerate}
+
+This meant that the aim of development should be to get a website
+hosted online on a public server, accessible via a suitable web domain
+address. The website should offer a service whereby users can search
+PIP-DB and download search results using a web browser. This simple
+and open-ended specification allowed for the majority of development
+effort to be focused upon innovating on the areas of database driven
+website development, and search engine usability.
+
+The primary reason for choosing the project was that there is a real
+existing need for a product of this type within the molecular biology
+community, with potential value and use for future scientific
+research. Development of database driven websites was an area which I
+was unfamiliar with and had no prior experience in, but is a skill
+that I felt was important to master.
+
+This is an interdisciplinary project that involves aspects of web
+application development, bioinformatics, data analysis, interaction
+design, and data mining. The project plan used the OpenUP development
+process, which places an emphasis on the early mitigation of
+risks. Two sets of milestones were defined to govern project
+development, covering the requirements of the design and
+implementation aspects of the project. The design milestones were
+given the labels D1 through D4 and the implementation milestones M1
+through M3. Figure~\ref{fig:timeline} shows the chronology of
+development.
+
+\newpage
+\begin{multicols}{2}
 
 \section*{Objectives}\label{sec:objectives}
 The following objectives were written during before the planning stage
 of the project, in order to provide a very high level overview of the
 finished product. The purpose of the objectives it to provide personal
 goals and expectations of the project, which can then be refined to
-produce specific and quantifiable requirements
-(Chapter~\ref{chap:requirements}).
+produce specific and quantifiable requirements.
 
 \begin{enumerate}
 \item To build a free (as in freedom) web application for searching
@@ -44,15 +84,31 @@ produce specific and quantifiable requirements
 \item The application should be scalable for much larger datasets.
 \end{enumerate}
 
-%% Requirements
+Chapter~\ref{chap:requirements} includes a description of the
+requirements derived from these objectives, and
+Chapter~\ref{chap:evaluation} evaluates the project with reference to
+the objectives, offering a measure of achievement for each. See the
+Overview section for a thorough description of the document structure.
 
-%% In the light of the “Context” section and any other relevant
-%% factors, give a clear statement of the requirements that the
-%% project’s end-product should meet. It should describe concisely
-%% what your experiment, design or program should do, (the question of
-%% how it is derived, or how it does it, will be dealt with in later
-%% sections).
+\columnbreak
 
+%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: timeline %%
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\centering
+% The bizarrely-specific height value is to vertically align the
+% caption with the left column text:
+\includegraphics[angle=90,origin=c,height=0.4561\paperheight]{assets/timeline}
+\caption[Project development timeline]
+        {A timeline of project development, showing significant major
+          project milestones.}
+\label{fig:timeline}
+\end{figure}
+
+\end{multicols}
+
+\newpage
 
 \newpage
 \section*{Submission archive}
@@ -199,28 +255,19 @@ to provide a technically accurate description of communication.
 
 
 \section*{Overview}\label{sec:overview}
-%% The last part of the introduction outlines the remainder of the
-%% report, explaining what comes in each section.  The introduction is
-%% the second most important section of the document. Everyone who
-%% reads your report will read the introduction; some may read only
-%% the Introduction and the Conclusion. Therefore, you should think
-%% carefully about what you want to say, and in what order you should
-%% say it. The introduction is also the most difficult one to write,
-%% because it is hard to balance the requirements of giving adequate
-%% explanation without entering into too much detail. For these
-%% reasons, you should re-write the introduction when you’ve written
-%% the rest of the Report (i.e. when you know what you have to
-%% introduce).
-The rest of the text is structured as follows: first a brief overview
-of the requirements analysis phase of the project is given
-(page~\pageref{chap:requirements}), with particular reference to the
-project plan. Then, a large body of text is devoted to the design and
-implementation of the final product, divided into three chapters:
-process (page~\pageref{chap:process}), infrastructure
-(page~\pageref{chap:infrastructure}), and product
-(page~\pageref{chap:product}). The results of the project are
-considered in the following evaluation chapter
-(page~\pageref{chap:evaluation}), followed by the conclusions
-(page~\pageref{chap:conclusions}). The appendices
-(page~\pageref{appendices}) and bibliography
-(page~\pageref{bibliography}) are included at the end.
+The rest of the text is structured as follows: the requirements
+analysis phase of the project is given in
+Chapter~\ref{chap:requirements}, with a brief overview of the project
+risks identified during the project planning phase and a description
+of the risk mitigation strategies. A large body of text is devoted to
+a description of the design and implementation of the final product,
+and is divided accordingly: information relevant to the development
+process and work flow is described in Chapter~\ref{chap:process}; the
+development of infrastructure and tooling is described in
+Chapter~\ref{chap:infrastructure}; and the product implementation in
+Chapter~\ref{chap:product}. Chapter~\ref{chap:evaluation} contains a
+product evaluation and the results of usability testing, and the
+conclusions and project results can be found in
+Chapter~\ref{chap:conclusions}. The appendices begin at
+page~\pageref{appendices}, followed by the bibliography and references
+at page~\pageref{bibliography}.
