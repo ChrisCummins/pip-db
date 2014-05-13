@@ -3,7 +3,7 @@ DOC = report
 
 DOCPDF = $(DOC).pdf
 DOCTEX = $(DOC).tex
-DOCSRC = $(shell find . \( ! -name '.*' \) -name '*.tex')
+DOCSRC = $(shell find . \( ! -name '.*' \) \( ! -name 'flycheck_*' \) -name '*.tex')
 
 BUILD_LOG = make.log
 
