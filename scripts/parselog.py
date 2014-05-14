@@ -35,7 +35,7 @@ def parse_lines(lines, outdir):
     curr_month = ""
     curr_date = None
     buf = []
-    line_lengths = []
+    word_counts = []
 
     # Process line by line
     for l in lines:
@@ -72,7 +72,11 @@ def parse_lines(lines, outdir):
                     else:
                         del buf[i]
 
-                line_lengths.append(len(buf))
+                wc = 0
+                for b in buf:
+                    wc += len(b.split())
+
+                word_counts.append(wc)
 
                 # Write buffer to file
                 fname = curr_date.strftime('%Y-%m-%d')
@@ -92,11 +96,11 @@ def parse_lines(lines, outdir):
         if curr_date and (len(buf) > 0 or l):
             buf.append(l)
 
-    print "Log length, {0}".format(len(lines))
-    print "No of entries, {0}".format(len(line_lengths))
-    print "Avg entry length, {0}".format(reduce(lambda x, y: x + y, line_lengths) / len(line_lengths))
-    print "Min entry length, {0}".format(min(line_lengths))
-    print "Max entry length, {0}".format(max(line_lengths))
+    print "No of entries, {0}".format(len(word_counts))
+    print "Log word count, {0}".format(sum(word_counts))
+    print "Avg word count, {0}".format(reduce(lambda x, y: x + y, word_counts) / len(word_counts))
+    print "Min word count, {0}".format(min(word_counts))
+    print "Max word count, {0}".format(max(word_counts))
 
 
 if __name__ == "__main__":
