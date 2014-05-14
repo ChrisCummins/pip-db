@@ -89,9 +89,27 @@ do_mksubmission() {
     rsync -a . "$target/"
 
     cd "$target"
-    echo "Cleaning submission repository"
+    echo "Building submission files"
     ./autogen.sh >/dev/null
     ./configure >/dev/null
+    make -C Documentation >/dev/null
+
+    # Export LaTeX PDFs
+    mv Documentation/plan/ProjectPlan.pdf  Documentation/ProjectPlan.pdf
+    mv Documentation/evaluation/report.pdf Documentation/Evaluation.pdf
+    mv Documentation/midterm/report.pdf    Documentation/MidtermReport.pdf
+    mv Documentation/design/d1/mockups.pdf Documentation/D1Mockups.pdf
+    mv Documentation/design/d2/renders.pdf Documentation/D2Mockups.pdf
+
+    # Export markdown HTMLs
+    for f in $(find Documentation -name '*.md'); do
+        html="${f%.*}".html
+        echo "  Creating $html"
+        pandoc $f -o $html
+        rm $f
+    done;
+
+    echo "Cleaning submission repository"
     make distclean >/dev/null
 
     # Tidy up
