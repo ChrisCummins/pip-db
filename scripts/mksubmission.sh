@@ -70,6 +70,7 @@ build/install-sh
 build/missing
 configure
 db/
+extern/bin/*
 extern/ncbi-blast-*
 pg/"
 
