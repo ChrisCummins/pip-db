@@ -1,31 +1,102 @@
 \chapter{Infrastructure}\label{chap:infrastructure}
 
-% WHAT is infrastructure
+The purpose of infrastructure is to develop a set of tools to assist
+in the creation of the product by automating a specific set of actions
+or behaviour. In software projects, these tools broadly fall into one
+of three categories: build automation, testing automation, and task
+automation. In all cases, their primary purposes is to save developer
+time and reduce the risk of human error by automating repeatable
+tasks. The development of tooling was assigned a high priority
+throughout the project due to its mitigating effects on the risks of
+technical complexity and deployment complexity. Additionally, it is
+often possible to repurpose tools for multiple projects, which helps
+satisfy the high project objective of producing something of real
+world value for future work.
 
-% WHY is infrastructure (the purpose of it)
-%    Importance of automation: builds, testing, deployment
-%    Requirements: WHY we spent time doing this
+\section{Build automation}\label{sec:build-automation}
 
-% HOW is infrastructure
-%    Tooling!
+The building and compilation stage for pip-db requires the execution
+of many steps, the most notable of which are:
 
-Broadly, infrastructure tools fit into one or more of four categories:
-building, testing, deployment, and task automation.
+\begin{itemize}
+\item \textbf{Clojure compilation} The web server is written in
+  Clojure LISP, which is a compiled language that must be compiled
+  into Java bytecode for execution on the Java Virtual Machine (see
+  Section~\ref{sec:programming-language-choice}).
+\item \textbf{JavaScript minification} Client-side scripts are
+  pre-processed using a minifier, which is program that reduces the
+  size of a source code by removing all unnecessary characters, and
+  further reduces the size of the source code through semantic
+  evaluation of the code in order to produce shorter variable names
+  and generate compacted source code. The purpose of generating a
+  compacted file is to reduce the bandwidth required to transmit it to
+  the client, resulting in faster page loading times.
+\item \textbf{Stylesheet pre-processing} Client-side stylesheets are
+  written in Less CSS, which is a language which compiles to CSS and
+  offers extensions to the CSS specification, such as variables and
+  control flow. Additionally, compiled CSS stylesheets are minified to
+  reduce their size.
+\item \textbf{Documentation rendering} User documentation is compiled
+  from intermediate forms (\LaTeX, Markdown) into publishable formats
+  (pdf, HTML).
+\item \textbf{Binary installation} Executable scripts and applications
+  and must be installed into appropriate directory in the system path,
+  for example \texttt{/usr/local/bin}.
+\end{itemize}
 
+\subsection{Build system}\label{subsec:build-system}
 
-\section{Building}\label{sec:building}
+In order to avoid having to manually execute every step of compilation
+by hand, a build system is used to automate the process. This project
+uses the GNU Build System\footnote{automake
+  \url{http://www.gnu.org/software/automake/manual/automake.html}}
+(also known as Autotools) for the unorthodox purpose of compiling
+website resources and source code. Autotools is a component of the GNU
+toolchain that was designed for creating portable Makefiles by
+offering three levels of increasing abstraction for the build system:
 
-% TODO: Pre-processing and cache busting
+\begin{enumerate}
+\item \textbf{autoconf} The autoconf tool generates a configure script
+  by scanning the build environment and generating scripts from input
+  sources.
+\item \textbf{configure} The configure script is responsible for
+  detecting platform-specific variables and configuring the build,
+  allowing for user configurations. Makefiles are generated at the end
+  of configuration.
+\item \textbf{make} Invoking the make program will build the project
+  using the Makefiles, which contain a set of targets for performing
+  tasks such as compilation, deletion of generated files, and
+  exporting releases.
+\end{enumerate}
 
-% Content hashing case study with autotools
-\cite{kelly2002optimization}
+In addition to automating each of the compilation tasks mentioned
+above, the autotooled build system offers the following additional
+behaviours:
 
+\begin{itemize}
+\item \textbf{Cross-platform compatibility} Differences between
+  platform-specific implementation details are handled by using the
+  substitution of generics. This means that the build system will
+  adapt to different environments and configurations.
+\item \textbf{Dependency resolution} A dependency tree models the
+  relation of compiled sources, so that compilation can be ordered
+  correctly to satisfy any dependencies. Additionally, third party
+  packages are downloaded and installed as required.
+\item \textbf{User configurations} Run time flags for the configure
+  script allow for partial compilation, enabling and disabling
+  features, and setting the optimisation level for compilation.
+\end{itemize}
 
-\subsection{Autotools}\label{subsec:autotools}
+Figure~\ref{fig:build-system-flowchart} shows how the build system
+prepares the HTML, CSS, and JS source files at build time. Autotools
+was designed for creating portable Makefiles for C software packages
+on UNIX systems. The application of Autotools for building websites is
+unusual, but the fine grained control and abstraction that is provided
+allows for a powerful and adaptive build system, with unique
+advantages over existing systems. Two such advantages are the ability
+to perform checksum based cache busting, and shell-level
+parallelisation of the build process.
 
-% TODO: Novel application of autotols for websites
-
-% Literate configure.ac
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Figure: build-system-flowchart %%
@@ -105,59 +176,141 @@ building, testing, deployment, and task automation.
   \draw[->] (js-html) -- node {NO} ++ (0, 2) |- (more-js);
   \draw[->] (js-html.180) -- node {YES} ++ (-.85cm, 0);
 \end{tikzpicture}
-\caption[Build system flowchart]{Build system flowchart.}
+\caption[Flowchart of build system HTML, CSS, and JS subsystem]
+        {Flowchart of build system HTML, CSS, and JS subsystem.}
 \label{fig:build-system-flowchart}
 \end{figure}
 
-\newpage
 
+\subsubsection*{Checksum based cache invalidation}
+
+When a web server transmits a file to client, it is possible to
+indicate in the HTTP response headers that the client should cache a
+copy of the file for future use. That way, future attempts to retrieve
+the file allow the client browser to simply retrieve the local copy
+from the cache, removing the need for a HTTP round trip. This greatly
+reduces the load time on repeat requests for the same file, and so is
+commonly used in the web for asset that are common to every page on a
+website, such as images, stylesheets, and scripts. The disadvantage of
+enabling this kind of caching is that if a client caches a file, and
+then the file is modified on the server, future requests for that file
+will retrieve the out of date cached copy. To prevent this, it is
+necessary to adopt a cache invalidation technique to ensure that files
+are not retrieved from the cache when they have been modified on the
+server.
+
+One technique for invalidating cached files on modification is to use
+a cache naming scheme \cite{kelly2002optimization}. This means that
+assets are given version numbers, and those version numbers are
+incremented every time a modification is made. For example, if a HTML
+page included a script \texttt{main.js}, the file would be given the
+name \texttt{main-v1.js}, that would be cached by the client. If
+\texttt{main.js} was modified, it would be renamed to
+\texttt{main-v2.js}, and all references to it would be updated to
+reflect this new name. At this point, the \texttt{main-v1.js} file
+would remain in the client's cache, but the HTML page would now point
+to \texttt{main-v2.js}, causing the client to fetch this new modified
+file. This process can be repeated indefinitely, so long as unique
+file names are always assigned.
+
+This technique for file name cache invalidation (known as
+\textit{cache busting}) is easy to incorporate into a build
+system. Every time the build system executes, it increments the
+version counters for each file, and updates any references to that
+file to point to the new version. However, this causes unnecessary
+duplication of files, since there is no means for detecting whether a
+file has \textit{actually} been modified when blindly increasing the
+version number.
+
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Listing: build-javascript %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\lstset{language=make}
+\lstset{language=python}
 \begin{lstlisting}[label=lst:build-javascript,caption={
-      [Autotools Makefile pattern for JavaScript compilation]
-      Autotools Makefile pattern for JavaScript compilation, taken
-      from \texttt{www/js/Makefile.am}. The conditional variables
-      \texttt{ENABLE\_MINI\_JS} and
-      \texttt{ENABLE\_CONTENT\_HASHING} are used to control the
-      behaviour of the compilation, and are set by passing argument
-      flags to the configuration script.}]
-# Compilation command
-if ENABLE_MINIFY_JS
-define compile
-  $(JAVA) -jar $(JS_JAR) --js=$1 --js_output_file=$2
-endef
-else # Disabled minification
-define compile
-  cat $1 > $2
-endef
-endif
+      [Pseudocode for compiling a JavaScript source]
+       Pseudocode listing for compiling a JavaScript source, with
+       optional content hashing and minification.}]
+def compile_javascript_source(file):
+    if content_hashing = enabled:
+        checksum = md5sum(file)
+        target_name = basename(file) + substring(checksum, 8) + '.js'
+    else:
+        target_name = filename(file)
 
-# JavaScript compilation
-$(DEST)/%.js: %.js
-  @test -d $(DEST) || { \
-    $(MKDIR_P) $(DEST); \
-  }
-if ENABLE_CONTENT_HASHING
-  $(eval CHASH := $(shell $(HASH_BIN) $< | cut -c1-$(HASH_LENGTH)))
-  $(eval NAME := $(addsuffix -$(CHASH).js,$(patsubst %.js,%,$@)))
-else
-  $(eval NAME := $@)
-endif
-  @test -f $(NAME) || { \
-    echo '  JS     $(notdir $(NAME))'; \
-    $(call compile,$<,$(NAME)); \
-  }
-if ENABLE_CONTENT_HASHING
-  $(eval TARGET := js\/$(patsubst %.js,%,$<))
-  @for h in $(HTML); do \
-    sed -ri 's/(<script src=\"(\{\{ *(\w|[_.])+ *\}\})*\/?)$(TARGET)(-[0-9a-f]{$(HASH_LENGTH)})?(\.js\")/\1$(TARGET)-$(CHASH)\5/' $$h; \
-  done
-endif
+    if not file_exists(target):
+        if minify_javascript = enabled:
+            target = minify(file)
+        else:
+            target = copy(file)
+
+        if content_hashing = enabled:
+            for h in html_source_list:
+                replace occurences of 'file' with 'target_name' in h
 \end{lstlisting}
 
+The pip-db build system uses a more pragmatic approach, whereby for
+each asset, it's checksum is computed using the md5sum algorithm. A
+concatenated version of this checksum is then appended to the
+filename, and references to the file are updated to point to this new
+file name, incorporating the checksum. The benefit of calculating file
+checksums instead of using incrementing version numbers is that the
+checksum is dependent on a file's \textit{contents}, and so will only
+change when the file has been modified. This succinctly solves the
+problem of cache invalidation only on file modifications, as
+unmodified files will have unchanged checksums. See
+Listing~\ref{lst:build-javascript} for a pseudocode implementation of
+this cache busting algorithm.
+
 \subsubsection*{Build system parallelisation}
+
+Autotools uses a recursive build system in which each directory is
+visited in turn, and all of the required compilation steps are
+executed before leaving and moving on to the next directory. This
+works well for the common use case of C programs, in which it may be
+necessary to generate all object files before invoking the
+linker. However, for the purposes of pip-db, this causes needless
+serialisation of the build system, since there are very few
+dependencies between different files. For example, the compiled web
+server does not depend on the stylesheets, which in turn do not depend
+on the client side scripts. Despite this, each item is compiled
+sequentially, with the build system only beginning on the next item
+once the previous item has completed.
+
+By representing the build system as a loop in which each iterations
+causes a new file to be compiled, it is evident that the loop could be
+successfully parallelised such that each iteration is assigned a
+separate thread, providing that there are no data dependencies between
+successive iterations. Over the course of several iterations,
+successive parallelisation optimisations were made to the build system
+such that as much of the compilation work is performed in parallel as
+possible.
+
+An experimental environment was set up on a development machine in
+which compilation was performed and timed 5 times, before applying a
+parallelisation optimisation and repeating the
+experiment. Figure~\ref{fig:build-times} shows the results of the
+experiment. In each case, the optimisation was implemented by simply
+spawning the compilation process in a forked subshell, as opposed to
+executing the compilation process from the main build thread. The
+first test performed was to time the serial build system, which
+executed in an average time of 39 seconds. The subsequent optimisation
+passes parallelised the following tasks: JavaScript minification, API
+documentation generation, CSS minification, image compression, Less
+CSS pre-processing, and tools compilation.
+
+As can be seen, the greatest reductions in times were achieved by
+parallelising the CPU-intensive JavaScript minification and
+documentation generation. Compilation tasks which were not CPU-bound
+such as image compression achieved a much lower reduction in
+compilation time, and in fact generated a very slight increase in the
+execution time. This is due to the cost of spawning a new subshell
+which is incurred by using shell-level parallelisation techniques. The
+build system parallelisation optimisations reduced execution time by a
+factor of 5. Further execution time reductions could be achieved by
+parallelising the recursive directory traversal of Autotools, but this
+would require significant alterations to the core automake package
+which are beyond the scope of this project.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -167,12 +320,12 @@ endif
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    title={Build system optimisations},
+    title={Build system parallelisation},
     axis y line*=left,
     axis x line*=bottom,
     scale only axis,
     ymajorgrids,
-    xticklabels={Control,
+    xticklabels={Unmodified,
                  JavaScript,
                  Documentation,
                  CSS,
@@ -246,43 +399,219 @@ coordinates {
 \label{fig:build-times}
 \end{figure}
 
-
+\newpage
 \subsection{On-demand compilation using inotify subsystem}\label{subsec:inotify}
 
-\cite{love2005kernel, shields2010inotify}
+A common desire amongst software engineers is to reduce the feedback
+loop when programming between making a modification to a source file,
+recompiling the sources, and executing the compiled program. The
+Autotooled build system described above provided a means for
+performing automated compilation of the project sources, but it must
+be manually invoked by the user, and it does not run any programs once
+completed. In order to reduce the feedback cycle for pip-db, a script
+was written which utilises the real time event notifications provided
+by the Linux inotify subsystem \cite{love2005kernel,
+  shields2010inotify}, in order to invoke the build system whenever a
+dependent source file is modified. In addition, it also performs
+heuristic analysis to determine which parts of the project need to be
+rebuilt, and will execute a development server after rebuilding. This
+greatly tightens the programmer feedback cycle, as the developer need
+only save a modified file in order for the build system to recompile
+the required sources and launch a new server with the changes in
+place, in real time.
+
+\subsection{Homogeneous deployment and development}\label{subsec:deployment}
+
+One of the project risks identified in the planning stage was the risk
+of complex deployment of the compiled website. This is a common
+problem with web development projects, where it is necessary to take a
+program developed on a local machine, and transfer it to run on a
+server which often has wildly different environments and
+hardware. Mitigation of this risk was achieved by combining the use of
+the Autotooled build system with the use of Heroku to host the
+website. Heroku\footnote{Heroku | Cloud Application Platform
+  \url{https://www.heroku.com/}} is a company which offers a hosting
+service whereby a repository can be uploaded and an arbitrary script
+executed. This means that a build script can be executed after
+uploading in order to compile all of the web sources on the server
+side, ensuring that differences in the environment can be compensated
+for by the build system. This simultaneously mitigates one of the key
+project risks, while providing a homogeneous build system which offers
+full control of the configuration of the deployment server and local
+development servers.
+
+\section{Test automation}\label{sec:test-automation}
+
+A stated goal of the project objectives is that there should be
+adequate automated test coverage of any APIs. This is achieved by
+using a combination of unit tests of individual software components,
+and black box testing of the entire web server using controlled
+datasets.
+
+\subsection{png: Generation of test data}\label{subsec:png}
+
+The generation of test data is achieved using a novel application of
+Markov chains for the purpose of creating plausible data from existing
+datasets. A Markov chain is a system used in statistical modelling of
+stochastic processes, in which the transitions between each state of a
+process are modelled as a function of their probability
+\cite{atwood2008markov}. When applied to a body of text, a set of
+Markov chains can model the probability that a given word may follow a
+preceding word. Listing~\ref{lst:markov-chain} shows a JavaScript
+implementation of this text parsing, building up an array of Markov
+chains (\texttt{wordTrees}), as well as recording each start and end
+word for sentences.
+
+\br{}
 
 
-\section{Testing}\label{sec:testing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Listing: markov-chain %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstset{language=JavaScript}
+\begin{lstlisting}[label=lst:markov-chain,caption={%
+      [Markov chain implementation]
+      Markov chain implementation in JavaScript.}]
+for (var i = 0; i < list.length; i++) {
+  var sentence = list[i].split(' ');             // Split line into words
 
-% AUTOMATED TEST COVERAGE
-\cite{zhu1997software}
+  startwords.push(sentence[0]);                  // Record first word
+  terminals.push(sentence[sentence.length - 1]); // Record last word
 
-% TEST COVERAGE
-\cite{woodward1980experience, gupta2000generating}
+  for (var j = 0; j < sentence.length - 1; j++) {
+    var current = sentence[j], next = sentence[j + 1];
 
-\subsection{Branch analysis for test coverage}\label{subsec:branch-analysis}
+    if (wordTrees[current] === undefined)
+      wordTrees[current] = [next];               // Create a word tree
+    else
+      wordTrees[current].push(next);             // Add word to tree
+  }
+}
+\end{lstlisting}
 
 
-% Cloverage
+By picking a random starting word from the set of states, it is
+possible to generate a syntactically correct sentence by traversing
+the states by picking a random transition from one state to the next,
+based on the probability of it occurring in the training set. See
+Listing~\ref{lst:markov-text-generator} for a JavaScript
+implementation of a Markov text generator. This method of text
+generation has applications where a seemingly plausible body of text
+must be generated from an input text, and has been used largely only
+for novelty purposes or for the generation of spam. The Plausible
+Nonsense Generator (png) is a tool which uses a Markov text generator
+to parse an input CSV training input, and generates a CSV with
+psuedo-random values based on these inputs.
 
-\subsection{Continuous integration}\label{subsec:continuous-integration}
+The Plausible Nonsense Generator proved extremely valuable for the
+purposes of blackbox systems testing, where it was possible to
+generate test datasets by training using PIP-DB. This provided useful
+test data while mitigating the risk of exposing the confidential
+PIP-DB data inadvertently while developing the prototype.
+
+\br{}
 
 
-% Travis CI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Listing: markov-text-generator %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstset{language=JavaScript}
+\begin{lstlisting}[label=lst:markov-text-generator,caption={%
+      [Markov text generator]
+      Markov text generator implementation.}]
+var next = function() {
+  var word = rand(startwords); // Pick a random starting word
+  var sentence = [word];       // Create a sentence array
 
-\section{Deployment}\label{sec:deployment}
+  while (wordTrees[word] !== undefined) {
+    var nextWords = wordTrees[word];
 
-% Continuous integration:
+    word = rand(nextWords);
+    sentence.push(word);
 
-\cite{fowler2006continuous, duvall2007continuous}
+    if (terminals[word] !== undefined)
+      break;
+  }
 
-% Heroku
+  return sentence.join(' ');
+};
+\end{lstlisting}
 
+\newpage
+\subsection{Test coverage using branch analysis}\label{subsec:branch-analysis}
+
+Unit tests are used to provide fine grained testing of individual
+software components. The purpose of these tests are to ensure
+correctness of code and algorithms, and operate at a lower level than
+whole system black box testing. Several criteria have been proposed
+for assessing the adequacy of unit tests, including an analysis of the
+coverages of code branches. For a given unit, the percentage of
+control transfers which are tested can be used as a metric to show
+indicate how thorough the testing is \cite{zhu1997software}. If every
+possible branch in a unit's program flow is tested, then it is said to
+have 100\% test coverage.
+
+In practice, achieving 100\% branch coverage with unit tests becomes
+increasingly impractical with software of significant
+complexity. Nested conditional logic results in an infinite set of
+unique paths through a program, requiring a structured approach to
+determine which paths require testing and which do not
+\cite{woodward1980experience}. In pip-db, the Clojure testing
+framework is used to write unit tests, and the third party library
+Cloverage\footnote{Cloverage
+  \url{https://github.com/lshift/cloverage}.} is used to perform
+automatic branch analysis of the source
+code. Figure~\ref{fig:cloverage} shows the generated report for a
+given source file. The output is colour coded for each line of source
+input such that green shows total test coverage, yellow indicates
+partial coverage and red represents untested logic. These visual
+indicators of test coverage allow for a quick review of test adequacy,
+and ensure that testing efforts can be focused on critical code
+sections, thus achieving the project objective of providing
+comprehensive automated test coverage of the API.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: cloverage %%
+%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.82\textwidth]{assets/cloverage}
+\caption[Screenshot of test coverage report]
+        {Screenshot of test coverage report.}
+\label{fig:cloverage}
+\end{figure}
+
+
+\newpage
+\subsection{Continuous integration}\label{subsec:ci}
+
+The usefulness of testing can only be asserted if tests are executed
+regularly during development. This is the basic tenant of the Test
+Driven Development process, which mandates that development occur in
+very small cycles of continuously writing new tests concurrently with
+the main development effort \cite{beck2003test}. One such technique
+for encouraging test driven development is the concept of continuous
+integration, in which the a cycle of development is accompanied by
+continuous integration of new features into the main build, in order
+to enable early regression catching \cite{fowler2006continuous,
+  duvall2007continuous}. In pip-db, continuous integration testing is
+provided by Travis CI\footnote{Travis CI
+  \url{https://travis-ci.org/}.}, a service which uses a similar
+process to Heroku as described in Section~\ref{subsec:deployment},
+automatically executing the full test suite whenever a new revision is
+made.
+
+The execution of tests occurs when a revision is published, and is
+performed asynchronously on a dedicated test server, which performs
+the tests and reports back whether the tests passed or failed. This
+way, it is possible to be continuously developing on the main project
+whilst ensuring that tests are never missed. This reduces the risk of
+human error causing a regression to enter into the main development
+branch unnoticed, as well as reducing the development cycle by
+performing testing asynchronously on dedicated hardware.
 
 \section{Task automation}\label{sec:task-automation}
-
-% TODO: brief explanation of each script in scripts/
-
 
 \subsection{dsa: Dataset analysis}\label{subsec:dsa}
 
@@ -370,112 +699,8 @@ plot coordinates{
 \label{fig:dsa-populated}
 \end{figure}
 
-
-\newpage
-\subsection{png: Generation of test data}\label{subsec:png}
-
-% TODO: novel application of Markov text generators for creating
-% plausible scientific data for testing purposes.
-
-\cite{atwood2008markov, page1999pagerank}
-
-% TODO: png
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Listing: markov-chain %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\lstset{language=JavaScript}
-\begin{lstlisting}[label=lst:markov-chain,caption={%
-      [Markov chain implementation]
-      Markov chain implementation in JavaScript.}]
-for (var i = 0; i < list.length; i++) {
-  var sentence = list[i].split(' ');             // Split line into words
-
-  startwords.push(sentence[0]);                  // Record first word
-  terminals.push(sentence[sentence.length - 1]); // Record last word
-
-  for (var j = 0; j < sentence.length - 1; j++) {
-    var current = sentence[j], next = sentence[j + 1];
-
-    if (wordTrees[current] === undefined)
-      wordTrees[current] = [next];               // Create a word tree
-    else
-      wordTrees[current].push(next);             // Add word to tree
-  }
-}
-\end{lstlisting}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Listing: markov-text-generator %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\lstset{language=JavaScript}
-\begin{lstlisting}[label=lst:markov-text-generator,caption={%
-      [Markov text generator]
-      Markov text generator implementation.}]
-var next = function() {
-  var word = rand(startwords); // Pick a random starting word
-  var sentence = [word];       // Create a sentence array
-
-  while (wordTrees[word] !== undefined) {
-    var nextWords = wordTrees[word];
-
-    word = rand(nextWords);
-    sentence.push(word);
-
-    if (terminals[word] !== undefined)
-      break;
-  }
-
-  return sentence.join(' ');
-};
-\end{lstlisting}
-
-
 \newpage
 \subsection{pipbot: Task automation}\label{subsec:pipbot}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Figure: pipbot-logo %%
-%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[H]
-\begin{verbatim}
-                              ,--.    ,--.
-                             ((O ))--((O ))
-                           ,'_`--'____`--'_`.
-                          _:  ____________  :_
-                         | | ||::::::::::|| | |
-                         | | ||::::::::::|| | |
-                         | | ||::::::::::|| | |
-                         |_| |/__________\| |_|
-                           |________________|
-                        __..-'            `-..__
-                     .-| : .----------------. : |-.
-                   ,\ || | |\______________/| | || /.
-                  /`.\:| | ||  __  __  __  || | |;/,'\
-                 :`-._\;.| || '--''--''--' || |,:/_.-':
-                 |    :  | || .----------. || |  :    |
-                 |    |  | || '--pipbot--' || |  |    |
-                 |    |  | ||   _   _   _  || |  |    |
-                 :,--.;  | ||  (_) (_) (_) || |  :,--.;
-                 (`-'|)  | ||______________|| |  (|`-')
-                  `--'   | |/______________\| |   `--'
-                         |____________________|
-                          `.________________,'
-                           (_______)(_______)
-                           (_______)(_______)
-                           (_______)(_______)
-                           (_______)(_______)
-                          |        ||        |
-                          '--------''--------'
-                     Hello there. My name is pipbot.
-\end{verbatim}
-\caption[The pipbot welcome message]
-  {The pipbot welcome message, displayed at the start of interactive sessions.}
-\label{fig:pipbot-logo}
-\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
