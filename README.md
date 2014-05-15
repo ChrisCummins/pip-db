@@ -2,8 +2,8 @@
 
 [![Build Status](https://api.travis-ci.org/ChrisCummins/pip-db.png)](https://travis-ci.org/ChrisCummins/pip-db)
 
-This repository contains the [Protein Isoelectric Point
-Database](http://www.pip-db.org), a website which houses data
+This repository contains the source code for the [Protein Isoelectric
+Point Database](http://www.pip-db.org), a website which houses data
 accumulated by members of Aston University's Life and Health Sciences
 department. The purpose of the website is to provide a powerful and
 easy-to-use search engine for the mass of biological data which has
