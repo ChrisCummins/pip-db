@@ -613,9 +613,41 @@ performing testing asynchronously on dedicated hardware.
 
 \section{Task automation}\label{sec:task-automation}
 
+The third category of infrastructure tooling is task automation. Task
+automation tools fulfil the self evident role of automating a sequence
+of actions which would otherwise have to be performed manually by the
+developer. The value of a task automation tool can be assessed based
+on the frequency with which the task needs to be performed, and the
+amount of time saved by automating it. Two examples of task automation
+tools which have been written for pip-db are a dataset analysis tool
+and a repository manager.
+
 \subsection{dsa: Dataset analysis}\label{subsec:dsa}
 
-% TODO: dsa
+It is important to analyse the contents of PIP-DB in order to best
+understand how it should be stored and interacted with, but a manual
+analysis of the dataset would taken hundreds of man hours due to its
+large size. Additionally, we would need to repeat this analysis if the
+dataset were to be modified. In order to mitigate the risk of a change
+in the dataset during development, a dataset analysis tool (dsa) was
+written which would perform automated statistical analysis of the
+dataset. The dsa tool parses an input dataset and produces a machine
+parsable output file containing meta data about the dataset, including
+such properties as the percentages of unique values for each column, a
+list of the most frequent values, the mean, range and mode of
+numerical values, and a number of other properties which prove
+influential in the design of the data
+back-end. Figure~\ref{fig:dsa-populated} shows a graph of one of the
+properties which it analyses.
+
+The dsa tool proved valuable in the early design stages of the web
+server, where a broad understanding of the dataset contents led to
+justified design decisions in the back-end, with real data to support
+design decisions. It also proved useful during the development of the
+Plausible Nonsense Generator (Section~\ref{subsec:png}), where it
+could be used to verify that the contents of generated datasets has
+similar properties to PIP-DB. This reduced the time required to
+prepare tests significantly.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -625,7 +657,7 @@ performing testing asynchronously on dedicated hardware.
 \centering
 \begin{tikzpicture}
 \begin{axis}[%
-    title={Populated fields in dataset},
+    title={Ratio of populated fields in dataset},
     width=\textwidth, height=6cm,
     axis y line*=left,
     axis x line*=bottom,
@@ -645,7 +677,7 @@ performing testing asynchronously on dedicated hardware.
       M.W,
       Subunit No.,
       Subunit M.W.,
-      No. of Iso-enzymes,
+      No.\ of Iso-enzymes,
       pI maximum value,
       pI min,
       pI max,
@@ -699,8 +731,47 @@ plot coordinates{
 \label{fig:dsa-populated}
 \end{figure}
 
+
+\subsection{pipbot: Repository management}\label{subsec:pipbot}
+
+The development of pipbot marks a departure from the UNIX philosophy
+of creating small, single purpose programs \cite{raymond2003art}, and
+instead attempts to create an all-encompassing tool for managing the
+day to day activities of repository management and development. With
+the sole aim of automating many of the more mundane tasks, pipbot can
+be invoked as either an interactive shell or a batch mode program, and
+has functionality for:
+
+\begin{itemize}
+\item \textbf{Build and deployment} Pipbot is capable of invoking the
+  build system for local development, as well as deploying public
+  builds to the remote web server. It can additionally generate
+  reports of the current local build configuration.
+\item \textbf{Generating burndowns} Pipbot can generate reports of the
+  development activity over a given timespan, and since the last
+  public release. This is useful for preparing for meetings by giving
+  a quick high level overview of recent development efforts.
+\item \textbf{Issue tracking} Pipbot interacts with the public GitHub
+  API in order to be able to list, show, open and close issues. This
+  removes the need to context switch between a programming editor and
+  a web browser during development.
+\item \textbf{Branching} Pipbot has an implementation of the branching
+  model (Section~\ref{subsec:branching-model}) that allows for the
+  creation and completion of feature branches. This enforces a
+  consistent version control policy, making the revision history more
+  uniform and informative.
+\item \textbf{Release preparation} Pipbot can create release branches
+  and tags.
+\end{itemize}
+
 \newpage
-\subsection{pipbot: Task automation}\label{subsec:pipbot}
+Implemented as a monolithic Python script, the pipbot tool was
+responsible for the huge time savings throughout the course of the
+project through full automation of the most common development
+tasks. Figure~\ref{fib:pipbot-session} shows an example pipbot
+session.
+
+\br{}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
