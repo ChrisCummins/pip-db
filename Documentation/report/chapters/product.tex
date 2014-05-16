@@ -303,7 +303,7 @@ an 11 digit character.
 %%%%%%%%%%%%%%%%%%%
 % Listing: router %
 %%%%%%%%%%%%%%%%%%%
-\lstset{language=Clojure}
+\lstset{language=clojure}
 \begin{lstlisting}[label=lst:router,caption={%
       [Application ring handler routes]
       Application ring handler routes, taken from \texttt{middleware.clj}.}]
@@ -651,36 +651,8 @@ def get_unique_identifier(record):
     return substring(b64, 11)
 \end{lstlisting}
 
-\newpage
 
-\section{Search engine design}\label{sec:search-engine}
-
-The search functionality of pip-db supports querying individual
-properties of the dataset, with the ability to combine individual
-properties to perform complex compound queries. Query properties fall
-into three main categories: Name queries ($N$), Protein queries ($P$),
-and Experimental method queries ($E$). Each category is composed of
-specific property queries, see Table~\ref{tab:query-components} for a
-full description. The structure of a query $Q$ can composed in a
-tree-like manner by considering $Q$ as the sum of all individual
-property queries (Figure~\ref{fig:query-tree}), and using a logical
-AND relationship to link neighbouring nodes. By treating a query as a
-tree structure, it can be easily mapped into LISP code by representing
-the root node of the tree as a set of nested
-lists.
-
-A set of macros were written to create a domain specific language in
-Clojure for representing queries as tree structures, with a syntax for
-describing comparison operations (e.g.\ is equal, is greater than, is
-not equal), and compound operations for composing operations
-(e.g.\ logical and, or). The query tree can then be serialised into an
-SQL statement by traversing traversing the tree and assembling each
-node into a select statement. Listing~\ref{lst:query-tree} shows the
-implementation of the pip-db query tree in Clojure, where logical
-reduction has been used to combine the AND conditionals where
-possible.
-
-\vspace{3cm}
+\vspace{2cm}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -714,7 +686,33 @@ $E$ & $t_l$, $t_h$ & Minimum and maximum experimental temperature\\
 
 
 \newpage
-\vspace{4cm}
+\section{Search engine design}\label{sec:search-engine}
+
+The search functionality of pip-db supports querying individual
+properties of the dataset, with the ability to combine individual
+properties to perform complex compound queries. Query properties fall
+into three main categories: Name queries ($N$), Protein queries ($P$),
+and Experimental method queries ($E$). Each category is composed of
+specific property queries, see Table~\ref{tab:query-components} for a
+full description. The structure of a query $Q$ can composed in a
+tree-like manner by considering $Q$ as the sum of all individual
+property queries (Figure~\ref{fig:query-tree}), and using a logical
+AND relationship to link neighbouring nodes. By treating a query as a
+tree structure, it can be easily mapped into LISP code by representing
+the root node of the tree as a set of nested
+lists.
+
+A set of macros were written to create a domain specific language in
+Clojure for representing queries as tree structures, with a syntax for
+describing comparison operations (e.g.\ is equal, is greater than, is
+not equal), and compound operations for composing operations
+(e.g.\ logical and, or). The query tree can then be serialised into an
+SQL select statement by traversing the tree and assembling each node
+into a condition statement. Listing~\ref{lst:query-tree} shows the
+implementation of the pip-db query tree in Clojure, where logical
+reduction has been used to combine the AND conditionals where
+possible.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %% Figure: query-tree %%
@@ -785,14 +783,15 @@ $E$ & $t_l$, $t_h$ & Minimum and maximum experimental temperature\\
 \label{fig:query-tree}
 \end{figure}
 
+% TODO: Example queries
 
-\vspace{1.5cm}
 
+\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %% Listing: query-tree %%
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\lstset{language=Clojure}
+\lstset{language=clojure}
 \begin{lstlisting}[label=lst:query-tree,caption={%
       [Clojure implementation of the query tree]
       Implementation of the query tree in Clojure, from the file
@@ -825,16 +824,43 @@ $E$ & $t_l$, $t_h$ & Minimum and maximum experimental temperature\\
 \end{lstlisting}
 
 
-\newpage
+\subsection{Incorporating BLAST searching}\label{subsec:blast-searching}
 
-\subsection{Incorporating BLAST+ searching}\label{subsec:blast-searching}
+One of the extensions to the core search engine suggested by Dr Flower
+was to add the ability to perform queries of PIP-DB using Basic Local
+Alignment Search Tool (BLAST) searching. NCBI BLAST consists of a
+suite of search tools\footnote{BLAST+ executables
+  \url{http://blast.ncbi.nlm.nih.gov}.}
+which can query a database of proteins sequences in the FASTA format,
+allowing users to identify proteins using parts of
+sequences. Incorporating BLAST searching in pip-db involved developing
+a dynamic dispatcher for the search engine which would invoke the
+required BLAST+ executable when needed.
 
 \subsubsection*{Dynamic dispatcher}
+
+Dynamic dispatch is the process by which a polymorphic function
+determines which behaviour to use at run time. The process is used
+extensively in pip-db, for example, routing request maps to ring
+handlers (Section~\ref{subsec:routing}). For searches, the main search
+function inspects the search parameters and determines whether a BLAST
+search is needed (i.e.\ whether the search parameters include a FASTA
+sequence). If a BLAST search is required, then the
+\textit{blast/search} function is used to handle the
+search. Otherwise, the \textit{db/search} function is used. In both
+cases, the results are merged into a results map which contains
+auxiliary information such as the number of records which were
+searched and the number of matching records, and the custom HTTP
+headers ``x-pip-db-query-terms'' and ``x-pip-db-records'' can be used
+to further control the contents of the response map. See
+Listing~\ref{lst:search-dispatcher} for the dispatcher implementation.
+
+\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Listing: search-dispatcher %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\lstset{language=Clojure}
+\lstset{language=clojure}
 \begin{lstlisting}[label=lst:search-dispatcher,caption={%
       [Search handler and dynamic dispatcher]
       Search handler and dynamic dispatcher. Accepting a request map,
@@ -865,63 +891,71 @@ $E$ & $t_l$, $t_h$ & Minimum and maximum experimental temperature\\
        {:Query-Terms               (dissoc params "seq_name")}))))
 \end{lstlisting}
 
- The \texttt{params->str} function (line \ref{lst:db-search-str})
- converts a search parameter map into a structured query tree
- (figure~\ref{fig:query-tree}) and serialises it into an SQL select
- statement. This is used to generate a vector of record rows which are
- mapped over the \texttt{row->record} function (line
- \ref{lst:db-search-row}), converting them back into structured YAPS
- records.
+
+In line~\ref{lst:search-dispatcher-dispatch}, either the
+\textit{blast/search} or \textit{db/search} functions are dispatched
+to handle the search request, depending on whether it is a BLAST or
+non-BLAST search, respectively. Listing~\ref{lst:db-search} shows the
+implementation of the \textit{db/search} function for performing
+non-BLAST searches.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %% Listing: db-search %%
 %%%%%%%%%%%%%%%%%%%%%%%%
-\lstset{language=Clojure}
+\lstset{language=clojure}
 \begin{lstlisting}[label=lst:db-search,caption={%
-      [The \texttt{db} namespace search function]
-      The \texttt{db} namespace search function.}]
+      [The \textit{db} namespace search function]
+      The \textit{db} namespace search function.}]
 (defn search [request]
 (*@\label{lst:db-search-str}@*)  (let [query-str (params->str (request :params))]
 (*@\label{lst:db-search-row}@*)    (map row->record (search-results query-str))))
 \end{lstlisting}
 
+The \textit{params->str} function (line~\ref{lst:db-search-str}) is
+responsible for serialising a parameter map into a structured query
+tree, and serialises it into an SQL select statement. This is used to
+generate a vector of SQL record rows which are mapped over the
+\textit{row->record} function (line~\ref{lst:db-search-row}),
+converting them back into structured YAPS records by post-processing
+the data.
 
-The blast search function (Listing~\ref{lst:blast-search}) first
-executes the \texttt{blastp} program with an appropriate environment
-and input filtered from the request map (line
-\ref{lst:blast-search-blastp}), and then maps the output of the
-program into the function \texttt{result->records} which performs a
+The BLAST search function (Listing~\ref{lst:blast-search}) first
+executes the \textit{blastp} program with an appropriate environment
+and input filtered from the request map
+(line~\ref{lst:blast-search-blastp}), and then maps the output of the
+program into the function \textit{result->records} which performs a
 reverse lookup of the matched sequences and performs repeated database
-searches for the matched records using the parameter map.
+searches for the matched records using the parameter
+map. Listing~\ref{lst:blast-search-wrapper} shows the implementation
+of the \textit{results->records} function, showing the functional
+composition of the db search function to produce blast search
+(line~\ref{lst:blast-search-wrapper-db}).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Listing: blast-search %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\lstset{language=Clojure}
+\lstset{language=clojure}
 \begin{lstlisting}[label=lst:blast-search,caption={%
-      [The \texttt{blast} namespace search function]
-      The \texttt{blast} namespace search function.}]
+      [The \textit{blast} namespace search function]
+      The \textit{blast} namespace search function.}]
 (defn search [request]
 (*@\label{lst:blast-search-blastp}@*)  (let [results (blast-results ((request :params) "seq"))]
 (*@\label{lst:blast-search-map}@*)    (flatten (map #(result->records request %) results))))
 \end{lstlisting}
 
+
 \newpage
-Listing \ref{lst:blast-search-wrapper} shows the implementation of the
-\texttt{results->records} function, proving the functional composition
-of the db search function to produce blast search (line
-\ref{lst:blast-search-wrapper-db}).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Listing: blast-search-wrapper %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\lstset{language=Clojure}
+\lstset{language=clojure}
 \begin{lstlisting}[label=lst:blast-search-wrapper,caption={%
-      [The \texttt{blast} namespace search function]
-      The \texttt{blast} namespace search function.}]
+      [The \textit{blast} namespace search function]
+      The \textit{blast} namespace search function.}]
 (defn result->records [request result]
   (let [params  (assoc (request :params) "seq_name" (result :title))
 (*@\label{lst:blast-search-wrapper-db}@*)        records (db/search (assoc request :params params))]
@@ -929,25 +963,85 @@ of the db search function to produce blast search (line
 \end{lstlisting}
 
 
-\subsection{Design of an API for searching services}\label{subsec:api-design}
+\subsection{API and mobile code}\label{subsec:api}
 
-% RESTFUL API
+After the implementation of the core search engine component, an API
+was designed which would expose the search functionality publicly. The
+purpose of a public API is to allow for programmatic public
+interaction with the search engine. This allows users to write their
+own clients for performing searches. Communications with the public
+API uses the JSON file format transmitted over HTTP. The reason for
+using JSON is that it is a lightweight data encoding which is widely
+and simply supported in a number of programming languages, and
+translates easily to and from the map structures which are used
+internally within the pip-db web server. All that was required to
+implement the public API was to assign ring handlers which wrap the
+internal search functions into JSON responses, shown in
+Listing~\ref{lst:api-handlers}.
 
-\lstset{language=Clojure}
+The public API offers benefits to software developers who intend to
+develop their own pip-db clients. Additionally, it also aids in
+development of the core website itself. By having a solid public API
+which is capable of interacting with the search engine, it is possible
+to avoid having to perform the dynamic generation of HTML for search
+results within the web server, and instead transmit mobile JavaScript
+scripts which interact with the public API and generate the required
+HTML on the client side. Doing so means that the public API is the
+only entry point for the search engine, which has many
+advantages. Firstly, it creates a simpler project, since it reduces
+the number of the APIs. Both internal and external clients use the
+same consistent API. This improves maintainability, as there is only
+one point of change for modifications, and it reduces the code
+size. Using mobile code also reduces the bandwidth load on the server,
+as transmitted JavaScript can be cached by web clients, requiring only
+JSON search results to be transmitted. This increases the throughput
+of the server by offloading the computational expense of generating
+HTML from the web server to the client browser, and uses the standard
+distributed application practise of balancing computation across all
+nodes in a system, not relying on the central web server node to
+preform all of the computation, leading to performance bottlenecks.
+
+The size of the client side vs.\ web server code bases are indicative
+of the amount of computation that is performed on each side. The
+pip-db web server consists of 1,882 lines of Clojure LISP, and the
+line count for client side scripts is only marginally lower at
+1,713. This indicates the balance between server-side and client-side
+computation. The public API also enables asynchronous AJAX
+communications with the search engine, a feature which is exploited
+extensively in the usability features described in
+Section~\ref{subsec:ux}.\\
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Listing: api-handlers %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstset{language=clojure}
 \begin{lstlisting}[label=lst:api-handlers,caption={%
       [API ring handler implementations]
-      API ring handler implementations, taken from \texttt{api.clj}.}]
+       API ring handler implementations, taken from \texttt{api.clj}.}]
 (defn s [request]
   (util/json-response (search/search request)))
 
 (defn r [request]
   (util/json-response (search/search (util/remap-id-param request))))
-
-(defn ac [request]
-  (util/json-response (db/autocomplete request)))
 \end{lstlisting}
 
-\subsection{Autocomplete}\label{subsec:autocomplete}
+
+\subsection{API-enabled search engine usability}\label{subsec:ux}
+
+As described in Section~\ref{subsec:user-centred-design}, a
+human-centred approach was adopted for the design of the
+website. Through consistent interaction with potential users and the
+evaluation of common use cases, a number of attempts to innovate the
+user experience for bioinformatics search engines. For the search
+page, a combination of mobile code and the public API was used to
+implement two features to streamline the process of entering complex
+searches: the first is context sensitive Autocompletion of fields
+using a dedicated API, and the second is a widget which indicates the
+number of results will be returned by a given
+search. Figure~\ref{fig:search-sequence} shows how a client browser
+interacts with these APIs when the user filling in a search form.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Figure: search-sequence %
@@ -996,15 +1090,19 @@ of the db search function to produce blast search (line
 \caption[Search form sequence diagram]{Search form sequence
   diagram. The instances \texttt{/api/ac}, \texttt{/api/s}, and
   \texttt{/s}, represent the public web services available at those
-  locations. Communication from the Browser to those services takes
-  the form of HTTP GET requests.}
+  locations. Communication from the browser to those services takes
+  the form of asynchronous HTTP GET requests.}
 \label{fig:search-sequence}
 \end{figure}
 
 
-\section{Performance and security}
+\newpage
+\section{Website design and usage}\label{sec:website-design}
 
-\section{Usage instructions}\label{sec:usage-instructions}
+This section contains an annotated visual overview of the design of
+the pip-db website, and its usage instructions.
+
+\vspace{1.5cm}
 
 
 %%%%%%%%%%%%%%%%%%%%
@@ -1012,9 +1110,14 @@ of the db search function to produce blast search (line
 %%%%%%%%%%%%%%%%%%%%
 \begin{figure}[H]
 \centering
-    \includegraphics[width=\textwidth]{assets/pip-db}
+    \includegraphics[width=0.82\textwidth]{assets/pip-db}
 \caption[pip-db homepage]
-        {pip-db homepage.}
+        {The pip-db homepage. This provides the main entry point into
+          the website. Users may perform basic protein name queries,
+          and navigate to the advanced search and BLAST search
+          pages. The copy is text provided by Dr Flower to explain the
+          purpose of PIP-DB and to provide scientific context and
+          background for the data.}
 \label{fig:pip-db}
 \end{figure}
 
@@ -1024,9 +1127,12 @@ of the db search function to produce blast search (line
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[H]
 \centering
-    \includegraphics[width=\textwidth]{assets/pip-db-advanced}
+    \includegraphics[width=0.82\textwidth]{assets/pip-db-advanced}
 \caption[pip-db advanced search page]
-        {pip-db advanced search page.}
+        {The pip-db advanced search page. This page allows users to
+          query the database using a combination of different
+          properties, including protein name keyword matching, and
+          numerical properties such as temperature and pI.}
 \label{fig:pip-db-advanced}
 \end{figure}
 
@@ -1036,58 +1142,14 @@ of the db search function to produce blast search (line
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[H]
 \centering
-    \includegraphics[width=\textwidth]{assets/pip-db-autocomplete}
+    \includegraphics[width=0.82\textwidth]{assets/pip-db-autocomplete}
 \caption[Autocompletion suggestions in pip-db]
-        {Autocompletion suggestions in pip-db for the term \textit{kina}.}
+        {Autocompletion suggestions on the advanced search page for
+          the term \textit{kina}. The autocompletion API uses
+          frequency analysis of the most common terms in the database
+          to provide appropriate suggestions, so that the most
+          frequently used matching terms are suggested first.}
 \label{fig:pip-db-autocomplete}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Figure pip-db-blast %%
-%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[H]
-\centering
-    \includegraphics[width=\textwidth]{assets/pip-db-blast}
-\caption[pip-db BLAST+ search page]
-        {pip-db BLAST+ search page with a sequence entered.}
-\label{fig:pip-db-blast}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Figure: pip-db-record %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[H]
-\centering
-    \includegraphics[width=\textwidth]{assets/pip-db-record}
-\caption[pip-db record page]
-        {pip-db record page for \textit{Alkaline phosphatase}.}
-\label{fig:pip-db-record}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Figure: pip-db-record-fasta %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[H]
-\centering
-    \includegraphics[width=\textwidth]{assets/pip-db-record-fasta}
-\caption[pip-db record page FASTA sequence]
-        {pip-db record page with visible FASTA sequence.}
-\label{fig:pip-db-record-fasta}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Figure: pip-db-results %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[H]
-\centering
-    \includegraphics[width=\textwidth]{assets/pip-db-results}
-\caption[pip-db results page]
-        {pip-db results page for the search term \textit{Alkaline phosphatase}.}
-\label{fig:pip-db-results}
 \end{figure}
 
 
@@ -1096,8 +1158,66 @@ of the db search function to produce blast search (line
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[H]
 \centering
-    \includegraphics[width=\textwidth]{assets/pip-db-results-indicator}
+    \includegraphics[width=0.82\textwidth]{assets/pip-db-results-indicator}
 \caption[pip-db results indicator]
-        {pip-db results indicator, showing 3 results.}
+        {The pip-db results indicator on the advanced search page. The
+          results indicator shows the number of records which match
+          the current search query, and is updated dynamically as the
+          user fills out the form. The screenshot shows that 3 records
+          will be returned for the current search terms. Also visible
+          is the use of a sliding range input widget for specifying a
+          range of pI values to search.}
 \label{fig:pip-db-results-indicator}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: pip-db-results %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.82\textwidth]{assets/pip-db-results}
+\caption[pip-db results page]
+        {The pip-db search results page for the search term
+          \textit{Alkaline phosphatase}. The search results page lists
+          the protein names and pI of each matching record. If the
+          user clicks on a record, further information about the
+          record is revealed. Clicking the ``See more information''
+          link will then redirect the user to that specific record's
+          page. There is a button to download the search results in
+          CSV or JSON formats.}
+\label{fig:pip-db-results}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: pip-db-record %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.82\textwidth]{assets/pip-db-record}
+\caption[pip-db record page]
+        {The pip-db record page, showing an \textit{Alkaline
+            phosphatase} entry. The page shows property values, with a
+          ``See other records like this'' link for showing records
+          with identical property values. Links and cross-references
+          to external resources are shown in the top right, along with
+          a button to download the record. Beneath that is an
+          automatic page reference generator, for the purpose of
+          citations.}
+\label{fig:pip-db-record}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: pip-db-download %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.82\textwidth]{assets/pip-db-download}
+\caption[pip-db download results page]
+        {The pip-db download results page, which supports the download
+          of search results and individual records in either CSV or
+          JSON formats.}
+\label{fig:pip-db-download}
 \end{figure}
