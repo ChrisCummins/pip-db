@@ -117,8 +117,9 @@ do_mksubmission() {
         rm -rf $f;
     done;
 
-    find . -name 'Makefile.in' | xargs rm
-    find . -name '.gitignore' | xargs rm
+    find . -name 'Makefile'    | xargs rm -f
+    find . -name 'Makefile.in' | xargs rm -f
+    find . -name '.gitignore'  | xargs rm -f
 
     # Create ZIP file
     directory=${PWD##*/}
