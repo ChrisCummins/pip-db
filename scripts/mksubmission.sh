@@ -4,7 +4,24 @@
 #
 # This script mirrors the project repository and cleans it up,
 # preparing it for submission for academic assessment.
-
+#
+# Copyright 2014 Chris Cummins.
+#
+# This file is part of pip-db.
+#
+# pip-db is free software: you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# pip-db is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with pip-db.  If not, see <http://www.gnu.org/licenses/>.
+#
 
 # Print program usage
 usage() {
@@ -50,9 +67,12 @@ CLEANFILES=".git
 aclocal.m4
 autom4te.cache
 build/install-sh
+build/jar/closure-compiler.jar
+build/jar/yuicompressor.jar
 build/missing
 configure
 db/
+extern/bin/*
 extern/ncbi-blast-*
 pg/"
 
@@ -71,9 +91,27 @@ do_mksubmission() {
     rsync -a . "$target/"
 
     cd "$target"
-    echo "Cleaning submission repository"
+    echo "Building submission files"
     ./autogen.sh >/dev/null
     ./configure >/dev/null
+    make -C Documentation >/dev/null
+
+    # Export LaTeX PDFs
+    mv Documentation/plan/ProjectPlan.pdf  Documentation/ProjectPlan.pdf
+    mv Documentation/evaluation/report.pdf Documentation/Evaluation.pdf
+    mv Documentation/midterm/report.pdf    Documentation/MidtermReport.pdf
+    mv Documentation/design/d1/mockups.pdf Documentation/D1Mockups.pdf
+    mv Documentation/design/d2/renders.pdf Documentation/D2Mockups.pdf
+
+    # Export markdown HTMLs
+    for f in $(find . -name '*.md'); do
+        html="${f%.*}".html
+        echo "  Creating $html"
+        pandoc $f -o $html
+        rm $f
+    done;
+
+    echo "Cleaning submission repository"
     make distclean >/dev/null
 
     # Tidy up
@@ -81,8 +119,9 @@ do_mksubmission() {
         rm -rf $f;
     done;
 
-    find . -name 'Makefile.in' | xargs rm
-    find . -name '.gitignore' | xargs rm
+    find . -name 'Makefile'    | xargs rm -f
+    find . -name 'Makefile.in' | xargs rm -f
+    find . -name '.gitignore'  | xargs rm -f
 
     # Create ZIP file
     directory=${PWD##*/}

@@ -1,26 +1,63 @@
 \chapter{Introduction}\label{chap:introduction}
 
-%% Introduction: This is mandatory. A description of the aims of the
-%% work and an indication of how the work is presented in the report.
-%% Typical target: a Chief Engineer who must have a comprehensive view
-%% of the contents of the report from the introduction. Therefore it
-%% should provide:
+The purpose of the project was to take a set of data collated by
+members of the Life and Health Sciences department and to categorise
+and store it online in an accessible form for other people to
+search. There are many existing databases categorising biological
+information at the molecular level, but none for the isoelectric point
+(pI). The isoelectric point is the acidity (pH) at which a molecule
+carries no net charge. Below the isoelectric point, proteins have a
+net positive charge, above it a negative charge. In the denatured
+state, the pI depends solely on a protein’s amino acid composition.
 
-%% Context
+Professor Ian Nabney proposed the project and supervised
+development. Dr Darren Flower of the Life and Health Sciences
+department acted as the principle owner of PIP-DB, providing a copy
+for use in the website. Additionally, he was responsible for helping
+to explain the required biochemistry theory, and acted as a potential
+user during design feedback sessions. The two primary deliverables
+provided by Professor Nabney in the project description were:
 
-%% Provide motivation for the project. Discuss the background to the
-%% project, provide whatever background the reader will need in order
-%% to understand your contribution, and including relevant previous
-%% work and any appropriate literature. Describe any work needed to
-%% establish detailed project requirements
+\begin{enumerate}
+\item An updatable relational database warehousing the provided dataset.
+\item A web-accessible GUI with searching and downloading functionality.
+\end{enumerate}
+
+This meant that the aim of development would be to get a website
+hosted online on a public server, accessible via a suitable web domain
+address. The website should offer a service whereby users can search
+PIP-DB and download search results using a web browser. This simple
+and open-ended specification allowed for the majority of development
+effort to be focused upon innovating on the areas of database driven
+website development, and search engine usability.
+
+The primary reason for choosing the project was that there is a real
+existing need for a product of this type within the molecular biology
+community, with potential value and use for future scientific
+research. Development of database driven websites was an area which I
+was unfamiliar with and had no prior experience in, but is a skill
+that I felt was important to master.
+
+This is an interdisciplinary project that involves aspects of web
+application development, bioinformatics, data analysis, interaction
+design, and data mining. The project plan used the OpenUP development
+process, which places an emphasis on the early mitigation of
+risks. Two sets of milestones were defined to govern project
+development, covering the requirements of the design and
+implementation aspects of the project. The design milestones were
+given the labels D1 through D4 and the implementation milestones M1
+through M3. Figure~\ref{fig:timeline} shows the chronology of
+development.
+
+\newpage
+\begin{multicols}{2}
 
 \section*{Objectives}\label{sec:objectives}
 The following objectives were written during before the planning stage
-of the project, in order to provide a very high level overview of the
-finished product. The purpose of the objectives it to provide personal
-goals and expectations of the project, which can then be refined to
-produce specific and quantifiable requirements
-(Chapter~\ref{chap:requirements}).
+of the project in order to provide a very high level overview of the
+finished product, and to express personal goals and expectations for
+the project which can then be refined to produce specific and
+quantifiable requirements.
 
 \begin{enumerate}
 \item To build a free (as in freedom) web application for searching
@@ -44,15 +81,32 @@ produce specific and quantifiable requirements
 \item The application should be scalable for much larger datasets.
 \end{enumerate}
 
-%% Requirements
+\noindent
+Chapter~\ref{chap:requirements} includes a description of the
+requirements derived from these objectives, and
+Chapter~\ref{chap:evaluation} evaluates the project with reference to
+the objectives, offering a measure of achievement for each. See the
+Overview section for a thorough description of the document structure.
 
-%% In the light of the “Context” section and any other relevant
-%% factors, give a clear statement of the requirements that the
-%% project’s end-product should meet. It should describe concisely
-%% what your experiment, design or program should do, (the question of
-%% how it is derived, or how it does it, will be dealt with in later
-%% sections).
+\columnbreak
 
+%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: timeline %%
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\centering
+% The bizarrely-specific height value is to vertically align the
+% caption with the left column text:
+\includegraphics[angle=90,origin=c,height=0.4561\paperheight]{assets/timeline}
+\caption[Project development timeline]
+        {A timeline of project development, showing significant major
+          project milestones.}
+\label{fig:timeline}
+\end{figure}
+
+\end{multicols}
+
+\newpage
 
 \newpage
 \section*{Submission archive}
@@ -78,6 +132,10 @@ to view the source files, which can be identified by the file
 extensions: ac, am, bib, clj, fsa, in, js, json, less, md, py, sh,
 tex, xml, yml.
 
+Note that while the submitted archive contains all project source
+codes, the third party BLAST+ binaries and compilers JAR have been
+removed in order to keep the size of the submission archive down.
+
 
 %%%%%%%%%%%%%%%%%%%%%%
 %% Figure: dir-tree %%
@@ -85,7 +143,7 @@ tex, xml, yml.
 \begin{figure}[H]
 \begin{multicols}{2}
 \centering
-\textbf{Directory}
+\hspace{1.5cm}\textbf{Archive directory}
 
 \raggedleft
 % LEFT COLUMN: Directory tree
@@ -94,10 +152,7 @@ tex, xml, yml.
 child {node {\texttt{bin}}}
 child {node {\texttt{build}}}
 child {node {\texttt{Documentation}}
-  child {node {\texttt{design}}
-    child {node {\texttt{d1}}}
-    child {node {\texttt{d2}}}
-  }
+  child {node {\texttt{design}}}
   child {node {\texttt{evaluation}}}
   child {node {\texttt{midterm}}}
   child {node {\texttt{plan}}}
@@ -115,6 +170,7 @@ child {node {\texttt{src}}}
 child {node {\texttt{test}}}
 child {node {\texttt{tools}}
   child {node {\texttt{csv2yaps}}}
+  child {node {\texttt{png}}}
   child {node {\texttt{watchr}}}
   child {node {\texttt{yaps2fsa}}}
 };
@@ -122,34 +178,33 @@ child {node {\texttt{tools}}
 \columnbreak
 
 \raggedright
-\textbf{Report sections}
+\textbf{Sections in this document}
 
 \textit{%
 % RIGHT COLUMN: Section cross-references
 \br{}\\ % /
-\ref{sec:building}\\                       % /bin
-\ref{sec:building}, \ref{sec:deployment}\\ % /build
-\br{}\\                                    % /Documentation
-\br{}\\                                    % /Documentation/design
-\br{}\\                                    % /Documentation/design/d1
-\br{}\\                                    % /Documentation/design/d2
-\br{}\\                                    % /Documentation/evaluation
-\br{}\\                                    % /Documentation/midterm
-\br{}\\                                    % /Documentation/plan
+\ref{sec:build-automation}\\ % /bin
+\ref{sec:build-automation}\\ % /build
+\ref{sec:development-process}, \ref{sec:design-process}\\ % /Documentation
+\ref{sec:design-process}\\ % /Documentation/design
+\ref{sec:usability-testing}\\ % /Documentation/evaluation
+\ref{sec:development-process}, \ref{sec:programming-language-choice}\\ % /Documentation/midterm
+\ref{sec:prototype-implementation}\\ % /Documentation/plan
 \br{}\\                                    % /Documentation/report
-\br{}\\                                    % /extern
-\br{}\\                                    % /resources
-\br{}\\                                    % /resources/css
+\ref{sec:search-engine}\\ % /extern
+\ref{sec:build-automation}\\ % /resources
+\ref{sec:build-automation}\\ % /resources/css
 \br{}\\                                    % /resources/fonts
 \br{}\\                                    % /resources/img
-\br{}\\                                    % /resources/js
-\br{}\\                                    % /scripts
-\br{}\\                                    % /src
-\br{}\\                                    % /test
-\br{}\\                                    % /tools/
-\br{}\\                                    % /tools/csv2yaps
-\br{}\\                                    % /tools/watchr
-\br{}\\                                    % /tools/yaps2fsa
+\ref{sec:search-engine}\\ % /resources/js
+\ref{sec:task-automation}\\ % /scripts
+\ref{sec:prototype-rewrite}, \ref{sec:persistent-storage}, \ref{sec:search-engine}\\ % /src
+\ref{sec:test-automation}\\ % /test
+\ref{sec:task-automation}\\ % /tools/
+\ref{sec:persistent-storage}\\ % /tools/csv2yaps
+\ref{sec:test-automation}\\ % /tools/png
+\ref{sec:build-automation}\\ % /tools/watchr
+\ref{sec:persistent-storage}\\ % /tools/yaps2fsa
 }
 \end{multicols}
 \caption[Archive directory structure]
@@ -164,10 +219,8 @@ operating system by executing the command \texttt{./bin/build -{}-all}
 from within the project root directory. This will invoke a script that
 will attempt to automatically resolve system dependencies and
 requirements. Failure to meet the system requirements will results in
-an informative error message being displayed.
-
-% TODO: Note on file paths (relative vs absolute)
-
+an informative error message being displayed. See
+Section~\ref{sec:build-automation} for further information.
 
 \section*{Nomenclature}\label{sec:nomenclature}
 Acronyms and initialisms will be used where appropriate in place of
@@ -185,42 +238,36 @@ members of the Life \& Health Sciences department, and the
 \textit{name} pip-db to refer to the software project that I developed
 to host this. In order to keep this distinction clear, the
 capitalisation will be kept consistent irrespective of the grammatical
-context. Thus, PIP-DB refers to a set of data, and pip-db refers to
-the presentation logic for this dataset.
+context.
 
 
 \subsubsection*{On the use of UML}
 A subset of the Unified Modelling Language \cite{ibm2003uml} is used a
 basis for many of the technical diagrams. One notable deviation from
-convention is the use of sequence diagrams \cite{ibm2004sequence} to
-describe the behaviour of web services. In such cases, the desired
+convention is the use of sequence diagrams to describe the behaviour
+of web services \cite{ibm2004sequence}. In such cases, the desired
 effect is to illustrate the behaviour of a system at a high level, not
 to provide a technically accurate description of communication.
 
 
 \section*{Overview}\label{sec:overview}
-%% The last part of the introduction outlines the remainder of the
-%% report, explaining what comes in each section.  The introduction is
-%% the second most important section of the document. Everyone who
-%% reads your report will read the introduction; some may read only
-%% the Introduction and the Conclusion. Therefore, you should think
-%% carefully about what you want to say, and in what order you should
-%% say it. The introduction is also the most difficult one to write,
-%% because it is hard to balance the requirements of giving adequate
-%% explanation without entering into too much detail. For these
-%% reasons, you should re-write the introduction when you’ve written
-%% the rest of the Report (i.e. when you know what you have to
-%% introduce).
-The rest of the text is structured as follows: first a brief overview
-of the requirements analysis phase of the project is given
-(page~\pageref{chap:requirements}), with particular reference to the
-project plan. Then, a large body of text is devoted to the design and
-implementation of the final product, divided into three chapters:
-process (page~\pageref{chap:process}), infrastructure
-(page~\pageref{chap:infrastructure}), and product
-(page~\pageref{chap:product}). The results of the project are
-considered in the following evaluation chapter
-(page~\pageref{chap:evaluation}), followed by the conclusions
-(page~\pageref{chap:conclusions}). The appendices
-(page~\pageref{appendices}) and bibliography
-(page~\pageref{bibliography}) are included at the end.
+The rest of the text is structured as follows: the project risk
+assessment is described in Chapter~\ref{chap:risks}, with a brief
+overview of the risks identified during the project planning phase and
+a description of the mitigation strategies. A large body of text is
+then devoted to a description of the design and implementation of the
+final product, and is divided accordingly: information relevant to the
+development process and work flow is described in
+Chapter~\ref{chap:process}; the development of infrastructure and
+tooling is described in Chapter~\ref{chap:infrastructure}; and the
+product implementation in
+Chapter~\ref{chap:product}. Chapter~\ref{chap:evaluation} contains an
+evaluation of the software and the results of usability testing, and
+the conclusions and recommendations for further work can be found in
+Chapter~\ref{chap:conclusions}. The appendices begin at
+page~\pageref{appendices}, followed by the bibliography and references
+at page~\pageref{bibliography}. The purpose of the Requirements and
+Process chapters is to offer an insight into the development plan and
+workflow. A reader who is solely interested in the implementation and
+engineering of the project may skip ahead to
+Chapter~\ref{chap:infrastructure}.

@@ -1,54 +1,95 @@
 \chapter{Process}\label{chap:process}
+
 The following chapter describes the processes used in the design and
 implementation of the project. Section~\ref{sec:development-process}
-provides and explanation of the development process and the approach
-to implementation, and Section~\ref{sec:design-process} describes the
+provides an explanation of the development process and the approach to
+implementation, and Section~\ref{sec:design-process} describes the
 user-centred aspects of the design process.
 
 \section{Development process}\label{sec:development-process}
 
-% AGILE
+A project with an individual developer requires a different approach
+to time management than a multi-developer project. The lack of other
+team members means that the development can afford to take a much more
+flexible and dynamic approach, allowing for a faster pace and lower
+cost of change in the development life cycle. Agile software processes
+focus on this fast pace of change by encouraging frequent
+communication with stakeholders and very short development iterations
+\cite{highsmith2001agile, martin2003agile}.
 
-\cite{martin2003agile, highsmith2001agile}
+Elements of the Agile manifesto \cite{fowler2001agile} inspired
+decisions in the project development. For example, frequent meetings
+with Dr Flower were used to provide ongoing feedback of development
+progress, and meets the agile requirement for \textit{customer
+  collaboration over contract negotiation}. Additionally, the
+requirement for \textit{working software over comprehensive
+  documentation} was used to justify the early development of a
+working prototype which users could interact with, instead of lengthy
+requirements notifications with potential users before beginning
+development work. This resulted in useful design feedback during early
+stages of the project development, as it is more intuitive for users
+to provide feedback for a functional prototype then it is to discuss
+requirements in a more abstract manner without being able to interact
+with a product.
 
-% OPENUP
-
-\cite{balduino2007introduction, kroll2006agility}
-
-% Project Plan Recap
-
-\subsection{Open Source}\label{subsec:open-source}
-One of the key considerations of the project objectives
-(Section~\ref{sec:objectives}) was that the finished project should be
-freely available without commercial interest, and this extends to the
-source code and development process. The success of truly open models
-of development have written about in great detail
-\cite{weber2004success, godfrey2000evolution, chesbrough2006open,
-  von2005democratizing}, and a philosophy of ``release early, release
-often'' has been developed in open source communities as a technique
-for encouraging rapid and widespread user involvement from an early
-stage \cite{raymond1999cathedral}.
-
-As a result, all of the program code, documentation and other files
-that have been created for pip-db have been released under the terms
-of the GNU General Public License v3 \cite{gnu2007gpl}. This is an
-open and permissive license that allows for commercial use, but it
-mandates that derivative works maintain the same license and must
-distribute the source code openly.
-
-
-\subsubsection*{A note on dataset confidentiality}
-It is important to distinguish that while pip-db is an open source
-project, the PIP-DB dataset as supplied by Dr.\ Flower remains
-confidential, and so at his request, has not been released for
-distribution.
-
+Not all of the Agile software philosophy was strictly adhered to. In
+particular, the emphasis on \textit{responding to change over
+  following a plan} was supplanted by the requirement for a formal
+project plan document to be created in the first term. Since the Agile
+philosophy doesn't provide a template or process for guiding
+development, so the iterative OpenUP development process was used to
+provide a time management framework, by dividing the development life
+cycle into discrete increments, each consisting of an inception,
+elaboration, construction, and evaluation phase
+\cite{balduino2007introduction}. OpenUP was chosen for the development
+process due to its entirely open source nature as part of the Eclipse
+Process Framework, and because it targets small teams and agile
+development by design \cite{kroll2006agility}. Development was split
+over three iterations, with one covering the first term, and two in
+the second term. The end of each iteration's evaluation phase
+culminated in a design and implementation milestone pair.
 
 \subsection{Version Control}\label{subsec:version-control}
 
+The git version control system was used to provide version control. A
+single monolithic git repository tracks revisions for all pip-db
+source codes and associated data. By using version control from the
+very project's inception, a fully accountable and transparent history
+of development has been recorded, with 2,420 revisions committed since
+14 October 2013.
 
-% GITHUB
-\cite{finley2011github}
+Git was chosen as the version control system due to its support for
+lightweight branching and distributed-by-design nature
+\cite{chacon2009pro}. While the benefits of distributed version
+control are not entirely exploited for single-developer projects, the
+support for concurrent development of branches encourages
+experimentation and an agile approach to development.
+
+\subsection{Open Source}\label{subsec:open-source}
+
+One of the key considerations of the project objectives
+(Chapter~\ref{sec:objectives}) was that the finished project should be
+freely available without commercial interest, and this extends to the
+source code and development process. The success of truly open models
+of development have been investigated in great detail
+\cite{weber2004success, godfrey2000evolution, chesbrough2006open,
+  von2005democratizing}, and a philosophy of ``release early, release
+often'' has been encouraged in open source communities as a technique
+for nurturing rapid and widespread user involvement from an early
+stage \cite{raymond1999cathedral}. As a result, all of the program
+code, documentation and supporting files that have been created for
+pip-db have been released under the terms of the GNU General Public
+License v3. This is an open and permissive license that allows for
+commercial use, but it mandates that derivative works maintain the
+same license and must distribute the source code openly
+\cite{gnu2007gpl}.
+
+The combination of an open source license and the use of git version
+control meant that online repository hosting could be used to provide
+a public centre for development. For this, the GitHub website was
+used, which is the most popular online repository hosting site
+\cite{finley2011github}, and offers free hosting for open source
+projects \cite{cummins2014pip-db}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -56,24 +97,45 @@ distribution.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[H]
 \centering
-    \includegraphics[width=\textwidth]{assets/github}
-\caption[GitHub project homepage]
-        {GitHub project homepage.}
+    \includegraphics[width=0.82\textwidth]{assets/github}
+\caption[Screenshot of GitHub project homepage]
+        {Screenshot of the GitHub repository for pip-db.}
 \label{fig:github-project}
 \end{figure}
 
 
-\subsubsection{Branching model}
+\subsubsection*{A note on dataset confidentiality}
+It is important to note that while pip-db is an open source project,
+the PIP-DB dataset as supplied by Dr Flower remains confidential at
+his request, and so has not been released for distribution.
 
-\cite{driessen2012successful}
+\subsection{Development workflow}\label{subsec:github-workflow}
 
-\subsection{GitHub workflow}\label{subsec:github-workflow}
+In addition to hosting the project source code and revision history,
+GitHub provides many useful features intended for collaborative
+development efforts, including an issue tracker, milestones, and a
+Wiki. By combining these features with strict version control
+practises, it is possible to create a dynamic development environment
+which simultaneously encourages experimentation and rapid change while
+providing a full history of revisions and the ability to roll back and
+integrate new features when required.
 
-% TODO: novel workflow
+The issue tracker provided by GitHub was used from the project
+inception. The purpose of the issue tracker is to document requests
+for changes. Whilst the revision control log provides a history of all
+of the changes which have been made, the issue tracker is used as a
+place to document changes which \textit{should} be made, but not have
+not yet been completed. Each issue is assigned a unique identifier,
+and these identifiers can be used in revision messages to provide a
+cross reference between the revision control history and the known
+issues and bugs. In total, 350 issues have been opened, of which 39
+remain open at the time of writing.
 
-% emacs + git + github = editor + version control + issue tracker
-
-% TODO: Issue tracker
+Issues can be categorised using labels
+(Table~\ref{tab:issue-labels}). Labels provide additional meta data
+regarding a type of issue, and each issue can be assigned multiple
+labels. The issue tracker can filter issues by labels, allowing for a
+quick visual overview of the issues particular types.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -81,14 +143,45 @@ distribution.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[H]
 \centering
-    \includegraphics[width=\textwidth]{assets/github-issues}
-\caption[GitHub project open issues]
-        {GitHub project open issues.}
+    \includegraphics[width=0.82\textwidth]{assets/github-issues}
+\caption[Screenshot of GitHub's pip-db issue tracker]
+        {Screenshot of GitHub's issue tracker for pip-db.}
 \label{fig:github-issues}
 \end{figure}
 
 
-% TODO: Milestones
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Table: issue-labels %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\centering
+\begin{tabular}{l l}
+\textbf{Label} & \textbf{Description}\\
+\hline
+Bug & Crash reports, stack traces, and software failures.\\
+Design & Issues relating to the user interface design.\\
+Documentation & Documentation tasks.\\
+Feature & Web service feature addition requests.\\
+Implementation & Issues relating to the web server implementation.\\
+Task & Feature addition requests.\\
+Testing \& tooling & Issues relating to infrastructure.\\
+Build system & Bugs and issues with the build system.\\
+Planning & Issues relating to TP1 project planning.\\
+Regression & Issues which have arisen as a result of changes, not additions.\\
+Version control & Git and GitHub issues and feature requests.\\
+Wontfix & Used to indicate issues which have been closed without being fixed.\\
+\end{tabular}
+\caption[Issue tracker labels]
+        {The labels used for categorising issues, and their corresponding meanings.}
+\label{tab:issue-labels}
+\end{table}
+
+
+In addition to assigning labels to issues, GitHub also supports the
+creation of milestones with set dates. Issues can be assigned to
+milestones, and the number of open and closed issues per milestone can
+be shown, providing an indication of the progress towards a particular
+milestones (Figure~\ref{fig:github-milestones}).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -96,39 +189,254 @@ distribution.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[H]
 \centering
-    \includegraphics[width=\textwidth]{assets/github-milestones}
-\caption[GitHub project open milestones]
-        {GitHub project open milestones.}
+    \includegraphics[width=0.82\textwidth]{assets/github-milestones}
+\caption[Screenshot of open project milestones]
+        {Screenshot of GitHub's milestones overview for pip-db.}
 \label{fig:github-milestones}
 \end{figure}
 
 
+\subsection{Branching model}\label{subsec:branching-model}
+
+A branching model was designed for this project in order to provide a
+consistent branching and release strategy to use over the course of
+development. Since the revision control must track a huge number of
+changes (over 2000) over the course of several months, it is important
+that the revision history be as clear as possible, and that branches
+are used intelligently to provide additional information about the
+project development, not to obscure past work.
+
+The branch model that I designed was inspired by Driessen's
+\textit{Successful Git branching model} \cite{driessen2012successful},
+with a number of changes to adapt it specifically for this
+project. The core of Driessen's model is two permanent branches which
+track the current development head, and the latest stable
+release. Developers work on the development branch, and update the
+stable branch at release time. Transient auxiliary branches are used
+as staging areas for new features and releases. The hotfix branch
+support was removed from Driesson's model, since the software
+developed is only proof and concept and so does not need to support
+regression patching.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Table: branch-names %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\centering
+\begin{tabular}{l l L{8cm}}
+\textbf{Driesson} & \textbf{Cummins} & \textbf{Purpose}\\
+\hline
+\texttt{master} & \texttt{stable} & The latest stable release.\\
+\texttt{develop} & \texttt{master} & The current development head.\\
+\texttt{release/:name} & \texttt{release/:version} & Release candidate staging areas.\\
+\texttt{feature/:name} & \texttt{wip/:id} & Feature addition branches (cross referenced with issue tracker using issue IDs).\\
+\texttt{hotfix/:name} & & Hotfix development branches.\\
+\end{tabular}
+\caption[Development model branch names]
+        {A comparison of branch names with Driesson's development model.}
+\label{tab:branch-names}
+\end{table}
+
+
+Importantly, the name scheme for feature branches was changed so that
+it matched the GitHub issue IDs. This meant that work on a feature
+should only begin when it has an open issue assigned to it, enforcing
+the use of the issue tracker. This novel integration of issue tracker
+and version control system means that for every change made in the
+project, it is possible to trace back not only the revision which
+introduced the change, but also the issue or feature request which
+demanded it. This means that every change is justified with a reason
+\textit{why} the change was made, not just the description of
+\textit{how} the change was made which is provided by the revision
+history.
+
+\subsection{Auxiliary documentation}\label{subsec:aux-docs}
+
+To ensure a consistent use of version control, a checklist was created
+for each common activity (submitting a patch, creating a release,
+starting work on a new feature). Additional files document the
+high-level workflow and approach to release management. Relevant
+documentation in the submission archive includes:
+
+\begin{verbatim}
+    Documentation/ReleaseChecklist.html
+    Documentation/SubmitChecklist.html
+    Documentation/SubmittingPatches.html
+    Documentation/Workflow.html
+    Documentation/VersionNumbering.html
+\end{verbatim}
+
+An engineer's log was used to keep daily notes of all development
+activity, minutes from stakeholder meetings, and other tertiary
+information that is missing from the revision history and issue
+tracker. A HTML render of the log can be found in the submission
+archive \texttt{Documentation/Log.html}. The project log was written
+in Markdown format for quick typesetting, and used a consistent date
+format to separate individual entries which meant it was possible to
+parse the log using a simple Python script
+(\texttt{scripts/parselog.py}) for export into different formats and
+analysis (Table~\ref{tab:log-parse}).
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%% Table: log-parse %%
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\centering
+\begin{tabular}{R{8cm} L{8cm}}
+Number of log entries & 127\\
+Total word count & 21,329\\
+Average entry word count & 167\\
+Shortest entry word count & 6\\
+Longest entry word count & 2,008\\
+\end{tabular}
+\caption[Project log details]
+        {Project log details.}
+\label{tab:log-parse}
+\end{table}
+
+
+\newpage
 \section{Design process}\label{sec:design-process}
 
+The complement of the development processes are the design processes,
+which dictate the approach to user interface design. Both the project
+objectives and risk mitigation strategies emphasise the importance of
+creating an intuitive user interface for the search engine, making the
+decisions in design processes important to the success of the project.
 
-\subsection{User-centred design}\label{subsec:user-centred-design}
+\subsection{Human-centred design}\label{subsec:user-centred-design}
 
-% Existing systems
+The software industry is undoing a renaissance in its attitude towards
+usability. In the post text-interface age, the graphical user
+interface has become the focus of many interesting shifts in design
+methodology. Human-centred design is a school of interaction design
+which edifies \textit{usability} as the primary goal of all design
+\cite{maguire2001methods}, and encourages designers to take a measured
+approach to interaction design, since ``the joy of an early release
+lasts but a short time. The bitterness of an unusable system lasts for
+years''.
 
-\cite{lu2011pubmed, hearst2007biotext}
+Uptake of human-centred design principles has been slower in the field
+of bioinformatics, which may be due to the common belief that
+usability is only of secondary importance to functionality, instead of
+being a core component of it. The disadvantage of this is that a
+number of popular existing bioinformatics tools have relatively poor
+usability, although there is evidence of attempts at innovation in
+some of the more popular tools \cite{lu2011pubmed,
+  hearst2007biotext}. There have been efforts made to introduce
+human-centred design into bioinformatics, with studies showing that
+``although users believe that the bioinformatics community is
+providing accurate and valuable data, they often find the interfaces
+to these resources tricky to use and navigate''
+\cite{pavelin2012bioinformatics}. The importance of good usability as
+a time saving mechanism has been justified as ``usability `barriers'
+can pose significant obstacles to a satisfactory user experience and
+force researchers to spend unnecessary time and effort to complete
+their tasks'' \cite{bolchini2009better}.
 
-% CRITIQUE of Darren's systems
+Over the course of the project development, a significant emphasis was
+placed on taking a human-centred approach design, not only because of
+the time saving benefits of a well designed tool, but also as a
+necessary coping mechanism for the difference in usability
+expectations between the computer science and biochemistry
+communities. Further risk mitigation is provided by extensive analysis
+of existing bioinformatics tools in the project planning
+stage\footnote{See the project plan for a critical analysis of
+  existing bioinformatics search engines. A copy of the project plan
+  can be found in the submission archive
+  \texttt{Documentation/ProjectPlan.pdf}.}.
 
-% Usability research
+\subsection{Prototype development}\label{subsec:prototype-development}
 
-\cite{bolchini2009better, pavelin2012bioinformatics}
+Rapid prototyping played a key role in being able to achieve the goal
+of human-centred design, allowing for immediate and visual feedback
+from stakeholders and potential users. The project used two types of
+prototyping: low fidelity and high fidelity.
+
+\subsubsection*{Low fidelity prototyping}
+
+Low fidelity prototyping involves the rapid generation of
+non-functional ``paper prototypes'' which are designed to give a rough
+impression of how the finished product will look, without specifying
+an implementation design. Low fidelity prototyping was achieved in
+this project using the Balsamiq\footnote{Balsamiq. Rapid, effective
+  and fun wireframing software. \url{http://balsamiq.com/}} program to
+generate mockups and wireframes of the pages of the website
+(Figure~\ref{fig:d1-mockups}). These mockups were discussed with Dr
+Flower to verify that they were broadly satisfactory, and then used as
+the basis for the M1 implementation. After the M1 implementation was
+complete, the mockups were updated and refined for the second D2
+design milestone (Figure~\ref{fig:d2-mockups}).
 
 
-\subsection{Low fidelity prototyping}\label{subsec:low-fidelity-prototype}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: github-project %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\centering
+    \includegraphics[width=\textwidth]{assets/d1-mockups}
+\caption[D1 design mockups for site pages]
+        {D1 design mockups for site pages.}
+\label{fig:d1-mockups}
+\end{figure}
 
-% TODO: Low-fi
-\cite{egger2000lofi}
 
-% TODO: Balsamiq
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: d2-mockups %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\centering
+    \includegraphics[width=\textwidth]{assets/d2-mockups}
+\caption[D2 design mockups for site pages]
+        {D2 design mockups for site pages.}
+\label{fig:d2-mockups}
+\end{figure}
+
+\newpage
+In addition to providing a guideline for the page aesthetics, the
+mockups were used to give a rough outline of the interaction design. A
+list of common tasks was created and for each, a sequence of mockups
+was generated which show the steps that the user would have to take to
+achieve them. Figure~\ref{fig:d1-search} shows the interaction design
+for a simple name search using the D1 design. Successive design
+iterations refined these interaction designs further, and covered a
+wider variety of use cases, such as exception handling and error
+cases.
 
 
-\subsection{High fidelity prototyping}\label{subsec:high-fidelity-prototype}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: d1-search %%
+%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\centering
+    \includegraphics[width=\textwidth]{assets/d1-search}
+\caption[D1 interaction design for a simple use case]
+        {D1 interaction design for a simple use case.}
+\label{fig:d1-search}
+\end{figure}
 
-% TODO: Rapid prototyping using PHP + CSS + HTML + JS
 
-% TODO: Both DESIGN and TECHNICAL prototype
+\subsubsection*{High fidelity prototyping}
+
+In contrast to low fidelity prototypes, the purpose of a high fidelity
+prototype is to provide a way for potential users and stakeholders to
+interact with a tangible simulation of the final product
+\cite{egger2000lofi}. This depth first prototyping requires a more
+technical approach which maps the high level design ideas of the low
+fidelity prototype to a functional back-end to provide dynamic
+behaviour.
+
+In order to mitigate the risk of creating a tool which is not
+intuitive, an initial prototype implementation was required for the M1
+milestone, at the end of the first term. This meant that the second
+term development could be focused upon refined and innovation of the
+user interface. There was a tight time schedule for development of
+this first prototype, so an opportunistic approach to programming was
+adopted, making maximum use of existing tools and supporting software
+where available \cite{brandt2008opportunistic}. The implementation of
+the M1 prototype is discussed in
+Section~\ref{sec:prototype-implementation}. See
+Appendix~\ref{app:d1-m1-comparison} for a comparison of the D1 low
+fidelity mockups with the M1 prototype implementation.

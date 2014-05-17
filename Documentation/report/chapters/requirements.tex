@@ -1,4 +1,4 @@
-\chapter{Requirements Analysis}\label{chap:requirements}
+\chapter{Risk Assessment}\label{chap:risks}
 
 It is expected that 400 hours of work be put into a final year
 project. With such a large body of time dedicated to it, it is
@@ -14,13 +14,15 @@ suffering from second-system effect \cite{brooks1995mythical}.
 
 To reduce the chance of this, a set of project risks were identified
 during the planning stage (Table~\ref{tab:risks}), and development was
-focused around the early mitigation of these risks. For each risk, the
-probability of it occurring and the impact that it would have on
-project progress was assigned a numerical value between 0-5, allowing
-the risks to ordered in terms of severity by calculating the geometric
-mean of these two metrics. High level risk mitigation strategies were
-constructed (Appendix~\ref{app:risk-mitigation}), and used as a
-starting point for creating the project life cycle plan.
+focused around the early mitigation of these risks.
+
+For each risk, the probability of it occurring and the impact that it
+would have on project progress was assigned a numerical value between
+0-5, allowing the risks to ordered in terms of severity using the
+geometric mean of these two values. High level risk mitigation
+strategies were constructed (Appendix~\ref{app:risk-mitigation}), and
+used as a starting point for creating the project life cycle plan,
+discussed in Section~\ref{chap:process}.
 
 
 %%%%%%%%%%%%%%%%%%
@@ -30,6 +32,7 @@ starting point for creating the project life cycle plan.
 \centering
 \begin{tabular}{c l l c c}
 \textbf{Risk} & \textbf{Description}                              & \textbf{Category}     & \textbf{P} & \textbf{I}\\
+\hline
 \textbf{R1}   & Design is not intuitive                           & \textit{Design}       & 2          & 3\\
 \textbf{R2}   & Project involves use of new technical skills      & \textit{Development}  & 5          & 5\\
 \textbf{R3}   & High Level of technical complexity                & \textit{Development}  & 5          & 3\\
@@ -49,9 +52,3 @@ starting point for creating the project life cycle plan.
          respectively, within the range 0-5.}
 \label{tab:risks}
 \end{table}
-
-\subsubsection*{Identification of stakeholders}
-
-The primary project stakeholder is Dr.\ Darren Flower, a scientist in
-the Life \& Health Sciences department who was responsible for
-overseeing the creation of the PIP-DB dataset.

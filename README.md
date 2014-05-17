@@ -2,17 +2,17 @@
 
 [![Build Status](https://api.travis-ci.org/ChrisCummins/pip-db.png)](https://travis-ci.org/ChrisCummins/pip-db)
 
-This repository contains the [Protein Isoelectric Point
-Database](http://www.pip-db.org), a website which houses data
+This repository contains the source code for the [Protein Isoelectric
+Point Database](http://www.pip-db.org), a website which houses data
 accumulated by members of Aston University's Life and Health Sciences
 department. The purpose of the website is to provide a powerful and
 easy-to-use search engine for the mass of biological data which has
 been acquired, making the valuable research accessible to all.
 
-The project is developed by Chris Cummins (http://chriscummins.cc) as part of an
-ongoing assessment towards an MEng Electronic Engineering & Computer Science
-course at the University of Aston.
-[Read the project plan](Documentation/ProjectPlan.md).
+The project was developed by Chris Cummins (http://chriscummins.cc) as
+partial fulfillment of the requirements for the degree of MEng
+Electronic Engineering & Computer Science at Aston University. [Read
+the submission report](Documentation/Report.pdf).
 
 ## Background
 
@@ -80,14 +80,15 @@ $ lein run
 
 Copyright 2014 Chris Cummins.
 
-This program is free software: you can redistribute it and/or modify it under
-the terms of the GNU General Public License as published by the Free Software
-Foundation, either version 3 of the License, or (at your option) any later
-version. [Read the license](LICENSE).
+pip-db is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+pip-db is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+for more details.
 
-You should have received a copy of the GNU General Public License along with
-this program.  If not, see http://www.gnu.org/licenses/.
+You should have received a copy of the GNU General Public License
+along with pip-db.  If not, see <http://www.gnu.org/licenses/>.
