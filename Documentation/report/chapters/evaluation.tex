@@ -7,30 +7,110 @@ evaluation was performed at the start of May.
 
 \section{Usability testing}\label{sec:usability-testing}
 
-Usability tests were conducted over a ten day period, and consisted of
-presenting a set of user scenarios to a participant which they would
-work through. The scenario would involve a set of tasks designed to
-test the intuitive user friendliness of the pip-db
-website. Appendix~\ref{app:evaluation-script} describes the procedure
-of the tests. Appendix~\ref{app:evaluation-scenarios} contains the
-user scenarios which were evaluated. Five tests were conducted in
-total, with the demographic of participants divided between PhD
-students specialising in a relevant biology field and non-scientific
-participants. In the case of user testing with participants who do not
-have a scientific background, extra verbal explanation was given to
-provide scientific context. Following recommended practises, each test
-session was recorded using audio and screen capture of the testing
-computer \cite{dumas1999practical}.
+Usability testing is a popular technique in qualitative software
+evaluation in which a participants are observed in a controlled
+environment performing a set of predetermined tasks in order to asses
+the usability of a product \cite{rubin2008handbook}.
 
-\subsubsection*{On sample size}
-\cite{nielsen2000you, rubin2008handbook}
+\subsection{Methodology}
 
-% TODO: Notes from testing
+Usability tests of pip-db were conducted over a ten day period, and
+consisted of presenting a set of user scenarios to a participant which
+they would work through. The scenario would involve a set of tasks
+designed to test the intuitive user friendliness of the pip-db
+website. Observations and notes are made throughout the course of the
+test, detailing any usability issues that the participant encountered.
+Appendix~\ref{app:evaluation-script} describes the procedure of the
+tests. Appendix~\ref{app:evaluation-scenarios} contains the user
+scenarios which were evaluated. Five tests were conducted in total
+with three PhD students specialising in a relevant biology field, and
+two non-scientific participants. In the case of user testing with
+participants who do not have a relevant scientific background, extra
+verbal explanation was given to provide scientific context and
+understanding. Following recommended practises, each test session was
+recorded using audio and screen capture of the testing computer
+\cite{dumas1999practical}.
+
+\subsection{Results}
+
+The results of user testing were generally very positive. Participants
+were largely satisfied with the user interface and were able to
+complete the tasks with little to no difficulty. However, several
+problems were discovered as a result of usability testing:
+
+\begin{itemize}
+\item Multiple participants were unsure how to input a numerical range
+  query when only an upper or lower bound is provided.
+\item One of the participants noticed a factual error within
+  PIP-DB. There is no contact address to report errors and
+  corrections.
+\item Every participant commented on the on the effectiveness of the
+  results indicator on the advanced search page. However, on several
+  occasions, the results indicator fell of sync with the search form
+  state, leading to confusion from participants. This is because of
+  the latency between changing a field value and updating the results
+  indicator.
+\item One of the participants noticed that the only way to return to
+  the previous page from the download results page is by using the web
+  browser's back button.
+\item One of the participants was unable to locate the ``Download
+  results'' button, to its placement in the top right of the screen,
+  out of the main path of scanning.
+\item Multiple participants found the placeholder text very helpful in
+  understanding the type of value which a search field
+  expected. However, not every input field has a placeholder value,
+  and some confusion was still had on the fields without placeholders.
+\item One of the participants was unsure of what query was performed
+  when clicking the ``See other records like this'' button. There is
+  no visual indicator on the search results page to show the user what
+  the search terms were.
+\item Two of the participants noted that they would prefer the ability
+  to type in exact numerical isoelectric point query values rather
+  than scrubbing a slider widget.
+\end{itemize}
 
 \section{Quantitative evaluation}\label{sec:quantitative-evaluation}
 
-\cite{jackson2011evaluation}
+Quantitative research involves evaluating a product using empirical
+and statistical techniques. For the quantitative evaluation of pip-db,
+a criteria-based assessment was performed using a set of criteria
+published by Jackson et al \cite{jackson2011evaluation}, and the
+project outcomes were evaluated critically with respect to the
+original objectives and risks.
+
+\subsection{Methodology}
+
+Jackson et al's assessment criteria offer a ``quantitative assessment
+of software in terms of sustainability, maintainability, and
+usability''. It was chosen as the quantitative evaluation method due
+to its emphasis on non-functional requirements, which are not
+evaluated through usability testing along. The assessment criteria are
+worded in a manner targeted at standalone application development, not
+web apps. As a result, not all of the criteria were
+evaluated. Additionally, a subset of the criteria was deemed
+irrelevant and ignored, for example evaluation of the current/future
+community.
+
+\subsection{Results}
+
+Appendix~\ref{app:criteria-evaluation} contains the full table of
+results, with yes/no answers for each of the criteria, and notes and
+annotations. The project scores strongly in the sustainability and
+maintainability categories, due to it's permissive open source
+license, heavy use of commenting, unit testing frameworks, and
+automated tooling. The project scores lower in the usability category,
+due to the relative shortage of user-orientated documentation. The
+importance of user documentation for websites is debatable, although
+at a minimum, a dedicated help page could help alleviate common
+usability problems. The project also scores lowly for testing due to
+its lack of automated GUI testing and scripted database testing.
 
 % TODO: project goals
 
 % TODO: Were risks mitigated
+
+% User friendliness of admin/upload
+% Performance + security
+% User registration system
+% Form for submitting directed request for ammendments
+% Parallelizing and further optimisations
