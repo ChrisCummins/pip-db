@@ -47,7 +47,7 @@ super-variables was restricted through the use of a single static API,
 and classes were used to subdivide program components.
 
 \newpage
-\section{Programming language choice}\label{sec:programming-language-choice}
+\section{Programming language selection}\label{sec:programming-language-choice}
 
 The amount of effort required to circumvent the faults of the PHP
 programming language resulted in a lot of wasted effort during the
@@ -260,7 +260,7 @@ in Section~\ref{subsec:routing}.
 
 
 \newpage
-\section{Prototype rewrite in LISP}\label{sec:prototype-rewrite}
+\section{Prototype rewrite}\label{sec:prototype-rewrite}
 
 After the decision was made at the end of TP1 to forgo PHP in favour
 of Clojure for future development, the M1 prototype was reimplemented,
@@ -393,7 +393,7 @@ content can be manipulated directly.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \lstset{language=html}
 \begin{lstlisting}[label=lst:clojure-html-gen,caption={%
-      [Generated HTML from the Clojure example]
+      [Generated HTML for the Clojure example]
        The HTML which is generated evaluation of the Clojure example.}]
 <!DOCTYPE html>
 <html lang="en">
@@ -954,8 +954,8 @@ composition of the db search function to produce blast search
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \lstset{language=clojure}
 \begin{lstlisting}[label=lst:blast-search-wrapper,caption={%
-      [The \textit{blast} namespace search function]
-      The \textit{blast} namespace search function.}]
+      [BLAST search output processing]
+       BLAST search output processing.}]
 (defn result->records [request result]
   (let [params  (assoc (request :params) "seq_name" (result :title))
 (*@\label{lst:blast-search-wrapper-db}@*)        records (db/search (assoc request :params params))]

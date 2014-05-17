@@ -35,18 +35,17 @@ database and provide public access to this important information.
 
 A schema and file format (YAPS) has been designed to house protein
 isoelectric point datasets, with appropriate tooling to convert
-between PIP-DB and the YAPS format. A search engine has been developed
-for the dataset, using a domain specific language which allows for
-compound queries to be expressed using tree structures in
+between PIP-DB and the YAPS format. A search engine and domain
+specific language has been designed which enables searching of PIP-DB
+by representing compound queries using tree structures in
 LISP. Support for protein sequence searching has been implemented
 using the NCBI BLAST+ search tools.
 
-A user-centred approach to designing web applications has been
+A human-centred approach to designing web applications has been
 adopted, with a heavy focus on interaction design and usability
 testing. The results of usability testing show numerous advantages in
-the interface design, such the design of a widget which dynamically
-indicates the number of results to be returned by a search engine
-query.
+the interface design, such as a widget which dynamically indicates the
+number of results to be returned by a search engine query.
 
 A public API for allowing programmatic communication with the search
 engine has been designed. The website makes extensive use of mobile
@@ -63,9 +62,10 @@ and build configurations.
 
 A parallelised build system has been developed which provides
 homogeneous development and deployment configurations. Tests show how
-shell-level parallelism can reduce compilation time by a factor of
-5. An implementation of checksum based cache busting and on-demand
-build systems using the Linux's inotify subsystem is described.
+the use of shell-level parallelism reduces build times by a factor of
+5. An implementation of checksum based cache invalidation and
+on-demand build systems using the Linux's inotify subsystem is
+described.
 
 
 %%%%%%%%%%%%%%%%%%%%%%
