@@ -37,9 +37,9 @@ particular, the emphasis on \textit{responding to change over
   following a plan} was supplanted by the requirement for a formal
 project plan document to be created in the first term. Since the Agile
 philosophy doesn't provide a template or process for guiding
-development, the iterative OpenUP development process was used to
-provide a template for time management, by dividing the development
-life cycle into discrete increments, each consisting of an inception,
+development, so the iterative OpenUP development process was used to
+provide a time management framework, by dividing the development life
+cycle into discrete increments, each consisting of an inception,
 elaboration, construction, and evaluation phase
 \cite{balduino2007introduction}. OpenUP was chosen for the development
 process due to its entirely open source nature as part of the Eclipse
@@ -54,12 +54,12 @@ culminated in a design and implementation milestone pair.
 The git version control system was used to provide version control. A
 single monolithic git repository tracks revisions for all pip-db
 source codes and associated data. By using version control from the
-very first day of the project, a fully accountable and transparent
-history of the project's development has been recorded, with 2,392
-revisions committed since 14 October 2013.
+very project's inception, a fully accountable and transparent history
+of development has been recorded, with 2,420 revisions committed since
+14 October 2013.
 
-Git was chosen as the version control system due to it's support for
-lightweight branching and it's distributed-by-design nature
+Git was chosen as the version control system due to its support for
+lightweight branching and distributed-by-design nature
 \cite{chacon2009pro}. While the benefits of distributed version
 control are not entirely exploited for single-developer projects, the
 support for concurrent development of branches encourages
@@ -68,10 +68,10 @@ experimentation and an agile approach to development.
 \subsection{Open Source}\label{subsec:open-source}
 
 One of the key considerations of the project objectives
-(Section~\ref{sec:objectives}) was that the finished project should be
+(Chapter~\ref{sec:objectives}) was that the finished project should be
 freely available without commercial interest, and this extends to the
 source code and development process. The success of truly open models
-of development have investigated in great detail
+of development have been investigated in great detail
 \cite{weber2004success, godfrey2000evolution, chesbrough2006open,
   von2005democratizing}, and a philosophy of ``release early, release
 often'' has been encouraged in open source communities as a technique
@@ -79,16 +79,17 @@ for nurturing rapid and widespread user involvement from an early
 stage \cite{raymond1999cathedral}. As a result, all of the program
 code, documentation and supporting files that have been created for
 pip-db have been released under the terms of the GNU General Public
-License v3 \cite{gnu2007gpl}. This is an open and permissive license
-that allows for commercial use, but it mandates that derivative works
-maintain the same license and must distribute the source code openly.
+License v3. This is an open and permissive license that allows for
+commercial use, but it mandates that derivative works maintain the
+same license and must distribute the source code openly
+\cite{gnu2007gpl}.
 
-The combination of open source license and the use of git version
-control meant that the online project hosting could be used to provide
-a public centre for development. For this, the GitHub website was used
-\cite{cummins2014pip-db}, which is the most popular online repository
-hosting site \cite{finley2011github}, and offers free hosting for open
-source projects.
+The combination of an open source license and the use of git version
+control meant that online repository hosting could be used to provide
+a public centre for development. For this, the GitHub website was
+used, which is the most popular online repository hosting site
+\cite{finley2011github}, and offers free hosting for open source
+projects \cite{cummins2014pip-db}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -98,15 +99,15 @@ source projects.
 \centering
     \includegraphics[width=0.82\textwidth]{assets/github}
 \caption[Screenshot of GitHub project homepage]
-        {Screenshot of the GitHub repository over for pip-db.}
+        {Screenshot of the GitHub repository for pip-db.}
 \label{fig:github-project}
 \end{figure}
 
 
 \subsubsection*{A note on dataset confidentiality}
 It is important to note that while pip-db is an open source project,
-the PIP-DB dataset as supplied by Dr Flower remains confidential,
-and so has not been released for distribution at his request.
+the PIP-DB dataset as supplied by Dr Flower remains confidential at
+his request, and so has not been released for distribution.
 
 \subsection{Development workflow}\label{subsec:github-workflow}
 
@@ -116,7 +117,7 @@ development efforts, including an issue tracker, milestones, and a
 Wiki. By combining these features with strict version control
 practises, it is possible to create a dynamic development environment
 which simultaneously encourages experimentation and rapid change while
-providing a full history of changes and the ability to roll back and
+providing a full history of revisions and the ability to roll back and
 integrate new features when required.
 
 The issue tracker provided by GitHub was used from the project
@@ -205,7 +206,7 @@ that the revision history be as clear as possible, and that branches
 are used intelligently to provide additional information about the
 project development, not to obscure past work.
 
-The branch model that I was designed was inspired by Driessen's
+The branch model that I designed was inspired by Driessen's
 \textit{Successful Git branching model} \cite{driessen2012successful},
 with a number of changes to adapt it specifically for this
 project. The core of Driessen's model is two permanent branches which
@@ -245,17 +246,17 @@ the use of the issue tracker. This novel integration of issue tracker
 and version control system means that for every change made in the
 project, it is possible to trace back not only the revision which
 introduced the change, but also the issue or feature request which
-demanded the change. This means that every change is justified with a
-reason \textit{why} the change was made not, not just the description
-of \textit{how} the change was made which is provided by the revision
+demanded it. This means that every change is justified with a reason
+\textit{why} the change was made, not just the description of
+\textit{how} the change was made which is provided by the revision
 history.
 
 \subsection{Auxiliary documentation}\label{subsec:aux-docs}
 
-To ensure a consistent use of version control, a set of checklists
-were creating for each common activity (submitting a patch, creating a
-release, starting work on a new feature). Additional files document
-the high-level workflow and approach to release management. Relevant
+To ensure a consistent use of version control, a checklist was created
+for each common activity (submitting a patch, creating a release,
+starting work on a new feature). Additional files document the
+high-level workflow and approach to release management. Relevant
 documentation in the submission archive includes:
 
 \begin{verbatim}
@@ -310,7 +311,7 @@ decisions in design processes important to the success of the project.
 The software industry is undoing a renaissance in its attitude towards
 usability. In the post text-interface age, the graphical user
 interface has become the focus of many interesting shifts in design
-methodology. Human-centred design is a school of user interface design
+methodology. Human-centred design is a school of interaction design
 which edifies \textit{usability} as the primary goal of all design
 \cite{maguire2001methods}, and encourages designers to take a measured
 approach to interaction design, since ``the joy of an early release
@@ -339,12 +340,13 @@ Over the course of the project development, a significant emphasis was
 placed on taking a human-centred approach design, not only because of
 the time saving benefits of a well designed tool, but also as a
 necessary coping mechanism for the difference in usability
-expectations between the computer sciences and biologists. Further
-risk mitigation is provided by extensive analysis of existing
-bioinformatics tools in the project planning stage\footnote{See the
-  project plan for a critical analysis of existing bioinformatics
-  search engines. A copy of the project plan can be found in the
-  submission archive \texttt{Documentation/ProjectPlan.pdf}.}.
+expectations between the computer science and biochemistry
+communities. Further risk mitigation is provided by extensive analysis
+of existing bioinformatics tools in the project planning
+stage\footnote{See the project plan for a critical analysis of
+  existing bioinformatics search engines. A copy of the project plan
+  can be found in the submission archive
+  \texttt{Documentation/ProjectPlan.pdf}.}.
 
 \subsection{Prototype development}\label{subsec:prototype-development}
 
@@ -358,11 +360,10 @@ prototyping: low fidelity and high fidelity.
 Low fidelity prototyping involves the rapid generation of
 non-functional ``paper prototypes'' which are designed to give a rough
 impression of how the finished product will look, without specifying
-system behaviour or implementation details. Low fidelity prototyping
-was achieved in this project using the
-Balsamiq\footnote{Balsamiq. Rapid, effective and fun wireframing
-  software. \url{http://balsamiq.com/}} program to generate mockups
-and wireframes of the pages of the website
+an implementation design. Low fidelity prototyping was achieved in
+this project using the Balsamiq\footnote{Balsamiq. Rapid, effective
+  and fun wireframing software. \url{http://balsamiq.com/}} program to
+generate mockups and wireframes of the pages of the website
 (Figure~\ref{fig:d1-mockups}). These mockups were discussed with Dr
 Flower to verify that they were broadly satisfactory, and then used as
 the basis for the M1 implementation. After the M1 implementation was
