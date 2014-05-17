@@ -1,27 +1,27 @@
 \chapter{Infrastructure}\label{chap:infrastructure}
 
 The purpose of infrastructure is to develop a set of tools to assist
-in the creation of the product by automating a specific set of actions
-or behaviour. In software projects, these tools broadly fall into one
-of three categories: build automation, testing automation, and task
+in the creation of a product by automating specific sets of actions or
+behaviour. In software projects, these tools broadly fall into one of
+three categories: build automation, testing automation, and task
 automation. In all cases, their primary purposes is to save developer
 time and reduce the risk of human error by automating repeatable
 tasks. The development of tooling was assigned a high priority
 throughout the project due to its mitigating effects on the risks of
 technical complexity and deployment complexity. Additionally, it is
 often possible to repurpose tools for multiple projects, which helps
-satisfy the high project objective of producing something of real
-world value for future work.
+satisfy the project objective of producing something of real world
+value for future work.
 
 \section{Build automation}\label{sec:build-automation}
 
-The building and compilation stage for pip-db requires the execution
-of many steps, the most notable of which are:
+The building and compilation stage of pip-db requires the execution of
+many steps, the most notable of which are:
 
 \begin{itemize}
 \item \textbf{Clojure compilation} The web server is written in
-  Clojure LISP, which is a compiled language that must be compiled
-  into Java bytecode for execution on the Java Virtual Machine (see
+  Clojure LISP, which is a compiled language that translate to Java
+  bytecode for execution on the Java Virtual Machine (see
   Section~\ref{sec:programming-language-choice}).
 \item \textbf{JavaScript minification} Client-side scripts are
   pre-processed using a minifier, which is program that reduces the
@@ -40,8 +40,8 @@ of many steps, the most notable of which are:
   from intermediate forms (\LaTeX, Markdown) into publishable formats
   (pdf, HTML).
 \item \textbf{Binary installation} Executable scripts and applications
-  and must be installed into appropriate directory in the system path,
-  for example \texttt{/usr/local/bin}.
+  and must be installed into a appropriate directory in the system
+  path, for example \texttt{/usr/local/bin}.
 \end{itemize}
 
 \subsection{Build system}\label{subsec:build-system}
@@ -190,14 +190,14 @@ copy of the file for future use. That way, future attempts to retrieve
 the file allow the client browser to simply retrieve the local copy
 from the cache, removing the need for a HTTP round trip. This greatly
 reduces the load time on repeat requests for the same file, and so is
-commonly used in the web for asset that are common to every page on a
+commonly used for caching assets that are common to every page on a
 website, such as images, stylesheets, and scripts. The disadvantage of
-enabling this kind of caching is that if a client caches a file, and
-then the file is modified on the server, future requests for that file
-will retrieve the out of date cached copy. To prevent this, it is
-necessary to adopt a cache invalidation technique to ensure that files
-are not retrieved from the cache when they have been modified on the
-server.
+enabling this kind of caching is that if the contents of the file is
+modified after it has been cached by a client, then future requests
+for that file will retrieve the out of date cached copy. To prevent
+this, it is necessary to adopt a cache invalidation technique to
+ensure that files are not retrieved from the cache when they have been
+modified on the server.
 
 One technique for invalidating cached files on modification is to use
 a cache naming scheme \cite{kelly2002optimization}. This means that
@@ -219,7 +219,7 @@ system. Every time the build system executes, it increments the
 version counters for each file, and updates any references to that
 file to point to the new version. However, this causes unnecessary
 duplication of files, since there is no means for detecting whether a
-file has \textit{actually} been modified when blindly increasing the
+file has actually been \textit{modified} when blindly increasing the
 version number.
 
 \newpage
@@ -246,11 +246,11 @@ def compile_javascript_source(file):
 
         if content_hashing = enabled:
             for h in html_source_list:
-                replace occurences of 'file' with 'target_name' in h
+                replace references to 'file' with 'target in h
 \end{lstlisting}
 
 The pip-db build system uses a more pragmatic approach, whereby for
-each asset, it's checksum is computed using the md5sum algorithm. A
+each file, its checksum is computed using the md5sum algorithm. A
 concatenated version of this checksum is then appended to the
 filename, and references to the file are updated to point to this new
 file name, incorporating the checksum. The benefit of calculating file
@@ -268,49 +268,49 @@ Autotools uses a recursive build system in which each directory is
 visited in turn, and all of the required compilation steps are
 executed before leaving and moving on to the next directory. This
 works well for the common use case of C programs, in which it may be
-necessary to generate all object files before invoking the
+necessary to generate all object files before invoking a
 linker. However, for the purposes of pip-db, this causes needless
-serialisation of the build system, since there are very few
+serialisation of the build system since there are very few
 dependencies between different files. For example, the compiled web
 server does not depend on the stylesheets, which in turn do not depend
 on the client side scripts. Despite this, each item is compiled
 sequentially, with the build system only beginning on the next item
 once the previous item has completed.
 
-By representing the build system as a loop in which each iterations
+By considering the build process as a loop in which each iteration
 causes a new file to be compiled, it is evident that the loop could be
 successfully parallelised such that each iteration is assigned a
 separate thread, providing that there are no data dependencies between
-successive iterations. Over the course of several iterations,
-successive parallelisation optimisations were made to the build system
-such that as much of the compilation work is performed in parallel as
-possible.
+successive iterations. Using this technique, several successive
+parallelisation optimisations were made to the build system so that as
+much of the compilation work is performed in parallel as possible.
 
 An experimental environment was set up on a development machine in
 which compilation was performed and timed 5 times, before applying a
 parallelisation optimisation and repeating the
 experiment. Figure~\ref{fig:build-times} shows the results of the
-experiment. In each case, the optimisation was implemented by simply
-spawning the compilation process in a forked subshell, as opposed to
-executing the compilation process from the main build thread. The
-first test performed was to time the serial build system, which
-executed in an average time of 39 seconds. The subsequent optimisation
-passes parallelised the following tasks: JavaScript minification, API
+experiment. In each case, the optimisation was implemented by spawning
+the compilation task in a forked subshell, as opposed to executing the
+compilation process from the main build thread. The first test
+performed was to time the serial build system, which executed in an
+average time of 39 seconds. The subsequent optimisation passes
+parallelised the following tasks: JavaScript minification, API
 documentation generation, CSS minification, image compression, Less
 CSS pre-processing, and tools compilation.
 
 As can be seen, the greatest reductions in times were achieved by
-parallelising the CPU-intensive JavaScript minification and
-documentation generation. Compilation tasks which were not CPU-bound
+parallelising the CPU intensive JavaScript minification and API
+documentation generation. Compilation tasks which are not CPU bound
 such as image compression achieved a much lower reduction in
-compilation time, and in fact generated a very slight increase in the
-execution time. This is due to the cost of spawning a new subshell
-which is incurred by using shell-level parallelisation techniques. The
-build system parallelisation optimisations reduced execution time by a
-factor of 5. Further execution time reductions could be achieved by
-parallelising the recursive directory traversal of Autotools, but this
-would require significant alterations to the core automake package
-which are beyond the scope of this project.
+compilation time through parallelisation, and in fact generated a very
+slight increase in the execution time. This is due to the cost of
+spawning a new subshell which is incurred by using shell-level
+parallelisation techniques. The build system parallelisation
+optimisations reduced execution time by a factor of 5. Further
+execution time reductions could be achieved by parallelising the
+recursive directory traversal of Autotools, but this would require
+significant alterations to the core automake package which are beyond
+the scope of this project.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -425,8 +425,8 @@ place, in real time.
 One of the project risks identified in the planning stage was the risk
 of complex deployment of the compiled website. This is a common
 problem with web development projects, where it is necessary to take a
-program developed on a local machine, and transfer it to run on a
-server which often has wildly different environments and
+program developed on a local machine and transfer it to run on a
+server which often has a wildly different environment and
 hardware. Mitigation of this risk was achieved by combining the use of
 the Autotooled build system with the use of Heroku to host the
 website. Heroku\footnote{Heroku | Cloud Application Platform
@@ -444,7 +444,7 @@ development servers.
 
 A stated goal of the project objectives is that there should be
 adequate automated test coverage of any APIs. This is achieved by
-using a combination of unit tests of individual software components,
+using a combination of unit tests of individual software components
 and black box testing of the entire web server using controlled
 datasets.
 
@@ -500,14 +500,14 @@ generation has applications where a seemingly plausible body of text
 must be generated from an input text, and has been used largely only
 for novelty purposes or for the generation of spam. The Plausible
 Nonsense Generator (png) is a tool which uses a Markov text generator
-to parse an input CSV training input, and generates a CSV with
-psuedo-random values based on these inputs.
+to parse an input CSV training input, and generates a CSV of the same
+format with psuedo-random values for individual fields.
 
 The Plausible Nonsense Generator proved extremely valuable for the
 purposes of blackbox systems testing, where it was possible to
-generate test datasets by training using PIP-DB. This provided useful
+generate test datasets by training with PIP-DB. This provided useful
 test data while mitigating the risk of exposing the confidential
-PIP-DB data inadvertently while developing the prototype.
+PIP-DB data inadvertently.
 
 \br{}
 
@@ -546,17 +546,17 @@ correctness of code and algorithms, and operate at a lower level than
 whole system black box testing. Several criteria have been proposed
 for assessing the adequacy of unit tests, including an analysis of the
 coverages of code branches. For a given unit, the percentage of
-control transfers which are tested can be used as a metric to show
-indicate how thorough the testing is \cite{zhu1997software}. If every
-possible branch in a unit's program flow is tested, then it is said to
-have 100\% test coverage.
+control transfers which are tested can be used as a metric to indicate
+how thorough the testing is \cite{zhu1997software}. If every possible
+branch in a unit's program flow is tested, then it is said to have
+100\% test coverage.
 
 In practice, achieving 100\% branch coverage with unit tests becomes
 increasingly impractical with software of significant
 complexity. Nested conditional logic results in an infinite set of
 unique paths through a program, requiring a structured approach to
-determine which paths require testing and which do not
-\cite{woodward1980experience}. In pip-db, the Clojure testing
+determine which paths to prioritise in testing and which can be
+ignored \cite{woodward1980experience}. In pip-db, the Clojure testing
 framework is used to write unit tests, and the third party library
 Cloverage\footnote{Cloverage
   \url{https://github.com/lshift/cloverage}.} is used to perform
@@ -726,31 +726,32 @@ plot coordinates{
 };
 \end{axis}
 \end{tikzpicture}
-\caption[Populated fields in dataset]
-        {The proportion of populated keys for each field in the dataset.}
+\caption[Proportion of populated fields in PIP-DB]
+        {The proportion of populated keys for each field in PIP-DB.}
 \label{fig:dsa-populated}
 \end{figure}
 
 
 \subsection{pipbot: Repository management}\label{subsec:pipbot}
 
-The development of pipbot marks a departure from the UNIX philosophy
-of creating small, single purpose programs \cite{raymond2003art}, and
-instead attempts to create an all-encompassing tool for managing the
-day to day activities of repository management and development. With
-the sole aim of automating many of the more mundane tasks, pipbot can
-be invoked as either an interactive shell or a batch mode program, and
-has functionality for:
+The development of pipbot marks an intentional departure from the UNIX
+philosophy of creating small, single purpose programs
+\cite{raymond2003art}, and instead attempts to create an
+all-encompassing tool for managing the day to day activities of
+repository management and maintenance. With the sole aim of automating
+many of the more mundane development tasks, pipbot can be invoked as
+either an interactive shell or a batch mode program, and has
+functionality for:
 
 \begin{itemize}
 \item \textbf{Build and deployment} Pipbot is capable of invoking the
   build system for local development, as well as deploying public
   builds to the remote web server. It can additionally generate
-  reports of the current local build configuration.
+  reports of the current local and remote build configurations.
 \item \textbf{Generating burndowns} Pipbot can generate reports of the
   development activity over a given timespan, and since the last
-  public release. This is useful for preparing for meetings by giving
-  a quick high level overview of recent development efforts.
+  public release. This is useful for giving a quick high level
+  overview of recent development efforts.
 \item \textbf{Issue tracking} Pipbot interacts with the public GitHub
   API in order to be able to list, show, open and close issues. This
   removes the need to context switch between a programming editor and
