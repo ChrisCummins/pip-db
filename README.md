@@ -9,10 +9,10 @@ department. The purpose of the website is to provide a powerful and
 easy-to-use search engine for the mass of biological data which has
 been acquired, making the valuable research accessible to all.
 
-The project is developed by Chris Cummins (http://chriscummins.cc) as part of an
-ongoing assessment towards an MEng Electronic Engineering & Computer Science
-course at the University of Aston.
-[Read the project plan](Documentation/ProjectPlan.md).
+The project was developed by Chris Cummins (http://chriscummins.cc) as
+partial fulfillment of the requirements for the degree of MEng
+Electronic Engineering & Computer Science at Aston University. [Read
+the submission report](Documentation/Report.pdf).
 
 ## Background
 
