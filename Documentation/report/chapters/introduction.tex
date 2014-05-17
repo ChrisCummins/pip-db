@@ -155,10 +155,7 @@ archive down.
 child {node {\texttt{bin}}}
 child {node {\texttt{build}}}
 child {node {\texttt{Documentation}}
-  child {node {\texttt{design}}
-    child {node {\texttt{d1}}}
-    child {node {\texttt{d2}}}
-  }
+  child {node {\texttt{design}}}
   child {node {\texttt{evaluation}}}
   child {node {\texttt{midterm}}}
   child {node {\texttt{plan}}}
@@ -176,6 +173,7 @@ child {node {\texttt{src}}}
 child {node {\texttt{test}}}
 child {node {\texttt{tools}}
   child {node {\texttt{csv2yaps}}}
+  child {node {\texttt{png}}}
   child {node {\texttt{watchr}}}
   child {node {\texttt{yaps2fsa}}}
 };
@@ -188,29 +186,28 @@ child {node {\texttt{tools}}
 \textit{%
 % RIGHT COLUMN: Section cross-references
 \br{}\\ % /
-\ref{sec:building}\\                       % /bin
-\ref{sec:building}, \ref{sec:deployment}\\ % /build
-\br{}\\                                    % /Documentation
-\br{}\\                                    % /Documentation/design
-\br{}\\                                    % /Documentation/design/d1
-\br{}\\                                    % /Documentation/design/d2
-\br{}\\                                    % /Documentation/evaluation
-\br{}\\                                    % /Documentation/midterm
-\br{}\\                                    % /Documentation/plan
+\ref{sec:build-automation}\\ % /bin
+\ref{sec:build-automation}\\ % /build
+\ref{sec:development-process}, \ref{sec:design-process}\\ % /Documentation
+\ref{sec:design-process}\\ % /Documentation/design
+\ref{sec:usability-testing}\\ % /Documentation/evaluation
+\ref{sec:development-process}, \ref{sec:programming-language-choice}\\ % /Documentation/midterm
+\ref{sec:prototype-implementation}\\ % /Documentation/plan
 \br{}\\                                    % /Documentation/report
-\br{}\\                                    % /extern
-\br{}\\                                    % /resources
-\br{}\\                                    % /resources/css
+\ref{sec:search-engine}\\ % /extern
+\ref{sec:build-automation}\\ % /resources
+\ref{sec:build-automation}\\ % /resources/css
 \br{}\\                                    % /resources/fonts
 \br{}\\                                    % /resources/img
-\br{}\\                                    % /resources/js
-\br{}\\                                    % /scripts
-\br{}\\                                    % /src
-\br{}\\                                    % /test
-\br{}\\                                    % /tools/
-\br{}\\                                    % /tools/csv2yaps
-\br{}\\                                    % /tools/watchr
-\br{}\\                                    % /tools/yaps2fsa
+\ref{sec:search-engine}\\ % /resources/js
+\ref{sec:task-automation}\\ % /scripts
+\ref{sec:prototype-rewrite}, \ref{sec:persistent-storage}, \ref{sec:search-engine}\\ % /src
+\ref{sec:test-automation}\\ % /test
+\ref{sec:task-automation}\\ % /tools/
+\ref{sec:persistent-storage}\\ % /tools/csv2yaps
+\ref{sec:test-automation}\\ % /tools/png
+\ref{sec:build-automation}\\ % /tools/watchr
+\ref{sec:persistent-storage}\\ % /tools/yaps2fsa
 }
 \end{multicols}
 \caption[Archive directory structure]
