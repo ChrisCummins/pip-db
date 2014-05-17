@@ -102,7 +102,7 @@ do_mksubmission() {
     mv Documentation/design/d2/renders.pdf Documentation/D2Mockups.pdf
 
     # Export markdown HTMLs
-    for f in $(find Documentation -name '*.md'); do
+    for f in $(find . -name '*.md'); do
         html="${f%.*}".html
         echo "  Creating $html"
         pandoc $f -o $html
