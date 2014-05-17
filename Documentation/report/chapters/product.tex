@@ -2,8 +2,8 @@
 
 This chapter describes the implementation of the pip-db web
 application, including the web server, database back-end, and client
-side logic. The first section describes the implementation of the
-prototype, in order to provide context and justification for the
+side logic. The chapter begins with a description of the prototype
+implementation in order to provide context and justification for the
 decisions made in the final product.
 
 \section{Implementation of the prototype}\label{sec:prototype-implementation}
@@ -34,17 +34,18 @@ were then written which would interact with the MySQL server and
 render web pages dynamically. Searching was performed through simple
 SQL select statements.
 
-Despite the on speed over correctness during development, several
-efforts were made to engineer a quality implementation, rather than a
-rushed one. PHP is a language that is notorious for encouraging bad
-programming practises through improper use and a number of caveats
-\cite{munroe2012php}, and steps were taken to actively reduce the risk
-of creating spaghetti code. A clear Model View Controller architecture
-was used to separate application logic from back-end communications
-and front-end rendering, and a templating engine was used to separate
-HTML presentation code from program logic. Access to global
-super-variables was restricted through the use of a single static API,
-and classes were used to subdivide program components.
+Despite the emphasis of speed over correctness during development,
+several efforts were made to engineer a quality implementation rather
+than simply a rushed one. PHP is a language that is notorious for
+encouraging bad programming practises through improper use and a
+number of caveats \cite{munroe2012php}, and steps were taken to
+actively reduce the risk of creating spaghetti code. A clear Model
+View Controller architecture was used to separate application logic
+from back-end communications and front-end rendering, and a templating
+engine was used to separate HTML presentation code from program
+logic. Access to global super-variables was restricted through the use
+of a single static API, and classes were used to subdivide program
+components.
 
 \newpage
 \section{Programming language selection}\label{sec:programming-language-choice}
@@ -80,13 +81,14 @@ broad research into popular web technologies.
 \end{table}
 
 
+\noindent
 Each language was evaluated with respect to a set of key desirable
 features:
 
 \begin{enumerate}
 \item \textbf{Brevity} Code written in the language should be concise
-  and containing minimal boilerplate. PHP requires numerous caveat
-  workarounds which pad out the size of source codes.
+  and contain minimal boilerplate. PHP requires numerous caveat
+  workarounds which pads out the size of source codes.
 \item \textbf{Encourage reuse} The language should encourage reuse as
   a core part of its design. In PHP, the programmer must take extra
   effort to reduce the risk of namespace collisions and modified
@@ -99,12 +101,12 @@ features:
 \item \textbf{Expressive} The most subjective of the requirements, the
   programming language should allow for the relatively direct
   translation of ideas into functioning code, without the need to work
-  around the limitations of the language.
+  around perceived limitations of the language.
 \end{enumerate}
 
 Of the programming languages considered, Clojure was chosen as the
 most suitable. In addition to satisfying all of the selection
-criteria, the language offered the additional benefits of begin
+criteria, the language offered the additional benefits of being
 incredibly fast as a result of it being a compiled language which
 executes on the JVM, and with simple support for concurrency due to
 the rejection of imperative programming in favour of immutable data
@@ -112,49 +114,49 @@ structures and a transactional memory model
 \cite{halloway2009programming, kraus2009multi}. Another benefit is
 that as a young programming language, it has a dynamic and fast paced
 development community, allowing for greater possibilities to
-contribute to existing projects.
-
-By far the most significant advantage of Clojure over PHP for the
-purposes of the project is that it is a very elegant language which
-departs from the ``worse is better'' philosophy of language design
-\cite{gabriel1991rise}, and has a functional programming paradigm
-which is simultaneously challenging and rewarding to master.
+contribute to existing projects. By far the most significant advantage
+of Clojure over PHP for the purposes of the project is that it is a
+very elegant language which departs from the ``worse is better''
+philosophy of language design \cite{gabriel1991rise}, and has a
+functional programming paradigm which is simultaneously challenging
+and rewarding to master.
 
 \subsection{The functional programming paradigm}\label{subsec:functional-programming-paradigm}
 
 Many popular programming languages that belong to the C family of
 languages describe computation as a set of statements that affects a
-program state. This is known an iterative programming paradigm. By
+program state. This is known as the iterative programming paradigm. By
 contrast, functional programming is a subtype of the declarative
-paradigm, in which the computation as described as the evaluation of
-functions which avoid state. In functional programming, the output of
-a function depends only on its inputs, which means that functional
-programs are easier to debug by design, since there is no possibility
-of global state or mutability. Additionally, by describing computation
-as the composition of functions, instead of as state machines, it is
-often simpler and intuitive to achieve a sensible level of modularity,
-as ``two features of functional programming languages in particular,
-higher-order functions and lazy evaluation, can contribute greatly to
-modularity'' \cite{hughes1989functional}.
+paradigm, in which computation is described as the evaluation of
+mathematical functions, which avoid state. In functional programming,
+the output of a function depends only on its inputs, which means that
+functional programs are easier to debug by design, since there is no
+possibility of global state or mutability. Additionally, by describing
+computation as the composition of functions instead of state machines,
+it is often simpler and more intuitive to achieve a sensible level of
+modularity, as ``two features of functional programming languages in
+particular, higher-order functions and lazy evaluation, can contribute
+greatly to modularity'' \cite{hughes1989functional}.
 
 To give a quantitative comparison of imperative and functional styles,
 we will compare two implementations of the simple Fizz buzz
 game. Listing~\ref{lst:fizzbuzz-imperative} contains a Java
-implementation of this, using an iterative and imperative
-approach. The body of the for loop is repeatedly evaluated, with the
-mutable variable \textit{x} acting as a counter.
+implementation, using an iterative and imperative approach. The body
+of the for loop is repeatedly evaluated, with the mutable variable
+\textit{x} acting as a counter.
 
 The functional Clojure implementation in
-Listing~\ref{lst:fizzbuzz-functional} uses many of the unique
+Listing~\ref{lst:fizzbuzz-functional} uses several of the unique
 characteristics of functional programming: high-order functions, lazy
 evaluation, and anonymous lambda functions. The high-order function
 \textit{map} is used in functional composition to apply a function
-over a collection. In this case, the anonymous condition function over
-the lazy sequence generated by \textit{range}. Note that the function
-contains no side effects, and since map returns a lazy sequence, the
-algorithm executes in $O(1)$ time complexity, rather than $O(n)$. Only
-when the sequence is iterated over will the items in the sequence be
-evaluated, and cached for future evaluations.
+over a collection. In this case, the anonymous condition function is
+applied over the lazy sequence generated by \textit{range}. Note that
+the function contains no side effects, and since map returns a lazy
+sequence, the algorithm executes in $O(1)$ time complexity, rather
+than the $O(n)$ of the Java implementation. Only when the sequence is
+iterated over will the items in the sequence be evaluated, and cached
+for future evaluations.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Listing: fizzbuzz-imperative %%
@@ -213,7 +215,7 @@ In the above sequence, the programmer may only affect the behaviour by
 modifying the contents of the PHP file which is evaluated. In Clojure,
 the \textit{Ring}\footnote{https://github.com/ring-clojure/ring} and
 \textit{Compojure}\footnote{https://github.com/weavejester/compojure}
-libraries produce a sequence for handling a HTTP request which is more
+libraries provide a sequence for handling a HTTP request which is more
 minimalistic:
 
 \begin{enumerate}
@@ -280,11 +282,11 @@ specific handler functions for different HTTP methods (e.g.\ GET, PUT,
 and POST) and path combinations.
 
 In pip-db, each page (e.g.\ index, login, search) is given a dedicated
-namespace, and each namespace contains a ring handler functions named
-after the HTTP method which they support. For example a GET request
+namespace, and each namespace contains ring handler functions named
+after the HTTP methods which they support. For example a GET request
 for the path ``/login'' will be handled by the function
 \textit{login/GET}. The exception to this naming convention is the API
-namespace, which is detailed in Section~\ref{subsec:api-design}. Each
+namespace, which is detailed in Section~\ref{subsec:api}. Each
 ring hangler function accepts a single \textit{request} map, which
 contains the required information to generate a response, such as POST
 values and headers. Listing~\ref{lst:router} shows the routes defined
@@ -333,8 +335,8 @@ an 11 digit character.
 \subsection{Ring handlers}\label{subsec:ring-handler}
 
 The routing middleware described in Section~\ref{subsec:routing} is
-responsible for determining which ring handler function to call, based
-on the path in the request map. The ring handler accepts a request map
+responsible for determining which ring handler function to call based
+on the path in the request map. A ring handler accepts a request map
 and returns a response map. Each page has its own dedicated namespace
 in pip-db, and uses a Model View Controller architecture to ensure
 separation of data, application, and presentation tier logic. As a
@@ -342,10 +344,10 @@ result, the ring handlers are often very simple functions which merely
 invoke the required view or controller
 component. Listing~\ref{lst:ring-handler} shows the ring handlers for
 the upload page. In the case of a GET request, the GET ring handler
-merely invokes the \textit{view} function, passing on the request
-map. For POST requests (i.e.\ file uploads), the file is stored in a
-temporary location, and the controller \textit{process-file} is
-invoked to handle the request and generate a response map.\\
+invokes the \textit{view} function, passing on the request map. For
+POST requests (i.e.\ file uploads), the file is stored in a temporary
+location, and the controller function \textit{process-file} is invoked
+to handle the request and generate a response map.\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Listing: ring-handler %
@@ -364,8 +366,8 @@ invoked to handle the request and generate a response map.\\
 
 \subsection{Generating HTML}\label{subsec:generating-html}
 
-Like many LISP dialects, Clojure maintains the ``code as data''
-design, which allows for powerful run time manipulation of programs by
+Like many LISP dialects, Clojure maintains the ``code as data'' design
+which allows for powerful run time manipulation of programs by
 modifying and creating code before evaluating it. This feature is
 extremely useful for the generation of HTML, where the reverse
 interpretation of ``data as code'' allows HTML to be encoded as data
@@ -394,7 +396,7 @@ content can be manipulated directly.
 \lstset{language=html}
 \begin{lstlisting}[label=lst:clojure-html-gen,caption={%
       [Generated HTML for the Clojure example]
-       The HTML which is generated evaluation of the Clojure example.}]
+       The HTML which is generated on evaluation of the Clojure example.}]
 <!DOCTYPE html>
 <html lang="en">
   <body>
@@ -424,19 +426,18 @@ from a number of sources by various people over the course of several
 years. Entries were recorded by hand, meaning that there are a number
 of style inconsistencies, and occasional inaccuracies as a result of
 human error during the data entry phase. Examples of hazards present
-in the dataset include:
+in PIP-DB include:
 
 \begin{itemize}
 \item Fields which have multiple values may have the individual values
-  separated using commas ``,'', or using slashes ``/'' or other
-  delimiters.
+  separated using commas ``,'', slashes ``/'', or other delimiters.
 \item Numeric fields may contain imprecise, approximate, and
   non-numeric values (e.g.\ ``~5'', ``> 10'', ``Room temperature'').
 \item Fields for which no data is available are sometimes annotated as
   such (e.g.\ ``N/A'', ``Unavailable'', ``-'').
 \end{itemize}
 
-Each record in PIP-DB consists of 23 fields which record various
+Each record in PIP-DB consists of 23 fields that record various
 properties about the protein, the experimental configuration, and
 cross-references to relevant external databases. Potential methods for
 storing PIP-DB were discussed at great length with Dr Flower, and it
@@ -456,8 +457,8 @@ to data integrity was designed:
   the non-destructive serialising of the intermediate data
   representation produced by pre-processing into a set of vectors
   which can be stored in SQL tables. This requires that the data be
-  strongly typed, such that text is encoded as strings, and numbers
-  encoded using appropriate integer of floating point types.
+  strongly typed, such that text is encoded as strings and numbers are
+  encoded using appropriate integer or floating point types.
 \item \textbf{Post-processing} Data post processing involves the
   transformation of rows within SQL tables into the required format
   for delivery to the user. This includes such changes as converting
@@ -474,9 +475,9 @@ transformations for each of the three tiers.
 Yet Another Protein Schema (YAPS) is the unimaginatively named schema
 which was designed to store the PIP-DB records. After extensive
 analysis of the PIP-DB dataset, a set of fields were chosen to encode
-each record within, ensuring that they capture all of the required
-data. A YAPS file format was then designed which would store these
-records, using JSON encoding. JSON encoding was chosen as it is a
+each record within, ensuring that they capture all pertinent
+information. A YAPS file format was then designed which would store
+these records using JSON encoding. JSON encoding was chosen as it is a
 human-readable text-based file format, allowing for easy creation and
 manipulation.
 
@@ -631,14 +632,14 @@ dataset. Since access to the entirety of PIP-DB is confidential, we
 must be able to take precautions to obfuscate the record URLs to
 prevent this type of crawling.
 
-The solution implemented in the final pip-db iteration is to use a
-unique hash to identify individual records. When a YAPS encoded record
-is processed, a secure SHA-1 hash of the record's values is computed,
-and encoded into base 64. The first 11 characters of this are then
-used as the unique identifier (Listing~\ref{lst:minihash}). Despite
-only using 11 of the checksum's characters, the low hash collision
-rate of SHA-1 and the base 64 encoding provides a huge amount of
-entropy, with over $7 \times 10^{19}$ unique possible URLs.\\
+The solution implemented in pip-db is to use a unique hash to identify
+individual records. When a YAPS encoded record is processed, a secure
+SHA-1 hash of the record's values is computed, and encoded into base
+64. The first 11 characters of this are then used as the unique
+identifier (Listing~\ref{lst:minihash}). Despite only using 11 of the
+checksum's characters, the low hash collision rate of SHA-1 and the
+base 64 encoding provides a huge amount of entropy, with over $7
+\times 10^{19}$ unique possible URLs.\\
 
 \lstset{language=python}
 \begin{lstlisting}[label=lst:minihash,caption={%
@@ -646,7 +647,8 @@ entropy, with over $7 \times 10^{19}$ unique possible URLs.\\
        Pseudocode for generating unique record identifiers, See
        \texttt{util.clj} for the Clojure implementation.}]
 def get_unique_identifier(record):
-    hash = sha1(string(record))
+    string = serialise_yaps_to_string(record)
+    hash = sha1(string)
     b64 = base64(hash)
     return substring(b64, 11)
 \end{lstlisting}
@@ -689,18 +691,18 @@ $E$ & $t_l$, $t_h$ & Minimum and maximum experimental temperature\\
 \section{Search engine design}\label{sec:search-engine}
 
 The search functionality of pip-db supports querying individual
-properties of the dataset, with the ability to combine individual
-properties to perform complex compound queries. Query properties fall
-into three main categories: Name queries ($N$), Protein queries ($P$),
-and Experimental method queries ($E$). Each category is composed of
-specific property queries, see Table~\ref{tab:query-components} for a
+properties of the dataset, with the ability to combine properties to
+perform complex compound queries. Query properties fall into three
+main categories: Name queries ($N$), Protein queries ($P$), and
+Experimental method queries ($E$). Each category is composed of
+specific property queries. See Table~\ref{tab:query-components} for a
 full description. The structure of a query $Q$ can composed in a
 tree-like manner by considering $Q$ as the sum of all individual
 property queries (Figure~\ref{fig:query-tree}), and using a logical
 AND relationship to link neighbouring nodes. By treating a query as a
 tree structure, it can be easily mapped into LISP code by representing
-the root node of the tree as a set of nested
-lists.
+the root node of the tree as a set of nested lists, and then
+serialising the data structure into a compound SQL select statement.
 
 A set of macros were written to create a domain specific language in
 Clojure for representing queries as tree structures, with a syntax for
@@ -850,9 +852,9 @@ sequence). If a BLAST search is required, then the
 search. Otherwise, the \textit{db/search} function is used. In both
 cases, the results are merged into a results map which contains
 auxiliary information such as the number of records which were
-searched and the number of matching records, and the custom HTTP
-headers ``x-pip-db-query-terms'' and ``x-pip-db-records'' can be used
-to further control the contents of the response map. See
+searched and the number of matching records. The custom HTTP headers
+``x-pip-db-query-terms'' and ``x-pip-db-records'' can be used to
+further control the contents of the response map. See
 Listing~\ref{lst:search-dispatcher} for the dispatcher implementation.
 
 \newpage
@@ -1033,14 +1035,14 @@ As described in Section~\ref{subsec:user-centred-design}, a
 human-centred approach was adopted for the design of the
 website. Through consistent interaction with potential users and the
 evaluation of common use cases, a number of attempts to innovate the
-user experience for bioinformatics search engines. For the search
-page, a combination of mobile code and the public API was used to
-implement two features to streamline the process of entering complex
-searches: the first is context sensitive Autocompletion of fields
-using a dedicated API, and the second is a widget which indicates the
-number of results will be returned by a given
+user experience for bioinformatics search engines were made. For the
+search page, a combination of mobile code and the public API was used
+to implement two features to streamline the process of entering
+complex searches: the first is context sensitive Autocompletion of
+fields using a dedicated API, and the second is a widget which
+indicates the number of results will be returned by a given
 search. Figure~\ref{fig:search-sequence} shows how a client browser
-interacts with these APIs when the user filling in a search form.
+interacts with these APIs when the user fills in a search form.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
