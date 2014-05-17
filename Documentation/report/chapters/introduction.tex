@@ -12,21 +12,18 @@ state, the pI depends solely on a protein’s amino acid composition.
 
 Professor Ian Nabney proposed the project and supervised
 development. Dr Darren Flower of the Life and Health Sciences
-department acted as the principle owner of the PIP-DB dataset,
-providing a copy for use in the website. Additionally, he was
-responsible for helping to understand the necessary the required
-biology theory and acted as a potential user during design feedback
-sessions.
-
-The two primary deliverables provided by Professor Nabney in the
-project description were:
+department acted as the principle owner of PIP-DB, providing a copy
+for use in the website. Additionally, he was responsible for helping
+to explain the required biochemistry theory, and acted as a potential
+user during design feedback sessions. The two primary deliverables
+provided by Professor Nabney in the project description were:
 
 \begin{enumerate}
 \item An updatable relational database warehousing the provided dataset.
 \item A web-accessible GUI with searching and downloading functionality.
 \end{enumerate}
 
-This meant that the aim of development should be to get a website
+This meant that the aim of development would be to get a website
 hosted online on a public server, accessible via a suitable web domain
 address. The website should offer a service whereby users can search
 PIP-DB and download search results using a web browser. This simple
@@ -57,10 +54,10 @@ development.
 
 \section*{Objectives}\label{sec:objectives}
 The following objectives were written during before the planning stage
-of the project, in order to provide a very high level overview of the
-finished product. The purpose of the objectives it to provide personal
-goals and expectations of the project, which can then be refined to
-produce specific and quantifiable requirements.
+of the project in order to provide a very high level overview of the
+finished product, and to express personal goals and expectations for
+the project which can then be refined to produce specific and
+quantifiable requirements.
 
 \begin{enumerate}
 \item To build a free (as in freedom) web application for searching
@@ -84,6 +81,7 @@ produce specific and quantifiable requirements.
 \item The application should be scalable for much larger datasets.
 \end{enumerate}
 
+\noindent
 Chapter~\ref{chap:requirements} includes a description of the
 requirements derived from these objectives, and
 Chapter~\ref{chap:evaluation} evaluates the project with reference to
@@ -135,9 +133,8 @@ extensions: ac, am, bib, clj, fsa, in, js, json, less, md, py, sh,
 tex, xml, yml.
 
 Note that while the submitted archive contains all project source
-codes, the third party BLAST+ binaries have been removed from
-\texttt{extern/bin} in order to keep the size of the submission
-archive down.
+codes, the third party BLAST+ binaries and compilers JAR have been
+removed in order to keep the size of the submission archive down.
 
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -222,10 +219,8 @@ operating system by executing the command \texttt{./bin/build -{}-all}
 from within the project root directory. This will invoke a script that
 will attempt to automatically resolve system dependencies and
 requirements. Failure to meet the system requirements will results in
-an informative error message being displayed.
-
-% TODO: Note on file paths (relative vs absolute)
-
+an informative error message being displayed. See
+Section~\ref{sec:build-automation} for further information.
 
 \section*{Nomenclature}\label{sec:nomenclature}
 Acronyms and initialisms will be used where appropriate in place of
@@ -243,33 +238,32 @@ members of the Life \& Health Sciences department, and the
 \textit{name} pip-db to refer to the software project that I developed
 to host this. In order to keep this distinction clear, the
 capitalisation will be kept consistent irrespective of the grammatical
-context. Thus, PIP-DB refers to a set of data, and pip-db refers to
-the presentation logic for this dataset.
+context.
 
 
 \subsubsection*{On the use of UML}
 A subset of the Unified Modelling Language \cite{ibm2003uml} is used a
 basis for many of the technical diagrams. One notable deviation from
-convention is the use of sequence diagrams \cite{ibm2004sequence} to
-describe the behaviour of web services. In such cases, the desired
+convention is the use of sequence diagrams to describe the behaviour
+of web services \cite{ibm2004sequence}. In such cases, the desired
 effect is to illustrate the behaviour of a system at a high level, not
 to provide a technically accurate description of communication.
 
 
 \section*{Overview}\label{sec:overview}
-The rest of the text is structured as follows: the requirements
-analysis phase of the project is given in Chapter~\ref{chap:risks},
-with a brief overview of the project risks identified during the
-project planning phase and a description of the risk mitigation
-strategies. A large body of text is devoted to a description of the
-design and implementation of the final product, and is divided
-accordingly: information relevant to the development process and work
-flow is described in Chapter~\ref{chap:process}; the development of
-infrastructure and tooling is described in
-Chapter~\ref{chap:infrastructure}; and the product implementation in
-Chapter~\ref{chap:product}. Chapter~\ref{chap:evaluation} contains a
-product evaluation and the results of usability testing, and the
-conclusions and project results can be found in
+The rest of the text is structured as follows: the project risk
+assessment is described in Chapter~\ref{chap:risks}, with a brief
+overview of the risks identified during the project planning phase and
+a description of the mitigation strategies. A large body of text is
+then devoted to a description of the design and implementation of the
+final product, and is divided accordingly: information relevant to the
+development process and work flow is described in
+Chapter~\ref{chap:process}; the development of infrastructure and
+tooling is described in Chapter~\ref{chap:infrastructure}; and the
+product implementation in
+Chapter~\ref{chap:product}. Chapter~\ref{chap:evaluation} contains an
+evaluation of the software and the results of usability testing, and
+the conclusions and recommendations for further work can be found in
 Chapter~\ref{chap:conclusions}. The appendices begin at
 page~\pageref{appendices}, followed by the bibliography and references
 at page~\pageref{bibliography}. The purpose of the Requirements and

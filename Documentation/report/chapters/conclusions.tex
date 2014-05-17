@@ -16,45 +16,45 @@ contributions have been made to four popular existing open source
 projects as a result of development: watch-less, clojure-koans,
 sqlkorma, and gitstats.
 
-While costly in terms of time, the radical switch in programming
-language after the completion of the initial prototype allowed a rare
-direct comparison to be made between non-trivial software written in
-PHP and Clojure. The comparison found that the functional
-implementation resulted in a 75\% reduction in code base size for
+The pip-db repository contains 34,205 lines of code, with an estimated
+development time of 605 hours, based on the 2,420 revisions in the
+version control history (based on an assumed average time cost of 15
+minutes of development per revision). While costly in terms of time,
+the radical switch in programming language after the completion of the
+initial prototype allowed for a rare direct comparison to be made
+between non-trivial software written in PHP and Clojure. The
+comparison can be used for qualitative evaluation of the strengths of
+both languages, and results showed that the reimplementation in a
+functional language resulted in a 75\% reduction in code base size for
 functionally identical web server implementations
 \cite{cummins2014migrating}.
 
 Development of an Autotooled build system for websites showed how
 shell-level parallelism could be used to reduce execution times by a
 factor of 5. Further work on the build system could reduce these times
-further by enabling parallelism within the core of automake.
-
-Further work on the pip-db website could include the development of
-administrative tools for modifying data, and refinements to the
-performance and security of the web server implementation. Increased
-scalability could be provided by implementing multi-threading support
-for request handling, and greater edge case handling could increase
-the server's robustness. One overlooked aspect of pip-db is the user
-account and registration system. The implementation of an accounts
-system was left incomplete as time was devoted instead to the
-implementation of novel features and user interaction refinements.
+further by enabling parallelism within the core of automake. It is
+possible to repurpose the build system for future web application
+projects.
 
 It my recommendation that further usability tests be performed on the
 existing pip-db design before any modifications are made to the user
 interface. While defended by some \cite{nielsen2000you}, it is
 generally believed that a usability testing sample size of 5 is too
 small to reveal an adequate number of usability problems
-\cite{spool2001testing, woolrych2001and}. In addition to formal
-usability testing, it would be possible to increase the amount of
-tracking data which is collected about users by recording all of the
-search queries are performed. This would provide quantitative data
-which could be used to optimise the search engine for the most popular
-queries.
-
-The persistent storage component of pip-db could be the subject of
-future research, with NoSQL technologies finding increasing usage for
-the similar purposes of document storage \cite{tudorica2011comparison,
-  mongo2014leading, hecht2011nosql, mongo2013top5}. Using a NoSQL
-store in place of the existing PostgreSQL back-end would remove the
-need for the vectorisation of YAPS records and greatly simply the data
-upload logic.
+\cite{spool2001testing, woolrych2001and}. Further work on the pip-db
+website could include the development of administrative tools for
+modifying data, and refinements to the performance and security of the
+web server implementation. Increased scalability could be provided by
+implementing multi-threading support for request handling, and greater
+edge case handling could increase the server's robustness. One
+overlooked aspect of pip-db is the user account and registration
+system. The implementation of an accounts system was left incomplete
+as time was devoted instead to the implementation of novel features
+and user interaction refinements. The persistent storage component of
+pip-db could be the subject of future research, with NoSQL
+technologies finding increasing usage for the similar purposes of
+document storage \cite{tudorica2011comparison, mongo2014leading,
+  hecht2011nosql, mongo2013top5}. Using a NoSQL store in place of the
+existing PostgreSQL back-end would remove the need for the
+vectorisation of YAPS records and greatly simply the data upload
+logic.

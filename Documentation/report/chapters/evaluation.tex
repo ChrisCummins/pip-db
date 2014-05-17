@@ -1,14 +1,14 @@
 \chapter{Evaluation}\label{chap:evaluation}
 
 Evaluation of pip-db comprised of both qualitative and quantitative
-components. Qualitative usability testing was conducted in mid April
-at the end of the development, and a criteria-based quantitative
-evaluation was performed at the start of May.
+evaluations. Qualitative usability testing was conducted in mid April
+at the end of the product development, and a criteria-based
+quantitative evaluation was performed at the start of May.
 
 \section{Usability testing}\label{sec:usability-testing}
 
 Usability testing is a popular technique in qualitative software
-evaluation in which a participants are observed in a controlled
+evaluation in which participants are observed in a controlled
 environment performing a set of predetermined tasks in order to asses
 the usability of a product \cite{rubin2008handbook}.
 
@@ -16,27 +16,27 @@ the usability of a product \cite{rubin2008handbook}.
 
 Usability tests of pip-db were conducted over a ten day period, and
 consisted of presenting a set of user scenarios to a participant which
-they would work through. The scenario would involve a set of tasks
+they would work through. Each scenario would involve a multiple tasks
 designed to test the intuitive user friendliness of the pip-db
 website. Observations and notes are made throughout the course of the
 test, detailing any usability issues that the participant encountered.
 Appendix~\ref{app:evaluation-script} describes the procedure of the
 tests. Appendix~\ref{app:evaluation-scenarios} contains the user
-scenarios which were evaluated. Five tests were conducted in total
+scenarios which were evaluated. Five tests were conducted in total,
 with three PhD students specialising in a relevant biology field, and
 two non-scientific participants. In the case of user testing with
 participants who do not have a relevant scientific background, extra
-verbal explanation was given to provide scientific context and
-understanding. Following recommended practises, each test session was
-recorded using audio and screen capture of the testing computer
-\cite{dumas1999practical}.
+verbal explanation was given to provide the necessary scientific
+context and understanding. Following recommended practises, each test
+session was recorded using audio and screen capture of the testing
+computer \cite{dumas1999practical}.
 
 \subsection{Results}
 
 The results of user testing were generally very positive. Participants
 were largely satisfied with the user interface and were able to
 complete the tasks with little to no difficulty. However, several
-problems were discovered as a result of usability testing:
+problems were discovered as a result of the tests:
 
 \begin{itemize}
 \item Multiple participants were unsure how to input a numerical range
@@ -63,11 +63,17 @@ problems were discovered as a result of usability testing:
 \item One of the participants was unsure of what query was performed
   when clicking the ``See other records like this'' button. There is
   no visual indicator on the search results page to show the user what
-  the search terms were.
+  the current search terms are.
 \item Two of the participants noted that they would prefer the ability
   to type in exact numerical isoelectric point query values rather
   than scrubbing a slider widget.
 \end{itemize}
+
+In all but one of the cases, it would be possible to mitigate the
+usability problem through minor modifications to the user
+interface. The result indicator issue is a more technically involved
+problem which would only be mitigated through the addition of a visual
+indicator to show when the value is out of sync.
 
 \section{Quantitative evaluation}\label{sec:quantitative-evaluation}
 
@@ -81,29 +87,30 @@ published by Jackson et al \cite{jackson2011evaluation}.
 
 \subsection{Methodology}
 
-Jackson et al's assessment criteria offer a ``quantitative assessment
-of software in terms of sustainability, maintainability, and
+The chosen assessment criteria offer a ``quantitative assessment of
+software in terms of sustainability, maintainability, and
 usability''. It was chosen as the quantitative evaluation method due
-to its emphasis on non-functional requirements, which are not
-evaluated through usability testing along. The assessment criteria are
-worded in a manner targeted at standalone application development, not
-web apps. As a result, not all of the criteria were
-evaluated. Additionally, a subset of the criteria was deemed
-irrelevant and ignored, for example evaluation of the current/future
-community.
+to its emphasis on the evaluation of non-functional requirements,
+which are often overlooked through usability testing alone. The
+assessment criteria are worded in a manner targeted at standalone
+application development, not web applications. As a result, not all of
+the criteria were evaluated. An additional subset of the criteria was
+deemed irrelevant and note evaluated, for example evaluation of the
+current/future community.
 
 \subsection{Results}
 
 Appendix~\ref{app:criteria-evaluation} contains the full table of
-results, with yes/no answers for each of the criteria, and notes and
-annotations. The project scores strongly in the sustainability and
-maintainability categories, due to it's permissive open source
-license, heavy use of commenting, unit testing frameworks, and
-automated tooling. The project scores lower in the usability category,
-due to the relative shortage of user-orientated documentation. The
-importance of user documentation for websites is debatable, although
-at a minimum, a dedicated help page could help alleviate common
-usability problems. The project also scores lowly for testing due to
-its lack of automated GUI testing and scripted database testing.
+results, with yes/no answers for each of the criteria, along with
+notes and annotations. The project scores strongly in the
+sustainability and maintainability categories, due to it's permissive
+open source license, heavy use of commenting, unit testing frameworks,
+and automated tooling. The project scores lower in the usability
+category, due to the relative shortage of user-orientated
+documentation. The importance of user documentation for websites is
+debatable, although at a minimum, a dedicated help page could help
+alleviate common usability problems. The project also scores lowly for
+testing due to its lack of automated GUI testing and scripted database
+testing.
 
 % TODO: Were risks mitigated
