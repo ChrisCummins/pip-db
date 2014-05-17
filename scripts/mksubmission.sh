@@ -67,6 +67,8 @@ CLEANFILES=".git
 aclocal.m4
 autom4te.cache
 build/install-sh
+build/jar/closure-compiler.jar
+build/jar/yuicompressor.jar
 build/missing
 configure
 db/
