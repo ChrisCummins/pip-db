@@ -5,55 +5,56 @@
 %% any findings or recommendations emerging from the project. Everyone
 %% who reads your report will read the conclusion.
 
-% TODO: The main contribution of this report is...
+The web application described in this document entirely fulfils the
+stated goal of categorising and providing accessible online search
+functionality for PIP-DB. In addition to satisfying the core
+deliverables, a pragmatic approach to the development of
+infrastructure and tooling has resulted in the creation of several
+supporting projects, including the YAPS file format, pipbot repository
+manager, plausible nonsense generator, and CSV analyser. Additionally,
+contributions have been made to four popular existing open source
+projects as a result of development: watch-less, clojure-koans,
+sqlkorma, and gitstats.
 
-% TODO: Over the recommended 400 hours of work: COST IMPLICATIONS
+While costly in terms of time, the radical switch in programming
+language after the completion of the initial prototype allowed a rare
+direct comparison to be made between non-trivial software written in
+PHP and Clojure. The comparison found that the functional
+implementation resulted in a 75\% reduction in code base size for
+functionally identical web server implementations
+\cite{cummins2014migrating}.
 
-% TODO: Cost of project (£10)
+Development of an Autotooled build system for websites showed how
+shell-level parallelism could be used to reduce execution times by a
+factor of 5. Further work on the build system could reduce these times
+further by enabling parallelism within the core of automake.
 
-% TODO: Could the project re-write have been avoided?
+Further work on the pip-db website could include the development of
+administrative tools for modifying data, and refinements to the
+performance and security of the web server implementation. Increased
+scalability could be provided by implementing multi-threading support
+for request handling, and greater edge case handling could increase
+the server's robustness. One overlooked aspect of pip-db is the user
+account and registration system. The implementation of an accounts
+system was left incomplete as time was devoted instead to the
+implementation of novel features and user interaction refinements.
 
-% TODO: Table of SLOCC counts
+It my recommendation that further usability tests be performed on the
+existing pip-db design before any modifications are made to the user
+interface. While defended by some \cite{nielsen2000you}, it is
+generally believed that a usability testing sample size of 5 is too
+small to reveal an adequate number of usability problems
+\cite{spool2001testing, woolrych2001and}. In addition to formal
+usability testing, it would be possible to increase the amount of
+tracking data which is collected about users by recording all of the
+search queries are performed. This would provide quantitative data
+which could be used to optimise the search engine for the most popular
+queries.
 
-% TODO: Review of repository activity (gitstats)
-
-\cite{cummins2014pip-db}
-\cite{cummins2014migrating}
-
-\section*{Related work}\label{sec:related-work}
-
-
-\section*{Further work}\label{sec:further-work}
-
-There are two categories for further work: product development, and
-related research.
-
-% TODO: Open source Balsamiq alternative?
-
-% TODO: further user testing: 5 is enough \cite{nielsen2000you}
-
-% Product development
-%   Data visualisation
-\cite{saraiya2005insight}
-%   \subsubsection*{Usability research}
-        % Good study with ``time benchmarks'':
-\cite{augustine2002discovering}
-%   \subsubsection*{Document storage}\label{subsec:document-storage}
-
-\paragraph{Document storage} Amongst the various taxonomies of NoSQL
-popular technologies, MongoDB
-\footnote{mongoDB \url{https://www.mongodb.org/}} has become one of the most
-popular, \cite{tudorica2011comparison, mongo2014leading,
-  hecht2011nosql, mongo2013top5}.
-
-% Replace SQL with document based storage
-
-% json in -> json out
-
-% ALSO would make querying simpler
-
-% noSQL
-% scalable
-
-
-\cite{chodorow2013mongodb}
+The persistent storage component of pip-db could be the subject of
+future research, with NoSQL technologies finding increasing usage for
+the similar purposes of document storage \cite{tudorica2011comparison,
+  mongo2014leading, hecht2011nosql, mongo2013top5}. Using a NoSQL
+store in place of the existing PostgreSQL back-end would remove the
+need for the vectorisation of YAPS records and greatly simply the data
+upload logic.
