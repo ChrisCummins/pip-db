@@ -4,7 +4,7 @@
             [pip-db.blast :as blast]
             [pip-db.db :as db]))
 
-(def max-no-of-returned-records 20)
+(def max-no-of-returned-records 150)
 
 ;; Perform a pip-db search and wrap the results in a search response
 ;; map. Note as an implementation detail, the `merge` function means
