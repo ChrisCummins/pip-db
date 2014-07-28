@@ -237,18 +237,22 @@
 
 ;; Generate the user menu for the navbar.
 (defn navbar-user [request]
-  [:ul.nav.navbar-nav.navbar-right
-   (if (util/signed-in? request)
-     [:li.dropdown
-      [:a#themes.dropdown-toggle {:href "#" :data-toggle "dropdown"}
-       (util/username request) [:span.caret]]
-      [:ul.dropdown-menu
-       [:li [:a {:href "/" :tabindex "-1"} "Run initial setup"]]
-       [:li [:a {:href "/upload" :tabindex "-1"} "Upload new data"]]
-       [:li [:a {:href "/" :tabindex "-1"} "Preferences"]]
-       [:li.divider]
-       [:li [:a {:href "/logout" :tabindex "-1"} "Log out"]]]]
-     [:li [:a {:href "/login"} "Login"]])])
+  ;; TODO: Add login link only once the login functionality has been
+  ;;       completed.
+  ;;
+  ;; [:ul.nav.navbar-nav.navbar-right
+  ;;  (if (util/signed-in? request)
+  ;;    [:li.dropdown
+  ;;     [:a#themes.dropdown-toggle {:href "#" :data-toggle "dropdown"}
+  ;;      (util/username request) [:span.caret]]
+  ;;     [:ul.dropdown-menu
+  ;;      [:li [:a {:href "/" :tabindex "-1"} "Run initial setup"]]
+  ;;      [:li [:a {:href "/upload" :tabindex "-1"} "Upload new data"]]
+  ;;      [:li [:a {:href "/" :tabindex "-1"} "Preferences"]]
+  ;;      [:li.divider]
+  ;;      [:li [:a {:href "/logout" :tabindex "-1"} "Log out"]]]]
+  ;;    [:li [:a {:href "/login"} "Login"]])]
+)
 
 (defn navbar [request]
   (let [navbar (request :navbar)]
