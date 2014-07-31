@@ -132,12 +132,16 @@
             var resultsText = data['No-Of-Records-Matched'] === 1 ?
                 '1 result ' : data['No-Of-Records-Matched'] + ' results';
 
-            var returnedText =
-                data['No-Of-Records-Returned'] < data['No-Of-Records-Matched'] ?
-                ' and returned the first ' + data['No-Of-Records-Returned'] : '';
+            var matched = data['No-Of-Records-Matched'];
+            var returned = data['No-Of-Records-Returned'];
+            var start = data['Returned-Records-Starting-At']
+
+            var paginationText = returned < matched ?
+                (start ? ' and showing results ' + start + ' - ' + (start + returned)
+                 : ' and showing the first ' + returned) : '';
 
             return 'Found ' + resultsText + ' of a possible ' +
-                data['No-Of-Records-Searched'] + returnedText + '...';
+                data['No-Of-Records-Searched'] + paginationText + '...';
         })());
 
         // Populate the table
