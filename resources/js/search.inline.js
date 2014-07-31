@@ -126,7 +126,7 @@
         $results.append(getRecordHeader() + getRecordBody());
     };
 
-    if (data['No-Of-Records-Matched']) {
+    if (data['No-Of-Records-Returned']) {
         // Populate the meta header if we have results
         $resultsCount.text((function () {
             var resultsText = data['No-Of-Records-Matched'] === 1 ?
