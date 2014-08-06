@@ -51,7 +51,8 @@
             else if (piMax)
                 return '< ' + piMax;
             else if (piMajor)
-                return piMajor + 'm';
+                // TODO: Do we need to indicate that this is a special value?
+                return piMajor;
             else // Fallback, in case record has no value
                 return ''
         }
