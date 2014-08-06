@@ -58,7 +58,8 @@ $(document).ready(function () {
     var addExternLink = function (prop, name, url) {
         var getButton = function (prop, name, url) {
             return '<li><a class="btn btn-success btn-block ' + prop +
-                '" href="' + url + '" target="_blank">' + name + '</a></li>';
+                '" href="' + url + '" title="' + url +
+                '"target="_blank">' + name + '</a></li>';
         };
 
         url = url || record[prop];
