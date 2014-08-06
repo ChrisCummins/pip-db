@@ -23,7 +23,9 @@
 ;; what the site is, it's purpose, and how to use it.
 (defn body [request]
   [:div.body
-   [:div.col-md-6.col-md-offset-1 (map #(vector :p.lead (apply str %)) body-text)]
+   [:div.col-md-6.col-md-offset-1 (map #(vector :p.lead (apply str %)) body-text)
+    [:p.lead "For questions and comments, contact "
+     [:a {:href "mailto:d.r.flower@aston.ac.uk"} "Dr Darren Flower"] "."]]
    [:div.col-md-4                 [:img {:src "/img/gel.jpg"}]]])
 
 (defn view [request]
