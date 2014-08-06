@@ -48,7 +48,7 @@ cd "$(get_source_directory)" 2>/dev/null
 
 echo "Creating PostreSQL database cluster in '$dir'..."
 
-test -d $dir && { echo "Directory '%dir' already exists!"; exit 5; }
+test -d $dir && { echo "Directory '$dir' already exists!"; exit 5; }
 
 initdb $dir
 

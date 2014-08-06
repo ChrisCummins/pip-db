@@ -51,7 +51,8 @@
             else if (piMax)
                 return '< ' + piMax;
             else if (piMajor)
-                return piMajor + 'm';
+                // TODO: Do we need to indicate that this is a special value?
+                return piMajor;
             else // Fallback, in case record has no value
                 return ''
         }
@@ -126,18 +127,22 @@
         $results.append(getRecordHeader() + getRecordBody());
     };
 
-    if (data['No-Of-Records-Matched']) {
+    if (data['No-Of-Records-Returned']) {
         // Populate the meta header if we have results
         $resultsCount.text((function () {
             var resultsText = data['No-Of-Records-Matched'] === 1 ?
                 '1 result ' : data['No-Of-Records-Matched'] + ' results';
 
-            var returnedText =
-                data['No-Of-Records-Returned'] < data['No-Of-Records-Matched'] ?
-                ' and returned the first ' + data['No-Of-Records-Returned'] : '';
+            var matched = data['No-Of-Records-Matched'];
+            var returned = data['No-Of-Records-Returned'];
+            var start = data['Returned-Records-Starting-At']
+
+            var paginationText = returned < matched ?
+                (start ? ' and showing results ' + start + ' - ' + (start + returned)
+                 : ' and showing the first ' + returned) : '';
 
             return 'Found ' + resultsText + ' of a possible ' +
-                data['No-Of-Records-Searched'] + returnedText + '...';
+                data['No-Of-Records-Searched'] + paginationText + '...';
         })());
 
         // Populate the table
@@ -164,6 +169,46 @@
         $results.prepend(html);
 
         $download.show(); // Show the download button
+
+        // Pagination links:
+        var max_page_links = 10;
+        var results_per_page = data['Max-No-of-Returned-Records'];
+        var results_url = new String(window.location).replace(/&start=\d+/, '');
+        var start = data['Returned-Records-Starting-At'];
+        var html = '<div class="row" style="margin: 20px 0;">' +
+                   '<div class="col-lg-12" style="text-align:center;">' +
+                   '<div id=#pagination class="btn-group" style="margin: 0 auto;">';
+
+        var page_count = Math.ceil(data['No-Of-Records-Matched'] / results_per_page);
+        var current_page = Math.floor(start / results_per_page) + 1;
+        var start_page = Math.max(1, current_page - (max_page_links / 2));
+        var end_page = Math.min(page_count + 1, start_page + max_page_links);
+
+        var get_results_page_url = function(n) {
+          if (n > 1)
+            return results_url + '&start=' + (n - 1) * results_per_page;
+          else
+            return results_url;
+        };
+
+        var pagination_button = function(contents, index, disabled) {
+          return '<a class="page-ref btn btn-success' +
+            (disabled ? ' disabled' : '') +
+            '" href="' + get_results_page_url(index) + '">' +
+            contents + "</a>";
+        }
+
+        if (current_page > 1)
+          html += pagination_button('&laquo', 1);
+
+        for (var i = start_page; i < end_page; i++)
+          html += pagination_button(i, i, i == current_page)
+
+        if (end_page < page_count)
+          html += pagination_button('&raquo', page_count);
+
+        html += '</div></div></div>'
+        $results.append(html);
 
     } else {
         // Show the "no results" message
