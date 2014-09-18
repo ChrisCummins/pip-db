@@ -12,7 +12,7 @@ been acquired, making the valuable research accessible to all.
 The project was developed by Chris Cummins (http://chriscummins.cc) as
 partial fulfillment of the requirements for the degree of MEng
 Electronic Engineering & Computer Science at Aston University. [Read
-the submission report](Documentation/Report.pdf).
+the submission report](Documentation/Report.pdf?raw=true).
 
 ## Background
 
